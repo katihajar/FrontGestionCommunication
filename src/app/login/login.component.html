@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Login Page </title>
+
+</head>
+
+<body>
+<!-- <h1> Login Form </h1> -->
+<form>
+  <div class="container">
+    <h1>
+      <img src="/assets/img/logocgi.png" alt="psa" title="psa" class="staticImg">
+    </h1>
+
+    <div class="signinEntry">
+      <div class="alert alert-warning" style="color: #cc0000" *ngIf='invalidLogin'>{{errorMessage}}</div>
+      <div class="alert alert-success" style="color: green" *ngIf='loginSuccess'>{{successMessage}}</div>
+
+      <div>
+                    <span class="label">
+                        <label>Utilisateur : </label> </span>
+      </div>
+      <div class="box">
+        <input type="text" [(ngModel)]="username" placeholder="Enter Username" name="username" required>
+        <span class="label2">
+                        <label>@cgi.com</label> </span>
+      </div>
+      <div>
+                    <span class="label">
+                    <label>Mot de passe : </label> </span>
+      </div>
+      <div class="box">
+        <input type="password" [(ngModel)]="password" placeholder="Enter Password" name="password" required>
+      </div>
+
+      <div class="boxBtn">
+        <button class="submitbtn" (click)=handleLogin()  type="submit">Connexion</button><br>
+      </div>
+    </div>
+    <footer class="footer">
+      <a href="#" style="float: inside"> Aide? </a>
+    </footer></div>
+</form>
+
+</body>
+
+</html>

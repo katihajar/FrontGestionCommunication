@@ -1,0 +1,137 @@
+Body {
+  margin-top: 5%;
+  font-family: Arial, Helvetica, sans-serif;
+  display: block;
+  font-size: 15px;
+  background-image:url("src/assets/img/bckgroundimg.png");
+
+}
+
+button {
+  background-color: #4CAF50;
+  width: 100%;
+  color: black;
+  padding: 15px;
+  margin: 10px 0px;
+  border: none;
+  cursor: pointer;
+}
+
+form {
+
+  display: block;
+  margin-top: 0em;
+}
+
+div {
+  display: block;
+}
+
+input[type=text],
+input[type=password] {
+  width: 341px;
+  border: 0.5px inset transparent;
+  border-radius: 0.25em;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  box-sizing: border-box;
+  box-shadow: 0 0 3px #e31937;
+  background-color: white;
+  padding-left: 10px;
+  padding-right: 0px;
+  padding-bottom: 0.8em;
+  padding-top: 0.8em;
+  background-clip: padding-box;
+
+}
+.opt{
+  width: 341px;
+  border: 0.5px inset transparent;
+  border-radius: 0.25em;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  box-sizing: border-box;
+  box-shadow: 0 0 3px #e31937;
+  background-color: white;
+  padding-left: 10px;
+  padding-right: 0px;
+  padding-bottom: 0.8em;
+  padding-top: 0.8em;
+  background-clip: padding-box;
+}
+input:hover{
+  box-shadow: 0 0 10px #e31937;
+}
+input:checked{
+  box-shadow: 0 0 20px #cc0000;
+  border: #cc0000;
+}
+button:hover {
+  opacity: 0.7;
+}
+
+.submitbtn {
+  background-color: #e31937;
+  width: auto;
+  box-sizing: content-box;
+  padding: 0.3em 1em 0.3em 1em;
+  border-radius: 0.25em;
+  margin: 0;
+  border: 1px inset transparent;
+  font-size: 1.2em;
+  color: white;
+  box-shadow: 0px 8px 10px #bde6cf inset, 3px 3px 3px black;
+  font-weight: normal;
+  text-shadow: 0px 1px 0px #bde6cf;
+
+}
+
+.label {
+  display: inline-block;
+  text-align: left;
+  margin-left: 10px;
+  color: black;
+  width: 351px;
+  padding-bottom: 0.5em;
+}
+
+.label2 {
+  display: inline-block;
+  text-align: left;
+  color: black;
+  width: 1px;
+  padding-bottom: 0.5em;
+}
+
+.container {
+  margin: auto;
+  text-align: center;
+}
+
+.box {
+  margin-bottom: 23px;
+  color: black;
+}
+
+.boxBtn {
+  padding-bottom: 18px;
+}
+
+.footer {
+  font-size: 12px;
+  color: black;
+  display: inline-block;
+  text-align: center;
+}
+.signinEntry {
+  margin: auto;
+  text-align: center;
+}
+.staticImg{
+  max-width: 100%;
+}
+

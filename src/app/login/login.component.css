@@ -3,7 +3,7 @@ Body {
   font-family: Arial, Helvetica, sans-serif;
   display: block;
   font-size: 15px;
-  background-image:url("src/assets/img/bckgroundimg.png");
+  background-image: url("src/assets/img/bckgroundimg.png");
   display: block;
   height: 700px;
 }
@@ -47,7 +47,8 @@ input[type=password] {
   background-clip: padding-box;
 
 }
-.opt{
+
+.opt {
   width: 341px;
   border: 0.5px inset transparent;
   border-radius: 0.25em;
@@ -64,13 +65,16 @@ input[type=password] {
   padding-top: 0.8em;
   background-clip: padding-box;
 }
-input:hover{
+
+input:hover {
   box-shadow: 0 0 10px #e31937;
 }
-input:checked{
+
+input:checked {
   box-shadow: 0 0 20px #cc0000;
   border: #cc0000;
 }
+
 button:hover {
   opacity: 0.7;
 }
@@ -109,7 +113,7 @@ button:hover {
 }
 
 .container {
-  min-height: 100%; 
+  min-height: 100%;
   margin: auto;
   text-align: center;
 }
@@ -128,14 +132,15 @@ button:hover {
   color: black;
   display: inline-block;
   text-align: center;
-  height: 100px; 
-  margin-bottom: -100px; 
+  height: 100px;
+  margin-bottom: -100px;
 }
+
 .signinEntry {
   margin: auto;
   text-align: center;
 }
-.staticImg{
+
+.staticImg {
   max-width: 100%;
 }
-

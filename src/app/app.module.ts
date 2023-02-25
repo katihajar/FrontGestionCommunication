@@ -20,6 +20,7 @@ import { SideBarPiloteComponent } from './components/sideBar/side-bar-pilote/sid
 import {ResponsableNavComponent} from "./components/navBar/responsableNav/responsable.nav.component";
 import {PiloteNavComponent} from "./components/navBar/piloteNav/pilote.nav.component";
 import {AdminNavComponent} from "./components/navBar/adminNav/admin.nav.component";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import {AdminNavComponent} from "./components/navBar/adminNav/admin.nav.componen
     PiloteNavComponent,
     AdminNavComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule,HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule,HttpClientModule, BrowserAnimationsModule],
   providers: [],
   bootstrap: [AppComponent]
 })

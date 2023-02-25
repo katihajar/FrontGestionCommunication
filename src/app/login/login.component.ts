@@ -58,10 +58,10 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/admin']);
         } else if (this.User.roles[0].name == 'ROLE_PILOTE') {
           console.log('piloteNav router  ...');
-          this.router.navigate(['/piloteNav']);
+          this.router.navigate(['/pilote']);
         }else if (this.User.roles[0].name == 'ROLE_RESPONSABLE') {
           console.log('respo router  ...');
-          this.router.navigate(['/responsableNav']);
+          this.router.navigate(['/responsable']);
         }
       }
     }, () => {

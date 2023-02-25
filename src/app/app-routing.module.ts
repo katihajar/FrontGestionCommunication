@@ -34,13 +34,14 @@ const routes: Routes = [
     ],
   },
   // no layout views
+  { path: 'test', component: TestComponent },
   { path: 'login', component: LoginComponent },
   { path: '', component: LoginComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { enableTracing: true })],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

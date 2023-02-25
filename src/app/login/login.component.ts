@@ -3,6 +3,7 @@ import { AuthService } from "../controller/service/auth.service";
 import { Userauth } from "../controller/model/userauth";
 import { User } from "../controller/model/user";
 import { Router } from '@angular/router';
+import {log} from "util";
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  
+
   username: string = String();
   password: string = String();
   errorMessage = 'Invalid Credentials';
@@ -55,11 +56,9 @@ export class LoginComponent implements OnInit {
         console.log('admin ...');
         if (this.User.roles[0].name == 'ROLE_ADMIN') {
           console.log('admin router  ...');
-          this.router.navigate(['/admin']);
-          // tslint:disable-next-line:triple-equals
+          this.router.navigate(['./test']);
         } else if (this.User.roles[0].name == 'ROLE_PILOTE') {
           this.router.navigate(['/pilote']);
-          // tslint:disable-next-line:triple-equals
         }else if (this.User.roles[0].name == 'ROLE_RESPONSABLE') {
           this.router.navigate(['/responsable']);
         }

@@ -34,12 +34,7 @@ import { SideBarPiloteComponent } from './components/sideBar/side-bar-pilote/sid
     HeaderResponsableComponent,
     TestComponent
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, FormsModule,HttpClientModule],
   providers: [],
   bootstrap: [AppComponent]
 })

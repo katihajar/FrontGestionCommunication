@@ -10,8 +10,8 @@ export class AdminComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log('layoutAdmin');
-    
+    console.log('layout  Admin');
+
   }
 
 }

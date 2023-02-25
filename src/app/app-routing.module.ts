@@ -6,6 +6,8 @@ import {ResponsableComponent} from "./layout/responsable/responsable.component";
 import {PiloteComponent} from "./layout/pilote/pilote.component";
 import {LoginComponent} from "./login/login.component";
 import {HomeComponent} from "./views/admin/home/home.component";
+import {ErrorPageComponent} from "./error-page/error-page.component";
+import {ForbiddenComponent} from "./forbidden/forbidden.component";
 
 
 @NgModule({
@@ -39,7 +41,8 @@ import {HomeComponent} from "./views/admin/home/home.component";
     },
     // no layout views
     { path: '', component: LoginComponent },
-    { path: 'error', component: TestComponent },
+    { path: 'error', component: ErrorPageComponent },
+    { path: 'forbidden', component: ForbiddenComponent },
     { path: '**', redirectTo: 'error', pathMatch: 'full' },
   ])],
   exports: [RouterModule],

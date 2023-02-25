@@ -25,6 +25,8 @@ import {MatDividerModule} from "@angular/material/divider";
 import {MatListModule} from "@angular/material/list";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import { HomeComponent } from './views/admin/home/home.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { HomeComponent } from './views/admin/home/home.component';
     HeaderResponsableComponent,
     TestComponent,
     HomeComponent,
+    ErrorPageComponent,
+    ForbiddenComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule,HttpClientModule, BrowserAnimationsModule,MatSidenavModule,
     MatToolbarModule,

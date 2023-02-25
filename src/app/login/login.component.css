@@ -3,7 +3,7 @@ Body {
   font-family: Arial, Helvetica, sans-serif;
   display: block;
   font-size: 15px;
-  background-image: url("src/assets/img/bckgroundimg.png");
+  background-image: url("../../assets/img/bckgroundimg.png");
   display: block;
   height: 640px;
 }

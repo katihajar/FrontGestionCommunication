@@ -10,7 +10,7 @@ import {LoginComponent} from "./login/login.component";
 @NgModule({
   imports: [RouterModule.forRoot([
     {
-      path: 'adminNav',
+      path: 'admin',
       component: AdminComponent,
       children: [
         { path: 'test', component: TestComponent },
@@ -18,7 +18,7 @@ import {LoginComponent} from "./login/login.component";
       ],
     },
     {
-      path: 'responsableNav',
+      path: 'responsable',
       component: ResponsableComponent,
       children: [
         { path: 'testRespo', component: TestComponent },
@@ -26,7 +26,7 @@ import {LoginComponent} from "./login/login.component";
       ],
     },
     {
-      path: 'piloteNav',
+      path: 'pilote',
       component: PiloteComponent,
       children: [
         { path: 'testPilote', component: TestComponent },

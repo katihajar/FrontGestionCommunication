@@ -3,7 +3,6 @@ import { AuthService } from "../controller/service/auth.service";
 import { Userauth } from "../controller/model/userauth";
 import { User } from "../controller/model/user";
 import { Router } from '@angular/router';
-import {log} from "util";
 
 @Component({
   selector: 'app-login',
@@ -53,14 +52,16 @@ export class LoginComponent implements OnInit {
       this.successMessage = 'Login Successful';
 
       if (this.UserAuth.accessToken !== null) {
-        console.log('admin ...');
+        console.log('routes ...');
         if (this.User.roles[0].name == 'ROLE_ADMIN') {
           console.log('admin router  ...');
-          this.router.navigate(['./admin']);
+          this.router.navigate(['/admin']);
         } else if (this.User.roles[0].name == 'ROLE_PILOTE') {
-          this.router.navigate(['/pilote']);
+          console.log('piloteNav router  ...');
+          this.router.navigate(['/piloteNav']);
         }else if (this.User.roles[0].name == 'ROLE_RESPONSABLE') {
-          this.router.navigate(['/responsable']);
+          console.log('respo router  ...');
+          this.router.navigate(['/responsableNav']);
         }
       }
     }, () => {

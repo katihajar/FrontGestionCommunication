@@ -1,47 +1,43 @@
 import { NgModule } from '@angular/core';
-import {  RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { AdminComponent } from './layout/admin/admin.component';
-import { ResponsableComponent } from './layout/responsable/responsable.component';
-import { PiloteComponent } from './layout/pilote/pilote.component';
-import { TestComponent } from './views/admin/test/test.component';
+import {RouterModule, Routes} from "@angular/router";
+import {AdminComponent} from "./layout/admin/admin.component";
+import {TestComponent} from "./views/admin/test/test.component";
+import {ResponsableComponent} from "./layout/responsable/responsable.component";
+import {PiloteComponent} from "./layout/pilote/pilote.component";
+import {LoginComponent} from "./login/login.component";
 
-
-
-const routes: Routes = [
-  {
-    path: 'admin',
-    component: AdminComponent,
-    children: [
-      { path: 'test', component: TestComponent },
-      { path: '', redirectTo: 'test', pathMatch: 'full' },
-    ],
-  },
-  {
-    path: 'responsable',
-    component: ResponsableComponent,
-    children: [
-      { path: 'test', component: TestComponent },
-      { path: '', redirectTo: 'test', pathMatch: 'full' },
-    ],
-  },
-  {
-    path: 'pilote',
-    component: PiloteComponent,
-    children: [
-      { path: 'test', component: TestComponent },
-      { path: '', redirectTo: 'test', pathMatch: 'full' },
-    ],
-  },
-  // no layout views
-  { path: 'test', component: TestComponent },
-  { path: 'login', component: LoginComponent },
-  { path: '', component: LoginComponent },
-  { path: '**', redirectTo: '', pathMatch: 'full' },
-];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { enableTracing: true })],
+  imports: [RouterModule.forRoot([
+    {
+      path: 'adminNav',
+      component: AdminComponent,
+      children: [
+        { path: 'test', component: TestComponent },
+        { path: '', redirectTo: 'test', pathMatch: 'full' },
+      ],
+    },
+    {
+      path: 'responsableNav',
+      component: ResponsableComponent,
+      children: [
+        { path: 'testRespo', component: TestComponent },
+        { path: '', redirectTo: 'testRespo', pathMatch: 'full' },
+      ],
+    },
+    {
+      path: 'piloteNav',
+      component: PiloteComponent,
+      children: [
+        { path: 'testPilote', component: TestComponent },
+        { path: '', redirectTo: 'testPilote', pathMatch: 'full' },
+      ],
+    },
+    // no layout views
+    { path: '', component: LoginComponent },
+    { path: 'error', component: TestComponent },
+    { path: '**', redirectTo: 'error', pathMatch: 'full' },
+  ])],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

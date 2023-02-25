@@ -41,7 +41,7 @@
         <div class="flex flex-wrap">
           <div class="w-6/12">
             <a
-              [routerLink]="['/pilote/test']"
+              [routerLink]="['/piloteNav/testPilote']"
               class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
             >
               Pilote Layout Pages
@@ -82,12 +82,12 @@
 
         <li class="items-center">
           <a
-            [routerLink]="['/pilote/test']"
+            [routerLink]="['/piloteNav/testPilote']"
             class="text-xs uppercase py-3 font-bold block"
             routerLinkActive
-            #piloteTest="routerLinkActive"
+            #piloteTestPilote="routerLinkActive"
             [ngClass]="
-            piloteTest.isActive
+            piloteTestPilote.isActive
                 ? 'text-red-600 hover:text-red-700'
                 : 'text-blueGray-700 hover:text-blueGray-500'
             "
@@ -95,7 +95,7 @@
             <i
               class="fas fa-table mr-2 text-sm"
               [ngClass]="
-              piloteTest.isActive ? 'opacity-75' : 'text-blueGray-300'
+              piloteTestPilote.isActive ? 'opacity-75' : 'text-blueGray-300'
               "
             ></i>
             TEST

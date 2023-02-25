@@ -17,6 +17,9 @@ import { TestComponent } from './views/admin/test/test.component';
 import { SideBarAdminComponent } from './components/sideBar/side-bar-admin/side-bar-admin.component';
 import { SideBarResponsableComponent } from './components/sideBar/side-bar-responsable/side-bar-responsable.component';
 import { SideBarPiloteComponent } from './components/sideBar/side-bar-pilote/side-bar-pilote.component';
+import {ResponsableNavComponent} from "./components/navBar/responsableNav/responsable.nav.component";
+import {PiloteNavComponent} from "./components/navBar/piloteNav/pilote.nav.component";
+import {AdminNavComponent} from "./components/navBar/adminNav/admin.nav.component";
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { SideBarPiloteComponent } from './components/sideBar/side-bar-pilote/sid
     HeaderAdminComponent,
     HeaderPiloteComponent,
     HeaderResponsableComponent,
-    TestComponent
+    TestComponent,
+    ResponsableNavComponent,
+    PiloteNavComponent,
+    AdminNavComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule,HttpClientModule],
   providers: [],

@@ -54,14 +54,14 @@ export class LoginComponent implements OnInit {
       if (this.UserAuth.accessToken !== null) {
         console.log('routes ...');
         if (this.User.roles[0].name == 'ROLE_ADMIN') {
-          console.log('adminNav router  ...');
+          console.log('admin router  ...');
           this.router.navigate(['/admin']);
         } else if (this.User.roles[0].name == 'ROLE_PILOTE') {
           console.log('piloteNav router  ...');
-          this.router.navigate(['/pilote']);
+          this.router.navigate(['/piloteNav']);
         }else if (this.User.roles[0].name == 'ROLE_RESPONSABLE') {
           console.log('respo router  ...');
-          this.router.navigate(['/responsable']);
+          this.router.navigate(['/responsableNav']);
         }
       }
     }, () => {

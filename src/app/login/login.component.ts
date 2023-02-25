@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../controller/service/auth.service";
 import { Userauth } from "../controller/model/userauth";
 import { User } from "../controller/model/user";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   invalidLogin = false;
   loginSuccess = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.User = new User();
@@ -49,6 +50,20 @@ export class LoginComponent implements OnInit {
       this.invalidLogin = false;
       this.loginSuccess = true;
       this.successMessage = 'Login Successful';
+
+      if (this.UserAuth.accessToken !== null) {
+        console.log('admin ...');
+        if (this.User.roles[0].name == 'ROLE_ADMIN') {
+          console.log('admin router  ...');
+          this.router.navigate(['/admin']);
+          // tslint:disable-next-line:triple-equals
+        } else if (this.User.roles[0].name == 'ROLE_PILOTE') {
+          this.router.navigate(['/pilote']);
+          // tslint:disable-next-line:triple-equals
+        }else if (this.User.roles[0].name == 'ROLE_RESPONSABLE') {
+          this.router.navigate(['/responsable']);
+        }
+      }
     }, () => {
       this.invalidLogin = true;
       this.loginSuccess = false;

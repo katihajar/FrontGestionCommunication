@@ -1,11 +1,10 @@
-<div>
+<mat-drawer-container>
+  <mat-drawer mode="side" [opened]="sideBarOpen">
+    <!-- <mat-drawer mode="side" opened="true"> -->
     <app-side-bar-responsable></app-side-bar-responsable>
-    <div class="relative md:ml-64 bg-blueGray-100">
-      <app-responsable-nav></app-responsable-nav>
-      <app-header-responsable></app-header-responsable>
-      <div class="px-4 md:px-10 mx-auto w-full -m-24">
-        <router-outlet></router-outlet>
-        <app-footer></app-footer>
-      </div>
-    </div>
-  </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-header-responsable (toggleSidebarForMe)="sideBarToggler()"></app-header-responsable>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

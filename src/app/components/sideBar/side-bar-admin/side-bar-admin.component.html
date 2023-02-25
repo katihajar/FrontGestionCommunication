@@ -1,46 +1,18 @@
-<aside class="sidebar">
-  <ul class="menu-list">
-    <li>
-      <div class="menu-container">
-        <button class="icon" id="menu">
-          <img src="./assets/images/menu.svg" alt="menu" />
-        </button>
-      </div>
-    </li>
-    <li>
-      <button class="icon" id="search">
-        <img src="./assets/images/search.svg" alt="search" />
-      </button>
-    </li>
-    <li>
-      <button class="icon" id="dashboard">
-        <img src="./assets/images/grid.svg" alt="dashboard" />
-      </button>
-    </li>
-    <li>
-      <button class="icon" id="pets">
-        <img src="./assets/images/pet.svg" alt="pets" />
-      </button>
-    </li>
-    <li>
-      <button class="icon" id="clients">
-        <img src="./assets/images/user.svg" alt="clients" />
-      </button>
-    </li>
-    <li>
-      <button class="icon" id="vets">
-        <img src="./assets/images/vet.svg" alt="vets" />
-      </button>
-    </li>
-    <li>
-      <button class="icon" id="settings">
-        <img src="./assets/images/settings.svg" alt="settings" />
-      </button>
-    </li>
-  </ul>
-  <div class="logout-container">
-    <button class="icon-logout">
-      <img src="./assets/images/log-out.svg" alt="logout" />
-    </button>
+<mat-nav-list>
+  <div class="logo py-6">
+<!--    <h1 style="color: #cc0000;font-size: 110px"> CGI</h1>-->
   </div>
-</aside>
+<!--  <mat-divider></mat-divider>-->
+<!--  <h2 matSubheader class="mt-2">APPLICATIONS</h2>-->
+
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/home">
+    <mat-icon>home</mat-icon> Home
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/test">
+    <mat-icon>dashboard</mat-icon> Dashboard
+  </a>
+  <a mat-list-item> <mat-icon>edit</mat-icon> Link 3 </a>
+  <a mat-list-item> <mat-icon>edit</mat-icon> Link 4 </a>
+  <a mat-list-item> <mat-icon>edit</mat-icon> Link 5 </a>
+  <a mat-list-item> <mat-icon>edit</mat-icon> Link 6 </a>
+</mat-nav-list>

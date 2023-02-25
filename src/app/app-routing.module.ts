@@ -5,6 +5,7 @@ import {TestComponent} from "./views/admin/test/test.component";
 import {ResponsableComponent} from "./layout/responsable/responsable.component";
 import {PiloteComponent} from "./layout/pilote/pilote.component";
 import {LoginComponent} from "./login/login.component";
+import {HomeComponent} from "./views/admin/home/home.component";
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import {LoginComponent} from "./login/login.component";
       component: AdminComponent,
       children: [
         { path: 'test', component: TestComponent },
+        { path: 'home', component: HomeComponent },
         { path: '', redirectTo: 'test', pathMatch: 'full' },
       ],
     },
@@ -22,6 +24,7 @@ import {LoginComponent} from "./login/login.component";
       component: ResponsableComponent,
       children: [
         { path: 'testRespo', component: TestComponent },
+        { path: 'homeRespo', component: HomeComponent },
         { path: '', redirectTo: 'testRespo', pathMatch: 'full' },
       ],
     },
@@ -30,6 +33,7 @@ import {LoginComponent} from "./login/login.component";
       component: PiloteComponent,
       children: [
         { path: 'testPilote', component: TestComponent },
+        { path: 'homePilote', component: HomeComponent },
         { path: '', redirectTo: 'testPilote', pathMatch: 'full' },
       ],
     },

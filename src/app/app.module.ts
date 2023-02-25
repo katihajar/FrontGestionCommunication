@@ -17,10 +17,14 @@ import { TestComponent } from './views/admin/test/test.component';
 import { SideBarAdminComponent } from './components/sideBar/side-bar-admin/side-bar-admin.component';
 import { SideBarResponsableComponent } from './components/sideBar/side-bar-responsable/side-bar-responsable.component';
 import { SideBarPiloteComponent } from './components/sideBar/side-bar-pilote/side-bar-pilote.component';
-import {ResponsableNavComponent} from "./components/navBar/responsableNav/responsable.nav.component";
-import {PiloteNavComponent} from "./components/navBar/piloteNav/pilote.nav.component";
-import {AdminNavComponent} from "./components/navBar/adminNav/admin.nav.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatMenuModule} from "@angular/material/menu";
+import {MatIconModule} from "@angular/material/icon";
+import {MatDividerModule} from "@angular/material/divider";
+import {MatListModule} from "@angular/material/list";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import { HomeComponent } from './views/admin/home/home.component';
 
 @NgModule({
   declarations: [
@@ -37,11 +41,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HeaderPiloteComponent,
     HeaderResponsableComponent,
     TestComponent,
-    ResponsableNavComponent,
-    PiloteNavComponent,
-    AdminNavComponent
+    HomeComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule,HttpClientModule, BrowserAnimationsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule,HttpClientModule, BrowserAnimationsModule,MatSidenavModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatIconModule,
+    MatDividerModule,
+    MatListModule],
   providers: [],
   bootstrap: [AppComponent]
 })

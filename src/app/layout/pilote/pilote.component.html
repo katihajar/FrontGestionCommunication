@@ -1,59 +1,10 @@
-<!DOCTYPE html>
-<html>
-  <head>
-
-  </head>
-  <body id="body-pd">
-<div>
+<mat-drawer-container>
+  <mat-drawer mode="side" [opened]="sideBarOpen">
+    <!-- <mat-drawer mode="side" opened="true"> -->
     <app-side-bar-pilote></app-side-bar-pilote>
-    <div class="relative md:ml-64 bg-blueGray-100">
-      <app-pilote-nav></app-pilote-nav>
-      <app-header-pilote></app-header-pilote>
-      <div class="px-4 md:px-10 mx-auto w-full -m-24">
-        <router-outlet></router-outlet>
-        <app-footer></app-footer>
-      </div>
-    </div>
-  </div>
-</body>
-  </html>
-  <script>
-    document.addEventListener("DOMContentLoaded", function(event) {
-     
-     const showNavbar = (toggleId, navId, bodyId, headerId) =>{
-     const toggle = document.getElementById(toggleId),
-     nav = document.getElementById(navId),
-     bodypd = document.getElementById(bodyId),
-     headerpd = document.getElementById(headerId)
-     
-     // Validate that all variables exist
-     if(toggle && nav && bodypd && headerpd){
-     toggle.addEventListener('click', ()=>{
-     // show navbar
-     nav.classList.toggle('show')
-     // change icon
-     toggle.classList.toggle('bx-x')
-     // add padding to body
-     bodypd.classList.toggle('body-pd')
-     // add padding to header
-     headerpd.classList.toggle('body-pd')
-     })
-     }
-     }
-     
-     showNavbar('header-toggle','nav-bar','body-pd','header')
-     
-     /*===== LINK ACTIVE =====*/
-     const linkColor = document.querySelectorAll('.nav_link')
-     
-     function colorLink(){
-     if(linkColor){
-     linkColor.forEach(l=> l.classList.remove('active'))
-     this.classList.add('active')
-     }
-     }
-     linkColor.forEach(l=> l.addEventListener('click', colorLink))
-     
-      // Your code to run since DOM is loaded and ready
-     });
-  </script>
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-header-pilote (toggleSidebarForMe)="sideBarToggler()"></app-header-pilote>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

@@ -3,8 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import {FormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import { FormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { ResponsableComponent } from './layout/responsable/responsable.component';
 import { AdminComponent } from './layout/admin/admin.component';
@@ -18,12 +18,12 @@ import { SideBarAdminComponent } from './components/sideBar/side-bar-admin/side-
 import { SideBarResponsableComponent } from './components/sideBar/side-bar-responsable/side-bar-responsable.component';
 import { SideBarPiloteComponent } from './components/sideBar/side-bar-pilote/side-bar-pilote.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatMenuModule} from "@angular/material/menu";
-import {MatIconModule} from "@angular/material/icon";
-import {MatDividerModule} from "@angular/material/divider";
-import {MatListModule} from "@angular/material/list";
-import {MatSidenavModule} from "@angular/material/sidenav";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatIconModule } from "@angular/material/icon";
+import { MatDividerModule } from "@angular/material/divider";
+import { MatListModule } from "@angular/material/list";
+import { MatSidenavModule } from "@angular/material/sidenav";
 import { HomeComponent } from './views/admin/home/home.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
@@ -47,7 +47,13 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
     ErrorPageComponent,
     ForbiddenComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule,HttpClientModule, BrowserAnimationsModule,MatSidenavModule,
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatSidenavModule,
     MatToolbarModule,
     MatMenuModule,
     MatIconModule,

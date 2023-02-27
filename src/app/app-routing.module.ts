@@ -18,7 +18,7 @@ import {ForbiddenComponent} from "./forbidden/forbidden.component";
       children: [
         { path: 'test', component: TestComponent },
         { path: 'home', component: HomeComponent },
-        { path: '', redirectTo: 'test', pathMatch: 'full' },
+        { path: '', redirectTo: 'home', pathMatch: 'full' },
       ],
     },
     {
@@ -27,7 +27,7 @@ import {ForbiddenComponent} from "./forbidden/forbidden.component";
       children: [
         { path: 'testRespo', component: TestComponent },
         { path: 'homeRespo', component: HomeComponent },
-        { path: '', redirectTo: 'testRespo', pathMatch: 'full' },
+        { path: '', redirectTo: 'homeRespo', pathMatch: 'full' },
       ],
     },
     {
@@ -36,7 +36,7 @@ import {ForbiddenComponent} from "./forbidden/forbidden.component";
       children: [
         { path: 'testPilote', component: TestComponent },
         { path: 'homePilote', component: HomeComponent },
-        { path: '', redirectTo: 'testPilote', pathMatch: 'full' },
+        { path: '', redirectTo: 'homePilote', pathMatch: 'full' },
       ],
     },
     // no layout views

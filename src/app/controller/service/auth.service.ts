@@ -64,5 +64,13 @@ export class AuthService {
   set User(value: User) {
     this._User = value;
   }
+  tokenHeaders(): HttpHeaders {
+    let headers = new HttpHeaders();
+      headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.UserAuth.accessToken}`,
+      });
+    return headers;
+  }
 
 }

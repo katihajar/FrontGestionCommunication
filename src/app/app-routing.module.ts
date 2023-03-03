@@ -8,6 +8,7 @@ import {LoginComponent} from "./login/login.component";
 import {HomeComponent} from "./views/admin/home/home.component";
 import {ErrorPageComponent} from "./error-page/error-page.component";
 import {ForbiddenComponent} from "./forbidden/forbidden.component";
+import { RegistreUserComponent } from './views/admin/registre-user/registre-user.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import {ForbiddenComponent} from "./forbidden/forbidden.component";
       children: [
         { path: 'test', component: TestComponent },
         { path: 'home', component: HomeComponent },
+        { path: 'users/register', component: RegistreUserComponent },
         { path: '', redirectTo: 'home', pathMatch: 'full' },
       ],
     },

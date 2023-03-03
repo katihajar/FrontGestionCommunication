@@ -15,6 +15,13 @@ mat-drawer-container {
 mat-drawer {
   background: #21272b;
 }
+.mat-drawer-content{
+  overflow: hidden;
+}
+.mat-body, .mat-body-1, .mat-typography .mat-body, .mat-typography .mat-body-1, .mat-typography {
+  font:0 14px/20px Roboto, "Helvetica Neue", sans-serif;
+  letter-spacing: normal;
+ }
 //#167774
 //#4729ab
 //#104113

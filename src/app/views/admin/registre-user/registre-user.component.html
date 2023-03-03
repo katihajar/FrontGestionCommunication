@@ -1,0 +1,91 @@
+<div class="container-fluid page card" style="background-color: white">
+  <div class="page__box p-3">Registre des Utilisateurs</div>
+  <div class="page__content shadow p-2 position-relative align-items-center">
+      <div class="card">
+        <h5>Utilisateur</h5>
+        <p-table  class="table" #dt1 [value]=" this.UserList" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+          [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          [globalFilterFields]="['nom','prenom','username','lots','roles']">
+          <ng-template pTemplate="caption">
+            <div class="flex">
+              <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                (click)="clear(dt1)"></button>
+              <span class="p-input-icon-left ml-auto" style="float: right;">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
+                  placeholder="Search keyword" />
+              </span>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th >
+                <div class="flex justify-content-center align-items-center">
+                  Nom
+                  <p-columnFilter type="text" field="nom" display="menu"></p-columnFilter>
+                </div>
+              </th>
+              <th>
+                <div class="flex justify-content-center align-items-center">
+                  Prenom
+                  <p-columnFilter type="text" field="prenom" display="menu"></p-columnFilter>
+                </div>
+              </th>
+              <th >
+                <div class="flex justify-content-center align-items-center">
+                  Utilisateur 
+                  <p-columnFilter type="text" field="username" display="menu"></p-columnFilter>
+                </div>
+              </th>
+              <th >
+                <div class="flex justify-content-center align-items-center">
+                  Lot 
+                  <p-columnFilter type="text" field="lots" display="menu"></p-columnFilter>
+                </div>
+              </th>
+              <th>
+                <div class="flex justify-content-center align-items-center">
+                  Role 
+                  <p-columnFilter type="text" field="roles" display="menu"></p-columnFilter>
+                </div>
+              </th>
+              <th >
+                action
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-users>
+            <tr>
+              <td>
+                {{users.nom}}
+              </td>
+
+              <td>
+                {{users.prenom}}
+              </td>
+             
+              <td>
+                {{users.username}}
+              </td>
+              <td>
+                {{users.lots}}
+              </td>
+              <td>
+                {{users.roles[0].name}}
+              </td>
+              <td><button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger"></button>
+                <button pButton pRipple type="button" icon="pi pi-edite" class="p-button-rounded p-button-success"></button>
+
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="6">aucun utilisareur trouvé.</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+      </div>
+      </div>

@@ -12,3 +12,8 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+.mat-body, .mat-body-1, .mat-typography .mat-body, .mat-typography .mat-body-1, .mat-typography {
+  font:0 Roboto, "Helvetica Neue", sans-serif;
+  letter-spacing: normal;
+ }
+@import "../node_modules/primeng/resources/primeng.min.css";

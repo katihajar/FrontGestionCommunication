@@ -110,7 +110,6 @@ import {ConfirmationService, MessageService} from "primeng/api";
 import { RegistreUserComponent } from './views/admin/registre-user/registre-user.component';
 import { AjoutUserComponent } from './views/admin/ajout-user/ajout-user.component';
 import { HttpClientModule } from '@angular/common/http';
-
 @NgModule({
   declarations: [
     AppComponent,

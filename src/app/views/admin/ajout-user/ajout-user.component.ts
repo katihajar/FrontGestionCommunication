@@ -7,9 +7,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./ajout-user.component.scss']
 })
 export class AjoutUserComponent implements OnInit {
-
+lots:any[]=[];
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    this.lots= [
+      {name: '3B'},
+      {name: '7B'},
+  ];
   }
+  
 }

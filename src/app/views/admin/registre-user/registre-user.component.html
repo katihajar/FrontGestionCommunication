@@ -1,94 +1,183 @@
 <div class="container-fluid page card" style="background-color: white">
   <div class="page__box p-3">Registre des Utilisateurs</div>
   <div class="page__content shadow p-2 position-relative align-items-center">
-      <div class="card">
-        <div>
-          <button pButton pRipple type="button" label="Ajouter Utilisateur" style="width: fit-content;margin: 4px;float: right;" routerLink="/admin/AddUsers" class="p-button-raised p-button-success"></button>
-        </div>
-        <p-table  class="table" #dt1 [value]=" this.UserList" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
-          [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
-          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-          [globalFilterFields]="['nom','prenom','username','lots','roles']">
-          <ng-template pTemplate="caption">
-            <div class="flex">
-              <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
-                (click)="clear(dt1)"></button>
-              <span class="p-input-icon-left ml-auto" style="float: right;">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
-                  placeholder="Search keyword" />
-              </span>
-            </div>
-          </ng-template>
-          <ng-template pTemplate="header">
-            <tr>
-              <th >
-                <div class="flex justify-content-center align-items-center">
-                  Nom
-                  <p-columnFilter type="text" field="nom" display="menu"></p-columnFilter>
-                </div>
-              </th>
-              <th>
-                <div class="flex justify-content-center align-items-center">
-                  Prenom
-                  <p-columnFilter type="text" field="prenom" display="menu"></p-columnFilter>
-                </div>
-              </th>
-              <th >
-                <div class="flex justify-content-center align-items-center">
-                  Utilisateur 
-                  <p-columnFilter type="text" field="username" display="menu"></p-columnFilter>
-                </div>
-              </th>
-              <th >
-                <div class="flex justify-content-center align-items-center">
-                  Lot 
-                  <p-columnFilter type="text" field="lots" display="menu"></p-columnFilter>
-                </div>
-              </th>
-              <th>
-                <div class="flex justify-content-center align-items-center">
-                  Role 
-                  <p-columnFilter type="text" field="roles" display="menu"></p-columnFilter>
-                </div>
-              </th>
-              <th >
-                action
-              </th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-users>
-            <tr>
-              <td>
-                {{users.nom}}
-              </td>
+    <div class="card">
+      <div>
+        <button pButton pRipple type="button" label="Ajouter Utilisateur"
+          style="width: fit-content;margin: 4px;float: right;" (click)="showBasicDialog2()"
+          class="p-button-raised p-button-success"></button>
+      </div>
+      <p-table class="table" #dt1 [value]=" this.UserList" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+         [loading]="loading" [paginator]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [globalFilterFields]="['nom','prenom','username','lots','roles']">
+        <ng-template pTemplate="caption">
+          <div class="flex">
+            <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+              (click)="clear(dt1)"></button>
+            <span class="p-input-icon-left ml-auto" style="float: right;">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
+                placeholder="Search keyword" />
+            </span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th>
+              <div class="flex justify-content-center align-items-center">
+                Nom
+                <p-columnFilter type="text" field="nom" display="menu"></p-columnFilter>
+              </div>
+            </th>
+            <th>
+              <div class="flex justify-content-center align-items-center">
+                Prenom
+                <p-columnFilter type="text" field="prenom" display="menu"></p-columnFilter>
+              </div>
+            </th>
+            <th>
+              <div class="flex justify-content-center align-items-center">
+                Utilisateur
+                <p-columnFilter type="text" field="username" display="menu"></p-columnFilter>
+              </div>
+            </th>
+            <th>
+              <div class="flex justify-content-center align-items-center">
+                Lot
+                <p-columnFilter type="text" field="lots" display="menu"></p-columnFilter>
+              </div>
+            </th>
+            <th>
+              <div class="flex justify-content-center align-items-center">
+                Role
+                <p-columnFilter type="text" field="roles" display="menu"></p-columnFilter>
+              </div>
+            </th>
+            <th>
+              action
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-users>
+          <tr>
+            <td>
+              {{users.nom}}
+            </td>
 
-              <td>
-                {{users.prenom}}
-              </td>
-             
-              <td>
-                {{users.username}}
-              </td>
-              <td>
-                {{users.lots}}
-              </td>
-              <td>
-                {{users.roles[0].name}}
-              </td>
-              <td><button pButton pRipple type="button" style="font-size: larger;" icon="pi pi-times" class="p-button-rounded p-button-danger"></button>
-                <button pButton pRipple type="button" style="font-size: larger;margin-left: 2%;"  icon="pi pi-pencil" class="p-button-rounded p-button-success"></button>
+            <td>
+              {{users.prenom}}
+            </td>
 
-              </td>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="emptymessage">
-            <tr>
-              <td colspan="6">aucun utilisareur trouvé.</td>
-            </tr>
-          </ng-template>
-        </p-table>
-      </div>
-      </div>
-      </div>
-      
+            <td>
+              {{users.username}}
+            </td>
+            <td>
+              {{users.lots}}
+            </td>
+            <td>
+              {{users.roles[0].name}}
+            </td>
+            <td><button pButton pRipple type="button" style="font-size: larger;" icon="pi pi-times"
+                class="p-button-rounded p-button-danger"></button>
+              <button pButton pRipple type="button" (click)="showDialogEdite(users)"
+                style="font-size: larger;margin-left: 2%;" icon="pi pi-pencil"
+                class="p-button-rounded p-button-success"></button>
+
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="6">aucun utilisareur trouvé.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
+
+<p-dialog header="Ajouter Un utilisareur" [modal]="true" (onHide)="submittedUtilisateur=false"
+  [(visible)]="displayBasic2" [style]="{width: '50vw', height: '20vw'}">
+  <div class="page__content-data position-relative text-center">
+    <div class="col-12">
+      <span class="p-input-icon-left" [style]="{'width':'45%'}">
+        <i class="pi pi-user"></i>
+        <input required [style]="{'width':'100%'}" [(ngModel)]="this.AddUser.user.prenom" type="text" pInputText
+          placeholder="Entré le prénom" />
+        <small style="color: red;" *ngIf="submittedUtilisateur && !this.AddUser.user.prenom" class="p-invalid">Prenom
+          obligatoir</small>
+
+      </span>
+      <span class="p-input-icon-left " style="margin-left: 2%;" [style]="{'width':'45%'}">
+        <i class="pi pi-user"></i>
+        <input required [style]="{'width':'100%'}" [(ngModel)]="this.AddUser.user.nom" type="text" pInputText
+          placeholder="Entré le nom" />
+        <small style="color: red; margin-left: 2%;" *ngIf="submittedUtilisateur && !this.AddUser.user.nom"
+          class="p-invalid">nom obligatoir</small>
+      </span>
+    </div>
+    <div class="col-12" style="margin-top: 2%;">
+      <span class="p-input-icon-left" [style]="{'width':'45%'}">
+        <p-dropdown [options]="lots" [(ngModel)]="this.AddUser.user.lots"
+          [style]="{'width':'100%','required':'required'}" placeholder="Selectinné le lot" optionValue="name"
+          optionLabel="name" [showClear]="true"></p-dropdown>
+        <small style="color: red;margin-left: 2%;" *ngIf="submittedUtilisateur && !this.AddUser.user.lots"
+          class="p-invalid">lot est obligatoir</small>
+      </span>
+      <span class="p-input-icon-left" style="margin-left: 2%;" [style]="{'width':'45%'}">
+        <p-dropdown [options]="RoleList" [(ngModel)]="this.AddUser.idRole"
+          [style]="{'width':'100%','required':'required'}" placeholder="Selectinné le role" optionValue="id"
+          optionLabel="name" [showClear]="true"></p-dropdown>
+        <small style="color: red;margin-left: 2%;" *ngIf="submittedUtilisateur && !this.AddUser.idRole"
+          class="p-invalid">Role obligatoir</small>
+      </span>
+
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button label="Submit" (click)="SaveUser()" icon="pi pi-check"></p-button>
+  </ng-template>
+</p-dialog>
+
+
+<p-dialog header="Modifer Un utilisareur" (onHide)="submittedUtilisateur=false" [modal]="true"
+  [(visible)]="displayEdite" [style]="{width: '50vw', height: '20vw'}">
+  <div class="page__content-data position-relative text-center">
+    <div class="col-12 ">
+      <span class="p-input-icon-left" [style]="{'width':'45%'}">
+        <i class="pi pi-user"></i>
+        <input required [style]="{'width':'100%'}" [(ngModel)]="this.EditeUser.user.prenom" type="text" pInputText
+          placeholder="Entré le prénom" />
+        <small style="color: red;" *ngIf="submittedUtilisateur && !this.EditeUser.user.prenom" class="p-invalid">Prenom
+          obligatoir</small>
+      </span>
+      <span class="p-input-icon-left " style="margin-left: 2%;" [style]="{'width':'45%'}">
+        <i class="pi pi-user"></i>
+        <input required [style]="{'width':'100%'}" [(ngModel)]="this.EditeUser.user.nom" type="text" pInputText
+          placeholder="Entré le nom" />
+        <small style="color: red;margin-left: 2%;" *ngIf="submittedUtilisateur && !this.EditeUser.user.nom"
+          class="p-invalid">nom obligatoir</small>
+      </span>
+    </div>
+    <div class="col-12" style="margin-top: 2%;">
+      <span class="p-input-icon-left" [style]="{'width':'45%'}">
+        <p-dropdown [options]="lots" [(ngModel)]="this.EditeUser.user.lots"
+          [style]="{'width':'100%', 'required':'required'}" placeholder="Selectinné le lot" optionValue="name"
+          optionLabel="name" [showClear]="true"></p-dropdown>
+        <small style="color: red;margin-left: 2%;" *ngIf="submittedUtilisateur && !this.EditeUser.user.lots"
+          class="p-invalid">lot est obligatoir</small>
+      </span>
+      <span class="p-input-icon-left" style="margin-left: 2%;" [style]="{'width':'45%'}">
+        <p-dropdown [options]="RoleList" [(ngModel)]="this.EditeUser.idRole"
+          [style]="{'width':'100%','required':'required'}" placeholder="Selectinné le role" optionValue="id"
+          optionLabel="name" [showClear]="true"></p-dropdown>
+        <small style="color: red;margin-left: 2%;" *ngIf="submittedUtilisateur && !this.EditeUser.idRole"
+          class="p-invalid">Role obligatoir</small>
+      </span>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button label="Submit" type="Submit" (click)="UpdateUser()" icon="pi pi-check"></p-button>
+  </ng-template>
+</p-dialog>

@@ -1,27 +1,9 @@
 @import "../home/home.component.scss";
 .card{
     border: 2px solid black; 
-    min-height: calc(50vh - 78px);
-
+    min-height: 50%;
+    width: 50%;
+    position: absolute;
 }
 
-.p-inputgroup-addon{
-    border-top-left-radius: 6px;
-    border-bottom-left-radius: 6px;
-    max-width: 5%;
-}
-.inputstyle{
-    display: flex;
-    align-items: stretch;
-    width: 100%;
-    margin-top: 5%;
-}
-input{
-    border-top-left-radius:0 ;
-    border-bottom-left-radius:0 ;
-    width: 34%;
-}
-.container{
-    align-items: center;
 
-}

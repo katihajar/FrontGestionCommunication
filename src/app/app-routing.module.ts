@@ -9,6 +9,7 @@ import {HomeComponent} from "./views/admin/home/home.component";
 import {ErrorPageComponent} from "./error-page/error-page.component";
 import {ForbiddenComponent} from "./forbidden/forbidden.component";
 import { RegistreUserComponent } from './views/admin/registre-user/registre-user.component';
+import { AjoutUserComponent } from './views/admin/ajout-user/ajout-user.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { RegistreUserComponent } from './views/admin/registre-user/registre-user
         { path: 'test', component: TestComponent },
         { path: 'home', component: HomeComponent },
         { path: 'users/register', component: RegistreUserComponent },
+        { path: 'AddUsers', component: AjoutUserComponent },
         { path: '', redirectTo: 'home', pathMatch: 'full' },
       ],
     },

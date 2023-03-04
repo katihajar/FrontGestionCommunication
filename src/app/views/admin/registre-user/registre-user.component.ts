@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Table } from 'primeng/table';
 import { User } from 'src/app/controller/model/user';
 import { UserService } from 'src/app/controller/service/user.service';
@@ -9,12 +10,8 @@ import { UserService } from 'src/app/controller/service/user.service';
   styleUrls: ['./registre-user.component.scss']
 })
 export class RegistreUserComponent implements OnInit {
-  statuses: any[] | undefined;
-
   loading: boolean = true;
-
-  activityValues: number[] = [0, 100];
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
     clear(table: Table) {
         table.clear();
     }

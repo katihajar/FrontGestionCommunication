@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { ResponsableComponent } from './layout/responsable/responsable.component';
 import { AdminComponent } from './layout/admin/admin.component';
@@ -109,6 +108,8 @@ import { VirtualScrollerModule } from 'primeng/virtualscroller';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {ConfirmationService, MessageService} from "primeng/api";
 import { RegistreUserComponent } from './views/admin/registre-user/registre-user.component';
+import { AjoutUserComponent } from './views/admin/ajout-user/ajout-user.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -128,7 +129,8 @@ import { RegistreUserComponent } from './views/admin/registre-user/registre-user
     HomeComponent,
     ErrorPageComponent,
     ForbiddenComponent,
-    RegistreUserComponent
+    RegistreUserComponent,
+    AjoutUserComponent
   ],
   imports: [
     BrowserModule,
@@ -224,7 +226,7 @@ import { RegistreUserComponent } from './views/admin/registre-user/registre-user
     VirtualScrollerModule,
     StyleClassModule,
   ],
-  providers: [ConfirmDialogModule,ConfirmationService,MessageService],
+  providers: [ConfirmationService,MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

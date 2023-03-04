@@ -2,7 +2,9 @@
   <div class="page__box p-3">Registre des Utilisateurs</div>
   <div class="page__content shadow p-2 position-relative align-items-center">
       <div class="card">
-        <h5>Utilisateur</h5>
+        <div>
+          <button pButton pRipple type="button" label="Ajouter Utilisateur" style="width: fit-content;margin: 4px;float: right;" routerLink="/admin/AddUsers" class="p-button-raised p-button-success"></button>
+        </div>
         <p-table  class="table" #dt1 [value]=" this.UserList" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
           [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -74,8 +76,8 @@
               <td>
                 {{users.roles[0].name}}
               </td>
-              <td><button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger"></button>
-                <button pButton pRipple type="button" icon="pi pi-edite" class="p-button-rounded p-button-success"></button>
+              <td><button pButton pRipple type="button" style="font-size: larger;" icon="pi pi-times" class="p-button-rounded p-button-danger"></button>
+                <button pButton pRipple type="button" style="font-size: larger;margin-left: 2%;"  icon="pi pi-pencil" class="p-button-rounded p-button-success"></button>
 
               </td>
             </tr>
@@ -89,3 +91,4 @@
       </div>
       </div>
       </div>
+      

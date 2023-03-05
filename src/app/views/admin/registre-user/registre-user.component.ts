@@ -17,6 +17,8 @@ export class RegistreUserComponent implements OnInit {
   displayEdite: boolean = false;
   submittedUtilisateur: boolean = false;
   lots:any[]=[];
+  piloteList = new Array<User>();
+  responsablleList = new Array<User>();
   constructor(private userService: UserService, private router: Router) { }
     clear(table: Table) {
         table.clear();
@@ -26,7 +28,13 @@ export class RegistreUserComponent implements OnInit {
       // @ts-ignore
       this.UserList = data.body;
       this.loading = false;
-      console.log("list : "+JSON.stringify(this.UserList));
+      for(let i = 0; i<this.UserList.length;i++){
+        if(this.UserList[i].roles[0].name== "ROLE_PILOTE"){
+          this.piloteList.push(this.UserList[i]);
+        } else  if(this.UserList[i].roles[0].name== "ROLE_RESPONSABLE"){
+          this.responsablleList.push(this.UserList[i]);
+        } 
+      }
     }
     );
   }
@@ -36,7 +44,6 @@ export class RegistreUserComponent implements OnInit {
     this.userService.FindAllRoles().subscribe((data) => {
       // @ts-ignore
       this.RoleList = data.body;
-      console.log("list : "+JSON.stringify(this.RoleList));
     }
     );
     this.lots= [
@@ -82,7 +89,6 @@ showDialogEdite(user: User) {
     this.submittedUtilisateur = true;
     this.AddUser.user.username=this.AddUser.user.prenom+'.'+this.AddUser.user.nom;
     this.AddUser.user.password=this.AddUser.user.username;
-    console.log('user Added  :  '+ JSON.stringify(this.AddUser));
     this.userService.SaveUser().subscribe((data) => {
            this.AddUser=new UserRole;
            this.FindAllUsers();
@@ -96,7 +102,6 @@ showDialogEdite(user: User) {
     this.submittedUtilisateur = true;
     this.EditeUser.user.username=this.EditeUser.user.prenom+'.'+this.EditeUser.user.nom;
     this.EditeUser.user.password=this.EditeUser.user.username;
-    console.log('user eddited  :  '+ JSON.stringify(this.EditeUser));
     this.userService.UpdateUser().subscribe((data) => {
            this.submittedUtilisateur = true;
            this.EditeUser =new UserRole;

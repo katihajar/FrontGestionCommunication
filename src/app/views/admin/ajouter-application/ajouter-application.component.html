@@ -1,0 +1,255 @@
+<div class="container-fluid page" style="background-color: white">
+  <div class="d-flex page__box p-3">Ajouter une Application</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="card align-items-center">
+      <div class="col-12" style="margin: 2%">
+        <span
+          class="p-input-icon-left"
+          style="margin-left: 3%"
+          [style]="{ width: '22%' }"
+        >
+        
+          <input
+            required
+            [style]="{ width: '100%' }"
+            type="text"
+            [(ngModel)]="this.AddApplication.nomApplication"
+            pInputText
+            placeholder="Entré le Nom d'Application"
+          />
+          <small
+            style="color: red"
+            *ngIf="submittedApplication && !this.AddApplication.nomApplication"
+            class="p-invalid"
+            >Prenom obligatoir</small
+          >
+        </span>
+        <span
+          class="p-input-icon-left"
+          style="margin-left: 2%"
+          [style]="{ width: '22%' }"
+        >
+            <input
+            required
+            [(ngModel)]="this.AddApplication.version"
+            [style]="{ width: '100%' }"
+            type="text"
+            pInputText
+            placeholder="Entré la version"
+          />
+          <small
+            style="color: red; margin-left: 2%"
+            *ngIf="submittedApplication && !this.AddApplication.version"
+            class="p-invalid"
+            >la version est obligatoire</small
+          >
+        </span>
+
+        <span
+          class="p-input-icon-left"
+          style="margin-left: 2%"
+          [style]="{ width: '22%' }"
+        >
+          <p-dropdown
+            [(ngModel)]="this.AddApplication.responsable"
+            [style]="{ width: '100%', required: 'required' }"
+            [options]="responsableList"
+            optionLabel="username"
+            [filter]="true"
+            filterBy="username"
+            [showClear]="true"
+            placeholder="Selectinné le Responsable"
+          >
+            <ng-template let-respo pTemplate="item">
+              <div class="country-item">
+                <div>{{ respo.username }}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+          <small
+            style="color: red; margin-left: 2%"
+            *ngIf="submittedApplication && !this.AddApplication.responsable"
+            class="p-invalid"
+            >Responsable est obligatoire</small
+          >
+        </span>
+        <span
+          class="p-input-icon-left"
+          style="margin-left: 2%"
+          [style]="{ width: '22%' }"
+        >
+          <p-dropdown
+            [(ngModel)]="this.AddApplication.disponibilite"
+            [options]="disponibilite"
+            [style]="{ width: '100%', required: 'required' }"
+            placeholder="Selectinné la disponibilité"
+            optionValue="name"
+            optionLabel="name"
+            [showClear]="true"
+          ></p-dropdown>
+          <small
+            style="color: red; margin-left: 2%"
+            *ngIf="submittedApplication && !this.AddApplication.disponibilite"
+            class="p-invalid"
+            >Disponibilité est obligatoire</small
+          >
+        </span>
+      </div>
+      <div class="col-12" style="margin-bottom: 2%; float: left">
+        <span
+          class="p-input-icon-left"
+          style="margin-left: 3%"
+          [style]="{ width: '22%' }"
+        >
+          <p-dropdown
+            [options]="lots"
+            [(ngModel)]="this.AddApplication.lot"
+            [style]="{ width: '100%', required: 'required' }"
+            placeholder="Selectinné le lot "
+            optionValue="name"
+            optionLabel="name"
+            [showClear]="true"
+          ></p-dropdown>
+          <small
+            style="color: red; margin-left: 2%"
+            *ngIf="submittedApplication && !this.AddApplication.lot"
+            class="p-invalid"
+            >lot est obligatoire</small
+          >
+        </span>
+        <span
+          class="p-input-icon-left"
+          style="margin-left: 2%"
+          [style]="{ width: '22%' }"
+        >
+          <p-dropdown
+            [options]="charte"
+            [(ngModel)]="this.AddApplication.charteIncident"
+            [style]="{ width: '100%', required: 'required' }"
+            placeholder="Selectinné la charte "
+            optionValue="name"
+            optionLabel="name"
+            [showClear]="true"
+          ></p-dropdown>
+          <small
+            style="color: red; margin-left: 2%"
+            *ngIf="submittedApplication && !this.AddApplication.charteIncident"
+            class="p-invalid"
+            >Charte est obligatoire</small
+          >
+        </span>
+      </div>
+
+        <div
+        class="card align-items-center"
+        style="width: 80%; margin-bottom: 2%"
+      >
+        <h1 style="margin: 3%">Ajouter les pilotes</h1>
+        <div class="col-12" style="margin-bottom: 2%">
+          <span
+            class="p-input-icon-left"
+            style="margin-left: 30%"
+            [style]="{ width: '40%' }"
+          >
+            <p-dropdown
+              [style]="{ width: '100%', required: 'required' }"
+              [(ngModel)]="selectedPiloteApp.pilote"
+              [options]="piloteList"
+              optionLabel="username"
+              [filter]="true"
+              filterBy="username"
+              [showClear]="true"
+              placeholder="Selectinné le pilote"
+            >
+              <ng-template let-pilote pTemplate="item">
+                <div class="country-item">
+                  <div>{{ pilote.username }}</div>
+                </div>
+              </ng-template>
+            </p-dropdown>
+          </span>
+          <button
+            style="margin-left: 1%"
+            (click)="AddPilote()"
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-plus"
+            class="p-button-rounded p-button-success"
+          ></button>
+        </div>
+        <div class="col-12" style="margin: 2%">
+          <p-table
+            class="table"
+            [value]="this.ListpiloteSelected"
+            dataKey="id"
+            [rows]="10"
+            [showCurrentPageReport]="true"
+            [paginator]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          >
+            <ng-template pTemplate="header">
+              <tr>
+                <th>
+                  <div class="flex justify-content-center align-items-center">
+                    Nom
+                  </div>
+                </th>
+                <th>
+                  <div class="flex justify-content-center align-items-center">
+                    Prenom
+                  </div>
+                </th>
+                <th>
+                  <div class="flex justify-content-center align-items-center">
+                    username
+                  </div>
+                </th>
+                <th>
+                  <div class="flex justify-content-center align-items-center">
+                    supprimer
+                  </div>
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-appPilote>
+              <tr>
+                <td>
+                  {{ appPilote.pilote.nom }}
+                </td>
+
+                <td>
+                  {{ appPilote.pilote.prenom }}
+                </td>
+
+                <td>
+                  {{ appPilote.pilote.username }}
+                </td>
+                <td>
+                  <button
+                    pButton
+                    pRipple
+                    type="button"
+                    style="font-size: larger"
+                    icon="pi pi-times"
+                    class="p-button-rounded p-button-danger"
+                    (click)="removePilote(appPilote)"
+                  ></button>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td colspan="4">aucune application trouvé.</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+      <div class="col-12 " style="margin-bottom: 2%; ">
+      <p-button  label="Submit" style=" float: right;margin-right: 2%;" (click)="SaveApp()"  icon="pi pi-check"></p-button></div>
+   </div>
+    </div>
+   
+  
+</div>

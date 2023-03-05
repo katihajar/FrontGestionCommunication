@@ -43,18 +43,12 @@ export class LoginComponent implements OnInit {
       // @ts-ignore
       this.UserAuth = data.body;
       this.User = this.UserAuth.user;
-      console.log('tken: ' + this.UserAuth.accessToken);
-      console.log('us: ' + JSON.stringify(this.User));
-      console.log('auth: ' + JSON.stringify(this.User.authorities));
-      console.log('role: ' + this.User.roles[0].name);
       this.invalidLogin = false;
       this.loginSuccess = true;
       this.successMessage = 'Login Successful';
 
       if (this.UserAuth.accessToken !== null) {
-        console.log('routes ...');
         if (this.User.roles[0].name == 'ROLE_ADMIN') {
-          console.log('admin router  ...');
           this.router.navigate(['/admin']);
         } else if (this.User.roles[0].name == 'ROLE_PILOTE') {
           console.log('piloteNav router  ...');

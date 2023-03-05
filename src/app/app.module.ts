@@ -108,8 +108,9 @@ import { VirtualScrollerModule } from 'primeng/virtualscroller';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {ConfirmationService, MessageService} from "primeng/api";
 import { RegistreUserComponent } from './views/admin/registre-user/registre-user.component';
-import { AjoutUserComponent } from './views/admin/ajout-user/ajout-user.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RegistreApplicationComponent } from './views/admin/registre-application/registre-application.component';
+import { AjouterApplicationComponent } from './views/admin/ajouter-application/ajouter-application.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -129,8 +130,9 @@ import { HttpClientModule } from '@angular/common/http';
     ErrorPageComponent,
     ForbiddenComponent,
     RegistreUserComponent,
-    AjoutUserComponent
-  ],
+    RegistreApplicationComponent,
+    AjouterApplicationComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

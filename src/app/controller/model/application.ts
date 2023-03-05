@@ -14,7 +14,7 @@ export class Application {
     public  responsable = new User();
     public lot: string = String();
     public charteIncident: string = String();
-    public disponibilite: boolean = true;
+    public disponibilite: string = String();
     public  piloteApplicationList = new Array<PiloteApplication>();
     public  incidentList = new Array<Incident>();
     public  operationList = new Array<Operation>();

@@ -1,0 +1,172 @@
+<div class="container-fluid page" style="background-color: white">
+    <div class="d-flex page__box p-3">Ajouter un Incident</div>
+    <div class="page__content shadow p-3 position-relative">
+        <div class="card align-items-center">
+            <div class="col-12" style="margin: 2%">
+                <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '22%' }">
+                    <label for="basic3" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Titre</label>
+                    <input inputId="basic3" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text" pInputText
+                        placeholder="Entré le Titre d'Incident"   [(ngModel)]="this.AddIncident.titreIncident" />
+
+                </span>
+                <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
+                    <label for="basic4" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">N° Incident</label>
+                    <input inputId="basic4" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="text" pInputText
+                        placeholder="Entré le numero d'incident"   [(ngModel)]="this.AddIncident.numeroIncident" />
+
+                </span>
+                <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
+                    <label for="basic1" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date Début</label>
+                    <p-calendar inputId="basic1" [(ngModel)]="date2" [style]="{ width: '100%' }" [(ngModel)]="this.AddIncident.dateDebut" ></p-calendar>
+
+                </span>
+                <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
+                    <label for="basic2" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date Fin</label>
+                    <p-calendar inputId="basic2" [(ngModel)]="date3" [style]="{ width: '100%' }" [(ngModel)]="this.AddIncident.dateFin"></p-calendar>
+
+                </span>
+            
+            </div>
+            <div class="col-12" style="margin-bottom: 2%;">
+                <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '46%' }">
+                    <label for="basic5" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Description</label>
+                    <textarea id="basic5" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text" pInputTextarea
+                        placeholder="Entré la description" [(ngModel)]="this.AddIncident.description"></textarea>
+
+                </span>
+                <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '46%' }">
+                    <label style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Situation Actuelle</label>
+                    <textarea style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text" pInputTextarea
+                        placeholder="Entré la situation Actuelle" [(ngModel)]="this.AddIncident.situationActuelle" ></textarea>
+
+                </span>
+            </div>
+            <div class="col-12" style="margin-bottom: 2%;">
+                <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '46%' }">
+                    <label style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Impact</label>
+                    <textarea style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text" pInputTextarea
+                        placeholder="Entré l'impact" [(ngModel)]="this.AddIncident.impact" ></textarea>
+
+                </span>
+                <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '46%' }">
+                    <label style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Cause Pricipate</label>
+                    <textarea style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text" pInputTextarea
+                        placeholder="Entré la cause Principale" [(ngModel)]="this.AddIncident.causePrincipale" ></textarea>
+
+                </span>
+            </div>
+
+            <div class="card align-items-center" style="width: 80%; margin-bottom: 2%">
+                <h1 style="margin: 3%">Ajouter le Plan d'Action</h1>
+                <div class="col-12 text-center" style="margin-bottom: 2%">
+                    <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
+                        <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">N° Action</label>
+                        <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="number" pInputText
+                            placeholder="Entré le numero" [(ngModel)]="this.Action.numero"/>
+    
+                    </span>
+                    <span
+                    class="p-input-icon-left"
+                    style="margin-left: 2%"
+                    [style]="{ width: '30%' }"
+                  >
+                  <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Statut</label>
+                    <p-dropdown
+                      [options]="StatutPlan"
+                      [style]="{ width: '100%', required: 'required' }"
+                      placeholder="Selectinné le Statut"
+                      optionValue="name"
+                      optionLabel="name"
+                      [showClear]="true"
+                      [(ngModel)]="this.Action.statut"
+                    ></p-dropdown>
+                    
+                  </span>
+                </div>
+                <div class="col-12 text-center" style="margin-bottom: 2%">
+                    <span class="p-input-icon-left" style="margin-left: 10%" [style]="{ width: '70%' }">
+                        <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Description</label>
+                        <textarea style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text"
+                            pInputTextarea placeholder="Entré la Nom description" [(ngModel)]="this.Action.description" ></textarea>
+
+                    </span>
+                    <button style="margin-left: 1%" pButton pRipple type="button" icon="pi pi-plus" (click)="AddAction()" 
+                        class="p-button-rounded p-button-success"></button>
+                </div>
+                <div class="col-12" style="margin: 2%">
+                    <p-table class="table" [value]="this.ListPlanAction" dataKey="id" [rows]="10"
+                        [showCurrentPageReport]="true" [paginator]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Numero
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        statut
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        description
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        supprimer
+                                    </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-plan>
+                            <tr>
+                                <td>
+                                    {{ plan.numero }}
+                                </td>
+
+                                <td>
+                                    {{ plan.statut }}
+                                </td>
+
+                                <td>
+                                    {{ plan.description }}
+                                </td>
+                                <td>
+                                    <button pButton pRipple type="button" style="font-size: larger" icon="pi pi-times"
+                                        class="p-button-rounded p-button-danger"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="4">aucun plan d'action n'a été ajoué.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+
+            <div class="col-12" >
+                <span class="p-input-icon-left" style="margin-left: 10%" [style]="{ width: '70%' }">
+                    <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Solution de contournement</label>
+                    <textarea id="basic7" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text" pInputTextarea
+                        placeholder="Entré la Solution de contournement" [(ngModel)]="this.AddIncident.solutionContournement" ></textarea>
+                </span>
+            </div>
+                <div class="col-12" >
+                    <span style="margin-left: 10%" class="p-input-icon-left" [style]="{ width: '40%' }">
+                        <label for="basic8" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Prochaine Communication</label>
+                        <p-calendar inputId="basic8" [(ngModel)]="date1" [style]="{ width: '100%' }" [(ngModel)]="this.AddIncident.prochaineCommunication"></p-calendar>
+    
+                    </span>
+            </div>
+            <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
+                <button pButton pRipple (click)="showCharte()" type="button" label="Visualiser la charte" style=" float: left;margin-left: 2%;" class="p-button-raised p-button-help"></button>
+                <button pButton pRipple style=" float: right;margin-right: 2%;" type="button" label="Submit" class="p-button-raised"></button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -11,11 +11,26 @@ import {Observable} from "rxjs";
 })
 export class ApplicationService {
   private url = environment.baseUrlAdmin;
+  private urlPilote = environment.baseUrlPilote;
   private _ListApplication: Array<Application> = new Array<Application>();
   private _ListPiloteApplication: Array<PiloteApplication> = new Array<PiloteApplication>();
   private _AddApplication: Application = new Application();
   private _AddPiloteApp: PiloteApplication = new PiloteApplication();
+  private _ListApplicationOfPilote: Array<PiloteApplication> = new Array<PiloteApplication>();
+
   constructor(private http: HttpClient,private auth: AuthService) { }
+
+ 
+  get ListApplicationOfPilote(): Array<PiloteApplication>{
+    if(this._ListApplicationOfPilote == null){
+      this._ListApplicationOfPilote = new Array<PiloteApplication>();
+    }
+    return this._ListApplicationOfPilote;
+  }
+
+  set ListApplicationOfPilote(value: Array<PiloteApplication>) {
+    this._ListApplicationOfPilote = value;
+  }
 
   get AddPiloteApp(): PiloteApplication{
     if(this._AddPiloteApp == null){
@@ -73,6 +88,30 @@ export class ApplicationService {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.post<void>(
       this.url + 'application/saveApp',this.AddApplication,
+      { observe: 'response', headers }
+    );    
+  }
+  
+  public FindAllPiloteApplcation(nom: string): Observable<HttpResponse<Array<PiloteApplication>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<PiloteApplication>>(
+      this.url + 'piloteapplication/app/'+nom,
+      { observe: 'response', headers }
+    );    
+  }
+
+  public SavePiloteToApp(): Observable<HttpResponse<PiloteApplication>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.post<PiloteApplication>(
+      this.url + 'piloteapplication/savePiloteApp',this.AddPiloteApp,
+      { observe: 'response', headers }
+    );    
+  }
+  public FindApplicationByPilote(): Observable<HttpResponse<Array<PiloteApplication>>> {
+    console.log('user :'+JSON.stringify(this.auth.User.username));
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<PiloteApplication>>(
+      this.urlPilote + 'piloteapplication/app/user/'+this.auth.User.username,
       { observe: 'response', headers }
     );    
   }

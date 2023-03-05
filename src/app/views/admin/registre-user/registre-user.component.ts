@@ -102,6 +102,8 @@ showDialogEdite(user: User) {
     this.submittedUtilisateur = true;
     this.EditeUser.user.username=this.EditeUser.user.prenom+'.'+this.EditeUser.user.nom;
     this.EditeUser.user.password=this.EditeUser.user.username;
+    console.log('eddited :'+ JSON.stringify(this.EditeUser.user));
+    
     this.userService.UpdateUser().subscribe((data) => {
            this.submittedUtilisateur = true;
            this.EditeUser =new UserRole;

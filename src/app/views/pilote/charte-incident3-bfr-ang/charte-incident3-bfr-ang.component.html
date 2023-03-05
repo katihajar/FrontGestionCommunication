@@ -1,0 +1,64 @@
+<p-dialog  [modal]="true" 
+  [(visible)]="this.charteIncident3BfrAng"  [style]="{width: '60vw', height: '70vw','margin-left':'3%'}" [resizable]="true">
+<div class="col-12" >
+  <img src="../../../../assets/img/IncidentOuvert.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
+</div>
+<div style="width: 100%;">
+  <div style="float:left; width: 48%;border-right:3px solid #e26a61;">
+    <div style="margin-top: 2%;">
+      <p>Sir or Madam,</p><br>
+      <br>
+      <p>Please find hereafter the follow up status regarding the incident:</p><br>
+      <br>
+      <p style="color: red;">Application Name :</p>
+      <p>Intraday</p><br>
+      <p style="color: red;">Start date :</p>
+      <p>29/04/2022 </p><br>
+      <p style="color: red;">Incident / Assistance ID : </p>
+      <p>INCXXXXX / CHGXXXX </p><br>
+      <p style="color: red;">Incident Status : </p>
+      <p>Open</p><br>
+      <br>
+      <p style="color: rgb(104, 104, 238);">INCIDENT DESCRIPTION </p>
+      <p style="color: rgb(177, 177, 177);">[root cause if known]</p><br>
+      <br>
+      <p style="color: rgb(104, 104, 238);">CURRENT SITUATION </p>
+      <p style="color: rgb(177, 177, 177);">[describe what is working, and what is down and what is the next step ]</p><br>
+      <br>
+       </div>
+
+  </div>
+ 
+  <div style="float:right;width: 48%">
+    <div style="margin-top: 2%;">
+      <p>Madame, Monsieur</p><br>
+      <br>
+      <p>Vous trouverez ci-après le point de suivi concernant l’incident :</p><br>
+      <br>
+      <p style="color: red;">Nom de l’application :</p>
+      <p>Intraday</p><br>
+      <p style="color: red;">Date de début : </p>
+      <p>29/04/2022 </p><br>
+      <p style="color: red;">Numéro d’incident / Assistance : </p>
+      <p>INCXXXXX / CHGXXXX </p><br>
+      <p style="color: red;">Statut de l’incident : </p>
+      <p>Ouvert</p><br>
+      <br>
+      <p style="color: rgb(104, 104, 238);">DESCRIPTION DE L’INCIDENT </p>
+      <p style="color: rgb(177, 177, 177);">Problème de connexion entre Intraday/Myprice et les services du groupe (TOTSA)</p><br>
+      <br>
+      <p style="color: rgb(104, 104, 238);">SITUATION ACTUEL</p>
+      <p style="color: rgb(177, 177, 177);">[describe what is working, and what is down and what is the next step ]</p><br>
+      <br>
+      
+    </div>
+
+  </div>
+</div>
+<div class="col-12" >
+  <img src="../../../../assets/img/FooterIncidentOuvert.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
+</div>
+<ng-template pTemplate="footer">
+  <p-button icon="pi pi-check" (click)="this.charteIncident3BfrAng=false" label="Ok" styleClass="p-button-text"></p-button>
+</ng-template>
+</p-dialog>

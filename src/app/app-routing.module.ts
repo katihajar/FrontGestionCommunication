@@ -11,6 +11,9 @@ import {ForbiddenComponent} from "./forbidden/forbidden.component";
 import { RegistreUserComponent } from './views/admin/registre-user/registre-user.component';
 import { RegistreApplicationComponent } from './views/admin/registre-application/registre-application.component';
 import { AjouterApplicationComponent } from './views/admin/ajouter-application/ajouter-application.component';
+import { RegistreApplicationOfPiloteComponent } from './views/pilote/registre-application-of-pilote/registre-application-of-pilote.component';
+import { RegistreIncidentPiloteComponent } from './views/pilote/registre-incident-pilote/registre-incident-pilote.component';
+import { AjouterIncidentPiloteComponent } from './views/pilote/ajouter-incident-pilote/ajouter-incident-pilote.component';
 
 
 @NgModule({
@@ -42,6 +45,9 @@ import { AjouterApplicationComponent } from './views/admin/ajouter-application/a
       children: [
         { path: 'testPilote', component: TestComponent },
         { path: 'homePilote', component: HomeComponent },
+        { path: 'application/registre', component: RegistreApplicationOfPiloteComponent },
+        { path: 'incident/registre', component: RegistreIncidentPiloteComponent },
+        { path: 'incident/save', component: AjouterIncidentPiloteComponent },
         { path: '', redirectTo: 'homePilote', pathMatch: 'full' },
       ],
     },

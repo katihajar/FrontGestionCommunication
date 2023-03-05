@@ -111,6 +111,11 @@ import { RegistreUserComponent } from './views/admin/registre-user/registre-user
 import { HttpClientModule } from '@angular/common/http';
 import { RegistreApplicationComponent } from './views/admin/registre-application/registre-application.component';
 import { AjouterApplicationComponent } from './views/admin/ajouter-application/ajouter-application.component';
+import { RegistreApplicationOfPiloteComponent } from './views/pilote/registre-application-of-pilote/registre-application-of-pilote.component';
+import { CharteIncident3BfrAngComponent } from './views/pilote/charte-incident3-bfr-ang/charte-incident3-bfr-ang.component';
+import { RegistreIncidentPiloteComponent } from './views/pilote/registre-incident-pilote/registre-incident-pilote.component';
+import { AjouterIncidentPiloteComponent } from './views/pilote/ajouter-incident-pilote/ajouter-incident-pilote.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -131,7 +136,11 @@ import { AjouterApplicationComponent } from './views/admin/ajouter-application/a
     ForbiddenComponent,
     RegistreUserComponent,
     RegistreApplicationComponent,
-    AjouterApplicationComponent
+    AjouterApplicationComponent,
+    RegistreApplicationOfPiloteComponent,
+    CharteIncident3BfrAngComponent,
+    RegistreIncidentPiloteComponent,
+    AjouterIncidentPiloteComponent
     ],
   imports: [
     BrowserModule,

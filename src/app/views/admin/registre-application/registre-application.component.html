@@ -61,6 +61,9 @@
                 </div>
               </th>
               <th>
+                Liste des Pilotes
+              </th>
+              <th>
                 action
               </th>
             </tr>
@@ -87,9 +90,12 @@
               <td>
                 {{app.charteIncident}}
               </td>
+              <td><button pButton pRipple type="button" (click)="FindListPilote(app)" style="font-size: larger;" icon="pi pi-search"
+                class="p-button-rounded p-button-info"></button>
+            </td>
               <td><button pButton pRipple type="button" style="font-size: larger;" icon="pi pi-times"
                   class="p-button-rounded p-button-danger"></button>
-                <button pButton pRipple type="button" 
+                <button pButton pRipple type="button" (click)="showInc()"
                   style="font-size: larger;margin-left: 2%;" icon="pi pi-pencil"
                   class="p-button-rounded p-button-success"></button>
   
@@ -98,10 +104,126 @@
           </ng-template>
           <ng-template pTemplate="emptymessage">
             <tr>
-              <td colspan="7">aucune application trouvé.</td>
+              <td colspan="8">aucune application trouvé.</td>
             </tr>
           </ng-template>
         </p-table>
       </div>
     </div>
   </div>
+  <p-dialog header="Liste des Pilotes" [modal]="true" [draggable]="false"
+  [(visible)]="displayPilote" [style]="{width: '70vw', height: '70vw','margin-left':'10%'}">
+
+    <div class="card">
+      <div>
+        <button pButton pRipple type="button" label="Ajouter Un Pilote" (click)="AddPilote()"
+          style="width: fit-content;margin: 4px;float: right;" 
+          class="p-button-raised p-button-success" ></button>
+      </div>
+    <p-table class="table" #dt2 [value]=" this.ListPiloteApplication" dataKey="id" [rows]="5" [showCurrentPageReport]="true"
+    [loading]="loading" [paginator]="true"
+   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+   [globalFilterFields]="['pilote.nom','pilote.prenom','pilote.username']">
+   <ng-template pTemplate="caption">
+     <div class="flex">
+       <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" 
+         (click)="clear(dt1)"></button>
+       <span class="p-input-icon-left ml-auto" style="float: right;">
+         <i class="pi pi-search"></i>
+         <input pInputText type="text" (input)="dt2.filterGlobal($any($event.target).value, 'contains')"
+           placeholder="Search keyword" />
+       </span>
+     </div>
+   </ng-template>
+   <ng-template pTemplate="header">
+     <tr>
+       <th>
+         <div class="flex justify-content-center align-items-center">
+           Nom 
+           <p-columnFilter type="text" field="pilote.nom" display="menu"></p-columnFilter>
+         </div>
+       </th>
+       <th>
+         <div class="flex justify-content-center align-items-center">
+           Prenom
+           <p-columnFilter type="text" field="pilote.prenom" display="menu"></p-columnFilter>
+         </div>
+       </th>
+       <th>
+         <div class="flex justify-content-center align-items-center">
+           Username
+           <p-columnFilter type="text" field="pilote.username" display="menu"></p-columnFilter>
+         </div>
+       </th>
+       <th>
+         action
+       </th>
+     </tr>
+   </ng-template>
+   <ng-template pTemplate="body" let-appPilote>
+     <tr>
+       <td>
+         {{appPilote.pilote.nom}}
+       </td>
+
+       <td>
+         {{appPilote.pilote.prenom}}
+       </td>
+
+       <td>
+         {{appPilote.pilote.username}}
+       </td>
+       <td><button pButton pRipple type="button" style="font-size: larger;" icon="pi pi-times"
+           class="p-button-rounded p-button-danger"></button>
+         <button pButton pRipple type="button" 
+           style="font-size: larger;margin-left: 2%;" icon="pi pi-pencil"
+           class="p-button-rounded p-button-success"></button>
+
+       </td>
+     </tr>
+   </ng-template>
+   <ng-template pTemplate="emptymessage">
+     <tr>
+       <td colspan="4">aucune pilote trouvé.</td>
+     </tr>
+   </ng-template>
+ </p-table>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="displayPilote=false" label="Ok" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>
+
+<p-dialog header="Ajouter Un Pilote" [modal]="true" (onHide)="submittedPilote=false"
+  [(visible)]="AjouterPilote" [style]="{width: '25vw', height: '20vw'}" [resizable]="true">
+
+    <div class="col-12 text-center" style="margin-top: 1%;" >
+      <span
+      class="p-input-icon-left"
+      
+      [style]="{ width: '60%' }"
+    >
+      <p-dropdown
+        [style]="{ width: '100%', required: 'required' }"
+        [(ngModel)]="this.AddPiloteApp.pilote"
+        [options]="piloteList"
+        optionLabel="username"
+        [filter]="true"
+        filterBy="username"
+        [showClear]="true"
+        placeholder="Selectinné le pilote"
+      >
+        <ng-template let-pilote pTemplate="item">
+          <div class="country-item">
+            <div>{{ pilote.username }}</div>
+          </div>
+        </ng-template>
+      </p-dropdown>
+    </span>
+    </div>
+  <ng-template pTemplate="footer">
+    <p-button label="Submit" (onClick)="SavePiloteToApp()" icon="pi pi-check"></p-button>
+  </ng-template>
+</p-dialog>
+<app-charte-incident3-bfr-ang></app-charte-incident3-bfr-ang>
+

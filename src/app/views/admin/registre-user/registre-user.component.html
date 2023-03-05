@@ -105,8 +105,8 @@
         <i class="pi pi-user"></i>
         <input required [style]="{'width':'100%'}" [(ngModel)]="this.AddUser.user.prenom" type="text" pInputText
           placeholder="Entré le prénom" />
-        <small style="color: red;" *ngIf="submittedUtilisateur && !this.AddUser.user.prenom" class="p-invalid">Prenom
-          obligatoir</small>
+        <small style="color: red;" *ngIf="submittedUtilisateur && !this.AddUser.user.prenom" class="p-invalid">Prenom est
+          obligatoire</small>
 
       </span>
       <span class="p-input-icon-left " style="margin-left: 2%;" [style]="{'width':'45%'}">
@@ -114,7 +114,7 @@
         <input required [style]="{'width':'100%'}" [(ngModel)]="this.AddUser.user.nom" type="text" pInputText
           placeholder="Entré le nom" />
         <small style="color: red; margin-left: 2%;" *ngIf="submittedUtilisateur && !this.AddUser.user.nom"
-          class="p-invalid">nom obligatoir</small>
+          class="p-invalid">Nom est obligatoire</small>
       </span>
     </div>
     <div class="col-12" style="margin-top: 2%;">
@@ -123,14 +123,14 @@
           [style]="{'width':'100%','required':'required'}" placeholder="Selectinné le lot" optionValue="name"
           optionLabel="name" [showClear]="true"></p-dropdown>
         <small style="color: red;margin-left: 2%;" *ngIf="submittedUtilisateur && !this.AddUser.user.lots"
-          class="p-invalid">lot est obligatoir</small>
+          class="p-invalid">lot est obligatoire</small>
       </span>
       <span class="p-input-icon-left" style="margin-left: 2%;" [style]="{'width':'45%'}">
         <p-dropdown [options]="RoleList" [(ngModel)]="this.AddUser.idRole"
           [style]="{'width':'100%','required':'required'}" placeholder="Selectinné le role" optionValue="id"
           optionLabel="name" [showClear]="true"></p-dropdown>
         <small style="color: red;margin-left: 2%;" *ngIf="submittedUtilisateur && !this.AddUser.idRole"
-          class="p-invalid">Role obligatoir</small>
+          class="p-invalid">Role est obligatoire</small>
       </span>
 
     </div>
@@ -149,15 +149,15 @@
         <i class="pi pi-user"></i>
         <input required [style]="{'width':'100%'}" [(ngModel)]="this.EditeUser.user.prenom" type="text" pInputText
           placeholder="Entré le prénom" />
-        <small style="color: red;" *ngIf="submittedUtilisateur && !this.EditeUser.user.prenom" class="p-invalid">Prenom
-          obligatoir</small>
+        <small style="color: red;" *ngIf="submittedUtilisateur && !this.EditeUser.user.prenom" class="p-invalid">Prenom est
+          obligatoire</small>
       </span>
       <span class="p-input-icon-left " style="margin-left: 2%;" [style]="{'width':'45%'}">
         <i class="pi pi-user"></i>
         <input required [style]="{'width':'100%'}" [(ngModel)]="this.EditeUser.user.nom" type="text" pInputText
           placeholder="Entré le nom" />
         <small style="color: red;margin-left: 2%;" *ngIf="submittedUtilisateur && !this.EditeUser.user.nom"
-          class="p-invalid">nom obligatoir</small>
+          class="p-invalid">Nom est obligatoire</small>
       </span>
     </div>
     <div class="col-12" style="margin-top: 2%;">
@@ -166,14 +166,14 @@
           [style]="{'width':'100%', 'required':'required'}" placeholder="Selectinné le lot" optionValue="name"
           optionLabel="name" [showClear]="true"></p-dropdown>
         <small style="color: red;margin-left: 2%;" *ngIf="submittedUtilisateur && !this.EditeUser.user.lots"
-          class="p-invalid">lot est obligatoir</small>
+          class="p-invalid">lot est obligatoire</small>
       </span>
       <span class="p-input-icon-left" style="margin-left: 2%;" [style]="{'width':'45%'}">
         <p-dropdown [options]="RoleList" [(ngModel)]="this.EditeUser.idRole"
           [style]="{'width':'100%','required':'required'}" placeholder="Selectinné le role" optionValue="id"
           optionLabel="name" [showClear]="true"></p-dropdown>
         <small style="color: red;margin-left: 2%;" *ngIf="submittedUtilisateur && !this.EditeUser.idRole"
-          class="p-invalid">Role obligatoir</small>
+          class="p-invalid">Role est obligatoire</small>
       </span>
     </div>
   </div>

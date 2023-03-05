@@ -19,10 +19,10 @@
             placeholder="Entré le Nom d'Application"
           />
           <small
-            style="color: red"
+            style="color: red; font-size : 16px"
             *ngIf="submittedApplication && !this.AddApplication.nomApplication"
             class="p-invalid"
-            >Prenom obligatoir</small
+            >Prenom est obligatoire</small
           >
         </span>
         <span
@@ -40,7 +40,7 @@
             placeholder="Entré la version"
           />
           <small
-            style="color: red; margin-left: 2%"
+            style="color: red; margin-left: 2%;font-size : 16px"
             *ngIf="submittedApplication && !this.AddApplication.version"
             class="p-invalid"
             >la version est obligatoire</small
@@ -52,7 +52,7 @@
           style="margin-left: 2%"
           [style]="{ width: '22%' }"
         >
-          <p-dropdown
+          <p-dropdown id="err"
             [(ngModel)]="this.AddApplication.responsable"
             [style]="{ width: '100%', required: 'required' }"
             [options]="responsableList"
@@ -67,13 +67,14 @@
                 <div>{{ respo.username }}</div>
               </div>
             </ng-template>
+           
+          
           </p-dropdown>
-          <small
-            style="color: red; margin-left: 2%"
+           <small for="err"
+            style="color: red; margin-left: 2%;font-size : 16px"
             *ngIf="submittedApplication && !this.AddApplication.responsable"
             class="p-invalid"
-            >Responsable est obligatoire</small
-          >
+            >Responsable est obligatoire</small>
         </span>
         <span
           class="p-input-icon-left"
@@ -90,7 +91,7 @@
             [showClear]="true"
           ></p-dropdown>
           <small
-            style="color: red; margin-left: 2%"
+            style="color: red; margin-left: 2%;font-size : 16px"
             *ngIf="submittedApplication && !this.AddApplication.disponibilite"
             class="p-invalid"
             >Disponibilité est obligatoire</small
@@ -113,7 +114,7 @@
             [showClear]="true"
           ></p-dropdown>
           <small
-            style="color: red; margin-left: 2%"
+            style="color: red; margin-left: 2%;font-size : 16px"
             *ngIf="submittedApplication && !this.AddApplication.lot"
             class="p-invalid"
             >lot est obligatoire</small
@@ -134,7 +135,7 @@
             [showClear]="true"
           ></p-dropdown>
           <small
-            style="color: red; margin-left: 2%"
+            style="color: red; margin-left: 2%;font-size : 16px"
             *ngIf="submittedApplication && !this.AddApplication.charteIncident"
             class="p-invalid"
             >Charte est obligatoire</small

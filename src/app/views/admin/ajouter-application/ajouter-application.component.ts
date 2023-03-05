@@ -87,6 +87,7 @@ SaveApp(){
          this.AddApplication=new Application;
          this.FindAllUsers();
          this.submittedApplication = false;
+         this.ListpiloteSelected = new Array<PiloteApplication>();
 
   })
 

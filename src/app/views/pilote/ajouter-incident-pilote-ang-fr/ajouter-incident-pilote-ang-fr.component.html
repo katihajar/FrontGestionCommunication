@@ -2,6 +2,11 @@
     <div class="d-flex page__box p-3">Ajouter un Incident</div>
     <div class="page__content shadow p-3 position-relative">
         <div class="card align-items-center">
+            <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
+              
+                <button pButton pRipple style=" float: right;margin-right: 2%;" type="button" label="translate"
+                    class="p-button-raised" (click)="translateInput()" ></button>
+            </div>
             <div style="width: 100%;">
                 <div style="float:left; width: 50%;border-right:3px solid #6d6a6a;">
                     <div class="col-12" style="margin: 2%">
@@ -85,8 +90,7 @@
                                     Action</label>
                                 <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }"
                                     type="number" pInputText placeholder="Entré le numero"
-                                    [(ngModel)]="this.Action.numero" />
-
+                                    [(ngModel)]="this.num" />
                             </span>
                             <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
                                 <label
@@ -151,7 +155,7 @@
                                             {{ plan.description }}
                                         </td>
                                         <td>
-                                            <button pButton pRipple type="button" style="font-size: larger"
+                                            <button pButton pRipple type="button" style="font-size: larger" (click)="removeListPlanAction(plan)"
                                                 icon="pi pi-times" class="p-button-rounded p-button-danger"></button>
                                         </td>
                                     </tr>
@@ -192,9 +196,8 @@
                             <label for="basic3"
                                 style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Titre</label>
                             <input inputId="basic3" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }"
-                                type="text" pInputText placeholder="Entré le Titre d'Incident"
+                                type="text" pInputText placeholder="Entré le Titre d'Incident" 
                                 [(ngModel)]="this.AddIncidentAng.titreIncident" />
-
                         </span>
                         <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
                             <label for="basic4" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">N°
@@ -268,13 +271,13 @@
                                     Action</label>
                                 <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }"
                                     type="number" pInputText placeholder="Entré le numero"
-                                    [(ngModel)]="this.ActionAng.numero" />
+                                    [(ngModel)]="this.numAng" />
 
                             </span>
                             <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
                                 <label
                                     style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Statut</label>
-                                <p-dropdown [options]="StatutPlan" [style]="{ width: '100%', required: 'required' }"
+                                <p-dropdown [options]="StatutPlanAng" [style]="{ width: '100%', required: 'required' }"
                                     placeholder="Selectinné le Statut" optionValue="name" optionLabel="name"
                                     [showClear]="true" [(ngModel)]="this.ActionAng.statut"></p-dropdown>
 
@@ -334,7 +337,7 @@
                                             {{ plan.description }}
                                         </td>
                                         <td>
-                                            <button pButton pRipple type="button" style="font-size: larger"
+                                            <button pButton pRipple type="button" style="font-size: larger" (click)="removeListPlanActionAng(plan)"
                                                 icon="pi pi-times" class="p-button-rounded p-button-danger"></button>
                                         </td>
                                     </tr>
@@ -370,14 +373,18 @@
                     </div>
                     
                 </div>
-                <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
-                    <button pButton pRipple (click)="showCharte()" type="button" label="Visualiser la charte"
-                        style=" float: left;margin-left: 2%;" class="p-button-raised p-button-help"></button>
-                    <button pButton pRipple style=" float: right;margin-right: 2%;" type="button" label="Submit"
-                        class="p-button-raised"></button>
-                </div>
+             
+            </div>
+            <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
+                <button pButton pRipple (click)="showCharte()" type="button" label="Visualiser la charte"
+                    style=" float: left;margin-left: 2%;" class="p-button-raised p-button-help"></button>
+                <button pButton pRipple (click)="SendAndSaveIncident()" style=" float: right;margin-right: 2%;" type="button" label="Submit"
+                    class="p-button-raised"></button>
             </div>
         </div>
     </div>
 
 </div>
+
+<app-charte-incident3-bfr-ang></app-charte-incident3-bfr-ang>
+<img [src]="imageDataUrl" *ngIf="imageDataUrl" alt="Rendered Image" crossOrigin="anonymous">

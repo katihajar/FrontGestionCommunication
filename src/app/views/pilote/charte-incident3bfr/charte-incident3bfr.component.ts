@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Incident } from 'src/app/controller/model/incident';
 import { CharteService } from 'src/app/controller/service/charte.service';
+import { IncidentService } from 'src/app/controller/service/incident.service';
 
 @Component({
   selector: 'app-charte-incident3bfr',
@@ -8,7 +10,7 @@ import { CharteService } from 'src/app/controller/service/charte.service';
 })
 export class CharteIncident3bfrComponent implements OnInit {
 
-  constructor(private charteService: CharteService) { }
+  constructor(private charteService: CharteService,private incidentService: IncidentService) { }
 
   ngOnInit(): void {
   }
@@ -19,5 +21,11 @@ export class CharteIncident3bfrComponent implements OnInit {
   set charteIncident3Bfr(value: boolean) {
     this.charteService.charteIncident3Bfr = value;
   }
+  get AddIncident(): Incident{
+    return this.incidentService.AddIncident;
+  }
 
+  set AddIncident(value: Incident) {
+    this.incidentService.AddIncident = value;
+  }
 }

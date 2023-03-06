@@ -47,6 +47,7 @@ export class RegistreIncidentPiloteComponent implements OnInit {
   ngOnInit(): void {
     this.FindIncident();
     this.FindApp();
+    this.AddIncident = new Incident();
     this.statutIncident = [
       { name: 'Ouvert' },
       { name: 'Résolu avec Suivi' },

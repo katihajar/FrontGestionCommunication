@@ -64,6 +64,7 @@ showInc(){
   }
   FindListPilote(app: Application) {
     this.AddPiloteApp.application = app;
+    console.log(app.nomApplication);
     this.App=app;
     this.appService.FindAllPiloteApplcation(app.nomApplication).subscribe((data) => {
       // @ts-ignore

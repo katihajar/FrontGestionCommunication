@@ -21,7 +21,7 @@ export class IncidentService {
     if(this._AddIncidentAng == null){
       this._AddIncidentAng = new Incident();
     }
-    return this._AddIncident;
+    return this._AddIncidentAng;
   }
 
   set AddIncidentAng(value: Incident) {

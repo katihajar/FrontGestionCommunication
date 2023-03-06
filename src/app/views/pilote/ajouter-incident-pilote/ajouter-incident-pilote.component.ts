@@ -18,7 +18,7 @@ export class AjouterIncidentPiloteComponent implements OnInit {
   date2: Date = new Date();
   date3: Date = new Date();
   Action: PlanAction = new PlanAction();
-
+  num:number= Number(0);
   ListPlanAction: Array<PlanAction> = new Array<PlanAction>();
   constructor(private incidentService: IncidentService, private charteService:CharteService,private router: Router) { }
   clear(table: Table) {
@@ -26,8 +26,8 @@ export class AjouterIncidentPiloteComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.AddIncident = new Incident();
     this.Action = new PlanAction();
+    this.num=1;
     this.StatutPlan= [
       {name: 'En cours'},
       {name: 'A Démarer'},
@@ -44,15 +44,18 @@ export class AjouterIncidentPiloteComponent implements OnInit {
   }
 
   AddAction(){
-    if(this.Action.statut != null && this.Action.description!=null && this.Action.numero != null  ){
+    if(this.Action.statut != null && this.Action.description!=null && this.num != null  ){
+      this.Action.numero = this.num;
     this.ListPlanAction.push(this.Action);
-    this.Action= new PlanAction();
+    this.Action = new PlanAction();
+    this.num = this.num+1;
   }
   }
 
   showCharte(){
     this.AddIncident.planActions=this.ListPlanAction;
     console.log("Incident info : "+JSON.stringify(this.AddIncident) );
+    this.charteIncident3Bfr= true;
     
   }
   get charteIncident3Bfr(): boolean {

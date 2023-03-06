@@ -108,7 +108,7 @@ import { VirtualScrollerModule } from 'primeng/virtualscroller';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {ConfirmationService, MessageService} from "primeng/api";
 import { RegistreUserComponent } from './views/admin/registre-user/registre-user.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RegistreApplicationComponent } from './views/admin/registre-application/registre-application.component';
 import { AjouterApplicationComponent } from './views/admin/ajouter-application/ajouter-application.component';
 import { RegistreApplicationOfPiloteComponent } from './views/pilote/registre-application-of-pilote/registre-application-of-pilote.component';
@@ -238,7 +238,7 @@ import { CharteIncident3bfrComponent } from './views/pilote/charte-incident3bfr/
     TreeSelectModule,
     TreeTableModule,
     VirtualScrollerModule,
-    StyleClassModule,
+    StyleClassModule
   ],
   providers: [ConfirmationService,MessageService],
   bootstrap: [AppComponent]

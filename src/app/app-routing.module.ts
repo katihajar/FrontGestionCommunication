@@ -14,6 +14,7 @@ import { AjouterApplicationComponent } from './views/admin/ajouter-application/a
 import { RegistreApplicationOfPiloteComponent } from './views/pilote/registre-application-of-pilote/registre-application-of-pilote.component';
 import { RegistreIncidentPiloteComponent } from './views/pilote/registre-incident-pilote/registre-incident-pilote.component';
 import { AjouterIncidentPiloteComponent } from './views/pilote/ajouter-incident-pilote/ajouter-incident-pilote.component';
+import { AjouterIncidentPiloteAngFrComponent } from './views/pilote/ajouter-incident-pilote-ang-fr/ajouter-incident-pilote-ang-fr.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { AjouterIncidentPiloteComponent } from './views/pilote/ajouter-incident-
         { path: 'homePilote', component: HomeComponent },
         { path: 'application/registre', component: RegistreApplicationOfPiloteComponent },
         { path: 'incident/registre', component: RegistreIncidentPiloteComponent },
-        { path: 'incident/save', component: AjouterIncidentPiloteComponent },
+        { path: 'incident/save/Français', component: AjouterIncidentPiloteComponent },
+        { path: 'incident/save/FrançaisAnglais', component: AjouterIncidentPiloteAngFrComponent },
         { path: '', redirectTo: 'homePilote', pathMatch: 'full' },
       ],
     },

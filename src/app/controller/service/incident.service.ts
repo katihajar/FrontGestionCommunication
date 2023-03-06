@@ -15,7 +15,18 @@ export class IncidentService {
   private _ListIncidentOfPilote: Array<Incident> = new Array<Incident>();
   private _ListPlandActionIncident: Array<PlanAction> = new Array<PlanAction>();
   private _AddIncident: Incident = new Incident();
+  private _AddIncidentAng: Incident = new Incident();
   constructor(private http: HttpClient,private auth: AuthService) { }
+  get AddIncidentAng(): Incident{
+    if(this._AddIncidentAng == null){
+      this._AddIncidentAng = new Incident();
+    }
+    return this._AddIncident;
+  }
+
+  set AddIncidentAng(value: Incident) {
+    this._AddIncidentAng = value;
+  }
 
   get AddIncident(): Incident{
     if(this._AddIncident == null){

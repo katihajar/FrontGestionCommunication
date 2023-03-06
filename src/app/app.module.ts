@@ -115,6 +115,8 @@ import { RegistreApplicationOfPiloteComponent } from './views/pilote/registre-ap
 import { CharteIncident3BfrAngComponent } from './views/pilote/charte-incident3-bfr-ang/charte-incident3-bfr-ang.component';
 import { RegistreIncidentPiloteComponent } from './views/pilote/registre-incident-pilote/registre-incident-pilote.component';
 import { AjouterIncidentPiloteComponent } from './views/pilote/ajouter-incident-pilote/ajouter-incident-pilote.component';
+import { AjouterIncidentPiloteAngFrComponent } from './views/pilote/ajouter-incident-pilote-ang-fr/ajouter-incident-pilote-ang-fr.component';
+import { CharteIncident3bfrComponent } from './views/pilote/charte-incident3bfr/charte-incident3bfr.component';
 
 @NgModule({
   declarations: [
@@ -140,7 +142,9 @@ import { AjouterIncidentPiloteComponent } from './views/pilote/ajouter-incident-
     RegistreApplicationOfPiloteComponent,
     CharteIncident3BfrAngComponent,
     RegistreIncidentPiloteComponent,
-    AjouterIncidentPiloteComponent
+    AjouterIncidentPiloteComponent,
+    AjouterIncidentPiloteAngFrComponent,
+    CharteIncident3bfrComponent
     ],
   imports: [
     BrowserModule,

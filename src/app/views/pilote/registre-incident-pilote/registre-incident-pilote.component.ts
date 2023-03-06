@@ -15,21 +15,29 @@ import { IncidentService } from 'src/app/controller/service/incident.service';
 export class RegistreIncidentPiloteComponent implements OnInit {
 
   loading: boolean = true;
-  statutIncident:any[]=[];
-  ListApp =new Array<Application>();
-  ListPiloteApp =new Array<PiloteApplication>();
+  statutIncident: any[] = [];
+  ListApp = new Array<Application>();
+  ListPiloteApp = new Array<PiloteApplication>();
   showPopUpIncd: boolean = false;
   application: Application = new Application();
-  constructor(private incidentService: IncidentService, private router: Router,private appService : ApplicationService) { }
+  listLangage: any[] = [];
+  langage: string= String();
+  constructor(private incidentService: IncidentService, private router: Router, private appService: ApplicationService) { }
   clear(table: Table) {
     table.clear();
   }
   RouteFormAddIncident() {
-    console.log('inc : '+JSON.stringify(this.AddIncident));
-    this.showPopUpIncd=false;
-    this.router.navigate(['/pilote/incident/save']);
+    if(this.AddIncident.application.nomApplication !=null && this.AddIncident.statut!=null && this.langage !=null){
+    if(this.langage == "Français"){
+    this.showPopUpIncd = false;
+    this.router.navigate(['/pilote/incident/save/Français']);
+  }else if(this.langage == "Français-Anglais"){
+    this.showPopUpIncd = false;
+    this.router.navigate(['/pilote/incident/save/FrançaisAnglais']);
   }
-  FindIncident(){
+    }
+  }
+  FindIncident() {
     this.incidentService.FindIncidentByPilote().subscribe((data) => {
       // @ts-ignore
       this.ListIncidentOfPilote = data.body;
@@ -39,17 +47,21 @@ export class RegistreIncidentPiloteComponent implements OnInit {
   ngOnInit(): void {
     this.FindIncident();
     this.FindApp();
-    this.statutIncident= [
-      {name: 'Ouvert'},
-      {name: 'Résolu avec Suivi'},
-      {name: 'Clos'},    
-  ];
-
+    this.statutIncident = [
+      { name: 'Ouvert' },
+      { name: 'Résolu avec Suivi' },
+      { name: 'Clos' },
+    ];
+    this.listLangage = [
+      { name: 'Français' },
+      { name: 'Français-Anglais' },
+      { name: 'Anglais' },
+    ];
   }
-  PopUp(){
+  PopUp() {
     this.showPopUpIncd = true;
   }
-  get ListIncidentOfPilote(): Array<Incident>{
+  get ListIncidentOfPilote(): Array<Incident> {
     return this.incidentService.ListIncidentOfPilote;
   }
 
@@ -57,7 +69,7 @@ export class RegistreIncidentPiloteComponent implements OnInit {
     this.incidentService.ListIncidentOfPilote = value;
   }
 
-  get AddIncident(): Incident{
+  get AddIncident(): Incident {
     return this.incidentService.AddIncident;
   }
 
@@ -70,9 +82,9 @@ export class RegistreIncidentPiloteComponent implements OnInit {
     this.appService.FindApplicationByPilote().subscribe((data) => {
       // @ts-ignore
       this.ListPiloteApp = data.body;
-      for(let i=0;i<this.ListPiloteApp.length;i++){
-      this.ListApp.push(this.ListPiloteApp[i].application);
-    }
+      for (let i = 0; i < this.ListPiloteApp.length; i++) {
+        this.ListApp.push(this.ListPiloteApp[i].application);
+      }
     })
   }
 

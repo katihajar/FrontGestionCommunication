@@ -5,6 +5,7 @@ import { Role } from 'src/app/controller/model/role';
 import { User } from 'src/app/controller/model/user';
 import { UserRole } from 'src/app/controller/model/user-role';
 import { UserService } from 'src/app/controller/service/user.service';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-registre-user',
@@ -19,7 +20,7 @@ export class RegistreUserComponent implements OnInit {
   lots:any[]=[];
   piloteList = new Array<User>();
   responsablleList = new Array<User>();
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router,private messageService: MessageService) { }
     clear(table: Table) {
         table.clear();
     }
@@ -89,26 +90,37 @@ showDialogEdite(user: User) {
     this.submittedUtilisateur = true;
     this.AddUser.user.username=this.AddUser.user.prenom+'.'+this.AddUser.user.nom;
     this.AddUser.user.password=this.AddUser.user.username;
+    if(this.AddUser.user.prenom != null && this.AddUser.user.nom != null && this.AddUser.idRole !=null && this.AddUser.user.lots !=null){
     this.userService.SaveUser().subscribe((data) => {
            this.AddUser=new UserRole;
            this.FindAllUsers();
            this.displayBasic2 = false;
            this.submittedUtilisateur = false;
+           this.messageService.add({severity:'success', summary: 'Success', detail: 'Utilisateur Ajouter avec succès'});
 
+    },error=>{
+      this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de l\'enregistrement'});
     })
-
+  }else{
+    this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
+  }
   }
   UpdateUser(){
     this.submittedUtilisateur = true;
     this.EditeUser.user.username=this.EditeUser.user.prenom+'.'+this.EditeUser.user.nom;
     this.EditeUser.user.password=this.EditeUser.user.username;
+    console.log(this.EditeUser.user.password);
     console.log('eddited :'+ JSON.stringify(this.EditeUser.user));
-    
     this.userService.UpdateUser().subscribe((data) => {
            this.submittedUtilisateur = true;
            this.EditeUser =new UserRole;
            this.FindAllUsers();
            this.displayEdite = false;
+           this.messageService.add({severity:'success', summary: 'Success', detail: 'Utilisateur Modifier avec succès'});
+
+          },error=>{
+            this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de la modification'});
+          
     })
 
   }

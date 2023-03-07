@@ -15,6 +15,8 @@ import { RegistreApplicationOfPiloteComponent } from './views/pilote/registre-ap
 import { RegistreIncidentPiloteComponent } from './views/pilote/registre-incident-pilote/registre-incident-pilote.component';
 import { AjouterIncidentPiloteComponent } from './views/pilote/ajouter-incident-pilote/ajouter-incident-pilote.component';
 import { AjouterIncidentPiloteAngFrComponent } from './views/pilote/ajouter-incident-pilote-ang-fr/ajouter-incident-pilote-ang-fr.component';
+import { RegistrePerimetreComponent } from './views/admin/registre-perimetre/registre-perimetre.component';
+import { RegistreProcessusMetierComponent } from './views/admin/registre-processus-metier/registre-processus-metier.component';
 
 
 @NgModule({
@@ -28,6 +30,8 @@ import { AjouterIncidentPiloteAngFrComponent } from './views/pilote/ajouter-inci
         { path: 'users/register', component: RegistreUserComponent },
         { path: 'application/register', component: RegistreApplicationComponent },
         { path: 'application/save', component: AjouterApplicationComponent },
+        { path: 'perimetre/register', component: RegistrePerimetreComponent },
+        { path: 'processusMetier/register', component: RegistreProcessusMetierComponent },
         { path: '', redirectTo: 'home', pathMatch: 'full' },
       ],
     },

@@ -17,20 +17,26 @@ export class RegistreApplicationComponent implements OnInit {
   loading: boolean = true;
   displayPilote: boolean = false;
   AjouterPilote: boolean = false;
+  ModifApp: boolean =false;
   piloteList = new Array<User>();
-  responsablleList = new Array<User>();
   submittedPilote: boolean = false;
+  submittedModif: boolean = false;
   App: Application = new Application();
+  responsableList = new Array<User>();
+  disponibilite:any[]=[];
   constructor(private appService: ApplicationService, private userService: UserService,
      private router: Router, private charteService: CharteService) { }
   clear(table: Table) {
     table.clear();
   }
-showInc(){
-  this.charteIncident3BfrAng =true;
-}
+
   ngOnInit(): void {
     this.FindAllApp();
+    this.FindAllUsers();
+    this.disponibilite= [
+      {name: 'Oui'},
+      {name: 'Non'},
+  ];
   }
 
   FindAllApp() {
@@ -38,8 +44,6 @@ showInc(){
       // @ts-ignore
       this.ListApplication = data.body;
       this.loading = false;
-      console.log('FirstApp : ' + JSON.stringify(this.ListApplication[0]));
-
     })
   }
   get ListApplication(): Array<Application> {
@@ -98,21 +102,19 @@ showInc(){
     this.userService.FindAllUsers().subscribe((data) => {
       // @ts-ignore
       this.UserList = data.body;
-      this.loading = false;
-      for (let i = 0; i < this.UserList.length; i++) {
-        if (this.UserList[i].roles[0].name == "ROLE_PILOTE") {
+      for(let i = 0; i<this.UserList.length;i++){
+        if(this.UserList[i].roles[0].name== "ROLE_PILOTE"){
           this.piloteList.push(this.UserList[i]);
-        }
+        } else if(this.UserList[i].roles[0].name== "ROLE_RESPONSABLE"){
+          this.responsableList.push(this.UserList[i]);
+        } 
       }
     }
     );
   }
-
-  get charteIncident3BfrAng(): boolean {
-    return this.charteService.charteIncident3BfrAng;
+  ShowModifDialog(app: Application){
+    this.ModifApp = true;
   }
 
-  set charteIncident3BfrAng(value: boolean) {
-    this.charteService.charteIncident3BfrAng = value;
-  }
+
 }

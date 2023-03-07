@@ -117,6 +117,8 @@ import { RegistreIncidentPiloteComponent } from './views/pilote/registre-inciden
 import { AjouterIncidentPiloteComponent } from './views/pilote/ajouter-incident-pilote/ajouter-incident-pilote.component';
 import { AjouterIncidentPiloteAngFrComponent } from './views/pilote/ajouter-incident-pilote-ang-fr/ajouter-incident-pilote-ang-fr.component';
 import { CharteIncident3bfrComponent } from './views/pilote/charte-incident3bfr/charte-incident3bfr.component';
+import { RegistrePerimetreComponent } from './views/admin/registre-perimetre/registre-perimetre.component';
+import { RegistreProcessusMetierComponent } from './views/admin/registre-processus-metier/registre-processus-metier.component';
 
 @NgModule({
   declarations: [
@@ -144,7 +146,9 @@ import { CharteIncident3bfrComponent } from './views/pilote/charte-incident3bfr/
     RegistreIncidentPiloteComponent,
     AjouterIncidentPiloteComponent,
     AjouterIncidentPiloteAngFrComponent,
-    CharteIncident3bfrComponent
+    CharteIncident3bfrComponent,
+    RegistrePerimetreComponent,
+    RegistreProcessusMetierComponent
     ],
   imports: [
     BrowserModule,

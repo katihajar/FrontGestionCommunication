@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { Application } from 'src/app/controller/model/application';
 import { PiloteApplication } from 'src/app/controller/model/pilote-application';
 import { User } from 'src/app/controller/model/user';
@@ -19,7 +20,7 @@ export class AjouterApplicationComponent implements OnInit {
   selectedPiloteApp = new PiloteApplication();
   ListpiloteSelected = new Array<PiloteApplication>();
   submittedApplication: boolean = false;
-  constructor(private userService: UserService, private appService : ApplicationService) { }
+  constructor(private userService: UserService, private appService : ApplicationService,private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.FindAllUsers();
@@ -83,13 +84,18 @@ SaveApp(){
   this.submittedApplication = true;
   this.AddApplication.piloteApplicationList =  this.ListpiloteSelected;
   console.log('APP Added  :  '+ JSON.stringify(this.AddApplication));
+  if(this.AddApplication.nomApplication != null && this.AddApplication.version != null &&this.AddApplication.responsable.nom != null && this.AddApplication.charteIncident !=null){
   this.appService.SaveApplication().subscribe((data) => {
          this.AddApplication=new Application;
          this.FindAllUsers();
          this.submittedApplication = false;
          this.ListpiloteSelected = new Array<PiloteApplication>();
-
+         this.messageService.add({severity:'success', summary: 'Success', detail: 'Application Ajouter avec succès'});
+        },error=>{
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de l\'enregistrement'});
   })
-
+  }else{
+    this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
+  }
 }
 }

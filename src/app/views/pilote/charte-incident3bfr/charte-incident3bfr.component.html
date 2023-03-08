@@ -37,7 +37,7 @@
       <p style="color: rgb(177, 177, 177);">{{this.AddIncident.impact}}</p><br>
       <br>
       <p style="color: rgb(104, 104, 238);">PLAN D'ACTION</p>
-      <div *ngFor="let action of this.AddIncident.planActions">
+      <div *ngFor="let action of this.AddIncident.planActionList">
         <p > <b><u>Action {{action.numero}}</u></b> {{action.statut}} : {{action.description}} </p>
       </div>
       <p style="color: rgb(104, 104, 238);">SOLUTION DE CONTOURNEMENT</p>

@@ -35,6 +35,21 @@ export class AuthService {
       { observe: 'response', headers }
     );
   }
+
+  public LogOUT(){
+    const headers = { Authorization: 'Bearer ' + this.UserAuth.accessToken };
+    return this.http.post(
+      this.url + 'api/auth/logout',
+      this.UserAuth,
+      { headers }
+    ).subscribe(
+            () => console.log('Logout successful'),
+            error => console.error('Logout failed', error)
+        );
+        
+  }
+  
+
   initHeaders(): HttpHeaders {
     let headers = new HttpHeaders();
     const token = localStorage.getItem('accessToken');

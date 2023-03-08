@@ -159,13 +159,13 @@
                 <div class="col-12" >
                     <span style="margin-left: 10%" class="p-input-icon-left" [style]="{ width: '40%' }">
                         <label for="basic8" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Prochaine Communication</label>
-                        <p-calendar inputId="basic8" [(ngModel)]="date1" [style]="{ width: '100%' }" [(ngModel)]="this.AddIncident.prochaineCommunication"></p-calendar>
+                        <p-calendar inputId="basic8" [(ngModel)]="date1" [style]="{ width: '100%' }" [(ngModel)]="this.AddIncident.prochaineCommunication" [showTime]="true" [showSeconds]="true"></p-calendar>
     
                     </span>
             </div>
             <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
                 <button pButton pRipple (click)="showCharte()" type="button" label="Visualiser la charte" style=" float: left;margin-left: 2%;" class="p-button-raised p-button-help"></button>
-                <button pButton pRipple style=" float: right;margin-right: 2%;" type="button" label="Submit" class="p-button-raised"></button>
+                <button pButton pRipple (click)="SendAndSaveIncident()" style=" float: right;margin-right: 2%;" type="button" label="Submit" class="p-button-raised"></button>
             </div>
         </div>
     </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Action } from 'rxjs/internal/scheduler/Action';
 import { Incident } from 'src/app/controller/model/incident';
@@ -17,22 +18,37 @@ export class AjouterIncidentPiloteComponent implements OnInit {
   date1: Date = new Date();
   date2: Date = new Date();
   date3: Date = new Date();
-  Action: PlanAction = new PlanAction();
+  Action= new PlanAction();
   num:number= Number(0);
-  ListPlanAction: Array<PlanAction> = new Array<PlanAction>();
-  constructor(private incidentService: IncidentService, private charteService:CharteService,private router: Router) { }
+
+  constructor(private incidentService: IncidentService, private messageService: MessageService,private charteService:CharteService,private router: Router) { }
   clear(table: Table) {
     table.clear();
+  }
+
+  get ListPlanAction(): Array<PlanAction>{
+
+    return this.incidentService.ListPlanAction;
+  }
+
+  set ListPlanAction(value: Array<PlanAction>) {
+    this.incidentService.ListPlanAction = value;
   }
 
   ngOnInit(): void {
     this.Action = new PlanAction();
     this.num=1;
+    this.ListPlanAction =this.AddIncident.planActionList;
     this.StatutPlan= [
       {name: 'En cours'},
       {name: 'A Démarer'},
       {name: 'Clos'},
   ];
+  this.StatutPlan= [
+    {name: 'Français'},
+    {name: 'Français-Anglais'},
+    {name: 'Anglais'},
+];
   }
 
   get AddIncident(): Incident{
@@ -53,10 +69,28 @@ export class AjouterIncidentPiloteComponent implements OnInit {
   }
 
   showCharte(){
-    this.AddIncident.planActions=this.ListPlanAction;
+    this.AddIncident.planActionList=this.ListPlanAction;
     console.log("Incident info : "+JSON.stringify(this.AddIncident) );
     this.charteIncident3Bfr= true;
     
+  }
+  SaveIncident(){
+    if(this.AddIncident.description != null && this.AddIncident.causePrincipale != null &&this.AddIncident.situationActuelle != null && this.AddIncident.prochaineCommunication !=null){
+      this.incidentService.SaveIncident().subscribe((data) => {
+             this.AddIncident=new Incident();
+             this.ListPlanAction = new Array<PlanAction>();
+             this.router.navigate(['/pilote/incident/registre']);
+             this.messageService.add({severity:'success', summary: 'Success', detail: 'Incident Ajouter avec succès'});
+            },error=>{
+              this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de l\'enregistrement'});
+      })
+      }else{
+        this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
+      }
+  }
+  SendAndSaveIncident() {
+    this.AddIncident.planActionList = this.ListPlanAction;
+   this.SaveIncident();
   }
   get charteIncident3Bfr(): boolean {
     return this.charteService.charteIncident3Bfr;

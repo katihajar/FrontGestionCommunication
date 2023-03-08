@@ -119,6 +119,10 @@ import { AjouterIncidentPiloteAngFrComponent } from './views/pilote/ajouter-inci
 import { CharteIncident3bfrComponent } from './views/pilote/charte-incident3bfr/charte-incident3bfr.component';
 import { RegistrePerimetreComponent } from './views/admin/registre-perimetre/registre-perimetre.component';
 import { RegistreProcessusMetierComponent } from './views/admin/registre-processus-metier/registre-processus-metier.component';
+import { CharteIncidentMoneticComponent } from './views/pilote/charte-incident-monetic/charte-incident-monetic.component';
+import { CharteIncidentMoneticAngComponent } from './views/pilote/charte-incident-monetic-ang/charte-incident-monetic-ang.component';
+import { CharteIncidentMoneticAngFrComponent } from './views/pilote/charte-incident-monetic-ang-fr/charte-incident-monetic-ang-fr.component';
+import { CharteIncident3bAngComponent } from './views/pilote/charte-incident3b-ang/charte-incident3b-ang.component';
 
 @NgModule({
   declarations: [
@@ -148,7 +152,11 @@ import { RegistreProcessusMetierComponent } from './views/admin/registre-process
     AjouterIncidentPiloteAngFrComponent,
     CharteIncident3bfrComponent,
     RegistrePerimetreComponent,
-    RegistreProcessusMetierComponent
+    RegistreProcessusMetierComponent,
+    CharteIncidentMoneticComponent,
+    CharteIncidentMoneticAngComponent,
+    CharteIncidentMoneticAngFrComponent,
+    CharteIncident3bAngComponent
     ],
   imports: [
     BrowserModule,

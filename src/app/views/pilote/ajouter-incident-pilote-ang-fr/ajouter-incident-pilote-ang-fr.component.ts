@@ -8,6 +8,7 @@ import { IncidentService } from 'src/app/controller/service/incident.service';
 import { CharteIncident3BfrAngComponent } from '../charte-incident3-bfr-ang/charte-incident3-bfr-ang.component';
 const translate = require('translate');
 import domToImage from 'dom-to-image';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-ajouter-incident-pilote-ang-fr',
   templateUrl: './ajouter-incident-pilote-ang-fr.component.html',
@@ -21,15 +22,14 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
   date1: Date = new Date();
   date2: Date = new Date();
   date3: Date = new Date();
-  Action: PlanAction = new PlanAction();
-  ActionAng: PlanAction = new PlanAction();
-  ListPlanAction: Array<PlanAction> = new Array<PlanAction>();
-  ListPlanActionAng: Array<PlanAction> = new Array<PlanAction>();
+  Action = new PlanAction();
+  ActionAng = new PlanAction();
+
   num: number = Number(0);
   numAng: number = Number(0);
   @ViewChild(CharteIncident3BfrAngComponent,{static:false}) myDiv: any;
   constructor(private incidentService: IncidentService, private charteService: CharteService,
-    private router: Router,private renderer: Renderer2, private el: ElementRef) {
+    private router: Router,private renderer: Renderer2, private el: ElementRef,private messageService: MessageService) {
   }
   clear(table: Table) {
     table.clear();
@@ -54,7 +54,8 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
       { name: 'To start' },
       { name: 'Closed' },
     ];
-
+    this.ListPlanAction =this.AddIncident.planActionList;
+    this.translateInput();
     if (this.AddIncident.statut == "Ouvert") {
       this.AddIncidentAng.statut = "Open";
     } else if (this.AddIncident.statut == "Résolu avec Suivi") {
@@ -156,6 +157,22 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
     this.incidentService.AddIncidentAng = value;
   }
 
+  get ListPlanActionAng(): Array<PlanAction>{
+    return this.incidentService.ListPlanActionAng;
+  }
+
+  set ListPlanActionAng(value: Array<PlanAction>) {
+    this.incidentService.ListPlanActionAng = value;
+  }
+
+  get ListPlanAction(): Array<PlanAction>{
+
+    return this.incidentService.ListPlanAction;
+  }
+
+  set ListPlanAction(value: Array<PlanAction>) {
+    this.incidentService.ListPlanAction = value;
+  }
 
 
   AddAction() {
@@ -183,23 +200,40 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
     this.charteService.charteIncident3BfrAng = value;
   }
   showCharte() {
-    this.AddIncident.planActions = this.ListPlanAction;
-    this.AddIncidentAng.planActions = this.ListPlanActionAng;
+    this.AddIncident.planActionList = this.ListPlanAction;
+    this.AddIncidentAng.planActionList = this.ListPlanActionAng;
     this.charteIncident3BfrAng = true;
   }
+  SaveIncident(){
+    if(this.AddIncident.description != null && this.AddIncident.causePrincipale != null &&this.AddIncident.situationActuelle != null && this.AddIncident.prochaineCommunication !=null){
+      this.incidentService.SaveIncident().subscribe((data) => {
+             this.AddIncident=new Incident();
+             this.ListPlanAction = new Array<PlanAction>();
+             this.ListPlanActionAng = new Array<PlanAction>();
+             this.router.navigate(['/pilote/incident/registre']);
+             this.messageService.add({severity:'success', summary: 'Success', detail: 'Incident Ajouter avec succès'});
+            },error=>{
+              this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de l\'enregistrement verifier le titre d \'incident'});
+      })
+      }else{
+        this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
+      }
+    
+  }
   SendAndSaveIncident() {
-       this.AddIncident.planActions = this.ListPlanAction;
-      this.AddIncidentAng.planActions = this.ListPlanActionAng;
-      this.charteIncident3BfrAng = true;
-      const node=this.myDiv.filterComponent.nativeElement;
-      const divHtml = this.myDiv.filterComponent.nativeElement.outerHTML;
-      console.log(divHtml);
-      domToImage.toPng(node).then((dataUrl: string) => {
-        this.imageDataUrl = dataUrl;
-      });
-      this.charteIncident3BfrAng = false;
-      const div='<h1>hellooo</h1>'
-      const emailUrl = `mailto:?subject=Subject&body=${encodeURIComponent(divHtml)}&Content-Type=text/html`;
+       this.AddIncident.planActionList = this.ListPlanAction;
+      this.AddIncidentAng.planActionList = this.ListPlanActionAng;
+      this.SaveIncident();
+      // this.charteIncident3BfrAng = true;
+      // const node=this.myDiv.filterComponent.nativeElement;
+      // const divHtml = this.myDiv.filterComponent.nativeElement.outerHTML;
+      // console.log(divHtml);
+      // domToImage.toPng(node).then((dataUrl: string) => {
+      //   this.imageDataUrl = dataUrl;
+      // });
+      // this.charteIncident3BfrAng = false;
+      // const div='<h1>hellooo</h1>'
+      // const emailUrl = `mailto:?subject=Subject&body=${encodeURIComponent(divHtml)}&Content-Type=text/html`;
       //window.location.href = emailUrl;
   }
 

@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {ConfirmationService, ConfirmEventType, MessageService} from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Application } from 'src/app/controller/model/application';
 import { Incident } from 'src/app/controller/model/incident';
 import { PiloteApplication } from 'src/app/controller/model/pilote-application';
+import { PlanAction } from 'src/app/controller/model/plan-action';
 import { ApplicationService } from 'src/app/controller/service/application.service';
+import { CharteService } from 'src/app/controller/service/charte.service';
 import { IncidentService } from 'src/app/controller/service/incident.service';
+const translate = require('translate');
 
 @Component({
   selector: 'app-registre-incident-pilote',
@@ -13,7 +17,7 @@ import { IncidentService } from 'src/app/controller/service/incident.service';
   styleUrls: ['./registre-incident-pilote.component.scss']
 })
 export class RegistreIncidentPiloteComponent implements OnInit {
-
+  ActionAng = new PlanAction();
   loading: boolean = true;
   statutIncident: any[] = [];
   ListApp = new Array<Application>();
@@ -21,8 +25,13 @@ export class RegistreIncidentPiloteComponent implements OnInit {
   showPopUpIncd: boolean = false;
   application: Application = new Application();
   listLangage: any[] = [];
+  listLangageCharte: any[] = [];
   langage: string= String();
-  constructor(private incidentService: IncidentService, private router: Router, private appService: ApplicationService) { }
+  viewCharte:boolean = false;
+  popUpLangue:boolean=false;
+  selectLang:any='';
+  constructor(private charteService:CharteService,private incidentService: IncidentService,private confirmationService: ConfirmationService,
+     private router: Router, private appService: ApplicationService, private messageService:MessageService) { }
   clear(table: Table) {
     table.clear();
   }
@@ -37,6 +46,132 @@ export class RegistreIncidentPiloteComponent implements OnInit {
   }
     }
   }
+ShowCharte(inc:Incident){
+  this.AddIncident=inc;
+  this.incidentService.FindPlanActionByIncident(inc.id).subscribe((data)=>{
+    // @ts-ignore
+    this.AddIncident.planActionList = data.body;
+    this.popUpLangue=true;
+    this.AddIncidentAng = new Incident();
+    this.ListPlanActionAng = new Array<PlanAction>();
+    this.translateInput();
+    if (this.AddIncident.statut == "Ouvert") {
+      this.AddIncidentAng.statut = "Open";
+    } else if (this.AddIncident.statut == "Résolu avec Suivi") {
+      this.AddIncidentAng.statut = "Resolved with Monitoring";
+    } else if (this.AddIncident.statut == "Clos") {
+      this.AddIncidentAng.statut = "Closed";
+    }
+  })
+}
+translateInput() {
+  translate(this.AddIncident.titreIncident, { from: 'fr', to: 'en' }).then((result: string) => {
+    this.AddIncidentAng.titreIncident = result;
+  })
+    .catch((error: any) => {
+      console.error(error);
+    });
+  translate(this.AddIncident.description, { from: 'fr', to: 'en' }).then((result: string) => {
+    this.AddIncidentAng.description = result;
+  })
+    .catch((error: any) => {
+      console.error(error);
+    });
+  translate(this.AddIncident.situationActuelle, { from: 'fr', to: 'en' }).then((result: string) => {
+    this.AddIncidentAng.situationActuelle = result;
+  })
+    .catch((error: any) => {
+      console.error(error);
+    });
+  translate(this.AddIncident.impact, { from: 'fr', to: 'en' }).then((result: string) => {
+    this.AddIncidentAng.impact = result;
+  })
+    .catch((error: any) => {
+      console.error(error);
+    });
+  translate(this.AddIncident.causePrincipale, { from: 'fr', to: 'en' }).then((result: string) => {
+    this.AddIncidentAng.causePrincipale = result;
+  })
+    .catch((error: any) => {
+      console.error(error);
+    });
+  translate(this.AddIncident.solutionContournement, { from: 'fr', to: 'en' }).then((result: string) => {
+    this.AddIncidentAng.solutionContournement = result;
+  })
+    .catch((error: any) => {
+      console.error(error);
+    });
+  this.AddIncidentAng.numeroIncident = this.AddIncident.numeroIncident;
+  this.AddIncidentAng.dateDebut = this.AddIncident.dateDebut;
+  this.AddIncidentAng.dateFin = this.AddIncident.dateFin;
+  this.AddIncidentAng.prochaineCommunication = this.AddIncident.prochaineCommunication;
+  this.AddIncidentAng.application = this.AddIncident.application;
+  for (let i = 0; i < this.AddIncident.planActionList.length; i++) {
+    translate(this.AddIncident.planActionList[i].description, { from: 'fr', to: 'en' }).then((result: string) => {
+      this.ActionAng.description = result; // Output: "Bonjour le monde"
+      if (this.AddIncident.planActionList[i].statut === "En cours") {
+        this.ActionAng.statut = "On going";
+        this.ActionAng.numero = this.AddIncident.planActionList[i].numero;
+        this.ListPlanActionAng.push(this.ActionAng);
+        this.ActionAng = new PlanAction();
+      } else if (this.AddIncident.planActionList[i].statut === "A Démarer") {
+        this.ActionAng.statut = "To start";
+        this.ActionAng.numero = this.AddIncident.planActionList[i].numero;
+        this.ListPlanActionAng.push(this.ActionAng);
+        this.ActionAng = new PlanAction();
+      } else if (this.AddIncident.planActionList[i].statut = "Clos") {
+        this.ActionAng.statut = "Closed";
+        this.ActionAng.numero = this.AddIncident.planActionList[i].numero;
+        this.ListPlanActionAng.push(this.ActionAng);
+        this.ActionAng = new PlanAction();
+      };
+    })
+      .catch((error: any) => {
+        console.error(error);
+      }); 
+  }
+  this.AddIncidentAng.planActionList=this.ListPlanActionAng;
+}
+Edite(inc:Incident){
+  this.AddIncident=inc;
+  this.incidentService.FindPlanActionByIncident(inc.id).subscribe((data)=>{
+    // @ts-ignore
+    this.AddIncident.planActionList = data.body;
+    this.ListPlanAction =this.AddIncident.planActionList;
+  })
+  this.showPopUpIncd = true;
+}
+
+SelectLanguage(){
+  if(this.selectLang == "Français"){
+    this.popUpLangue = false;
+    if(this.AddIncident.application.charteIncident == 'charte Incident M.Mehdi'){
+      this.charteIncident3Bfr= true;
+      this.selectLang='';
+    }else if(this.AddIncident.application.charteIncident == 'charte Incident M.Taha'){
+      this.charteIncidentMonetic = true;
+      this.selectLang='';
+    }
+  }else if(this.selectLang == "Français-Anglais"){
+    this.popUpLangue = false;
+    if(this.AddIncident.application.charteIncident == 'charte Incident M.Mehdi'){
+      this.charteIncident3BfrAng= true;
+      this.selectLang='';
+    }else if(this.AddIncident.application.charteIncident == 'charte Incident M.Taha'){
+      this.charteIncidentMoneticAngFr = true;
+      this.selectLang='';
+    }
+  }else if(this.selectLang == "Anglais"){
+    this.popUpLangue = false;
+    if(this.AddIncident.application.charteIncident == 'charte Incident M.Mehdi'){
+      this.charteIncident3BAng= true;
+      this.selectLang='';
+    }else if(this.AddIncident.application.charteIncident == 'charte Incident M.Taha'){
+      this.charteIncidentMoneticAng = true;
+      this.selectLang='';
+    }
+  }
+}
   FindIncident() {
     this.incidentService.FindIncidentByPilote().subscribe((data) => {
       // @ts-ignore
@@ -48,6 +183,7 @@ export class RegistreIncidentPiloteComponent implements OnInit {
     this.FindIncident();
     this.FindApp();
     this.AddIncident = new Incident();
+    
     this.statutIncident = [
       { name: 'Ouvert' },
       { name: 'Résolu avec Suivi' },
@@ -56,10 +192,16 @@ export class RegistreIncidentPiloteComponent implements OnInit {
     this.listLangage = [
       { name: 'Français' },
       { name: 'Français-Anglais' },
-      { name: 'Anglais' },
     ];
+    this.listLangageCharte=[
+      { name: 'Français' },
+      { name: 'Français-Anglais' },
+      { name: 'Anglais' }
+    ]
   }
   PopUp() {
+    this.AddIncident= new Incident();
+    this.AddIncidentAng= new Incident();
     this.showPopUpIncd = true;
   }
   get ListIncidentOfPilote(): Array<Incident> {
@@ -77,6 +219,71 @@ export class RegistreIncidentPiloteComponent implements OnInit {
   set AddIncident(value: Incident) {
     this.incidentService.AddIncident = value;
   }
+  get AddIncidentAng(): Incident {
+    return this.incidentService.AddIncidentAng;
+  }
+
+  set AddIncidentAng(value: Incident) {
+    this.incidentService.AddIncidentAng = value;
+  }
+  get charteIncident3Bfr(): boolean {
+    return this.charteService.charteIncident3Bfr;
+  }
+
+  set charteIncident3Bfr(value: boolean) {
+    this.charteService.charteIncident3Bfr = value;
+  }
+  get charteIncidentMonetic(): boolean {
+    return this.charteService.charteIncidentMonetic;
+  }
+
+  set charteIncidentMonetic(value: boolean) {
+    this.charteService.charteIncidentMonetic = value;
+  }
+  get charteIncident3BfrAng(): boolean {
+    return this.charteService.charteIncident3BfrAng;
+  }
+
+  set charteIncident3BfrAng(value: boolean) {
+    this.charteService.charteIncident3BfrAng = value;
+  }
+  get charteIncident3BAng(): boolean {
+    return this.charteService.charteIncident3BAng;
+  }
+
+  set charteIncident3BAng(value: boolean) {
+    this.charteService.charteIncident3BAng = value;
+  }
+  get charteIncidentMoneticAng(): boolean {
+    return this.charteService.charteIncidentMoneticAng;
+  }
+
+  set charteIncidentMoneticAng(value: boolean) {
+    this.charteService.charteIncidentMoneticAng = value;
+  }
+  get charteIncidentMoneticAngFr(): boolean {
+    return this.charteService.charteIncidentMoneticAngFr;
+  }
+
+  set charteIncidentMoneticAngFr(value: boolean) {
+    this.charteService.charteIncidentMoneticAngFr = value;
+  }
+  get ListPlanActionAng(): Array<PlanAction>{
+    return this.incidentService.ListPlanActionAng;
+  }
+
+  set ListPlanActionAng(value: Array<PlanAction>) {
+    this.incidentService.ListPlanActionAng = value;
+  }
+
+  get ListPlanAction(): Array<PlanAction>{
+
+    return this.incidentService.ListPlanAction;
+  }
+
+  set ListPlanAction(value: Array<PlanAction>) {
+    this.incidentService.ListPlanAction = value;
+  }
 
 
   FindApp() {
@@ -88,5 +295,34 @@ export class RegistreIncidentPiloteComponent implements OnInit {
       }
     })
   }
-
+  onDialogHideLang(){
+    this.FindIncident();
+  }
+  DeleteIncident(id:number){
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to proceed?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.incidentService.DeleteIncident(id).subscribe((data) => {
+          this.FindIncident();
+          // @ts-ignore
+          this.messageService.add({severity:'success', summary: 'Success', detail: 'Incident supprimer avec succès'});
+        },error=>{
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de la suppression'});
+    });
+      },
+      reject: (type:any) => {
+          switch(type) {
+              case ConfirmEventType.REJECT:
+                  this.messageService.add({severity:'error', summary:'Rejected', detail:'Suppression Rejeter'});
+              break;
+              case ConfirmEventType.CANCEL:
+                  this.messageService.add({severity:'warn', summary:'Cancelled', detail:'Suppression Annuler'});
+              break;
+          }
+      }
+  });
+   
+  }
 }

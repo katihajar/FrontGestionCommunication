@@ -16,6 +16,6 @@ export class Incident {
     public dateFin: Date = new Date();
     public application =new Application();
     public prochaineCommunication: Date = new Date();
-    public planActions =new Array<PlanAction>();
     public createurIncident =new User();
+    public planActionList = new Array<PlanAction>();
 }

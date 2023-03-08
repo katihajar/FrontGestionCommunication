@@ -185,7 +185,7 @@
                                 style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Prochaine
                                 Communication</label>
                             <p-calendar inputId="basic8" [(ngModel)]="date1" [style]="{ width: '100%' }"
-                                [(ngModel)]="this.AddIncident.prochaineCommunication"></p-calendar>
+                                [(ngModel)]="this.AddIncident.prochaineCommunication" [showTime]="true" [showSeconds]="true"></p-calendar>
 
                         </span>
                     </div>
@@ -366,7 +366,7 @@
                             <label for="basic8"
                                 style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Prochaine
                                 Communication</label>
-                            <p-calendar inputId="basic8" [(ngModel)]="date1" [style]="{ width: '100%' }"
+                            <p-calendar inputId="basic8" [(ngModel)]="date1" [style]="{ width: '100%' }" [showTime]="true" [showSeconds]="true"
                                 [(ngModel)]="this.AddIncidentAng.prochaineCommunication"></p-calendar>
 
                         </span>

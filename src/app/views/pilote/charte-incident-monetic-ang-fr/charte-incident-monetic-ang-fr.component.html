@@ -2,7 +2,7 @@
     [style]="{width: '60vw', height: '70vw','margin-left':'3%'}" [resizable]="true">
     <div class="col-12">
         
-            <div *ngIf="this.AddIncident.statut == 'Résolu avec Suivi'" style="border: 1px solid  rgb(211, 45, 16) ;">
+            <div *ngIf="this.AddIncident.statut == 'Ouvert'" style="border: 1px solid  rgb(211, 45, 16) ;">
                 <img src="../../../../assets/img/incidentMoneticEncours.png" width="100%" style="margin-left: 0%;"
                     alt="psa" title="psa" class="staticImg">
             </div>
@@ -13,11 +13,11 @@
         
     </div>
     <div style="width: 100%;margin-top: 2%;margin-bottom: 2%;color: black;"
-        [ngStyle]="{'border': this.AddIncident.statut == 'Clos' ? '1px solid #17d440' : (this.AddIncident.statut == 'Résolu avec Suivi' ? '1px solid #ddbd07' : '1px solid white') }">
+        [ngStyle]="{'border': this.AddIncident.statut == 'Clos' ? '1px solid #17d440' : (this.AddIncident.statut == 'Ouvert' ? '1px solid #ddbd07' : '1px solid white') }">
         <div style="margin: 1%;font-family: 'Times New Roman', Times, sans-serif;">
             <p style="font-weight: bolder;">Current status : <span *ngIf="this.AddIncident.statut == 'Clos'"
                     style="color: rgb(12, 199, 12);"> RESOLVED</span> <b
-                    *ngIf="this.AddIncident.statut == 'Résolu avec Suivi'" style="color: rgb(211, 45, 16);"> ON
+                    *ngIf="this.AddIncident.statut == 'Ouvert'" style="color: rgb(211, 45, 16);"> ON
                     GOING</b></p>
             <p style="font-weight: bolder;">Application : [<span style="background-color: cyan;"> Production
                 </span>/<span style="background-color: cyan"> Preproduction </span>] <span
@@ -31,7 +31,7 @@
                     CET</span></p>
 
             <div style="height: 3vh; display: flex; align-items: center; justify-content: flex-start; text-align: center;"
-                [ngStyle]="{'background-color': this.AddIncident.statut == 'Clos' ? 'rgb(93, 182, 163)' : (this.AddIncident.statut == 'Résolu avec Suivi' ? 'rgb(245, 107, 118)' : 'white') }">
+                [ngStyle]="{'background-color': this.AddIncident.statut == 'Clos' ? 'rgb(93, 182, 163)' : (this.AddIncident.statut == 'Ouvert' ? 'rgb(245, 107, 118)' : 'white') }">
                 <p style="margin: 0; font-weight: bolder;"><span style="background-color: cyan;"> Production
                     </span>/<span style="background-color: cyan"> Preproduction </span>] <span
                         style="background-color: yellow;">{{this.AddIncidentAng.application.nomApplication}}</span>-Incident
@@ -62,10 +62,10 @@
 
     </div>
     <div style="width: 100%;margin-top: 2%;margin-bottom: 2%;color: black;"
-    [ngStyle]="{'border': this.AddIncident.statut == 'Clos' ? '1px solid #17d440' : (this.AddIncident.statut == 'Résolu avec Suivi' ? '1px solid #ddbd07' : '1px solid white') }">
+    [ngStyle]="{'border': this.AddIncident.statut == 'Clos' ? '1px solid #17d440' : (this.AddIncident.statut == 'Ouvert' ? '1px solid #ddbd07' : '1px solid white') }">
     <div style="margin: 1%;font-family: 'Times New Roman', Times, sans-serif;">
         <div style="height: 3vh; display: flex; align-items: center; justify-content: flex-start; text-align: center;"
-                [ngStyle]="{'background-color': this.AddIncident.statut == 'Clos' ? 'rgb(93, 182, 163)' : (this.AddIncident.statut == 'Résolu avec Suivi' ? 'rgb(245, 107, 118)' : 'white') }">
+                [ngStyle]="{'background-color': this.AddIncident.statut == 'Clos' ? 'rgb(93, 182, 163)' : (this.AddIncident.statut == 'Ouvert' ? 'rgb(245, 107, 118)' : 'white') }">
                 <p style="margin: 0; font-weight: bolder;"><span style="background-color: cyan;"> Production
                     </span>/<span style="background-color: cyan"> Preproduction </span>] <span
                         style="background-color: yellow;">{{this.AddIncidentAng.application.nomApplication}}</span>-Incident
@@ -94,7 +94,7 @@
 
     <div class="col-12">
 
-        <div *ngIf="this.AddIncident.statut == 'Résolu avec Suivi'" style="border:1px solid rgb(211, 45, 16) ;">
+        <div *ngIf="this.AddIncident.statut == 'Ouvert'" style="border:1px solid rgb(211, 45, 16) ;">
             <img src="../../../../assets/img/footerIncidentMoneticEncours.png" width="100%" style="margin-left: 0%;"
                 alt="psa" title="psa" class="staticImg">
         </div>

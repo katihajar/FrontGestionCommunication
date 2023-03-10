@@ -10,6 +10,8 @@ import { ApplicationService } from 'src/app/controller/service/application.servi
 import { CharteService } from 'src/app/controller/service/charte.service';
 import { IncidentService } from 'src/app/controller/service/incident.service';
 const translate = require('translate');
+import * as FileSaver from 'file-saver';
+const moment = require('moment');
 
 @Component({
   selector: 'app-registre-incident-pilote',
@@ -35,6 +37,51 @@ export class RegistreIncidentPiloteComponent implements OnInit {
   clear(table: Table) {
     table.clear();
   }
+
+
+  exportExcel() {
+    import("xlsx").then(xlsx => {
+      console.log(typeof Date.prototype.toLocaleDateString);
+      console.log(new Incident().dateDebut instanceof Date);
+      const worksheet = xlsx.utils.json_to_sheet(this.ListIncidentOfPilote.map(incident => {
+        return {
+          id:incident.id,
+          application: incident.application.nomApplication, 
+          titreIncident: incident.titreIncident,
+          numeroIncident: incident.numeroIncident,
+          statut: incident.statut,
+          description: incident.description,
+          situationActuelle: incident.situationActuelle,
+          impact: incident.impact,
+          causePrincipale: incident.causePrincipale,
+          solutionContournement: incident.solutionContournement,
+          dateDebut: moment(incident.dateDebut).format('DD-MM-YYYY'),
+          dateFin: moment(incident.dateFin).format('DD-MM-YYYY')
+        };
+      }));
+      const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+      const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+      this.saveAsExcelFile(excelBuffer, "products");
+    });
+  }
+
+saveAsExcelFile(buffer: any, fileName: string): void {
+    let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+        type: EXCEL_TYPE
+    });
+    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+}
+
+
+
+
+
+
+
+
+
   RouteFormAddIncident() {
     if(this.AddIncident.application.nomApplication !=null && this.AddIncident.statut!=null && this.langage !=null){
     if(this.langage == "Français"){
@@ -145,28 +192,28 @@ Edite(inc:Incident){
 SelectLanguage(){
   if(this.selectLang == "Français"){
     this.popUpLangue = false;
-    if(this.AddIncident.application.charteIncident == 'charte Incident M.Mehdi'){
+    if(this.AddIncident.application.charteIncident == 'charte Incident'){
       this.charteIncident3Bfr= true;
       this.selectLang='';
-    }else if(this.AddIncident.application.charteIncident == 'charte Incident M.Taha'){
+    }else if(this.AddIncident.application.charteIncident == 'charte Incident Monetics'){
       this.charteIncidentMonetic = true;
       this.selectLang='';
     }
   }else if(this.selectLang == "Français-Anglais"){
     this.popUpLangue = false;
-    if(this.AddIncident.application.charteIncident == 'charte Incident M.Mehdi'){
+    if(this.AddIncident.application.charteIncident == 'charte Incident'){
       this.charteIncident3BfrAng= true;
       this.selectLang='';
-    }else if(this.AddIncident.application.charteIncident == 'charte Incident M.Taha'){
+    }else if(this.AddIncident.application.charteIncident == 'charte Incident Monetics'){
       this.charteIncidentMoneticAngFr = true;
       this.selectLang='';
     }
   }else if(this.selectLang == "Anglais"){
     this.popUpLangue = false;
-    if(this.AddIncident.application.charteIncident == 'charte Incident M.Mehdi'){
+    if(this.AddIncident.application.charteIncident == 'charte Incident'){
       this.charteIncident3BAng= true;
       this.selectLang='';
-    }else if(this.AddIncident.application.charteIncident == 'charte Incident M.Taha'){
+    }else if(this.AddIncident.application.charteIncident == 'charte Incident Monetics'){
       this.charteIncidentMoneticAng = true;
       this.selectLang='';
     }

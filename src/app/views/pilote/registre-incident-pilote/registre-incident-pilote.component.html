@@ -3,17 +3,22 @@
   <div class="page__content shadow p-2 position-relative align-items-center">
     <div class="card">
       <div>
+        
         <button pButton pRipple type="button" label="Ajouter Incident" (click)="PopUp()"
           style="width: fit-content;margin: 4px;float: right;" class="p-button-raised p-button-success"></button>
       </div>
       <p-table class="table" #dt1 [value]=" this.ListIncidentOfPilote" dataKey="id" [rows]="10"
         [showCurrentPageReport]="true" [loading]="loading" [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [sortField]="'dateDebut'" [sortOrder]="-1"
         [globalFilterFields]="['titreIncident','application.nomApplication','statut','dateDebut','dateFin','prochaineCommunication','description','situationActuelle','impact','causePrincipale','solutionContournement']">
         <ng-template pTemplate="caption">
           <div class="flex">
+            
+                
             <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
               (click)="clear(dt1)"></button>
+              <button style="margin-left: 1%;" type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>       
             <span class="p-input-icon-left ml-auto" style="float: right;">
               <i class="pi pi-search"></i>
               <input pInputText type="text" (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
@@ -22,17 +27,17 @@
           </div>
         </ng-template>
         <ng-template pTemplate="header">
-          <tr>
-            <th>
-              <div class="flex justify-content-center align-items-center">
-                titre Incident
-                <p-columnFilter type="text" field="titreIncident" display="menu"></p-columnFilter>
-              </div>
-            </th>
+          <tr>      
             <th>
               <div class="flex justify-content-center align-items-center">
                 Application
                 <p-columnFilter type="text" field="application.nomApplication" display="menu"></p-columnFilter>
+              </div>
+            </th>
+            <th>
+              <div class="flex justify-content-center align-items-center">
+                titre Incident
+                <p-columnFilter type="text" field="titreIncident" display="menu"></p-columnFilter>
               </div>
             </th>
             <th>
@@ -84,23 +89,19 @@
               </div>
             </th>
             <th>
-              Visualiser la charte
+              Action
             </th>
-            <th>
-              Modifier sur l'incident
-            </th>
-            <th>
-              Supprimer l'incident
-            </th>
+           
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-incident>
           <tr>
-            <td>
-              {{incident.titreIncident}}
-            </td>
+           
             <td>
               {{incident.application.nomApplication}}
+            </td>
+             <td>
+              {{incident.titreIncident}}
             </td>
             <td>
 
@@ -133,11 +134,9 @@
             </td>
             <td><button pButton pRipple (click)="ShowCharte(incident)" type="button" style="font-size: larger;" icon="pi pi-search"
                 class="p-button-rounded p-button-info"></button>
-            </td>
-            <td><button pButton pRipple (click)="Edite(incident)" type="button" style="font-size: larger;" icon="pi pi-pencil"
+            <button pButton pRipple (click)="Edite(incident)" type="button" style="font-size: larger;" icon="pi pi-pencil"
               class="p-button-rounded p-button-success"></button>
-          </td>
-          <td><button pButton pRipple (click)="DeleteIncident(incident.id)" type="button" style="font-size: larger;" icon="pi pi-times"
+          <button pButton pRipple (click)="DeleteIncident(incident.id)" type="button" style="font-size: larger;" icon="pi pi-times"
             class="p-button-rounded p-button-danger"></button>
         </td>
           </tr>

@@ -68,7 +68,6 @@ export class RegistreApplicationComponent implements OnInit {
   }
   FindListPilote(app: Application) {
     this.AddPiloteApp.application = app;
-    console.log(app.nomApplication);
     this.App=app;
     this.appService.FindAllPiloteApplcation(app.nomApplication).subscribe((data) => {
       // @ts-ignore
@@ -89,9 +88,7 @@ export class RegistreApplicationComponent implements OnInit {
   AddPilote() {
     this.AjouterPilote = true;
   }
-  SavePiloteToApp(){
-    console.log('content pilote :'+JSON.stringify(this.AddPiloteApp));
-    
+  SavePiloteToApp(){    
     this.appService.SavePiloteToApp().subscribe((data)=>{
       this.FindListPilote(this.App);
       this.AddPiloteApp = new PiloteApplication;

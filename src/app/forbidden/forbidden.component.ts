@@ -13,7 +13,6 @@ export class ForbiddenComponent implements OnInit {
 
   ngOnInit(): void {
     var str = document.getElementsByTagName('div')[0].innerHTML.toString();
-    console.log('hna string value : '+str);  
     var i = 0;
     document.getElementsByTagName('div')[0].innerHTML = "";
 

@@ -33,8 +33,8 @@ export class AjouterApplicationComponent implements OnInit {
     {name: 'Non'},
 ];
 this.charte= [
-  {name: 'charte Incident M.Taha'},
-  {name: 'charte Incident M.Mehdi'},
+  {name: 'charte Incident'},
+  {name: 'charte Incident Monetics'},
 ];
   }
   FindAllUsers(){
@@ -83,7 +83,6 @@ set AddApplication(value: Application) {
 SaveApp(){
   this.submittedApplication = true;
   this.AddApplication.piloteApplicationList =  this.ListpiloteSelected;
-  console.log('APP Added  :  '+ JSON.stringify(this.AddApplication));
   if(this.AddApplication.nomApplication != null && this.AddApplication.version != null &&this.AddApplication.responsable.nom != null && this.AddApplication.charteIncident !=null){
   this.appService.SaveApplication().subscribe((data) => {
          this.AddApplication=new Application;

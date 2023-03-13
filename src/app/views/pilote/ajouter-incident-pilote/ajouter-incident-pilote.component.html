@@ -17,12 +17,12 @@
                 </span>
                 <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
                     <label for="basic1" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date Début</label>
-                    <p-calendar inputId="basic1" [(ngModel)]="date2" [style]="{ width: '100%' }" [(ngModel)]="this.AddIncident.dateDebut" ></p-calendar>
+                    <p-calendar inputId="basic1" [showTime]="true" [(ngModel)]="date2" [style]="{ width: '100%' }" [(ngModel)]="this.AddIncident.dateDebut" ></p-calendar>
 
                 </span>
                 <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
                     <label for="basic2" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date Fin</label>
-                    <p-calendar inputId="basic2" [(ngModel)]="date3" [style]="{ width: '100%' }" [(ngModel)]="this.AddIncident.dateFin"></p-calendar>
+                    <p-calendar inputId="basic2" [showTime]="true" [(ngModel)]="date3" [style]="{ width: '100%' }" [(ngModel)]="this.AddIncident.dateFin"></p-calendar>
 
                 </span>
             
@@ -159,7 +159,7 @@
                 <div class="col-12" >
                     <span style="margin-left: 10%" class="p-input-icon-left" [style]="{ width: '40%' }">
                         <label for="basic8" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Prochaine Communication</label>
-                        <p-calendar inputId="basic8" [(ngModel)]="date1" [style]="{ width: '100%' }" [(ngModel)]="this.AddIncident.prochaineCommunication" [showTime]="true" [showSeconds]="true"></p-calendar>
+                        <p-calendar inputId="basic8" [(ngModel)]="date1" [style]="{ width: '100%' }" [(ngModel)]="this.AddIncident.prochaineCommunication" [showTime]="true" ></p-calendar>
     
                     </span>
             </div>
@@ -171,3 +171,4 @@
     </div>
 </div>
 <app-charte-incident3bfr></app-charte-incident3bfr>
+<app-charte-incident-monetic></app-charte-incident-monetic>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Incident } from 'src/app/controller/model/incident';
 import { CharteService } from 'src/app/controller/service/charte.service';
 import { IncidentService } from 'src/app/controller/service/incident.service';
@@ -9,7 +9,7 @@ import { IncidentService } from 'src/app/controller/service/incident.service';
   styleUrls: ['./charte-incident-monetic.component.scss']
 })
 export class CharteIncidentMoneticComponent implements OnInit {
-
+  @ViewChild('myDialog',{static:false}) filterComponent!: ElementRef;
   constructor(private charteService: CharteService,private incidentService: IncidentService) { }
 
   ngOnInit(): void {

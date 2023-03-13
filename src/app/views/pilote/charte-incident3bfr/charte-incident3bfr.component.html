@@ -1,5 +1,6 @@
 <p-dialog  [modal]="true" 
   [(visible)]="this.charteIncident3Bfr"  [style]="{width: '60vw', height: '70vw','margin-left':'3%'}" [resizable]="true">
+  <div #myDialog id="myDialog" style="width: 100%;">
 <div class="col-12" >
   <div *ngIf="this.AddIncident.statut == 'Ouvert'" >
   <img src="../../../../assets/img/IncidentOuvert.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
@@ -58,6 +59,7 @@
     <div *ngIf="this.AddIncident.statut == 'Clos'" >
       <img src="../../../../assets/img/FooterIncidentClos.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
       </div>
+</div>
 </div>
 <ng-template pTemplate="footer">
   <p-button icon="pi pi-check" (click)="this.charteIncident3Bfr=false" label="Ok" styleClass="p-button-text"></p-button>

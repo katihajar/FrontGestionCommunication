@@ -13,6 +13,7 @@ import { CharteIncident3bfrComponent } from '../charte-incident3bfr/charte-incid
 import html2canvas from 'html2canvas';
 import { saveAs } from 'file-saver';
 import { MyOptions } from 'src/app/controller/model/myoption';
+import { CharteIncidentMoneticComponent } from '../charte-incident-monetic/charte-incident-monetic.component';
 
 @Component({
   selector: 'app-ajouter-incident-pilote',
@@ -31,8 +32,9 @@ export class AjouterIncidentPiloteComponent implements OnInit {
   EmailEnCC:any[]=[];
   imageDataUrl: string= String();
   Subject: string= String();
+  dialogElement:any;
   @ViewChild(CharteIncident3bfrComponent,{static:false}) myDiv: any ;
-
+  @ViewChild(CharteIncidentMoneticComponent,{static:false}) myDivMonetic: any ;
   constructor(private incidentService: IncidentService, private messageService: MessageService,
     private charteService:CharteService,private router: Router,private destService:DestinataireService) { }
   clear(table: Table) {
@@ -97,8 +99,11 @@ this.destService.FindDestinataireByApplication(this.AddIncident.application.id).
 
   showCharte(){
     this.AddIncident.planActionList=this.ListPlanAction;
-    this.charteIncident3Bfr= true;
-    
+    if(this.AddIncident.application.charteIncident =='charte Incident'){
+      this.charteIncident3Bfr = true;
+    } else if(this.AddIncident.application.charteIncident =='charte Incident Monetics'){
+        this.charteIncidentMonetic = true;
+      }    
   }
   SaveIncident(){
     if(this.AddIncident.application.charteIncident =='charte Incident'){
@@ -111,8 +116,8 @@ this.destService.FindDestinataireByApplication(this.AddIncident.application.id).
              this.AddIncident=new Incident();
              this.ListPlanAction = new Array<PlanAction>();
              this.router.navigate(['/pilote/incident/registre']);
-             const mailtoLink = `mailto:${this.EmailObligatoire.join(',')}?cc=${this.EmailEnCC.join(',')}&subject=${this.Subject}`;
-             window.location.href = mailtoLink;
+             const mailtoLink = `mailto:${this.EmailObligatoire.join(',')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(',')}`;
+             window.open(mailtoLink, '_blank');
              this.messageService.add({severity:'success', summary: 'Success', detail: 'Incident Ajouter avec succès'});
             },error=>{
               this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de l\'enregistrement'});
@@ -122,16 +127,24 @@ this.destService.FindDestinataireByApplication(this.AddIncident.application.id).
       }
   }
   takeScreenshot() {
-    this.charteIncident3Bfr = true;
+    if(this.AddIncident.application.charteIncident =='charte Incident'){
+      this.charteIncident3Bfr = true;
+    } else if(this.AddIncident.application.charteIncident =='charte Incident Monetics'){
+        this.charteIncidentMonetic = true;
+      }
     setTimeout(() => {
-      const dialogElement = this.myDiv.filterComponent.nativeElement;
+      if(this.AddIncident.application.charteIncident =='charte Incident'){
+        this.dialogElement = this.myDiv.filterComponent.nativeElement;
+        } else if(this.AddIncident.application.charteIncident =='charte Incident Monetics'){
+          this.dialogElement = this.myDivMonetic.filterComponent.nativeElement;
+        }
       const options: MyOptions = {
         scale: 2,
         logging: true,
         imageSmoothingEnabled: true,
         imageSmoothingQuality: 'high'
       };
-      html2canvas(dialogElement, options).then((canvas) => {
+      html2canvas(this.dialogElement, options).then((canvas) => {
         this.imageDataUrl = canvas.toDataURL();
         const blob = this.dataURLtoBlob(this.imageDataUrl);
         const imageUrl = URL.createObjectURL(blob); // create URL object from blob
@@ -139,7 +152,11 @@ this.destService.FindDestinataireByApplication(this.AddIncident.application.id).
         saveAs(file);
         this.SaveIncident();
       });
-      this.charteIncident3Bfr = false;
+      if(this.AddIncident.application.charteIncident =='charte Incident'){
+        this.charteIncident3Bfr = false;
+      } else if(this.AddIncident.application.charteIncident =='charte Incident Monetics'){
+          this.charteIncidentMonetic = false;
+        }
     }, 1000);
   }
   
@@ -178,5 +195,12 @@ this.destService.FindDestinataireByApplication(this.AddIncident.application.id).
 
   set charteIncident3Bfr(value: boolean) {
     this.charteService.charteIncident3Bfr = value;
+  }
+  get charteIncidentMonetic(): boolean {
+    return this.charteService.charteIncidentMonetic;
+  }
+
+  set charteIncidentMonetic(value: boolean) {
+    this.charteService.charteIncidentMonetic = value;
   }
 }

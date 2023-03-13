@@ -13,6 +13,7 @@ import { saveAs } from 'file-saver';
 import { MyOptions } from 'src/app/controller/model/myoption';
 import { DestinataireCommunication } from 'src/app/controller/model/destinataire-communication';
 import { DestinataireService } from 'src/app/controller/service/destinataire.service';
+import { CharteIncidentMoneticAngFrComponent } from '../charte-incident-monetic-ang-fr/charte-incident-monetic-ang-fr.component';
 @Component({
   selector: 'app-ajouter-incident-pilote-ang-fr',
   templateUrl: './ajouter-incident-pilote-ang-fr.component.html',
@@ -35,8 +36,10 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
   EmailObligatoire:any[]=[];
   EmailEnCC:any[]=[];
   Subject:string = String();
-
+  dialogElement:any;
   @ViewChild(CharteIncident3BfrAngComponent,{static:false}) myDiv: any ;
+  @ViewChild(CharteIncidentMoneticAngFrComponent,{static:false}) myDivMonetic: any ;
+
   constructor(private incidentService: IncidentService, private charteService: CharteService,
     private router: Router,private renderer: Renderer2, private el: ElementRef,private destService: DestinataireService,
     private messageService: MessageService,private cdRef: ChangeDetectorRef) {
@@ -226,10 +229,21 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
   set charteIncident3BfrAng(value: boolean) {
     this.charteService.charteIncident3BfrAng = value;
   }
+  get charteIncidentMoneticAngFr(): boolean {
+    return this.charteService.charteIncidentMoneticAngFr;
+  }
+
+  set charteIncidentMoneticAngFr(value: boolean) {
+    this.charteService.charteIncidentMoneticAngFr = value;
+  }
   showCharte() {
     this.AddIncident.planActionList = this.ListPlanAction;
     this.AddIncidentAng.planActionList = this.ListPlanActionAng;
-    this.charteIncident3BfrAng = true;
+    if(this.AddIncident.application.charteIncident =='charte Incident'){
+      this.charteIncident3BfrAng = true;
+      }else if(this.AddIncident.application.charteIncident =='charte Incident Monetics'){
+        this.charteIncidentMoneticAngFr = true;
+      }
   }
   SaveIncident(){
     if(this.AddIncident.application.charteIncident =='charte Incident'){
@@ -242,8 +256,8 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
              this.AddIncident=new Incident();
               this.ListPlanAction = new Array<PlanAction>();
              this.ListPlanActionAng = new Array<PlanAction>();
-             const mailtoLink = `mailto:${this.EmailObligatoire.join(',')}?cc=${this.EmailEnCC.join(',')}&subject=${this.Subject}`;
-             window.location.href = mailtoLink;
+             const mailtoLink = `mailto:${this.EmailObligatoire.join(',')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(',')}`;
+             window.open(mailtoLink, '_blank');
              this.router.navigate(['/pilote/incident/registre']);
              this.messageService.add({severity:'success', summary: 'Success', detail: 'Incident Ajouter avec succès'});
             },error=>{
@@ -258,16 +272,24 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
 
 
   takeScreenshot() {
+    if(this.AddIncident.application.charteIncident =='charte Incident'){
     this.charteIncident3BfrAng = true;
+    }else if(this.AddIncident.application.charteIncident =='charte Incident Monetics'){
+      this.charteIncidentMoneticAngFr = true;
+    }
     setTimeout(() => {
-      const dialogElement = this.myDiv.filterComponent.nativeElement;
+      if(this.AddIncident.application.charteIncident =='charte Incident'){
+      this.dialogElement = this.myDiv.filterComponent.nativeElement;
+      } else if(this.AddIncident.application.charteIncident =='charte Incident Monetics'){
+        this.dialogElement = this.myDivMonetic.filterComponent.nativeElement;
+      }
       const options: MyOptions = {
         scale: 2,
         logging: true,
         imageSmoothingEnabled: true,
         imageSmoothingQuality: 'high'
       };
-      html2canvas(dialogElement, options).then((canvas) => {
+      html2canvas(this.dialogElement, options).then((canvas) => {
         this.imageDataUrl = canvas.toDataURL();
         const blob = this.dataURLtoBlob(this.imageDataUrl);
         const imageUrl = URL.createObjectURL(blob); // create URL object from blob
@@ -275,8 +297,11 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
         saveAs(file);
         this.SaveIncident();
       });
-      this.charteIncident3BfrAng = false;
-    }, 1000);
+      if(this.AddIncident.application.charteIncident =='charte Incident'){
+        this.charteIncident3BfrAng = false;
+        }else if(this.AddIncident.application.charteIncident =='charte Incident Monetics'){
+          this.charteIncidentMoneticAngFr = false;
+        }    }, 1000);
   }
   
   dataURLtoBlob(dataURL: string): Blob {

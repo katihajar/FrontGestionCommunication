@@ -10,8 +10,37 @@ export class CharteService {
 private _charteIncidentMonetic: boolean = false;
 private _charteIncidentMoneticAng: boolean = false;
 private _charteIncidentMoneticAngFr: boolean = false;
+private _charteOperationAngFr: boolean = false;
+private _charteOperationFr: boolean = false;
+private _charteOperationAng: boolean = false;
 
   constructor() { }
+
+  get charteOperationAng(): boolean {
+    return this._charteOperationAng;
+  }
+
+  set charteOperationAng(value: boolean) {
+    this._charteOperationAng = value;
+  }
+
+  get charteOperationAngFr(): boolean {
+    return this._charteOperationAngFr;
+  }
+
+  set charteOperationAngFr(value: boolean) {
+    this._charteOperationAngFr = value;
+  }
+
+  get charteOperationFr(): boolean {
+    return this._charteOperationFr;
+  }
+
+  set charteOperationFr(value: boolean) {
+    this._charteOperationFr = value;
+  }
+
+
 
   get charteIncidentMoneticAngFr(): boolean {
     return this._charteIncidentMoneticAngFr;

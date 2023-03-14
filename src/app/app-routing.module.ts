@@ -12,11 +12,14 @@ import { RegistreUserComponent } from './views/admin/registre-user/registre-user
 import { RegistreApplicationComponent } from './views/admin/registre-application/registre-application.component';
 import { AjouterApplicationComponent } from './views/admin/ajouter-application/ajouter-application.component';
 import { RegistreApplicationOfPiloteComponent } from './views/pilote/registre-application-of-pilote/registre-application-of-pilote.component';
-import { RegistreIncidentPiloteComponent } from './views/pilote/registre-incident-pilote/registre-incident-pilote.component';
-import { AjouterIncidentPiloteComponent } from './views/pilote/ajouter-incident-pilote/ajouter-incident-pilote.component';
-import { AjouterIncidentPiloteAngFrComponent } from './views/pilote/ajouter-incident-pilote-ang-fr/ajouter-incident-pilote-ang-fr.component';
+import { RegistreIncidentPiloteComponent } from './views/pilote/Incident/registre-incident-pilote/registre-incident-pilote.component';
+import { AjouterIncidentPiloteComponent } from './views/pilote/Incident/ajouter-incident-pilote/ajouter-incident-pilote.component';
+import { AjouterIncidentPiloteAngFrComponent } from './views/pilote/Incident/ajouter-incident-pilote-ang-fr/ajouter-incident-pilote-ang-fr.component';
 import { RegistrePerimetreComponent } from './views/admin/registre-perimetre/registre-perimetre.component';
 import { RegistreProcessusMetierComponent } from './views/admin/registre-processus-metier/registre-processus-metier.component';
+import { RegistreOperationComponent } from './views/pilote/operation/registre-operation/registre-operation.component';
+import { AjouterOperationComponent } from './views/pilote/operation/ajouter-operation/ajouter-operation.component';
+import { AjouterOperationFrAngComponent } from './views/pilote/operation/ajouter-operation-fr-ang/ajouter-operation-fr-ang.component';
 
 
 @NgModule({
@@ -54,6 +57,9 @@ import { RegistreProcessusMetierComponent } from './views/admin/registre-process
         { path: 'incident/registre', component: RegistreIncidentPiloteComponent },
         { path: 'incident/save/Français', component: AjouterIncidentPiloteComponent },
         { path: 'incident/save/FrançaisAnglais', component: AjouterIncidentPiloteAngFrComponent },
+        { path: 'operation/registre', component: RegistreOperationComponent },
+        { path: 'operation/save/Français', component: AjouterOperationComponent },
+        { path: 'operation/save/FrançaisAnglais', component: AjouterOperationFrAngComponent },
         { path: '', redirectTo: 'homePilote', pathMatch: 'full' },
       ],
     },

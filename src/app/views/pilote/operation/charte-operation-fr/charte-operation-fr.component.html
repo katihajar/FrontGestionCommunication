@@ -1,0 +1,43 @@
+<p-dialog [modal]="true" [(visible)]="this.charteOperationFr"
+    [style]="{width: '70vw', height: '70vw','margin-left':'3%'}" [resizable]="true">
+    <div #myDialog id="myDialog" style="width: 100%;border:2px solid rgb(24, 109, 189)">
+        <div class="col-12">
+            <img src="../../../../../assets/img/operationPlanifier.png" width="100%" style="margin-left: 0%;" alt="psa"
+                title="psa" class="staticImg">
+        </div>
+        <div style="width: 100%;" style="font-family: 'Times New Roman', Times, sans-serif;font-size: 25px;">
+            <div style="float:left;width: 100%;">
+                <div *ngIf="this.AddOperation.statut == 'Planifier'" class="col-12" style="height: 5vh; align-items: center; justify-content: center;display: flex; text-align: center;background-color: rgb(146, 196, 219);">
+                    <p style="margin: 1%;"><b style="color: white;font-size: 30px;">Détails de l'opération</b></p>
+                </div>
+                <div *ngIf="this.AddOperation.statut == 'Terminer'" class="col-12" style="height: 5vh; align-items: center; justify-content: center;display: flex; text-align: center;background-color: rgb(100, 241, 136);">
+                    <p style="margin: 1%;"><b style="color: white;font-size: 30px;">Fin de l'opération</b></p>
+                </div>
+                <div style="margin: 2%;">
+                    <p>Bonjour,</p><br>
+
+                    <p>{{this.AddOperation.description}}</p><br>
+
+                    <div *ngIf="this.AddOperation.statut == 'Planifier'">
+                        <br>
+                        <p>Restons à votre dispostion pour toutes informations complémentaires.</p><br>
+                    </div>
+                    <br>
+                    <p style="color: rgb(55, 97, 233);">PRIERE DE TRANSFERER CET EMAIL A TOUTES LES PARTIES CONCERNEES.</p>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-12" style="margin-top: 2%;">
+
+            <img src="../../../../../assets/img/FooteroperationPlanifier.png" width="100%" style="margin-left: 0%;" alt="psa"
+                title="psa" class="staticImg">
+
+
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="this.charteOperationFr=false" label="Ok"
+            styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>

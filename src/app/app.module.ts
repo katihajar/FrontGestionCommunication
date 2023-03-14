@@ -112,17 +112,23 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RegistreApplicationComponent } from './views/admin/registre-application/registre-application.component';
 import { AjouterApplicationComponent } from './views/admin/ajouter-application/ajouter-application.component';
 import { RegistreApplicationOfPiloteComponent } from './views/pilote/registre-application-of-pilote/registre-application-of-pilote.component';
-import { CharteIncident3BfrAngComponent } from './views/pilote/charte-incident3-bfr-ang/charte-incident3-bfr-ang.component';
-import { RegistreIncidentPiloteComponent } from './views/pilote/registre-incident-pilote/registre-incident-pilote.component';
-import { AjouterIncidentPiloteComponent } from './views/pilote/ajouter-incident-pilote/ajouter-incident-pilote.component';
-import { AjouterIncidentPiloteAngFrComponent } from './views/pilote/ajouter-incident-pilote-ang-fr/ajouter-incident-pilote-ang-fr.component';
-import { CharteIncident3bfrComponent } from './views/pilote/charte-incident3bfr/charte-incident3bfr.component';
+import { CharteIncident3BfrAngComponent } from './views/pilote/Incident/charte-incident3-bfr-ang/charte-incident3-bfr-ang.component';
+import { RegistreIncidentPiloteComponent } from './views/pilote/Incident/registre-incident-pilote/registre-incident-pilote.component';
+import { AjouterIncidentPiloteComponent } from './views/pilote/Incident/ajouter-incident-pilote/ajouter-incident-pilote.component';
+import { AjouterIncidentPiloteAngFrComponent } from './views/pilote/Incident/ajouter-incident-pilote-ang-fr/ajouter-incident-pilote-ang-fr.component';
+import { CharteIncident3bfrComponent } from './views/pilote/Incident/charte-incident3bfr/charte-incident3bfr.component';
 import { RegistrePerimetreComponent } from './views/admin/registre-perimetre/registre-perimetre.component';
 import { RegistreProcessusMetierComponent } from './views/admin/registre-processus-metier/registre-processus-metier.component';
-import { CharteIncidentMoneticComponent } from './views/pilote/charte-incident-monetic/charte-incident-monetic.component';
-import { CharteIncidentMoneticAngComponent } from './views/pilote/charte-incident-monetic-ang/charte-incident-monetic-ang.component';
-import { CharteIncidentMoneticAngFrComponent } from './views/pilote/charte-incident-monetic-ang-fr/charte-incident-monetic-ang-fr.component';
-import { CharteIncident3bAngComponent } from './views/pilote/charte-incident3b-ang/charte-incident3b-ang.component';
+import { CharteIncidentMoneticComponent } from './views/pilote/Incident/charte-incident-monetic/charte-incident-monetic.component';
+import { CharteIncidentMoneticAngComponent } from './views/pilote/Incident/charte-incident-monetic-ang/charte-incident-monetic-ang.component';
+import { CharteIncidentMoneticAngFrComponent } from './views/pilote/Incident/charte-incident-monetic-ang-fr/charte-incident-monetic-ang-fr.component';
+import { CharteIncident3bAngComponent } from './views/pilote/Incident/charte-incident3b-ang/charte-incident3b-ang.component';
+import { RegistreOperationComponent } from './views/pilote/operation/registre-operation/registre-operation.component';
+import { AjouterOperationComponent } from './views/pilote/operation/ajouter-operation/ajouter-operation.component';
+import { AjouterOperationFrAngComponent } from './views/pilote/operation/ajouter-operation-fr-ang/ajouter-operation-fr-ang.component';
+import { CharteOperationFrAngComponent } from './views/pilote/operation/charte-operation-fr-ang/charte-operation-fr-ang.component';
+import { CharteOperationFrComponent } from './views/pilote/operation/charte-operation-fr/charte-operation-fr.component';
+import { CharteOperationAngComponent } from './views/pilote/operation/charte-operation-ang/charte-operation-ang.component';
 
 @NgModule({
   declarations: [
@@ -156,7 +162,13 @@ import { CharteIncident3bAngComponent } from './views/pilote/charte-incident3b-a
     CharteIncidentMoneticComponent,
     CharteIncidentMoneticAngComponent,
     CharteIncidentMoneticAngFrComponent,
-    CharteIncident3bAngComponent
+    CharteIncident3bAngComponent,
+    RegistreOperationComponent,
+    AjouterOperationComponent,
+    AjouterOperationFrAngComponent,
+    CharteOperationFrAngComponent,
+    CharteOperationFrComponent,
+    CharteOperationAngComponent
     ],
   imports: [
     BrowserModule,

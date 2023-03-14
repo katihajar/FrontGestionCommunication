@@ -1,0 +1,116 @@
+<div class="container-fluid page" style="background-color: white">
+    <div class="d-flex page__box p-3">Ajouter une Operation</div>
+    <div class="page__content shadow p-3 position-relative">
+        <div class="card align-items-center">
+            <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
+                <button pButton pRipple style=" float: right;margin-right: 2%;" type="button" label="translate"
+                    (click)="translateInput()" class="p-button-raised"></button>
+            </div>
+            <div style="width: 100%;">
+                <div style="float:left; width: 50%;border-right:3px solid #6d6a6a;">
+                    <div class="col-12" style="margin: 1%">
+                        <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '22%' }">
+                            <label for="basic3"
+                                style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Titre</label>
+                            <input inputId="basic3" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }"
+                                type="text" pInputText placeholder="Entré le Titre d'Operation"
+                                [(ngModel)]="this.AddOperation.titre" />
+
+                        </span>
+                        <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
+                            <label for="basic4" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">N°
+                                Incident</label>
+                            <input inputId="basic4" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }"
+                                type="text" pInputText placeholder="Entré le numero d'Operation"
+                                [(ngModel)]="this.AddOperation.numero" />
+
+                        </span>
+                        <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
+                            <label for="basic1" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date
+                                Début</label>
+                            <p-calendar inputId="basic1" [showTime]="true" [(ngModel)]="date2"
+                                [style]="{ width: '100%' }" [(ngModel)]="this.AddOperation.dateDebut"></p-calendar>
+
+                        </span>
+                        <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
+                            <label for="basic2" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date
+                                Fin</label>
+                            <p-calendar inputId="basic2" [showTime]="true" [(ngModel)]="date3"
+                                [style]="{ width: '100%' }" [(ngModel)]="this.AddOperation.dateFin"></p-calendar>
+
+                        </span>
+
+                    </div>
+                    <div class="col-12" style="margin-bottom: 2%;">
+                        <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '90%' }">
+                            <label for="basic5"
+                                style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Description</label>
+                            <textarea id="basic5" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }"
+                                type="text" pInputTextarea placeholder="Entré la description"
+                                [(ngModel)]="this.AddOperation.description"></textarea>
+
+                        </span>
+
+                    </div>
+                </div>
+                <div style="float:right; width: 50%;">
+
+                    <div class="col-12" style="margin: 1%">
+                        <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '22%' }">
+                            <label for="basic3"
+                                style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Title</label>
+                            <input inputId="basic3" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }"
+                                type="text" pInputText placeholder="Entré le Titre d'Operation"
+                                [(ngModel)]="this.AddOperationAng.titre" />
+
+                        </span>
+                        <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
+                            <label for="basic4" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">N°
+                                Operation</label>
+                            <input inputId="basic4" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }"
+                                type="text" pInputText placeholder="Entré le numero d'Operation"
+                                [(ngModel)]="this.AddOperationAng.numero" />
+
+                        </span>
+                        <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
+                            <label for="basic1" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Start
+                                Date</label>
+                            <p-calendar inputId="basic1" [showTime]="true" [(ngModel)]="date2"
+                                [style]="{ width: '100%' }" [(ngModel)]="this.AddOperationAng.dateDebut"></p-calendar>
+
+                        </span>
+                        <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
+                            <label for="basic2" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">End
+                                Date</label>
+                            <p-calendar inputId="basic2" [showTime]="true" [(ngModel)]="date3"
+                                [style]="{ width: '100%' }" [(ngModel)]="this.AddOperationAng.dateFin"></p-calendar>
+
+                        </span>
+
+                    </div>
+                    <div class="col-12" style="margin-bottom: 2%;">
+                        <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '90%' }">
+                            <label for="basic5"
+                                style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Description</label>
+                            <textarea id="basic5" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }"
+                                type="text" pInputTextarea placeholder="Entré la description"
+                                [(ngModel)]="this.AddOperationAng.description"></textarea>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
+                <button pButton pRipple type="button" label="Visualiser la charte" (click)="showCharte()"
+                    style=" float: left;margin-left: 2%;" class="p-button-raised p-button-help"></button>
+                <button pButton pRipple style=" float: right;margin-right: 2%;" type="button" label="Submit"
+                    class="p-button-raised" (click)="SendAndSaveOper()"></button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<app-charte-operation-fr-ang></app-charte-operation-fr-ang>

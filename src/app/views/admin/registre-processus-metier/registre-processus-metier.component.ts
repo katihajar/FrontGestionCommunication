@@ -56,7 +56,7 @@ export class RegistreProcessusMetierComponent implements OnInit {
     })
   }
   SaveProcessusMetire(){
-    if(this.AddProcessusMetier.titre != null){
+    if(this.AddProcessusMetier.titre != ''){
     this.processusMetierService.SaveProcessusMetier().subscribe((data) => {
            this.AddProcessusMetier=new ProcessusMetier();
            this.FindAllProcessusMetier();
@@ -71,7 +71,7 @@ export class RegistreProcessusMetierComponent implements OnInit {
   }
   }
   UpdateProcessusMetire(){
-    if(this.ModifierProcessusMetier.titre != null){
+    if(this.ModifierProcessusMetier.titre != ''){
     this.processusMetierService.UpdateProcessusMetier().subscribe((data) => {
            this.ModifierProcessusMetier=new ProcessusMetier();
            this.FindAllProcessusMetier();

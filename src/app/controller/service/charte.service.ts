@@ -14,7 +14,35 @@ private _charteOperationAngFr: boolean = false;
 private _charteOperationFr: boolean = false;
 private _charteOperationAng: boolean = false;
 
+private _charteChangeAngFr: boolean = false;
+private _charteChangeFr: boolean = false;
+private _charteChangeAng: boolean = false;
   constructor() { }
+
+
+  get charteChangeAng(): boolean {
+    return this._charteChangeAng;
+  }
+
+  set charteChangeAng(value: boolean) {
+    this._charteChangeAng = value;
+  }
+
+  get charteChangeFr(): boolean {
+    return this._charteChangeFr;
+  }
+
+  set charteChangeFr(value: boolean) {
+    this._charteChangeFr = value;
+  }
+
+  get charteChangeAngFr(): boolean {
+    return this._charteChangeAngFr;
+  }
+
+  set charteChangeAngFr(value: boolean) {
+    this._charteChangeAngFr = value;
+  }
 
   get charteOperationAng(): boolean {
     return this._charteOperationAng;

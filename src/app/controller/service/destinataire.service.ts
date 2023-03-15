@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class DestinataireService {
   private urlPilote = environment.baseUrlPilote;
+  private urlRespo = environment.baseUrlResponsable;
   private _ListDestinataireApp: Array<DestinataireCommunication> = new Array<DestinataireCommunication>();
   private _AddDestinataire: DestinataireCommunication = new DestinataireCommunication();
 
@@ -63,5 +64,11 @@ export class DestinataireService {
       { observe: 'response', headers }
     );    
   }
-
+  public FindDestinataireByApplicationByResp(id:number): Observable<HttpResponse<Array<DestinataireCommunication>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<DestinataireCommunication>>(
+      this.urlRespo + 'destinataire/findByApplication/'+id,
+      { observe: 'response', headers }
+    );    
+  }
 }

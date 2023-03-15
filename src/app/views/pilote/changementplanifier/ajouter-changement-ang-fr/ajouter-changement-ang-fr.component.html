@@ -1,0 +1,280 @@
+<div class="container-fluid page" style="background-color: white">
+    <div class="d-flex page__box p-3">Ajouter un Changement</div>
+    <div class="page__content shadow p-3 position-relative">
+        <div class="card align-items-center">
+            <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
+              
+                <button pButton pRipple style=" float: right;margin-right: 2%;" type="button" label="translate"
+                    class="p-button-raised" (click)="translateInput()" ></button>
+            </div>
+            <div style="width: 100%;">
+                <div style="float:left; width: 50%;border-right:3px solid #6d6a6a;">
+                    <div class="col-12" style="margin: 2%">
+                        <span class="p-input-icon-left" style="margin-left: 1%" [style]="{ width: '22%' }">
+                            <label for="basic3"
+                                style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Titre</label>
+                            <input inputId="basic3" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }"
+                                type="text" pInputText placeholder="Entré le Titre du Changement"
+                                [(ngModel)]="this.AddChangement.titre" />
+
+                        </span>
+                        <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
+                            <label for="basic4" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">N°
+                                Version App</label>
+                            <input inputId="basic4" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }"
+                                type="text" pInputText placeholder="Entré le numero d'incident"
+                                [(ngModel)]="this.AddChangement.version" />
+
+                        </span>
+                        <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
+                            <label for="basic1" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date
+                                Début</label>
+                                <p-calendar inputId="basic2" [(ngModel)]="date2" [style]="{ width: '100%' }" [showTime]="true" 
+                                [(ngModel)]="this.AddChangement.dateDebut"></p-calendar>
+
+                        </span>
+                        <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
+                            <label for="basic2" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date
+                                Fin</label>
+                                <p-calendar inputId="basic2" [(ngModel)]="date1" [style]="{ width: '100%' }" [showTime]="true" 
+                                [(ngModel)]="this.AddChangement.dateFin"></p-calendar>
+
+                        </span>
+
+                    </div>
+                    <div class="col-12" style="margin-bottom: 2%;">
+                        <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '46%' }">
+                            <label for="basic5"
+                                style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Détail</label>
+                            <textarea id="basic5" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }"
+                                type="text" pInputTextarea placeholder="Entré le Detail"
+                                [(ngModel)]="this.AddChangement.detail"></textarea>
+
+                        </span>
+                        <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '46%' }">
+                            <label for="basic5"
+                                style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Impact Métier</label>
+                            <textarea id="basic5" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }"
+                                type="text" pInputTextarea placeholder="Entré l'Impact Métier"
+                                [(ngModel)]="this.AddChangement.impactMetier"></textarea>
+
+                        </span>
+                 
+                    </div>
+
+                    <div class="card align-items-center" style="width: 80%; margin-left: 10%;margin-bottom: 2%">
+                        <h1 style="margin: 3%;color: black;">Ajouter le Contenu</h1>
+                        <div class="col-12 text-center" style="margin-bottom: 2%">
+                            <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '45%' }">
+                                <label for="basic6"
+                                    style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">N° Ticket
+                                    </label>
+                                <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }"
+                                    type="text" pInputText placeholder="Entré le numero"
+                                    [(ngModel)]="this.Contenu.titre" />
+                            </span>
+                            </div>
+                            <div class="col-12 text-center" style="margin-bottom: 2%">
+                            <span class="p-input-icon-left" style="margin-left: 10%" [style]="{ width: '70%' }">
+                                <label
+                                    style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Description</label>
+                                <textarea style="padding-left: 0.8rem; " required [style]="{ width: '100%' }"
+                                    type="text" pInputTextarea placeholder="Entré la Nom description"
+                                    [(ngModel)]="this.Contenu.description"></textarea>
+
+                            </span>
+                            <button style="margin-left: 1%" pButton pRipple type="button" icon="pi pi-plus"
+                                (click)="AddContenu()" class="p-button-rounded p-button-success"></button>
+                        </div>
+                    
+                        <div class="col-12" style="margin: 2%">
+                            <p-table class="table" [value]="this.ListContenu" dataKey="id" [rows]="10"
+                                [showCurrentPageReport]="true" [paginator]="true"
+                                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                N° Ticket
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                description
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                supprimer
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-cont>
+                                    <tr>
+                                        <td>
+                                            {{ cont.titre }}
+                                        </td>
+
+
+                                        <td>
+                                            {{ cont.description }}
+                                        </td>
+                                        <td>
+                                            <button pButton pRipple type="button" style="font-size: larger" (click)="removeListContenu(cont)"
+                                                icon="pi pi-times" class="p-button-rounded p-button-danger"></button>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage">
+                                    <tr>
+                                        <td colspan="3">aucun contenu n'a été ajoué.</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+
+                </div>
+                <div style="float:right; width: 50%;">
+                    <div class="col-12" style="margin: 2%">
+                        <span class="p-input-icon-left" style="margin-left: 1%" [style]="{ width: '22%' }">
+                            <label for="basic01"
+                                style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Title</label>
+                            <input inputId="basic01" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }"
+                                type="text" pInputText placeholder="Enter Title"
+                                [(ngModel)]="this.AddChangementAng.titre" />
+
+                        </span>
+                        <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
+                            <label for="basic02" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">N°
+                                Version Application</label>
+                            <input inputId="basic02" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }"
+                                type="text" pInputText placeholder="Enter application Version"
+                                [(ngModel)]="this.AddChangementAng.version" />
+
+                        </span>
+                        <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
+                            <label for="basic03" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Start Date
+                                </label>
+                            <p-calendar inputId="basic03" [(ngModel)]="date3" [showTime]="true" [style]="{ width: '100%' }"
+                                [(ngModel)]="this.AddChangementAng.dateDebut"></p-calendar>
+                        </span>
+                        <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
+                            <label for="basic04" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">End Date
+                                </label>
+                            <p-calendar inputId="basic04" [(ngModel)]="date4" [showTime]="true" [style]="{ width: '100%' }"
+                                [(ngModel)]="this.AddChangementAng.dateFin"></p-calendar>
+
+                        </span>
+
+                    </div>
+                    <div class="col-12" style="margin-bottom: 2%;">
+                        <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '46%' }">
+                            <label for="basic5"
+                                style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Détail</label>
+                            <textarea id="basic5" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }"
+                                type="text" pInputTextarea placeholder="Enter Detail"
+                                [(ngModel)]="this.AddChangementAng.detail"></textarea>
+
+                        </span>
+                        <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '46%' }">
+                            <label for="basic5"
+                                style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Business Impact</label>
+                            <textarea id="basic5" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }"
+                                type="text" pInputTextarea placeholder="Enter Business Impact"
+                                [(ngModel)]="this.AddChangementAng.impactMetier"></textarea>
+
+                        </span>
+                 
+                    </div>
+           
+
+                    
+                    <div class="card align-items-center" style="width: 80%; margin-left: 10%;margin-bottom: 2%">
+                        <h1 style="margin: 3%;color: black;" >Ajouter le Contenu</h1>
+                        <div class="col-12 text-center" style="margin-bottom: 2%">
+                            <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '45%' }">
+                                <label for="basic6"
+                                    style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">N° Ticket
+                                    </label>
+                                <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }"
+                                    type="text" pInputText placeholder="Enter Ticket"
+                                    [(ngModel)]="this.ContenuAng.titre" />
+                            </span>
+                            </div>
+                            <div class="col-12 text-center" style="margin-bottom: 2%">
+                            <span class="p-input-icon-left" style="margin-left: 10%" [style]="{ width: '70%' }">
+                                <label
+                                    style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Description</label>
+                                <textarea style="padding-left: 0.8rem; " required [style]="{ width: '100%' }"
+                                    type="text" pInputTextarea placeholder="Enter description"
+                                    [(ngModel)]="this.ContenuAng.description"></textarea>
+
+                            </span>
+                            <button style="margin-left: 1%" pButton pRipple type="button" icon="pi pi-plus"
+                                (click)="AddContenuAng()" class="p-button-rounded p-button-success"></button>
+                        </div>
+                    
+                        <div class="col-12" style="margin: 2%">
+                            <p-table class="table" [value]="this.ListContenuAng" dataKey="id" [rows]="10"
+                                [showCurrentPageReport]="true" [paginator]="true"
+                                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                N° Ticket
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                description
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                delete
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-cont>
+                                    <tr>
+                                        <td>
+                                            {{ cont.titre }}
+                                        </td>
+
+
+                                        <td>
+                                            {{ cont.description }}
+                                        </td>
+                                        <td>
+                                            <button pButton pRipple type="button" style="font-size: larger" (click)="removeListContenuAng(cont)"
+                                                icon="pi pi-times" class="p-button-rounded p-button-danger"></button>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage">
+                                    <tr>
+                                        <td colspan="3">aucun contenu n'a été ajoué.</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                    
+                </div>
+             
+            </div>
+            <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
+                <button pButton pRipple (click)="showCharte()" type="button" label="Visualiser la charte"
+                    style=" float: left;margin-left: 2%;" class="p-button-raised p-button-help"></button>
+                <button pButton pRipple (click)="SendAndSaveChange()" style=" float: right;margin-right: 2%;" type="button" label="Submit"
+                    class="p-button-raised"></button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<app-charte-changement-fr-ang></app-charte-changement-fr-ang>

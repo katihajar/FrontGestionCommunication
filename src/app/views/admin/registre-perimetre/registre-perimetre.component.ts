@@ -56,7 +56,7 @@ export class RegistrePerimetreComponent implements OnInit {
     })
   }
   SavePerimetre(){
-    if(this.AddPerimetre.titre != null){
+    if(this.AddPerimetre.titre != ''){
     this.perimetreService.SavePerimetre().subscribe((data) => {
            this.AddPerimetre=new Perimetre();
            this.FindAllPerimetre();
@@ -71,7 +71,7 @@ export class RegistrePerimetreComponent implements OnInit {
   }
   }
   UpdatePerimetre(){
-    if(this.ModifierPerimetre.titre != null){
+    if(this.ModifierPerimetre.titre != ''){
     this.perimetreService.UpdatePerimetre().subscribe((data) => {
            this.ModifierPerimetre=new Perimetre();
            this.FindAllPerimetre();

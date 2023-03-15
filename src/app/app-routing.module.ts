@@ -20,6 +20,11 @@ import { RegistreProcessusMetierComponent } from './views/admin/registre-process
 import { RegistreOperationComponent } from './views/pilote/operation/registre-operation/registre-operation.component';
 import { AjouterOperationComponent } from './views/pilote/operation/ajouter-operation/ajouter-operation.component';
 import { AjouterOperationFrAngComponent } from './views/pilote/operation/ajouter-operation-fr-ang/ajouter-operation-fr-ang.component';
+import { RegistreChangementPlanifierComponent } from './views/pilote/changementplanifier/registre-changement-planifier/registre-changement-planifier.component';
+import { AjouterChangementFrComponent } from './views/pilote/changementplanifier/ajouter-changement-fr/ajouter-changement-fr.component';
+import { AjouterChangementAngFrComponent } from './views/pilote/changementplanifier/ajouter-changement-ang-fr/ajouter-changement-ang-fr.component';
+import { ResgistreApplicationRespoComponent } from './views/responsable/resgistre-application-respo/resgistre-application-respo.component';
+import { ResgistreIncidentRespoComponent } from './views/responsable/resgistre-incident-respo/resgistre-incident-respo.component';
 
 
 @NgModule({
@@ -44,6 +49,8 @@ import { AjouterOperationFrAngComponent } from './views/pilote/operation/ajouter
       children: [
         { path: 'testRespo', component: TestComponent },
         { path: 'homeRespo', component: HomeComponent },
+        { path: 'incident/registre', component: ResgistreIncidentRespoComponent },
+        { path: 'application/registre', component: ResgistreApplicationRespoComponent },
         { path: '', redirectTo: 'homeRespo', pathMatch: 'full' },
       ],
     },
@@ -60,6 +67,9 @@ import { AjouterOperationFrAngComponent } from './views/pilote/operation/ajouter
         { path: 'operation/registre', component: RegistreOperationComponent },
         { path: 'operation/save/Français', component: AjouterOperationComponent },
         { path: 'operation/save/FrançaisAnglais', component: AjouterOperationFrAngComponent },
+        { path: 'changement/registre', component: RegistreChangementPlanifierComponent },
+        { path: 'changement/save/Français', component: AjouterChangementFrComponent },
+        { path: 'changement/save/FrançaisAnglais', component: AjouterChangementAngFrComponent},
         { path: '', redirectTo: 'homePilote', pathMatch: 'full' },
       ],
     },

@@ -1,29 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {ConfirmationService, ConfirmEventType, MessageService} from 'primeng/api';
+import * as FileSaver from 'file-saver';
+import * as moment from 'moment';
+import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Application } from 'src/app/controller/model/application';
 import { Incident } from 'src/app/controller/model/incident';
-import { PiloteApplication } from 'src/app/controller/model/pilote-application';
 import { PlanAction } from 'src/app/controller/model/plan-action';
-import { ApplicationService } from 'src/app/controller/service/application.service';
+import { ApplicationRespoService } from 'src/app/controller/service/application-respo.service';
 import { CharteService } from 'src/app/controller/service/charte.service';
+import { IncidentRespoService } from 'src/app/controller/service/incident-respo.service';
 import { IncidentService } from 'src/app/controller/service/incident.service';
 const translate = require('translate');
-import * as FileSaver from 'file-saver';
-const moment = require('moment');
 
 @Component({
-  selector: 'app-registre-incident-pilote',
-  templateUrl: './registre-incident-pilote.component.html',
-  styleUrls: ['./registre-incident-pilote.component.scss']
+  selector: 'app-resgistre-incident-respo',
+  templateUrl: './resgistre-incident-respo.component.html',
+  styleUrls: ['./resgistre-incident-respo.component.scss']
 })
-export class RegistreIncidentPiloteComponent implements OnInit {
+export class ResgistreIncidentRespoComponent implements OnInit {
+
   ActionAng = new PlanAction();
   loading: boolean = true;
   statutIncident: any[] = [];
   ListApp = new Array<Application>();
-  ListPiloteApp = new Array<PiloteApplication>();
+  ListPiloteApp = new Array<Application>();
   showPopUpIncd: boolean = false;
   application: Application = new Application();
   listLangage: any[] = [];
@@ -32,18 +33,17 @@ export class RegistreIncidentPiloteComponent implements OnInit {
   viewCharte:boolean = false;
   popUpLangue:boolean=false;
   selectLang:any='';
-  constructor(private charteService:CharteService,private incidentService: IncidentService,private confirmationService: ConfirmationService,
-     private router: Router, private appService: ApplicationService, private messageService:MessageService) { }
+  constructor(private charteService:CharteService,private incidentServiceReso: IncidentRespoService,private incidentService: IncidentService,private confirmationService: ConfirmationService,
+     private router: Router, private appService: ApplicationRespoService, private messageService:MessageService) { }
   clear(table: Table) {
     table.clear();
   }
-
 
   exportExcel() {
     import("xlsx").then(xlsx => {
       console.log(typeof Date.prototype.toLocaleDateString);
       console.log(new Incident().dateDebut instanceof Date);
-      const worksheet = xlsx.utils.json_to_sheet(this.ListIncidentOfPilote.map(incident => {
+      const worksheet = xlsx.utils.json_to_sheet(this.ListIncidentOfRespo.map(incident => {
         return {
           id:incident.id,
           application: incident.application.nomApplication, 
@@ -75,22 +75,10 @@ saveAsExcelFile(buffer: any, fileName: string): void {
 }
 
 
-  RouteFormAddIncident() {
-    if(this.AddIncident.application.nomApplication != '' && this.AddIncident.statut!='' && this.langage !=''){
-    if(this.langage == "Français"){
-    this.showPopUpIncd = false;
-    this.router.navigate(['/pilote/incident/save/Français']);
-  }else if(this.langage == "Français-Anglais"){
-    this.showPopUpIncd = false;
-    this.router.navigate(['/pilote/incident/save/FrançaisAnglais']);
-  }
-    }else{
-      this.messageService.add({severity:'warn', summary:'Warning', detail:'Veuillez insérer tous les champs.'});
-    }
-  }
+
 ShowCharte(inc:Incident){
   this.AddIncident=inc;
-  this.incidentService.FindPlanActionByIncident(inc.id).subscribe((data)=>{
+  this.incidentServiceReso.FindPlanActionByIncident(inc.id).subscribe((data)=>{
     // @ts-ignore
     this.AddIncident.planActionList = data.body;
     this.popUpLangue=true;
@@ -174,15 +162,7 @@ translateInput() {
   }
   this.AddIncidentAng.planActionList=this.ListPlanActionAng;
 }
-Edite(inc:Incident){
-  this.AddIncident=inc;
-  this.incidentService.FindPlanActionByIncident(inc.id).subscribe((data)=>{
-    // @ts-ignore
-    this.AddIncident.planActionList = data.body;
-    this.ListPlanAction =this.AddIncident.planActionList;
-  })
-  this.showPopUpIncd = true;
-}
+
 
 SelectLanguage(){
   if(this.selectLang == "Français"){
@@ -215,9 +195,9 @@ SelectLanguage(){
   }
 }
   FindIncident() {
-    this.incidentService.FindIncidentByPilote().subscribe((data) => {
+    this.incidentServiceReso.FindIncidentByRespo().subscribe((data) => {
       // @ts-ignore
-      this.ListIncidentOfPilote = data.body;
+      this.ListIncidentOfRespo = data.body;
       this.loading = false;
     })
   }
@@ -241,16 +221,12 @@ SelectLanguage(){
       { name: 'Anglais' }
     ]
   }
-  PopUp() {
-    this.AddIncident= new Incident();
-    this.AddIncidentAng= new Incident();
-    this.showPopUpIncd = true;
-  }
-  get ListIncidentOfPilote(): Array<Incident> {
+
+  get ListIncidentOfRespo(): Array<Incident> {
     return this.incidentService.ListIncidentOfPilote;
   }
 
-  set ListIncidentOfPilote(value: Array<Incident>) {
+  set ListIncidentOfRespo(value: Array<Incident>) {
     this.incidentService.ListIncidentOfPilote = value;
   }
 
@@ -329,42 +305,14 @@ SelectLanguage(){
 
 
   FindApp() {
-    this.appService.FindApplicationByPilote().subscribe((data) => {
+    this.appService.FindApplicationByRespo().subscribe((data) => {
       // @ts-ignore
-      this.ListPiloteApp = data.body;
-      for (let i = 0; i < this.ListPiloteApp.length; i++) {
-        this.ListApp.push(this.ListPiloteApp[i].application);
-      }
+      this.ListApp = data.body;
     })
   }
   onDialogHideLang(){
     this.FindIncident();
   }
-  DeleteIncident(id:number){
-    this.confirmationService.confirm({
-      message: 'Are you sure that you want to proceed?',
-      header: 'Confirmation',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.incidentService.DeleteIncident(id).subscribe((data) => {
-          this.FindIncident();
-          // @ts-ignore
-          this.messageService.add({severity:'success', summary: 'Success', detail: 'Incident supprimer avec succès'});
-        },error=>{
-          this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de la suppression'});
-    });
-      },
-      reject: (type:any) => {
-          switch(type) {
-              case ConfirmEventType.REJECT:
-                  this.messageService.add({severity:'error', summary:'Rejected', detail:'Suppression Rejeter'});
-              break;
-              case ConfirmEventType.CANCEL:
-                  this.messageService.add({severity:'warn', summary:'Cancelled', detail:'Suppression Annuler'});
-              break;
-          }
-      }
-  });
-   
-  }
+
+
 }

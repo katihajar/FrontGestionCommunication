@@ -83,7 +83,7 @@ set AddApplication(value: Application) {
 SaveApp(){
   this.submittedApplication = true;
   this.AddApplication.piloteApplicationList =  this.ListpiloteSelected;
-  if(this.AddApplication.nomApplication != null && this.AddApplication.version != null &&this.AddApplication.responsable.nom != null && this.AddApplication.charteIncident !=null){
+  if(this.AddApplication.nomApplication != ''  &&this.AddApplication.responsable.nom != '' && this.AddApplication.charteIncident !=''){
   this.appService.SaveApplication().subscribe((data) => {
          this.AddApplication=new Application;
          this.FindAllUsers();

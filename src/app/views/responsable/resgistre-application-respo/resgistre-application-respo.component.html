@@ -1,0 +1,179 @@
+<div class="container-fluid page card" style="background-color: white">
+  <div class="page__box p-3">Registre des Applications</div>
+  <div class="page__content shadow p-2 position-relative align-items-center">
+    <div class="card">
+      <p-table class="table" #dt1 [value]=" this.ListApplication" dataKey="id" [rows]="10"
+        [showCurrentPageReport]="true" [loading]="loading" [paginator]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [globalFilterFields]="['nomApplication','lot','disponibilite','charteIncident']">
+        <ng-template pTemplate="caption">
+          <div class="flex">
+            <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+              (click)="clear(dt1)"></button>
+            <span class="p-input-icon-left ml-auto" style="float: right;">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
+                placeholder="Search keyword" />
+            </span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th>
+              <div class="flex justify-content-center align-items-center">
+                Nom Application
+                <p-columnFilter type="text" field="nomApplication" display="menu"></p-columnFilter>
+              </div>
+            </th>
+
+            <th>
+              <div class="flex justify-content-center align-items-center">
+                lot
+                <p-columnFilter type="text" field="lot" display="menu"></p-columnFilter>
+              </div>
+            </th>
+
+            <th>
+              <div class="flex justify-content-center align-items-center">
+                Disponibilite
+                <p-columnFilter type="text" field="disponibilite" display="menu"></p-columnFilter>
+              </div>
+            </th>
+            <th>
+              <div class="flex justify-content-center align-items-center">
+                charteIncident
+                <p-columnFilter type="text" field="charteIncident" display="menu"></p-columnFilter>
+              </div>
+            </th>
+            <th>
+              Liste des Destinataire
+            </th>
+
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-app>
+          <tr>
+            <td>
+              {{app.nomApplication}}
+            </td>
+            <td>
+              {{app.lot}}
+            </td>
+
+            <td>
+              {{app.disponibilite}}
+            </td>
+            <td>
+              {{app.charteIncident}}
+            </td>
+            <td><button pButton pRipple type="button" style="font-size: larger;" icon="pi pi-search"
+                class="p-button-rounded p-button-info" (click)="showDestinataire(app)"></button>
+            </td>
+
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="6">aucune application trouvé.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
+
+
+<p-dialog header="Liste des Destinataires" [modal]="true" [draggable]="false" [(visible)]="displayDestinataire"
+  [style]="{width: '70vw', height: '70vw','margin-left':'10%'}">
+  <div class="card">
+
+    <p-table class="table" #dt2 [value]=" this.ListDestinataireApp" dataKey="id" [rows]="5"
+      [showCurrentPageReport]="true" [loading]="loading" [paginator]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [globalFilterFields]="['nom','prenom','email','typeDest','statutRespo']">
+      <ng-template pTemplate="caption">
+        <div class="flex">
+          <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+            (click)="clear(dt1)"></button>
+          <span class="p-input-icon-left ml-auto" style="float: right;">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (input)="dt2.filterGlobal($any($event.target).value, 'contains')"
+              placeholder="Search keyword" />
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Nom
+              <p-columnFilter type="text" field="nom" display="menu"></p-columnFilter>
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Prenom
+              <p-columnFilter type="text" field="prenom" display="menu"></p-columnFilter>
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Email
+              <p-columnFilter type="text" field="email" display="menu"></p-columnFilter>
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Type
+              <p-columnFilter type="text" field="typeDest" display="menu"></p-columnFilter>
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Statut
+              <p-columnFilter type="text" field="statutRespo" display="menu"></p-columnFilter>
+            </div>
+          </th>
+          <th>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-dest>
+        <tr>
+          <td>
+            {{dest.nom}}
+          </td>
+
+          <td>
+            {{dest.prenom}}
+          </td>
+
+          <td>
+            {{dest.email}}
+          </td>
+          <td>
+            {{dest.typeDest}}
+          </td>
+          <td>
+            {{dest.statutRespo}}
+          </td>
+          <td>
+            <div *ngIf="dest.statutRespo== 'Valider'">
+              <button pButton pRipple type="button" label="Retirer" (click)="Refuser(dest)" class="p-button-success"></button>
+            </div>
+            <div *ngIf="dest.statutRespo== 'En Attente'">
+              <button pButton pRipple type="button" label="Valider" (click)="Valider(dest)"  class="p-button-warning"></button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="6">aucun destinataire n'a été trouvé.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="displayDestinataire=false" label="Ok" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>

@@ -10,7 +10,7 @@
         <p-table class="table" #dt1 [value]=" this.ListApplication" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
            [loading]="loading" [paginator]="true"
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-          [globalFilterFields]="['nomApplication','version','lot','responsable.username','disponibilite','charteIncident']">
+          [globalFilterFields]="['nomApplication','lot','responsable.username','disponibilite','charteIncident']">
           <ng-template pTemplate="caption">
             <div class="flex">
               <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
@@ -30,12 +30,7 @@
                   <p-columnFilter type="text" field="nomApplication" display="menu"></p-columnFilter>
                 </div>
               </th>
-              <th>
-                <div class="flex justify-content-center align-items-center">
-                  Version
-                  <p-columnFilter type="text" field="version" display="menu"></p-columnFilter>
-                </div>
-              </th>
+           
               <th>
                 <div class="flex justify-content-center align-items-center">
                   lot
@@ -74,9 +69,7 @@
                 {{app.nomApplication}}
               </td>
   
-              <td>
-                {{app.version}}
-              </td>
+           
   
               <td>
                 {{app.lot}}
@@ -102,7 +95,7 @@
           </ng-template>
           <ng-template pTemplate="emptymessage">
             <tr>
-              <td colspan="8">aucune application n'a été trouvé.</td>
+              <td colspan="7">aucune application n'a été trouvé.</td>
             </tr>
           </ng-template>
         </p-table>

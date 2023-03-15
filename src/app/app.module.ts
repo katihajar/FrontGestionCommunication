@@ -129,6 +129,14 @@ import { AjouterOperationFrAngComponent } from './views/pilote/operation/ajouter
 import { CharteOperationFrAngComponent } from './views/pilote/operation/charte-operation-fr-ang/charte-operation-fr-ang.component';
 import { CharteOperationFrComponent } from './views/pilote/operation/charte-operation-fr/charte-operation-fr.component';
 import { CharteOperationAngComponent } from './views/pilote/operation/charte-operation-ang/charte-operation-ang.component';
+import { RegistreChangementPlanifierComponent } from './views/pilote/changementplanifier/registre-changement-planifier/registre-changement-planifier.component';
+import { CharteChangementFrComponent } from './views/pilote/changementplanifier/charte-changement-fr/charte-changement-fr.component';
+import { CharteChangementFrAngComponent } from './views/pilote/changementplanifier/charte-changement-fr-ang/charte-changement-fr-ang.component';
+import { CharteChangementAngComponent } from './views/pilote/changementplanifier/charte-changement-ang/charte-changement-ang.component';
+import { AjouterChangementAngFrComponent } from './views/pilote/changementplanifier/ajouter-changement-ang-fr/ajouter-changement-ang-fr.component';
+import { AjouterChangementFrComponent } from './views/pilote/changementplanifier/ajouter-changement-fr/ajouter-changement-fr.component';
+import { ResgistreApplicationRespoComponent } from './views/responsable/resgistre-application-respo/resgistre-application-respo.component';
+import { ResgistreIncidentRespoComponent } from './views/responsable/resgistre-incident-respo/resgistre-incident-respo.component';
 
 @NgModule({
   declarations: [
@@ -168,7 +176,15 @@ import { CharteOperationAngComponent } from './views/pilote/operation/charte-ope
     AjouterOperationFrAngComponent,
     CharteOperationFrAngComponent,
     CharteOperationFrComponent,
-    CharteOperationAngComponent
+    CharteOperationAngComponent,
+    RegistreChangementPlanifierComponent,
+    CharteChangementFrComponent,
+    CharteChangementFrAngComponent,
+    CharteChangementAngComponent,
+    AjouterChangementAngFrComponent,
+    AjouterChangementFrComponent,
+    ResgistreApplicationRespoComponent,
+    ResgistreIncidentRespoComponent
     ],
   imports: [
     BrowserModule,

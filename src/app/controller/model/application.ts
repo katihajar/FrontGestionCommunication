@@ -10,8 +10,7 @@ import { User } from "./user";
 export class Application {
     public id: number = Number(0);
     public nomApplication: string = String();
-    public version: string = String();
-    public  responsable = new User();
+    public responsable = new User();
     public lot: string = String();
     public charteIncident: string = String();
     public disponibilite: string = String();

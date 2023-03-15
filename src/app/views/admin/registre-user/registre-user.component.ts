@@ -90,7 +90,7 @@ showDialogEdite(user: User) {
     this.submittedUtilisateur = true;
     this.AddUser.user.username=this.AddUser.user.prenom+'.'+this.AddUser.user.nom;
     this.AddUser.user.password=this.AddUser.user.username;
-    if(this.AddUser.user.prenom != null && this.AddUser.user.nom != null && this.AddUser.idRole !=null && this.AddUser.user.lots !=null){
+    if(this.AddUser.user.prenom != '' && this.AddUser.user.nom != '' && this.AddUser.idRole !=null && this.AddUser.user.lots !=''){
     this.userService.SaveUser().subscribe((data) => {
            this.AddUser=new UserRole;
            this.FindAllUsers();

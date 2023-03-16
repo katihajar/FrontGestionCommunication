@@ -20,6 +20,7 @@ const translate = require('translate');
 })
 export class ResgistreIncidentRespoComponent implements OnInit {
 
+  ListIncidentOfRespo = new Array<Incident>();
   ActionAng = new PlanAction();
   loading: boolean = true;
   statutIncident: any[] = [];
@@ -222,13 +223,6 @@ SelectLanguage(){
     ]
   }
 
-  get ListIncidentOfRespo(): Array<Incident> {
-    return this.incidentService.ListIncidentOfPilote;
-  }
-
-  set ListIncidentOfRespo(value: Array<Incident>) {
-    this.incidentService.ListIncidentOfPilote = value;
-  }
 
   get AddIncident(): Incident {
     return this.incidentService.AddIncident;

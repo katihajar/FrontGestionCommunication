@@ -11,6 +11,7 @@ import { ContenuChangement } from '../model/contenu-changement';
 })
 export class ChangementService {
   private urlPilote = environment.baseUrlPilote;
+  private urlRespo = environment.baseUrlResponsable;
   private _ListChangementOfPilote: Array<ChangementPlanifier> = new Array<ChangementPlanifier>();
   private _AddChangement: ChangementPlanifier = new ChangementPlanifier();
   private _AddChangementAng: ChangementPlanifier = new ChangementPlanifier();
@@ -102,4 +103,20 @@ export class ChangementService {
       { observe: 'response', headers }
     );    
   }
+
+  public FindContenuByChangementRespo(id:number): Observable<HttpResponse<Array<ContenuChangement>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<ContenuChangement>>(
+      this.urlRespo + 'contenuchangement/changement/'+id,
+      { observe: 'response', headers }
+    );    
+  }
+  public FindChangementByRespo(): Observable<HttpResponse<Array<ChangementPlanifier>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<ChangementPlanifier>>(
+      this.urlRespo + 'changementplanifier/user/'+this.auth.User.id,
+      { observe: 'response', headers }
+    );    
+  }
+
 }

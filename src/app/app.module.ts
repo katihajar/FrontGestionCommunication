@@ -137,6 +137,8 @@ import { AjouterChangementAngFrComponent } from './views/pilote/changementplanif
 import { AjouterChangementFrComponent } from './views/pilote/changementplanifier/ajouter-changement-fr/ajouter-changement-fr.component';
 import { ResgistreApplicationRespoComponent } from './views/responsable/resgistre-application-respo/resgistre-application-respo.component';
 import { ResgistreIncidentRespoComponent } from './views/responsable/resgistre-incident-respo/resgistre-incident-respo.component';
+import { ResgistreOperationRespoComponent } from './views/responsable/resgistre-operation-respo/resgistre-operation-respo.component';
+import { ResgistreChangementRespoComponent } from './views/responsable/resgistre-changement-respo/resgistre-changement-respo.component';
 
 @NgModule({
   declarations: [
@@ -184,7 +186,9 @@ import { ResgistreIncidentRespoComponent } from './views/responsable/resgistre-i
     AjouterChangementAngFrComponent,
     AjouterChangementFrComponent,
     ResgistreApplicationRespoComponent,
-    ResgistreIncidentRespoComponent
+    ResgistreIncidentRespoComponent,
+    ResgistreOperationRespoComponent,
+    ResgistreChangementRespoComponent
     ],
   imports: [
     BrowserModule,

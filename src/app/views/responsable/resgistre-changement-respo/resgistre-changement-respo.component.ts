@@ -1,23 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
+import * as FileSaver from 'file-saver';
+import * as moment from 'moment';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Application } from 'src/app/controller/model/application';
 import { ChangementPlanifier } from 'src/app/controller/model/changement-planifier';
 import { ContenuChangement } from 'src/app/controller/model/contenu-changement';
 import { PiloteApplication } from 'src/app/controller/model/pilote-application';
-import { ApplicationService } from 'src/app/controller/service/application.service';
+import { ApplicationRespoService } from 'src/app/controller/service/application-respo.service';
 import { ChangementService } from 'src/app/controller/service/changement.service';
 import { CharteService } from 'src/app/controller/service/charte.service';
 const translate = require('translate');
-import * as FileSaver from 'file-saver';
-const moment = require('moment');
+
 @Component({
-  selector: 'app-registre-changement-planifier',
-  templateUrl: './registre-changement-planifier.component.html',
-  styleUrls: ['./registre-changement-planifier.component.scss']
+  selector: 'app-resgistre-changement-respo',
+  templateUrl: './resgistre-changement-respo.component.html',
+  styleUrls: ['./resgistre-changement-respo.component.scss']
 })
-export class RegistreChangementPlanifierComponent implements OnInit {
+export class ResgistreChangementRespoComponent implements OnInit {
+
   loading: boolean = true;
   showPopUpChange: boolean = false;
   ListApp = new Array<Application>();
@@ -30,8 +32,9 @@ export class RegistreChangementPlanifierComponent implements OnInit {
   listLangageCharte: any[] = [];
   ListPiloteApp = new Array<PiloteApplication>();
   ContenuAng = new ContenuChangement();
+  ListChangementOfRespo = new Array<ChangementPlanifier>();
   constructor(private router: Router,private changeService: ChangementService, private charte: CharteService,
-    private confirmationService: ConfirmationService,private messageService:MessageService,private appService: ApplicationService) { }
+    private confirmationService: ConfirmationService,private messageService:MessageService,private appService: ApplicationRespoService) { }
 
   ngOnInit(): void {
     this.FindChange();
@@ -56,7 +59,7 @@ export class RegistreChangementPlanifierComponent implements OnInit {
   }
   exportExcel() {
     import("xlsx").then(xlsx => {
-      const worksheet = xlsx.utils.json_to_sheet(this.ListChangementOfPilote.map(change => {
+      const worksheet = xlsx.utils.json_to_sheet(this.ListChangementOfRespo.map(change => {
         return {
           id:change.id,
           application: change.application.nomApplication, 
@@ -107,14 +110,7 @@ get charteChangeAngFr(): boolean {
 set charteChangeAngFr(value: boolean) {
   this.charte.charteChangeAngFr = value;
 }
-  get ListChangementOfPilote(): Array<ChangementPlanifier> {
-    return this.changeService.ListChangementOfPilote;
-  }
-
-  set ListChangementOfPilote(value: Array<ChangementPlanifier>) {
-    this.changeService.ListChangementOfPilote = value;
-  }
-
+ 
   get AddChangement(): ChangementPlanifier {
     return this.changeService.AddChangement;
   }
@@ -145,19 +141,10 @@ set charteChangeAngFr(value: boolean) {
   set ListContenu(value: Array<ContenuChangement>) {
     this.changeService.ListContenu= value;
   }
-  Edite(chng:ChangementPlanifier){
-    this.AddChangement=chng;
-    this.changeService.FindContenuByChangement(chng.id).subscribe((data)=>{
-      // @ts-ignore
-      this.AddChangement.contenuChangementList = data.body;
-      this.ListContenu =this.AddChangement.contenuChangementList;
-    })
-    this.showPopUpChange = true;
-  }
   
   ShowCharte(chng:ChangementPlanifier){
     this.AddChangement=chng;
-    this.changeService.FindContenuByChangement(chng.id).subscribe((data)=>{
+    this.changeService.FindContenuByChangementRespo(chng.id).subscribe((data)=>{
       // @ts-ignore
       this.AddChangement.contenuChangementList = data.body;
       this.popUpLangue=true;
@@ -171,11 +158,7 @@ set charteChangeAngFr(value: boolean) {
       } 
     })
   }
-  PopUp() {
-    this.AddChangement= new ChangementPlanifier();
-    this.AddChangementAng= new ChangementPlanifier();
-    this.showPopUpChange = true;
-  }
+
   SelectLanguage(){
     if(this.selectLang == "Français"){
       this.popUpLangue = false;
@@ -227,64 +210,22 @@ set charteChangeAngFr(value: boolean) {
     }
     this.AddChangementAng.contenuChangementList=this.ListContenuAng;
   }
-  RouteFormAddChange() {
-    if(this.AddChangement.application.nomApplication != '' && this.AddChangement.statut!='' && this.langage !=''){
-    if(this.langage == "Français"){
-    this.showPopUpChange = false;
-    this.router.navigate(['/pilote/changement/save/Français']);
-  }else if(this.langage == "Français-Anglais"){
-    this.showPopUpChange = false;
-    this.router.navigate(['/pilote/changement/save/FrançaisAnglais']);
-  }
-    }else{
-      this.messageService.add({severity:'warn', summary:'Warning', detail:'Veuillez insérer tous les champs.'});
-    }
-  }
+
   FindChange() {
-    this.changeService.FindChangementByPilote().subscribe((data) => {
+    this.changeService.FindChangementByRespo().subscribe((data) => {
       // @ts-ignore
-      this.ListChangementOfPilote = data.body;
+      this.ListChangementOfRespo = data.body;
       this.loading = false;
     })
   }
 
   FindApp() {
-    this.appService.FindApplicationByPilote().subscribe((data) => {
+    this.appService.FindApplicationByRespo().subscribe((data) => {
       // @ts-ignore
-      this.ListPiloteApp = data.body;
-      for (let i = 0; i < this.ListPiloteApp.length; i++) {
-        this.ListApp.push(this.ListPiloteApp[i].application);
-      }
+      this.ListApp = data.body;
     })
   }
   onDialogHideLang(){
     this.FindChange();
-  }
-  DeleteChange(id:number){
-    this.confirmationService.confirm({
-      message: 'Are you sure that you want to proceed?',
-      header: 'Confirmation',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.changeService.DeleteChangement(id).subscribe((data) => {
-          this.FindChange();
-          // @ts-ignore
-          this.messageService.add({severity:'success', summary: 'Success', detail: 'Changement supprimer avec succès'});
-        },error=>{
-          this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de la suppression'});
-    });
-      },
-      reject: (type:any) => {
-          switch(type) {
-              case ConfirmEventType.REJECT:
-                  this.messageService.add({severity:'error', summary:'Rejected', detail:'Suppression Rejeter'});
-              break;
-              case ConfirmEventType.CANCEL:
-                  this.messageService.add({severity:'warn', summary:'Cancelled', detail:'Suppression Annuler'});
-              break;
-          }
-      }
-  });
-   
   }
 }

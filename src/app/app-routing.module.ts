@@ -25,6 +25,8 @@ import { AjouterChangementFrComponent } from './views/pilote/changementplanifier
 import { AjouterChangementAngFrComponent } from './views/pilote/changementplanifier/ajouter-changement-ang-fr/ajouter-changement-ang-fr.component';
 import { ResgistreApplicationRespoComponent } from './views/responsable/resgistre-application-respo/resgistre-application-respo.component';
 import { ResgistreIncidentRespoComponent } from './views/responsable/resgistre-incident-respo/resgistre-incident-respo.component';
+import { ResgistreOperationRespoComponent } from './views/responsable/resgistre-operation-respo/resgistre-operation-respo.component';
+import { ResgistreChangementRespoComponent } from './views/responsable/resgistre-changement-respo/resgistre-changement-respo.component';
 
 
 @NgModule({
@@ -51,6 +53,8 @@ import { ResgistreIncidentRespoComponent } from './views/responsable/resgistre-i
         { path: 'homeRespo', component: HomeComponent },
         { path: 'incident/registre', component: ResgistreIncidentRespoComponent },
         { path: 'application/registre', component: ResgistreApplicationRespoComponent },
+        { path: 'operation/registre', component: ResgistreOperationRespoComponent },
+        { path: 'changement/registre', component: ResgistreChangementRespoComponent },
         { path: '', redirectTo: 'homeRespo', pathMatch: 'full' },
       ],
     },

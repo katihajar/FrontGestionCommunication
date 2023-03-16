@@ -10,6 +10,7 @@ import { AuthService } from './auth.service';
 })
 export class OperationService {
   private urlPilote = environment.baseUrlPilote;
+  private urlRespo = environment.baseUrlResponsable;
   private _ListOperationOfPilote: Array<Operation> = new Array<Operation>();
   private _AddOperation: Operation = new Operation();
   private _AddOperationAng: Operation = new Operation();
@@ -53,6 +54,13 @@ export class OperationService {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<Operation>>(
       this.urlPilote + 'operation/user/'+this.auth.User.id,
+      { observe: 'response', headers }
+    );    
+  }
+  public FindOperationByRespo(): Observable<HttpResponse<Array<Operation>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<Operation>>(
+      this.urlRespo + 'operation/user/'+this.auth.User.id,
       { observe: 'response', headers }
     );    
   }

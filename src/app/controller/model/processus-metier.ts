@@ -1,8 +1,8 @@
-import { EtatProcessusMetierDetail } from "./etat-processus-metier-detail";
+import { EtatProcessusMetier} from "./etat-processus-metier";
 
 export class ProcessusMetier {
     public id: number = Number(0);
     public titre: string = String();
-    public etatProcessusMetierDetailList = new Array<EtatProcessusMetierDetail>();
+    public etatProcessusMetierList = new Array<EtatProcessusMetier>();
 
 }

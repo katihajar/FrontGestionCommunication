@@ -13,7 +13,6 @@ import {Observable} from "rxjs";
 export class IncidentService {
   private urlPilote = environment.baseUrlPilote;
   private _ListIncidentOfPilote: Array<Incident> = new Array<Incident>();
-  private _ListPlandActionIncident: Array<PlanAction> = new Array<PlanAction>();
   private _AddIncident: Incident = new Incident();
   private _AddIncidentAng: Incident = new Incident();
   private _ListPlanAction = new Array<PlanAction>();
@@ -74,17 +73,6 @@ export class IncidentService {
 
   set ListIncidentOfPilote(value: Array<Incident>) {
     this._ListIncidentOfPilote = value;
-  }
-
-  get ListPlandActionIncident(): Array<PlanAction>{
-    if(this._ListPlandActionIncident == null){
-      this._ListPlandActionIncident = new Array<PlanAction>();
-    }
-    return this._ListPlandActionIncident;
-  }
-
-  set ListPlandActionIncident(value: Array<PlanAction>) {
-    this._ListPlandActionIncident = value;
   }
 
   public FindIncidentByPilote(): Observable<HttpResponse<Array<Incident>>> {

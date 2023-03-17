@@ -27,6 +27,7 @@ import { ResgistreApplicationRespoComponent } from './views/responsable/resgistr
 import { ResgistreIncidentRespoComponent } from './views/responsable/resgistre-incident-respo/resgistre-incident-respo.component';
 import { ResgistreOperationRespoComponent } from './views/responsable/resgistre-operation-respo/resgistre-operation-respo.component';
 import { ResgistreChangementRespoComponent } from './views/responsable/resgistre-changement-respo/resgistre-changement-respo.component';
+import { RegistreHealthCheckComponent } from './views/pilote/healthCheckPreprodProd/registre-health-check/registre-health-check.component';
 
 
 @NgModule({
@@ -74,6 +75,7 @@ import { ResgistreChangementRespoComponent } from './views/responsable/resgistre
         { path: 'changement/registre', component: RegistreChangementPlanifierComponent },
         { path: 'changement/save/Français', component: AjouterChangementFrComponent },
         { path: 'changement/save/FrançaisAnglais', component: AjouterChangementAngFrComponent},
+        { path: 'healthcheck/PreprodProd/registre', component: RegistreHealthCheckComponent },
         { path: '', redirectTo: 'homePilote', pathMatch: 'full' },
       ],
     },

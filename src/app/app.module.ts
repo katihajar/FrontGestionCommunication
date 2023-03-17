@@ -139,6 +139,9 @@ import { ResgistreApplicationRespoComponent } from './views/responsable/resgistr
 import { ResgistreIncidentRespoComponent } from './views/responsable/resgistre-incident-respo/resgistre-incident-respo.component';
 import { ResgistreOperationRespoComponent } from './views/responsable/resgistre-operation-respo/resgistre-operation-respo.component';
 import { ResgistreChangementRespoComponent } from './views/responsable/resgistre-changement-respo/resgistre-changement-respo.component';
+import { RegistreHealthCheckComponent } from './views/pilote/healthCheckPreprodProd/registre-health-check/registre-health-check.component';
+import { AjoutHealthCheckComponent } from './views/pilote/healthCheckPreprodProd/ajout-health-check/ajout-health-check.component';
+import { CharteHealthCheckComponent } from './views/pilote/healthCheckPreprodProd/charte-health-check/charte-health-check.component';
 
 @NgModule({
   declarations: [
@@ -188,7 +191,10 @@ import { ResgistreChangementRespoComponent } from './views/responsable/resgistre
     ResgistreApplicationRespoComponent,
     ResgistreIncidentRespoComponent,
     ResgistreOperationRespoComponent,
-    ResgistreChangementRespoComponent
+    ResgistreChangementRespoComponent,
+    RegistreHealthCheckComponent,
+    AjoutHealthCheckComponent,
+    CharteHealthCheckComponent
     ],
   imports: [
     BrowserModule,

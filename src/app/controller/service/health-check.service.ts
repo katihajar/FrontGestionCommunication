@@ -2,9 +2,11 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Application } from '../model/application';
 import { EtatProcessusMetier } from '../model/etat-processus-metier';
 import { HealthChekPreprodProd } from '../model/health-chek-preprod-prod';
 import { HealthChekPreprodProdDetail } from '../model/health-chek-preprod-prod-detail';
+import { ProcessusMetier } from '../model/processus-metier';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -102,4 +104,19 @@ export class HealthCheckService {
       { observe: 'response', headers }
     );    
   }
+  public FindAllProcessusMetier(): Observable<HttpResponse<Array<ProcessusMetier>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<ProcessusMetier>>(
+      this.urlPilote + 'processusmetier/findAll',
+      { observe: 'response', headers }
+    );    
+  }
+  public FindApp(): Observable<HttpResponse<Array<Application>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<Application>>(
+      this.urlPilote + 'application/AllApp',
+      { observe: 'response', headers }
+    );    
+  }
+
 }

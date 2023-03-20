@@ -1,69 +1,26 @@
-<!-- <div class="container-fluid page" style="background-color: white">
+<div class="container-fluid page" style="background-color: white">
     <div class="d-flex page__box p-3">Ajouter un Etat de santé</div>
     <div class="page__content shadow p-3 position-relative">
         <div class="card align-items-center">
-            <div class="col-12" style="margin: 2%">
-                <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '22%' }">
-                    <label for="basic3" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Titre</label>
-                    <input inputId="basic3" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text" pInputText
-                        placeholder="Entré le Titre d'Incident"   [(ngModel)]="this.helthchekdetail.processus" />
-
-                </span>
-                <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
-                    <label for="basic4" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">N° Incident</label>
-                    <input inputId="basic4" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="text" pInputText
-                        placeholder="Entré le numero d'incident"   [(ngModel)]="this.AddIncident.numeroIncident" />
-                </span>
-                <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
-                    <label for="basic1" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date Début</label>
-                    <p-calendar inputId="basic1" [showTime]="true" [(ngModel)]="date2" [style]="{ width: '100%' }" [(ngModel)]="this.AddIncident.dateDebut" ></p-calendar>
-
-                </span>
-                <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
-                    <label for="basic2" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date Fin</label>
-                    <p-calendar inputId="basic2" [showTime]="true" [(ngModel)]="date3" [style]="{ width: '100%' }" [(ngModel)]="this.AddIncident.dateFin"></p-calendar>
-
-                </span>
-            
-            </div>
-            <div class="col-12" style="margin-bottom: 2%;">
-                <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '46%' }">
-                    <label for="basic5" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Description</label>
-                    <textarea id="basic5" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text" pInputTextarea
-                        placeholder="Entré la description" [(ngModel)]="this.AddIncident.description"></textarea>
-
-                </span>
-                <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '46%' }">
-                    <label style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Situation Actuelle</label>
-                    <textarea style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text" pInputTextarea
-                        placeholder="Entré la situation Actuelle" [(ngModel)]="this.AddIncident.situationActuelle" ></textarea>
-
-                </span>
-            </div>
-            <div class="col-12" style="margin-bottom: 2%;">
-                <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '46%' }">
-                    <label style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Impact</label>
-                    <textarea style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text" pInputTextarea
-                        placeholder="Entré l'impact" [(ngModel)]="this.AddIncident.impact" ></textarea>
-
-                </span>
-                <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '46%' }">
-                    <label style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Cause Pricipate</label>
-                    <textarea style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text" pInputTextarea
-                        placeholder="Entré la cause Principale" [(ngModel)]="this.AddIncident.causePrincipale" ></textarea>
-
-                </span>
-            </div>
-
-            <div class="card align-items-center" style="width: 80%; margin-bottom: 2%">
-                <h1 style="margin: 3%">Ajouter le Plan d'Action</h1>
+            <div class="card align-items-center" style="width: 80%; margin-bottom: 2%;margin-top: 2%;">
+                <h1 style="margin: 3%">Etat Processus Metier</h1>
                 <div class="col-12 text-center" style="margin-bottom: 2%">
-                    <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
-                        <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">N° Action</label>
-                        <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="number" pInputText
-                            placeholder="Entré le numero" [(ngModel)]="this.num"/>
-    
-                    </span>
+                    <span
+                    class="p-input-icon-left"
+                    style="margin-left: 2%"
+                    [style]="{ width: '30%' }"
+                  >
+                  <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Processus</label> 
+                    <p-dropdown [style]="{ width: '100%', required: 'required' }" [options]="ListProcessus" optionLabel="titre"
+                    [filter]="true" filterBy="titre" [showClear]="true" placeholder="Selectinné le processus"
+                    [(ngModel)]="this.etatproc.processusMetier">
+                    <ng-template let-process pTemplate="item">
+                      <div class="country-item">
+                        <div>{{ process.titre }}</div>
+                      </div>
+                    </ng-template>
+                  </p-dropdown>             
+                  </span>
                     <span
                     class="p-input-icon-left"
                     style="margin-left: 2%"
@@ -71,36 +28,28 @@
                   >
                   <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Statut</label>
                     <p-dropdown
-                      [options]="StatutPlan"
+                    [options]="ListFeu"
                       [style]="{ width: '100%', required: 'required' }"
                       placeholder="Selectinné le Statut"
                       optionValue="name"
                       optionLabel="name"
                       [showClear]="true"
-                      [(ngModel)]="this.Action.statut"
+                      [(ngModel)]="this.etatproc.statut"
                     ></p-dropdown>
                     
                   </span>
-                </div>
-                <div class="col-12 text-center" style="margin-bottom: 2%">
-                    <span class="p-input-icon-left" style="margin-left: 10%" [style]="{ width: '70%' }">
-                        <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Description</label>
-                        <textarea style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text"
-                            pInputTextarea placeholder="Entré la Nom description" [(ngModel)]="this.Action.description" ></textarea>
-
-                    </span>
-                    <button style="margin-left: 1%" pButton pRipple type="button" icon="pi pi-plus" (click)="AddAction()" 
+                  <button style="margin-left: 2%" pButton pRipple type="button" icon="pi pi-plus" (click)="AddEtat()"
                         class="p-button-rounded p-button-success"></button>
                 </div>
                 <div class="col-12" style="margin: 2%">
-                    <p-table class="table" [value]="this.ListPlanAction" dataKey="id" [rows]="10"
+                    <p-table class="table" [value]="this.listEtatproc" dataKey="id" [rows]="10"
                         [showCurrentPageReport]="true" [paginator]="true"
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
                         <ng-template pTemplate="header">
                             <tr>
                                 <th>
                                     <div class="flex justify-content-center align-items-center">
-                                        Numero
+                                        Processus Metier
                                     </div>
                                 </th>
                                 <th>
@@ -108,9 +57,185 @@
                                         statut
                                     </div>
                                 </th>
+                             
                                 <th>
                                     <div class="flex justify-content-center align-items-center">
-                                        description
+                                        supprimer
+                                    </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-etatproc>
+                            <tr>
+                                <td>
+                                    {{ etatproc.processusMetier.titre }}
+                                </td>
+
+                                <td>
+                                    {{ etatproc.statut }}
+                                </td>
+
+                                <td>
+                                    <button pButton pRipple type="button" style="font-size: larger" icon="pi pi-times" (click)="removeEtat(etatproc)"
+                                        class="p-button-rounded p-button-danger"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="3">aucun processus metier n'a été ajoué.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+
+            <div class="card align-items-center" style="width: 80%; margin-bottom: 2%">
+                <!-- <h1 style="margin: 3%">Ajouter le Plan d'Action</h1> -->
+                <div class="col-12 text-center" style="margin-bottom: 2%">
+                    <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
+                        <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Processus</label>
+                        <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="text" pInputText
+                            placeholder="Entré le processus" [(ngModel)]="this.helthchekdetail.processus"/>
+                    </span>
+                    <span
+                    class="p-input-icon-left"
+                    style="margin-left: 2%"
+                    [style]="{ width: '22%' }"
+                  >
+                  <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Application</label>
+                  <p-dropdown [style]="{ width: '100%', required: 'required' }" [options]="ListApp" optionLabel="nomApplication"
+                  [filter]="true" filterBy="nomApplication" [showClear]="true" placeholder="Selectinné l'Application"
+                  [(ngModel)]="this.helthchekdetail.application">
+                  <ng-template let-application pTemplate="item">
+                    <div class="country-item">
+                      <div>{{ application.nomApplication }}</div>
+                    </div>
+                  </ng-template>
+                </p-dropdown>   
+                  </span>
+                  <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
+                    <label for="basic1" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date Début</label>
+                    <p-calendar inputId="basic1" [showTime]="true" [(ngModel)]="date2" [style]="{ width: '100%' }" [(ngModel)]="this.helthchekdetail.dateDebut" ></p-calendar>
+
+                </span>
+                <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
+                    <label for="basic2" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date Fin</label>
+                    <p-calendar inputId="basic2" [showTime]="true" [(ngModel)]="date3" [style]="{ width: '100%' }" [(ngModel)]="this.helthchekdetail.dateFin"></p-calendar>
+
+                </span>
+                </div>
+                <div class="col-12" style="margin-bottom: 2%;">
+                    <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '46%' }">
+                        <label for="info"  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Information/Problème</label>
+                        <textarea inputId="info" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text"
+                            pInputTextarea placeholder="Entré les nformations/Problèmes" [(ngModel)]="this.helthchekdetail.information" ></textarea>
+                    </span>
+                    <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '46%' }">
+                        <label for="infoTch" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Information Technique</label>
+                        <textarea inputId="infoTch" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text"
+                            pInputTextarea placeholder="Entré les nformations/Problèmes" [(ngModel)]="this.helthchekdetail.problemeTechnique" ></textarea>
+                    </span>
+                </div>
+                <div class="col-12" style="margin-bottom: 2%;">
+                    <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '95%' }">
+                        <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Impact Metier</label>
+                        <textarea style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text"
+                            pInputTextarea placeholder="Entré les nformations/Problèmes" [(ngModel)]="this.helthchekdetail.impactMetier" ></textarea>
+                    </span>
+
+                </div>
+                <div class="col-12" style="margin-bottom: 2%;">
+                    <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '46%' }">
+                        <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Cause</label>
+                        <textarea style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text"
+                            pInputTextarea placeholder="Entré les nformations/Problèmes" [(ngModel)]="this.helthchekdetail.cause" ></textarea>
+                    </span>
+                    <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '46%' }">
+                        <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Plan Action</label>
+                        <textarea style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text"
+                            pInputTextarea placeholder="Entré les nformations/Problèmes" [(ngModel)]="this.helthchekdetail.planAction" ></textarea>
+                    </span>
+                </div>
+                <div class="col-12 text-center" style="margin-bottom: 2%">
+                    <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '25%' }">
+                        <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Impact Client</label>
+                        <p-dropdown
+                        [options]="ListImpactClient"
+                        [style]="{ width: '100%', required: 'required' }"
+                        placeholder="Selectinné l'impact client"
+                        optionValue="name"
+                        optionLabel="name"
+                        [showClear]="true"
+                        [(ngModel)]="this.helthchekdetail.impactClient"
+                      ></p-dropdown>
+                      </span>
+                    <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '25%' }">
+                        <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Feu</label>
+                        <p-dropdown
+                        [options]="ListFeu"
+                        [style]="{ width: '100%', required: 'required' }"
+                        placeholder="Selectinné feu"
+                        optionValue="name"
+                        optionLabel="name"
+                        [showClear]="true"
+                        [(ngModel)]="this.helthchekdetail.feu"
+                      ></p-dropdown>
+                      </span>
+                      <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '25%' }">
+                        <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Staut</label>
+                        <p-dropdown
+                        [options]="ListStatut"
+                        [style]="{ width: '100%', required: 'required' }"
+                        placeholder="Selectinné statut"
+                        optionValue="name"ss
+                        optionLabel="name"
+                        [showClear]="true"
+                        [(ngModel)]="this.helthchekdetail.statut"
+                      ></p-dropdown>
+                      </span>
+                    <button style="margin-left: 2%" pButton pRipple type="button" icon="pi pi-plus" (click)="AddDeatils()"
+                        class="p-button-rounded p-button-success"></button>
+                </div>
+                <div class="col-12" style="margin: 2%">
+                    <p-table class="table" [value]="this.listHelthchekdetail" dataKey="id" [rows]="10"
+                        [showCurrentPageReport]="true" [paginator]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Processus
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Application
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Information/Problème
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Impact Client
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Information Technique
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Feu
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Statut
                                     </div>
                                 </th>
                                 <th>
@@ -120,28 +245,44 @@
                                 </th>
                             </tr>
                         </ng-template>
-                        <ng-template pTemplate="body" let-plan>
+                        <ng-template pTemplate="body" let-Helth>
                             <tr>
                                 <td>
-                                    {{ plan.numero }}
-                                </td>
-
-                                <td>
-                                    {{ plan.statut }}
-                                </td>
-
-                                <td>
-                                    {{ plan.description }}
+                                    {{ Helth.processus }}
                                 </td>
                                 <td>
-                                    <button pButton pRipple type="button" style="font-size: larger" icon="pi pi-times" (click)="removeAction(plan)"
+                                    {{ Helth.application.nomApplication }}
+                                </td>
+                                <td>
+                                    {{ Helth.information }}<br>
+                                    <b style="color: rgb(13, 126, 201);">Impact Merier :</b><br>
+                                    {{ Helth.impactMetier }}<br>
+                                    <b style="color: rgb(13, 126, 201);">Cause :</b><br>
+                                    {{ Helth.cause }}<br>
+                                    <b style="color: rgb(13, 126, 201);">Plan Action :</b><br>
+                                    {{ Helth.planAction }}
+                                </td>
+                                <td>
+                                    {{ Helth.impactClient }}
+                                </td>
+                                <td>
+                                    {{ Helth.problemeTechnique }}
+                                </td>
+                                <td>
+                                    {{ Helth.feu }}
+                                </td>
+                                <td>
+                                    {{ Helth.statut }}
+                                </td>
+                                <td>
+                                    <button pButton pRipple type="button" style="font-size: larger" icon="pi pi-times" (click)="removeDeatils(Helth)"
                                         class="p-button-rounded p-button-danger"></button>
                                 </td>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="emptymessage">
                             <tr>
-                                <td colspan="4">aucun plan d'action n'a été ajoué.</td>
+                                <td colspan="8">aucune donnée n'a été ajoué.</td>
                             </tr>
                         </ng-template>
                     </p-table>
@@ -154,4 +295,4 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>

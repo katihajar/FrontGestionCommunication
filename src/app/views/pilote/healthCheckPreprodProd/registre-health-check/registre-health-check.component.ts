@@ -30,6 +30,9 @@ export class RegistreHealthCheckComponent implements OnInit {
       { name: 'PRODUCTION' },
     ];
   }
+  RouterAjout(){
+    this.router.navigate(['/pilote/healthcheck/PreprodProd/save']);
+  }
   onDialogHideLang(){
     this.AddHealthCheck = new HealthChekPreprodProd();
   }

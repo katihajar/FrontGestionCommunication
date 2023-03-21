@@ -290,9 +290,10 @@
             </div>
 
             <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
-                <button pButton pRipple  type="button" label="Visualiser la charte" style=" float: left;margin-left: 2%;" class="p-button-raised p-button-help"></button>
-                <button pButton pRipple  style=" float: right;margin-right: 2%;" type="button" label="Submit" class="p-button-raised"></button>
+                <button pButton pRipple  type="button" label="Visualiser la charte" style=" float: left;margin-left: 2%;" (click)="charte()" class="p-button-raised p-button-help"></button>
+                <button pButton pRipple  style=" float: right;margin-right: 2%;" type="button" label="Submit" class="p-button-raised" (click)="SendAndSaveIncident()"></button>
             </div>
         </div>
     </div>
 </div>
+<app-charte-health-check></app-charte-health-check>

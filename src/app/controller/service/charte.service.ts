@@ -17,8 +17,16 @@ private _charteOperationAng: boolean = false;
 private _charteChangeAngFr: boolean = false;
 private _charteChangeFr: boolean = false;
 private _charteChangeAng: boolean = false;
-  constructor() { }
+private _charteHealthCheckPreprodProd: boolean = false;
 
+  constructor() { }
+  get charteHealthCheckPreprodProd(): boolean {
+    return this._charteHealthCheckPreprodProd;
+  }
+
+  set charteHealthCheckPreprodProd(value: boolean) {
+    this._charteHealthCheckPreprodProd = value;
+  }
 
   get charteChangeAng(): boolean {
     return this._charteChangeAng;

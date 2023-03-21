@@ -1,7 +1,7 @@
 <div class="container-fluid page card" style="background-color: white">
   <div class="page__box p-3">Registre des Applications</div>
   <div class="page__content shadow p-2 position-relative align-items-center">
-    <div class="card">
+    <div class="card" style="border: none;">
       <p-table class="table" #dt1 [value]=" this.ListApplication" dataKey="id" [rows]="10"
         [showCurrentPageReport]="true" [loading]="loading" [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -85,7 +85,7 @@
 
 <p-dialog header="Liste des Destinataires" [modal]="true" [draggable]="false" [(visible)]="displayDestinataire"
   [style]="{width: '70vw', height: '70vw','margin-left':'10%'}">
-  <div class="card">
+  <div class="card" style="border: none;">
 
     <p-table class="table" #dt2 [value]=" this.ListDestinataireApp" dataKey="id" [rows]="5"
       [showCurrentPageReport]="true" [loading]="loading" [paginator]="true"

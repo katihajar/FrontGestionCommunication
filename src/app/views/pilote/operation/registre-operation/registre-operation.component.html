@@ -2,11 +2,14 @@
     <div class="page__box p-3">Registre des Operations</div>
     <div class="page__content shadow p-2 position-relative align-items-center">
       <div class="card">
-        <div>
-          <button pButton pRipple type="button" label="Ajouter Operation"
-            style="width: fit-content;margin: 4px;float: right;" (click)="PopUpAdd()"
-            class="p-button-raised p-button-success" ></button>
-        </div>
+        <p-toolbar styleClass="mb-4 gap-2">
+          <ng-template pTemplate="right">
+              <button pButton pRipple label="Ajouter Operation" icon="pi pi-plus" class="p-button-success mr-2" (click)="PopUpAdd()" ></button>
+          </ng-template>
+          <ng-template pTemplate="left">
+              <button pButton pRipple label="Export" icon="pi pi-upload" (click)="exportExcel()" class="p-button-help"></button>
+          </ng-template>
+      </p-toolbar>
         <p-table class="table" #dt1 [value]=" this.ListOperationOfPilote" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
            [loading]="loading" [paginator]="true"
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -15,7 +18,6 @@
             <div class="flex">
               <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
                 (click)="clear(dt1)"></button>
-                <button style="margin-left: 1%;" type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>       
               <span class="p-input-icon-left ml-auto" style="float: right;">
                 <i class="pi pi-search"></i>
                 <input pInputText type="text" (input)="dt1.filterGlobal($any($event.target).value, 'contains')"

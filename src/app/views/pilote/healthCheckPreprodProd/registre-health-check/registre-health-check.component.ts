@@ -7,6 +7,7 @@ import { HealthChekPreprodProd } from 'src/app/controller/model/health-chek-prep
 import { HealthChekPreprodProdDetail } from 'src/app/controller/model/health-chek-preprod-prod-detail';
 import { CharteService } from 'src/app/controller/service/charte.service';
 import { HealthCheckService } from 'src/app/controller/service/health-check.service';
+const moment = require('moment');
 
 @Component({
   selector: 'app-registre-health-check',
@@ -31,7 +32,11 @@ export class RegistreHealthCheckComponent implements OnInit {
     ];
   }
   RouterAjout(){
+    if(this.AddHealthCheck.type != ''){
+    this.AddHealthCheck.dateAjout = new Date();
+    this.AddHealthCheck.titre ='Etat de santé du '+moment(this.AddHealthCheck.dateAjout).format('DD/MM/YYYY')+','+moment(this.AddHealthCheck.dateAjout).format('HH:MM');
     this.router.navigate(['/pilote/healthcheck/PreprodProd/save']);
+    }
   }
   onDialogHideLang(){
     this.AddHealthCheck = new HealthChekPreprodProd();

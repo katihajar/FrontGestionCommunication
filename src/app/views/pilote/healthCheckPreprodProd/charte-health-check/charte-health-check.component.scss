@@ -1,0 +1,41 @@
+@import "../../registre-application-of-pilote/registre-application-of-pilote.component.scss";
+
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color:#ffe6ee;}
+
+#customers tr:hover {background-color: #ffe6ee;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+}
+#cust {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#cust td, #cust th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+
+#cust th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #990033;
+  color: white;
+}

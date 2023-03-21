@@ -1,1 +1,142 @@
-<p>charte-health-check works!</p>
+<p-dialog [modal]="true" [(visible)]="this.charteHealthCheckPreprodProd"
+    [style]="{width: '65vw', height: '70vw','margin-left':'3%'}" [resizable]="true">
+    <div #myDialog id="myDialog" style="width: 100%;">
+        <div class="col-12">
+
+            <div style="border:1px solid black;">
+                <img src="../../../../../assets/img/EtatSantéProd.png" width="100%"  alt="psa"
+                    title="psa" class="staticImg">
+            </div>
+        </div>
+        <div style="width: 100%;margin-top: 2%;margin-bottom: 2%;color: black;"
+            [ngStyle]="{'border':'1px solid black'}">
+            <div style="font-family: 'Times New Roman', Times, sans-serif;">
+                <div style="height: 4vh; display: flex; align-items: center; justify-content: flex-start; text-align: center;background-color: rgb(88, 140, 153) ">
+                    <p style="margin: 1%; font-weight: bolder;">[{{this.AddHealthCheck.type}}] Etat de santé Monétique – <span style="background-color: yellow;">{{this.AddHealthCheck.dateAjout | date :'dd/MM/YYYY'}}</span>, <span style="background-color:yellow ;">{{this.AddHealthCheck.dateAjout | date :'hh:mm'}}</span></p>
+                    <div style="margin-left: auto;">
+                      <img src="../../../../../assets/img/frFlag.png"  class="mr-2 flag " style="width: 30px;"/>
+                    </div>
+                  </div>
+            </div>
+            <div style="font-family: 'Times New Roman', Times, sans-serif;margin: 2%;">
+                <div class="col-12">
+                    <p style="color: cornflowerblue;;">Bonjour</p><br>
+                    <p style="color: cornflowerblue;;">Merci de trouver ci-dessous l'état de santé du SI Monétique du <b style="background-color: yellow;">{{this.AddHealthCheck.dateAjout | date : 'dd/MM/YYYY'}}</b> à <b style="background-color: yellow;">{{this.AddHealthCheck.dateAjout | date : 'hh:mm'}}</b></p>
+                    <div style="float:left; width: 35%; margin-top: 2%;"  >
+                        <table id="customers">
+                            <tr>
+                                 <th style="background-color: #990033;color: white;width: 60%;">Application
+                                </th>
+                                <th style="background-color: white;color: #990033;width: 40%;">Disponibilité
+                                </th>
+                            </tr>
+                            <tr *ngFor="let app of this.ListApp">
+                                <td style="width: 60%;">
+                                    {{ app.nomApplication }}
+                                </td>
+                                <td style="width: 40%;">
+                                    {{ app.disponibilite }}
+                                </td>
+                            </tr>
+                        </table>
+                        <img src="../../../../../assets/img/HealthLegend.png" width="100%" alt="psa"
+                        title="psa" class="staticImg">
+                    </div>
+                    <div style="float:right; width: 55%;margin: 2%;"  >
+                        <table id="customers">
+                            <tr>
+                            <th style="background-color: #990033;color: white;width: 60%;">Processus Métier
+                            </th>
+                            <th style="background-color: white;color: #990033;width: 40%;">Statut
+                            </th>
+                        </tr>
+                        <tr *ngFor="let etat of this.AddHealthCheck.etatProcessusMetierList">
+                            <td style="width: 60%;">
+                                {{ etat.processusMetier.titre }}
+                            </td>
+                            <td style="width: 40%;">
+                                {{ etat.statut }}
+                            </td>
+                        </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-12 " style="margin-top: 1%; ">
+               
+                    <table id="cust" >
+                        <tr>
+                            <th>Processus
+                            </th>
+                            <th>Application
+                            </th>
+                            <th>Date début
+                            </th>
+                            <th>Date Fin
+                            </th>
+                            <th>Information/Problème
+                            </th>
+                            <th>Impact Client
+                            </th>
+                            <th>Information Technique
+                            </th>
+                            <th>Feu
+                            </th>
+                            <th>Statut
+                            </th>
+                        </tr>
+                        <tr *ngFor="let Helth of this.AddHealthCheck.healthChekPreprodProdDetailList">
+                            <td>
+                                {{ Helth.processus }}
+                            </td>
+                            <td>
+                                {{ Helth.application.nomApplication }}
+                            </td>
+                            <td>
+                                {{ Helth.dateDebut | date: 'dd/MM/YY'}}
+                            </td>
+                            <td>
+                                {{ Helth.dateFin | date: 'dd/MM/YY'}}
+                            </td>
+                            <td>
+                                {{ Helth.information }}<br>
+                                <b style="color: rgb(13, 126, 201);">Impact Merier :</b><br>
+                                {{ Helth.impactMetier }}<br>
+                                <b style="color: rgb(13, 126, 201);">Cause :</b><br>
+                                {{ Helth.cause }}<br>
+                                <b style="color: rgb(13, 126, 201);">Plan Action :</b><br>
+                                {{ Helth.planAction }}
+                            </td>
+                            <td>
+                                {{ Helth.impactClient }}
+                            </td>
+                            <td>
+                                {{ Helth.problemeTechnique }}
+                            </td>
+                            <td>
+                                {{ Helth.feu }}
+                            </td>
+                            <td>
+                                {{ Helth.statut }}
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-12">
+
+            <div style="border:1px solid black ;">
+                <img src="../../../../../assets/img/FooterEtatSantéProd.png" width="100%"
+                    alt="psa" title="psa" class="staticImg">
+            </div>
+
+        </div>
+        
+    </div>
+    <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="this.charteHealthCheckPreprodProd=false" label="Ok" styleClass="p-button-text"></p-button>
+          </ng-template>
+</p-dialog>

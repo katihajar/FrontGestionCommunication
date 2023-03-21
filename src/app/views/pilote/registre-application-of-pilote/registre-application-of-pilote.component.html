@@ -1,7 +1,7 @@
 <div class="container-fluid page card" style="background-color: white">
     <div class="page__box p-3">Registre des Applications</div>
     <div class="page__content shadow p-2 position-relative align-items-center">
-      <div class="card">
+      <div class="card" style="border: none;">
         <p-table class="table" #dt1 [value]=" this.ListApplicationOfPilote" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
            [loading]="loading" [paginator]="true"
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -95,12 +95,14 @@
 
   <p-dialog header="Liste des Destinataires" [modal]="true" [draggable]="false"
   [(visible)]="displayDestinataire" [style]="{width: '70vw', height: '70vw','margin-left':'10%'}">
-    <div class="card">
-      <div>
-        <button pButton pRipple type="button" label="Ajouter Un Destinataire" (click)="dialogAddDest=true"
-          style="width: fit-content;margin: 4px;float: right;" 
-          class="p-button-raised p-button-success" ></button>
-      </div>
+    <div class="card" style="border: none;">
+      <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+        </ng-template>
+        <ng-template pTemplate="right">
+            <button pButton pRipple label="Ajouter un Destinataire" icon="pi pi-plus" class="p-button-success mr-2" (click)="dialogAddDest=true" ></button>
+        </ng-template>
+    </p-toolbar>
     <p-table class="table" #dt2 [value]=" this.ListDestinataireApp" dataKey="id" [rows]="5" [showCurrentPageReport]="true"
     [loading]="loading" [paginator]="true"
    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"

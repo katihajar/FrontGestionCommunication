@@ -2,11 +2,13 @@
   <div class="page__box p-3">Registre des Processus Métier</div>
   <div class="page__content shadow p-2 position-relative align-items-center">
     <div class="card">
-      <div>
-          <button pButton pRipple type="button" label="Ajouter Processus Métier"
-            style="width: fit-content;margin: 4px;float: right;" 
-            class="p-button-raised p-button-success" (click)="dialogAjoutProc=true"></button>
-        </div>
+      <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+        </ng-template>
+        <ng-template pTemplate="right">
+            <button pButton pRipple label="Ajouter Processus Métier" icon="pi pi-plus" class="p-button-success mr-2" (click)="dialogAjoutProc=true" ></button>
+        </ng-template>
+    </p-toolbar>
         <p-table class="table" #dt1 [value]=" this.ListAllProcessusMetier" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
            [loading]="loading" [paginator]="true"
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"

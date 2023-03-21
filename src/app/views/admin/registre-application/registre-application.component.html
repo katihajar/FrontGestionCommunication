@@ -2,11 +2,14 @@
     <div class="page__box p-3">Registre des Applications</div>
     <div class="page__content shadow p-2 position-relative align-items-center">
       <div class="card">
-        <div>
-          <button pButton pRipple type="button" label="Ajouter Application"
-            style="width: fit-content;margin: 4px;float: right;" 
-            class="p-button-raised p-button-success" (click)="RouteFormAddApp()"></button>
-        </div>
+        <p-toolbar styleClass="mb-4 gap-2">
+          <ng-template pTemplate="left">
+          </ng-template>
+          <ng-template pTemplate="right">
+              <button pButton pRipple label="Ajouter Application" icon="pi pi-plus" class="p-button-success mr-2" (click)="RouteFormAddApp()" ></button>
+          </ng-template>
+  
+      </p-toolbar>
         <p-table class="table" #dt1 [value]=" this.ListApplication" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
            [loading]="loading" [paginator]="true"
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"

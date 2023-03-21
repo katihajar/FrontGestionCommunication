@@ -2,11 +2,13 @@
   <div class="page__box p-3">Registre des Utilisateurs</div>
   <div class="page__content shadow p-2 position-relative align-items-center">
     <div class="card">
-      <div>
-        <button pButton pRipple type="button" label="Ajouter Utilisateur"
-          style="width: fit-content;margin: 4px;float: right;" (click)="showBasicDialog2()"
-          class="p-button-raised p-button-success"></button>
-      </div>
+      <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+        </ng-template>
+        <ng-template pTemplate="right">
+            <button pButton pRipple label="Ajouter Processus Métier" icon="pi pi-plus" class="p-button-success mr-2" (click)="showBasicDialog2()" ></button>
+        </ng-template>
+    </p-toolbar>
       <p-table class="table" #dt1 [value]=" this.UserList" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
          [loading]="loading" [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -97,7 +99,7 @@
 </div>
 
 <p-dialog header="Ajouter Un utilisareur" [modal]="true" (onHide)="submittedUtilisateur=false"
-  [(visible)]="displayBasic2" [style]="{width: '50vw'}" [resizable]="true">
+  [(visible)]="displayBasic2" [style]="{width: '50vw', height: '20vw'}" [resizable]="true">
   <div class="page__content-data position-relative text-center">
     <div class="col-12">
       <span class="p-input-icon-left" [style]="{'width':'45%'}">
@@ -133,6 +135,7 @@
       </span>
 
     </div>
+    
   </div>
   <ng-template pTemplate="footer">
     <p-button label="Submit" (click)="SaveUser()" icon="pi pi-check"></p-button>

@@ -183,7 +183,7 @@
                       ></p-dropdown>
                       </span>
                       <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '25%' }">
-                        <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Staut</label>
+                        <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Statut</label>
                         <p-dropdown
                         [options]="ListStatut"
                         [style]="{ width: '100%', required: 'required' }"
@@ -269,7 +269,11 @@
                                     {{ Helth.problemeTechnique }}
                                 </td>
                                 <td>
-                                    {{ Helth.feu }}
+                                    <div *ngIf="Helth.feu =='OK'">    <p-badge severity="success" styleClass="mr-2"></p-badge>
+                                    </div> 
+                                    <div *ngIf="Helth.feu =='En cours d\'éxecuxtion'"><p-badge severity="info" styleClass="mr-2"></p-badge></div>
+                                    <div *ngIf="Helth.feu =='Flux non critique KO'" ><p-badge severity="warning" styleClass="mr-2"></p-badge></div> 
+                                    <div *ngIf="Helth.feu =='Flux critique KO'" ><p-badge severity="danger" styleClass="mr-2"></p-badge></div>   
                                 </td>
                                 <td>
                                     {{ Helth.statut }}
@@ -291,7 +295,7 @@
 
             <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
                 <button pButton pRipple  type="button" label="Visualiser la charte" style=" float: left;margin-left: 2%;" (click)="charte()" class="p-button-raised p-button-help"></button>
-                <button pButton pRipple  style=" float: right;margin-right: 2%;" type="button" label="Submit" class="p-button-raised" (click)="SendAndSaveIncident()"></button>
+                <button pButton pRipple  style=" float: right;margin-right: 2%;" type="button" label="Submit" class="p-button-raised" (click)="SendAndSaveHealth()"></button>
             </div>
         </div>
     </div>

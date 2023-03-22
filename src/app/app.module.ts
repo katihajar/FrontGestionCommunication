@@ -142,6 +142,11 @@ import { ResgistreChangementRespoComponent } from './views/responsable/resgistre
 import { RegistreHealthCheckComponent } from './views/pilote/healthCheckPreprodProd/registre-health-check/registre-health-check.component';
 import { AjoutHealthCheckComponent } from './views/pilote/healthCheckPreprodProd/ajout-health-check/ajout-health-check.component';
 import { CharteHealthCheckComponent } from './views/pilote/healthCheckPreprodProd/charte-health-check/charte-health-check.component';
+import { RegistrehealthCheckBwPerimetreComponent } from './views/pilote/healthCheckBwPerimetre/registrehealth-check-bw-perimetre/registrehealth-check-bw-perimetre.component';
+import { AjoutHealthCheckBwPerimetreComponent } from './views/pilote/healthCheckBwPerimetre/ajout-health-check-bw-perimetre/ajout-health-check-bw-perimetre.component';
+import { CharteHealthCheckBwPerimetreComponent } from './views/pilote/healthCheckBwPerimetre/charte-health-check-bw-perimetre/charte-health-check-bw-perimetre.component';
+import { RegistrHealthBwPerimetreRespoComponent } from './views/responsable/registr-health-bw-perimetre-respo/registr-health-bw-perimetre-respo.component';
+import { RegistrHealthCheckProdRespoComponent } from './views/responsable/registr-health-check-prod-respo/registr-health-check-prod-respo.component';
 
 @NgModule({
   declarations: [
@@ -194,7 +199,12 @@ import { CharteHealthCheckComponent } from './views/pilote/healthCheckPreprodPro
     ResgistreChangementRespoComponent,
     RegistreHealthCheckComponent,
     AjoutHealthCheckComponent,
-    CharteHealthCheckComponent
+    CharteHealthCheckComponent,
+    RegistrehealthCheckBwPerimetreComponent,
+    AjoutHealthCheckBwPerimetreComponent,
+    CharteHealthCheckBwPerimetreComponent,
+    RegistrHealthBwPerimetreRespoComponent,
+    RegistrHealthCheckProdRespoComponent
     ],
   imports: [
     BrowserModule,

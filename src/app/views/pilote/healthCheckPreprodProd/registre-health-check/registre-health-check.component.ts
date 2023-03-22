@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { EtatProcessusMetier } from 'src/app/controller/model/etat-processus-metier';
 import { HealthChekPreprodProd } from 'src/app/controller/model/health-chek-preprod-prod';
@@ -25,12 +25,17 @@ export class RegistreHealthCheckComponent implements OnInit {
     }
   
   ngOnInit(): void {
+    this.AddHealthCheck = new HealthChekPreprodProd();
     this.FindHealth();
     this.ListType= [
       { name: 'PREPRODUCTION' },
       { name: 'PRODUCTION' },
     ];
   }
+PopAjout(){
+  this.AddHealthCheck = new HealthChekPreprodProd();
+  this.popUpAjout= true;
+}
   RouterAjout(){
     if(this.AddHealthCheck.type != ''){
     this.AddHealthCheck.dateAjout = new Date();
@@ -47,6 +52,19 @@ export class RegistreHealthCheckComponent implements OnInit {
       this.ListHealthCheck = data.body;
       this.loading = false;
     })
+  }
+  Edite(helth:HealthChekPreprodProd){
+    this.AddHealthCheck=helth;
+    this.healthService.FindDetailByHealthCheck(helth.id).subscribe((data)=>{
+      // @ts-ignore
+      this.AddHealthCheck.healthChekPreprodProdDetailList=data.body;
+    }); 
+    this.healthService.FindEtatProcessusByHealthCheck(helth.id).subscribe((data)=>{
+      // @ts-ignore
+      this.AddHealthCheck.etatProcessusMetierList=data.body;
+    });
+    this.popUpAjout=true;
+
   }
   get AddHealthCheck(): HealthChekPreprodProd{
     return this.healthService.AddHealthCheck;
@@ -79,5 +97,51 @@ export class RegistreHealthCheckComponent implements OnInit {
 
   set ListHealthCheck(value: Array<HealthChekPreprodProd>) {
     this.healthService.ListHealthCheck = value;
+  }
+  get charteHealthCheckPreprodProd(): boolean {
+    return this.charteService.charteHealthCheckPreprodProd;
+  }
+
+  set charteHealthCheckPreprodProd(value: boolean) {
+    this.charteService.charteHealthCheckPreprodProd = value;
+  }
+  charte(helth:HealthChekPreprodProd){
+    this.AddHealthCheck=helth;
+    this.healthService.FindDetailByHealthCheck(helth.id).subscribe((data)=>{
+      // @ts-ignore
+      this.AddHealthCheck.healthChekPreprodProdDetailList=data.body;
+    }); 
+    this.healthService.FindEtatProcessusByHealthCheck(helth.id).subscribe((data)=>{
+      // @ts-ignore
+      this.AddHealthCheck.etatProcessusMetierList=data.body;
+    });
+    this.charteHealthCheckPreprodProd = true;
+  }
+  DeleteHealthCheck(id:number){
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to proceed?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.healthService.DeleteHealthCheck(id).subscribe((data) => {
+          this.FindHealth();
+          // @ts-ignore
+          this.messageService.add({severity:'success', summary: 'Success', detail: 'Etat de Santé supprimer avec succès'});
+        },error=>{
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de la suppression'});
+    });
+      },
+      reject: (type:any) => {
+          switch(type) {
+              case ConfirmEventType.REJECT:
+                  this.messageService.add({severity:'error', summary:'Rejected', detail:'Suppression Rejeter'});
+              break;
+              case ConfirmEventType.CANCEL:
+                  this.messageService.add({severity:'warn', summary:'Cancelled', detail:'Suppression Annuler'});
+              break;
+          }
+      }
+  });
+   
   }
 }

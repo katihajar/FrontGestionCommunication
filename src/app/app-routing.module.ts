@@ -29,6 +29,10 @@ import { ResgistreOperationRespoComponent } from './views/responsable/resgistre-
 import { ResgistreChangementRespoComponent } from './views/responsable/resgistre-changement-respo/resgistre-changement-respo.component';
 import { RegistreHealthCheckComponent } from './views/pilote/healthCheckPreprodProd/registre-health-check/registre-health-check.component';
 import { AjoutHealthCheckComponent } from './views/pilote/healthCheckPreprodProd/ajout-health-check/ajout-health-check.component';
+import { RegistrehealthCheckBwPerimetreComponent } from './views/pilote/healthCheckBwPerimetre/registrehealth-check-bw-perimetre/registrehealth-check-bw-perimetre.component';
+import { AjoutHealthCheckBwPerimetreComponent } from './views/pilote/healthCheckBwPerimetre/ajout-health-check-bw-perimetre/ajout-health-check-bw-perimetre.component';
+import { RegistrHealthCheckProdRespoComponent } from './views/responsable/registr-health-check-prod-respo/registr-health-check-prod-respo.component';
+import { RegistrHealthBwPerimetreRespoComponent } from './views/responsable/registr-health-bw-perimetre-respo/registr-health-bw-perimetre-respo.component';
 
 
 @NgModule({
@@ -57,6 +61,8 @@ import { AjoutHealthCheckComponent } from './views/pilote/healthCheckPreprodProd
         { path: 'application/registre', component: ResgistreApplicationRespoComponent },
         { path: 'operation/registre', component: ResgistreOperationRespoComponent },
         { path: 'changement/registre', component: ResgistreChangementRespoComponent },
+        { path: 'healthcheck/PreprodProd/registre', component: RegistrHealthCheckProdRespoComponent },
+        { path: 'healthcheck/Bw/registre', component: RegistrHealthBwPerimetreRespoComponent },
         { path: '', redirectTo: 'homeRespo', pathMatch: 'full' },
       ],
     },
@@ -78,6 +84,8 @@ import { AjoutHealthCheckComponent } from './views/pilote/healthCheckPreprodProd
         { path: 'changement/save/FrançaisAnglais', component: AjouterChangementAngFrComponent},
         { path: 'healthcheck/PreprodProd/registre', component: RegistreHealthCheckComponent },
         { path: 'healthcheck/PreprodProd/save', component: AjoutHealthCheckComponent },
+        { path: 'healthcheck/Bw/registre', component: RegistrehealthCheckBwPerimetreComponent },
+        { path: 'healthcheck/Bw/save', component: AjoutHealthCheckBwPerimetreComponent },
         { path: '', redirectTo: 'homePilote', pathMatch: 'full' },
       ],
     },

@@ -2,15 +2,7 @@
     <div class="page__box p-3">Registre des états de Santé Preprod/Prod </div>
     <div class="page__content shadow p-2 position-relative align-items-center">
       <div class="card">
-    
-          <p-toolbar styleClass="mb-4 gap-2">
-            <ng-template pTemplate="right">
-                <button pButton pRipple label="Ajouter Etat santé" icon="pi pi-plus" class="p-button-success mr-2" (click)="PopAjout()" ></button>
-            </ng-template>
-            <ng-template pTemplate="left">
-            </ng-template>
-        </p-toolbar>
-         
+             
         <p-table class="table" #dt1 [value]=" this.ListHealthCheck" dataKey="id" [rows]="10"
           [showCurrentPageReport]="true" [loading]="loading" [paginator]="true"
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -67,10 +59,7 @@
               </td>
               <td><button pButton pRipple  type="button" style="font-size: larger;" icon="pi pi-search" (click)="charte(health)"
                   class="p-button-rounded p-button-info"></button>
-              <button pButton pRipple  type="button" style="font-size: larger;" icon="pi pi-pencil" (click)="Edite(health)"
-                class="p-button-rounded p-button-success"></button>
-            <button pButton pRipple type="button" style="font-size: larger;" icon="pi pi-times" (click)="DeleteHealthCheck(health.id)"
-              class="p-button-rounded p-button-danger"></button>
+        
           </td>
             </tr>
           </ng-template>
@@ -83,20 +72,6 @@
       </div>
     </div>
   </div>
-
-  <p-dialog header="Choix Health Check" [modal]="true" [(visible)]="popUpAjout" (onHide)="onDialogHideLang()"
-  [style]="{width: '30vw', height: '15vw'}" [resizable]="true">
- 
-  <div class="col-12 text-center" style="margin-top: 1%;">
-    <span class="p-input-icon-left" style="margin-left: 2%;" [style]="{'width':'80%'}">
-      <p-dropdown [options]="this.ListType" [(ngModel)]="this.AddHealthCheck.type"
-        [style]="{'width':'100%','required':'required'}" placeholder="Selectinné le type" optionValue="name"
-        optionLabel="name" [showClear]="true"></p-dropdown>
-    </span>
-  </div>
-  <ng-template pTemplate="footer">
-    <p-button label="Submit" (onClick)="RouterAjout()"  icon="pi pi-check"></p-button>
-  </ng-template>
-</p-dialog>
-<app-charte-health-check></app-charte-health-check>
-<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+  <app-charte-health-check></app-charte-health-check>
+  <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+  

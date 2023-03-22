@@ -1,4 +1,4 @@
-<p-dialog [modal]="true" [(visible)]="this.charteHealthCheckPreprodProd"
+<p-dialog [modal]="true" [(visible)]="this.charteHealthCheckPreprodProd" header="Charte Health Check "
     [style]="{width: '65vw', height: '70vw','margin-left':'3%'}" [resizable]="true">
     <div #myDialog id="myDialog" style="width: 100%;">
         <div class="col-12">
@@ -25,37 +25,44 @@
                     <div style="float:left; width: 35%; margin-top: 2%;"  >
                         <table id="customers">
                             <tr>
-                                 <th style="background-color: #990033;color: white;width: 60%;">Application
+                                 <th style="background-color: #990033;color: white;width: 60%;text-align: center;">Application
                                 </th>
-                                <th style="background-color: white;color: #990033;width: 40%;">Disponibilité
+                                <th style="background-color: white;color: #990033;width: 40%;text-align: center;">Disponibilité
                                 </th>
                             </tr>
                             <tr *ngFor="let app of this.ListApp">
-                                <td style="width: 60%;">
+                                <td style="width: 75%;">
                                     {{ app.nomApplication }}
                                 </td>
-                                <td style="width: 40%;">
-                                    {{ app.disponibilite }}
+                                <td style="width: 25%;text-align: center;">
+                                    <div *ngIf="app.disponibilite =='Oui'">    <p-badge severity="success" styleClass="mr-2"></p-badge>
+                                    </div> 
+                                    <div *ngIf="app.disponibilite =='Non'" ><p-badge severity="danger" styleClass="mr-2"></p-badge></div>   
+                               
                                 </td>
                             </tr>
                         </table>
                         <img src="../../../../../assets/img/HealthLegend.png" width="100%" alt="psa"
                         title="psa" class="staticImg">
                     </div>
-                    <div style="float:right; width: 55%;margin: 2%;"  >
+                    <div style="float:right; width: 55%;margin: 2%;">
                         <table id="customers">
                             <tr>
-                            <th style="background-color: #990033;color: white;width: 60%;">Processus Métier
+                            <th style="background-color: #990033;color: white;width: 60%;text-align: center;">Processus Métier
                             </th>
-                            <th style="background-color: white;color: #990033;width: 40%;">Statut
+                            <th style="background-color: white;color: #990033;width: 40%;text-align: center;">Statut
                             </th>
                         </tr>
                         <tr *ngFor="let etat of this.AddHealthCheck.etatProcessusMetierList">
-                            <td style="width: 60%;">
+                            <td style="width: 75%;">
                                 {{ etat.processusMetier.titre }}
                             </td>
-                            <td style="width: 40%;">
-                                {{ etat.statut }}
+                            <td style="width: 25%;text-align: center;">
+                                <div *ngIf="etat.statut =='OK'">    <p-badge severity="success" styleClass="mr-2"></p-badge>
+                                </div> 
+                                <div *ngIf="etat.statut =='En cours d\'éxecuxtion'"><p-badge severity="info" styleClass="mr-2"></p-badge></div>
+                                <div *ngIf="etat.statut =='Flux non critique KO'" ><p-badge severity="warning" styleClass="mr-2"></p-badge></div> 
+                                <div *ngIf="etat.statut =='Flux critique KO'" ><p-badge severity="danger" styleClass="mr-2"></p-badge></div>                            
                             </td>
                         </tr>
                         </table>
@@ -113,7 +120,11 @@
                                 {{ Helth.problemeTechnique }}
                             </td>
                             <td>
-                                {{ Helth.feu }}
+                                <div *ngIf="Helth.feu =='OK'">    <p-badge severity="success" styleClass="mr-2"></p-badge>
+                                </div> 
+                                <div *ngIf="Helth.feu =='En cours d\'éxecuxtion'"><p-badge severity="info" styleClass="mr-2"></p-badge></div>
+                                <div *ngIf="Helth.feu =='Flux non critique KO'" ><p-badge severity="warning" styleClass="mr-2"></p-badge></div> 
+                                <div *ngIf="Helth.feu =='Flux critique KO'" ><p-badge severity="danger" styleClass="mr-2"></p-badge></div>   
                             </td>
                             <td>
                                 {{ Helth.statut }}

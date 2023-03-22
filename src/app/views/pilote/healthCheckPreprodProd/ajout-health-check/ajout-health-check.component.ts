@@ -49,6 +49,10 @@ export class AjoutHealthCheckComponent implements OnInit {
   ngOnInit(): void {
     this.FindApp();
     this.FindProcessus();
+    this.listHelthchekdetail=new Array<HealthChekPreprodProdDetail>();
+    this.listEtatproc=new Array<EtatProcessusMetier>();
+    this.listEtatproc=this.AddHealthCheck.etatProcessusMetierList;
+    this.listHelthchekdetail=this.AddHealthCheck.healthChekPreprodProdDetailList;
     this.ListFeu= [
       { name: 'OK' },
       { name: 'En cours d\'éxecuxtion' },
@@ -127,7 +131,7 @@ removeDeatils(us: HealthChekPreprodProdDetail) {
              this.AddHealthCheck=new HealthChekPreprodProd();
              this.listEtatproc = new Array<EtatProcessusMetier>();
              this.listHelthchekdetail= new Array<HealthChekPreprodProdDetail>();
-             this.router.navigate(['/pilote/incident/registre']);
+             this.router.navigate(['/pilote/healthcheck/PreprodProd/registre']);
              const mailtoLink = `mailto:${this.EmailObligatoire.join(',')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(',')}`;
              window.open(mailtoLink, '_blank');
              this.messageService.add({severity:'success', summary: 'Success', detail: 'Incident Ajouter avec succès'});
@@ -190,7 +194,7 @@ removeDeatils(us: HealthChekPreprodProdDetail) {
     return new Blob([u8arr], { type: mime });
   }
 
-  SendAndSaveIncident() {
+  SendAndSaveHealth() {
     this.AddHealthCheck.id=0;
     this.AddHealthCheck.etatProcessusMetierList = this.listEtatproc;
     this.AddHealthCheck.healthChekPreprodProdDetailList = this.listHelthchekdetail;

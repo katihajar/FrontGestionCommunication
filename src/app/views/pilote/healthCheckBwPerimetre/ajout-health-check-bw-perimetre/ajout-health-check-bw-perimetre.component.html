@@ -1,0 +1,186 @@
+<div class="container-fluid page" style="background-color: white">
+    <div class="d-flex page__box p-3">Ajouter un Etat de santé</div>
+    <div class="page__content shadow p-3 position-relative">
+        <div class="card align-items-center;margin: 2%">
+                <!-- <h1 style="margin: 3%">Ajouter le Plan d'Action</h1> -->
+                <div class="col-12 text-center" style="margin-bottom: 2%;margin-top: 2%;">             
+                    <span
+                    class="p-input-icon-left"
+                    [style]="{ width: '30%' }"
+                  >
+                  <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Perimeter</label>
+                  <p-dropdown [style]="{ width: '100%', required: 'required' }" [options]="ListPerimetre" optionLabel="titre"
+                  [filter]="true" filterBy="titre" [showClear]="true" placeholder="Selectinné le Perimetre"
+                  [(ngModel)]="this.helthchekBwdetail.perimetre">
+                  <ng-template let-peri pTemplate="item">
+                    <div class="country-item">
+                      <div>{{ peri.titre }}</div>
+                    </div>
+                  </ng-template>
+                </p-dropdown>   
+                  </span>
+                  <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
+                    <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Status Night Treatment</label>
+                    <p-dropdown
+                    [options]="ListStatut"
+                    [style]="{ width: '100%', required: 'required' }"
+                    placeholder="Selectinné statut"
+                    optionValue="name"
+                    optionLabel="name"
+                    [showClear]="true"
+                    [(ngModel)]="this.helthchekBwdetail.statusNightTreatment"
+                  ></p-dropdown>
+                  </span>
+                  <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
+                    <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Status Data Integrity</label>
+                    <p-dropdown
+                    [options]="ListStatut"
+                    [style]="{ width: '100%', required: 'required' }"
+                    placeholder="Selectinné Statut"
+                    optionValue="name"
+                    optionLabel="name"
+                    [showClear]="true"
+                    [(ngModel)]="this.helthchekBwdetail.statusDataIntegrity"
+                  ></p-dropdown>
+                  </span>
+                </div>
+                <div class="col-12" style="margin-bottom: 2%;">
+                    <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '46%' }">
+                        <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Incident in Progress</label>
+                        <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="number" pInputText
+                            placeholder="Entré le nombre d'inicdent en cours" [(ngModel)]="this.helthchekBwdetail.incidentInProgress"/>
+                    </span>
+                    <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '46%' }">
+                        <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Incident Completed this month</label>
+                        <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="number" pInputText
+                            placeholder="Entré le nombre d'inicdent completer" [(ngModel)]="this.helthchekBwdetail.incidentCompleted"/>
+                    </span>
+                </div>
+                <div class="col-12" style="margin-bottom: 2%;">
+                    <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '46%' }">
+                        <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Comment</label>
+                        <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="text" pInputText
+                            placeholder="Entré le commentaire" [(ngModel)]="this.helthchekBwdetail.comment"/>
+                    </span>
+                    <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '40%' }">
+                        <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Key User feedBack</label>
+                        <p-dropdown
+                        [options]="userKey"
+                        [style]="{ width: '100%', required: 'required' }"
+                        placeholder="Selectinné feedBack"
+                        optionValue="name"
+                        optionLabel="name"
+                        [showClear]="true"
+                        [(ngModel)]="this.helthchekBwdetail.feedBack"
+                      ></p-dropdown>
+                      </span>
+                      <button style="margin-left: 2%" pButton pRipple type="button" icon="pi pi-plus" (click)="AddDetails()"
+                        class="p-button-rounded p-button-success"></button>
+                </div>
+                <div class="card" style="margin: 2%">
+                <div class="col-12" >
+                    <p-table class="table" [value]="this.listHelthchekBwdetail" dataKey="id" [rows]="10" 
+                        [showCurrentPageReport]="true" [paginator]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Perimeter
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Status Night Treatment
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Status Data Integrity
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Incident in Progress
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Incident Completed this month
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Comment
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Key User FeedBack
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        supprimer
+                                    </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-Helth>
+                            <tr>
+                                <td>
+                                    {{ Helth.perimetre.titre }}
+                                </td>
+                                <td>
+                                    <div *ngIf="Helth.statusNightTreatment =='OK'">    <p-badge severity="success" styleClass="mr-2"></p-badge>
+                                    </div> 
+                                    <div *ngIf="Helth.statusNightTreatment =='In progress'"><p-badge severity="info" styleClass="mr-2"></p-badge></div>
+                                    <div *ngIf="Helth.statusNightTreatment =='Critical data KO'" ><p-badge severity="warning" styleClass="mr-2"></p-badge></div> 
+                                    <div *ngIf="Helth.statusNightTreatment =='Non critical data KO'" ><p-badge severity="danger" styleClass="mr-2"></p-badge></div>   
+                            
+                                </td>
+                                <td>
+                                    <div *ngIf="Helth.statusDataIntegrity =='OK'">    <p-badge severity="success" styleClass="mr-2"></p-badge>
+                                    </div> 
+                                    <div *ngIf="Helth.statusDataIntegrity =='In progress'"><p-badge severity="info" styleClass="mr-2"></p-badge></div>
+                                    <div *ngIf="Helth.statusDataIntegrity =='Critical data KO'" ><p-badge severity="warning" styleClass="mr-2"></p-badge></div> 
+                                    <div *ngIf="Helth.statusDataIntegrity =='Non critical data KO'" ><p-badge severity="danger" styleClass="mr-2"></p-badge></div>   
+                            
+                                </td>
+                                <td>
+                                    {{ Helth.incidentInProgress }}
+                                </td>
+                                <td>
+                                    {{ Helth.incidentCompleted }}
+                                </td>
+                                <td>
+                                    {{ Helth.comment }}
+                                        </td>
+                                <td>
+                                    <div *ngIf="Helth.feedBack =='Yes'">
+                                        <i class="pi pi-check" style="font-size: 2rem"></i>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button pButton pRipple type="button" style="font-size: larger" icon="pi pi-times" (click)="removeDetails(Helth)"
+                                        class="p-button-rounded p-button-danger"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="8">aucune donnée n'a été ajoué.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            
+</div>
+            <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
+                <button pButton pRipple  type="button" label="Visualiser la charte" style=" float: left;margin-left: 2%;" (click)="charte()" class="p-button-raised p-button-help"></button>
+                <button pButton pRipple  style=" float: right;margin-right: 2%;" type="button" label="Submit" class="p-button-raised" (click)="SendAndSaveHealth()"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<app-charte-health-check-bw-perimetre></app-charte-health-check-bw-perimetre>

@@ -211,6 +211,8 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
       this.ListPlanAction.push(this.Action);
       this.Action = new PlanAction();
       this.num = this.num + 1;
+    }else{
+      this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
     }
   }
   AddActionAng() {
@@ -219,6 +221,8 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
       this.ListPlanActionAng.push(this.ActionAng);
       this.ActionAng = new PlanAction();
       this.numAng = this.numAng + 1;
+    }else{
+      this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
     }
   }
 
@@ -243,6 +247,8 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
       this.charteIncident3BfrAng = true;
       }else if(this.AddIncident.application.charteIncident =='charte Incident Monetics'){
         this.charteIncidentMoneticAngFr = true;
+      }else{
+        this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Charte Non trouvé'});
       }
   }
   SaveIncident(){

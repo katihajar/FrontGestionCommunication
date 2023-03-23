@@ -37,15 +37,15 @@
             </span> version <span style="background-color: yellow"> {{this.AddChangement.version}} </span></p>
            
             <div *ngIf="this.AddChangement.statut=='Planifié'">
-            <p >Start of <span style="color: rgb(7, 133, 218);">planned </span>change :<span style="background-color: yellow;"> {{this.AddChangement.dateDebut | date : 'YYYY-MM-dd hh:mm'}} CET
+            <p >Start of <span style="color: rgb(7, 133, 218);">planned </span>change :<span style="background-color: yellow;"> {{this.AddChangement.dateDebut | date : 'YYYY-MM-dd HH:mm'}} CET
             </span></p>
-            <p >End of <span style="color: rgb(7, 133, 218);">planned </span>change  :<span style="background-color: yellow;"> {{this.AddChangement.dateFin | date : 'YYYY-MM-dd hh:mm'}} CET
+            <p >End of <span style="color: rgb(7, 133, 218);">planned </span>change  :<span style="background-color: yellow;"> {{this.AddChangement.dateFin | date : 'YYYY-MM-dd HH:mm'}} CET
             </span></p>
             </div>
             <div *ngIf="this.AddChangement.statut=='Terminé avec succès'">
-              <p >Start of <span style="color: rgb(47, 201, 60);">completed </span>change :<span style="background-color: yellow;"> {{this.AddChangement.dateDebut | date : 'YYYY-MM-dd hh:mm'}} CET
+              <p >Start of <span style="color: rgb(47, 201, 60);">completed </span>change :<span style="background-color: yellow;"> {{this.AddChangement.dateDebut | date : 'YYYY-MM-dd HH:mm'}} CET
               </span></p>
-              <p >End of <span style="color: rgb(47, 201, 60);">completed </span>change :<span style="background-color: yellow;"> {{this.AddChangement.dateFin | date : 'YYYY-MM-dd hh:mm'}} CET
+              <p >End of <span style="color: rgb(47, 201, 60);">completed </span>change :<span style="background-color: yellow;"> {{this.AddChangement.dateFin | date : 'YYYY-MM-dd HH:mm'}} CET
               </span></p>
             </div>
             <div *ngIf="this.AddChangement.statut=='Planifié'">
@@ -104,15 +104,15 @@
       <p >Application :<span style="background-color: yellow;"> {{this.AddChangement.application.nomApplication}}
       </span> version <span style="background-color: yellow"> {{this.AddChangement.version}} </span></p>
       <div *ngIf="this.AddChangement.statut=='Planifié'">
-      <p >Début de la Mise en Production <span style="color: rgb(7, 133, 218);">planifiée </span> :<span style="background-color: yellow;"> {{this.AddChangement.dateDebut | date : 'YYYY-MM-dd hh:mm'}} CET
+      <p >Début de la Mise en Production <span style="color: rgb(7, 133, 218);">planifiée </span> :<span style="background-color: yellow;"> {{this.AddChangement.dateDebut | date : 'YYYY-MM-dd HH:mm'}} CET
       </span></p>
-      <p >Fin de la Mise en Production <span style="color: rgb(7, 133, 218);">planifiée </span> :<span style="background-color: yellow;"> {{this.AddChangement.dateFin | date : 'YYYY-MM-dd hh:mm'}} CET
+      <p >Fin de la Mise en Production <span style="color: rgb(7, 133, 218);">planifiée </span> :<span style="background-color: yellow;"> {{this.AddChangement.dateFin | date : 'YYYY-MM-dd HH:mm'}} CET
       </span></p>
     </div>
     <div *ngIf="this.AddChangement.statut=='Terminé avec succès'">
-      <p >Début de la Mise en Production <span style="color: rgb(47, 201, 60);">réalisée  </span> :<span style="background-color: yellow;"> {{this.AddChangement.dateDebut | date : 'YYYY-MM-dd hh:mm'}} CET
+      <p >Début de la Mise en Production <span style="color: rgb(47, 201, 60);">réalisée  </span> :<span style="background-color: yellow;"> {{this.AddChangement.dateDebut | date : 'YYYY-MM-dd HH:mm'}} CET
       </span></p>
-      <p >Fin de la Mise en Production <span style="color: rgb(47, 201, 60);">réalisée  </span> :<span style="background-color: yellow;"> {{this.AddChangement.dateFin | date : 'YYYY-MM-dd hh:mm'}} CET
+      <p >Fin de la Mise en Production <span style="color: rgb(47, 201, 60);">réalisée  </span> :<span style="background-color: yellow;"> {{this.AddChangement.dateFin | date : 'YYYY-MM-dd HH:mm'}} CET
       </span></p>
     </div>
     <div *ngIf="this.AddChangement.statut=='Planifié'">

@@ -69,6 +69,8 @@ export class AjouterChangementFrComponent implements OnInit {
     if(this.Contenu.titre != '' && this.Contenu.description!=''  ){
     this.ListContenu.push(this.Contenu);
     this.Contenu = new ContenuChangement();
+  }else{
+    this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
   }
   }
   
@@ -77,16 +79,17 @@ export class AjouterChangementFrComponent implements OnInit {
     this.ListContenu.splice(i, 1);
   }
 
-  showCharte(){
-    this.AddChangement.contenuChangementList=this.ListContenu;
-      this.charteChangeFr = true;
-  }
+
   get charteChangeFr(): boolean {
     return this.charteService.charteChangeFr;
   }
 
   set charteChangeFr(value: boolean) {
     this.charteService.charteChangeFr = value;
+  } 
+   showCharte(){
+    this.AddChangement.contenuChangementList=this.ListContenu;
+      this.charteChangeFr = true;
   }
   SaveChange(){
     if(this.AddChangement.statut =='Planifié'){

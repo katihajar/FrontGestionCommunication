@@ -33,6 +33,9 @@ import { RegistrehealthCheckBwPerimetreComponent } from './views/pilote/healthCh
 import { AjoutHealthCheckBwPerimetreComponent } from './views/pilote/healthCheckBwPerimetre/ajout-health-check-bw-perimetre/ajout-health-check-bw-perimetre.component';
 import { RegistrHealthCheckProdRespoComponent } from './views/responsable/registr-health-check-prod-respo/registr-health-check-prod-respo.component';
 import { RegistrHealthBwPerimetreRespoComponent } from './views/responsable/registr-health-bw-perimetre-respo/registr-health-bw-perimetre-respo.component';
+import { RegistrePointVersionComponent } from './views/pilote/pointVersion/registre-point-version/registre-point-version.component';
+import { AjoutPointVersionComponent } from './views/pilote/pointVersion/ajout-point-version/ajout-point-version.component';
+import { RegistrePointVersionRespoComponent } from './views/responsable/registre-point-version-respo/registre-point-version-respo.component';
 
 
 @NgModule({
@@ -63,6 +66,7 @@ import { RegistrHealthBwPerimetreRespoComponent } from './views/responsable/regi
         { path: 'changement/registre', component: ResgistreChangementRespoComponent },
         { path: 'healthcheck/PreprodProd/registre', component: RegistrHealthCheckProdRespoComponent },
         { path: 'healthcheck/Bw/registre', component: RegistrHealthBwPerimetreRespoComponent },
+        { path: 'pointversion/registre', component: RegistrePointVersionRespoComponent },
         { path: '', redirectTo: 'homeRespo', pathMatch: 'full' },
       ],
     },
@@ -86,6 +90,8 @@ import { RegistrHealthBwPerimetreRespoComponent } from './views/responsable/regi
         { path: 'healthcheck/PreprodProd/save', component: AjoutHealthCheckComponent },
         { path: 'healthcheck/Bw/registre', component: RegistrehealthCheckBwPerimetreComponent },
         { path: 'healthcheck/Bw/save', component: AjoutHealthCheckBwPerimetreComponent },
+        { path: 'pointversion/registre', component: RegistrePointVersionComponent },
+        { path: 'pointversion/save', component: AjoutPointVersionComponent },
         { path: '', redirectTo: 'homePilote', pathMatch: 'full' },
       ],
     },

@@ -147,6 +147,10 @@ import { AjoutHealthCheckBwPerimetreComponent } from './views/pilote/healthCheck
 import { CharteHealthCheckBwPerimetreComponent } from './views/pilote/healthCheckBwPerimetre/charte-health-check-bw-perimetre/charte-health-check-bw-perimetre.component';
 import { RegistrHealthBwPerimetreRespoComponent } from './views/responsable/registr-health-bw-perimetre-respo/registr-health-bw-perimetre-respo.component';
 import { RegistrHealthCheckProdRespoComponent } from './views/responsable/registr-health-check-prod-respo/registr-health-check-prod-respo.component';
+import { RegistrePointVersionComponent } from './views/pilote/pointVersion/registre-point-version/registre-point-version.component';
+import { RegistrePointVersionRespoComponent } from './views/responsable/registre-point-version-respo/registre-point-version-respo.component';
+import { AjoutPointVersionComponent } from './views/pilote/pointVersion/ajout-point-version/ajout-point-version.component';
+import { ChartePointVersionComponent } from './views/pilote/pointVersion/charte-point-version/charte-point-version.component';
 
 @NgModule({
   declarations: [
@@ -204,7 +208,11 @@ import { RegistrHealthCheckProdRespoComponent } from './views/responsable/regist
     AjoutHealthCheckBwPerimetreComponent,
     CharteHealthCheckBwPerimetreComponent,
     RegistrHealthBwPerimetreRespoComponent,
-    RegistrHealthCheckProdRespoComponent
+    RegistrHealthCheckProdRespoComponent,
+    RegistrePointVersionComponent,
+    RegistrePointVersionRespoComponent,
+    AjoutPointVersionComponent,
+    ChartePointVersionComponent
     ],
   imports: [
     BrowserModule,

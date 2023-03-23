@@ -154,12 +154,16 @@ export class AjouterChangementAngFrComponent implements OnInit {
     if (this.Contenu.titre != '' && this.Contenu.description != '') {
       this.ListContenu.push(this.Contenu);
       this.Contenu = new ContenuChangement();
+    }else{
+      this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
     }
   }
   AddContenuAng() {
     if (this.ContenuAng.titre != '' && this.ContenuAng.description != '') {
       this.ListContenuAng.push(this.ContenuAng);
       this.ContenuAng = new ContenuChangement();
+    }else{
+      this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
     }
   }
   showCharte(){

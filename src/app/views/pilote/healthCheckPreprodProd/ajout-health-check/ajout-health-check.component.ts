@@ -89,6 +89,8 @@ export class AjoutHealthCheckComponent implements OnInit {
     if(this.etatproc.statut != '' && this.etatproc.processusMetier.titre!=''  ){
     this.listEtatproc.push(this.etatproc);
     this.etatproc = new EtatProcessusMetier();
+  } else{
+    this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
   }
 }
 removeEtat(us: EtatProcessusMetier) {
@@ -99,6 +101,7 @@ AddDeatils(){
   if(this.helthchekdetail.statut != '' && this.helthchekdetail.application.nomApplication!='' && this.helthchekdetail.feu != '' && this.helthchekdetail.impactClient != '' && this.helthchekdetail.information != ''){
   this.listHelthchekdetail.push(this.helthchekdetail);
   this.helthchekdetail = new HealthChekPreprodProdDetail();
+}else{        this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
 }
 }
 

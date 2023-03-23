@@ -1,0 +1,97 @@
+<p-dialog [modal]="true" [(visible)]="this.chartePointVersion" header="Charte Point Version"
+    [style]="{width: '65vw', height: '90vw','margin-left':'3%'}" [resizable]="true">
+    <div #myDialog id="myDialog" style="width: 100%;">
+      <div class="col-12">
+        
+        <div  style="border:1px solid rgb(18, 231, 231) ;">
+          <img src="../../../../../assets/img/ChangementTerminer.png" width="100%" style="margin-left: 0%;"
+              alt="psa" title="psa" class="staticImg">
+      </div>
+      </div>
+      <div style="width: 100%;margin-top: 2%;margin-bottom: 2%;color: black;" [ngStyle]="{'border': '1px solid rgb(18, 231, 231)'}">
+      <div style="font-family: 'Times New Roman', Times, sans-serif;font-size: 18px;color: #2c58a0">
+        <div style="height: 4vh; display: flex; align-items: center; justify-content: flex-start; text-align: center;color: black;"
+        [ngStyle]="{'background-color': 'rgb(69, 163, 240)' }">
+        <h3 style="margin: 1%; font-weight: bolder;"> {{this.AddPointVersion.application.nomApplication}}  <span style="background-color: yellow;color: black;">{{this.AddPointVersion.version}} </span> – Point version  – <span style="background-color: yellow;color: black;">{{this.AddPointVersion.dateAjout | date: 'dd/MM/YYYY'}}</span></h3>
+                <div style="margin-left: auto;">
+                <img src="../../../../../assets/img/frFlag.png"  class="mr-2 flag " style="width: 30px;"/>
+        </div>
+    </div>
+    <div style="margin: 2%;">
+    <p >Bonjour,</p><br>
+    <p style="margin-bottom: 1%;">Veuillez trouver, ci-dessous, le compte-rendu de la réunion de suivi de version tenue à {{this.AddPointVersion.dateAjout | date: 'HH'}}h CET: </p>
+    <h2><span style="background-color: #0864b4;color: white;"><b><u>V{{this.AddPointVersion.version}}</u></b></span></h2>
+    <h2 style="margin-bottom: 0%;padding: 0%;margin: 0%"><span style="background-color: #ffc404;"><b>Nombre de tickets confirmés : {{this.AddPointVersion.ticketConfirmer}}</b><br></span></h2>
+    <h2 style="margin-bottom: 0%;margin-top: 0%;padding: 0%;margin: 0%"><span style="background-color: #ffc404;"><b>Livraisons sur CARPM (MEI) : </b></span></h2><br>
+    <div *ngIf="this.AddPointVersion.livraisonCARMList.length !=0">
+    <div class="row align-items-center" style=" display: flex; justify-content:  center;">
+      <div style=" width: 55%;margin: 2%;">
+        <table id="customers">
+            <tr>
+            <th style="width: 40%;text-align: center;">Date MEI
+            </th>
+            <th style="width: 40%;text-align: center;">Nombre tickets livrés
+            </th>
+            <th style="width: 20%;text-align: center;">Statut MEI
+            </th>
+        </tr>
+        <tr *ngFor="let liv of this.AddPointVersion.livraisonCARMList">
+            <td style="width: 40%;text-align: center;">
+                {{ liv.dateMEI | date: 'dd/MM/YYYY'}}
+            </td>
+            <td style="width: 40%;text-align: center;">
+              {{ liv.nombreTicket }}
+                </td>
+                <td style="width: 20%;text-align: center;">
+                  <div  *ngIf="liv.statutMEI == 'OK'">{{ liv.statutMEI }}</div>
+                    </td>
+        </tr>
+        </table>
+    </div>
+      </div>
+      </div>
+      <h2 style="margin-bottom: 0%;padding: 0%;margin: 0%"><span style="background-color: #ffc404;"><b>GO / No GO TNR  : {{this.AddPointVersion.goNoGoTNR}}</b></span></h2>
+       <h2 style="margin-bottom: 0%;margin-top: 0%;padding: 0%;margin: 0%"> <span style="background-color: #ffc404;margin-top: 0%;"><b>GO / No GO MEP  : {{this.AddPointVersion.goNoGoMEP}}</b></span></h2><br>
+      <p>Les tickets de la version ainsi que les commentaires/remarques (colonne : commentaire IT) de cette réunion sont  : </p><br>
+      <div *ngIf="this.AddPointVersion.ticketList.length !=0">
+      <h2 style="color: white; background-color: #0464b4;background-size: cover;"><u>Tickets retirés de la version :</u></h2> <br>
+      <h2 style="color: #1c4c88;"><b><u>En séance :</u></b></h2>
+      <div *ngFor="let ticket of this.AddPointVersion.ticketList">
+        <div *ngIf="ticket.type == 'Retirer'">
+          <li style="padding: 4px;"> <b>{{ticket.numero}} :</b>{{ticket.description}}</li>
+        </div>
+      </div><br>
+      <h2 ><u><span style="color: white; background-color: #0464b4;background-size: auto;">Ticket ajouté à la version (Hors séance) :</span></u></h2> <br>
+      <div *ngFor="let ticket of this.AddPointVersion.ticketList">
+        <div *ngIf="ticket.type == 'Ajouter'">
+          <li style="padding: 4px;"> <b>{{ticket.numero}} :</b>{{ticket.description}}</li>
+        </div>
+
+      </div><br>
+      </div>
+      <div *ngIf="this.AddPointVersion.remarque != ''">
+        <h2 style="color: #1c4c88;"><b><u>Remarque :</u></b></h2>
+        <p>{{this.AddPointVersion.remarque}}</p><br>
+      </div>
+      <div *ngIf="this.AddPointVersion.planningPointVersionList.length !=0">
+      <p>Le planning actuel de la V{{this.AddPointVersion.version}} est le suivant, il sera mis à jour dès qu’une décision finale aura été partagée :</p>
+      <div *ngFor="let plan of this.AddPointVersion.planningPointVersionList">
+          <li  style="padding: 4px;"> {{plan.titre}} :{{plan.description}}</li>
+      </div><br>
+      </div>
+    </div>
+    </div>
+  </div>
+    <div class="col-12">
+
+      <div  style="border:1px solid rgb(18, 231, 231) ;">
+          <img src="../../../../../assets/img/FooterChangementTerminer.png" width="100%" style="margin-left: 0%;"
+              alt="psa" title="psa" class="staticImg">
+      </div>
+      
+  </div>
+  </div>
+    <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="this.chartePointVersion=false" label="Ok" styleClass="p-button-text"></p-button>
+          </ng-template>
+</p-dialog>

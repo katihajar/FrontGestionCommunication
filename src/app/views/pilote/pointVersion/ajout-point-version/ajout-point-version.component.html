@@ -1,0 +1,371 @@
+<div class="container-fluid page" style="background-color: white">
+    <div class="d-flex page__box p-3">Ajouter Point de Version</div>
+    <div class="page__content shadow p-3 position-relative">
+        <div class="card align-items-center">
+            <div class="col-12" style="margin: 2%">
+                <span
+                class="p-input-icon-left"
+                style="margin-left: 2%"
+                [style]="{ width: '30%' }"
+              >
+              <label  for="basic5" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Application</label>
+              <p-dropdown [style]="{ width: '100%', required: 'required' }" [options]="ListApp" optionLabel="nomApplication"
+              [filter]="true" filterBy="nomApplication" [showClear]="true" inputId="basic5" placeholder="Selectinné l'Application"
+              [(ngModel)]="this.AddPointVersion.application">
+              <ng-template let-application pTemplate="item">
+                <div class="country-item">
+                  <div>{{ application.nomApplication }}</div>
+                </div>
+              </ng-template>
+            </p-dropdown>   
+              </span>
+                <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
+                    <label for="basic4" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Version</label>
+                    <input inputId="basic4" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="text" pInputText
+                        placeholder="Entré la version"   [(ngModel)]="this.AddPointVersion.version" />
+
+                </span>
+                <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
+                    <label for="basic4" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Nombre de tickets confirmés  </label>
+                    <input inputId="basic4" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="text" pInputText
+                        placeholder="Entré le Nombre de tickets confirmés "   [(ngModel)]="this.AddPointVersion.ticketConfirmer" />
+
+                </span>
+            
+            </div>
+            <div class="col-12" style="margin: 2%">
+                <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
+                    <label for="basic4" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">GO / No GO TNR </label>
+                    <input inputId="basic4" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="text" pInputText
+                        placeholder="Entré le GO / No GO TNR "   [(ngModel)]="this.AddPointVersion.goNoGoTNR" />
+
+                </span>
+                <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
+                    <label for="basic4" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">GO / No GO MEP  </label>
+                    <input inputId="basic4" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="text" pInputText
+                        placeholder="Entré le GO / No GO MEP  "   [(ngModel)]="this.AddPointVersion.goNoGoMEP" />
+
+                </span>
+                <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
+                    <label for="basic4" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date Reunion </label>
+                        <p-calendar inputId="basic4" [(ngModel)]="date2" [style]="{ width: '100%' }" [(ngModel)]="this.AddPointVersion.dateAjout" [showTime]="true" ></p-calendar>
+
+                </span>
+            </div>
+
+            <div class="card align-items-center" style="width: 80%; margin-bottom: 3%">
+                <h1 style="margin: 3%">Ajouter Livraison CARPM</h1>
+                <div class="col-12" style="margin-bottom: 2%">
+                    <span style="margin-left: 2%" class="p-input-icon-left" [style]="{ width: '40%' }">
+                        <label for="basic8" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date MEI</label>
+                        <p-calendar inputId="basic8" [(ngModel)]="date1" [style]="{ width: '100%' }" [(ngModel)]="this.Livraison.dateMEI" [showTime]="true" ></p-calendar>
+    
+                    </span>
+                    <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '40%' }">
+                        <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Nombre tickets livrés</label>
+                        <input inputId="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="number" pInputText
+                            placeholder="Entré le numero" [(ngModel)]="this.Livraison.nombreTicket"/>
+    
+                    </span>
+                  
+                </div>
+                <div class="col-12" style="margin-bottom: 2%">
+                    <span
+                    class="p-input-icon-left"
+                    style="margin-left: 2%"
+                    [style]="{ width: '70%' }"
+                  >
+                  <label for="basic" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Statut MEI</label>
+                    <p-dropdown
+                    inputId="basic"
+                      [options]="ListTypeTicket"
+                      [style]="{ width: '100%', required: 'required' }"
+                      placeholder="Selectinné le Statut"
+                      optionValue="name"
+                      optionLabel="name"
+                      [showClear]="true"
+                      [(ngModel)]="this.Livraison.statutMEI"
+                    ></p-dropdown>
+                    
+                  </span>
+
+                    <button style="margin-left: 1%" pButton pRipple type="button" icon="pi pi-plus" (click)="AddLivraison()" 
+                        class="p-button-rounded p-button-success"></button>
+                </div>
+                <div class="col-12" style="margin: 2%">
+                    <p-table class="table" [value]="this.ListLivraison" dataKey="id" [rows]="10"
+                        [showCurrentPageReport]="true" [paginator]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Date MEI
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Nombre tickets livrés
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Statut
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        supprimer
+                                    </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-livraison>
+                            <tr>
+                                <td>
+                                    {{ livraison.dateMEI | date: 'dd/MM/YYYY'}}
+                                </td>
+
+                                <td>
+                                    {{ livraison.nombreTicket }}
+                                </td>
+
+                                <td>
+                                    {{ livraison.statutMEI }}
+                                </td>
+                                <td>
+                                    <button pButton pRipple type="button" style="font-size: larger" icon="pi pi-times" (click)="removeLivraison(livraison)"
+                                        class="p-button-rounded p-button-danger"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="4">aucun plan d'action n'a été ajoué.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+            <div class="card align-items-center" style="width: 80%; margin-bottom: 3%">
+                <h1 style="margin: 3%">Ticket Ajouté</h1>
+                <div class="col-12 " style="margin-bottom: 2%">
+                    <span style="margin-left: 2%" class="p-input-icon-left" [style]="{ width: '45%' }">
+                        <label for="basic8" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">N° Ticket</label>
+                        <textarea inputId="basic8" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="number" pInputTextarea
+                        placeholder="Entré le numero" [(ngModel)]="this.TicketAjouter.numero"></textarea>
+                    </span>
+                    <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '45%' }">
+                        <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Description</label>
+                        <textarea inputId="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="number" pInputTextarea
+                            placeholder="Entré le Description" [(ngModel)]="this.TicketAjouter.description"></textarea>
+    
+                    </span>
+                    <button style="margin-left: 1%" pButton pRipple type="button" icon="pi pi-plus" (click)="AddTicketAjouter()" 
+                        class="p-button-rounded p-button-success"></button>
+                </div>
+
+                <div class="col-12" style="margin: 2%">
+                    <p-table class="table" [value]="this.ListTicketAjouter" dataKey="id" [rows]="10"
+                        [showCurrentPageReport]="true" [paginator]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        N° Ticket
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Description
+                                    </div>
+                                </th>
+                           
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        supprimer
+                                    </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-ticket>
+                            <tr>
+                                <td>
+                                    {{ ticket.numero}}
+                                </td>
+
+                                <td>
+                                    {{ ticket.description }}
+                                </td>
+
+                                <td>
+                                    <button pButton pRipple type="button" style="font-size: larger" icon="pi pi-times" (click)="removeTicketAjouter(ticket)"
+                                        class="p-button-rounded p-button-danger"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="4">aucun ticket n'a été ajoué.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+            <div class="card align-items-center" style="width: 80%; margin-bottom: 3%">
+                <h1 style="margin: 3%">Ticket Retiré</h1>
+                <div class="col-12 " style="margin-bottom: 2%">
+                    <span style="margin-left: 2%" class="p-input-icon-left" [style]="{ width: '45%' }">
+                        <label for="basic8" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">N° Ticket</label>
+                        <textarea inputId="basic8" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="number" pInputTextarea
+                        placeholder="Entré le numero" [(ngModel)]="this.TicketRetirer.numero"></textarea>
+                    </span>
+                    <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '45%' }">
+                        <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Description</label>
+                        <textarea inputId="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="number" pInputTextarea
+                            placeholder="Entré le description" [(ngModel)]="this.TicketRetirer.description"></textarea>
+    
+                    </span>
+                    <button style="margin-left: 1%" pButton pRipple type="button" icon="pi pi-plus" (click)="AddTicketRetirer()" 
+                        class="p-button-rounded p-button-success"></button>
+                </div>
+
+                <div class="col-12" style="margin: 2%">
+                    <p-table class="table" [value]="this.ListTicketRetirer" dataKey="id" [rows]="10"
+                        [showCurrentPageReport]="true" [paginator]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        N° Ticket
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Description
+                                    </div>
+                                </th>
+                           
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        supprimer
+                                    </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-ticket>
+                            <tr>
+                                <td>
+                                    {{ ticket.numero}}
+                                </td>
+
+                                <td>
+                                    {{ ticket.description }}
+                                </td>
+
+                                <td>
+                                    <button pButton pRipple type="button" style="font-size: larger" icon="pi pi-times" (click)="removeTicketRetirer(ticket)"
+                                        class="p-button-rounded p-button-danger"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="4">aucun ticket n'a été ajoué.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+            <div class="card align-items-center" style="width: 80%; margin-bottom: 3%">
+                <h1 style="margin: 3%">Planning Point Version</h1>
+                <div class="col-12 " style="margin-bottom: 2%">
+                    <span style="margin-left: 2%" class="p-input-icon-left" [style]="{ width: '45%' }">
+                        <label for="basic8" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Titre</label>
+                        <textarea inputId="basic8" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="number" pInputTextarea
+                        placeholder="Entré le planning" [(ngModel)]="this.Planning.titre"></textarea>
+                    </span>
+                    <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '45%' }">
+                        <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Description</label>
+                        <textarea inputId="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="number" pInputTextarea
+                            placeholder="Entré le numero" [(ngModel)]="this.Planning.description"></textarea>
+    
+                    </span>
+                    <button style="margin-left: 1%" pButton pRipple type="button" icon="pi pi-plus" (click)="AddPlanning()" 
+                        class="p-button-rounded p-button-success"></button>
+                </div>
+
+                <div class="col-12" style="margin: 2%">
+                    <p-table class="table" [value]="this.ListPlanning" dataKey="id" [rows]="10"
+                        [showCurrentPageReport]="true" [paginator]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Titre
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Description
+                                    </div>
+                                </th>
+                           
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        supprimer
+                                    </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-plan>
+                            <tr>
+                                <td>
+                                    {{ plan.titre}}
+                                </td>
+
+                                <td>
+                                    {{ plan.description }}
+                                </td>
+
+                                <td>
+                                    <button pButton pRipple type="button" style="font-size: larger" icon="pi pi-times" (click)="removePlanning(plan)"
+                                        class="p-button-rounded p-button-danger"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="4">aucun planning n'a été ajoué.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+
+            <div class="col-12" >
+                <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '46%' }">
+                    <label for="basic9" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Lien Commentaire</label>
+                    <textarea inputId="basic9" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text" pInputTextarea
+                        placeholder="Entré la Solution de contournement" [(ngModel)]="this.AddPointVersion.lienComment" ></textarea>
+                </span>
+          
+                    <span style="margin-left: 2%" class="p-input-icon-left" [style]="{ width: '46%' }">
+                        <label for="basic7" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Remarque</label>
+                        <textarea inputId="basic7" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text" pInputTextarea
+                            placeholder="Entré la Solution de contournement" [(ngModel)]="this.AddPointVersion.remarque" ></textarea>
+                    
+                    </span>
+            </div>
+        
+            <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
+                <button pButton pRipple (click)="showCharte()" type="button" label="Visualiser la charte" style=" float: left;margin-left: 2%;" class="p-button-raised p-button-help"></button>
+                <button pButton pRipple (click)="SendAndSavePoint()" style=" float: right;margin-right: 2%;" type="button" label="Submit" class="p-button-raised"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<app-charte-point-version></app-charte-point-version>

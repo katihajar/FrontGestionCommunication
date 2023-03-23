@@ -88,6 +88,8 @@ this.destService.FindDestinataireByApplication(this.AddIncident.application.id).
     this.ListPlanAction.push(this.Action);
     this.Action = new PlanAction();
     this.num = this.num+1;
+  }else{
+    this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
   }
   }
 
@@ -103,7 +105,9 @@ this.destService.FindDestinataireByApplication(this.AddIncident.application.id).
       this.charteIncident3Bfr = true;
     } else if(this.AddIncident.application.charteIncident =='charte Incident Monetics'){
         this.charteIncidentMonetic = true;
-      }    
+      } else{
+        this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Charte non trouvé'});
+      }   
   }
   SaveIncident(){
     if(this.AddIncident.application.charteIncident =='charte Incident'){

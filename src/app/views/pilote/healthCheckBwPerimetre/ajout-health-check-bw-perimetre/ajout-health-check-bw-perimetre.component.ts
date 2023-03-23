@@ -35,18 +35,13 @@ export class AjoutHealthCheckBwPerimetreComponent implements OnInit {
   dialogElement:any;
   @ViewChild(CharteHealthCheckBwPerimetreComponent,{static:false}) myDiv: any ;
   constructor(private healthService: HealthCheckBwPerimetreService,private charteService:CharteService,private router: Router,
-    private confirmationService: ConfirmationService,private messageService:MessageService) { }
-    clear(table: Table) {
-      table.clear();
-    }
-  
+    private messageService:MessageService) { }
+
   ngOnInit(): void {
     this.FindPerimetre();
     this.helthchekBwdetail= new HealthCheckBwPerimetreDetail();
     this.listHelthchekBwdetail = new Array<HealthCheckBwPerimetreDetail>();
-    if(this.AddHealthCheckBw.titre !=''){
-      this.listHelthchekBwdetail = this.AddHealthCheckBw.healthCheckBwPerimetreDetailList;
-    }
+    this.listHelthchekBwdetail = this.AddHealthCheckBw.healthCheckBwPerimetreDetailList;
     this.ListStatut= [
       { name: 'OK' },
       { name: 'In progress' },
@@ -62,6 +57,8 @@ export class AjoutHealthCheckBwPerimetreComponent implements OnInit {
     if(this.helthchekBwdetail.perimetre.titre != '' && this.helthchekBwdetail.statusNightTreatment!='' && this.helthchekBwdetail.statusNightTreatment!=''&& this.helthchekBwdetail.statusDataIntegrity!='' ){
     this.listHelthchekBwdetail.push(this.helthchekBwdetail);
     this.helthchekBwdetail = new HealthCheckBwPerimetreDetail();
+  }else{
+    this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
   }
 }
 removeDetails(us: HealthCheckBwPerimetreDetail) {

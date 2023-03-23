@@ -12,7 +12,7 @@
             [ngStyle]="{'border':'1px solid black'}">
             <div style="font-family: 'Times New Roman', Times, sans-serif;">
                 <div style="height: 4vh; display: flex; align-items: center; justify-content: flex-start; text-align: center;background-color: rgb(88, 140, 153) ">
-                    <p style="margin: 1%; font-weight: bolder;">[{{this.AddHealthCheck.type}}] Etat de santé Monétique – <span style="background-color: yellow;">{{this.AddHealthCheck.dateAjout | date :'dd/MM/YYYY'}}</span>, <span style="background-color:yellow ;">{{this.AddHealthCheck.dateAjout | date :'hh:mm'}}</span></p>
+                    <p style="margin: 1%; font-weight: bolder;">[{{this.AddHealthCheck.type}}] Etat de santé Monétique – <span style="background-color: yellow;">{{this.AddHealthCheck.dateAjout | date :'dd/MM/YYYY'}}</span>, <span style="background-color:yellow ;">{{this.AddHealthCheck.dateAjout | date :'HH:mm'}}</span></p>
                     <div style="margin-left: auto;">
                       <img src="../../../../../assets/img/frFlag.png"  class="mr-2 flag " style="width: 30px;"/>
                     </div>
@@ -21,7 +21,7 @@
             <div style="font-family: 'Times New Roman', Times, sans-serif;margin: 2%;">
                 <div class="col-12">
                     <p style="color: cornflowerblue;;">Bonjour</p><br>
-                    <p style="color: cornflowerblue;;">Merci de trouver ci-dessous l'état de santé du SI Monétique du <b style="background-color: yellow;">{{this.AddHealthCheck.dateAjout | date : 'dd/MM/YYYY'}}</b> à <b style="background-color: yellow;">{{this.AddHealthCheck.dateAjout | date : 'hh:mm'}}</b></p>
+                    <p style="color: cornflowerblue;;">Merci de trouver ci-dessous l'état de santé du SI Monétique du <b style="background-color: yellow;">{{this.AddHealthCheck.dateAjout | date : 'dd/MM/YYYY'}}</b> à <b style="background-color: yellow;">{{this.AddHealthCheck.dateAjout | date : 'HH:mm'}}</b></p>
                     <div style="float:left; width: 35%; margin-top: 2%;"  >
                         <table id="customers">
                             <tr>

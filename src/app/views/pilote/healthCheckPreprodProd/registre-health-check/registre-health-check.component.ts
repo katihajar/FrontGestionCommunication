@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
+import { Application } from 'src/app/controller/model/application';
 import { EtatProcessusMetier } from 'src/app/controller/model/etat-processus-metier';
 import { HealthChekPreprodProd } from 'src/app/controller/model/health-chek-preprod-prod';
 import { HealthChekPreprodProdDetail } from 'src/app/controller/model/health-chek-preprod-prod-detail';
@@ -43,8 +44,22 @@ PopAjout(){
     this.router.navigate(['/pilote/healthcheck/PreprodProd/save']);
     }
   }
+  get ListApp(): Array<Application>{
+    return this.healthService.ListApp;
+  }
+
+  set ListApp(value: Array<Application>) {
+    this.healthService.ListApp = value;
+  }
+
   onDialogHideLang(){
     this.AddHealthCheck = new HealthChekPreprodProd();
+  }
+  FindApp(){
+    this.healthService.FindApp().subscribe((data)=>{
+      // @ts-ignore
+      this.ListApp= data.body;
+    })
   }
   FindHealth(){
     this.healthService.FindHealthCheckByPilote().subscribe((data) => {
@@ -63,6 +78,7 @@ PopAjout(){
       // @ts-ignore
       this.AddHealthCheck.etatProcessusMetierList=data.body;
     });
+    this.AddHealthCheck.titre ='Etat de santé du '+moment(this.AddHealthCheck.dateAjout).format('DD/MM/YYYY')+','+moment(this.AddHealthCheck.dateAjout).format('HH:MM');
     this.popUpAjout=true;
 
   }
@@ -115,6 +131,7 @@ PopAjout(){
       // @ts-ignore
       this.AddHealthCheck.etatProcessusMetierList=data.body;
     });
+    this.FindApp();
     this.charteHealthCheckPreprodProd = true;
   }
   DeleteHealthCheck(id:number){

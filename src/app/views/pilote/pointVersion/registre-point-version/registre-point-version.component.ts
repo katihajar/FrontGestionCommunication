@@ -42,17 +42,16 @@ export class RegistrePointVersionComponent implements OnInit {
     this.pointService.FindLivraisonByPointVersion(point.id).subscribe((data) => {
       //@ts-ignore
       this.AddPointVersion.livraisonCARMList = data.body;
-    });
-    this.pointService.FindPlanningByPointVersion(point.id).subscribe((data) => {
+      this.pointService.FindPlanningByPointVersion(point.id).subscribe((data) => {
       // @ts-ignore
-      this.AddPointVersion.planningPointVersionList = data.body;
-    });
-    this.pointService.FindTicketByPointVersion(point.id).subscribe((data) => {
+      this.AddPointVersion.planningPointVersionList = data.body; 
+      this.pointService.FindTicketByPointVersion(point.id).subscribe((data) => {
       //@ts-ignore
       this.AddPointVersion.ticketList = data.body;
+      this.router.navigate(['/pilote/pointversion/save']);
     });
-    this.router.navigate(['/pilote/pointversion/save']);
-
+    });
+    });   
   }
   get AddPointVersion(): PointVersion {
     return this.pointService.AddPointVersion;
@@ -92,7 +91,6 @@ export class RegistrePointVersionComponent implements OnInit {
       //@ts-ignore
       this.AddPointVersion.ticketList = data.body;
     });
-
     this.chartePointVersion = true;
   }
   DeletePointVersion(id: number) {

@@ -360,6 +360,20 @@
                     
                     </span>
             </div>
+            <div class="col-12" >
+                <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '50%' }">
+                    <label for="basic9" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-bottom: 1%;">Upload Image</label>
+                    <input
+                    inputId="basic9"
+                    type="file"
+                    accept="image/*"
+                    class="form-control form-control-alternative"
+                    placeholder="file"
+                    name="file"
+                    (change)="onUpload($event)">
+</span>
+
+            </div>
         
             <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
                 <button pButton pRipple (click)="showCharte()" type="button" label="Visualiser la charte" style=" float: left;margin-left: 2%;" class="p-button-raised p-button-help"></button>

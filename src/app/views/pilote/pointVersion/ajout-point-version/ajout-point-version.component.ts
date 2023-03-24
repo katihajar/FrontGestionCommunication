@@ -41,6 +41,7 @@ export class AjoutPointVersionComponent implements OnInit {
   dialogElement: any;
   date1: Date = new Date();
   date2: Date = new Date();
+  selectedFile!: File;
   @ViewChild(ChartePointVersionComponent, { static: false }) myDiv: any;
   constructor(private pointService: PointVersionService, private charteService: CharteService, private router: Router,
     private messageService: MessageService) { }
@@ -53,34 +54,39 @@ export class AjoutPointVersionComponent implements OnInit {
     this.ListLivraison = new Array<LivraisonCARM>();
     this.TicketAjouter = new Ticket();
     this.TicketRetirer = new Ticket();
-    this.Planning= new PlanningPointVersion();
-    this.Livraison= new LivraisonCARM();
-    this.ListPlanning =this.AddPointVersion.planningPointVersionList;
+    this.Planning = new PlanningPointVersion();
+    this.Livraison = new LivraisonCARM();
+    this.ListPlanning = this.AddPointVersion.planningPointVersionList;
     this.ListLivraison = this.AddPointVersion.livraisonCARMList;
-    for(let i =0; i<this.AddPointVersion.ticketList.length;i++){
-      if(this.AddPointVersion.ticketList[i].type == 'Ajouter'){
-        this.ListTicketAjouter.push(this.AddPointVersion.ticketList[i]);
-      }else{
-        this.ListTicketRetirer.push(this.AddPointVersion.ticketList[i]);
+    if (this.AddPointVersion.ticketList.length != null) {
+      for (let i = 0; i < this.AddPointVersion.ticketList.length; i++) {
+        if (this.AddPointVersion.ticketList[i].type == 'Ajouter') {
+          this.ListTicketAjouter.push(this.AddPointVersion.ticketList[i]);
+        } else {
+          this.ListTicketRetirer.push(this.AddPointVersion.ticketList[i]);
+        }
       }
+    } else {
+      this.ListTicketAjouter = new Array<Ticket>();
+      this.ListTicketRetirer = new Array<Ticket>();
     }
     this.ListTypeTicket = [
       { name: 'OK' },
       { name: 'NO' },
     ];
   }
-  FindApp(){
-    this.pointService.FindApp().subscribe((data)=>{
+  FindApp() {
+    this.pointService.FindApp().subscribe((data) => {
       // @ts-ignore
-      this.ListApp= data.body;
+      this.ListApp = data.body;
     })
   }
   AddLivraison() {
     if (this.Livraison.dateMEI != null) {
       this.ListLivraison.push(this.Livraison);
       this.Livraison = new LivraisonCARM();
-    }else{
-      this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
+    } else {
+      this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Insérer tout les champs' });
     }
   }
   removeLivraison(us: LivraisonCARM) {
@@ -92,8 +98,8 @@ export class AjoutPointVersionComponent implements OnInit {
       this.TicketAjouter.type = 'Ajouter';
       this.ListTicketAjouter.push(this.TicketAjouter);
       this.TicketAjouter = new Ticket();
-    }else{
-      this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
+    } else {
+      this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Insérer tout les champs' });
     }
   }
   removeTicketAjouter(us: Ticket) {
@@ -105,8 +111,8 @@ export class AjoutPointVersionComponent implements OnInit {
       this.TicketRetirer.type = 'Retirer';
       this.ListTicketRetirer.push(this.TicketRetirer);
       this.TicketRetirer = new Ticket();
-    }else{
-      this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
+    } else {
+      this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Insérer tout les champs' });
     }
   }
   removeTicketRetirer(us: Ticket) {
@@ -117,8 +123,8 @@ export class AjoutPointVersionComponent implements OnInit {
     if (this.Planning.titre != null && this.Planning.description != '') {
       this.ListPlanning.push(this.Planning);
       this.Planning = new PlanningPointVersion();
-    }else{
-      this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
+    } else {
+      this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Insérer tout les champs' });
     }
   }
   removePlanning(us: PlanningPointVersion) {
@@ -139,45 +145,59 @@ export class AjoutPointVersionComponent implements OnInit {
   set AddPointVersion(value: PointVersion) {
     this.pointService.AddPointVersion = value;
   }
-  showCharte(){
-    this.AddPointVersion.livraisonCARMList=this.ListLivraison;
-    this.AddPointVersion.planningPointVersionList=this.ListPlanning;
+  onUpload(event: any) {
+    this.selectedFile = <File>event.target.files[0];
+
+  }
+  showCharte() {
+    this.AddPointVersion.livraisonCARMList = this.ListLivraison;
+    this.AddPointVersion.planningPointVersionList = this.ListPlanning;
     this.ListTicket = this.ListTicketAjouter;
-    for(let i = 0; i<this.ListTicketRetirer.length; i++){
-    this.ListTicket.push(this.ListTicketRetirer[i]);
+    for (let i = 0; i < this.ListTicketRetirer.length; i++) {
+      this.ListTicket.push(this.ListTicketRetirer[i]);
+    }
+    this.AddPointVersion.ticketList = this.ListTicket;
+    if (this.selectedFile != null) {
+      const reader = new FileReader();
+      reader.readAsDataURL(this.selectedFile);
+      reader.onload = () => {
+        const base64String = reader.result as string;
+        const base64 = base64String.split(',')[1];
+        this.AddPointVersion.image = base64;
+        this.AddPointVersion.imageType = this.selectedFile.type;               
+      };
+    }
+    this.chartePointVersion = true;
   }
-    this.AddPointVersion.ticketList=this.ListTicket;
-      this.chartePointVersion = true;
-  }
-  SavePoint(){
-    if(this.AddPointVersion.application.nomApplication != null && this.AddPointVersion.version != '' && this.AddPointVersion.dateAjout != null){
-    this.AddPointVersion.titre = this.AddPointVersion.application.nomApplication+' '+ this.AddPointVersion.version +' – Point version  – '+moment(this.AddPointVersion.dateAjout).format('DD/MM/YYYY');
-    this.Subject = this.AddPointVersion.titre;
-    if(this.AddPointVersion.titre != ''  &&this.AddPointVersion.goNoGoMEP != '' && this.AddPointVersion.goNoGoTNR !='' && this.AddPointVersion.remarque !='' && this.AddPointVersion.lienComment !=''){
-      this.pointService.SavePointVersion().subscribe((data) => {
-             this.AddPointVersion=new PointVersion();
-             this.ListTicketAjouter = new Array<Ticket>();
-             this.ListTicketRetirer = new Array<Ticket>();
-             this.ListTicket = new Array<Ticket>();
-             this.ListLivraison = new Array<LivraisonCARM>();
-             this.ListPlanning = new Array<PlanningPointVersion>();
-             this.router.navigate(['/pilote/pointversion/registre']);
-             const mailtoLink = `mailto:${this.EmailObligatoire.join(',')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(',')}`;
-             window.open(mailtoLink, '_blank');
-             this.messageService.add({severity:'success', summary: 'Success', detail: 'Point Version Ajouter avec succès'});
-            },error=>{
-              this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de l\'enregistrement'});
-      })
-      }else{
-        this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
+  SavePoint() {
+    if (this.AddPointVersion.application.nomApplication != null && this.AddPointVersion.version != '' && this.AddPointVersion.dateAjout != null) {
+      this.AddPointVersion.titre = this.AddPointVersion.application.nomApplication + ' ' + this.AddPointVersion.version + ' – Point version  – ' + moment(this.AddPointVersion.dateAjout).format('DD/MM/YYYY');
+      this.Subject = this.AddPointVersion.titre;
+      if (this.AddPointVersion.titre != '' && this.AddPointVersion.goNoGoMEP != '' && this.AddPointVersion.goNoGoTNR != '' && this.AddPointVersion.remarque != '' && this.AddPointVersion.lienComment != '') {
+        this.pointService.SavePointVersion(this.selectedFile).subscribe((data) => {
+          this.AddPointVersion = new PointVersion();
+          this.ListTicketAjouter = new Array<Ticket>();
+          this.ListTicketRetirer = new Array<Ticket>();
+          this.ListTicket = new Array<Ticket>();
+          this.ListLivraison = new Array<LivraisonCARM>();
+          this.ListPlanning = new Array<PlanningPointVersion>();
+          this.router.navigate(['/pilote/pointversion/registre']);
+          const mailtoLink = `mailto:${this.EmailObligatoire.join(',')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(',')}`;
+          window.open(mailtoLink, '_blank');
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Point Version Ajouter avec succès' });
+        }, error => {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Erreur lors de l\'enregistrement' });
+        })
+      } else {
+        this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Insérer tout les champs' });
       }
-    }else{
-      this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
+    } else {
+      this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Insérer tout les champs' });
     }
   }
   takeScreenshot() {
-      this.chartePointVersion = true;
-     
+    this.chartePointVersion = true;
+
     setTimeout(() => {
       this.dialogElement = this.myDiv.filterComponent.nativeElement;
       const options: MyOptions = {
@@ -190,7 +210,7 @@ export class AjoutPointVersionComponent implements OnInit {
         this.imageDataUrl = canvas.toDataURL();
         const blob = this.dataURLtoBlob(this.imageDataUrl);
         const imageUrl = URL.createObjectURL(blob); // create URL object from blob
-        const file = new File([blob], this.AddPointVersion.application.nomApplication+'.png', { type: 'image/png' });
+        const file = new File([blob], this.AddPointVersion.application.nomApplication + '.png', { type: 'image/png' });
         saveAs(file);
         this.SavePoint();
       });
@@ -198,7 +218,7 @@ export class AjoutPointVersionComponent implements OnInit {
 
     }, 1000);
   }
-  
+
   dataURLtoBlob(dataURL: string): Blob {
     const arr = dataURL.split(',');
     if (arr.length < 2) {
@@ -224,14 +244,15 @@ export class AjoutPointVersionComponent implements OnInit {
   }
 
   SendAndSavePoint() {
-    this.AddPointVersion.livraisonCARMList=this.ListLivraison;
-    this.AddPointVersion.planningPointVersionList=this.ListPlanning;
+    this.AddPointVersion.id = 0;
+    this.AddPointVersion.livraisonCARMList = this.ListLivraison;
+    this.AddPointVersion.planningPointVersionList = this.ListPlanning;
     this.ListTicket = this.ListTicketAjouter;
-    for(let i = 0; i<this.ListTicketRetirer.length; i++){
-    this.ListTicket.push(this.ListTicketRetirer[i]);
-  }
-    this.AddPointVersion.ticketList=this.ListTicket;
-      this.chartePointVersion = true;
+    for (let i = 0; i < this.ListTicketRetirer.length; i++) {
+      this.ListTicket.push(this.ListTicketRetirer[i]);
+    }
+    this.AddPointVersion.ticketList = this.ListTicket;
+    this.chartePointVersion = true;
     this.takeScreenshot();
   }
 }

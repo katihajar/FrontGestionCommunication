@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
+import { Application } from 'src/app/controller/model/application';
 import { HealthChekPreprodProd } from 'src/app/controller/model/health-chek-preprod-prod';
 import { CharteService } from 'src/app/controller/service/charte.service';
 import { HealthCheckRespoService } from 'src/app/controller/service/health-check-respo.service';
@@ -28,7 +29,12 @@ export class RegistrHealthCheckProdRespoComponent implements OnInit {
     this.AddHealthCheck = new HealthChekPreprodProd();
     this.FindHealth();
   }
-
+  FindApp(){
+    this.healthService.FindApp().subscribe((data)=>{
+      // @ts-ignore
+      this.ListApp= data.body;
+    })
+  }
   FindHealth(){
     this.healthService.FindHealthCheck().subscribe((data) => {
       // @ts-ignore
@@ -52,6 +58,14 @@ export class RegistrHealthCheckProdRespoComponent implements OnInit {
   set charteHealthCheckPreprodProd(value: boolean) {
     this.charteService.charteHealthCheckPreprodProd = value;
   }
+  get ListApp(): Array<Application>{
+    return this.health2.ListApp;
+  }
+
+  set ListApp(value: Array<Application>) {
+    this.health2.ListApp = value;
+  }
+
   charte(helth:HealthChekPreprodProd){
     this.AddHealthCheck=helth;
     this.healthService.FindDetailByHealthCheck(helth.id).subscribe((data)=>{
@@ -62,6 +76,7 @@ export class RegistrHealthCheckProdRespoComponent implements OnInit {
       // @ts-ignore
       this.AddHealthCheck.etatProcessusMetierList=data.body;
     });
+    this.FindApp();
     this.charteHealthCheckPreprodProd = true;
   }
 }

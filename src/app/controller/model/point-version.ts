@@ -19,4 +19,8 @@ export class PointVersion {
     public livraisonCARMList=new Array<LivraisonCARM>();
     public planningPointVersionList=new Array<PlanningPointVersion>();
     public ticketList=new Array<Ticket>();
+    public image :string = String();
+    public imageSize: number = Number(0);
+    public imageName:string = String();
+    public imageType:string = String();
 }

@@ -11,18 +11,19 @@ import { HealthCheckService } from 'src/app/controller/service/health-check.serv
 })
 export class CharteHealthCheckComponent implements OnInit {
   @ViewChild('myDialog',{static:false}) filterComponent!: ElementRef;
-  ListApp: Array<Application>=new Array<Application>();
   constructor(private charteService: CharteService,private healthService: HealthCheckService) { }
 
   ngOnInit(): void {
-    this.FindApp();
   }
-  FindApp(){
-    this.healthService.FindApp().subscribe((data)=>{
-      // @ts-ignore
-      this.ListApp= data.body;
-    })
+
+  get ListApp(): Array<Application>{
+    return this.healthService.ListApp;
   }
+
+  set ListApp(value: Array<Application>) {
+    this.healthService.ListApp = value;
+  }
+
   get charteHealthCheckPreprodProd(): boolean {
     return this.charteService.charteHealthCheckPreprodProd;
   }

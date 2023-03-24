@@ -49,11 +49,18 @@ export class PointVersionService {
     );    
   }
 
-  public SavePointVersion(): Observable<HttpResponse<PointVersion>> {
+  public SavePointVersion(select:File): Observable<HttpResponse<PointVersion>> {
     this.AddPointVersion.createurPointVersion = this.auth.User;
-    const headers: HttpHeaders = this.auth.tokenHeaders();
+    const headers: HttpHeaders = this.auth.tokenHeaders2();
+    const data: FormData=new FormData();
+    const pointVersion = Object.assign({}, this.AddPointVersion); // create a copy of AddPointVersion
+    const { id,createurPointVersion,application, ...pointVersionWithoutId } = pointVersion;
+    data.append('file',select,select.name);
+    data.append('pointVersion',JSON.stringify(pointVersionWithoutId));
+    data.append('idApp', this.AddPointVersion.application.id.toString());
+    data.append('idUser',this.AddPointVersion.createurPointVersion.id.toString());
     return this.http.post<PointVersion>(
-      this.urlPilote + 'pointversion/save',this.AddPointVersion,
+      this.urlPilote + 'pointversion/save',data,
       { observe: 'response', headers }
     );    
   }

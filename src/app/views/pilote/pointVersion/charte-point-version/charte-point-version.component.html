@@ -53,6 +53,11 @@
       <h2 style="margin-bottom: 0%;padding: 0%;margin: 0%"><span style="background-color: #ffc404;"><b>GO / No GO TNR  : {{this.AddPointVersion.goNoGoTNR}}</b></span></h2>
        <h2 style="margin-bottom: 0%;margin-top: 0%;padding: 0%;margin: 0%"> <span style="background-color: #ffc404;margin-top: 0%;"><b>GO / No GO MEP  : {{this.AddPointVersion.goNoGoMEP}}</b></span></h2><br>
       <p>Les tickets de la version ainsi que les commentaires/remarques (colonne : commentaire IT) de cette réunion sont  : </p><br>
+      <div class="col-12" *ngIf="this.AddPointVersion.image != null" style="margin-bottom: 2%;">
+        <h1 style="margin: 1%; font-weight: bolder;text-align: center;"> {{this.AddPointVersion.application.nomApplication | uppercase}} V{{this.AddPointVersion.version}}  – POINT VERSION du {{this.AddPointVersion.dateAjout | date: 'dd/MM'}}</h1>
+        <img src="data:{{this.AddPointVersion.imageType}};base64,{{this.AddPointVersion.image}}" width="100%" 
+        alt="psa" title="psa" class="staticImg" >
+      </div>
       <div *ngIf="this.AddPointVersion.ticketList.length !=0">
       <h2 style="color: white; background-color: #0464b4;background-size: cover;"><u>Tickets retirés de la version :</u></h2> <br>
       <h2 style="color: #1c4c88;"><b><u>En séance :</u></b></h2>

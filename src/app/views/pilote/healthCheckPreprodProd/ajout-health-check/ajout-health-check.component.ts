@@ -23,7 +23,6 @@ const moment = require('moment');
 })
 export class AjoutHealthCheckComponent implements OnInit {
 
-  ListApp: Array<Application>= new Array<Application>();
   ListFeu:any[]=[];
   ListImpactClient:any[]=[];
   ListStatut:any[]=[];
@@ -116,6 +115,13 @@ removeDeatils(us: HealthChekPreprodProdDetail) {
       this.ListProcessus= data.body;
     })
   }
+  get ListApp(): Array<Application>{
+    return this.healthService.ListApp;
+  }
+
+  set ListApp(value: Array<Application>) {
+    this.healthService.ListApp = value;
+  }
   FindApp(){
     this.healthService.FindApp().subscribe((data)=>{
       // @ts-ignore
@@ -125,9 +131,11 @@ removeDeatils(us: HealthChekPreprodProdDetail) {
   charte(){
     this.AddHealthCheck.etatProcessusMetierList = this.listEtatproc;
     this.AddHealthCheck.healthChekPreprodProdDetailList = this.listHelthchekdetail;
+    this.FindApp();
     this.charteHealthCheckPreprodProd = true;
   }
   SaveHealth(){
+    this.AddHealthCheck.dateAjout = new Date();
     this.Subject = '['+this.AddHealthCheck.type+'] Etat de santé Monétique – '+moment(this.AddHealthCheck.dateAjout).format('DD/MM/YYYY')+','+moment(this.AddHealthCheck.dateAjout).format('HH:MM');
     if(this.AddHealthCheck.etatProcessusMetierList.length != 0 && this.AddHealthCheck.healthChekPreprodProdDetailList.length != 0  ){
       this.healthService.SaveHealthCheck().subscribe((data) => {

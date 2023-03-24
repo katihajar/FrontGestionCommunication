@@ -11,6 +11,5 @@ export class User {
   public credentialsNonExpired = true;
   public accountNonLocked = true;
   public enabled = true;
-  public authorities: [] | undefined;
   public  roles = new Array<Role>();
 }

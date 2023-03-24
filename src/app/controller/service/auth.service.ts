@@ -87,5 +87,13 @@ export class AuthService {
       });
     return headers;
   }
-
+  tokenHeaders2(): HttpHeaders {
+    let headers = new HttpHeaders();
+      headers = new HttpHeaders({
+        Accept: 'application/json',
+        // 'Content-Type':'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW',
+        Authorization: `Bearer ${this.UserAuth.accessToken}`,
+      });
+    return headers;
+  }
 }

@@ -19,7 +19,22 @@ export class HealthCheckService {
   private _AddHealthCheck: HealthChekPreprodProd = new HealthChekPreprodProd();
   private _ListHealthDetail = new Array<HealthChekPreprodProdDetail>();
   private _ListEtatProcess = new Array<EtatProcessusMetier>();
+  private _ListApp = new Array<Application>();
   constructor(private http: HttpClient,private auth: AuthService) { }
+
+
+  get ListApp(): Array<Application>{
+    if(this._ListApp == null){
+      this._ListApp = new Array<Application>();
+    }
+    return this._ListApp;
+  }
+
+  set ListApp(value: Array<Application>) {
+    this._ListApp = value;
+  }
+
+
 
 
   get AddHealthCheck(): HealthChekPreprodProd{

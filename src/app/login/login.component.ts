@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    this.User = new User();
-    this.UserAuth = new Userauth();
+    if(this.User.username != ''){
+    this.authService.LogOUT();}
   }
   get User(): User {
     return this.authService.User;
@@ -43,9 +43,14 @@ export class LoginComponent implements OnInit {
       // @ts-ignore
       this.UserAuth = data.body;
       this.User = this.UserAuth.user;
+      localStorage.setItem('currentUser', JSON.stringify(this.User));
+      localStorage.setItem('accessToken', this.UserAuth.accessToken as string);
+      localStorage.setItem('refreshToken',this.UserAuth.refreshToken as string);
+      localStorage.setItem('auth',JSON.stringify(this.UserAuth));
       this.invalidLogin = false;
       this.loginSuccess = true;
       this.successMessage = 'Login Successful';
+      console.log(this.UserAuth.accessToken);
       if (this.UserAuth.accessToken !== null) {
         if (this.User.roles[0].name == 'ROLE_ADMIN') {
           this.router.navigate(['/admin']);

@@ -14,7 +14,12 @@ export class AuthService {
   private _User: User = new User();
   private _UserAuth: Userauth = new Userauth();
   private _submitted: boolean = false;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    if (this.isLoggedIn()) {
+      this.User = this.getUser();
+      this.UserAuth = this.getAuth();
+    }
+  }
 
   get UserAuth(): Userauth {
     if(this._UserAuth == null){
@@ -30,26 +35,45 @@ export class AuthService {
   public Login(user: string, pass: string): Observable<HttpResponse<Userauth>> {
     const headers: HttpHeaders = this.initHeaders();
     return this.http.post<Userauth>(
-      this.url + 'api/auth/login',
+      this.url + '/api/auth/login',
       { username: user, password: pass },
       { observe: 'response', headers }
     );
   }
 
   public LogOUT(){
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('auth');
+    localStorage.removeItem('currentUser');
     const headers = { Authorization: 'Bearer ' + this.UserAuth.accessToken };
     return this.http.post(
-      this.url + 'api/auth/logout',
+      this.url + '/logout', // update this line to add a forward slash before "logout"
       this.UserAuth,
       { headers }
     ).subscribe(
-            () => console.log('Logout successful'),
+            () => {
+              this.User = new User();
+              this.UserAuth = new Userauth();
+              console.log('Logout successful')
+            },
             error => console.error('Logout failed', error)
         );
-        
-  }
-  
 
+  }
+
+
+
+  isLoggedIn() {
+    return !!localStorage.getItem('currentUser');
+  }
+
+  getUser() {
+    return JSON.parse(localStorage.getItem('currentUser') as string);
+  }
+  getAuth(){
+    return JSON.parse(localStorage.getItem('auth') as string);
+  }
   initHeaders(): HttpHeaders {
     let headers = new HttpHeaders();
     const token = localStorage.getItem('accessToken');

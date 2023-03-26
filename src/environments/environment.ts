@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  baseUrl: 'http://localhost:8039/',
+  baseUrl: 'http://localhost:8039',
   baseUrlAdmin: 'http://localhost:8039/api/admin/',
   baseUrlPilote: 'http://localhost:8039/api/pilote/',
   baseUrlResponsable: 'http://localhost:8039/api/responsable/',

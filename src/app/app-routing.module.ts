@@ -51,7 +51,7 @@ import { RegistrePointVersionRespoComponent } from './views/responsable/registre
         { path: 'application/save', component: AjouterApplicationComponent },
         { path: 'perimetre/register', component: RegistrePerimetreComponent },
         { path: 'processusMetier/register', component: RegistreProcessusMetierComponent },
-        { path: '', redirectTo: 'home', pathMatch: 'full' },
+        { path: '', redirectTo: 'test', pathMatch: 'full' },
       ],
     },
     {
@@ -67,7 +67,7 @@ import { RegistrePointVersionRespoComponent } from './views/responsable/registre
         { path: 'healthcheck/PreprodProd/registre', component: RegistrHealthCheckProdRespoComponent },
         { path: 'healthcheck/Bw/registre', component: RegistrHealthBwPerimetreRespoComponent },
         { path: 'pointversion/registre', component: RegistrePointVersionRespoComponent },
-        { path: '', redirectTo: 'homeRespo', pathMatch: 'full' },
+        { path: '', redirectTo: 'testRespo', pathMatch: 'full' },
       ],
     },
     {
@@ -92,7 +92,7 @@ import { RegistrePointVersionRespoComponent } from './views/responsable/registre
         { path: 'healthcheck/Bw/save', component: AjoutHealthCheckBwPerimetreComponent },
         { path: 'pointversion/registre', component: RegistrePointVersionComponent },
         { path: 'pointversion/save', component: AjoutPointVersionComponent },
-        { path: '', redirectTo: 'homePilote', pathMatch: 'full' },
+        { path: '', redirectTo: 'testPilote', pathMatch: 'full' },
       ],
     },
     // no layout views

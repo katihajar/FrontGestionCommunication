@@ -262,7 +262,7 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
              this.AddIncident=new Incident();
               this.ListPlanAction = new Array<PlanAction>();
              this.ListPlanActionAng = new Array<PlanAction>();
-             const mailtoLink = `mailto:${this.EmailObligatoire.join(',')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(',')}`;
+             const mailtoLink = `mailto:${this.EmailObligatoire.join(';')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(';')}`;
              window.open(mailtoLink, '_blank');
              this.router.navigate(['/pilote/incident/registre']);
              this.messageService.add({severity:'success', summary: 'Success', detail: 'Incident Ajouter avec succès'});

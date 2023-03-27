@@ -102,7 +102,7 @@ export class AjouterChangementFrComponent implements OnInit {
              this.AddChangement=new ChangementPlanifier();
              this.ListContenu = new Array<ContenuChangement>();
              this.router.navigate(['/pilote/changement/registre']);
-             const mailtoLink = `mailto:${this.EmailObligatoire.join(',')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(',')}`;
+             const mailtoLink = `mailto:${this.EmailObligatoire.join(';')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(';')}`;
              window.open(mailtoLink, '_blank');
              this.messageService.add({severity:'success', summary: 'Success', detail: 'Changement Ajouter avec succès'});
             },error=>{

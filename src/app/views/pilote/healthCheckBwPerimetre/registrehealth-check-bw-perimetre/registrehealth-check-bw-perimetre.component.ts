@@ -31,7 +31,7 @@ export class RegistrehealthCheckBwPerimetreComponent implements OnInit {
   }
   RouterAjout(){
     this.AddHealthCheckBw.dateAjout = new Date();
-    this.AddHealthCheckBw.titre ='Health Check  BW perimeter -'+moment(this.AddHealthCheckBw.dateAjout).format('DD/MM/YYYY');
+    this.AddHealthCheckBw.titre ='Health Check  BW perimeter - '+moment(this.AddHealthCheckBw.dateAjout).format('DD/MM/YYYY');
    this.router.navigate(['/pilote/healthcheck/Bw/save']);
   }
 
@@ -47,6 +47,8 @@ export class RegistrehealthCheckBwPerimetreComponent implements OnInit {
     this.healthService.FindDetailByHealthCheckBw(helth.id).subscribe((data)=>{
             // @ts-ignore
       this.AddHealthCheckBw.healthCheckBwPerimetreDetailList=data.body;
+      this.AddHealthCheckBw.dateAjout = new Date();
+      this.AddHealthCheckBw.titre ='Health Check  BW perimeter - '+moment(this.AddHealthCheckBw.dateAjout).format('DD/MM/YYYY');  
       this.router.navigate(['/pilote/healthcheck/Bw/save']);
     }); 
 

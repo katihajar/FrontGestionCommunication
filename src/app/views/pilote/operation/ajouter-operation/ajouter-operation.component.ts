@@ -123,7 +123,7 @@ export class AjouterOperationComponent implements OnInit {
        if(this.AddOperation.description != '' && this.AddOperation.titre != '' && this.AddOperation.dateDebut !=null){
        this.operationService.SaveOperation().subscribe((data) => {
               this.AddOperation=new Operation();
-              const mailtoLink = `mailto:${this.EmailObligatoire.join(',')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(',')}`;
+              const mailtoLink = `mailto:${this.EmailObligatoire.join(';')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(';')}`;
               window.open(mailtoLink, '_blank');
               this.router.navigate(['/pilote/operation/registre']);
               this.messageService.add({severity:'success', summary: 'Success', detail: 'Operation Ajouter avec succès'});

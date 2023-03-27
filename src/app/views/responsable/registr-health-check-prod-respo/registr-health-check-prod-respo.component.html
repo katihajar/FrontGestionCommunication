@@ -4,7 +4,7 @@
     <div class="card">
       <p-table class="table" #dt1 [value]=" this.ListHealthCheck" dataKey="id" [rows]="10"
         [showCurrentPageReport]="true" [loading]="loading" [paginator]="true"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [sortField]="'dateDebut'"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [sortField]="'dateAjout'"
         [sortOrder]="-1" [globalFilterFields]="['titre','type','dateAjout']">
         <ng-template pTemplate="caption">
           <div class="flex">

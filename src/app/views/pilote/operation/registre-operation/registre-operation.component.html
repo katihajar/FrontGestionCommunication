@@ -13,6 +13,7 @@
         <p-table class="table" #dt1 [value]=" this.ListOperationOfPilote" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
            [loading]="loading" [paginator]="true"
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          [sortField]="'dateDebut'" [sortOrder]="-1"
           [globalFilterFields]="['application.nomApplication','titre','numero','statut','description','dateDebut','dateFin']">
           <ng-template pTemplate="caption">
             <div class="flex">

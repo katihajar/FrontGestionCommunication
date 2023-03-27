@@ -12,6 +12,7 @@ import html2canvas from 'html2canvas';
 import { saveAs } from 'file-saver';
 import { MyOptions } from 'src/app/controller/model/myoption';
 import { CharteHealthCheckBwPerimetreComponent } from '../charte-health-check-bw-perimetre/charte-health-check-bw-perimetre.component';
+import { DestinataireService } from 'src/app/controller/service/destinataire.service';
 const moment = require('moment');
 @Component({
   selector: 'app-ajout-health-check-bw-perimetre',
@@ -35,7 +36,7 @@ export class AjoutHealthCheckBwPerimetreComponent implements OnInit {
   dialogElement:any;
   @ViewChild(CharteHealthCheckBwPerimetreComponent,{static:false}) myDiv: any ;
   constructor(private healthService: HealthCheckBwPerimetreService,private charteService:CharteService,private router: Router,
-    private messageService:MessageService) { }
+    private messageService:MessageService,private destService: DestinataireService) { }
 
   ngOnInit(): void {
     this.FindPerimetre();
@@ -52,6 +53,17 @@ export class AjoutHealthCheckBwPerimetreComponent implements OnInit {
       { name: 'Yes' },
       { name: 'No' },
     ];
+    this.destService.FindDestinataireHealthCheckBwPerimetre().subscribe((data)=>{
+      // @ts-ignore
+      this.listDestinataire = data.body;
+      for(let i = 0;i<this.listDestinataire.length;i++){
+        if(this.listDestinataire[i].typeDest=='Obligatoire' && this.listDestinataire[i].statutRespo == 'Valider'){
+          this.EmailObligatoire.push(this.listDestinataire[i].email)
+        }else if(this.listDestinataire[i].typeDest=='en CC' && this.listDestinataire[i].statutRespo == 'Valider'){
+          this.EmailEnCC.push(this.listDestinataire[i].email)
+        }
+      }
+    })
   }
   AddDetails(){
     if(this.helthchekBwdetail.perimetre.titre != '' && this.helthchekBwdetail.statusNightTreatment!='' && this.helthchekBwdetail.statusNightTreatment!=''&& this.helthchekBwdetail.statusDataIntegrity!='' ){
@@ -101,7 +113,7 @@ removeDetails(us: HealthCheckBwPerimetreDetail) {
              this.listHelthchekBwdetail = new Array<HealthCheckBwPerimetreDetail>();
              this.helthchekBwdetail= new HealthCheckBwPerimetreDetail;
              this.router.navigate(['/pilote/healthcheck/Bw/registre']);
-             const mailtoLink = `mailto:${this.EmailObligatoire.join(',')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(',')}`;
+             const mailtoLink = `mailto:${this.EmailObligatoire.join(';')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(';')}`;
              window.open(mailtoLink, '_blank');
              this.messageService.add({severity:'success', summary: 'Success', detail: 'Incident Ajouter avec succès'});
             },error=>{

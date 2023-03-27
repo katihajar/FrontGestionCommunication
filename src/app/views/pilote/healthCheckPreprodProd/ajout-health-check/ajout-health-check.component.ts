@@ -14,6 +14,7 @@ import { CharteHealthCheckComponent } from '../charte-health-check/charte-health
 import html2canvas from 'html2canvas';
 import { saveAs } from 'file-saver';
 import { MyOptions } from 'src/app/controller/model/myoption';
+import { DestinataireService } from 'src/app/controller/service/destinataire.service';
 const moment = require('moment');
 
 @Component({
@@ -41,7 +42,7 @@ export class AjoutHealthCheckComponent implements OnInit {
   dialogElement:any;
   @ViewChild(CharteHealthCheckComponent,{static:false}) myDiv: any ;
   constructor(private healthService: HealthCheckService,private charteService:CharteService,private router: Router,
-    private confirmationService: ConfirmationService,private messageService:MessageService) { }
+    private confirmationService: ConfirmationService,private messageService:MessageService,private destService: DestinataireService) { }
     clear(table: Table) {
       table.clear();
     }
@@ -67,7 +68,17 @@ export class AjoutHealthCheckComponent implements OnInit {
       { name: 'OUI' },
       { name: 'NON' },
     ];
-    
+    this.destService.FindDestinataireHealthCheckProd().subscribe((data)=>{
+      // @ts-ignore
+      this.listDestinataire = data.body;
+      for(let i = 0;i<this.listDestinataire.length;i++){
+        if(this.listDestinataire[i].typeDest=='Obligatoire' && this.listDestinataire[i].statutRespo == 'Valider'){
+          this.EmailObligatoire.push(this.listDestinataire[i].email)
+        }else if(this.listDestinataire[i].typeDest=='en CC' && this.listDestinataire[i].statutRespo == 'Valider'){
+          this.EmailEnCC.push(this.listDestinataire[i].email)
+        }
+      }
+    })
   }
 
   get AddHealthCheck(): HealthChekPreprodProd{
@@ -143,7 +154,7 @@ removeDeatils(us: HealthChekPreprodProdDetail) {
              this.listEtatproc = new Array<EtatProcessusMetier>();
              this.listHelthchekdetail= new Array<HealthChekPreprodProdDetail>();
              this.router.navigate(['/pilote/healthcheck/PreprodProd/registre']);
-             const mailtoLink = `mailto:${this.EmailObligatoire.join(',')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(',')}`;
+             const mailtoLink = `mailto:${this.EmailObligatoire.join(';')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(';')}`;
              window.open(mailtoLink, '_blank');
              this.messageService.add({severity:'success', summary: 'Success', detail: 'Incident Ajouter avec succès'});
             },error=>{

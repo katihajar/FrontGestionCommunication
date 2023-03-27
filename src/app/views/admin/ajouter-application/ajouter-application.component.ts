@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Application } from 'src/app/controller/model/application';
 import { PiloteApplication } from 'src/app/controller/model/pilote-application';
@@ -20,7 +21,7 @@ export class AjouterApplicationComponent implements OnInit {
   selectedPiloteApp = new PiloteApplication();
   ListpiloteSelected = new Array<PiloteApplication>();
   submittedApplication: boolean = false;
-  constructor(private userService: UserService, private appService : ApplicationService,private messageService: MessageService) { }
+  constructor(private userService: UserService, private appService : ApplicationService,private messageService: MessageService,private router: Router) { }
 
   ngOnInit(): void {
     this.FindAllUsers();
@@ -86,10 +87,12 @@ SaveApp(){
   if(this.AddApplication.nomApplication != ''  &&this.AddApplication.responsable.nom != '' && this.AddApplication.charteIncident !=''){
   this.appService.SaveApplication().subscribe((data) => {
          this.AddApplication=new Application;
+         this.piloteList = new Array<User>();
          this.FindAllUsers();
          this.submittedApplication = false;
          this.ListpiloteSelected = new Array<PiloteApplication>();
          this.messageService.add({severity:'success', summary: 'Success', detail: 'Application Ajouter avec succès'});
+         this.router.navigate(['/admin/application/register']);
         },error=>{
           this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de l\'enregistrement'});
   })

@@ -13,6 +13,7 @@ import html2canvas from 'html2canvas';
 import { saveAs } from 'file-saver';
 import { MyOptions } from 'src/app/controller/model/myoption';
 import { Application } from 'src/app/controller/model/application';
+import { DestinataireService } from 'src/app/controller/service/destinataire.service';
 const moment = require('moment');
 
 @Component({
@@ -44,7 +45,7 @@ export class AjoutPointVersionComponent implements OnInit {
   selectedFile!: File;
   @ViewChild(ChartePointVersionComponent, { static: false }) myDiv: any;
   constructor(private pointService: PointVersionService, private charteService: CharteService, private router: Router,
-    private messageService: MessageService) { }
+    private messageService: MessageService,private destService :DestinataireService) { }
 
   ngOnInit(): void {
     this.FindApp();
@@ -74,6 +75,17 @@ export class AjoutPointVersionComponent implements OnInit {
       { name: 'OK' },
       { name: 'NO' },
     ];
+    this.destService.FindDestinataireByApplication(this.AddPointVersion.application.id).subscribe((data)=>{
+      // @ts-ignore
+      this.listDestinataire = data.body;
+      for(let i = 0;i<this.listDestinataire.length;i++){
+        if(this.listDestinataire[i].typeDest=='Obligatoire' && this.listDestinataire[i].statutRespo == 'Valider'){
+          this.EmailObligatoire.push(this.listDestinataire[i].email)
+        }else if(this.listDestinataire[i].typeDest=='en CC' && this.listDestinataire[i].statutRespo == 'Valider'){
+          this.EmailEnCC.push(this.listDestinataire[i].email)
+        }
+      }
+    })
   }
   FindApp() {
     this.pointService.FindApp().subscribe((data) => {
@@ -182,7 +194,7 @@ export class AjoutPointVersionComponent implements OnInit {
           this.ListLivraison = new Array<LivraisonCARM>();
           this.ListPlanning = new Array<PlanningPointVersion>();
           this.router.navigate(['/pilote/pointversion/registre']);
-          const mailtoLink = `mailto:${this.EmailObligatoire.join(',')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(',')}`;
+          const mailtoLink = `mailto:${this.EmailObligatoire.join(';')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(';')}`;
           window.open(mailtoLink, '_blank');
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Point Version Ajouter avec succès' });
         }, error => {

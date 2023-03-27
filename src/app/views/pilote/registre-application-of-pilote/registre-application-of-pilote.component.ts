@@ -34,7 +34,10 @@ export class RegistreApplicationOfPiloteComponent implements OnInit {
     ]
   }
 OnHidAddDest(){
-  this.AddDestinataire = new DestinataireCommunication();
+  this.AddDestinataire.nom= '';
+  this.AddDestinataire.email= '';
+  this.AddDestinataire.prenom= '';
+  this.AddDestinataire.typeDest= '';
 }
   FindApp() {
     this.appService.FindApplicationByPilote().subscribe((data) => {
@@ -82,8 +85,11 @@ SaveDestinataire(){
     this.destinataireService.SaveDestinataire().subscribe((data) => {
       this.dialogAddDest = false;
       this.showDestinataire(this.AddDestinataire.application);
-           this.AddDestinataire=new DestinataireCommunication();
-           this.messageService.add({severity:'success', summary: 'Success', detail: 'Destinataire Ajouter avec succès'});
+      this.AddDestinataire.nom= '';
+      this.AddDestinataire.email= '';
+      this.AddDestinataire.prenom= '';
+      this.AddDestinataire.typeDest= '';
+      this.messageService.add({severity:'success', summary: 'Success', detail: 'Destinataire Ajouter avec succès'});
           },error=>{
             this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de l\'enregistrement'});
     })

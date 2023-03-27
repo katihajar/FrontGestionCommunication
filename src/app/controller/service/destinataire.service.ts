@@ -56,7 +56,20 @@ export class DestinataireService {
       { observe: 'response', headers }
     );    
   }
-
+  public FindDestinataireHealthCheckProd(): Observable<HttpResponse<Array<DestinataireCommunication>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<DestinataireCommunication>>(
+      this.urlPilote + 'destinataire/findByNomApplication/health\ check\ ProdPredprod',
+      { observe: 'response', headers }
+    );    
+  }
+  public FindDestinataireHealthCheckBwPerimetre(): Observable<HttpResponse<Array<DestinataireCommunication>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<DestinataireCommunication>>(
+      this.urlPilote + 'destinataire/findByNomApplication/Health\ Check\ Bw\ Perimetre',
+      { observe: 'response', headers }
+    );    
+  }
   public DeleteDestinataire(id:number): Observable<HttpResponse<number>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.delete<number>(

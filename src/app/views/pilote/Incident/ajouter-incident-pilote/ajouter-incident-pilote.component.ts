@@ -120,7 +120,7 @@ this.destService.FindDestinataireByApplication(this.AddIncident.application.id).
              this.AddIncident=new Incident();
              this.ListPlanAction = new Array<PlanAction>();
              this.router.navigate(['/pilote/incident/registre']);
-             const mailtoLink = `mailto:${this.EmailObligatoire.join(',')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(',')}`;
+             const mailtoLink = `mailto:${this.EmailObligatoire.join(';')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(';')}`;
              window.open(mailtoLink, '_blank');
              this.messageService.add({severity:'success', summary: 'Success', detail: 'Incident Ajouter avec succès'});
             },error=>{

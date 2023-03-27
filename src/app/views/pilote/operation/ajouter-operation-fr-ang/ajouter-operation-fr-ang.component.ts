@@ -154,7 +154,7 @@ export class AjouterOperationFrAngComponent implements OnInit {
       this.operationService.SaveOperation().subscribe((data) => {
              this.AddOperation=new Operation();
              this.AddOperationAng=new Operation();
-             const mailtoLink = `mailto:${this.EmailObligatoire.join(',')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(',')}`;
+             const mailtoLink = `mailto:${this.EmailObligatoire.join(';')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(';')}`;
              window.open(mailtoLink, '_blank');
              this.router.navigate(['/pilote/operation/registre']);
              this.messageService.add({severity:'success', summary: 'Success', detail: 'Operation Ajouter avec succès'});

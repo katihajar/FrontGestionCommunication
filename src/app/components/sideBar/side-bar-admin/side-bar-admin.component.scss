@@ -6,13 +6,18 @@
 }
 .logo {
   margin-top: 0%;
+  margin-bottom: 4%;
   text-align: center;
   height: fit-content;
-img {
   width: 300px;
-  margin-bottom: 2%;
+  height: 180px;
+  background: linear-gradient( to right,#E41937 10%, #A82465 55%, #5236AB 100%)!important;
 }
+h1 {
+  color: white;
+  text-align: center;
 }
+
 .mat-divider {
   border-top-width: 2px;
   border-color: #c5c7c9;

@@ -22,6 +22,7 @@ export class AuthService {
     if (this.isLoggedIn()) {
       this.User = this.getUser();
       this.UserAuth = this.getAuth();
+      this.startTokenRefreshTimer();
     }
   }
 
@@ -52,25 +53,48 @@ export class AuthService {
     );
   }
   public startTokenRefreshTimer() {
-    // @ts-ignore
-    this.tokenRefreshTimer = setInterval(() => {
-      // Send refresh token request and update user authentication object
-      this.refreshToken().subscribe(response => {
-        // @ts-ignore
-        this.UserAuth =response.body;
-        localStorage.setItem('accessToken', this.UserAuth.accessToken as string);
-        localStorage.setItem('refreshToken', this.UserAuth.refreshToken as string);
-        localStorage.setItem('auth', JSON.stringify(this.UserAuth));
-      }, () => {
-        this.router.navigate(['/forbidden']);
-      });
-    }, 25000);
+    const timerInterval = 25000;
+    // Check if a previous timer was set
+    const previousTimer = localStorage.getItem('tokenRefreshTimer');
+    if (previousTimer) {
+      // Calculate the time remaining until the next refresh
+      const timeSinceLastRefresh = new Date().getTime() - parseInt(previousTimer, 0);
+      const timeRemaining = Math.max(timerInterval - timeSinceLastRefresh, 0);
+      // Resume the timer using setTimeout()
+            // @ts-ignore
+      this.tokenRefreshTimer = setTimeout(() => {
+        this.refreshTokenAndSetTimer();
+      }, timeRemaining);
+    } else {
+      // Start a new timer using setInterval()
+            // @ts-ignore
+      this.tokenRefreshTimer = setInterval(() => {
+        this.refreshTokenAndSetTimer();
+      }, timerInterval);
+    }
   }
+  
+  private refreshTokenAndSetTimer() {
+    // Send refresh token request and update user authentication object
+    this.refreshToken().subscribe(response => {
+      localStorage.setItem('tokenRefreshTimer', new Date().getTime().toString());
+      // @ts-ignore
+      this.UserAuth = response.body;
+      localStorage.setItem('accessToken', this.UserAuth.accessToken as string);
+      localStorage.setItem('refreshToken', this.UserAuth.refreshToken as string);
+      localStorage.setItem('auth', JSON.stringify(this.UserAuth));
+      console.log('refreshed');
+    }, () => {
+      this.router.navigate(['/forbidden']);
+    });
+  }
+
   public LogOUT(){
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('auth');
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('tokenRefreshTimer');
     clearInterval(this.tokenRefreshTimer);
     clearTimeout(this.tokenRefreshTimeout);
     const headers = { Authorization: 'Bearer ' + this.UserAuth.accessToken };
@@ -97,6 +121,9 @@ export class AuthService {
 
   getUser() {
     return JSON.parse(localStorage.getItem('currentUser') as string);
+  }
+  getTimer(){
+    
   }
   getAuth(){
     return JSON.parse(localStorage.getItem('auth') as string);

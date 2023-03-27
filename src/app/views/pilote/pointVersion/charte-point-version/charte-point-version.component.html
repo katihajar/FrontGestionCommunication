@@ -2,7 +2,7 @@
     [style]="{width: '65vw', height: '90vw','margin-left':'3%'}" [resizable]="true">
     <div #myDialog id="myDialog" style="width: 100%;">
       <div class="col-12">
-        
+
         <div  style="border:1px solid rgb(18, 231, 231) ;">
           <img src="../../../../../assets/img/ChangementTerminer.png" width="100%" style="margin-left: 0%;"
               alt="psa" title="psa" class="staticImg">
@@ -55,7 +55,7 @@
       <p>Les tickets de la version ainsi que les commentaires/remarques (colonne : commentaire IT) de cette réunion sont  : </p><br>
       <div class="col-12" *ngIf="this.AddPointVersion.image != null" style="margin-bottom: 2%;">
         <h1 style="margin: 1%; font-weight: bolder;text-align: center;"> {{this.AddPointVersion.application.nomApplication | uppercase}} V{{this.AddPointVersion.version}}  – POINT VERSION du {{this.AddPointVersion.dateAjout | date: 'dd/MM'}}</h1>
-        <img src="data:{{this.AddPointVersion.imageType}};base64,{{this.AddPointVersion.image}}" width="100%" 
+        <img src="data:{{this.AddPointVersion.imageType}};base64,{{this.AddPointVersion.image}}" width="100%"
         alt="psa" title="psa" class="staticImg" >
       </div>
       <div *ngIf="this.AddPointVersion.ticketList.length !=0">
@@ -93,7 +93,7 @@
           <img src="../../../../../assets/img/FooterChangementTerminer.png" width="100%" style="margin-left: 0%;"
               alt="psa" title="psa" class="staticImg">
       </div>
-      
+
   </div>
   </div>
     <ng-template pTemplate="footer">

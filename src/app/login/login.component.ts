@@ -51,6 +51,8 @@ export class LoginComponent implements OnInit {
       this.loginSuccess = true;
       this.successMessage = 'Login Successful';
       console.log(this.UserAuth.accessToken);
+      // Start token refresh timer
+      this.authService.startTokenRefreshTimer();
       if (this.UserAuth.accessToken !== null) {
         if (this.User.roles[0].name == 'ROLE_ADMIN') {
           this.router.navigate(['/admin']);

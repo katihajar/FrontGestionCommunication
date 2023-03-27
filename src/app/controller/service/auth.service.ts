@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {Userauth} from "../model/userauth";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,13 @@ import {Userauth} from "../model/userauth";
 export class AuthService {
 
   private url = environment.baseUrl;
+  // @ts-ignore
+  private tokenRefreshTimer: number;
+  private tokenRefreshTimeout: any;
   private _User: User = new User();
   private _UserAuth: Userauth = new Userauth();
   private _submitted: boolean = false;
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private router: Router) {
     if (this.isLoggedIn()) {
       this.User = this.getUser();
       this.UserAuth = this.getAuth();
@@ -31,7 +35,14 @@ export class AuthService {
   set UserAuth(value: Userauth) {
     this._UserAuth = value;
   }
-
+  private refreshToken(): Observable<HttpResponse<Userauth>> {
+    const headers: HttpHeaders = this.initHeaders();
+    return this.http.post<Userauth>(
+      this.url + '/api/auth/refresh-token',
+       this.UserAuth ,
+      { observe: 'response', headers }
+    );
+  }
   public Login(user: string, pass: string): Observable<HttpResponse<Userauth>> {
     const headers: HttpHeaders = this.initHeaders();
     return this.http.post<Userauth>(
@@ -40,12 +51,28 @@ export class AuthService {
       { observe: 'response', headers }
     );
   }
-
+  public startTokenRefreshTimer() {
+    // @ts-ignore
+    this.tokenRefreshTimer = setInterval(() => {
+      // Send refresh token request and update user authentication object
+      this.refreshToken().subscribe(response => {
+        // @ts-ignore
+        this.UserAuth =response.body;
+        localStorage.setItem('accessToken', this.UserAuth.accessToken as string);
+        localStorage.setItem('refreshToken', this.UserAuth.refreshToken as string);
+        localStorage.setItem('auth', JSON.stringify(this.UserAuth));
+      }, () => {
+        this.router.navigate(['/forbidden']);
+      });
+    }, 25000);
+  }
   public LogOUT(){
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('auth');
     localStorage.removeItem('currentUser');
+    clearInterval(this.tokenRefreshTimer);
+    clearTimeout(this.tokenRefreshTimeout);
     const headers = { Authorization: 'Bearer ' + this.UserAuth.accessToken };
     return this.http.post(
       this.url + '/logout', // update this line to add a forward slash before "logout"

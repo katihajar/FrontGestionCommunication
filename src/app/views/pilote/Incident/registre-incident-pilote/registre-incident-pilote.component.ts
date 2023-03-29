@@ -33,7 +33,8 @@ export class RegistreIncidentPiloteComponent implements OnInit {
   popUpLangue:boolean=false;
   selectLang:any='';
   constructor(private charteService:CharteService,private incidentService: IncidentService,private confirmationService: ConfirmationService,
-     private router: Router, private appService: ApplicationService, private messageService:MessageService) { }
+     private router: Router, private appService: ApplicationService, private messageService:MessageService) { 
+     }
   clear(table: Table) {
     table.clear();
   }
@@ -226,11 +227,7 @@ SelectLanguage(){
     this.FindApp();
     this.AddIncident = new Incident();
     
-    this.statutIncident = [
-      { name: 'Ouvert' },
-      { name: 'Résolu avec Suivi' },
-      { name: 'Clos' },
-    ];
+  
     this.listLangage = [
       { name: 'Français' },
       { name: 'Français-Anglais' },
@@ -239,7 +236,22 @@ SelectLanguage(){
       { name: 'Français' },
       { name: 'Français-Anglais' },
       { name: 'Anglais' }
-    ]
+    ];
+
+  }
+  changeStatut(){
+    if(this.AddIncident.application.charteIncident == 'charte Incident'){
+      this.statutIncident = [
+        { name: 'Ouvert' },
+        { name: 'Résolu avec Suivi' },
+        { name: 'Clos' },
+      ];
+    }else if(this.AddIncident.application.charteIncident == 'charte Incident Monetics'){
+      this.statutIncident = [
+        { name: 'Ouvert' },
+        { name: 'Clos' },
+      ];
+    }
   }
   PopUp() {
     this.AddIncident= new Incident();

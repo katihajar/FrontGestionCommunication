@@ -1,17 +1,24 @@
-<mat-nav-list>
-  <div class="logo d-flex justify-content-center align-items-center">
-    
-    <h1 class="text-center" style="font-size: 45px;font-family: 'Times New Roman', Times, sans-serif;line-height: 1.2;"> Gestion de Communication</h1> 
-   </div>
+<mat-nav-list class="side-nav">
 
-  <a style="margin-bottom: 2%;" mat-list-item routerLinkActive="list-item-active" routerLink="/responsable/testRespo">
-    <mat-icon>dashboard</mat-icon> Dashboard
+  <div class="logo">
+
+    <h1 class="logo-text" style="text-align: center;">Gestion de Communication</h1>
+
+  </div>
+
+  <mat-divider style="margin-top: 0%;margin-bottom: 2%;"></mat-divider>
+
+
+  <h2 class="section-title" style="margin-left: 2%;">MENU :</h2>
+
+  <a class="nav-link" routerLinkActive="active" routerLink="/responsable/testRespo">
+Dashboard
   </a>
-  <a style="margin-bottom: 2%;" mat-list-item routerLinkActive="list-item-active" routerLink="/responsable/application/registre"> <mat-icon>supervisor_account</mat-icon> Gestion Destinataire </a>
-  <a style="margin-bottom: 2%;" mat-list-item routerLinkActive="list-item-active" routerLink="/responsable/incident/registre"> <mat-icon>report_problem</mat-icon> Registre Incident </a>
-  <a style="margin-bottom: 2%;" mat-list-item routerLinkActive="list-item-active" routerLink="/responsable/operation/registre"> <mat-icon>autorenew</mat-icon> Registre D'Operation </a>
-  <a style="margin-bottom: 4%;" mat-list-item routerLinkActive="list-item-active" routerLink="/responsable/changement/registre"> <mat-icon>change_history</mat-icon> Registre De Changement </a>
-  <a style="margin-bottom: 4%;" mat-list-item routerLinkActive="list-item-active" routerLink="/responsable/healthcheck/PreprodProd/registre"> <mat-icon>check_circle_outline</mat-icon> Gestion Health Check Preprod-Prod </a>
-  <a style="margin-bottom: 2%;" mat-list-item routerLinkActive="list-item-active" routerLink="/responsable/healthcheck/Bw/registre"> <mat-icon>check_circle</mat-icon> Gestion Health CheckBw Perimeter </a>
-  <a style="margin-bottom: 2%;" mat-list-item routerLinkActive="list-item-active" routerLink="/responsable/pointversion/registre"> <mat-icon>new_releases</mat-icon> Gestion Point Version </a>
+  <a class="nav-link" routerLinkActive="active" routerLink="/responsable/application/registre"> Gestion Destinataire </a>
+  <a class="nav-link" routerLinkActive="active" routerLink="/responsable/incident/registre"> Registre Incident </a>
+  <a class="nav-link" routerLinkActive="active" routerLink="/responsable/operation/registre"> Registre D'Operation </a>
+  <a class="nav-link" routerLinkActive="active" routerLink="/responsable/changement/registre">  Registre De Changement </a>
+  <a class="nav-link" routerLinkActive="active" routerLink="/responsable/healthcheck/PreprodProd/registre">  Gestion Health Check Preprod-Prod </a>
+  <a class="nav-link" routerLinkActive="active" routerLink="/responsable/healthcheck/Bw/registre"> Gestion Health CheckBw Perimeter </a>
+  <a class="nav-link" routerLinkActive="active" routerLink="/responsable/pointversion/registre">  Gestion Point Version </a>
 </mat-nav-list>

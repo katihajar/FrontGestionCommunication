@@ -1,16 +1,23 @@
-<mat-nav-list>
-  <div class="logo d-flex justify-content-center align-items-center">
-    
- <h1 class="text-center" style="font-size: 45px;font-family: 'Times New Roman', Times, sans-serif;line-height: 1.2;"> Gestion de Communication</h1> 
-</div> 
-<!--  <mat-divider></mat-divider>-->
-<!--  <h2 matSubheader class="mt-2">APPLICATIONS</h2>-->
-  <!-- <mat-divider></mat-divider> -->
-  <a style="margin-bottom: 2%;" mat-list-item routerLinkActive="list-item-active" routerLink="/admin/test">
-    <mat-icon>dashboard</mat-icon> Dashboard
+<mat-nav-list class="side-nav">
+
+  <div class="logo">
+
+    <h1 class="logo-text" style="text-align: center;">Gestion de Communication</h1>
+
+  </div>
+
+  <mat-divider style="margin-top: 0%;margin-bottom: 2%;"></mat-divider>
+
+
+  <h2 class="section-title" style="margin-left: 2%;">MENU :</h2>
+
+
+
+  <a class="nav-link" routerLinkActive="active" routerLink="/admin/test">
+ Dashboard
   </a>
-  <a style="margin-bottom: 2%;" mat-list-item routerLinkActive="list-item-active" routerLink="/admin/users/register"> <mat-icon>supervisor_account</mat-icon> Gestion des Utilisateurs</a>
-  <a style="margin-bottom: 2%;" mat-list-item routerLinkActive="list-item-active" routerLink="/admin/application/register"> <mat-icon>important_devices</mat-icon> Gestion des Applications </a>
-  <a style="margin-bottom: 2%;" mat-list-item routerLinkActive="list-item-active" routerLink="/admin/perimetre/register"> <mat-icon>label</mat-icon> Gestion des Périmètres </a>
-  <a style="margin-bottom: 2%;" mat-list-item routerLinkActive="list-item-active" routerLink="/admin/processusMetier/register"> <mat-icon>reorder</mat-icon> Gestion des Processus Métier </a>
+  <a class="nav-link" routerLinkActive="active"  routerLink="/admin/users/register">Gestion des Utilisateurs</a>
+  <a class="nav-link" routerLinkActive="active"  routerLink="/admin/application/register">Gestion des Applications </a>
+  <a class="nav-link" routerLinkActive="active"  routerLink="/admin/perimetre/register">  Gestion des Périmètres </a>
+  <a class="nav-link" routerLinkActive="active"  routerLink="/admin/processusMetier/register"> Gestion des Processus Métier </a>
 </mat-nav-list>

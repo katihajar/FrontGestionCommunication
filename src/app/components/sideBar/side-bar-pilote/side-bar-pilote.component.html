@@ -1,19 +1,70 @@
-<mat-nav-list>
-  <div class="logo d-flex justify-content-center align-items-center">
-    
-    <h1 class="text-center" style="font-size: 45px;font-family: 'Times New Roman', Times, sans-serif;line-height: 1.2;"> Gestion de Communication</h1> 
-   </div>
-  <!--   <mat-divider></mat-divider>
- <h2 matSubheader class="mt-2">APPLICATIONS</h2>-->
+<mat-nav-list class="side-nav">
 
-  <a style="margin-bottom: 2%;" mat-list-item routerLinkActive="list-item-active" routerLink="/pilote/testPilote">
-    <mat-icon>dashboard</mat-icon> Dashboard
+  <div class="logo">
+
+    <h1 class="logo-text" style="text-align: center;">Gestion de Communication</h1>
+
+  </div>
+
+  <mat-divider style="margin-top: 0%;margin-bottom: 2%;"></mat-divider>
+
+
+  <h2 class="section-title" style="margin-left: 2%;">MENU :</h2>
+
+
+  <a class="nav-link" routerLinkActive="active" routerLink="/pilote/Dashboard">
+
+    Dashboard
+
   </a>
-  <a style="margin-bottom: 2%;" mat-list-item routerLinkActive="list-item-active" routerLink="/pilote/application/registre"> <mat-icon>supervisor_account</mat-icon> Gestion des Destinataires </a>
-  <a style="margin-bottom: 2%;" mat-list-item routerLinkActive="list-item-active" routerLink="/pilote/incident/registre"> <mat-icon>report_problem</mat-icon> Gestion Des Incidents </a>
-  <a style="margin-bottom: 2%;" mat-list-item routerLinkActive="list-item-active" routerLink="/pilote/operation/registre"> <mat-icon>autorenew</mat-icon> Gestion Des Operations </a>
-  <a style="margin-bottom: 4%;" mat-list-item routerLinkActive="list-item-active" routerLink="/pilote/changement/registre"> <mat-icon>change_history</mat-icon> Gestion Des Changements </a>
-  <a style="margin-bottom: 4%;" mat-list-item routerLinkActive="list-item-active" routerLink="/pilote/healthcheck/PreprodProd/registre"> <mat-icon>check_circle_outline</mat-icon> Gestion Health Check Preprod-Prod </a>
-  <a style="margin-bottom: 2%;" mat-list-item routerLinkActive="list-item-active" routerLink="/pilote/healthcheck/Bw/registre"> <mat-icon>check_circle</mat-icon> Gestion Health CheckBw Perimeter </a>
-  <a style="margin-bottom: 2%;" mat-list-item routerLinkActive="list-item-active" routerLink="/pilote/pointversion/registre"> <mat-icon>new_releases</mat-icon> Gestion des Versions </a>
+
+
+  <a class="nav-link" routerLinkActive="active" routerLink="/pilote/application/registre">
+
+    Gestion des Destinataires
+
+  </a>
+
+
+  <a class="nav-link" routerLinkActive="active" routerLink="/pilote/incident/registre">
+
+    Gestion Des Incidents
+
+  </a>
+
+
+  <a class="nav-link" routerLinkActive="active" routerLink="/pilote/operation/registre">
+
+    Gestion Des Operations
+
+  </a>
+
+
+  <a class="nav-link" routerLinkActive="active" routerLink="/pilote/changement/registre">
+
+    Gestion Des Changements
+
+  </a>
+
+
+  <a class="nav-link" routerLinkActive="active" routerLink="/pilote/healthcheck/PreprodProd/registre">
+
+    Gestion Health Check Preprod-Prod
+
+  </a>
+
+
+  <a class="nav-link" routerLinkActive="active" routerLink="/pilote/healthcheck/Bw/registre">
+
+    Gestion Health CheckBw Perimeter
+
+  </a>
+
+
+  <a class="nav-link" routerLinkActive="active" routerLink="/pilote/pointversion/registre">
+
+    Gestion des Versions
+
+  </a>
+
 </mat-nav-list>

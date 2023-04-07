@@ -151,6 +151,7 @@ import { RegistrePointVersionComponent } from './views/pilote/pointVersion/regis
 import { RegistrePointVersionRespoComponent } from './views/responsable/registre-point-version-respo/registre-point-version-respo.component';
 import { AjoutPointVersionComponent } from './views/pilote/pointVersion/ajout-point-version/ajout-point-version.component';
 import { ChartePointVersionComponent } from './views/pilote/pointVersion/charte-point-version/charte-point-version.component';
+import { DashboardPiloteComponent } from './views/pilote/dashboard-pilote/dashboard-pilote.component';
 
 @NgModule({
   declarations: [
@@ -212,7 +213,8 @@ import { ChartePointVersionComponent } from './views/pilote/pointVersion/charte-
     RegistrePointVersionComponent,
     RegistrePointVersionRespoComponent,
     AjoutPointVersionComponent,
-    ChartePointVersionComponent
+    ChartePointVersionComponent,
+    DashboardPiloteComponent
     ],
   imports: [
     BrowserModule,

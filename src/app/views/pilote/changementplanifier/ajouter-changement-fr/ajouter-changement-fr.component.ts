@@ -92,6 +92,7 @@ export class AjouterChangementFrComponent implements OnInit {
       this.charteChangeFr = true;
   }
   SaveChange(){
+    this.AddChangement.dateAjout = new Date();
     if(this.AddChangement.statut =='Planifié'){
       this.Subject = '[PRODUCTION] '+this.AddChangement.application.nomApplication+' '+this.AddChangement.version+' - Planned change - '+moment(this.AddChangement.dateDebut).format('DD/MM/YYYY');
      }else if(this.AddChangement.statut =='Terminé avec succès'){

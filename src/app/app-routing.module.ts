@@ -36,6 +36,7 @@ import { RegistrHealthBwPerimetreRespoComponent } from './views/responsable/regi
 import { RegistrePointVersionComponent } from './views/pilote/pointVersion/registre-point-version/registre-point-version.component';
 import { AjoutPointVersionComponent } from './views/pilote/pointVersion/ajout-point-version/ajout-point-version.component';
 import { RegistrePointVersionRespoComponent } from './views/responsable/registre-point-version-respo/registre-point-version-respo.component';
+import { DashboardPiloteComponent } from './views/pilote/dashboard-pilote/dashboard-pilote.component';
 
 
 @NgModule({
@@ -74,8 +75,7 @@ import { RegistrePointVersionRespoComponent } from './views/responsable/registre
       path: 'pilote',
       component: PiloteComponent,
       children: [
-        { path: 'testPilote', component: TestComponent },
-        { path: 'homePilote', component: HomeComponent },
+        { path: 'Dashboard', component: DashboardPiloteComponent },
         { path: 'application/registre', component: RegistreApplicationOfPiloteComponent },
         { path: 'incident/registre', component: RegistreIncidentPiloteComponent },
         { path: 'incident/save/Français', component: AjouterIncidentPiloteComponent },
@@ -92,7 +92,7 @@ import { RegistrePointVersionRespoComponent } from './views/responsable/registre
         { path: 'healthcheck/Bw/save', component: AjoutHealthCheckBwPerimetreComponent },
         { path: 'pointversion/registre', component: RegistrePointVersionComponent },
         { path: 'pointversion/save', component: AjoutPointVersionComponent },
-        { path: '', redirectTo: 'testPilote', pathMatch: 'full' },
+        { path: '', redirectTo: 'Dashboard', pathMatch: 'full' },
       ],
     },
     // no layout views

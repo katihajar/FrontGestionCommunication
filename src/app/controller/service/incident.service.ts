@@ -74,7 +74,13 @@ export class IncidentService {
   set ListIncidentOfPilote(value: Array<Incident>) {
     this._ListIncidentOfPilote = value;
   }
-
+  public FindAllIncident(): Observable<HttpResponse<Array<Incident>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<Incident>>(
+      this.urlPilote + 'incident/findAll',
+      { observe: 'response', headers }
+    );    
+  }
   public FindIncidentByPilote(): Observable<HttpResponse<Array<Incident>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<Incident>>(

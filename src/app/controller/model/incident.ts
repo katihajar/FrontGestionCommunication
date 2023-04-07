@@ -13,6 +13,7 @@ export class Incident {
     public causePrincipale: string = String();
     public solutionContournement: string = String();
     public dateDebut: Date = new Date();
+    public dateAjout: Date = new Date();
     public dateFin: Date = new Date();
     public application =new Application();
     public prochaineCommunication: Date = new Date();

@@ -9,6 +9,7 @@ export class Operation {
     public description: string = String();
     public dateDebut: Date = new Date();
     public dateFin: Date = new Date();
+    public dateAjout: Date = new Date();
     public createurOperation =new User();
     public application =new Application();
 }

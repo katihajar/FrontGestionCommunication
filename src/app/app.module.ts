@@ -18,10 +18,10 @@ import { SideBarResponsableComponent } from './components/sideBar/side-bar-respo
 import { SideBarPiloteComponent } from './components/sideBar/side-bar-pilote/side-bar-pilote.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from "@angular/material/toolbar";
-import { MatMenuModule } from "@angular/material/menu";
+import { MatLegacyMenuModule as MatMenuModule } from "@angular/material/legacy-menu";
 import { MatIconModule } from "@angular/material/icon";
 import { MatDividerModule } from "@angular/material/divider";
-import { MatListModule } from "@angular/material/list";
+import { MatLegacyListModule as MatListModule } from "@angular/material/legacy-list";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { HomeComponent } from './views/admin/home/home.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
@@ -41,7 +41,6 @@ import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ChipModule } from 'primeng/chip';
 import { ChipsModule } from 'primeng/chips';
-import { CodeHighlighterModule } from 'primeng/codehighlighter';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ColorPickerModule } from 'primeng/colorpicker';
@@ -151,6 +150,7 @@ import { RegistrePointVersionComponent } from './views/pilote/pointVersion/regis
 import { RegistrePointVersionRespoComponent } from './views/responsable/registre-point-version-respo/registre-point-version-respo.component';
 import { AjoutPointVersionComponent } from './views/pilote/pointVersion/ajout-point-version/ajout-point-version.component';
 import { ChartePointVersionComponent } from './views/pilote/pointVersion/charte-point-version/charte-point-version.component';
+import { DashboardPiloteComponent } from './views/pilote/dashboard-pilote/dashboard-pilote.component';
 
 @NgModule({
   declarations: [
@@ -212,7 +212,8 @@ import { ChartePointVersionComponent } from './views/pilote/pointVersion/charte-
     RegistrePointVersionComponent,
     RegistrePointVersionRespoComponent,
     AjoutPointVersionComponent,
-    ChartePointVersionComponent
+    ChartePointVersionComponent,
+    DashboardPiloteComponent
     ],
   imports: [
     BrowserModule,
@@ -241,7 +242,6 @@ import { ChartePointVersionComponent } from './views/pilote/pointVersion/charte-
     CheckboxModule,
     ChipsModule,
     ChipModule,
-    CodeHighlighterModule,
     ConfirmDialogModule,
     ConfirmPopupModule,
     ColorPickerModule,

@@ -18,10 +18,10 @@ import { SideBarResponsableComponent } from './components/sideBar/side-bar-respo
 import { SideBarPiloteComponent } from './components/sideBar/side-bar-pilote/side-bar-pilote.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from "@angular/material/toolbar";
-import { MatMenuModule } from "@angular/material/menu";
+import { MatLegacyMenuModule as MatMenuModule } from "@angular/material/legacy-menu";
 import { MatIconModule } from "@angular/material/icon";
 import { MatDividerModule } from "@angular/material/divider";
-import { MatListModule } from "@angular/material/list";
+import { MatLegacyListModule as MatListModule } from "@angular/material/legacy-list";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { HomeComponent } from './views/admin/home/home.component';
 import { ErrorPageComponent } from './error-page/error-page.component';

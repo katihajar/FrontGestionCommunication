@@ -33,5 +33,16 @@ mat-toolbar {
 ::ng-deep {
 .mat-menu-content {
   width: 160px;
+  background:#424242;
 }
+}
+.mat-menu-item {
+  color: #c5c7c9 !important;
+  font-size: 1.2rem;
+  height: 50px !important;
+  margin-bottom: 1px;
+  &:hover {
+    color: white !important;
+    background-color: #595858;
+  }
 }

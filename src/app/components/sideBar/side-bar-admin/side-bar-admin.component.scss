@@ -163,3 +163,12 @@
   margin-top: 0;
 
 }
+.mat-list-item {
+  color: #c5c7c9 !important;
+  font-size: 1.2rem;
+  height: 50px !important;
+  margin-bottom: 1px;
+  &:hover {
+    color: white !important;
+  }
+}

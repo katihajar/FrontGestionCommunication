@@ -110,6 +110,7 @@ this.destService.FindDestinataireByApplication(this.AddIncident.application.id).
       }   
   }
   SaveIncident(){
+    this.AddIncident.dateAjout = new Date();
     if(this.AddIncident.application.charteIncident =='charte Incident'){
       this.Subject = '[INCIDENT]['+this.AddIncident.application.nomApplication+'][Communication No.'+this.AddIncident.numeroIncident+'] '+this.AddIncident.titreIncident+' -  '+this.AddIncident.statut;
      }else if(this.AddIncident.application.charteIncident =='charte Incident Monetics'){

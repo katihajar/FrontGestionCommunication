@@ -252,6 +252,7 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
       }
   }
   SaveIncident(){
+    this.AddIncident.dateAjout = new Date();
     if(this.AddIncident.application.charteIncident =='charte Incident'){
       this.Subject = '[INCIDENT]['+this.AddIncident.application.nomApplication+'][Communication No.'+this.AddIncident.numeroIncident+'] '+this.AddIncidentAng.titreIncident+' / '+this.AddIncident.titreIncident+' - '+this.AddIncidentAng.statut+' / '+this.AddIncident.statut;
     }else if(this.AddIncident.application.charteIncident =='charte Incident Monetics'){

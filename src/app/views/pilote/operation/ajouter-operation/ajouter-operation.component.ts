@@ -115,6 +115,7 @@ export class AjouterOperationComponent implements OnInit {
       this.takeScreenshot();
   }
   SaveOperation(){
+    this.AddOperation.dateAjout = new Date();
     if(this.AddOperation.statut=='Planifier'){
      this.Subject = '[TOTALENERGIES][COMMUNICATION] -N°.'+this.AddOperation.numero+' - Description Courte de l\'Operation Planiafiée'; 
     }else if(this.AddOperation.statut=='Terminer'){

@@ -25,7 +25,15 @@ export class AuthService {
       this.startTokenRefreshTimer();
     }
   }
-
+  ngOnInit() {
+    this.startTokenRefreshTimer();
+  }
+  ngOnDestroy() {
+    // clear any previous timer
+    clearTimeout(this.tokenRefreshTimer);
+    clearInterval(this.tokenRefreshTimer);
+    localStorage.removeItem('tokenRefreshTimer');
+  }
   get UserAuth(): Userauth {
     if(this._UserAuth == null){
       this._UserAuth = new Userauth();

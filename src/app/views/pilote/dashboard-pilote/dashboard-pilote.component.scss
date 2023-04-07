@@ -1,1 +1,16 @@
 @import "../registre-application-of-pilote/registre-application-of-pilote.component.scss";
+
+  /* Charts */
+  canvas {
+    margin-bottom: 20px; /* Add some space between the charts */
+  }
+
+  .page__content {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .page__content > div {
+    width: auto;
+    display: block;
+  }

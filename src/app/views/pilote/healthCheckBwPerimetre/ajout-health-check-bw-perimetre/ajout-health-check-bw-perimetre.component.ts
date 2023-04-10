@@ -107,7 +107,6 @@ removeDetails(us: HealthCheckBwPerimetreDetail) {
   }
   SaveHealth(){
     this.Subject = this.AddHealthCheckBw.titre;
-    if(this.AddHealthCheckBw.healthCheckBwPerimetreDetailList.length != 0  ){
       this.healthService.SaveHealthCheck().subscribe((data) => {
              this.AddHealthCheckBw=new HealthCheckBwPerimetre();
              this.listHelthchekBwdetail = new Array<HealthCheckBwPerimetreDetail>();
@@ -119,9 +118,7 @@ removeDetails(us: HealthCheckBwPerimetreDetail) {
             },error=>{
               this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de l\'enregistrement'});
       })
-      }else{
-        this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
-      }
+     
   }
   takeScreenshot() {
 
@@ -178,6 +175,10 @@ removeDetails(us: HealthCheckBwPerimetreDetail) {
   SendAndSaveHealth() {
     this.AddHealthCheckBw.id=0;
     this.AddHealthCheckBw.healthCheckBwPerimetreDetailList = this.listHelthchekBwdetail;
+    if(this.AddHealthCheckBw.healthCheckBwPerimetreDetailList.length != 0  ){
     this.takeScreenshot();
+  }else{
+    this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
+  }
   }
 }

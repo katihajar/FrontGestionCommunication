@@ -116,7 +116,6 @@ this.destService.FindDestinataireByApplication(this.AddIncident.application.id).
      }else if(this.AddIncident.application.charteIncident =='charte Incident Monetics'){
       this.Subject = '[PRODUCTION] '+this.AddIncident.application.nomApplication+' Incident '+this.AddIncident.numeroIncident+' - '+this.AddIncident.titreIncident;
      }
-    if(this.AddIncident.description != '' && this.AddIncident.causePrincipale != '' &&this.AddIncident.situationActuelle != '' && this.AddIncident.prochaineCommunication !=null){
       this.incidentService.SaveIncident().subscribe((data) => {
              this.AddIncident=new Incident();
              this.ListPlanAction = new Array<PlanAction>();
@@ -127,9 +126,7 @@ this.destService.FindDestinataireByApplication(this.AddIncident.application.id).
             },error=>{
               this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de l\'enregistrement'});
       })
-      }else{
-        this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
-      }
+      
   }
   takeScreenshot() {
     if(this.AddIncident.application.charteIncident =='charte Incident'){
@@ -192,7 +189,11 @@ this.destService.FindDestinataireByApplication(this.AddIncident.application.id).
   SendAndSaveIncident() {
     this.AddIncident.planActionList = this.ListPlanAction;
     this.AddIncident.id=0;
+    if(this.AddIncident.description != '' && this.AddIncident.causePrincipale != '' &&this.AddIncident.situationActuelle != '' && this.AddIncident.prochaineCommunication !=null){
     this.takeScreenshot();
+    }else{
+        this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
+      }
   }
   get charteIncident3Bfr(): boolean {
     return this.charteService.charteIncident3Bfr;

@@ -16,8 +16,6 @@ export class ChartePointVersionComponent implements OnInit {
     private router:Router) { }
 
   ngOnInit(): void {
-console.log('hnaaa '+this.AddPointVersion.image);
-
   }
   get chartePointVersion(): boolean {
     return this.charteService.chartePointVersion;

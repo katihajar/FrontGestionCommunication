@@ -36,6 +36,12 @@
               </th>
               <th>
                 <div class="flex justify-content-center align-items-center">
+                  Statut
+                  <p-columnFilter type="text" field="statut" display="menu"></p-columnFilter>
+                </div>
+              </th>
+              <th>
+                <div class="flex justify-content-center align-items-center">
                   Titre
                   <p-columnFilter type="text" field="titre" display="menu"></p-columnFilter>
                 </div>
@@ -55,13 +61,13 @@
               <th>
                 <div class="flex justify-content-center align-items-center">
                   Date Debut
-                  <p-columnFilter type="date" field="dateDebut" display="menu"></p-columnFilter>
+                  <!-- <p-columnFilter type="date" field="dateDebut" display="menu"></p-columnFilter> -->
                 </div>
               </th>
               <th>
                 <div class="flex justify-content-center align-items-center">
                   Date Fin
-                  <p-columnFilter type="date" field="dateFin" display="menu"></p-columnFilter>
+                  <!-- <p-columnFilter type="date" field="dateFin" display="menu"></p-columnFilter> -->
                 </div>
               </th> 
               <th>
@@ -73,6 +79,12 @@
             <tr>
               <td>
                 {{operation.application.nomApplication}}
+              </td>
+              <td>
+                <div *ngIf="operation.statut=='Planifier'"><p-badge severity="warning" styleClass="mr-2"></p-badge></div>
+                <div *ngIf="operation.statut=='Terminer'" ><p-badge severity="success" styleClass="mr-2"></p-badge></div> 
+              
+                {{operation.statut}}
               </td>
               <td>
                 {{operation.titre}}

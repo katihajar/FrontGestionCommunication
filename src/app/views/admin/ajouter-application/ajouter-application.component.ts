@@ -58,8 +58,7 @@ AddPilote(){
   this.ListpiloteSelected.push(this.selectedPiloteApp);
   this.selectedPiloteApp = new PiloteApplication();
 }else{
-  console.log('Accun pilote selectionné');
-  
+  this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
 }
 }
 removePilote(us:PiloteApplication){

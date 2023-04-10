@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
 import {AdminComponent} from "./layout/admin/admin.component";
-import {TestComponent} from "./views/admin/test/test.component";
 import {ResponsableComponent} from "./layout/responsable/responsable.component";
 import {PiloteComponent} from "./layout/pilote/pilote.component";
 import {LoginComponent} from "./login/login.component";
-import {HomeComponent} from "./views/admin/home/home.component";
 import {ErrorPageComponent} from "./error-page/error-page.component";
 import {ForbiddenComponent} from "./forbidden/forbidden.component";
 import { RegistreUserComponent } from './views/admin/registre-user/registre-user.component';
@@ -37,6 +35,8 @@ import { RegistrePointVersionComponent } from './views/pilote/pointVersion/regis
 import { AjoutPointVersionComponent } from './views/pilote/pointVersion/ajout-point-version/ajout-point-version.component';
 import { RegistrePointVersionRespoComponent } from './views/responsable/registre-point-version-respo/registre-point-version-respo.component';
 import { DashboardPiloteComponent } from './views/pilote/dashboard-pilote/dashboard-pilote.component';
+import { DashboardComponent } from './views/admin/dashboard/dashboard.component';
+import { DashboardRespoComponent } from './views/responsable/dashboard-respo/dashboard-respo.component';
 
 
 @NgModule({
@@ -45,22 +45,20 @@ import { DashboardPiloteComponent } from './views/pilote/dashboard-pilote/dashbo
       path: 'admin',
       component: AdminComponent,
       children: [
-        { path: 'test', component: TestComponent },
-        { path: 'home', component: HomeComponent },
+        { path: 'dashboard', component: DashboardComponent },
         { path: 'users/register', component: RegistreUserComponent },
         { path: 'application/register', component: RegistreApplicationComponent },
         { path: 'application/save', component: AjouterApplicationComponent },
         { path: 'perimetre/register', component: RegistrePerimetreComponent },
         { path: 'processusMetier/register', component: RegistreProcessusMetierComponent },
-        { path: '', redirectTo: 'test', pathMatch: 'full' },
+        { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       ],
     },
     {
       path: 'responsable',
       component: ResponsableComponent,
       children: [
-        { path: 'testRespo', component: TestComponent },
-        { path: 'homeRespo', component: HomeComponent },
+        { path: 'dashboard', component: DashboardRespoComponent },
         { path: 'incident/registre', component: ResgistreIncidentRespoComponent },
         { path: 'application/registre', component: ResgistreApplicationRespoComponent },
         { path: 'operation/registre', component: ResgistreOperationRespoComponent },
@@ -68,7 +66,7 @@ import { DashboardPiloteComponent } from './views/pilote/dashboard-pilote/dashbo
         { path: 'healthcheck/PreprodProd/registre', component: RegistrHealthCheckProdRespoComponent },
         { path: 'healthcheck/Bw/registre', component: RegistrHealthBwPerimetreRespoComponent },
         { path: 'pointversion/registre', component: RegistrePointVersionRespoComponent },
-        { path: '', redirectTo: 'testRespo', pathMatch: 'full' },
+        { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       ],
     },
     {

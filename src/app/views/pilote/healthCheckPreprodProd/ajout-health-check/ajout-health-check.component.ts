@@ -148,7 +148,6 @@ removeDeatils(us: HealthChekPreprodProdDetail) {
   SaveHealth(){
     this.AddHealthCheck.dateAjout = new Date();
     this.Subject = '['+this.AddHealthCheck.type+'] Etat de santé Monétique – '+moment(this.AddHealthCheck.dateAjout).format('DD/MM/YYYY')+','+moment(this.AddHealthCheck.dateAjout).format('HH:MM');
-    if(this.AddHealthCheck.etatProcessusMetierList.length != 0 && this.AddHealthCheck.healthChekPreprodProdDetailList.length != 0  ){
       this.healthService.SaveHealthCheck().subscribe((data) => {
              this.AddHealthCheck=new HealthChekPreprodProd();
              this.listEtatproc = new Array<EtatProcessusMetier>();
@@ -160,9 +159,7 @@ removeDeatils(us: HealthChekPreprodProdDetail) {
             },error=>{
               this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de l\'enregistrement'});
       })
-      }else{
-        this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
-      }
+     
   }
   takeScreenshot() {
 
@@ -220,6 +217,10 @@ removeDeatils(us: HealthChekPreprodProdDetail) {
     this.AddHealthCheck.id=0;
     this.AddHealthCheck.etatProcessusMetierList = this.listEtatproc;
     this.AddHealthCheck.healthChekPreprodProdDetailList = this.listHelthchekdetail;
+    if(this.AddHealthCheck.etatProcessusMetierList.length != 0 && this.AddHealthCheck.healthChekPreprodProdDetailList.length != 0  ){
     this.takeScreenshot();
+  }else{
+    this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
+  }
   }
 }

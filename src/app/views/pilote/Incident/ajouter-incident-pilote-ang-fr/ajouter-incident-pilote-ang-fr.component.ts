@@ -258,7 +258,6 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
     }else if(this.AddIncident.application.charteIncident =='charte Incident Monetics'){
       this.Subject = '[PRODUCTION] '+this.AddIncident.application.nomApplication+' Incident '+this.AddIncident.numeroIncident+' - '+this.AddIncident.titreIncident;
      }   
-      if(this.AddIncident.description != '' && this.AddIncident.causePrincipale != '' &&this.AddIncident.situationActuelle != '' && this.AddIncident.prochaineCommunication !=null){
       this.incidentService.SaveIncident().subscribe((data) => {
              this.AddIncident=new Incident();
               this.ListPlanAction = new Array<PlanAction>();
@@ -270,9 +269,7 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
             },error=>{
               this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de l\'enregistrement verifier le titre d \'incident'});
       })
-      }else{
-        this.messageService.add({severity:'warn', summary: 'Warning', detail: 'Insérer tout les champs'});
-      }
+
     
   }
 
@@ -338,7 +335,11 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
        this.AddIncident.planActionList = this.ListPlanAction;
        this.AddIncident.id=0;
       this.AddIncidentAng.planActionList = this.ListPlanActionAng;
-      this.takeScreenshot();
+      if(this.AddIncident.description != '' && this.AddIncident.causePrincipale != '' &&this.AddIncident.situationActuelle != '' && this.AddIncident.prochaineCommunication !=null){
+        this.takeScreenshot();
+        }else{
+            this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
+          }
   }
 
   

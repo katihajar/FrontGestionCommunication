@@ -185,7 +185,6 @@ export class AjoutPointVersionComponent implements OnInit {
     if (this.AddPointVersion.application.nomApplication != null && this.AddPointVersion.version != '' && this.AddPointVersion.dateAjout != null) {
       this.AddPointVersion.titre = this.AddPointVersion.application.nomApplication + ' ' + this.AddPointVersion.version + ' – Point version  – ' + moment(this.AddPointVersion.dateAjout).format('DD/MM/YYYY');
       this.Subject = this.AddPointVersion.titre;
-      if (this.AddPointVersion.titre != '' && this.AddPointVersion.goNoGoMEP != '' && this.AddPointVersion.goNoGoTNR != '' && this.AddPointVersion.remarque != '' && this.AddPointVersion.lienComment != '') {
         this.pointService.SavePointVersion(this.selectedFile).subscribe((data) => {
           this.AddPointVersion = new PointVersion();
           this.ListTicketAjouter = new Array<Ticket>();
@@ -203,9 +202,7 @@ export class AjoutPointVersionComponent implements OnInit {
       } else {
         this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Insérer tout les champs' });
       }
-    } else {
-      this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Insérer tout les champs' });
-    }
+   
   }
   takeScreenshot() {
     this.chartePointVersion = true;
@@ -264,7 +261,10 @@ export class AjoutPointVersionComponent implements OnInit {
       this.ListTicket.push(this.ListTicketRetirer[i]);
     }
     this.AddPointVersion.ticketList = this.ListTicket;
-    this.chartePointVersion = true;
+    if (this.AddPointVersion.titre != '' && this.AddPointVersion.goNoGoMEP != '' && this.AddPointVersion.goNoGoTNR != '' && this.AddPointVersion.remarque != '' && this.AddPointVersion.lienComment != '') {
     this.takeScreenshot();
+  } else {
+    this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Insérer tout les champs' });
+  }
   }
 }

@@ -42,8 +42,6 @@ export class RegistreIncidentPiloteComponent implements OnInit {
 
   exportExcel() {
     import("xlsx").then(xlsx => {
-      console.log(typeof Date.prototype.toLocaleDateString);
-      console.log(new Incident().dateDebut instanceof Date);
       const worksheet = xlsx.utils.json_to_sheet(this.ListIncidentOfPilote.map(incident => {
         return {
           id:incident.id,
@@ -181,6 +179,7 @@ Edite(inc:Incident){
     // @ts-ignore
     this.AddIncident.planActionList = data.body;
     this.ListPlanAction =this.AddIncident.planActionList;
+    this.changeStatut();
   })
   this.showPopUpIncd = true;
 }

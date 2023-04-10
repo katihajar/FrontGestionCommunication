@@ -179,7 +179,6 @@ export class AjouterChangementAngFrComponent implements OnInit {
      }else if(this.AddChangement.statut =='Terminé avec succès'){
       this.Subject = '[PRODUCTION] '+this.AddChangement.application.nomApplication+' '+this.AddChangement.version+' - Completed Change - '+moment(this.AddChangement.dateDebut).format('DD/MM/YYYY');
      }
-    if(this.AddChangement.titre != '' && this.AddChangement.impactMetier != '' &&this.AddChangement.version != '' && this.AddChangement.dateDebut !=null){
       this.changeService.SaveChangement().subscribe((data) => {
              this.AddChangement=new ChangementPlanifier();
              this.ListContenu = new Array<ContenuChangement>();
@@ -190,9 +189,7 @@ export class AjouterChangementAngFrComponent implements OnInit {
             },error=>{
               this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de l\'enregistrement'});
       })
-      }else{
-        this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
-      }
+     
   }
   takeScreenshot() {
       this.charteChangeAngFr = true;
@@ -247,6 +244,10 @@ export class AjouterChangementAngFrComponent implements OnInit {
     this.AddChangementAng.contenuChangementList=this.ListContenuAng;
     this.AddChangementAng.application = this.AddChangement.application;
     this.AddChangement.id=0;
+    if(this.AddChangement.titre != '' && this.AddChangement.impactMetier != '' &&this.AddChangement.version != '' && this.AddChangement.dateDebut !=null){
    this.takeScreenshot();
+  }else{
+    this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
+  }
 }
 }

@@ -10,6 +10,7 @@ import { AuthService } from './auth.service';
 })
 export class OperationService {
   private urlPilote = environment.baseUrlPilote;
+  private urlAdmin = environment.baseUrlAdmin;
   private urlRespo = environment.baseUrlResponsable;
   private _ListOperationOfPilote: Array<Operation> = new Array<Operation>();
   private _AddOperation: Operation = new Operation();
@@ -49,7 +50,27 @@ export class OperationService {
   set ListOperationOfPilote(value: Array<Operation>) {
     this._ListOperationOfPilote = value;
   }
-
+  public FindAllOperationAdmin(): Observable<HttpResponse<Array<Operation>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<Operation>>(
+      this.urlAdmin + 'operation/findAll',
+      { observe: 'response', headers }
+    );    
+  }
+  public FindAllOperationRespo(): Observable<HttpResponse<Array<Operation>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<Operation>>(
+      this.urlRespo + 'operation/findAll',
+      { observe: 'response', headers }
+    );    
+  }
+  public FindAllOperation(): Observable<HttpResponse<Array<Operation>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<Operation>>(
+      this.urlPilote + 'operation/findAll',
+      { observe: 'response', headers }
+    );    
+  }
   public FindOperationByPilote(): Observable<HttpResponse<Array<Operation>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<Operation>>(

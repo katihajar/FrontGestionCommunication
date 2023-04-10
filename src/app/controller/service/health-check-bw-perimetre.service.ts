@@ -61,7 +61,6 @@ export class HealthCheckBwPerimetreService {
   public SaveHealthCheck(): Observable<HttpResponse<HealthCheckBwPerimetre>> {
     this.AddHealthCheckBw.createurHealthCheckBwPerimetre = this.auth.User;
     const headers: HttpHeaders = this.auth.tokenHeaders();
-    console.log(JSON.stringify(this.AddHealthCheckBw));
     return this.http.post<HealthCheckBwPerimetre>(
       this.urlPilote + 'healthcheck/bwperimetre/save',this.AddHealthCheckBw,
       { observe: 'response', headers }

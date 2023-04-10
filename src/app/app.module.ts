@@ -12,7 +12,6 @@ import { FooterComponent } from './components/footer/footer/footer.component';
 import { HeaderAdminComponent } from './components/headers/header-admin/header-admin.component';
 import { HeaderPiloteComponent } from './components/headers/header-pilote/header-pilote.component';
 import { HeaderResponsableComponent } from './components/headers/header-responsable/header-responsable.component';
-import { TestComponent } from './views/admin/test/test.component';
 import { SideBarAdminComponent } from './components/sideBar/side-bar-admin/side-bar-admin.component';
 import { SideBarResponsableComponent } from './components/sideBar/side-bar-responsable/side-bar-responsable.component';
 import { SideBarPiloteComponent } from './components/sideBar/side-bar-pilote/side-bar-pilote.component';
@@ -23,7 +22,6 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatLegacyListModule as MatListModule } from "@angular/material/legacy-list";
 import { MatSidenavModule } from "@angular/material/sidenav";
-import { HomeComponent } from './views/admin/home/home.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { StyleClassModule } from 'primeng/styleclass';
@@ -151,6 +149,8 @@ import { RegistrePointVersionRespoComponent } from './views/responsable/registre
 import { AjoutPointVersionComponent } from './views/pilote/pointVersion/ajout-point-version/ajout-point-version.component';
 import { ChartePointVersionComponent } from './views/pilote/pointVersion/charte-point-version/charte-point-version.component';
 import { DashboardPiloteComponent } from './views/pilote/dashboard-pilote/dashboard-pilote.component';
+import { DashboardRespoComponent } from './views/responsable/dashboard-respo/dashboard-respo.component';
+import { DashboardComponent } from './views/admin/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -166,8 +166,6 @@ import { DashboardPiloteComponent } from './views/pilote/dashboard-pilote/dashbo
     HeaderAdminComponent,
     HeaderPiloteComponent,
     HeaderResponsableComponent,
-    TestComponent,
-    HomeComponent,
     ErrorPageComponent,
     ForbiddenComponent,
     RegistreUserComponent,
@@ -213,7 +211,9 @@ import { DashboardPiloteComponent } from './views/pilote/dashboard-pilote/dashbo
     RegistrePointVersionRespoComponent,
     AjoutPointVersionComponent,
     ChartePointVersionComponent,
-    DashboardPiloteComponent
+    DashboardPiloteComponent,
+    DashboardRespoComponent,
+    DashboardComponent
     ],
   imports: [
     BrowserModule,

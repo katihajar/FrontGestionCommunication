@@ -53,27 +53,24 @@
                 </span>
             </div>
 
-            <div class="card align-items-center" style="width: 80%; margin-bottom: 3%">
+            <div class="card align-items-center" style="width: 80%; margin-bottom: 3%;background-color: rgb(241, 241, 241);">
                 <h1 style="margin: 3%">Ajouter Livraison CARPM</h1>
                 <div class="col-12" style="margin-bottom: 2%">
-                    <span style="margin-left: 2%" class="p-input-icon-left" [style]="{ width: '40%' }">
+                    <span style="margin-left: 2%" class="p-input-icon-left" [style]="{ width: '30%' }">
                         <label for="basic8" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date MEI</label>
                         <p-calendar inputId="basic8" [(ngModel)]="date1" [style]="{ width: '100%' }" [(ngModel)]="this.Livraison.dateMEI" [showTime]="true" ></p-calendar>
     
                     </span>
-                    <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '40%' }">
+                    <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
                         <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Nombre tickets livrés</label>
                         <input inputId="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="number" pInputText
                             placeholder="Entré le numero" [(ngModel)]="this.Livraison.nombreTicket"/>
     
                     </span>
-                  
-                </div>
-                <div class="col-12" style="margin-bottom: 2%">
                     <span
                     class="p-input-icon-left"
                     style="margin-left: 2%"
-                    [style]="{ width: '70%' }"
+                    [style]="{ width: '25%' }"
                   >
                   <label for="basic" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Statut MEI</label>
                     <p-dropdown
@@ -88,10 +85,10 @@
                     ></p-dropdown>
                     
                   </span>
-
                     <button style="margin-left: 1%" pButton pRipple type="button" icon="pi pi-plus" (click)="AddLivraison()" 
                         class="p-button-rounded p-button-success"></button>
                 </div>
+                
                 <div class="col-12" style="margin: 2%">
                     <p-table class="table" [value]="this.ListLivraison" dataKey="id" [rows]="10"
                         [showCurrentPageReport]="true" [paginator]="true"
@@ -147,7 +144,7 @@
                     </p-table>
                 </div>
             </div>
-            <div class="card align-items-center" style="width: 80%; margin-bottom: 3%">
+            <div class="card align-items-center" style="width: 80%; margin-bottom: 3%;background-color: rgb(241, 241, 241);">
                 <h1 style="margin: 3%">Ticket Ajouté</h1>
                 <div class="col-12 " style="margin-bottom: 2%">
                     <span style="margin-left: 2%" class="p-input-icon-left" [style]="{ width: '45%' }">
@@ -213,7 +210,7 @@
                     </p-table>
                 </div>
             </div>
-            <div class="card align-items-center" style="width: 80%; margin-bottom: 3%">
+            <div class="card align-items-center" style="width: 80%; margin-bottom: 3%;background-color: rgb(241, 241, 241);">
                 <h1 style="margin: 3%">Ticket Retiré</h1>
                 <div class="col-12 " style="margin-bottom: 2%">
                     <span style="margin-left: 2%" class="p-input-icon-left" [style]="{ width: '45%' }">
@@ -279,7 +276,7 @@
                     </p-table>
                 </div>
             </div>
-            <div class="card align-items-center" style="width: 80%; margin-bottom: 3%">
+            <div class="card align-items-center" style="width: 80%; margin-bottom: 3%;background-color: rgb(241, 241, 241);">
                 <h1 style="margin: 3%">Planning Point Version</h1>
                 <div class="col-12 " style="margin-bottom: 2%">
                     <span style="margin-left: 2%" class="p-input-icon-left" [style]="{ width: '45%' }">

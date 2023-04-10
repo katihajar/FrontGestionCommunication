@@ -108,7 +108,6 @@ export class ApplicationService {
     );    
   }
   public FindApplicationByPilote(): Observable<HttpResponse<Array<PiloteApplication>>> {
-    console.log('user :'+JSON.stringify(this.auth.User.username));
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<PiloteApplication>>(
       this.urlPilote + 'piloteapplication/app/user/'+this.auth.User.username,

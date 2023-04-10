@@ -112,7 +112,11 @@ export class AjouterOperationComponent implements OnInit {
   }
   SendAndSaveOper() {
       this.AddOperation.id=0;
+      if(this.AddOperation.description != '' && this.AddOperation.titre != '' && this.AddOperation.dateDebut !=null){
       this.takeScreenshot();
+    }else{
+      this.messageService.add({severity:'warn', summary: 'Warning', detail: 'Insérer tout les champs'});
+    }
   }
   SaveOperation(){
     this.AddOperation.dateAjout = new Date();
@@ -121,7 +125,6 @@ export class AjouterOperationComponent implements OnInit {
     }else if(this.AddOperation.statut=='Terminer'){
        this.Subject = '[TOTALENERGIES][COMMUNICATION] -N°.'+this.AddOperation.numero+' - Description Courte de l\'Operation Terminée'; 
     }
-       if(this.AddOperation.description != '' && this.AddOperation.titre != '' && this.AddOperation.dateDebut !=null){
        this.operationService.SaveOperation().subscribe((data) => {
               this.AddOperation=new Operation();
               const mailtoLink = `mailto:${this.EmailObligatoire.join(';')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(';')}`;
@@ -131,9 +134,7 @@ export class AjouterOperationComponent implements OnInit {
              },error=>{
                this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de l\'enregistrement verifier le titre d \'Operation'});
        })
-       }else{
-         this.messageService.add({severity:'warn', summary: 'Warning', detail: 'Insérer tout les champs'});
-       }
+      
      
    }
 }

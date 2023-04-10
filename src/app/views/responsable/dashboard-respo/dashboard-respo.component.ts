@@ -1,24 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { Incident } from 'src/app/controller/model/incident';
-import { IncidentService } from 'src/app/controller/service/incident.service';
-import Chart from 'chart.js/auto';
-import { style } from '@angular/animations';
-import { Operation } from 'src/app/controller/model/operation';
-import { OperationService } from 'src/app/controller/service/operation.service';
+import { Component } from '@angular/core';
 import { ChangementPlanifier } from 'src/app/controller/model/changement-planifier';
+import { Incident } from 'src/app/controller/model/incident';
+import { Operation } from 'src/app/controller/model/operation';
 import { ChangementService } from 'src/app/controller/service/changement.service';
+import { OperationService } from 'src/app/controller/service/operation.service';
+import Chart from 'chart.js/auto';
+import { IncidentRespoService } from 'src/app/controller/service/incident-respo.service';
 
 @Component({
-  selector: 'app-dashboard-pilote',
-  templateUrl: './dashboard-pilote.component.html',
-  styleUrls: ['./dashboard-pilote.component.scss']
+  selector: 'app-dashboard-respo',
+  templateUrl: './dashboard-respo.component.html',
+  styleUrls: ['./dashboard-respo.component.scss']
 })
-export class DashboardPiloteComponent implements OnInit {
+export class DashboardRespoComponent {
 
   listIncident:Array<Incident>=new Array<Incident>();
   listOperation:Array<Operation>=new Array<Operation>();
   listChange:Array<ChangementPlanifier>=new Array<ChangementPlanifier>();
-  constructor(private service: IncidentService,private operationService: OperationService,private changeService: ChangementService) { 
+  constructor(private service: IncidentRespoService,private operationService: OperationService,private changeService: ChangementService) { 
   }
 
   ngOnInit(): void {
@@ -33,7 +32,7 @@ export class DashboardPiloteComponent implements OnInit {
      this.generateIncidentsPerStatutChart();
      this.generateIncidentsPerStatutChartMonth();
     });
-    this.operationService.FindAllOperation().subscribe(data=>{
+    this.operationService.FindAllOperationRespo().subscribe(data=>{
       //@ts-ignore
       this.listOperation = data.body;
      this.generateOperationPerApplicationChart();
@@ -42,7 +41,7 @@ export class DashboardPiloteComponent implements OnInit {
      this.generateOperationPerStatutChart();
      this.generateOperationPerStatutChartMonth();
     });
-    this.changeService.FindAllChange().subscribe(data=>{
+    this.changeService.FindAllChangeRespo().subscribe(data=>{
       //@ts-ignore
       this.listChange = data.body;
      this.generateChangePerApplicationChart();

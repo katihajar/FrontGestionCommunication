@@ -42,8 +42,6 @@ export class ResgistreIncidentRespoComponent implements OnInit {
 
   exportExcel() {
     import("xlsx").then(xlsx => {
-      console.log(typeof Date.prototype.toLocaleDateString);
-      console.log(new Incident().dateDebut instanceof Date);
       const worksheet = xlsx.utils.json_to_sheet(this.ListIncidentOfRespo.map(incident => {
         return {
           id:incident.id,

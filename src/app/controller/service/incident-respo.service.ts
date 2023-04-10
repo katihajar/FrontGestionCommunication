@@ -12,11 +12,24 @@ import { AuthService } from './auth.service';
 export class IncidentRespoService {
 
   private urlRespo = environment.baseUrlResponsable;
+  private urlAdmin = environment.baseUrlAdmin;
 
   constructor(private http: HttpClient,private auth: AuthService) { }
+  public FindAllIncident(): Observable<HttpResponse<Array<Incident>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<Incident>>(
+      this.urlRespo + 'incident/findAll',
+      { observe: 'response', headers }
+    );    
+  }
 
-
-
+  public FindAllIncidentAdmin(): Observable<HttpResponse<Array<Incident>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<Incident>>(
+      this.urlAdmin + 'incident/findAll',
+      { observe: 'response', headers }
+    );    
+  }
   public FindIncidentByRespo(): Observable<HttpResponse<Array<Incident>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<Incident>>(

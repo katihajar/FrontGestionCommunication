@@ -25,15 +25,7 @@ export class AuthService {
       this.startTokenRefreshTimer();
     }
   }
-  ngOnInit() {
-    this.startTokenRefreshTimer();
-  }
-  ngOnDestroy() {
-    // clear any previous timer
-    clearTimeout(this.tokenRefreshTimer);
-    clearInterval(this.tokenRefreshTimer);
-    localStorage.removeItem('tokenRefreshTimer');
-  }
+
   get UserAuth(): Userauth {
     if(this._UserAuth == null){
       this._UserAuth = new Userauth();
@@ -73,6 +65,11 @@ export class AuthService {
       this.tokenRefreshTimer = setTimeout(() => {
         this.refreshTokenAndSetTimer();
       }, timeRemaining);
+      // Start a new timer using setInterval()
+            // @ts-ignore
+       this.tokenRefreshTimer = setInterval(() => {
+       this.refreshTokenAndSetTimer();
+      }, timerInterval);
     } else {
       // Start a new timer using setInterval()
             // @ts-ignore
@@ -91,7 +88,6 @@ export class AuthService {
       localStorage.setItem('accessToken', this.UserAuth.accessToken as string);
       localStorage.setItem('refreshToken', this.UserAuth.refreshToken as string);
       localStorage.setItem('auth', JSON.stringify(this.UserAuth));
-      console.log('refreshed');
     }, () => {
       this.router.navigate(['/forbidden']);
     });
@@ -105,20 +101,8 @@ export class AuthService {
     localStorage.removeItem('tokenRefreshTimer');
     clearInterval(this.tokenRefreshTimer);
     clearTimeout(this.tokenRefreshTimeout);
-    const headers = { Authorization: 'Bearer ' + this.UserAuth.accessToken };
-    return this.http.post(
-      this.url + '/logout', // update this line to add a forward slash before "logout"
-      this.UserAuth,
-      { headers }
-    ).subscribe(
-            () => {
-              this.User = new User();
-              this.UserAuth = new Userauth();
-              console.log('Logout successful')
-            },
-            error => console.error('Logout failed', error)
-        );
-
+    this.User = new User();
+    this.UserAuth = new Userauth();
   }
 
 
@@ -130,9 +114,7 @@ export class AuthService {
   getUser() {
     return JSON.parse(localStorage.getItem('currentUser') as string);
   }
-  getTimer(){
-    
-  }
+
   getAuth(){
     return JSON.parse(localStorage.getItem('auth') as string);
   }
@@ -177,7 +159,6 @@ export class AuthService {
     let headers = new HttpHeaders();
       headers = new HttpHeaders({
         Accept: 'application/json',
-        // 'Content-Type':'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW',
         Authorization: `Bearer ${this.UserAuth.accessToken}`,
       });
     return headers;

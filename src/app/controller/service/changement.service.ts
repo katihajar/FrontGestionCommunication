@@ -11,7 +11,8 @@ import { ContenuChangement } from '../model/contenu-changement';
 })
 export class ChangementService {
   private urlPilote = environment.baseUrlPilote;
-  private urlRespo = environment.baseUrlResponsable;
+  private urlRespo = environment.baseUrlResponsable; 
+  private urlAdmin = environment.baseUrlAdmin;
   private _ListChangementOfPilote: Array<ChangementPlanifier> = new Array<ChangementPlanifier>();
   private _AddChangement: ChangementPlanifier = new ChangementPlanifier();
   private _AddChangementAng: ChangementPlanifier = new ChangementPlanifier();
@@ -72,6 +73,27 @@ export class ChangementService {
 
   set ListChangementOfPilote(value: Array<ChangementPlanifier>) {
     this._ListChangementOfPilote = value;
+  }
+  public FindAllChangeRespo(): Observable<HttpResponse<Array<ChangementPlanifier>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<ChangementPlanifier>>(
+      this.urlRespo + 'changementplanifier/findAll',
+      { observe: 'response', headers }
+    );    
+  }
+  public FindAllChangeAdmin(): Observable<HttpResponse<Array<ChangementPlanifier>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<ChangementPlanifier>>(
+      this.urlAdmin + 'changementplanifier/findAll',
+      { observe: 'response', headers }
+    );    
+  }
+  public FindAllChange(): Observable<HttpResponse<Array<ChangementPlanifier>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<ChangementPlanifier>>(
+      this.urlPilote + 'changementplanifier/findAll',
+      { observe: 'response', headers }
+    );    
   }
   public FindContenuByChangement(id:number): Observable<HttpResponse<Array<ContenuChangement>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();

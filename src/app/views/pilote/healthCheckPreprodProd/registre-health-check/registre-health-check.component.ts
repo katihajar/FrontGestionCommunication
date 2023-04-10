@@ -39,28 +39,16 @@ PopAjout(){
 }
   RouterAjout(){
     if(this.AddHealthCheck.type != ''){
-    this.AddHealthCheck.dateAjout = new Date();
-    this.AddHealthCheck.titre ='Etat de santé du '+moment(this.AddHealthCheck.dateAjout).format('DD/MM/YYYY')+','+moment(this.AddHealthCheck.dateAjout).format('HH:MM');
-    this.router.navigate(['/pilote/healthcheck/PreprodProd/save']);
+      this.router.navigate(['/pilote/healthcheck/PreprodProd/save']);
+    }else{
+      this.messageService.add({severity:'warn', summary:'Warning', detail:'Selectionner le Type'});
     }
-  }
-  get ListApp(): Array<Application>{
-    return this.healthService.ListApp;
-  }
-
-  set ListApp(value: Array<Application>) {
-    this.healthService.ListApp = value;
   }
 
   onDialogHideLang(){
     this.AddHealthCheck = new HealthChekPreprodProd();
   }
-  FindApp(){
-    this.healthService.FindApp().subscribe((data)=>{
-      // @ts-ignore
-      this.ListApp= data.body;
-    })
-  }
+
   FindHealth(){
     this.healthService.FindHealthCheckByPilote().subscribe((data) => {
       // @ts-ignore
@@ -78,7 +66,11 @@ PopAjout(){
       // @ts-ignore
       this.AddHealthCheck.etatProcessusMetierList=data.body;
     });
-    this.AddHealthCheck.titre ='Etat de santé du '+moment(this.AddHealthCheck.dateAjout).format('DD/MM/YYYY')+','+moment(this.AddHealthCheck.dateAjout).format('HH:MM');
+    this.healthService.FindStatutAppByHealthCheck(helth.id).subscribe((data)=>{
+      // @ts-ignore
+      this.AddHealthCheck.statutApplicationList=data.body;
+
+    }); 
     this.popUpAjout=true;
 
   }
@@ -131,8 +123,11 @@ PopAjout(){
       // @ts-ignore
       this.AddHealthCheck.etatProcessusMetierList=data.body;
     });
-    this.FindApp();
-    this.charteHealthCheckPreprodProd = true;
+    this.healthService.FindStatutAppByHealthCheck(helth.id).subscribe((data)=>{
+      // @ts-ignore
+      this.AddHealthCheck.statutApplicationList=data.body;
+    }); 
+       this.charteHealthCheckPreprodProd = true;
   }
   DeleteHealthCheck(id:number){
     this.confirmationService.confirm({

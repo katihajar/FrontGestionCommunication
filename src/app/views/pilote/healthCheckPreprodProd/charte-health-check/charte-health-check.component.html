@@ -30,14 +30,16 @@
                                 <th style="background-color: white;color: #990033;width: 40%;text-align: center;">Disponibilité
                                 </th>
                             </tr>
-                            <tr *ngFor="let app of this.ListApp">
+                            <tr *ngFor="let satutApp of this.AddHealthCheck.statutApplicationList">
                                 <td style="width: 75%;">
-                                    {{ app.nomApplication }}
+                                    {{ satutApp.application.nomApplication }}
                                 </td>
                                 <td style="width: 25%;text-align: center;">
-                                    <div *ngIf="app.disponibilite =='Oui'">    <p-badge severity="success" styleClass="mr-2"></p-badge>
+                                    <div *ngIf="satutApp.statut =='OK'">    <p-badge severity="success" styleClass="mr-2"></p-badge>
                                     </div> 
-                                    <div *ngIf="app.disponibilite =='Non'" ><p-badge severity="danger" styleClass="mr-2"></p-badge></div>   
+                                    <div *ngIf="satutApp.statut =='En cours d\'éxecuxtion'"><p-badge severity="info" styleClass="mr-2"></p-badge></div>
+                                    <div *ngIf="satutApp.statut =='Flux non critique KO'" ><p-badge severity="warning" styleClass="mr-2"></p-badge></div> 
+                                    <div *ngIf="satutApp.statut =='Flux critique KO'" ><p-badge severity="danger" styleClass="mr-2"></p-badge></div> 
                                
                                 </td>
                             </tr>

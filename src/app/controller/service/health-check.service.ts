@@ -8,6 +8,7 @@ import { HealthChekPreprodProd } from '../model/health-chek-preprod-prod';
 import { HealthChekPreprodProdDetail } from '../model/health-chek-preprod-prod-detail';
 import { ProcessusMetier } from '../model/processus-metier';
 import { AuthService } from './auth.service';
+import { StatutApplication } from '../model/statut-application';
 
 @Injectable({
   providedIn: 'root'
@@ -102,6 +103,13 @@ export class HealthCheckService {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<HealthChekPreprodProdDetail>>(
       this.urlPilote + 'healthcheckdetail/health/'+id,
+      { observe: 'response', headers }
+    );    
+  }
+  public FindStatutAppByHealthCheck(id:number): Observable<HttpResponse<Array<StatutApplication>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<StatutApplication>>(
+      this.urlPilote + 'statutapp/statutapp/'+id,
       { observe: 'response', headers }
     );    
   }

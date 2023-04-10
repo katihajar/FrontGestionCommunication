@@ -15,6 +15,7 @@ import html2canvas from 'html2canvas';
 import { saveAs } from 'file-saver';
 import { MyOptions } from 'src/app/controller/model/myoption';
 import { DestinataireService } from 'src/app/controller/service/destinataire.service';
+import { StatutApplication } from 'src/app/controller/model/statut-application';
 const moment = require('moment');
 
 @Component({
@@ -27,7 +28,10 @@ export class AjoutHealthCheckComponent implements OnInit {
   ListFeu:any[]=[];
   ListImpactClient:any[]=[];
   ListStatut:any[]=[];
+  statuApp :StatutApplication=new StatutApplication();
   ListProcessus: Array<ProcessusMetier>= new Array<ProcessusMetier>();
+  ListApp:Array<Application>= new Array<Application>();
+  ListStatutApp:Array<StatutApplication>=new Array<StatutApplication>();
   date2: Date = new Date();
   date3: Date = new Date();
   helthchekdetail: HealthChekPreprodProdDetail= new HealthChekPreprodProdDetail();
@@ -51,8 +55,10 @@ export class AjoutHealthCheckComponent implements OnInit {
     this.FindProcessus();
     this.listHelthchekdetail=new Array<HealthChekPreprodProdDetail>();
     this.listEtatproc=new Array<EtatProcessusMetier>();
+    this.ListStatutApp = new Array<StatutApplication>();
     this.listEtatproc=this.AddHealthCheck.etatProcessusMetierList;
     this.listHelthchekdetail=this.AddHealthCheck.healthChekPreprodProdDetailList;
+    this.ListStatutApp = this.AddHealthCheck.statutApplicationList;
     this.ListFeu= [
       { name: 'OK' },
       { name: 'En cours d\'éxecuxtion' },
@@ -95,6 +101,18 @@ export class AjoutHealthCheckComponent implements OnInit {
   set charteHealthCheckPreprodProd(value: boolean) {
     this.charteService.charteHealthCheckPreprodProd = value;
   }
+  AddStatutApp(){
+    if(this.statuApp.statut != '' && this.statuApp.application.nomApplication!=''  ){
+    this.ListStatutApp.push(this.statuApp);
+    this.statuApp = new StatutApplication();
+  } else{
+    this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
+  }
+}
+removeStatutApp(us: StatutApplication) {
+  let i = this.ListStatutApp.indexOf(us);
+  this.ListStatutApp.splice(i, 1);
+}
   AddEtat(){
     if(this.etatproc.statut != '' && this.etatproc.processusMetier.titre!=''  ){
     this.listEtatproc.push(this.etatproc);
@@ -126,13 +144,7 @@ removeDeatils(us: HealthChekPreprodProdDetail) {
       this.ListProcessus= data.body;
     })
   }
-  get ListApp(): Array<Application>{
-    return this.healthService.ListApp;
-  }
 
-  set ListApp(value: Array<Application>) {
-    this.healthService.ListApp = value;
-  }
   FindApp(){
     this.healthService.FindApp().subscribe((data)=>{
       // @ts-ignore
@@ -142,12 +154,13 @@ removeDeatils(us: HealthChekPreprodProdDetail) {
   charte(){
     this.AddHealthCheck.etatProcessusMetierList = this.listEtatproc;
     this.AddHealthCheck.healthChekPreprodProdDetailList = this.listHelthchekdetail;
+    this.AddHealthCheck.statutApplicationList= this.ListStatutApp;
     this.FindApp();
     this.charteHealthCheckPreprodProd = true;
   }
   SaveHealth(){
-    this.AddHealthCheck.dateAjout = new Date();
-    this.Subject = '['+this.AddHealthCheck.type+'] Etat de santé Monétique – '+moment(this.AddHealthCheck.dateAjout).format('DD/MM/YYYY')+','+moment(this.AddHealthCheck.dateAjout).format('HH:MM');
+    this.AddHealthCheck.titre ='Etat de santé du '+moment(this.AddHealthCheck.dateAjout).format('DD/MM/YYYY')+','+moment(this.AddHealthCheck.dateAjout).format('HH:mm');
+    this.Subject = '['+this.AddHealthCheck.type+'] Etat de santé Monétique – '+moment(this.AddHealthCheck.dateAjout).format('DD/MM/YYYY')+','+moment(this.AddHealthCheck.dateAjout).format('HH:mm');
       this.healthService.SaveHealthCheck().subscribe((data) => {
              this.AddHealthCheck=new HealthChekPreprodProd();
              this.listEtatproc = new Array<EtatProcessusMetier>();
@@ -218,7 +231,8 @@ removeDeatils(us: HealthChekPreprodProdDetail) {
     this.AddHealthCheck.etatProcessusMetierList = this.listEtatproc;
     this.AddHealthCheck.healthChekPreprodProdDetailList = this.listHelthchekdetail;
     if(this.AddHealthCheck.etatProcessusMetierList.length != 0 && this.AddHealthCheck.healthChekPreprodProdDetailList.length != 0  ){
-    this.takeScreenshot();
+      this.AddHealthCheck.dateAjout = new Date();
+      this.takeScreenshot();
   }else{
     this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
   }

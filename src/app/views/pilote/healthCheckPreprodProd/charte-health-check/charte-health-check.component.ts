@@ -16,13 +16,7 @@ export class CharteHealthCheckComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  get ListApp(): Array<Application>{
-    return this.healthService.ListApp;
-  }
 
-  set ListApp(value: Array<Application>) {
-    this.healthService.ListApp = value;
-  }
 
   get charteHealthCheckPreprodProd(): boolean {
     return this.charteService.charteHealthCheckPreprodProd;

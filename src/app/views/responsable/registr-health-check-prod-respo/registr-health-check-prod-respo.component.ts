@@ -29,12 +29,7 @@ export class RegistrHealthCheckProdRespoComponent implements OnInit {
     this.AddHealthCheck = new HealthChekPreprodProd();
     this.FindHealth();
   }
-  FindApp(){
-    this.healthService.FindApp().subscribe((data)=>{
-      // @ts-ignore
-      this.ListApp= data.body;
-    })
-  }
+
   FindHealth(){
     this.healthService.FindHealthCheck().subscribe((data) => {
       // @ts-ignore
@@ -58,13 +53,7 @@ export class RegistrHealthCheckProdRespoComponent implements OnInit {
   set charteHealthCheckPreprodProd(value: boolean) {
     this.charteService.charteHealthCheckPreprodProd = value;
   }
-  get ListApp(): Array<Application>{
-    return this.health2.ListApp;
-  }
 
-  set ListApp(value: Array<Application>) {
-    this.health2.ListApp = value;
-  }
 
   charte(helth:HealthChekPreprodProd){
     this.AddHealthCheck=helth;
@@ -76,7 +65,10 @@ export class RegistrHealthCheckProdRespoComponent implements OnInit {
       // @ts-ignore
       this.AddHealthCheck.etatProcessusMetierList=data.body;
     });
-    this.FindApp();
+    this.healthService.FindStatutAppByHealthCheck(helth.id).subscribe((data)=>{
+      // @ts-ignore
+      this.AddHealthCheck.statutApplicationList=data.body;
+    });
     this.charteHealthCheckPreprodProd = true;
   }
 }

@@ -160,12 +160,11 @@
     </ng-template>
   </p-dialog>
   
-  
-  <app-charte-incident3bfr></app-charte-incident3bfr>
-  <app-charte-incident3-bfr-ang></app-charte-incident3-bfr-ang>
-  <app-charte-incident3b-ang></app-charte-incident3b-ang>
-  <app-charte-incident-monetic></app-charte-incident-monetic>
-  <app-charte-incident-monetic-ang></app-charte-incident-monetic-ang>
-  <app-charte-incident-monetic-ang-fr></app-charte-incident-monetic-ang-fr>
+  <app-charte-incident3bfr  *ngIf="charteIncident3Bfr"></app-charte-incident3bfr>
+  <app-charte-incident3-bfr-ang  *ngIf="charteIncident3BfrAng"></app-charte-incident3-bfr-ang>
+  <app-charte-incident3b-ang  *ngIf="charteIncident3BAng"></app-charte-incident3b-ang>
+  <app-charte-incident-monetic  *ngIf="charteIncidentMonetic"></app-charte-incident-monetic>
+  <app-charte-incident-monetic-ang  *ngIf="charteIncidentMoneticAng"></app-charte-incident-monetic-ang>
+  <app-charte-incident-monetic-ang-fr  *ngIf="charteIncidentMoneticAngFr"></app-charte-incident-monetic-ang-fr>  
   <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
   

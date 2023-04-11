@@ -116,7 +116,7 @@
     <p-button label="Submit" (onClick)="SelectLanguage()" icon="pi pi-check"></p-button>
   </ng-template>
 </p-dialog>
-<app-charte-operation-fr></app-charte-operation-fr>
-<app-charte-operation-fr-ang></app-charte-operation-fr-ang>
-<app-charte-operation-ang></app-charte-operation-ang>
+<app-charte-operation-fr  *ngIf="charteOperationFr"></app-charte-operation-fr>
+<app-charte-operation-fr-ang  *ngIf="charteOperationAngFr"></app-charte-operation-fr-ang>
+<app-charte-operation-ang  *ngIf="charteOperationAng"></app-charte-operation-ang>
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>

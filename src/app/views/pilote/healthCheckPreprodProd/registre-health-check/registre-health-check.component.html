@@ -94,5 +94,5 @@
     <p-button label="Submit" (onClick)="RouterAjout()"  icon="pi pi-check"></p-button>
   </ng-template>
 </p-dialog>
-<app-charte-health-check></app-charte-health-check>
+<app-charte-health-check *ngIf="charteHealthCheckPreprodProd"></app-charte-health-check>
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>

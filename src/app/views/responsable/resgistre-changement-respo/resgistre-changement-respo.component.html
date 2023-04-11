@@ -128,9 +128,8 @@
     </ng-template>
   </p-dialog>
   
-  
- <app-charte-changement-ang></app-charte-changement-ang>
- <app-charte-changement-fr></app-charte-changement-fr>
- <app-charte-changement-fr-ang></app-charte-changement-fr-ang>
+  <app-charte-changement-ang *ngIf="charteChangeAng"></app-charte-changement-ang>
+  <app-charte-changement-fr *ngIf="charteChangeFr"></app-charte-changement-fr>
+  <app-charte-changement-fr-ang *ngIf="charteChangeAngFr"></app-charte-changement-fr-ang>
   <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
   

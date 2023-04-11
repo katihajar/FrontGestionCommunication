@@ -151,6 +151,7 @@ import { ChartePointVersionComponent } from './views/pilote/pointVersion/charte-
 import { DashboardPiloteComponent } from './views/pilote/dashboard-pilote/dashboard-pilote.component';
 import { DashboardRespoComponent } from './views/responsable/dashboard-respo/dashboard-respo.component';
 import { DashboardComponent } from './views/admin/dashboard/dashboard.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -213,7 +214,8 @@ import { DashboardComponent } from './views/admin/dashboard/dashboard.component'
     ChartePointVersionComponent,
     DashboardPiloteComponent,
     DashboardRespoComponent,
-    DashboardComponent
+    DashboardComponent,
+    ChangePasswordComponent
     ],
   imports: [
     BrowserModule,

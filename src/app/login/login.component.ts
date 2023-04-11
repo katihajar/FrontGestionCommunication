@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    localStorage.removeItem('currentUser');
     if(this.User.username != ''){
     this.authService.LogOUT();}
   }

@@ -55,8 +55,7 @@
             obligatoire</small>
         </span>
       </div>
-
-      <div class="card align-items-center" style="width: 80%; margin-bottom: 2%">
+      <div class="card " style="width: 80%; margin-bottom: 2%">
         <h1 style="margin: 3%">Ajouter les pilotes</h1>
         <div class="col-12" style="margin-bottom: 2%">
           <span class="p-input-icon-left" style="margin-left: 30%" [style]="{ width: '40%' }">
@@ -73,7 +72,7 @@
           <button style="margin-left: 1%" (click)="AddPilote()" pButton pRipple type="button" icon="pi pi-plus"
             class="p-button-rounded p-button-success"></button>
         </div>
-        <div class="col-12" style="margin: 2%">
+        <div class="col-12">
           <p-table class="table" [value]="this.ListpiloteSelected" dataKey="id" [rows]="10"
             [showCurrentPageReport]="true" [paginator]="true"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
@@ -127,7 +126,7 @@
             </ng-template>
           </p-table>
         </div>
-      </div>
+      </div> 
       <div class="col-12 " style="margin-bottom: 2%; ">
         <p-button label="Submit" style=" float: right;margin-right: 2%;" (click)="SaveApp()"
           icon="pi pi-check"></p-button>

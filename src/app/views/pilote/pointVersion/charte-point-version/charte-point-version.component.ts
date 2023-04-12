@@ -11,11 +11,17 @@ import { PointVersionService } from 'src/app/controller/service/point-version.se
   styleUrls: ['./charte-point-version.component.scss']
 })
 export class ChartePointVersionComponent implements OnInit {
+  sizeLivr:number=0;
+  sizeTicket:number=0;
+  sizePlan:number=0;
   @ViewChild('myDialog',{static:false}) filterComponent!: ElementRef;
   constructor(private pointService: PointVersionService,private charteService:CharteService,private sanitizer: DomSanitizer,
     private router:Router) { }
 
   ngOnInit(): void {
+  //  this.sizeLivr= this.AddPointVersion.livraisonCARMList.length;
+  //  this.sizeTicket= this.AddPointVersion.ticketList.length ;
+  //  this.sizePlan=this.AddPointVersion.planningPointVersionList.length;
   }
   get chartePointVersion(): boolean {
     return this.charteService.chartePointVersion;

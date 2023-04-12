@@ -23,7 +23,7 @@
     <h2><span style="background-color: #0864b4;color: white;"><b><u>V{{this.AddPointVersion.version}}</u></b></span></h2>
     <h2 style="margin-bottom: 0%;padding: 0%;margin: 0%"><span style="background-color: #ffc404;"><b>Nombre de tickets confirmés : {{this.AddPointVersion.ticketConfirmer}}</b><br></span></h2>
     <h2 style="margin-bottom: 0%;margin-top: 0%;padding: 0%;margin: 0%"><span style="background-color: #ffc404;"><b>Livraisons sur CARPM (MEI) : </b></span></h2><br>
-    <div *ngIf="this.AddPointVersion.livraisonCARMList.length !=0">
+    <div *ngIf="this.AddPointVersion.livraisonCARMList">
     <div class="row align-items-center" style=" display: flex; justify-content:  center;">
       <div style=" width: 55%;margin: 2%;">
         <table id="customers">
@@ -58,7 +58,7 @@
         <img src="data:{{this.AddPointVersion.imageType}};base64,{{this.AddPointVersion.image}}" width="100%"
         alt="psa" title="psa" class="staticImg" >
       </div>
-      <div *ngIf="this.AddPointVersion.ticketList.length !=0">
+      <div *ngIf="this.AddPointVersion.ticketList">
       <h2 style="color: white; background-color: #0464b4;background-size: cover;"><u>Tickets retirés de la version :</u></h2> <br>
       <h2 style="color: #1c4c88;"><b><u>En séance :</u></b></h2>
       <div *ngFor="let ticket of this.AddPointVersion.ticketList">
@@ -78,7 +78,7 @@
         <h2 style="color: #1c4c88;"><b><u>Remarque :</u></b></h2>
         <p>{{this.AddPointVersion.remarque}}</p><br>
       </div>
-      <div *ngIf="this.AddPointVersion.planningPointVersionList.length !=0">
+      <div *ngIf="this.AddPointVersion.planningPointVersionList">
       <p>Le planning actuel de la V{{this.AddPointVersion.version}} est le suivant, il sera mis à jour dès qu’une décision finale aura été partagée :</p>
       <div *ngFor="let plan of this.AddPointVersion.planningPointVersionList">
           <li  style="padding: 4px;"> {{plan.titre}} :{{plan.description}}</li>

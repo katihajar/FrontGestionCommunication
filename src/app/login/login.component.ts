@@ -18,10 +18,11 @@ export class LoginComponent implements OnInit {
   invalidLogin = false;
   loginSuccess = false;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {
+    localStorage.removeItem('currentUser');
+   }
 
   ngOnInit(): void {
-    localStorage.removeItem('currentUser');
     if(this.User.username != ''){
     this.authService.LogOUT();}
   }

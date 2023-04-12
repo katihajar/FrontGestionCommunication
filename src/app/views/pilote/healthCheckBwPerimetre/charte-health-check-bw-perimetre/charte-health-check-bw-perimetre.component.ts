@@ -9,12 +9,15 @@ import { HealthCheckBwPerimetreService } from 'src/app/controller/service/health
   styleUrls: ['./charte-health-check-bw-perimetre.component.scss']
 })
 export class CharteHealthCheckBwPerimetreComponent implements OnInit {
-
+  size:number=0;
   @ViewChild('myDialog',{static:false}) filterComponent!: ElementRef;
   constructor(private charteService: CharteService,private healthService: HealthCheckBwPerimetreService) { }
 
 
   ngOnInit(): void {
+    for(let i=0;i< this.AddHealthCheckBw.healthCheckBwPerimetreDetailList.length;i++){
+    this.size = this.size+1;
+}
   }
   get charteHealthCheckBw(): boolean {
     return this.charteService.charteHealthCheckBw;

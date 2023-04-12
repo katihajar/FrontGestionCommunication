@@ -23,6 +23,12 @@
       {
         "image-alt": "off"
       }
+    ],
+    "axe/structure": [
+      "default",
+      {
+        "listitem": "off"
+      }
     ]
   }
 }

@@ -15,9 +15,6 @@ export class CharteHealthCheckBwPerimetreComponent implements OnInit {
 
 
   ngOnInit(): void {
-    for(let i=0;i< this.AddHealthCheckBw.healthCheckBwPerimetreDetailList.length;i++){
-    this.size = this.size+1;
-}
   }
   get charteHealthCheckBw(): boolean {
     return this.charteService.charteHealthCheckBw;

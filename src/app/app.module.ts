@@ -152,7 +152,7 @@ import { DashboardPiloteComponent } from './views/pilote/dashboard-pilote/dashbo
 import { DashboardRespoComponent } from './views/responsable/dashboard-respo/dashboard-respo.component';
 import { DashboardComponent } from './views/admin/dashboard/dashboard.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import { ExpiredTokenInterceptor } from './controller/service/ExpiredTokenInterceptor';
+import { ExpiredTokenInterceptor } from './controller/service/expiredTokenInterceptor';
 import { ExpireTokenComponent } from './redirectlogin/expire-token/expire-token.component';
 
 @NgModule({

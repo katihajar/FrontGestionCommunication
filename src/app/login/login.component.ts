@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit {
   loginSuccess = false;
 
   constructor(private authService: AuthService, private router: Router) {
-    localStorage.removeItem('currentUser');
    }
 
   ngOnInit(): void {
@@ -51,8 +50,6 @@ export class LoginComponent implements OnInit {
       this.invalidLogin = false;
       this.loginSuccess = true;
       this.successMessage = 'Login Successful';
-      // Start token refresh timer
-      // this.authService.startTokenRefreshTimer();
       if (this.UserAuth.accessToken !== null) {
         if (this.User.roles[0].name == 'ROLE_ADMIN') {
           this.router.navigate(['/admin']);

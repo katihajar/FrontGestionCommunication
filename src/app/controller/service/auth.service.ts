@@ -103,9 +103,16 @@ export class AuthService {
     clearTimeout(this.tokenRefreshTimeout);
     this.User = new User();
     this.UserAuth = new Userauth();
+    this.Httplogout();
   }
 
-
+  public Httplogout(): Observable<any> {
+    const headers: HttpHeaders = this.initHeaders();
+    return this.http.post<any>(
+      this.url + '/api/auth/logout',
+      {headers }
+    );
+  }
 
   isLoggedIn() {
     return !!localStorage.getItem('currentUser');

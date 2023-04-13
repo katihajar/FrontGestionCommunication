@@ -22,7 +22,7 @@ export class AuthService {
     if (this.isLoggedIn()) {
       this.User = this.getUser();
       this.UserAuth = this.getAuth();
-      this.startTokenRefreshTimer();
+      // this.startTokenRefreshTimer();
     }
   }
 

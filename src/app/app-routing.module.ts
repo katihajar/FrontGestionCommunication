@@ -37,6 +37,7 @@ import { RegistrePointVersionRespoComponent } from './views/responsable/registre
 import { DashboardPiloteComponent } from './views/pilote/dashboard-pilote/dashboard-pilote.component';
 import { DashboardComponent } from './views/admin/dashboard/dashboard.component';
 import { DashboardRespoComponent } from './views/responsable/dashboard-respo/dashboard-respo.component';
+import { ExpireTokenComponent } from './redirectlogin/expire-token/expire-token.component';
 
 
 @NgModule({
@@ -95,8 +96,10 @@ import { DashboardRespoComponent } from './views/responsable/dashboard-respo/das
     },
     // no layout views
     { path: '', component: LoginComponent },
+    { path: 'login', component: LoginComponent },
     { path: 'error', component: ErrorPageComponent },
     { path: 'forbidden', component: ForbiddenComponent },
+    { path: 'expired-token', component: ExpireTokenComponent },
     { path: '**', redirectTo: 'error', pathMatch: 'full' },
   ])],
   exports: [RouterModule],

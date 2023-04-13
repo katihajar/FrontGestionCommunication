@@ -23,8 +23,7 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    if(this.User.username != ''){
-    this.authService.LogOUT();}
+      this.authService.LogOUT();
   }
   get User(): User {
     return this.authService.User;
@@ -53,7 +52,7 @@ export class LoginComponent implements OnInit {
       this.loginSuccess = true;
       this.successMessage = 'Login Successful';
       // Start token refresh timer
-      this.authService.startTokenRefreshTimer();
+      // this.authService.startTokenRefreshTimer();
       if (this.UserAuth.accessToken !== null) {
         if (this.User.roles[0].name == 'ROLE_ADMIN') {
           this.router.navigate(['/admin']);

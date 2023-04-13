@@ -105,7 +105,7 @@ import { VirtualScrollerModule } from 'primeng/virtualscroller';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {ConfirmationService, MessageService} from "primeng/api";
 import { RegistreUserComponent } from './views/admin/registre-user/registre-user.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { RegistreApplicationComponent } from './views/admin/registre-application/registre-application.component';
 import { AjouterApplicationComponent } from './views/admin/ajouter-application/ajouter-application.component';
 import { RegistreApplicationOfPiloteComponent } from './views/pilote/registre-application-of-pilote/registre-application-of-pilote.component';
@@ -152,6 +152,8 @@ import { DashboardPiloteComponent } from './views/pilote/dashboard-pilote/dashbo
 import { DashboardRespoComponent } from './views/responsable/dashboard-respo/dashboard-respo.component';
 import { DashboardComponent } from './views/admin/dashboard/dashboard.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ExpiredTokenInterceptor } from './controller/service/ExpiredTokenInterceptor';
+import { ExpireTokenComponent } from './redirectlogin/expire-token/expire-token.component';
 
 @NgModule({
   declarations: [
@@ -215,7 +217,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     DashboardPiloteComponent,
     DashboardRespoComponent,
     DashboardComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    ExpireTokenComponent
     ],
   imports: [
     BrowserModule,
@@ -310,7 +313,11 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     VirtualScrollerModule,
     StyleClassModule
   ],
-  providers: [ConfirmationService,MessageService],
+  providers: [ConfirmationService,MessageService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: ExpiredTokenInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

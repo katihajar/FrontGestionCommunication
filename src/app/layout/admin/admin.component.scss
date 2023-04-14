@@ -6,26 +6,35 @@
 
 mat-drawer {
   width: 300px;
+  background: #333333;
+  z-index: 100000;
 }
 mat-drawer-container {
   height: 100%;
   background-color: white;
 }
 
-mat-drawer {
-  background: #21272b;
-}
-.mat-drawer-content{
-  overflow-y:scroll ;
-  overflow-x: hidden;
-}
+
 .mat-body, .mat-body-1, .mat-typography .mat-body, .mat-typography .mat-body-1, .mat-typography {
   font:0 14px/20px Roboto, "Helvetica Neue", sans-serif;
   letter-spacing: normal;
  }
-//#167774
-//#4729ab
-//#104113
-//#2f5c79
-//#832f0a
-//#625009
+ .mat-drawer-content {
+  overflow-y:scroll ;
+  overflow-x: hidden;
+  position: relative;
+  z-index: 9999;
+}
+
+p-dialog {
+  position: absolute;
+  z-index: 2;
+}
+
+app-header-admin ,app-header-responsable, app-header-pilote{
+  z-index: 1;
+}
+// app-side-bar-admin,app-side-bar-responsable,app-side-bar-pilote{
+//   z-index: 1;
+// }
+

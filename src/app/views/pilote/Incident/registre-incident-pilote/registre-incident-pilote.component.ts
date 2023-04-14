@@ -32,6 +32,7 @@ export class RegistreIncidentPiloteComponent implements OnInit {
   viewCharte:boolean = false;
   popUpLangue:boolean=false;
   selectLang:any='';
+  ListType:any[]=[];
   constructor(private charteService:CharteService,private incidentService: IncidentService,private confirmationService: ConfirmationService,
      private router: Router, private appService: ApplicationService, private messageService:MessageService) { 
      }
@@ -225,7 +226,10 @@ SelectLanguage(){
     this.FindIncident();
     this.FindApp();
     this.AddIncident = new Incident();
-    
+    this.ListType= [
+      { name: 'PREPRODUCTION' },
+      { name: 'PRODUCTION' },
+    ];
   
     this.listLangage = [
       { name: 'Français' },

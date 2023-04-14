@@ -26,8 +26,16 @@ export class AjouterApplicationComponent implements OnInit {
   ngOnInit(): void {
     this.FindAllUsers();
     this.lots= [
+      {name: '1'},
+      {name: '2'},
       {name: '3B'},
-      {name: '7B'},
+      {name: '5'},
+      {name: '6'},
+      {name: '7 EDI'},
+      {name: '7 EDD'},
+      {name: '9'},
+      {name: 'BI'},
+      {name: 'VERSPA'}
   ];
   this.disponibilite= [
     {name: 'Oui'},

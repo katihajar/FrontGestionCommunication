@@ -1,6 +1,6 @@
-<div class="container-fluid page card" style="background-color: white">
+<div class="container-fluid page" style="background-color: white">
     <div class="page__box p-3">Registre des Applications</div>
-    <div class="page__content shadow p-2 position-relative align-items-center">
+    <div class="page__content shadow p-2 position-relative ">
       <div class="card" style="width: 100%;">
         <p-toolbar styleClass="mb-4 gap-2">
           <ng-template pTemplate="left">
@@ -108,7 +108,7 @@
   <p-dialog header="Liste des Pilotes" [modal]="true" [draggable]="false"
   [(visible)]="displayPilote" [style]="{width: '70vw', height: '70vw','margin-left':'10%'}">
 
-    <div class="card">
+    <div>
       <div>
         <button pButton pRipple type="button" label="Ajouter Un Pilote" (click)="AddPilote()"
           style="width: fit-content;margin: 4px;float: right;" 

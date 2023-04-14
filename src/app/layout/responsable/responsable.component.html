@@ -1,3 +1,5 @@
+    <app-header-responsable style="margin-left: 0%;"  (toggleSidebarForMe)="sideBarToggler()"></app-header-responsable>
+
 <mat-drawer-container>
   <mat-drawer mode="side" [opened]="sideBarOpen">
     <!-- <mat-drawer mode="side" opened="true"> -->
@@ -5,7 +7,6 @@
   </mat-drawer>
   <mat-drawer-content>
     <p-toast></p-toast>
-    <app-header-responsable (toggleSidebarForMe)="sideBarToggler()"></app-header-responsable>
     <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>

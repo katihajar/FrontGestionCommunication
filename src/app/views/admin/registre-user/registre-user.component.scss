@@ -1,6 +1,25 @@
-@import "../dashboard/dashboard.component.scss";
-
-.card {
-    border: none;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.page {
+    color: white;
+    padding: 0 1rem;
+    background: #f1f5f9;
+    &__box {
+      min-height: 120px;
+      background: linear-gradient(84deg, #991f3d, #e31937 33%, #ff6a00 67%, #facdd2 100%);
+      margin: 0 -1rem;
+      font-size: 36px;
     }
+    &__content {
+      min-height: calc(50vh - 178px);
+      border-radius: 10px;
+      margin-top: -2rem;
+      margin-bottom: 2%;
+      background: white;
+      color: black;
+      font-size: 2rem;
+      &-data {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }

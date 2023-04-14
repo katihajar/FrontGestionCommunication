@@ -12,7 +12,7 @@
             [ngStyle]="{'border':'1px solid black'}">
             <div style="font-family: 'Times New Roman', Times, sans-serif;">
                 <div style="height: 4vh; display: flex; align-items: center; justify-content: flex-start; text-align: center;background-color: rgb(88, 140, 153) ">
-                    <p style="margin: 1%; font-weight: bolder;">[{{this.AddHealthCheck.type}}] Etat de santé Monétique – <span style="background-color: yellow;">{{this.AddHealthCheck.dateAjout | date :'dd/MM/YYYY'}}</span>, <span style="background-color:yellow ;">{{this.AddHealthCheck.dateAjout | date :'HH:mm'}}</span></p>
+                    <p style="margin: 1%; font-weight: bolder;">[{{this.AddHealthCheck.type}}] Etat de santé Monétique – <span  >{{this.AddHealthCheck.dateAjout | date :'dd/MM/YYYY'}}</span>, <span   >{{this.AddHealthCheck.dateAjout | date :'HH:mm'}}</span></p>
                     <div style="margin-left: auto;">
                       <img src="../../../../../assets/img/frFlag.png"  class="mr-2 flag " style="width: 30px;"/>
                     </div>
@@ -20,8 +20,8 @@
             </div>
             <div style="font-family: 'Times New Roman', Times, sans-serif;margin: 2%;">
                 <div class="col-12">
-                    <p style="color: cornflowerblue;;">Bonjour</p><br>
-                    <p style="color: cornflowerblue;;">Merci de trouver ci-dessous l'état de santé du SI Monétique du <b style="background-color: yellow;">{{this.AddHealthCheck.dateAjout | date : 'dd/MM/YYYY'}}</b> à <b style="background-color: yellow;">{{this.AddHealthCheck.dateAjout | date : 'HH:mm'}}</b></p>
+                    <p style="color: black;">Bonjour</p><br>
+                    <p style="color: black;">Merci de trouver ci-dessous l'état de santé du SI Monétique du <b  >{{this.AddHealthCheck.dateAjout | date : 'dd/MM/YYYY'}}</b> à <b  >{{this.AddHealthCheck.dateAjout | date : 'HH:mm'}}</b></p>
                     <div style="float:left; width: 35%; margin-top: 2%;"  >
                         <table id="customers">
                             <tr>
@@ -56,7 +56,7 @@
                             </th>
                         </tr>
                         <tr *ngFor="let etat of this.AddHealthCheck.etatProcessusMetierList">
-                            <td style="width: 75%;">
+                            <td style="width: 75%;text-align: left;">
                                 {{ etat.processusMetier.titre }}
                             </td>
                             <td style="width: 25%;text-align: center;">
@@ -93,42 +93,44 @@
                             <th>Statut
                             </th>
                         </tr>
-                        <tr *ngFor="let Helth of this.AddHealthCheck.healthChekPreprodProdDetailList">
-                            <td>
+                        <tr *ngFor="let Helth of this.AddHealthCheck.healthChekPreprodProdDetailList" style="background-color: white;">
+                            <td style="text-align: center;">
                                 {{ Helth.processus }}
                             </td>
-                            <td>
+                            <td style="text-align: center;">
                                 {{ Helth.application.nomApplication }}
                             </td>
-                            <td>
+                            <td style="text-align: center;">
                                 {{ Helth.dateDebut | date: 'dd/MM/YY'}}
                             </td>
-                            <td>
-                                {{ Helth.dateFin | date: 'dd/MM/YY'}}
+                            <td style="text-align: center;">
+                                <span *ngIf="Helth.dateFin!=null">{{ Helth.dateFin | date: 'dd/MM/YY'}}</span>
+                                <span *ngIf="Helth.dateFin==null">-</span>
+                                
                             </td>
                             <td>
                                 {{ Helth.information }}<br>
-                                <b style="color: rgb(13, 126, 201);">Impact Merier :</b><br>
+                                <b style="color: black">Impact Merier :</b><br>
                                 {{ Helth.impactMetier }}<br>
-                                <b style="color: rgb(13, 126, 201);">Cause :</b><br>
+                                <b style="color: black;">Cause :</b><br>
                                 {{ Helth.cause }}<br>
-                                <b style="color: rgb(13, 126, 201);">Plan Action :</b><br>
+                                <b style="color: black;">Plan Action :</b><br>
                                 {{ Helth.planAction }}
                             </td>
-                            <td>
+                            <td style="text-align: center;">
                                 {{ Helth.impactClient }}
                             </td>
                             <td>
                                 {{ Helth.problemeTechnique }}
                             </td>
-                            <td>
+                            <td style="text-align: center;">
                                 <div *ngIf="Helth.feu =='OK'">    <p-badge severity="success" styleClass="mr-2"></p-badge>
                                 </div> 
                                 <div *ngIf="Helth.feu =='En cours d\'éxecuxtion'"><p-badge severity="info" styleClass="mr-2"></p-badge></div>
                                 <div *ngIf="Helth.feu =='Flux non critique KO'" ><p-badge severity="warning" styleClass="mr-2"></p-badge></div> 
                                 <div *ngIf="Helth.feu =='Flux critique KO'" ><p-badge severity="danger" styleClass="mr-2"></p-badge></div>   
                             </td>
-                            <td>
+                            <td style="text-align: center;">
                                 {{ Helth.statut }}
                             </td>
                         </tr>
@@ -141,7 +143,7 @@
 
         <div class="col-12">
 
-            <div style="border:1px solid black ;">
+            <div style="margin-top: 1%;border:1px solid black ;">
                 <img src="../../../../../assets/img/FooterEtatSantéProd.png" width="100%"
                     alt="psa" title="psa" class="staticImg">
             </div>

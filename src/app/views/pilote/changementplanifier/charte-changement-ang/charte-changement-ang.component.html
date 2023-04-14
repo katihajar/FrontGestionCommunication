@@ -15,10 +15,10 @@
            
             <div style="height: 4vh; display: flex; align-items: center; justify-content: flex-start; text-align: center;"
                 [ngStyle]="{'background-color': 'rgb(69, 163, 240)' }">
-                <p style="margin: 1%; font-weight: bolder;">[<span style="background-color: cyan;"> PRODUCTION
-                    </span>/<span style="background-color: cyan"> PREPRODUCTION </span>] <span
-                        style="background-color: yellow;">{{this.AddChangement.application.nomApplication}}</span>-
-                    <span style="background-color:yellow ;">{{this.AddChangement.version}}</span> - <span *ngIf="this.AddChangement.statut=='Planifié'"
+                <p style="margin: 1%; font-weight: bolder;">[<span > PRODUCTION
+                    </span>/<span > PREPRODUCTION </span>] <span
+                        >{{this.AddChangement.application.nomApplication}}</span>-
+                    <span >{{this.AddChangement.version}}</span> - <span *ngIf="this.AddChangement.statut=='Planifié'"
                         >Planned change - </span>
                         <span *ngIf="this.AddChangement.statut=='Terminé avec succès'"
                        >Completed change - </span>
@@ -31,21 +31,21 @@
             <br>
             <div style="margin: 1%;">
             <p style="background-color: rgb(244, 247, 247);"><u>Description</u> </p>
-            <p >Platform :<span style="background-color: cyan;"> PRODUCTION
-            </span>/<span style="background-color: cyan"> PREPRODUCTION </span></p>
-            <p >Application :<span style="background-color: yellow;"> {{this.AddChangement.application.nomApplication}}
-            </span> version <span style="background-color: yellow"> {{this.AddChangement.version}} </span></p>
+            <p >Platform : PRODUCTION
+            PREPRODUCTION </p>
+            <p >Application : {{this.AddChangement.application.nomApplication}}
+            version {{this.AddChangement.version}} </p>
            
             <div *ngIf="this.AddChangement.statut=='Planifié'">
-            <p >Start of <span style="color: rgb(7, 133, 218);">planned </span>change :<span style="background-color: yellow;"> {{this.AddChangement.dateDebut | date : 'YYYY-MM-dd HH:mm'}} CET
-            </span></p>
-            <p >End of <span style="color: rgb(7, 133, 218);">planned </span>change  :<span style="background-color: yellow;"> {{this.AddChangement.dateFin | date : 'YYYY-MM-dd HH:mm'}} CET
-            </span></p>
+            <p >Start of <span style="color: rgb(7, 133, 218);">planned </span>change : {{this.AddChangement.dateDebut | date : 'YYYY-MM-dd HH:mm'}} CET
+            </p>
+            <p >End of <span style="color: rgb(7, 133, 218);">planned </span>change  : {{this.AddChangement.dateFin | date : 'YYYY-MM-dd HH:mm'}} CET
+            </p>
             </div>
             <div *ngIf="this.AddChangement.statut=='Terminé avec succès'">
-              <p >Start of <span style="color: rgb(47, 201, 60);">completed </span>change :<span style="background-color: yellow;"> {{this.AddChangement.dateDebut | date : 'YYYY-MM-dd HH:mm'}} CET
+              <p >Start of <span style="color: rgb(47, 201, 60);">completed </span>change :<span > {{this.AddChangement.dateDebut | date : 'YYYY-MM-dd HH:mm'}} CET
               </span></p>
-              <p >End of <span style="color: rgb(47, 201, 60);">completed </span>change :<span style="background-color: yellow;"> {{this.AddChangement.dateFin | date : 'YYYY-MM-dd HH:mm'}} CET
+              <p >End of <span style="color: rgb(47, 201, 60);">completed </span>change :<span> {{this.AddChangement.dateFin | date : 'YYYY-MM-dd HH:mm'}} CET
               </span></p>
             </div>
             <div *ngIf="this.AddChangement.statut=='Planifié'">
@@ -53,17 +53,17 @@
             </span></p>
           </div>
           <div *ngIf="this.AddChangement.statut=='Terminé avec succès'">
-            <p >Status  :<span style="color: rgb(47, 201, 60);background-color: cyan;"> Completed successfully</span> / <span style="color: rgb(250, 171, 25);background-color: cyan;">Work In Progress</span>
+            <p >Status  :<span style="color: rgb(47, 201, 60)"> Completed successfully</span> / <span style="color: rgb(250, 171, 25);">Work In Progress</span>
             </p>
           </div>
-          <p style="background-color: yellow;">Detail: {{this.AddChangementAng.detail}}  </p><br>
+          <p >Detail: {{this.AddChangementAng.detail}}  </p><br>
             <p style="background-color: rgb(244, 247, 247);"><u>Content</u></p>
             
                 <table style="width:100%"  >
 
                   <tr *ngFor="let cont of this.AddChangementAng.contenuChangementList" >
-                    <td [width]="'15%'" style="background-color: yellow;font-family: 'Times New Roman', Times, serif;">{{cont.titre}}</td>
-          <td [width]="'85%'"  style="background-color: yellow;font-family: 'Times New Roman', Times, serif;">{{cont.description}}</td>
+                    <td [width]="'15%'" style="font-family: 'Times New Roman', Times, serif;">{{cont.titre}}</td>
+          <td [width]="'85%'"  style="font-family: 'Times New Roman', Times, serif;">{{cont.description}}</td>
    
                   </tr>
               
@@ -71,7 +71,7 @@
             <br>
             <div *ngIf="this.AddChangement.statut=='Planifié'">
               <p style="background-color: rgb(244, 247, 247);"><u>Business Impacts</u></p>
-              <p style="background-color: yellow;white-space: pre-line;">{{this.AddChangementAng.impactMetier}} </p>
+              <p style="white-space: pre-line;">{{this.AddChangementAng.impactMetier}} </p>
             </div>
                 </div>
         </div>

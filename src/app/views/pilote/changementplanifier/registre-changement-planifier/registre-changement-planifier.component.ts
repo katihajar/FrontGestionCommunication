@@ -28,6 +28,7 @@ export class RegistreChangementPlanifierComponent implements OnInit {
   statutOperation: any[] = [];
   popUpLangue:boolean=false;
   listLangageCharte: any[] = [];
+  ListType: any[] = [];
   ListPiloteApp = new Array<PiloteApplication>();
   ContenuAng = new ContenuChangement();
   constructor(private router: Router,private changeService: ChangementService, private charte: CharteService,
@@ -49,7 +50,8 @@ export class RegistreChangementPlanifierComponent implements OnInit {
       { name: 'Français' },
       { name: 'Français-Anglais' },
       { name: 'Anglais' }
-    ]
+    ];
+    
   }
   clear(table: Table) {
     table.clear();

@@ -4,30 +4,32 @@
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
+
 }
 
 #customers td, #customers th {
-  border: 1px solid #ddd;
+  border: 1px solid  rgb(194, 193, 193);
   padding: 8px;
+  text-align: center;
 }
 
-#customers tr:nth-child(even){background-color:#ffe6ee;}
+#customers tr:nth-child(even){background-color: #e0dcdc;}
 
-#customers tr:hover {background-color: #ffe6ee;}
+#customers tr:hover {background-color:  #e0dcdc;}
 
 #customers th {
   padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
+  padding-bottom: 12px;  
 }
 #cust {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
+  border-color: #b1afaf;
 }
 
 #cust td, #cust th {
-  border: 1px solid #ddd;
+  border: 1px solid  rgb(194, 193, 193);
   padding: 8px;
 }
 

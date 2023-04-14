@@ -1,173 +1,71 @@
 .side-nav {
-
   padding: 0;
-
   margin: 0;
-
   list-style: none;
-
-  color: white;
-
-  height: 100%;
-
+  color: #ffffff;
 }
-
-
-.side-nav .logo {
-
-  display: flex;
-
-  justify-content: center;
-
-  align-items: center;
-
-  height: 200px;
-  background:  #f7f7f7;
-
-}
-
-// give me a backgroud of logo that will go with this site?
-
-
-.side-nav .logo h1 {
-
-  font-family: 'Times New Roman', Times, sans-serif;
-
-  font-size: 38px;
-
-  font-weight: bold;
-
-  margin: 0;
-
-  line-height: 1.2;
-
-}
-
 
 .side-nav a {
-
   display: block;
-
-  padding: 12px 16px;
-
+  padding: 22px 16px;
   font-size: 20px;
-
+  margin-top: 0%;
   text-decoration: none;
-
-  color: white;
-
+  color: #ffffff;
   transition: background-color 0.2s;
-
+  border-bottom: 1px solid #ddd;
+  
 }
-
 
 .side-nav a:hover {
-
-  background-color: rgba(233, 204, 253, 0.856) ;
-
-  color:black;
-
+  background: linear-gradient(74deg, #e31937 2%, #a82465 44%, #5236ab 84%);
+  border-color: transparent;
 }
-
 
 .side-nav .active {
-
-  background-color: rgba(233, 204, 253, 0.856);
-
-  color:black;
-
-
+  background: linear-gradient(74deg, #e31937 2%, #a82465 44%, #5236ab 84%);
+  color: #fff;
 }
-
 
 .side-nav .mat-list-item:hover {
-
-  background-color: rgba(233, 204, 253, 0.856);
-
-  color:black;
-
-
+  background: linear-gradient(74deg, #e31937 2%, #a82465 44%, #5236ab 84%);
+  color: #fff;
 }
-
 
 .side-nav .mat-list-item-content {
-
   display: flex;
-
   align-items: center;
-
 }
-
 
 .side-nav .mat-list-item-icon {
-
   margin-right: 16px;
-
   font-size: 24px;
-
 }
-
 
 .side-nav .mat-divider {
-
-  margin-top: 12px;
-
-  margin-bottom: 12px;
-
-  border-color: rgba(255, 255, 255, 0.2);
-
+  border-color: rgba(255, 255, 255, 0.301);
 }
-
 
 .side-nav .mat-subheader {
-
   padding: 8px 16px;
-
   font-size: 14px;
-
   font-weight: bold;
-
   text-transform: uppercase;
-
   color: rgba(255, 255, 255, 0.6);
-
   letter-spacing: 1px;
-
   border-top: 1px solid rgba(255, 255, 255, 0.2);
-
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-
 }
-
 
 .side-nav .mat-subheader:hover {
-
-  background-color: rgba(233, 204, 253, 0.856);
-
-  color:black;
-
-
+  background-color: #2f2f2f;
+  color: #fff;
 }
-
 
 .side-nav .mat-nav-list-item {
-
   margin-top: 8px;
-
 }
-
 
 .side-nav .mat-nav-list-item:first-child {
-
   margin-top: 0;
-
-}
-.mat-list-item {
-  color: #c5c7c9 !important;
-  font-size: 1.2rem;
-  height: 50px !important;
-  margin-bottom: 1px;
-  &:hover {
-    color: white !important;
-  }
 }

@@ -21,7 +21,6 @@ export class ExpiredTokenInterceptor implements HttpInterceptor {
             this.authService.LogOUT();
             this.router.navigate(['/expired-token']);
           }
-          // redirect to the expired token page
         }
         return throwError(error);
       })

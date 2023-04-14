@@ -15,12 +15,12 @@
     <div style="font-family: 'Times New Roman', Times, sans-serif;">
       <div style="margin: 1%;">
       <p style="font-weight: bolder;">Current status : <span *ngIf="this.AddIncident.statut == 'Clos'" style="color: rgb(12, 199, 12);"> RESOLVED</span> <b *ngIf="this.AddIncident.statut == 'Ouvert'" style="color: rgb(211, 45, 16);"> ON GOING</b></p>
-      <p style="font-weight: bolder;">Application : [<span style="background-color: cyan;"> Production </span>/<span style="background-color: cyan"> Preproduction </span>] <span style="background-color: yellow;">{{this.AddIncidentAng.application.nomApplication}}</span></p>
-      <p style="font-weight: bolder;">Start of incident :<span style="background-color: yellow;">{{this.AddIncidentAng.dateDebut | date: 'yyyy-MM-dd HH:mm'}} CET</span></p>
-      <p style="font-weight: bolder;" *ngIf="this.AddIncident.statut == 'Clos'"><span style="background-color: rgb(186, 189, 189);">End of incident :</span><span style="background-color: yellow">{{this.AddIncidentAng.dateDebut | date: 'yyyy-MM-dd HH:mm'}} CET</span></p>
+      <p style="font-weight: bolder;">Application : [<span  > Production </span>/<span  > Preproduction </span>] <span  >{{this.AddIncidentAng.application.nomApplication}}</span></p>
+      <p style="font-weight: bolder;">Start of incident :<span  >{{this.AddIncidentAng.dateDebut | date: 'yyyy-MM-dd HH:mm'}} CET</span></p>
+      <p style="font-weight: bolder;" *ngIf="this.AddIncident.statut == 'Clos'"><span >End of incident :</span><span  >{{this.AddIncidentAng.dateDebut | date: 'yyyy-MM-dd HH:mm'}} CET</span></p>
 </div>
       <div style="height: 4vh; display: flex; align-items: center; justify-content: flex-start; text-align: center;" [ngStyle]="{'background-color': this.AddIncident.statut == 'Clos' ? 'rgb(93, 182, 163)' : (this.AddIncident.statut == 'Ouvert' ? 'rgb(245, 107, 118)' : 'white') }">
-        <p style="margin: 1%; font-weight: bolder;"><span style="background-color: cyan;"> Production </span>/<span style="background-color: cyan"> Preproduction </span>] <span style="background-color: yellow;">{{this.AddIncidentAng.application.nomApplication}}</span>-Incident <span style="background-color:yellow ;">{{this.AddIncidentAng.numeroIncident}}</span> - <span style="background-color:yellow ;">{{this.AddIncidentAng.titreIncident}}</span></p>
+        <p style="margin: 1%; font-weight: bolder;"><span  > Production </span>/<span  > Preproduction </span>] <span  >{{this.AddIncidentAng.application.nomApplication}}</span>-Incident <span  >{{this.AddIncidentAng.numeroIncident}}</span> - <span  >{{this.AddIncidentAng.titreIncident}}</span></p>
         <div style="margin-left: auto;">
           <img src="../../../../../assets/img/usaFlag.png"  class="mr-2 flag " style="width: 30px;"/>
         </div>
@@ -28,22 +28,22 @@
       <br>
       <div style="margin: 1%;">
       <p style="background-color: rgb(244, 247, 247);"><u>Description</u> </p>
-      <p style="background-color: yellow;">{{this.AddIncidentAng.description}}</p><br>
+      <p  >{{this.AddIncidentAng.description}}</p><br>
       
 
       <p style="background-color: rgb(244, 247, 247);"><u>Business impact</u></p>
-      <p style="background-color: yellow;">{{this.AddIncidentAng.impact}}</p><br>
+      <p  >{{this.AddIncidentAng.impact}}</p><br>
       <p style="background-color: rgb(244, 247, 247);"><u>Current situation</u> </p>
-      <p style="background-color: yellow;">{{this.AddIncidentAng.situationActuelle}}</p><br>
+      <p  >{{this.AddIncidentAng.situationActuelle}}</p><br>
       <p style="background-color: rgb(244, 247, 247);"><u>Cause identified</u> </p>
-      <p style="background-color: yellow;">{{this.AddIncidentAng.causePrincipale}}</p><br>
+      <p  >{{this.AddIncidentAng.causePrincipale}}</p><br>
       
       <p style="background-color: rgb(244, 247, 247);"><u>Action Plan</u></p>
-      <div *ngFor="let action of this.AddIncidentAng.planActionList" style="background-color: yellow;font-family: 'Times New Roman', Times, serif;">
+      <div *ngFor="let action of this.AddIncidentAng.planActionList" style=" font-family: 'Times New Roman', Times, serif;">
         <li > {{action.description}} </li>
       </div><br>
       <p style="font-family: 'Times New Roman', Times, serif;"> <u>Next communication :</u></p>
-      <p style="background-color: yellow;font-family: 'Times New Roman', Times, serif;">{{this.AddIncidentAng.prochaineCommunication | date: 'dd-MM-yyyy HH:mm'}}</p>
+      <p style=" font-family: 'Times New Roman', Times, serif;">{{this.AddIncidentAng.prochaineCommunication | date: 'dd-MM-yyyy HH:mm'}}</p>
          </div>
 </div>
   </div>

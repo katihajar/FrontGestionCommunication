@@ -1,6 +1,6 @@
-<div class="container-fluid page card" style="background-color: white">
+<div class="container-fluid page " style="background-color: white">
     <div class="page__box p-3">Registre des Changements Planifier</div>
-    <div class="page__content shadow p-2 position-relative align-items-center">
+    <div class="page__content shadow p-2 position-relative">
       <div class="card">
         <p-toolbar styleClass="mb-4 gap-2">
           <ng-template pTemplate="right">
@@ -167,8 +167,6 @@
       <p-button label="Submit" (onClick)="SelectLanguage()" icon="pi pi-check"></p-button>
     </ng-template>
   </p-dialog>
-  
-  
  <app-charte-changement-ang *ngIf="charteChangeAng"></app-charte-changement-ang>
  <app-charte-changement-fr *ngIf="charteChangeFr"></app-charte-changement-fr>
  <app-charte-changement-fr-ang *ngIf="charteChangeAngFr"></app-charte-changement-fr-ang>

@@ -1,10 +1,10 @@
+<app-header-pilote style="margin-left: 0%;" (toggleSidebarForMe)="sideBarToggler()"></app-header-pilote>
 <mat-drawer-container>
   <mat-drawer mode="side" [opened]="sideBarOpen">
     <app-side-bar-pilote></app-side-bar-pilote>
   </mat-drawer>
-  <mat-drawer-content>
+  <mat-drawer-content style="position: relative;">
     <p-toast></p-toast>
-    <app-header-pilote (toggleSidebarForMe)="sideBarToggler()"></app-header-pilote>
     <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>

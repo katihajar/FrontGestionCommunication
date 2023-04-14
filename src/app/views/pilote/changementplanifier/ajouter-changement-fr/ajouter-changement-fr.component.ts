@@ -94,9 +94,9 @@ export class AjouterChangementFrComponent implements OnInit {
   SaveChange(){
     this.AddChangement.dateAjout = new Date();
     if(this.AddChangement.statut =='Planifié'){
-      this.Subject = '[PRODUCTION] '+this.AddChangement.application.nomApplication+' '+this.AddChangement.version+' - Planned change - '+moment(this.AddChangement.dateDebut).format('DD/MM/YYYY');
+      this.Subject = '['+this.AddChangement.type+'] '+this.AddChangement.application.nomApplication+' '+this.AddChangement.version+' - Planned change - '+moment(this.AddChangement.dateDebut).format('DD/MM/YYYY');
      }else if(this.AddChangement.statut =='Terminé avec succès'){
-      this.Subject = '[PRODUCTION] '+this.AddChangement.application.nomApplication+' '+this.AddChangement.version+' - Completed Change - '+moment(this.AddChangement.dateDebut).format('DD/MM/YYYY');
+      this.Subject = '['+this.AddChangement.type+'] '+this.AddChangement.application.nomApplication+' '+this.AddChangement.version+' - Completed Change - '+moment(this.AddChangement.dateDebut).format('DD/MM/YYYY');
      }
       this.changeService.SaveChangement().subscribe((data) => {
              this.AddChangement=new ChangementPlanifier();

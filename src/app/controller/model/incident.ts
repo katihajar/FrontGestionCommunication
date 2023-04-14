@@ -9,6 +9,7 @@ export class Incident {
     public statut: string = String();
     public description: string = String();
     public situationActuelle: string = String();
+    public type: string = String();
     public impact: string = String();
     public causePrincipale: string = String();
     public solutionContournement: string = String();

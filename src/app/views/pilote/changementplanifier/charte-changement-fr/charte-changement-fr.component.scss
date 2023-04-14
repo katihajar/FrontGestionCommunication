@@ -1,6 +1,10 @@
 @import "../../registre-application-of-pilote/registre-application-of-pilote.component.scss";
 
 table,  td {
-    border: 1px dotted black;
-    border-collapse: collapse;
-  }
+  border: 1px dotted black;
+  padding: 8px;
+  border-collapse: collapse;
+}
+div{
+  font-size: large;
+}

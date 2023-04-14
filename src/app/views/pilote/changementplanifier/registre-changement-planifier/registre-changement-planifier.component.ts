@@ -38,6 +38,10 @@ export class RegistreChangementPlanifierComponent implements OnInit {
     this.FindChange();
     this.FindApp();
     this.AddChangement = new ChangementPlanifier();
+    this.ListType= [
+      { name: 'PREPRODUCTION' },
+      { name: 'PRODUCTION' },
+    ];
     this.statutChange = [
       { name: 'Planifié' },
       { name: 'Terminé avec succès' },

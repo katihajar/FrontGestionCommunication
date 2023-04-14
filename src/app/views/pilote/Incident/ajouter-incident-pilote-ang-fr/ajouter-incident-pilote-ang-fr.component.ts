@@ -256,7 +256,7 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
     if(this.AddIncident.application.charteIncident =='charte Incident'){
       this.Subject = '[INCIDENT]['+this.AddIncident.application.nomApplication+'][Communication No.'+this.AddIncident.numeroIncident+'] '+this.AddIncidentAng.titreIncident+' / '+this.AddIncident.titreIncident+' - '+this.AddIncidentAng.statut+' / '+this.AddIncident.statut;
     }else if(this.AddIncident.application.charteIncident =='charte Incident Monetics'){
-      this.Subject = '[PRODUCTION] '+this.AddIncident.application.nomApplication+' Incident '+this.AddIncident.numeroIncident+' - '+this.AddIncident.titreIncident;
+      this.Subject = '['+this.AddIncident.type+'] '+this.AddIncident.application.nomApplication+' Incident '+this.AddIncident.numeroIncident+' - '+this.AddIncident.titreIncident;
      }   
       this.incidentService.SaveIncident().subscribe((data) => {
              this.AddIncident=new Incident();

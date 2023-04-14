@@ -91,15 +91,15 @@
 </div>
 <div class="col-12" >
   <div *ngIf="this.AddIncident.statut == 'Ouvert'" >
-    <img src="../../../../../assets/img/FooterIncidentOuvert.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
+  <img src="../../../../../assets/img/FooterIncidentOuvert.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
+  </div>
+  <div *ngIf="this.AddIncident.statut == 'Résolu avec Suivi'" >
+    <img src="../../../../../assets/img/FooterIncidentResoluAvecSuivi.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
     </div>
-    <div *ngIf="this.AddIncident.statut == 'Résolu avec Suivi'" >
-      <img src="../../../../../assets/img/FooterIncidentResoluAvecSuivi.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
+    <div *ngIf="this.AddIncident.statut == 'Clos'" >
+      <img src="../../../../../assets/img/FooterIncidentClos.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
       </div>
-      <div *ngIf="this.AddIncident.statut == 'Clos'" >
-        <img src="../../../../../assets/img/FooterIncidentClos.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
-        </div>
-      </div></div>
+</div></div>
 <ng-template pTemplate="footer">
   <p-button icon="pi pi-check" (click)="this.charteIncident3BfrAng=false" label="Ok" styleClass="p-button-text"></p-button>
 </ng-template>

@@ -12,7 +12,9 @@
   padding: 8px;
   text-align: center;
 }
-
+div{
+  font-size: large;
+}
 #customers tr:nth-child(even){background-color: #e0dcdc;}
 
 #customers tr:hover {background-color:  #e0dcdc;}

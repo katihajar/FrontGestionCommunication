@@ -31,6 +31,7 @@ export class RegistreIncidentPiloteComponent implements OnInit {
   langage: string= String();
   viewCharte:boolean = false;
   popUpLangue:boolean=false;
+  optionType:boolean=false;
   selectLang:any='';
   ListType:any[]=[];
   constructor(private charteService:CharteService,private incidentService: IncidentService,private confirmationService: ConfirmationService,
@@ -242,14 +243,17 @@ SelectLanguage(){
     ];
 
   }
+  
   changeStatut(){
     if(this.AddIncident.application.charteIncident == 'charte Incident'){
+      this.optionType=false;
       this.statutIncident = [
         { name: 'Ouvert' },
         { name: 'Résolu avec Suivi' },
         { name: 'Clos' },
       ];
     }else if(this.AddIncident.application.charteIncident == 'charte Incident Monetics'){
+      this.optionType=true;
       this.statutIncident = [
         { name: 'Ouvert' },
         { name: 'Clos' },

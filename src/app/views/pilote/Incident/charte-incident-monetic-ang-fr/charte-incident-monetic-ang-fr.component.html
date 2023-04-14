@@ -21,8 +21,8 @@
                     style="color: rgb(12, 199, 12);"> RESOLVED</span> <b
                     *ngIf="this.AddIncident.statut == 'Ouvert'" style="color: rgb(211, 45, 16);"> ON
                     GOING</b></p>
-            <p style="font-weight: bolder;">Application : [<span  > Production
-                </span>/<span  > Preproduction </span>] <span
+            <p style="font-weight: bolder;">Application : [<span  > {{this.AddIncident.type}}
+                </span>] <span
                      >{{this.AddIncidentAng.application.nomApplication}}</span></p>
             <p style="font-weight: bolder;">Start of incident :<span
                      >{{this.AddIncidentAng.dateDebut | date: 'yyyy-MM-dd HH:mm'}}
@@ -34,8 +34,8 @@
             </div>
             <div style="height: 4vh; display: flex; align-items: center; justify-content: flex-start; text-align: center;"
                 [ngStyle]="{'background-color': this.AddIncident.statut == 'Clos' ? 'rgb(93, 182, 163)' : (this.AddIncident.statut == 'Ouvert' ? 'rgb(245, 107, 118)' : 'white') }">
-                <p style="margin: 1%; font-weight: bolder;"><span  > Production
-                    </span>/<span  > Preproduction </span>] <span
+                <p style="margin: 1%; font-weight: bolder;"><span  > [{{this.AddIncident.type}}
+                    </span>] <span
                          >{{this.AddIncidentAng.application.nomApplication}}</span>-Incident
                     <span  >{{this.AddIncidentAng.numeroIncident}}</span> - <span
                          >{{this.AddIncidentAng.titreIncident}}</span></p>
@@ -73,8 +73,8 @@
     <div style="font-family: 'Times New Roman', Times, sans-serif;">
         <div style="height: 4vh; display: flex; align-items: center; justify-content: flex-start; text-align: center;"
                 [ngStyle]="{'background-color': this.AddIncident.statut == 'Clos' ? 'rgb(93, 182, 163)' : (this.AddIncident.statut == 'Ouvert' ? 'rgb(245, 107, 118)' : 'white') }">
-                <p style="margin: 1%; font-weight: bolder;"><span  > Production
-                    </span>/<span  > Preproduction </span>] <span
+                <p style="margin: 1%; font-weight: bolder;"><span  > [{{this.AddIncident.type}}
+                    </span>] <span
                          >{{this.AddIncident.application.nomApplication}}</span>-Incident
                     <span  >{{this.AddIncident.numeroIncident}}</span> - <span
                          >{{this.AddIncident.titreIncident}}</span></p>

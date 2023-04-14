@@ -114,7 +114,7 @@ this.destService.FindDestinataireByApplication(this.AddIncident.application.id).
     if(this.AddIncident.application.charteIncident =='charte Incident'){
       this.Subject = '[INCIDENT]['+this.AddIncident.application.nomApplication+'][Communication No.'+this.AddIncident.numeroIncident+'] '+this.AddIncident.titreIncident+' -  '+this.AddIncident.statut;
      }else if(this.AddIncident.application.charteIncident =='charte Incident Monetics'){
-      this.Subject = '[PRODUCTION] '+this.AddIncident.application.nomApplication+' Incident '+this.AddIncident.numeroIncident+' - '+this.AddIncident.titreIncident;
+      this.Subject = '['+this.AddIncident.type+'] '+this.AddIncident.application.nomApplication+' Incident '+this.AddIncident.numeroIncident+' - '+this.AddIncident.titreIncident;
      }
       this.incidentService.SaveIncident().subscribe((data) => {
              this.AddIncident=new Incident();

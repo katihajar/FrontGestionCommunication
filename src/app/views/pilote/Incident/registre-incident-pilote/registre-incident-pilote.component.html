@@ -152,8 +152,8 @@
     </div>
   </div>
 </div>
-<p-dialog header="Ajouter Un Incident" [modal]="true" [(visible)]="showPopUpIncd" (onHide)="onDialogHideLang()"
-  [style]="{width: '40vw', height: '25vw'}" [resizable]="true">
+<p-dialog header="Ajouter Un Incident" [modal]="true" [(visible)]="showPopUpIncd" (onHide)="onDialogHideLang()" [responsive]="true" [autoZIndex]="true"
+  [style]="{width: '40vw', height: '20vw'}" [resizable]="true">
 
   <div class="col-12 text-center" style="margin-top: 1%;">
     <span class="p-input-icon-left" [style]="{ width: '40%' }">
@@ -173,7 +173,12 @@
         optionLabel="name" [showClear]="true"></p-dropdown>
     </span>
   </div>
-  <div class="col-12 text-center" style="margin-top: 1%;">
+  <div class="col-12 text-center" style="margin-top: 2%;">
+    <span class="p-input-icon-left"  [style]="{'width':'40%'}" *ngIf="this.optionType">
+      <p-dropdown [options]="ListType" [(ngModel)]="this.AddIncident.type"
+        [style]="{'width':'100%','required':'required'}" placeholder="Selectinné le type" optionValue="name"
+        optionLabel="name" [showClear]="true"></p-dropdown>
+    </span>
     <span class="p-input-icon-left" style="margin-left: 2%;" [style]="{'width':'40%'}">
       <p-dropdown [options]="listLangage" [(ngModel)]="this.langage"
         [style]="{'width':'100%','required':'required'}" placeholder="Selectinné la langue" optionValue="name"

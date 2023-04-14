@@ -15,8 +15,7 @@
            
             <div style="height: 4vh; display: flex; align-items: center; justify-content: flex-start; text-align: center;"
                 [ngStyle]="{'background-color': 'rgb(69, 163, 240)' }">
-                <p style="margin: 1%; font-weight: bolder;">[<span > PRODUCTION
-                    </span>/<span > PREPRODUCTION </span>] <span
+                <p style="margin: 1%; font-weight: bolder;">[<span > {{this.AddChangement.type}}</span>] <span
                         >{{this.AddChangement.application.nomApplication}}</span>-
                     <span >{{this.AddChangement.version}}</span> - <span *ngIf="this.AddChangement.statut=='Planifié'"
                         >Planned change - </span>
@@ -31,8 +30,7 @@
             <br>
             <div style="margin: 1%;">
             <p style="background-color: rgb(244, 247, 247);"><u>Description</u> </p>
-            <p >Platform :<span > PRODUCTION
-            </span>/<span > PREPRODUCTION </span></p>
+            <p >Platform :<span > {{this.AddChangement.type}}</span></p>
             <p >Application :<span > {{this.AddChangement.application.nomApplication}}
             </span> version <span > {{this.AddChangement.version}} </span></p>
            
@@ -83,8 +81,7 @@
            
       <div style="height: 4vh; display: flex; align-items: center; justify-content: flex-start; text-align: center;"
           [ngStyle]="{'background-color': 'rgb(69, 163, 240)' }">
-          <p style="margin: 1%; font-weight: bolder;">[<span > PRODUCTION
-              </span>/<span > PREPRODUCTION </span>] <span
+          <p style="margin: 1%; font-weight: bolder;">[<span > {{this.AddChangement.type}}</span>] <span
                    >{{this.AddChangement.application.nomApplication}}</span>-
               <span>{{this.AddChangement.version}}</span> - <span *ngIf="this.AddChangement.statut=='Planifié'"
                   >Planned change - </span>
@@ -99,8 +96,7 @@
       <br>
       <div style="margin: 1%;">
       <p style="background-color: rgb(244, 247, 247);"><u>Description</u> </p>
-      <p >Platform :<span > PRODUCTION
-      </span>/<span > PREPRODUCTION </span></p>
+      <p >Platform :<span > {{this.AddChangement.type}}</span></p>
       <p >Application :<span  > {{this.AddChangement.application.nomApplication}}
       </span> version <span > {{this.AddChangement.version}} </span></p>
       <div *ngIf="this.AddChangement.statut=='Planifié'">

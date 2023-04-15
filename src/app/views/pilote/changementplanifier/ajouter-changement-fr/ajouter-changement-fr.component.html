@@ -1,7 +1,6 @@
 <div class="container-fluid page" style="background-color: white">
     <div class="d-flex page__box p-3">Ajouter un Changement</div>
-    <div class="page__content shadow p-3 position-relative">
-        <div class="card align-items-center">
+    <div class="page__content shadow p-3 position-relative card align-items-center">
             <div class="col-12" style="margin: 2%">
                 <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '22%' }">
                     <label for="basic3"
@@ -23,14 +22,14 @@
                     <label for="basic1" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date
                         Début</label>
                     <p-calendar inputId="basic1" [(ngModel)]="date2" [showTime]="true" [style]="{ width: '100%' }"
-                        [(ngModel)]="this.AddChangement.dateDebut"></p-calendar>
+                    appendTo="body"  [(ngModel)]="this.AddChangement.dateDebut"></p-calendar>
 
                 </span>
                 <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
                     <label for="basic2" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date
                         Fin</label>
                     <p-calendar inputId="basic2" [(ngModel)]="date3" [showTime]="true" [style]="{ width: '100%' }"
-                        [(ngModel)]="this.AddChangement.dateFin"></p-calendar>
+                    appendTo="body" [(ngModel)]="this.AddChangement.dateFin"></p-calendar>
 
                 </span>
 
@@ -44,7 +43,7 @@
                         [(ngModel)]="this.AddChangement.detail"></textarea>
 
                 </span>
-                <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '46%' }">
+                <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '46%' }">
                     <label for="basic5"
                         style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Impact Métier</label>
                     <textarea id="basic5" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }"
@@ -55,7 +54,7 @@
          
             </div>
 
-            <div class="card align-items-center" style="width: 80%; margin-left: 1%;margin-bottom: 2%;background-color: rgb(241, 241, 241);">
+            <div class="card align-items-center" style="width: 97%; margin-left: 1%;margin-bottom: 2%;background-color: rgb(241, 241, 241);">
                 <h1 style="margin: 3%;color: black;">Ajouter le Contenu</h1>
                 <div class="col-12 text-center" style="margin-bottom: 2%">
                     <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '45%' }">
@@ -133,5 +132,4 @@
             </div>
         </div>
     </div>
-</div>
 <app-charte-changement-fr *ngIf="charteChangeFr"></app-charte-changement-fr>

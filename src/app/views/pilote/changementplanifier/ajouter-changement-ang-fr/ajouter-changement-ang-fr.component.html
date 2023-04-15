@@ -1,7 +1,6 @@
 <div class="container-fluid page" style="background-color: white">
     <div class="d-flex page__box p-3">Ajouter un Changement</div>
-    <div class="page__content shadow p-3 position-relative">
-        <div class="card align-items-center">
+    <div class="card align-items-center page__content shadow p-3 position-relative">
             <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
               
                 <button pButton pRipple style=" float: right;margin-right: 2%;" type="button" label="translate"
@@ -29,14 +28,14 @@
                         <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
                             <label for="basic1" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date
                                 Début</label>
-                                <p-calendar inputId="basic2" [(ngModel)]="date2" [style]="{ width: '100%' }" [showTime]="true" 
+                                <p-calendar inputId="basic2" [(ngModel)]="date2" [style]="{ width: '100%' }" [showTime]="true" appendTo="body"
                                 [(ngModel)]="this.AddChangement.dateDebut"></p-calendar>
 
                         </span>
                         <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
                             <label for="basic2" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date
                                 Fin</label>
-                                <p-calendar inputId="basic2" [(ngModel)]="date1" [style]="{ width: '100%' }" [showTime]="true" 
+                                <p-calendar inputId="basic2" [(ngModel)]="date1" [style]="{ width: '100%' }" [showTime]="true" appendTo="body"
                                 [(ngModel)]="this.AddChangement.dateFin"></p-calendar>
 
                         </span>
@@ -62,7 +61,7 @@
                  
                     </div>
 
-                    <div class="card align-items-center" style="width: 80%; margin-left: 10%;margin-bottom: 2%;background-color: rgb(241, 241, 241);">
+                    <div class="card align-items-center" style="width: 95%; margin-left: 3%;margin-bottom: 2%;background-color: rgb(241, 241, 241);">
                         <h1 style="margin: 3%;color: black;">Ajouter le Contenu</h1>
                         <div class="col-12 text-center" style="margin-bottom: 2%">
                             <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '45%' }">
@@ -137,7 +136,7 @@
 
                 </div>
                 <div style="float:right; width: 50%;">
-                    <div class="col-12" style="margin: 2%">
+                    <div class="col-12" style="margin: 2%;display: flex;">
                         <span class="p-input-icon-left" style="margin-left: 1%" [style]="{ width: '22%' }">
                             <label for="basic01"
                                 style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Title</label>
@@ -157,13 +156,13 @@
                         <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
                             <label for="basic03" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Start Date
                                 </label>
-                            <p-calendar inputId="basic03" [(ngModel)]="date3" [showTime]="true" [style]="{ width: '100%' }"
+                            <p-calendar inputId="basic03" [(ngModel)]="date3" [showTime]="true" [style]="{ width: '100%' }" appendTo="body"
                                 [(ngModel)]="this.AddChangementAng.dateDebut"></p-calendar>
                         </span>
                         <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
                             <label for="basic04" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">End Date
                                 </label>
-                            <p-calendar inputId="basic04" [(ngModel)]="date4" [showTime]="true" [style]="{ width: '100%' }"
+                            <p-calendar inputId="basic04" [(ngModel)]="date4" [showTime]="true" [style]="{ width: '100%' }" appendTo="body"
                                 [(ngModel)]="this.AddChangementAng.dateFin"></p-calendar>
 
                         </span>
@@ -191,7 +190,7 @@
            
 
                     
-                    <div class="card align-items-center" style="width: 80%; margin-left: 10%;margin-bottom: 2%;background-color: rgb(241, 241, 241);">
+                    <div class="card align-items-center" style="width: 95%; margin-left: 3%;margin-bottom: 2%;background-color: rgb(241, 241, 241);">
                         <h1 style="margin: 3%;color: black;" >Ajouter le Contenu</h1>
                         <div class="col-12 text-center" style="margin-bottom: 2%">
                             <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '45%' }">
@@ -274,7 +273,6 @@
                     class="p-button-raised"></button>
             </div>
         </div>
-    </div>
 
 </div>
 <app-charte-changement-fr-ang *ngIf="charteChangeAngFr"></app-charte-changement-fr-ang>

@@ -1,10 +1,10 @@
 <div class="container-fluid page" style="background-color: white">
     <div class="d-flex page__box p-3">Ajouter un Etat de santé</div>
-    <div class="page__content shadow p-3 position-relative">
-        <div class="card align-items-center">
+    <div class="card page__content shadow p-3 position-relative align-items-center">
 
 
-            <div class="card align-items-center" style="width: 80%; margin-bottom: 2%;margin-top: 2%;">
+
+            <div class="card align-items-center" style="width: 97%; margin-bottom: 2%;margin-top: 2%;">
                 <h1 style="margin: 3%">Etat des Applications</h1>
                 <div class="col-12 text-center" style="margin-bottom: 2%">
                     <span
@@ -92,7 +92,7 @@
                 </div>
             </div>
 
-            <div class="card align-items-center" style="width: 80%; margin-bottom: 2%;margin-top: 2%;">
+            <div class="card align-items-center" style="width: 97%; margin-bottom: 2%;margin-top: 2%;">
                 <h1 style="margin: 3%">Etat Processus Metier</h1>
                 <div class="col-12 text-center" style="margin-bottom: 2%">
                     <span
@@ -180,7 +180,7 @@
                 </div>
             </div>
 
-            <div class="card align-items-center" style="width: 80%; margin-bottom: 2%">
+            <div class="card align-items-center" style="width: 97%; margin-bottom: 2%">
                 <!-- <h1 style="margin: 3%">Ajouter le Plan d'Action</h1> -->
                 <div class="col-12 text-center" style="margin-bottom: 2%">
                     <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
@@ -206,12 +206,12 @@
                   </span>
                   <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
                     <label for="basic1" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date Début</label>
-                    <p-calendar inputId="basic1" [showTime]="true" [(ngModel)]="date2" [style]="{ width: '100%' }" [(ngModel)]="this.helthchekdetail.dateDebut" ></p-calendar>
+                    <p-calendar appendTo="body"  inputId="basic1" [showTime]="true" [(ngModel)]="date2" [style]="{ width: '100%' }" [(ngModel)]="this.helthchekdetail.dateDebut" ></p-calendar>
 
                 </span>
                 <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
                     <label for="basic2" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date Fin</label>
-                    <p-calendar inputId="basic2" [showTime]="true" [(ngModel)]="date3" [style]="{ width: '100%' }" [(ngModel)]="this.helthchekdetail.dateFin"></p-calendar>
+                    <p-calendar appendTo="body"  inputId="basic2" [showTime]="true" [(ngModel)]="date3" [style]="{ width: '100%' }" [(ngModel)]="this.helthchekdetail.dateFin"></p-calendar>
 
                 </span>
                 </div>
@@ -389,5 +389,5 @@
             </div>
         </div>
     </div>
-</div>
+
 <app-charte-health-check *ngIf="charteHealthCheckPreprodProd"></app-charte-health-check>

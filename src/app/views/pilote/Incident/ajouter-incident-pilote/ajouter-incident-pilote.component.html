@@ -1,7 +1,6 @@
 <div class="container-fluid page" style="background-color: white">
     <div class="d-flex page__box p-3">Ajouter un Incident</div>
-    <div class="page__content shadow p-3 position-relative">
-        <div class="card align-items-center" >
+    <div class="card align-items-center page__content shadow p-3 position-relative">
             <div class="col-12" style="margin: 2%">
                 <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '22%' }">
                     <label for="basic3" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Titre</label>
@@ -17,12 +16,12 @@
                 </span>
                 <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
                     <label for="basic1" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date Début</label>
-                    <p-calendar inputId="basic1" [showTime]="true" [(ngModel)]="date2" [style]="{ width: '100%' }" [(ngModel)]="this.AddIncident.dateDebut" ></p-calendar>
+                    <p-calendar inputId="basic1" [showTime]="true" [(ngModel)]="date2" [style]="{ width: '100%' }" appendTo="body" [(ngModel)]="this.AddIncident.dateDebut" ></p-calendar>
 
                 </span>
                 <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
                     <label for="basic2" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date Fin</label>
-                    <p-calendar inputId="basic2" [showTime]="true" [(ngModel)]="date3" [style]="{ width: '100%' }" [(ngModel)]="this.AddIncident.dateFin"></p-calendar>
+                    <p-calendar inputId="basic2" [showTime]="true" [(ngModel)]="date3" [style]="{ width: '100%' }" appendTo="body" [(ngModel)]="this.AddIncident.dateFin"></p-calendar>
 
                 </span>
             
@@ -56,7 +55,7 @@
                 </span>
             </div>
 
-            <div class="card align-items-center" style="width: 80%; margin-bottom: 2%; background-color: rgb(241, 241, 241);">
+            <div class="card align-items-center" style="width: 97%; margin-bottom: 2%; background-color: rgb(241, 241, 241);">
                 <h1 style="margin: 3%">Ajouter le Plan d'Action</h1>
                 <div class="col-12 text-center" style="margin-bottom: 2%">
                     <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
@@ -159,7 +158,7 @@
                 <div class="col-12" >
                     <span style="margin-left: 10%" class="p-input-icon-left" [style]="{ width: '40%' }">
                         <label for="basic8" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Prochaine Communication</label>
-                        <p-calendar inputId="basic8" [(ngModel)]="date1" [style]="{ width: '100%' }" [(ngModel)]="this.AddIncident.prochaineCommunication" [showTime]="true" ></p-calendar>
+                        <p-calendar inputId="basic8" [(ngModel)]="date1" [style]="{ width: '100%' }" appendTo="body" [(ngModel)]="this.AddIncident.prochaineCommunication" [showTime]="true" ></p-calendar>
     
                     </span>
             </div>
@@ -168,7 +167,6 @@
                 <button pButton pRipple (click)="SendAndSaveIncident()" style=" float: right;margin-right: 2%;" type="button" label="Submit" class="p-button-raised"></button>
             </div>
         </div>
-    </div>
 </div>
 <app-charte-incident3bfr  *ngIf="charteIncident3Bfr"></app-charte-incident3bfr>
 <app-charte-incident-monetic  *ngIf="charteIncidentMonetic"></app-charte-incident-monetic>

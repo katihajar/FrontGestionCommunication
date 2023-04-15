@@ -1,14 +1,12 @@
 <div class="container-fluid page" style="background-color: white">
     <div class="d-flex page__box p-3">Ajouter un Etat de santé</div>
-    <div class="page__content shadow p-3 position-relative">
-        <div class="card align-items-center;margin: 2%">
-                <!-- <h1 style="margin: 3%">Ajouter le Plan d'Action</h1> -->
+    <div class="card align-items-center page__content shadow p-3 position-relative">
                 <div class="col-12 text-center" style="margin-bottom: 2%;margin-top: 2%;">             
                     <span
                     class="p-input-icon-left"
                     [style]="{ width: '30%' }"
                   >
-                  <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Perimeter</label>
+                  <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Perimeter</label>
                   <p-dropdown [style]="{ width: '100%', required: 'required' }" [options]="ListPerimetre" optionLabel="titre"
                   [filter]="true" filterBy="titre" [showClear]="true" placeholder="Selectinné le Perimetre"
                   [(ngModel)]="this.helthchekBwdetail.perimetre">
@@ -44,8 +42,8 @@
                   ></p-dropdown>
                   </span>
                 </div>
-                <div class="col-12" style="margin-bottom: 2%;">
-                    <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '46%' }">
+                <div class="col-12 text-center" style="margin-bottom: 2%;">
+                    <span class="p-input-icon-left" [style]="{ width: '46%' }">
                         <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Incident in Progress</label>
                         <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="number" pInputText
                             placeholder="Entré le nombre d'inicdent en cours" [(ngModel)]="this.helthchekBwdetail.incidentInProgress"/>
@@ -56,8 +54,8 @@
                             placeholder="Entré le nombre d'inicdent completer" [(ngModel)]="this.helthchekBwdetail.incidentCompleted"/>
                     </span>
                 </div>
-                <div class="col-12" style="margin-bottom: 2%;">
-                    <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '46%' }">
+                <div class="col-12 text-center" style="margin-bottom: 2%;">
+                    <span class="p-input-icon-left" [style]="{ width: '46%' }">
                         <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Comment</label>
                         <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="text" pInputText
                             placeholder="Entré le commentaire" [(ngModel)]="this.helthchekBwdetail.comment"/>
@@ -77,7 +75,7 @@
                       <button style="margin-left: 2%" pButton pRipple type="button" icon="pi pi-plus" (click)="AddDetails()"
                         class="p-button-rounded p-button-success"></button>
                 </div>
-                <div class="card" style="margin: 2%">
+                <div class="card align-items-center"  style="margin: 2%;width: 98%;">
                 <div class="col-12" >
                     <p-table class="table" [value]="this.listHelthchekBwdetail" dataKey="id" [rows]="10" 
                         [showCurrentPageReport]="true" [paginator]="true"
@@ -182,5 +180,4 @@
             </div>
         </div>
     </div>
-</div>
 <app-charte-health-check-bw-perimetre *ngIf="charteHealthCheckBw"></app-charte-health-check-bw-perimetre>

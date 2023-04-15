@@ -1,7 +1,7 @@
 <div class="container-fluid page" style="background-color: white">
     <div class="d-flex page__box p-3">Ajouter Point de Version</div>
-    <div class="page__content shadow p-3 position-relative">
-        <div class="card align-items-center">
+    <div class="card align-items-center page__content shadow p-3 position-relative">
+
             <div class="col-12" style="margin: 2%">
                 <span
                 class="p-input-icon-left"
@@ -48,17 +48,17 @@
                 </span>
                 <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
                     <label for="basic4" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date Reunion </label>
-                        <p-calendar inputId="basic4" [(ngModel)]="date2" [style]="{ width: '100%' }" [(ngModel)]="this.AddPointVersion.dateAjout" [showTime]="true" ></p-calendar>
+                        <p-calendar inputId="basic4" appendTo="body"  [(ngModel)]="date2" [style]="{ width: '100%' }" [(ngModel)]="this.AddPointVersion.dateAjout" [showTime]="true" ></p-calendar>
 
                 </span>
             </div>
 
-            <div class="card align-items-center" style="width: 80%; margin-bottom: 3%;background-color: rgb(241, 241, 241);">
+            <div class="card align-items-center" style="width: 97%; margin-bottom: 3%;background-color: rgb(241, 241, 241);">
                 <h1 style="margin: 3%">Ajouter Livraison CARPM</h1>
                 <div class="col-12" style="margin-bottom: 2%">
                     <span style="margin-left: 2%" class="p-input-icon-left" [style]="{ width: '30%' }">
                         <label for="basic8" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date MEI</label>
-                        <p-calendar inputId="basic8" [(ngModel)]="date1" [style]="{ width: '100%' }" [(ngModel)]="this.Livraison.dateMEI" [showTime]="true" ></p-calendar>
+                        <p-calendar appendTo="body"  inputId="basic8" [(ngModel)]="date1" [style]="{ width: '100%' }" [(ngModel)]="this.Livraison.dateMEI" [showTime]="true" ></p-calendar>
     
                     </span>
                     <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
@@ -144,7 +144,7 @@
                     </p-table>
                 </div>
             </div>
-            <div class="card align-items-center" style="width: 80%; margin-bottom: 3%;background-color: rgb(241, 241, 241);">
+            <div class="card align-items-center" style="width: 97%; margin-bottom: 3%;background-color: rgb(241, 241, 241);">
                 <h1 style="margin: 3%">Ticket Ajouté</h1>
                 <div class="col-12 " style="margin-bottom: 2%">
                     <span style="margin-left: 2%" class="p-input-icon-left" [style]="{ width: '45%' }">
@@ -210,7 +210,7 @@
                     </p-table>
                 </div>
             </div>
-            <div class="card align-items-center" style="width: 80%; margin-bottom: 3%;background-color: rgb(241, 241, 241);">
+            <div class="card align-items-center" style="width: 97%; margin-bottom: 3%;background-color: rgb(241, 241, 241);">
                 <h1 style="margin: 3%">Ticket Retiré</h1>
                 <div class="col-12 " style="margin-bottom: 2%">
                     <span style="margin-left: 2%" class="p-input-icon-left" [style]="{ width: '45%' }">
@@ -276,7 +276,7 @@
                     </p-table>
                 </div>
             </div>
-            <div class="card align-items-center" style="width: 80%; margin-bottom: 3%;background-color: rgb(241, 241, 241);">
+            <div class="card align-items-center" style="width: 97%; margin-bottom: 3%;background-color: rgb(241, 241, 241);">
                 <h1 style="margin: 3%">Planning Point Version</h1>
                 <div class="col-12 " style="margin-bottom: 2%">
                     <span style="margin-left: 2%" class="p-input-icon-left" [style]="{ width: '45%' }">
@@ -358,7 +358,7 @@
                     </span>
             </div>
             <div class="col-12" >
-                <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '50%' }">
+                <span class="p-input-icon-left" style="margin-left: 2%;margin-top: 2%;" [style]="{ width: '50%' }">
                     <label for="basic9" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-bottom: 1%;">Upload Image</label>
                     <input
                     inputId="basic9"
@@ -378,5 +378,4 @@
             </div>
         </div>
     </div>
-</div>
 <app-charte-point-version *ngIf="chartePointVersion"></app-charte-point-version>

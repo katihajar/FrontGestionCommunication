@@ -27,27 +27,24 @@ export class DashboardRespoComponent {
       //@ts-ignore
       this.listIncident = data.body;
      this.generateIncidentsPerApplicationChart();
-     this.generateIncidentsPerMonthChart(year);
+     this.generateIncidentsClosPerLotsChart();
      this.generateIncidentsPerLotChart();
-     this.generateIncidentsPerStatutChart();
      this.generateIncidentsPerStatutChartMonth();
     });
     this.operationService.FindAllOperationRespo().subscribe(data=>{
       //@ts-ignore
       this.listOperation = data.body;
      this.generateOperationPerApplicationChart();
-     this.generateOperationPerMonthChart(year);
-     this.generateOperationPerLotChart();
-     this.generateOperationPerStatutChart();
+     this.generateOperationTerminerPerLotChart();
+     this.generateOperationPlanifierPerLotChart();
      this.generateOperationPerStatutChartMonth();
     });
     this.changeService.FindAllChangeRespo().subscribe(data=>{
       //@ts-ignore
       this.listChange = data.body;
      this.generateChangePerApplicationChart();
-     this.generateChangePerMonthChart(year);
-     this.generateChangePerLotChart();
-     this.generateChangePerStatutChart();
+     this.generateChangePlanifierPerLotChart();
+     this.generateChangeTerminePerLotChart();
      this.generateChangePerStatutChartMonth();
     });
   }
@@ -80,20 +77,31 @@ export class DashboardRespoComponent {
     const datasets = statut.map(title => ({
       label: title,
       data: monthNames.map(monthName => incidentsPerApplication[monthName]?.[title] || 0),
-      backgroundColor: this.getRandomColor()
+      backgroundColor: this.getRandomColor(),
+      fill: true
     }));
   
     const chart = new Chart('incidentsPerStatutChartMonth', {
-      type: 'bar',
+      type: 'line',
       data: {
         labels: monthNames,
         datasets
       },
       options: {
-        aspectRatio: 3, // Set the aspect ratio to 2:1
+        aspectRatio: 3.5, // Set the aspect ratio to 2:1
         scales: {
           y: {
             beginAtZero: true
+          }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Nombre d\'incident par mois',
+            padding: {
+              top: 20,
+              bottom: 20
+            }
           }
         }
       }
@@ -101,9 +109,8 @@ export class DashboardRespoComponent {
   }
 
   generateIncidentsPerApplicationChart() {
-    // Group incidents by application
-    const incidentsPerApplication = this.listIncident.reduce((acc:any, incident) => {
-      if (incident.statut === 'Ouvert') { // only count incidents with statut equal to "Ouvert"
+    const incidentsClosPerApplication = this.listIncident.reduce((acc:any, incident) => {
+      if (incident.statut === 'Clos') { 
         const applicationTitle = incident.application.nomApplication;
         if (!acc[applicationTitle]) {
           acc[applicationTitle] = 0;
@@ -112,81 +119,104 @@ export class DashboardRespoComponent {
       }
       return acc;
     }, {});
+    
+    // Group incidents by application for open incidents
+    const incidentsOpenPerApplication = this.listIncident.reduce((acc:any, incident) => {
+      if (incident.statut === 'Ouvert') { 
+        const applicationTitle = incident.application.nomApplication;
+        if (!acc[applicationTitle]) {
+          acc[applicationTitle] = 0;
+        }
+        acc[applicationTitle]++;
+      }
+      return acc;
+    }, {});
+    
+    // Get unique application labels for both datasets
+    const allLabels = [...new Set([...Object.keys(incidentsClosPerApplication), ...Object.keys(incidentsOpenPerApplication)])];
   
-    // Convert the incidents per application object into two arrays for labels and data
-    const labels = Object.keys(incidentsPerApplication);
-    const data = Object.values(incidentsPerApplication);
-    const backgroundColors = Array.from({ length: labels.length }, () => {
-      const r = Math.floor(Math.random() * 256);
-      const g = Math.floor(Math.random() * 256);
-      const b = Math.floor(Math.random() * 256);
-      return `rgba(${r}, ${g}, ${b}, 0.5)`;
-    });
+    // Define colors for open and closed datasets
+    const openColors = ['rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.5)', 'rgba(255, 206, 86, 0.5)', 'rgba(75, 192, 192, 0.5)', 'rgba(153, 102, 255, 0.5)', 'rgba(255, 159, 64, 0.5)'];
+    const closedColors = ['rgb(255, 0, 0)', 'rgb(0, 255, 0)', 'rgb(0, 0, 255)', 'rgb(255, 255, 0)', 'rgb(255, 0, 255)', 'rgb(0, 255, 255)'];
+  
+    // Create datasets for both open and closed incidents
+    const closedData = allLabels.map(label => incidentsClosPerApplication[label] || 0);
+    const openData = allLabels.map(label => incidentsOpenPerApplication[label] || 0);
+    
+    // Assign colors to datasets
+    const backgroundColors = [...closedColors.slice(0, allLabels.length), ...openColors.slice(0, allLabels.length)];
+    
     // Create a chart using Chart.js
-    const chart = new Chart('incidentsPerApplicationChart', {
-      type: 'doughnut',
+    const chart = new Chart('combinedChart', {
+      type: 'bar',
       data: {
-        labels,
+        labels: allLabels,
         datasets: [
           {
-            label: 'Number of Incidents',
-            data,
-            backgroundColor: backgroundColors,
-            borderColor: backgroundColors.map(color => color.replace('0.5', '1')),
-     
+            label: 'Nombre d\'Incidents cloturé',
+            data: closedData,
+            backgroundColor: closedColors.slice(0, allLabels.length),
+            borderColor: closedColors.map(color => color.replace('0.5', '1')),
+            borderWidth: 1
+          },
+          {
+            label: 'Nombre d\'incident ouvert',
+            data: openData,
+            backgroundColor: openColors.slice(0, allLabels.length),
+            borderColor: openColors.map(color => color.replace('0.5', '1')),
             borderWidth: 1
           }
         ]
       },
       options: {
-        aspectRatio: 1.1, // Set the aspect ratio to 2:1
+        aspectRatio: 3.5, // Set the aspect ratio to 2:1
         scales: {
           y: {
             beginAtZero: true
           }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Nombre d\'incidents ouverts et cloturés par Application',
+            padding: {
+              top: 20,
+              bottom: 20
+            }
+          }
         }
-      },
-     
+      }
     });
   }
 
+
   
 
-  generateIncidentsPerMonthChart(year: number) {
-    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    
-    const incidentsPerMonth = this.listIncident.reduce((acc: any, incident) => {
-      const dateAjout = new Date(incident.dateAjout);
-      if (isNaN(dateAjout.getMonth())) {
-        // Skip this incident if dateAjout is not a valid date
-        return acc;
-      }
-      const incidentYear = dateAjout.getFullYear();
-      if (incidentYear !== year) {
-        // Skip this incident if it's not from the specified year
-        return acc;
-      }
-      const monthIndex = dateAjout.getMonth();
-      const monthName = monthNames[monthIndex];
-      if (!acc[monthName]) {
-        acc[monthName] = 0;
-      }
-      if (incident.statut === 'Ouvert') {
-        acc[monthName]++;
+  generateIncidentsClosPerLotsChart() {
+    const lots = Array.from(new Set(this.listIncident.map(incident => incident.application.lot)));
+  
+    const incidentsPerLots = this.listIncident.reduce((acc: any, incident) => {
+      const lot = incident.application.lot;
+      const statut = incident.statut;
+      if (statut === "Clos") {
+        if (!acc[lot]) {
+          acc[lot] = 0;
+        }
+        acc[lot]++;
       }
       return acc;
     }, {});
-    
-    const datasets = [{
-      label: 'Incidents ouverts par Mois',
-      data: monthNames.map(monthName => incidentsPerMonth[monthName] || 0),
+  
+    const datasets = lots.map(lot => ({
+      label: lot,
+      data: [incidentsPerLots[lot] || 0],
       backgroundColor: this.getRandomColor()
-    }];
-    
-    const chart = new Chart('incidentsPerMonthChart', {
-      type: 'line',
+    }));
+  
+    const chart = new Chart('incidentsClosPerLotsChart', {
+      type: 'bar',
       data: {
-        labels: monthNames,
+        labels: ['Nombre d\'Incident par lots'],
         datasets
       },
       options: {
@@ -194,6 +224,16 @@ export class DashboardRespoComponent {
         scales: {
           y: {
             beginAtZero: true
+          }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Nombre d\'incident cloturé par lot',
+            padding: {
+              top: 20,
+              bottom: 20
+            }
           }
         }
       }
@@ -236,57 +276,22 @@ export class DashboardRespoComponent {
           y: {
             beginAtZero: true
           }
-        }
-      }
-    });
-  }
-
-  generateIncidentsPerStatutChart() {
-    const statuts = Array.from(new Set(this.listIncident.map(incident => incident.statut)));
-  
-    const incidentsPerStatut = this.listIncident.reduce((acc: any, incident) => {
-      const statut = incident.statut;
-      if (!acc[statut]) {
-        acc[statut] = 0;
-      }
-      acc[statut]++;
-      return acc;
-    }, {});
-
-      // Convert the incidents per application object into two arrays for labels and data
-      const labels = Object.keys(incidentsPerStatut);
-      const data = Object.values(incidentsPerStatut);
-        const backgroundColors = Array.from({ length: labels.length }, () => {
-      const r = Math.floor(Math.random() * 256);
-      const g = Math.floor(Math.random() * 256);
-      const b = Math.floor(Math.random() * 256);
-      return `rgba(${r}, ${g}, ${b}, 0.5)`;
-    });
-     // Create a chart using Chart.js
-    const chart = new Chart('incidentsPerStatutChart', {
-      type: 'pie',
-      data: {
-        labels,
-        datasets: [
-          {
-            label: 'Number of Incidents',
-            data,
-            backgroundColor: backgroundColors,
-            borderColor: backgroundColors.map(color => color.replace('0.5', '1')),
-            borderWidth: 1
-          }
-        ]
-      },
-      options: {
-        aspectRatio: 1.1, // Set the aspect ratio to 2:1
-        scales: {
-          y: {
-            beginAtZero: true
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Nombre d\'incident ouvert par lot',
+            padding: {
+              top: 20,
+              bottom: 20
+            }
           }
         }
       }
     });
   }
+
+
 
   // chart Operation 
 
@@ -316,17 +321,18 @@ export class DashboardRespoComponent {
     const datasets = statut.map(title => ({
       label: title,
       data: monthNames.map(monthName => operationPerApplication[monthName]?.[title] || 0),
-      backgroundColor: this.getRandomColor()
+      backgroundColor: this.getRandomColor(),
+      fill:true
     }));
   
     const chart = new Chart('operationPerStatutChartMonth', {
-      type: 'bar',
+      type: 'line',
       data: {
         labels: monthNames,
         datasets
       },
       options: {
-        aspectRatio: 3, // Set the aspect ratio to 2:1
+        aspectRatio: 3.5, // Set the aspect ratio to 2:1
         scales: {
           y: {
             beginAtZero: true
@@ -336,7 +342,7 @@ export class DashboardRespoComponent {
     });
   }
   generateOperationPerApplicationChart() {
-    const operationPerApplication = this.listOperation.reduce((acc:any, operation) => {
+    const OperationPlanifierPerApplication = this.listOperation.reduce((acc:any, operation) => {
       if (operation.statut === 'Planifier') { 
         const applicationTitle = operation.application.nomApplication;
         if (!acc[applicationTitle]) {
@@ -346,77 +352,100 @@ export class DashboardRespoComponent {
       }
       return acc;
     }, {});
+    
+    const OperationTerminePerApplication = this.listOperation.reduce((acc:any, operation) => {
+      if (operation.statut === 'Terminer') { 
+        const applicationTitle = operation.application.nomApplication;
+        if (!acc[applicationTitle]) {
+          acc[applicationTitle] = 0;
+        }
+        acc[applicationTitle]++;
+      }
+      return acc;
+    }, {});
+    
+    // Get unique application labels for both datasets
+    const allLabels = [...new Set([...Object.keys(OperationPlanifierPerApplication), ...Object.keys(OperationTerminePerApplication)])];
   
-    const labels = Object.keys(operationPerApplication);
-    const data = Object.values(operationPerApplication);
-    const backgroundColors = Array.from({ length: labels.length }, () => {
-      const r = Math.floor(Math.random() * 256);
-      const g = Math.floor(Math.random() * 256);
-      const b = Math.floor(Math.random() * 256);
-      return `rgba(${r}, ${g}, ${b}, 0.5)`;
-    });
+    // Define colors for open and closed datasets
+    const openColors = ['rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.5)', 'rgba(255, 206, 86, 0.5)', 'rgba(75, 192, 192, 0.5)', 'rgba(153, 102, 255, 0.5)', 'rgba(255, 159, 64, 0.5)'];
+    const closedColors = ['rgb(255, 0, 0)', 'rgb(0, 255, 0)', 'rgb(0, 0, 255)', 'rgb(255, 255, 0)', 'rgb(255, 0, 255)', 'rgb(0, 255, 255)'];
+  
+    // Create datasets for both open and closed incidents
+    const closedData = allLabels.map(label => OperationPlanifierPerApplication[label] || 0);
+    const openData = allLabels.map(label => OperationTerminePerApplication[label] || 0);
+    
+    // Assign colors to datasets
+    const backgroundColors = [...closedColors.slice(0, allLabels.length), ...openColors.slice(0, allLabels.length)];
+    
     // Create a chart using Chart.js
     const chart = new Chart('operationPerApplicationChart', {
-      type: 'doughnut',
+      type: 'bar',
       data: {
-        labels,
+        labels: allLabels,
         datasets: [
           {
-            label: 'Number of Operations',
-            data,
-            backgroundColor: backgroundColors,
-            borderColor: backgroundColors.map(color => color.replace('0.5', '1')),
-     
+            label: 'Nombre d\'operation planifier',
+            data: closedData,
+            backgroundColor: closedColors.slice(0, allLabels.length),
+            borderColor: closedColors.map(color => color.replace('0.5', '1')),
+            borderWidth: 1
+          },
+          {
+            label: 'Nombre d\'operation terminer',
+            data: openData,
+            backgroundColor: openColors.slice(0, allLabels.length),
+            borderColor: openColors.map(color => color.replace('0.5', '1')),
             borderWidth: 1
           }
         ]
       },
       options: {
-        aspectRatio: 1.1, // Set the aspect ratio to 2:1
+        aspectRatio: 3.5, // Set the aspect ratio to 2:1
         scales: {
           y: {
             beginAtZero: true
           }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Nombre d\'operation planifier et terminer par Application',
+            padding: {
+              top: 20,
+              bottom: 20
+            }
+          }
         }
-      },
-     
+      }
     });
   }
-  generateOperationPerMonthChart(year: number) {
-    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    
-    const operationsPerMonth = this.listOperation.reduce((acc: any, operation) => {
-      const dateAjout = new Date(operation.dateAjout);
-      if (isNaN(dateAjout.getMonth())) {
-        // Skip this incident if dateAjout is not a valid date
-        return acc;
-      }
-      const operationYear = dateAjout.getFullYear();
-      if (operationYear !== year) {
-        // Skip this incident if it's not from the specified year
-        return acc;
-      }
-      const monthIndex = dateAjout.getMonth();
-      const monthName = monthNames[monthIndex];
-      if (!acc[monthName]) {
-        acc[monthName] = 0;
-      }
-      if (operation.statut === 'Planifier') {
-        acc[monthName]++;
+
+  generateOperationTerminerPerLotChart() {
+    const lots = Array.from(new Set(this.listOperation.map(operation => operation.application.lot)));
+  
+    const operationPerLots = this.listOperation.reduce((acc: any, op) => {
+      const lot = op.application.lot;
+      const statut = op.statut;
+      if (statut === "Terminer") {
+        if (!acc[lot]) {
+          acc[lot] = 0;
+        }
+        acc[lot]++;
       }
       return acc;
     }, {});
-    
-    const datasets = [{
-      label: 'Operation planifier par Mois',
-      data: monthNames.map(monthName => operationsPerMonth[monthName] || 0),
+  
+    const datasets = lots.map(lot => ({
+      label: lot,
+      data: [operationPerLots[lot] || 0],
       backgroundColor: this.getRandomColor()
-    }];
-    
-    const chart = new Chart('operationPerMonthChart', {
-      type: 'line',
+    }));
+  
+    const chart = new Chart('operationTerminerPerLotsChart', {
+      type: 'bar',
       data: {
-        labels: monthNames,
+        labels: ['Nombre d\'operation terminer par lots'],
         datasets
       },
       options: {
@@ -425,18 +454,30 @@ export class DashboardRespoComponent {
           y: {
             beginAtZero: true
           }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Nombre d\'operation terminer par lots',
+            padding: {
+              top: 20,
+              bottom: 20
+            }
+          }
         }
       }
     });
   }
+  
+  
 
-    
-  generateOperationPerLotChart() {
+  
+  generateOperationPlanifierPerLotChart() {
     const lots = Array.from(new Set(this.listOperation.map(operation => operation.application.lot)));
   
-    const operationPerLots = this.listOperation.reduce((acc: any, operation) => {
-      const lot = operation.application.lot;
-      const statut = operation.statut;
+    const operationPerLots = this.listOperation.reduce((acc: any, op) => {
+      const lot = op.application.lot;
+      const statut = op.statut;
       if (statut === "Planifier") {
         if (!acc[lot]) {
           acc[lot] = 0;
@@ -452,10 +493,10 @@ export class DashboardRespoComponent {
       backgroundColor: this.getRandomColor()
     }));
   
-    const chart = new Chart('operationPerLotsChart', {
+    const chart = new Chart('operationPlannedPerLotsChart', {
       type: 'bar',
       data: {
-        labels: ['Nombre d\'operation par lots'],
+        labels: ['Nombre d\'operation planifier par lots'],
         datasets
       },
       options: {
@@ -464,56 +505,23 @@ export class DashboardRespoComponent {
           y: {
             beginAtZero: true
           }
-        }
-      }
-    });
-  }
-
-  generateOperationPerStatutChart() {
-    const statuts = Array.from(new Set(this.listOperation.map(operation => operation.statut)));
-  
-    const operationPerStatut = this.listOperation.reduce((acc: any, operation) => {
-      const statut = operation.statut;
-      if (!acc[statut]) {
-        acc[statut] = 0;
-      }
-      acc[statut]++;
-      return acc;
-    }, {});
-
-      const labels = Object.keys(operationPerStatut);
-      const data = Object.values(operationPerStatut);
-        const backgroundColors = Array.from({ length: labels.length }, () => {
-      const r = Math.floor(Math.random() * 256);
-      const g = Math.floor(Math.random() * 256);
-      const b = Math.floor(Math.random() * 256);
-      return `rgba(${r}, ${g}, ${b}, 0.5)`;
-    });
-     // Create a chart using Chart.js
-    const chart = new Chart('operationPerStatutChart', {
-      type: 'pie',
-      data: {
-        labels,
-        datasets: [
-          {
-            label: 'Number of Operation',
-            data,
-            backgroundColor: backgroundColors,
-            borderColor: backgroundColors.map(color => color.replace('0.5', '1')),
-            borderWidth: 1
-          }
-        ]
-      },
-      options: {
-        aspectRatio: 1.1, // Set the aspect ratio to 2:1
-        scales: {
-          y: {
-            beginAtZero: true
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Nombre d\'operation planifier par lots',
+            padding: {
+              top: 20,
+              bottom: 20
+            }
           }
         }
       }
     });
   }
+    
+ 
+
 // chart changement 
 generateChangePerStatutChartMonth() {
   const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -541,17 +549,18 @@ generateChangePerStatutChartMonth() {
   const datasets = statut.map(title => ({
     label: title,
     data: monthNames.map(monthName => changePerApplication[monthName]?.[title] || 0),
-    backgroundColor: this.getRandomColor()
+    backgroundColor: this.getRandomColor(),
+    fill:true
   }));
 
   const chart = new Chart('changePerStatutChartMonth', {
-    type: 'bar',
+    type: 'line',
     data: {
       labels: monthNames,
       datasets
     },
     options: {
-      aspectRatio: 3, // Set the aspect ratio to 2:1
+      aspectRatio: 3.5, // Set the aspect ratio to 2:1
       scales: {
         y: {
           beginAtZero: true
@@ -561,7 +570,7 @@ generateChangePerStatutChartMonth() {
   });
 }
 generateChangePerApplicationChart() {
-  const changePerApplication = this.listChange.reduce((acc:any, change) => {
+  const changementPlanifierPerApplication = this.listChange.reduce((acc:any, change) => {
     if (change.statut === 'Planifié') { 
       const applicationTitle = change.application.nomApplication;
       if (!acc[applicationTitle]) {
@@ -571,77 +580,99 @@ generateChangePerApplicationChart() {
     }
     return acc;
   }, {});
+  
+  const changementTerminePerApplication = this.listChange.reduce((acc:any, change) => {
+    if (change.statut === 'Terminé avec succès') { 
+      const applicationTitle = change.application.nomApplication;
+      if (!acc[applicationTitle]) {
+        acc[applicationTitle] = 0;
+      }
+      acc[applicationTitle]++;
+    }
+    return acc;
+  }, {});
+  
+  // Get unique application labels for both datasets
+  const allLabels = [...new Set([...Object.keys(changementPlanifierPerApplication), ...Object.keys(changementTerminePerApplication)])];
 
-  const labels = Object.keys(changePerApplication);
-  const data = Object.values(changePerApplication);
-  const backgroundColors = Array.from({ length: labels.length }, () => {
-    const r = Math.floor(Math.random() * 256);
-    const g = Math.floor(Math.random() * 256);
-    const b = Math.floor(Math.random() * 256);
-    return `rgba(${r}, ${g}, ${b}, 0.5)`;
-  });
+  // Define colors for open and closed datasets
+  const openColors = ['rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.5)', 'rgba(255, 206, 86, 0.5)', 'rgba(75, 192, 192, 0.5)', 'rgba(153, 102, 255, 0.5)', 'rgba(255, 159, 64, 0.5)'];
+  const closedColors = ['rgb(255, 0, 0)', 'rgb(0, 255, 0)', 'rgb(0, 0, 255)', 'rgb(255, 255, 0)', 'rgb(255, 0, 255)', 'rgb(0, 255, 255)'];
+
+  // Create datasets for both open and closed incidents
+  const closedData = allLabels.map(label => changementPlanifierPerApplication[label] || 0);
+  const openData = allLabels.map(label => changementTerminePerApplication[label] || 0);
+  
+  // Assign colors to datasets
+  const backgroundColors = [...closedColors.slice(0, allLabels.length), ...openColors.slice(0, allLabels.length)];
+  
   // Create a chart using Chart.js
   const chart = new Chart('changePerApplicationChart', {
-    type: 'doughnut',
+    type: 'bar',
     data: {
-      labels,
+      labels: allLabels,
       datasets: [
         {
-          label: 'Nombre de Changement planifier',
-          data,
-          backgroundColor: backgroundColors,
-          borderColor: backgroundColors.map(color => color.replace('0.5', '1')),
-   
+          label: 'Nombre de changement planifier',
+          data: closedData,
+          backgroundColor: closedColors.slice(0, allLabels.length),
+          borderColor: closedColors.map(color => color.replace('0.5', '1')),
+          borderWidth: 1
+        },
+        {
+          label: 'Nombre de changement terminer',
+          data: openData,
+          backgroundColor: openColors.slice(0, allLabels.length),
+          borderColor: openColors.map(color => color.replace('0.5', '1')),
           borderWidth: 1
         }
       ]
     },
     options: {
-      aspectRatio: 1.1, // Set the aspect ratio to 2:1
+      aspectRatio: 3.5, // Set the aspect ratio to 2:1
       scales: {
         y: {
           beginAtZero: true
         }
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: 'Nombre de changement planifier et terminer par Application',
+          padding: {
+            top: 20,
+            bottom: 20
+          }
+        }
       }
-    },
-   
+    }
   });
 }
-generateChangePerMonthChart(year: number) {
-  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  
-  const changePerMonth = this.listChange.reduce((acc: any, change) => {
-    const dateAjout = new Date(change.dateAjout);
-    if (isNaN(dateAjout.getMonth())) {
-      // Skip this incident if dateAjout is not a valid date
-      return acc;
-    }
-    const changeYear = dateAjout.getFullYear();
-    if (changeYear !== year) {
-      // Skip this incident if it's not from the specified year
-      return acc;
-    }
-    const monthIndex = dateAjout.getMonth();
-    const monthName = monthNames[monthIndex];
-    if (!acc[monthName]) {
-      acc[monthName] = 0;
-    }
-    if (change.statut === 'Planifié') {
-      acc[monthName]++;
+generateChangeTerminePerLotChart() {
+  const lots = Array.from(new Set(this.listChange.map(change => change.application.lot)));
+
+  const changePerLots = this.listChange.reduce((acc: any, change) => {
+    const lot = change.application.lot;
+    const statut = change.statut;
+    if (statut === "Terminé avec succès") {
+      if (!acc[lot]) {
+        acc[lot] = 0;
+      }
+      acc[lot]++;
     }
     return acc;
   }, {});
-  
-  const datasets = [{
-    label: 'Changement planifier par Mois',
-    data: monthNames.map(monthName => changePerMonth[monthName] || 0),
+
+  const datasets = lots.map(lot => ({
+    label: lot,
+    data: [changePerLots[lot] || 0],
     backgroundColor: this.getRandomColor()
-  }];
-  
-  const chart = new Chart('changePerMonthChart', {
-    type: 'line',
+  }));
+
+  const chart = new Chart('changeTerminerPerLotsChart', {
+    type: 'bar',
     data: {
-      labels: monthNames,
+      labels: ['Nombre de changement terminer par lots'],
       datasets
     },
     options: {
@@ -650,13 +681,22 @@ generateChangePerMonthChart(year: number) {
         y: {
           beginAtZero: true
         }
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: 'Nombre de changement terminer par lots',
+          padding: {
+            top: 20,
+            bottom: 20
+          }
+        }
       }
     }
   });
 }
 
-  
-generateChangePerLotChart() {
+generateChangePlanifierPerLotChart() {
   const lots = Array.from(new Set(this.listChange.map(change => change.application.lot)));
 
   const changePerLots = this.listChange.reduce((acc: any, change) => {
@@ -677,7 +717,7 @@ generateChangePerLotChart() {
     backgroundColor: this.getRandomColor()
   }));
 
-  const chart = new Chart('changePerLotsChart', {
+  const chart = new Chart('changePlannedPerLotsChart', {
     type: 'bar',
     data: {
       labels: ['Nombre de changement planifier par lots'],
@@ -689,50 +729,15 @@ generateChangePerLotChart() {
         y: {
           beginAtZero: true
         }
-      }
-    }
-  });
-}
-
-generateChangePerStatutChart() {
-
-  const changePerStatut = this.listChange.reduce((acc: any, change) => {
-    const statut = change.statut;
-    if (!acc[statut]) {
-      acc[statut] = 0;
-    }
-    acc[statut]++;
-    return acc;
-  }, {});
-
-    const labels = Object.keys(changePerStatut);
-    const data = Object.values(changePerStatut);
-      const backgroundColors = Array.from({ length: labels.length }, () => {
-    const r = Math.floor(Math.random() * 256);
-    const g = Math.floor(Math.random() * 256);
-    const b = Math.floor(Math.random() * 256);
-    return `rgba(${r}, ${g}, ${b}, 0.5)`;
-  });
-   // Create a chart using Chart.js
-  const chart = new Chart('changePerStatutChart', {
-    type: 'pie',
-    data: {
-      labels,
-      datasets: [
-        {
-          label: 'Nombre de changement planifier',
-          data,
-          backgroundColor: backgroundColors,
-          borderColor: backgroundColors.map(color => color.replace('0.5', '1')),
-          borderWidth: 1
-        }
-      ]
-    },
-    options: {
-      aspectRatio: 1.1, // Set the aspect ratio to 2:1
-      scales: {
-        y: {
-          beginAtZero: true
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: 'Nombre de changement planifier par lots',
+          padding: {
+            top: 20,
+            bottom: 20
+          }
         }
       }
     }

@@ -1,24 +1,27 @@
 @import "../../responsable/resgistre-application-respo/resgistre-application-respo.component.scss";
-canvas {
-    margin-bottom: 20px; /* Add some space between the charts */
-  }
+ /* Charts */
+ canvas {
+  margin-bottom: 20px; /* Add some space between the charts */
+  background-color: white;
+}
 
-  .page__content {
-    display: flex;
-    flex-wrap: wrap;
-    background-color: rgb(247, 246, 246);
-  }
-  
-  .page__content > div {
-    width: 100%;
-    display: block;
-  }
-  .gradient-text {
-    background: linear-gradient(84deg, #991f3d, #e31937 33%, #ff6a00 67%, #facdd2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    height: 40px;
-    margin-bottom: 2%;
-    margin-top: 2%;
-    text-align: center;
-  }
+.page__content {
+ display: flex;
+  flex-wrap: wrap;
+  background-color: rgb(247, 246, 246);
+}
+
+.page__content > div {
+  width: 100%;
+ display: block;
+}
+
+.gradient-text {
+  background: linear-gradient(84deg, #991f3d, #e31937 33%, #ff6a00 67%, #facdd2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  height: 40px;
+  margin-bottom: 2%;
+  margin-top: 2%;
+  text-align: center;
+}

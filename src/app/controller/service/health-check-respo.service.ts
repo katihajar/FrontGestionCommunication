@@ -14,6 +14,7 @@ import { StatutApplication } from '../model/statut-application';
 })
 export class HealthCheckRespoService {
   private urlRespo = environment.baseUrlResponsable;
+  private urlAdmin = environment.baseUrlAdmin;
 
   constructor(private http: HttpClient,private auth: AuthService) { }
   public FindHealthCheck(): Observable<HttpResponse<Array<HealthChekPreprodProd>>> {
@@ -23,7 +24,20 @@ export class HealthCheckRespoService {
       { observe: 'response', headers }
     );    
   }
-
+  public FindAllHealthCheckRespo(): Observable<HttpResponse<Array<HealthChekPreprodProd>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<HealthChekPreprodProd>>(
+      this.urlRespo + 'healthcheck/findAll',
+      { observe: 'response', headers }
+    );    
+  }
+  public FindAllHealthCheckAdmin(): Observable<HttpResponse<Array<HealthChekPreprodProd>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<HealthChekPreprodProd>>(
+      this.urlAdmin + 'healthcheck/findAll',
+      { observe: 'response', headers }
+    );    
+  }
   public FindDetailByHealthCheck(id:number): Observable<HttpResponse<Array<HealthChekPreprodProdDetail>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<HealthChekPreprodProdDetail>>(

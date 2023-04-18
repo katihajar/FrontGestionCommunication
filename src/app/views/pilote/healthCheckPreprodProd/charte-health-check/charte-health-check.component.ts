@@ -1,8 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Application } from 'src/app/controller/model/application';
 import { HealthChekPreprodProd } from 'src/app/controller/model/health-chek-preprod-prod';
+import { ProcessusMetier } from 'src/app/controller/model/processus-metier';
+import { User } from 'src/app/controller/model/user';
+import { AuthService } from 'src/app/controller/service/auth.service';
 import { CharteService } from 'src/app/controller/service/charte.service';
 import { HealthCheckService } from 'src/app/controller/service/health-check.service';
+import { ProcessusMetierService } from 'src/app/controller/service/processus-metier.service';
 
 @Component({
   selector: 'app-charte-health-check',
@@ -10,13 +13,42 @@ import { HealthCheckService } from 'src/app/controller/service/health-check.serv
   styleUrls: ['./charte-health-check.component.scss']
 })
 export class CharteHealthCheckComponent implements OnInit {
+  listHealt:Array<HealthChekPreprodProd>= new Array<HealthChekPreprodProd>();
+  listProcess:Array<ProcessusMetier>= new Array<ProcessusMetier>();
+  uniqueDates = [];
   @ViewChild('myDialog',{static:false}) filterComponent!: ElementRef;
-  constructor(private charteService: CharteService,private healthService: HealthCheckService) { }
+  constructor(private authService: AuthService,private charteService: CharteService,private healthService: HealthCheckService,private processService: ProcessusMetierService) { }
 
   ngOnInit(): void {
+    this.listHealt = new Array<HealthChekPreprodProd>();
+    this.listProcess= new Array<ProcessusMetier>();
+    if (this.User.roles[0].name == 'ROLE_PILOTE') {
+    this.healthService.FindLast10HealthCheck().subscribe((data)=>{
+      // @ts-ignore
+      this.listHealt = data.body;   
+    });
+    this.processService.FindAllProcessusMetierPilote().subscribe((data)=>{
+      // @ts-ignore
+      this.listProcess = data.body;   
+    });
+  } else{
+    this.healthService.FindLast10HealthCheckRespo().subscribe((data)=>{
+      // @ts-ignore
+      this.listHealt = data.body;   
+    });
+    this.processService.FindAllProcessusMetierRespo().subscribe((data)=>{
+      // @ts-ignore
+      this.listProcess = data.body;   
+    });
+  }
   }
 
-
+  get User(): User {
+    return this.authService.User;
+  }
+  set User(value: User) {
+    this.authService.User = value;
+  }
 
   get charteHealthCheckPreprodProd(): boolean {
     return this.charteService.charteHealthCheckPreprodProd;

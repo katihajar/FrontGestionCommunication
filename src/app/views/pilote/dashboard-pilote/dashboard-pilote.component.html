@@ -3,7 +3,7 @@
   <div class="page__content shadow p-3 position-relative" >   
     <div class="card" style="border: none;width: 100%;background-color: rgb(247, 246, 246);">
       <div  class="col-12 row gradient-text" >
-        <h1 style="text-align: center;font-size:larger;font-weight: bolder;">Dashboad Incident</h1>
+        <h1 style="text-align: center;font-size:larger;font-weight: bolder;">Communication d'Incident</h1>
         </div>
       <div class="row">
         <div class="col-lg-12">
@@ -26,7 +26,7 @@
         </div>
       </div>
       <div  class="col-12 row gradient-text" >
-        <h1 style="text-align: center;font-size:larger;font-weight: bolder;">Dashboad Operation</h1>
+        <h1 style="text-align: center;font-size:larger;font-weight: bolder;">Communication d'Operation</h1>
         </div>
         <div class="row">
           <div class="col-lg-12">
@@ -48,7 +48,7 @@
 
         </div>
         <div  class="col-12 row gradient-text" >
-          <h1 style="text-align: center;font-size:larger;font-weight: bolder;">Dashboad Changement Planifier</h1>
+          <h1 style="text-align: center;font-size:larger;font-weight: bolder;">Communication de Changement Planifier</h1>
           </div>
           <div class="row">
             <div class="col-lg-12">
@@ -67,8 +67,43 @@
             <div class="col-lg-12">
               <canvas id="changePerApplicationChart"></canvas>
             </div>
-    </div>
-    
+         </div>
+         <div  class="col-12 row gradient-text" >
+          <h1 style="text-align: center;font-size:larger;font-weight: bolder;">Communication du Health Check Preprod/Prod</h1>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <canvas id="healthCheckPerMonthChart"></canvas>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <canvas id="healthCheckPerWeekChart"></canvas>
+            </div>
+            <div class="col-lg-6">
+              <canvas id="healthCheckPerDayChart"></canvas>
+            </div>
+          </div>
+          <div  class="row" style="margin-bottom: 2%;">
+            <div class="col-lg-3" ></div>
+            <div class="col-lg-3" ></div>
+            <div class="form-group col-lg-3">
+              <label for="startDate" style="font-size: 14px;">Start Date</label>
+              <input type="date" class="form-control" id="startDate" (input)="onStartDateChanged($event)">
+            </div>
+            
+            <div class="form-group col-lg-3">
+              <label for="endDate" style="font-size: 14px;">End Date</label>
+              <input type="date" class="form-control" id="endDate" (input)="onEndDateChanged($event)">
+            </div>
+          </div>
+          <div  class="row">
+            <div class="col-lg-12">
+            <canvas id="health-check-chart"></canvas>
+            </div>
+          </div>
+          <div>
+        </div>
   </div>
 </div>
 

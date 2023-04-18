@@ -7,6 +7,10 @@ import { Operation } from 'src/app/controller/model/operation';
 import { OperationService } from 'src/app/controller/service/operation.service';
 import { ChangementPlanifier } from 'src/app/controller/model/changement-planifier';
 import { ChangementService } from 'src/app/controller/service/changement.service';
+import { HealthChekPreprodProd } from 'src/app/controller/model/health-chek-preprod-prod';
+import * as moment from 'moment';
+import { HealthCheckRespoService } from 'src/app/controller/service/health-check-respo.service';
+import { HealthCheckService } from 'src/app/controller/service/health-check.service';
 
 @Component({
   selector: 'app-dashboard-pilote',
@@ -18,7 +22,14 @@ export class DashboardPiloteComponent implements OnInit {
   listIncident:Array<Incident>=new Array<Incident>();
   listOperation:Array<Operation>=new Array<Operation>();
   listChange:Array<ChangementPlanifier>=new Array<ChangementPlanifier>();
-  constructor(private service: IncidentService,private operationService: OperationService,private changeService: ChangementService) { 
+  listHealthCheckProd:Array<HealthChekPreprodProd>=new Array<HealthChekPreprodProd>();
+  dateRange = {
+    start: moment().startOf('month'),
+    end: moment().endOf('month')
+  };
+  private chart!: Chart;
+
+  constructor(private service: IncidentService,private operationService: OperationService,private changeService: ChangementService,private healthprodService: HealthCheckService) { 
   }
 
   ngOnInit(): void {
@@ -48,12 +59,36 @@ export class DashboardPiloteComponent implements OnInit {
      this.generateChangeTerminePerLotChart();
      this.generateChangePerStatutChartMonth();
     });
+    this.healthprodService.FindAllHealthCheck().subscribe(data=>{
+      //@ts-ignore
+      this.listHealthCheckProd = data.body;
+     this.generateChartsHealthProd();
+     this.updateChart();
+    });
   }
 
+  onStartDateChanged(event: Event) {
+    const startDateStr = (event.target as HTMLInputElement).value;
+    const startDate = moment(startDateStr);
+    if (startDate.isValid()) {
+      this.dateRange.start = startDate;
+      this.updateChart();
+    }
+  }
+  
+  onEndDateChanged(event: Event) {
+    const endDateStr = (event.target as HTMLInputElement).value;
+    const endDate = moment(endDateStr);
+    if (endDate.isValid()) {
+      this.dateRange.end = endDate;
+      this.updateChart();
+    }
+  }
+  
 // Chart Incident 
   
   generateIncidentsPerStatutChartMonth() {
-    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const monthNames = ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aout', 'Sep', 'Oct', 'Nov', 'Dec'];
     const statut = Array.from(new Set(this.listIncident.map(incident => incident.statut)));
   
     const incidentsPerApplication = this.listIncident.reduce((acc:any, incident) => {
@@ -136,10 +171,10 @@ export class DashboardPiloteComponent implements OnInit {
     // Get unique application labels for both datasets
     const allLabels = [...new Set([...Object.keys(incidentsClosPerApplication), ...Object.keys(incidentsOpenPerApplication)])];
   
-    // Define colors for open and closed datasets
-    const openColors = ['rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.5)', 'rgba(255, 206, 86, 0.5)', 'rgba(75, 192, 192, 0.5)', 'rgba(153, 102, 255, 0.5)', 'rgba(255, 159, 64, 0.5)'];
-    const closedColors = ['rgb(255, 0, 0)', 'rgb(0, 255, 0)', 'rgb(0, 0, 255)', 'rgb(255, 255, 0)', 'rgb(255, 0, 255)', 'rgb(0, 255, 255)'];
-  
+    // Define colors for open and closed datasets using getRandomColor() function
+    const openColors = allLabels.map(label => this.getRandomColor());
+    const closedColors = allLabels.map(label => this.getRandomColor());
+    
     // Create datasets for both open and closed incidents
     const closedData = allLabels.map(label => incidentsClosPerApplication[label] || 0);
     const openData = allLabels.map(label => incidentsOpenPerApplication[label] || 0);
@@ -297,7 +332,7 @@ export class DashboardPiloteComponent implements OnInit {
   // chart Operation 
 
   generateOperationPerStatutChartMonth() {
-    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const monthNames = ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aout', 'Sep', 'Oct', 'Nov', 'Dec'];
     const statut = Array.from(new Set(this.listOperation.map(operation => operation.statut)));
   
     const operationPerApplication = this.listOperation.reduce((acc:any, operation) => {
@@ -368,10 +403,9 @@ export class DashboardPiloteComponent implements OnInit {
     // Get unique application labels for both datasets
     const allLabels = [...new Set([...Object.keys(OperationPlanifierPerApplication), ...Object.keys(OperationTerminePerApplication)])];
   
-    // Define colors for open and closed datasets
-    const openColors = ['rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.5)', 'rgba(255, 206, 86, 0.5)', 'rgba(75, 192, 192, 0.5)', 'rgba(153, 102, 255, 0.5)', 'rgba(255, 159, 64, 0.5)'];
-    const closedColors = ['rgb(255, 0, 0)', 'rgb(0, 255, 0)', 'rgb(0, 0, 255)', 'rgb(255, 255, 0)', 'rgb(255, 0, 255)', 'rgb(0, 255, 255)'];
-  
+    // Define colors for open and closed datasets using getRandomColor() function
+    const openColors = allLabels.map(label => this.getRandomColor());
+    const closedColors = allLabels.map(label => this.getRandomColor());
     // Create datasets for both open and closed incidents
     const closedData = allLabels.map(label => OperationPlanifierPerApplication[label] || 0);
     const openData = allLabels.map(label => OperationTerminePerApplication[label] || 0);
@@ -525,7 +559,8 @@ export class DashboardPiloteComponent implements OnInit {
 
 // chart changement 
 generateChangePerStatutChartMonth() {
-  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const monthNames = ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aout', 'Sep', 'Oct', 'Nov', 'Dec'];
+
   const statut = Array.from(new Set(this.listChange.map(change => change.statut)));
 
   const changePerApplication = this.listChange.reduce((acc:any, change) => {
@@ -597,9 +632,9 @@ generateChangePerApplicationChart() {
   const allLabels = [...new Set([...Object.keys(changementPlanifierPerApplication), ...Object.keys(changementTerminePerApplication)])];
 
   // Define colors for open and closed datasets
-  const openColors = ['rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.5)', 'rgba(255, 206, 86, 0.5)', 'rgba(75, 192, 192, 0.5)', 'rgba(153, 102, 255, 0.5)', 'rgba(255, 159, 64, 0.5)'];
-  const closedColors = ['rgb(255, 0, 0)', 'rgb(0, 255, 0)', 'rgb(0, 0, 255)', 'rgb(255, 255, 0)', 'rgb(255, 0, 255)', 'rgb(0, 255, 255)'];
-
+   // Define colors for open and closed datasets using getRandomColor() function
+   const openColors = allLabels.map(label => this.getRandomColor());
+   const closedColors = allLabels.map(label => this.getRandomColor());
   // Create datasets for both open and closed incidents
   const closedData = allLabels.map(label => changementPlanifierPerApplication[label] || 0);
   const openData = allLabels.map(label => changementTerminePerApplication[label] || 0);
@@ -744,6 +779,232 @@ generateChangePlanifierPerLotChart() {
     }
   });
 }
+
+///////////////////////////////
+getHealthCheckPerWeekOfCurrentMonth(): number[] {
+  const today = new Date();
+  const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+  const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+  const startDate = new Date(startOfMonth);
+  startDate.setDate(startDate.getDate() - startDate.getDay() + 1); // get the start date of the first week of the month
+  const endDate = new Date(endOfMonth);
+  endDate.setDate(endDate.getDate() - endDate.getDay() + 7); // get the end date of the last week of the month
+  const numWeeks = Math.ceil((endDate.getTime() - startDate.getTime()) / (7 * 24 * 60 * 60 * 1000));
+  const healthCheckPerWeek = new Array(numWeeks).fill(0);
+
+  this.listHealthCheckProd.forEach(healthCheck => {
+    const date = new Date(healthCheck.dateAjout);
+    if (date >= startDate && date <= endDate) {
+      const weekIndex = Math.floor((date.getTime() - startDate.getTime()) / (7 * 24 * 60 * 60 * 1000));
+      healthCheckPerWeek[weekIndex]++;
+    }
+  });
+
+  return healthCheckPerWeek;
+}
+private getWeekLabels(): string[] {
+  const today = new Date();
+  const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+  const startDate = new Date(startOfMonth);
+  const endDate = new Date(startOfMonth);
+  startDate.setDate(startDate.getDate() - startDate.getDay() + 1); // get the start date of the first week of the month
+  endDate.setDate(endDate.getDate() - endDate.getDay() ); // get the start date of the first week of the month
+
+  const numWeeks = this.getHealthCheckPerWeekOfCurrentMonth().length;
+  const labels = new Array(numWeeks).fill(0);
+  for (let i = 0; i < numWeeks; i++) {
+    const startOfWeek = new Date(startDate.getTime() + i * 7 * 24 * 60 * 60 * 1000);
+    const endOfWeek = new Date(endDate.getTime() + (i + 1) * 7 * 24 * 60 * 60 * 1000 );
+    const startWeekLabel = startOfWeek.toLocaleDateString(undefined, { day: '2-digit', month: '2-digit' });
+    const endWeekLabel = endOfWeek.toLocaleDateString(undefined, { day: '2-digit', month: '2-digit' });
+    labels[i] = `(${startWeekLabel} - ${endWeekLabel})`;
+  }
+
+  return labels;
+}
+getHealthCheckPerDayOfCurrentWeek(): number[] {
+  const currentDate = new Date();
+  const currentDayOfWeek = currentDate.getDay();
+  const firstDayOfWeek = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - currentDayOfWeek);
+  const healthCheckCounts: number[] = new Array(7).fill(0);
+
+  this.listHealthCheckProd.forEach(healthCheck => {
+    const healthCheckDate = new Date(healthCheck.dateAjout);
+    if (healthCheckDate >= firstDayOfWeek ) {
+      const dayOfWeek = healthCheckDate.getDay();
+      healthCheckCounts[dayOfWeek]++;
+
+    }
+  });
+
+  return healthCheckCounts;
+}
+getHealthCheckPerMonthOfCurrentYear(): number[] {
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const healthCheckCounts: number[] = new Array(12).fill(0);
+
+  this.listHealthCheckProd.forEach(healthCheck => {
+    const healthCheckDate = new Date(healthCheck.dateAjout);
+    if (healthCheckDate.getFullYear() === currentYear) {
+      const monthIndex = healthCheckDate.getMonth();
+      healthCheckCounts[monthIndex]++;
+    }
+  });
+
+  return healthCheckCounts;
+}
+generateChartsHealthProd(): void {
+  // Chart for health check per week
+  const healthCheckPerWeekChart = new Chart('healthCheckPerWeekChart', {
+    type: 'line',
+    data: {
+      labels: this.getWeekLabels(),
+      datasets: [{
+        label: 'Health Check Per Week',
+        data: this.getHealthCheckPerWeekOfCurrentMonth(),
+        backgroundColor: this.getRandomColor(),
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: 'Nombre d\'état de santé par semaine',
+          padding: {
+            top: 20,
+            bottom: 20
+          }
+        }
+      }
+    }
+  });
+
+  // Chart for health check per day
+  const healthCheckPerDayChart = new Chart('healthCheckPerDayChart', {
+    type: 'bar',
+    data: {
+      labels: ['Dimanch', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+      datasets: [{
+        label: 'Health Check Per Day',
+        data: this.getHealthCheckPerDayOfCurrentWeek(),
+        backgroundColor: this.getRandomColor(),
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: 'Nombre d\'état de santé par jour',
+          padding: {
+            top: 20,
+            bottom: 20
+          }
+        }
+      }
+    }
+  });
+
+  // Chart for health check per month
+  const healthCheckPerMonthChart = new Chart('healthCheckPerMonthChart', {
+    type: 'bar',
+    data: {
+      labels: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aout', 'Sep', 'Oct', 'Nov', 'Dec'],
+      datasets: [{
+        label: 'Health Check Per Month',
+        data: this.getHealthCheckPerMonthOfCurrentYear(),
+        backgroundColor: this.getRandomColor(),
+        borderWidth: 1
+      }]
+    },
+    options: {
+      aspectRatio: 3.5, // Set the aspect ratio to 2:1
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: 'Nombre d\'état de santé par mois',
+          padding: {
+            top: 20,
+            bottom: 20
+          }
+        }
+      }
+    }
+  });
+}
+private updateChart() {
+  if (this.chart) {
+    this.chart.destroy();
+  }
+
+  const startDate = this.dateRange.start.toDate();
+  const endDate = this.dateRange.end.toDate();
+
+  const numHealthChecksPerDay: {[date: string]: number} = {};
+  this.listHealthCheckProd.forEach((hc) => {
+    const date = moment(hc.dateAjout).format('YYYY-MM-DD');
+    if (moment(date).isBetween(startDate, endDate, null, '[]')) {
+      if (!numHealthChecksPerDay[date]) {
+        numHealthChecksPerDay[date] = 1;
+      } else {
+        numHealthChecksPerDay[date]++;
+      }
+    }
+  });
+
+  const dates = Object.keys(numHealthChecksPerDay).sort();
+  const numHealthChecks = dates.map(date => numHealthChecksPerDay[date]);
+
+  const ctx = document.getElementById('health-check-chart') as HTMLCanvasElement;
+  this.chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: dates.map(date => moment(date).format('DD/MM')),
+      datasets: [{
+        label: 'Number of health checks',
+        data: numHealthChecks,
+        backgroundColor: this.getRandomColor(),
+        borderWidth: 1
+      }]
+    },
+    options: {
+      aspectRatio: 3.5, // Set the aspect ratio to 2:1
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: 'Nombre d\'état de santé',
+          padding: {
+            top: 20,
+            bottom: 20
+          }
+        }
+      }
+    }
+  });
+}
+
    getRandomColor() {
     const r = Math.floor(Math.random() * 256);
     const g = Math.floor(Math.random() * 256);

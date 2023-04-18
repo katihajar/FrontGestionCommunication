@@ -16,6 +16,7 @@ import { StatutApplication } from '../model/statut-application';
 export class HealthCheckService {
 
   private urlPilote = environment.baseUrlPilote;
+  private urlRespo = environment.baseUrlResponsable;
   private _ListHealthCheck: Array<HealthChekPreprodProd> = new Array<HealthChekPreprodProd>();
   private _AddHealthCheck: HealthChekPreprodProd = new HealthChekPreprodProd();
   private _ListHealthDetail = new Array<HealthChekPreprodProdDetail>();
@@ -141,5 +142,25 @@ export class HealthCheckService {
       { observe: 'response', headers }
     );    
   }
-
+  public FindAllHealthCheck(): Observable<HttpResponse<Array<HealthChekPreprodProd>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<HealthChekPreprodProd>>(
+      this.urlPilote + 'healthcheck/findAll',
+      { observe: 'response', headers }
+    );    
+  }
+  public FindLast10HealthCheck(): Observable<HttpResponse<Array<HealthChekPreprodProd>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<HealthChekPreprodProd>>(
+      this.urlPilote + 'healthcheck/last10',
+      { observe: 'response', headers }
+    );    
+  }
+  public FindLast10HealthCheckRespo(): Observable<HttpResponse<Array<HealthChekPreprodProd>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<HealthChekPreprodProd>>(
+      this.urlRespo + 'healthcheck/last10',
+      { observe: 'response', headers }
+    );    
+  }
 }

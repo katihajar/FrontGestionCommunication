@@ -11,6 +11,7 @@ import {Observable} from "rxjs";
 export class ProcessusMetierService {
   private url = environment.baseUrlAdmin;
   private urlPilote = environment.baseUrlPilote;
+  private urlRespo = environment.baseUrlResponsable;
   private _ListAllProcessusMetier: Array<ProcessusMetier> = new Array<ProcessusMetier>();
   private _AddProcessusMetier: ProcessusMetier = new ProcessusMetier();
   private _ModifierProcessusMetier: ProcessusMetier = new ProcessusMetier();
@@ -47,6 +48,20 @@ export class ProcessusMetierService {
 
   set AddProcessusMetier(value: ProcessusMetier) {
     this._AddProcessusMetier = value;
+  }
+  public FindAllProcessusMetierPilote(): Observable<HttpResponse<Array<ProcessusMetier>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<ProcessusMetier>>(
+      this.urlPilote + 'processusmetier/findAll',
+      { observe: 'response', headers }
+    );    
+  }
+  public FindAllProcessusMetierRespo(): Observable<HttpResponse<Array<ProcessusMetier>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<ProcessusMetier>>(
+      this.urlRespo + 'processusmetier/findAll',
+      { observe: 'response', headers }
+    );    
   }
   public FindAllProcessusMetier(): Observable<HttpResponse<Array<ProcessusMetier>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();

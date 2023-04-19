@@ -1,5 +1,5 @@
 <p-dialog [modal]="true" [(visible)]="this.charteHealthCheckPreprodProd" header="Charte Health Check "
-    [style]="{width: '65vw', height: '70vw','margin-left':'3%'}" [resizable]="true">
+    [style]="{width: '67vw', height: '70vw','margin-left':'3%'}" [resizable]="true">
     <div #myDialog id="myDialog" style="width: 100%;">
         <div class="col-12">
 
@@ -159,13 +159,13 @@
                     </table>
 
                 </div>
-                <div class="col-12" style="margin-top: 1%; ">
+                <div class="col-12" style="margin-top: 2%; ">
                     <table id="customers2">
-                        <tr style="background-color: #990033;color: white;width: 20%;text-align: center;">
-                            <th>Historique</th>
+                        <tr >
+                            <th style="background-color: #990033;color: white;width: 30%;text-align: center;">Historique</th>
                         </tr>
                         <tr>
-                            <th style="background-color: #990033;color: white;text-align: center;"> Etat des
+                            <th style="background-color: #990033;color: white;text-align: left;"> Etat des
                                 Processus Métier
                             </th>
                             <ng-container *ngFor="let healt of listHealt">

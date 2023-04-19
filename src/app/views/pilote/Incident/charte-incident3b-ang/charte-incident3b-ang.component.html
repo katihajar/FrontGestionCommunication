@@ -19,32 +19,32 @@
       <br>
       <p>Please find hereafter the follow up status regarding the incident:</p><br>
       <br>
-      <p style="color: red;">Application Name :</p>
-      <p>{{this.AddIncidentAng.application.nomApplication}}</p><br>
-      <p style="color: red;">Start date :</p>
-      <p>{{this.AddIncidentAng.dateDebut | date: 'MM/dd/yyyy'}} </p><br>
-      <p style="color: red;">Incident / Assistance ID : </p>
-      <p>{{this.AddIncidentAng.numeroIncident}} </p><br>
-      <p style="color: red;">Incident Status : </p>
-      <p>{{this.AddIncidentAng.statut}}</p><br>
+      <p style="color: red;font-weight: bolder;">Application Name :</p>
+      <p>{{this.AddIncidentAng.application.nomApplication}}</p>
+      <p style="color: red;font-weight: bolder;">Start date :</p>
+      <p>{{this.AddIncidentAng.dateDebut | date: 'MM/dd/yyyy'}} </p>
+      <p style="color: red;font-weight: bolder;">Incident / Assistance ID : </p>
+      <p>{{this.AddIncidentAng.numeroIncident}} </p>
+      <p style="color: red;font-weight: bolder;">Incident Status : </p>
+      <p>{{this.AddIncidentAng.statut}}</p>
       <br>
-      <p style="color: rgb(104, 104, 238);">INCIDENT DESCRIPTION </p>
+      <p style="color: rgb(91, 91, 219);font-weight: bolder;">INCIDENT DESCRIPTION </p>
       <p style="color: rgb(177, 177, 177);">{{this.AddIncidentAng.description}}</p><br>
       <br>
-      <p style="color: rgb(104, 104, 238);">CURRENT SITUATION </p>
+      <p style="color: rgb(91, 91, 219);font-weight: bolder;">CURRENT SITUATION </p>
       <p style="color: rgb(177, 177, 177);">{{this.AddIncidentAng.situationActuelle}}</p><br>
       <br>
-      <p style="color: rgb(104, 104, 238);">IDENTIFIED IMPACTS</p>
+      <p style="color: rgb(91, 91, 219);font-weight: bolder;">IDENTIFIED IMPACTS</p>
       <p style="color: rgb(177, 177, 177);">{{this.AddIncidentAng.impact}}</p><br>
       <br>
-      <p style="color: rgb(104, 104, 238);">ACTION PLAN</p>
+      <p style="color: rgb(91, 91, 219);font-weight: bolder;">ACTION PLAN</p>
       <div *ngFor="let action of this.AddIncidentAng.planActionList">
-        <p> <b><u>Action {{action.numero}}</u></b> {{action.statut}} : {{action.description}} </p><br>
+        <p> <b><u>Action {{action.numero}}</u></b> ({{action.statut}}) : {{action.description}} </p><br>
       </div>
-      <p style="color: rgb(104, 104, 238);">WORKAROUND</p>
+      <p style="color: rgb(91, 91, 219);font-weight: bolder;">WORKAROUND</p>
       <p style="color: rgb(177, 177, 177);">{{this.AddIncidentAng.solutionContournement}}</p><br>
       <br>
-      <p><span style="color: rgb(104, 104, 238);"> NEXT COMMUNICATION AT:</span>{{this.AddIncidentAng.prochaineCommunication | date: 'HH:mm:ss MM/dd/yyyy'}}</p>
+      <p><span style="color: rgb(91, 91, 219);font-weight: bolder;"> NEXT COMMUNICATION AT:</span>{{this.AddIncidentAng.prochaineCommunication | date: 'HH:mm:ss MM/dd/yyyy'}}</p>
     
       <br>
        </div>

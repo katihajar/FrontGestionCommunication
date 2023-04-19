@@ -955,7 +955,16 @@ private updateChart() {
   const startDate = this.dateRange.start.toDate();
   const endDate = this.dateRange.end.toDate();
 
+  // Set Monday as the first day of the week
+  moment.updateLocale('en', {
+    week: {
+      dow: 1 // Monday
+    }
+  });
+
   const numHealthChecksPerDay: {[date: string]: number} = {};
+  let totalNumHealthChecks = 0;
+  
   this.listHealthCheckProd.forEach((hc) => {
     const date = moment(hc.dateAjout).format('YYYY-MM-DD');
     if (moment(date).isBetween(startDate, endDate, null, '[]')) {
@@ -964,6 +973,7 @@ private updateChart() {
       } else {
         numHealthChecksPerDay[date]++;
       }
+      totalNumHealthChecks++;
     }
   });
 
@@ -974,12 +984,13 @@ private updateChart() {
   this.chart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: dates.map(date => moment(date).format('DD/MM')),
+      labels: [moment(startDate).format('DD/MM') + ' - ' + moment(endDate).format('DD/MM')],
       datasets: [{
         label: 'Number of health checks',
-        data: numHealthChecks,
+        data: [totalNumHealthChecks],
         backgroundColor: this.getRandomColor(),
-        borderWidth: 1
+        borderWidth: 1,
+        barPercentage: 0.4
       }]
     },
     options: {
@@ -992,7 +1003,7 @@ private updateChart() {
       plugins: {
         title: {
           display: true,
-          text: 'Nombre d\'état de santé',
+          text: 'Nombre total d\'états de santé dans la période du ' + moment(startDate).format('DD/MM/YYYY') + ' au ' + moment(endDate).format('DD/MM/YYYY'),
           padding: {
             top: 20,
             bottom: 20
@@ -1002,7 +1013,6 @@ private updateChart() {
     }
   });
 }
-
    getRandomColor() {
     const r = Math.floor(Math.random() * 256);
     const g = Math.floor(Math.random() * 256);

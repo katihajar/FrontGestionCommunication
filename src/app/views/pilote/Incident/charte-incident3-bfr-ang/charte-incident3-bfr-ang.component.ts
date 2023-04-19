@@ -13,6 +13,7 @@ export class CharteIncident3BfrAngComponent implements OnInit {
   constructor(private charteService: CharteService,private incidentService: IncidentService) { }
 
   ngOnInit(): void {
+    this.AddIncidentAng.application.nomApplication=this.AddIncident.application.nomApplication; 
   }
   get charteIncident3BfrAng(): boolean {
     return this.charteService.charteIncident3BfrAng;

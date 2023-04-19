@@ -19,32 +19,32 @@
       <br>
       <p>Vous trouverez ci-après le point de suivi concernant l’incident :</p><br>
       <br>
-      <p style="color: red;">Nom de l’application :</p>
-      <p>{{this.AddIncident.application.nomApplication}}</p><br>
-      <p style="color: red;">Date de début : </p>
-      <p>{{this.AddIncident.dateDebut | date: 'MM/dd/yyyy'}} </p><br>
-      <p style="color: red;">Numéro d’incident / Assistance : </p>
-      <p>{{this.AddIncident.numeroIncident}} </p><br>
-      <p style="color: red;">Statut de l’incident : </p>
-      <p>{{this.AddIncident.statut}}</p><br>
+      <p style="color: red;font-weight: bolder;">Nom de l’application :</p>
+      <p>{{this.AddIncident.application.nomApplication}}</p>
+      <p style="color: red;font-weight: bolder;">Date de début : </p>
+      <p>{{this.AddIncident.dateDebut | date: 'MM/dd/yyyy'}} </p>
+      <p style="color: red;font-weight: bolder;">Numéro d’incident / Assistance : </p>
+      <p>{{this.AddIncident.numeroIncident}} </p>
+      <p style="color: red;font-weight: bolder;">Statut de l’incident : </p>
+      <p>{{this.AddIncident.statut}}</p>
       <br>
-      <p style="color: rgb(104, 104, 238);">DESCRIPTION DE L’INCIDENT </p>
+      <p style="color: rgb(91, 91, 219);font-weight: bolder;">DESCRIPTION DE L’INCIDENT </p>
       <p style="color: rgb(177, 177, 177);">{{this.AddIncident.description}}</p><br>
       <br>
-      <p style="color: rgb(104, 104, 238);">SITUATION ACTUELLE</p>
+      <p style="color: rgb(91, 91, 219);font-weight: bolder;">SITUATION ACTUELLE</p>
       <p style="color: rgb(177, 177, 177);">{{this.AddIncident.situationActuelle}}</p><br>
       <br>
-      <p style="color: rgb(104, 104, 238);">IMPACTS IDENTIFIES</p>
+      <p style="color: rgb(91, 91, 219);font-weight: bolder;">IMPACTS IDENTIFIES</p>
       <p style="color: rgb(177, 177, 177);">{{this.AddIncident.impact}}</p><br>
       <br>
-      <p style="color: rgb(104, 104, 238);">PLAN D'ACTION</p>
+      <p style="color: rgb(91, 91, 219);font-weight: bolder;">PLAN D'ACTION</p>
       <div *ngFor="let action of this.AddIncident.planActionList">
-        <p > <b><u>Action {{action.numero}}</u></b> {{action.statut}} : {{action.description}} </p>
+        <p > <b><u>Action {{action.numero}}</u></b> ({{action.statut}}) : {{action.description}} </p>
       </div>
-      <p style="color: rgb(104, 104, 238);">SOLUTION DE CONTOURNEMENT</p>
+      <p style="color: rgb(91, 91, 219);">SOLUTION DE CONTOURNEMENT</p>
       <p style="color: rgb(177, 177, 177);">{{this.AddIncident.solutionContournement}}</p><br>
       <br>
-      <p><span style="color: rgb(104, 104, 238);"> PROCHAINE COMMUNICATION :</span>{{this.AddIncident.prochaineCommunication | date: 'HH:mm:ss MM/dd/yyyy'}}</p>
+      <p><span style="color: rgb(91, 91, 219);"> PROCHAINE COMMUNICATION :</span>{{this.AddIncident.prochaineCommunication | date: 'HH:mm:ss MM/dd/yyyy'}}</p>
     </div>
 
   </div>

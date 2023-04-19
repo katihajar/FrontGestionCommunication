@@ -95,7 +95,7 @@ this.destService.FindDestinataireByApplication(this.AddIncident.application.id).
     );
   }
   AddAction(){
-    if(this.Action.statut != '' && this.Action.description!='' && this.num != 0  ){
+    if(this.Action.statut != '' && this.Action.description!='' && this.num > 0  ){
       this.Action.numero = this.num;
     this.ListPlanAction.push(this.Action);
     this.Action = new PlanAction();

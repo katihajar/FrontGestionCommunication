@@ -206,7 +206,7 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
 
 
   AddAction() {
-    if (this.Action.statut != '' && this.Action.description != '' && this.Action.numero != 0) {
+    if (this.Action.statut != '' && this.Action.description != '' && this.num > 0) {
       this.Action.numero = this.num;
       this.ListPlanAction.push(this.Action);
       this.Action = new PlanAction();
@@ -216,7 +216,7 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
     }
   }
   AddActionAng() {
-    if (this.ActionAng.statut != '' && this.ActionAng.description != '' && this.ActionAng.numero != 0) {
+    if (this.ActionAng.statut != '' && this.ActionAng.description != '' && this.numAng > 0) {
       this.Action.numero = this.numAng;
       this.ListPlanActionAng.push(this.ActionAng);
       this.ActionAng = new PlanAction();

@@ -151,6 +151,9 @@ removeDeatils(us: HealthChekPreprodProdDetail) {
       this.ListApp= data.body;
     })
   }
+  isSubmitDisabled(){
+    return this.ListApp.length == 0 || this.listHelthchekdetail.length == 0 || this.listEtatproc.length == 0;
+  }
   charte(){
     this.AddHealthCheck.etatProcessusMetierList = this.listEtatproc;
     this.AddHealthCheck.healthChekPreprodProdDetailList = this.listHelthchekdetail;
@@ -168,7 +171,7 @@ removeDeatils(us: HealthChekPreprodProdDetail) {
              this.router.navigate(['/pilote/healthcheck/PreprodProd/registre']);
              const mailtoLink = `mailto:${this.EmailObligatoire.join(';')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(';')}`;
              window.open(mailtoLink, '_blank');
-             this.messageService.add({severity:'success', summary: 'Success', detail: 'Incident Ajouter avec succès'});
+             this.messageService.add({severity:'success', summary: 'Success', detail: 'Etat de santé Ajouter avec succès'});
             },error=>{
               this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de l\'enregistrement'});
       })

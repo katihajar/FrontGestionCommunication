@@ -239,6 +239,14 @@ export class AjouterChangementAngFrComponent implements OnInit {
     }
     return new Blob([u8arr], { type: mime });
   }
+  isSubmitDisabled(){
+    return !this.AddChangement.titre || this.AddChangement.titre.length < 3|| !this.AddChangement.version || !this.AddChangement.dateDebut
+     || !this.AddChangement.dateFin || !this.AddChangement.detail || this.AddChangement.detail.length < 3||
+      !this.AddChangement.impactMetier || this.AddChangement.impactMetier.length < 3 || this.ListContenu.length == 0 ||
+      !this.AddChangementAng.titre || this.AddChangementAng.titre.length < 3|| !this.AddChangementAng.version || !this.AddChangementAng.dateDebut
+     || !this.AddChangementAng.dateFin || !this.AddChangementAng.detail || this.AddChangementAng.detail.length < 3||
+      !this.AddChangementAng.impactMetier || this.AddChangementAng.impactMetier.length < 3 || this.ListContenuAng.length == 0;
+  }
   SendAndSaveChange() {
     this.AddChangement.contenuChangementList=this.ListContenu;
     this.AddChangementAng.contenuChangementList=this.ListContenuAng;

@@ -52,6 +52,13 @@ export class AjouterOperationFrAngComponent implements OnInit {
       }
     })
   }
+  isSubmitDisabled() {
+    return !this.AddOperation.titre || this.AddOperation.titre.length < 3 ||
+           !this.AddOperation.description || this.AddOperation.description.length < 3 ||
+           !this.AddOperation.dateDebut || !this.AddOperationAng.titre || this.AddOperationAng.titre.length < 3 ||
+           !this.AddOperationAng.description || this.AddOperationAng.description.length < 3 ||
+           !this.AddOperationAng.dateDebut;
+  }
   get AddOperation(): Operation{
     return this.operationService.AddOperation;
   }

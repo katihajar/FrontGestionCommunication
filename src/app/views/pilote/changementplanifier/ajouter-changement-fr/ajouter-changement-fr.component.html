@@ -4,7 +4,7 @@
             <div class="col-12" style="margin: 2%">
                 <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '22%' }">
                     <label for="basic3"
-                        style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Titre</label>
+                        style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Titre<span style="color: red;">*</span></label>
                     <input inputId="basic3" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }"
                         type="text" pInputText placeholder="Entré le Titre du Changement"
                         [(ngModel)]="this.AddChangement.titre" />
@@ -12,7 +12,7 @@
                 </span>
                 <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
                     <label for="basic4" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">N°
-                        Version App</label>
+                        Version Application<span style="color: red;">*</span></label>
                     <input inputId="basic4" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }"
                         type="text" pInputText placeholder="Entré le numero d'incident"
                         [(ngModel)]="this.AddChangement.version" />
@@ -20,14 +20,14 @@
                 </span>
                 <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
                     <label for="basic1" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date
-                        Début</label>
+                        Début<span style="color: red;">*</span></label>
                     <p-calendar inputId="basic1" [(ngModel)]="date2" [showTime]="true" [style]="{ width: '100%' }"
                     appendTo="body"  [(ngModel)]="this.AddChangement.dateDebut"></p-calendar>
 
                 </span>
                 <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
                     <label for="basic2" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date
-                        Fin</label>
+                        Fin<span style="color: red;">*</span></label>
                     <p-calendar inputId="basic2" [(ngModel)]="date3" [showTime]="true" [style]="{ width: '100%' }"
                     appendTo="body" [(ngModel)]="this.AddChangement.dateFin"></p-calendar>
 
@@ -37,7 +37,7 @@
             <div class="col-12" style="margin-bottom: 2%;">
                 <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '46%' }">
                     <label for="basic5"
-                        style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Détail</label>
+                        style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Détail<span style="color: red;">*</span></label>
                     <textarea id="basic5" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }"
                         type="text" pInputTextarea placeholder="Entré le Detail"
                         [(ngModel)]="this.AddChangement.detail"></textarea>
@@ -45,7 +45,7 @@
                 </span>
                 <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '46%' }">
                     <label for="basic5"
-                        style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Impact Métier</label>
+                        style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Impact Métier<span style="color: red;">*</span></label>
                     <textarea id="basic5" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }"
                         type="text" pInputTextarea placeholder="Entré l'Impact Métier"
                         [(ngModel)]="this.AddChangement.impactMetier"></textarea>
@@ -55,7 +55,7 @@
             </div>
 
             <div class="card align-items-center" style="width: 97%; margin-left: 1%;margin-bottom: 2%;background-color: rgb(241, 241, 241);">
-                <h1 style="margin: 3%;color: black;">Ajouter le Contenu</h1>
+                <h1 style="margin: 3%;color: black;">Ajouter le Contenu<span style="color: red;">*</span></h1>
                 <div class="col-12 text-center" style="margin-bottom: 2%">
                     <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '45%' }">
                         <label for="basic6"
@@ -128,7 +128,7 @@
             </div>
             <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
                 <button pButton pRipple (click)="showCharte()" type="button" label="Visualiser la charte" style=" float: left;margin-left: 2%;" class="p-button-raised p-button-help"></button>
-                <button pButton pRipple (click)="SendAndSaveChange()" style=" float: right;margin-right: 2%;" type="button" label="Submit" class="p-button-raised"></button>
+                <button pButton pRipple (click)="SendAndSaveChange()" [disabled]="isSubmitDisabled()" style=" float: right;margin-right: 2%;" type="button" label="Submit" class="p-button-raised"></button>
             </div>
         </div>
     </div>

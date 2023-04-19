@@ -5,7 +5,7 @@
 
 
             <div class="card align-items-center" style="width: 97%; margin-bottom: 2%;margin-top: 2%;">
-                <h1 style="margin: 3%">Etat des Applications</h1>
+                <h1 style="margin: 3%">Etat des Applications<span style="color: red;">*</span></h1>
                 <div class="col-12 text-center" style="margin-bottom: 2%">
                     <span
                     class="p-input-icon-left"
@@ -93,7 +93,7 @@
             </div>
 
             <div class="card align-items-center" style="width: 97%; margin-bottom: 2%;margin-top: 2%;">
-                <h1 style="margin: 3%">Etat Processus Metier</h1>
+                <h1 style="margin: 3%">Etat Processus Metier<span style="color: red;">*</span></h1>
                 <div class="col-12 text-center" style="margin-bottom: 2%">
                     <span
                     class="p-input-icon-left"
@@ -184,7 +184,7 @@
                 <!-- <h1 style="margin: 3%">Ajouter le Plan d'Action</h1> -->
                 <div class="col-12 text-center" style="margin-bottom: 2%">
                     <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
-                        <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Processus</label>
+                        <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Processus<span style="color: red;">*</span></label>
                         <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="text" pInputText
                             placeholder="Entré le processus" [(ngModel)]="this.helthchekdetail.processus"/>
                     </span>
@@ -193,7 +193,7 @@
                     style="margin-left: 2%"
                     [style]="{ width: '22%' }"
                   >
-                  <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Application</label>
+                  <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Application<span style="color: red;">*</span></label>
                   <p-dropdown [style]="{ width: '100%', required: 'required' }" [options]="ListApp" optionLabel="nomApplication"
                   [filter]="true" filterBy="nomApplication" [showClear]="true" placeholder="Selectinné l'Application"
                   [(ngModel)]="this.helthchekdetail.application">
@@ -217,19 +217,19 @@
                 </div>
                 <div class="col-12" style="margin-bottom: 2%;">
                     <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '46%' }">
-                        <label for="info"  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Information/Problème</label>
+                        <label for="info"  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Information/Problème<span style="color: red;">*</span></label>
                         <textarea inputId="info" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text"
                             pInputTextarea placeholder="Entré les nformations/Problèmes" [(ngModel)]="this.helthchekdetail.information" ></textarea>
                     </span>
                     <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '46%' }">
-                        <label for="infoTch" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Information Technique</label>
+                        <label for="infoTch" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Information Technique<span style="color: red;">*</span></label>
                         <textarea inputId="infoTch" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text"
                             pInputTextarea placeholder="Entré les nformations/Problèmes" [(ngModel)]="this.helthchekdetail.problemeTechnique" ></textarea>
                     </span>
                 </div>
                 <div class="col-12" style="margin-bottom: 2%;">
                     <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '95%' }">
-                        <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Impact Metier</label>
+                        <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Impact Metier<span style="color: red;">*</span></label>
                         <textarea style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text"
                             pInputTextarea placeholder="Entré les nformations/Problèmes" [(ngModel)]="this.helthchekdetail.impactMetier" ></textarea>
                     </span>
@@ -237,19 +237,19 @@
                 </div>
                 <div class="col-12" style="margin-bottom: 2%;">
                     <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '46%' }">
-                        <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Cause</label>
+                        <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Cause<span style="color: red;">*</span></label>
                         <textarea style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text"
                             pInputTextarea placeholder="Entré les nformations/Problèmes" [(ngModel)]="this.helthchekdetail.cause" ></textarea>
                     </span>
                     <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '46%' }">
-                        <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Plan Action</label>
+                        <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Plan Action<span style="color: red;">*</span></label>
                         <textarea style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text"
                             pInputTextarea placeholder="Entré les nformations/Problèmes" [(ngModel)]="this.helthchekdetail.planAction" ></textarea>
                     </span>
                 </div>
                 <div class="col-12 text-center" style="margin-bottom: 2%">
                     <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '25%' }">
-                        <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Impact Client</label>
+                        <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Impact Client<span style="color: red;">*</span></label>
                         <p-dropdown
                         [options]="ListImpactClient"
                         [style]="{ width: '100%', required: 'required' }"
@@ -261,7 +261,7 @@
                       ></p-dropdown>
                       </span>
                     <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '25%' }">
-                        <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Feu</label>
+                        <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Feu<span style="color: red;">*</span></label>
                         <p-dropdown
                         [options]="ListFeu"
                         [style]="{ width: '100%', required: 'required' }"
@@ -273,7 +273,7 @@
                       ></p-dropdown>
                       </span>
                       <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '25%' }">
-                        <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Statut</label>
+                        <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Statut<span style="color: red;">*</span></label>
                         <p-dropdown
                         [options]="ListStatut"
                         [style]="{ width: '100%', required: 'required' }"
@@ -385,7 +385,7 @@
 
             <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
                 <button pButton pRipple  type="button" label="Visualiser la charte" style=" float: left;margin-left: 2%;" (click)="charte()" class="p-button-raised p-button-help"></button>
-                <button pButton pRipple  style=" float: right;margin-right: 2%;" type="button" label="Submit" class="p-button-raised" (click)="SendAndSaveHealth()"></button>
+                <button pButton pRipple  style=" float: right;margin-right: 2%;" type="button" label="Submit" [disabled]="isSubmitDisabled()" class="p-button-raised" (click)="SendAndSaveHealth()"></button>
             </div>
         </div>
     </div>

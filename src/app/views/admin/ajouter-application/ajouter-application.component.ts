@@ -60,6 +60,9 @@ this.charte= [
  }
  );
 }
+isSubmitDisabled(){
+  return !this.AddApplication.nomApplication || this.AddApplication.nomApplication.length <3 || !this.AddApplication.responsable || !this.AddApplication.disponibilite || !this.AddApplication.lot || !this.AddApplication.charteIncident || this.ListpiloteSelected.length == 0;
+}
 AddPilote(){
   let m =this.ListpiloteSelected.indexOf(this.selectedPiloteApp);
   if(this.selectedPiloteApp.pilote.nom != null && m==-1){

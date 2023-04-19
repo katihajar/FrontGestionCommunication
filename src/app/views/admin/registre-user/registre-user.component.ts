@@ -39,7 +39,9 @@ export class RegistreUserComponent implements OnInit {
     }
     );
   }
-  
+  isSubmitDisabled(){
+    return !this.AddUser.user.prenom || this.AddUser.user.prenom.length <3 || !this.AddUser.user.nom || this.AddUser.user.nom.length <3|| !this.AddUser.user.lots || !this.AddUser.idRole;
+  }
   ngOnInit(): void {
     this.FindAllUsers();
     this.userService.FindAllRoles().subscribe((data) => {

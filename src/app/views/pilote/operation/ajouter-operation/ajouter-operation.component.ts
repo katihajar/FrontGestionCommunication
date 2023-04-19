@@ -47,6 +47,11 @@ export class AjouterOperationComponent implements OnInit {
       }
     })
   }
+  isSubmitDisabled() {
+    return !this.AddOperation.titre || this.AddOperation.titre.length < 3 ||
+           !this.AddOperation.description || this.AddOperation.description.length < 3 ||
+           !this.AddOperation.dateDebut;
+  }
   get AddOperation(): Operation{
     return this.operationService.AddOperation;
   }

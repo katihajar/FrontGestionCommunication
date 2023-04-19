@@ -83,7 +83,7 @@
     </span>
     </div>
   <ng-template pTemplate="footer">
-    <p-button label="Submit" (onClick)="SavePerimetre()" icon="pi pi-check"></p-button>
+    <p-button label="Submit" (onClick)="SavePerimetre()" [disabled]="!this.AddPerimetre.titre || this.AddPerimetre.titre.length <3" icon="pi pi-check"></p-button>
   </ng-template>
 </p-dialog>
 
@@ -108,6 +108,6 @@
   </span>
   </div>
 <ng-template pTemplate="footer">
-  <p-button label="Submit" (onClick)="UpdatePerimetre()" icon="pi pi-check"></p-button>
+  <p-button label="Submit" (onClick)="UpdatePerimetre()" [disabled]="!this.ModifierPerimetre.titre || this.ModifierPerimetre.titre.length <3" icon="pi pi-check"></p-button>
 </ng-template>
 </p-dialog>

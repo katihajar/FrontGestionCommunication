@@ -268,7 +268,7 @@ set charteChangeAngFr(value: boolean) {
   }
   DeleteChange(id:number){
     this.confirmationService.confirm({
-      message: 'Are you sure that you want to proceed?',
+      message: 'Êtes-vous sûr(e) de vouloir continuer?',
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {

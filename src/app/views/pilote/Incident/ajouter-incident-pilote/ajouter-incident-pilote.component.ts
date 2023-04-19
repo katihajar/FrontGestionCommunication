@@ -81,7 +81,19 @@ this.destService.FindDestinataireByApplication(this.AddIncident.application.id).
   set AddIncident(value: Incident) {
     this.incidentService.AddIncident = value;
   }
-
+  isSubmitDisabled() {
+    return (
+      !this.AddIncident.titreIncident ||
+      this.AddIncident.titreIncident.length < 3 ||
+      !this.AddIncident.dateDebut ||
+      !this.AddIncident.description ||
+      this.AddIncident.description.length < 3 ||
+      !this.AddIncident.situationActuelle ||
+      this.AddIncident.situationActuelle.length < 3 ||
+      !this.AddIncident.causePrincipale ||
+      this.AddIncident.causePrincipale.length < 3
+    );
+  }
   AddAction(){
     if(this.Action.statut != '' && this.Action.description!='' && this.num != 0  ){
       this.Action.numero = this.num;

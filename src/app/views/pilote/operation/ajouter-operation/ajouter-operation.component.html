@@ -4,7 +4,7 @@
         <div class="card align-items-center">
             <div class="col-12" style="margin: 2%">
                 <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '22%' }">
-                    <label for="basic3" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Titre</label>
+                    <label for="basic3" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Titre<span style="color: red;">*</span></label>
                     <input inputId="basic3" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text" pInputText
                         placeholder="Entré le Titre d'Operation"   [(ngModel)]="this.AddOperation.titre" />
 
@@ -16,7 +16,7 @@
 
                 </span>
                 <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
-                    <label for="basic1" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date Début</label>
+                    <label for="basic1" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date Début<span style="color: red;">*</span></label>
                     <p-calendar appendTo="body"  inputId="basic1" [showTime]="true" [(ngModel)]="date2" [style]="{ width: '100%' }" [(ngModel)]="this.AddOperation.dateDebut" ></p-calendar>
 
                 </span>
@@ -29,7 +29,7 @@
             </div>
             <div class="col-12" style="margin-bottom: 2%;">
                 <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '90%' }">
-                    <label for="basic5" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Description</label>
+                    <label for="basic5" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Description<span style="color: red;">*</span></label>
                     <textarea id="basic5" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text" pInputTextarea
                         placeholder="Entré la description" [(ngModel)]="this.AddOperation.description"></textarea>
 
@@ -40,7 +40,7 @@
             
             <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
                 <button pButton pRipple  type="button" label="Visualiser la charte" (click)="showCharte()" style=" float: left;margin-left: 2%;" class="p-button-raised p-button-help"></button>
-                <button pButton pRipple  style=" float: right;margin-right: 2%;" type="button" label="Submit" class="p-button-raised" (click)="SendAndSaveOper()"></button>
+                <button pButton pRipple  style=" float: right;margin-right: 2%;" type="button" label="Submit" [disabled]="isSubmitDisabled()" class="p-button-raised" (click)="SendAndSaveOper()"></button>
             </div>
         </div>
     </div>

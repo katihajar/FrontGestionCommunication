@@ -82,7 +82,7 @@
     </span>
     </div>
   <ng-template pTemplate="footer">
-    <p-button label="Submit" (onClick)="SaveProcessusMetire()" icon="pi pi-check"></p-button>
+    <p-button label="Submit" (onClick)="SaveProcessusMetire()" [disabled]="!this.AddProcessusMetier.titre || this.AddProcessusMetier.titre.length <3" icon="pi pi-check"></p-button>
   </ng-template>
 </p-dialog>
 
@@ -107,6 +107,6 @@
   </span>
   </div>
 <ng-template pTemplate="footer">
-  <p-button label="Submit" (onClick)="UpdateProcessusMetire()" icon="pi pi-check"></p-button>
+  <p-button label="Submit" [disabled]="!this.ModifierProcessusMetier.titre || this.ModifierProcessusMetier.titre.length <3" (onClick)="UpdateProcessusMetire()" icon="pi pi-check"></p-button>
 </ng-template>
 </p-dialog>

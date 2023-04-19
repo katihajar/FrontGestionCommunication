@@ -43,6 +43,7 @@ export class AjoutHealthCheckBwPerimetreComponent implements OnInit {
     this.helthchekBwdetail= new HealthCheckBwPerimetreDetail();
     this.listHelthchekBwdetail = new Array<HealthCheckBwPerimetreDetail>();
     this.listHelthchekBwdetail = this.AddHealthCheckBw.healthCheckBwPerimetreDetailList;
+    this.AddHealthCheckBw.dateAjout = new Date();
     this.ListStatut= [
       { name: 'OK' },
       { name: 'In progress' },
@@ -64,6 +65,9 @@ export class AjoutHealthCheckBwPerimetreComponent implements OnInit {
         }
       }
     })
+  }
+  isSubmitDisabled(){
+    return this.listHelthchekBwdetail.length == 0;
   }
   AddDetails(){
     if(this.helthchekBwdetail.perimetre.titre != '' && this.helthchekBwdetail.statusNightTreatment!='' && this.helthchekBwdetail.statusNightTreatment!=''&& this.helthchekBwdetail.statusDataIntegrity!='' ){
@@ -114,7 +118,7 @@ removeDetails(us: HealthCheckBwPerimetreDetail) {
              this.router.navigate(['/pilote/healthcheck/Bw/registre']);
              const mailtoLink = `mailto:${this.EmailObligatoire.join(';')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(';')}`;
              window.open(mailtoLink, '_blank');
-             this.messageService.add({severity:'success', summary: 'Success', detail: 'Incident Ajouter avec succès'});
+             this.messageService.add({severity:'success', summary: 'Success', detail: 'Etat de santé Ajouter avec succès'});
             },error=>{
               this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de l\'enregistrement'});
       })
@@ -176,6 +180,7 @@ removeDetails(us: HealthCheckBwPerimetreDetail) {
     this.AddHealthCheckBw.id=0;
     this.AddHealthCheckBw.healthCheckBwPerimetreDetailList = this.listHelthchekBwdetail;
     if(this.AddHealthCheckBw.healthCheckBwPerimetreDetailList.length != 0  ){
+      this.AddHealthCheckBw.dateAjout = new Date();
     this.takeScreenshot();
   }else{
     this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});

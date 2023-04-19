@@ -79,7 +79,11 @@ export class AjouterChangementFrComponent implements OnInit {
     this.ListContenu.splice(i, 1);
   }
 
-
+  isSubmitDisabled(){
+  return !this.AddChangement.titre || this.AddChangement.titre.length < 3|| !this.AddChangement.version || !this.AddChangement.dateDebut
+   || !this.AddChangement.dateFin || !this.AddChangement.detail || this.AddChangement.detail.length < 3||
+    !this.AddChangement.impactMetier || this.AddChangement.impactMetier.length < 3 || this.ListContenu.length == 0;
+}
   get charteChangeFr(): boolean {
     return this.charteService.charteChangeFr;
   }

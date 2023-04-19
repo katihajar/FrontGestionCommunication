@@ -251,6 +251,28 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
         this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Charte Non trouvé'});
       }
   }
+  isSubmitDisabled() {
+    return (
+      !this.AddIncident.titreIncident ||
+      this.AddIncident.titreIncident.length < 3 ||
+      !this.AddIncident.dateDebut ||
+      !this.AddIncident.description ||
+      this.AddIncident.description.length < 3 ||
+      !this.AddIncident.situationActuelle ||
+      this.AddIncident.situationActuelle.length < 3 ||
+      !this.AddIncident.causePrincipale ||
+      this.AddIncident.causePrincipale.length < 3 ||
+      !this.AddIncidentAng.titreIncident ||
+      this.AddIncidentAng.titreIncident.length < 3 ||
+      !this.AddIncidentAng.dateDebut ||
+      !this.AddIncidentAng.description ||
+      this.AddIncidentAng.description.length < 3 ||
+      !this.AddIncidentAng.situationActuelle ||
+      this.AddIncidentAng.situationActuelle.length < 3 ||
+      !this.AddIncidentAng.causePrincipale ||
+      this.AddIncidentAng.causePrincipale.length < 3
+    );
+  }
   SaveIncident(){
     this.AddIncident.dateAjout = new Date();
     if(this.AddIncident.application.charteIncident =='charte Incident'){

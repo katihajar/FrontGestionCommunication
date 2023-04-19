@@ -8,7 +8,7 @@
                 style="margin-left: 2%"
                 [style]="{ width: '30%' }"
               >
-              <label  for="basic5" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Application</label>
+              <label  for="basic5" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Application<span style="color: red;">*</span></label>
               <p-dropdown [style]="{ width: '100%', required: 'required' }" [options]="ListApp" optionLabel="nomApplication"
               [filter]="true" filterBy="nomApplication" [showClear]="true" inputId="basic5" placeholder="Selectinné l'Application"
               [(ngModel)]="this.AddPointVersion.application">
@@ -20,13 +20,13 @@
             </p-dropdown>   
               </span>
                 <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
-                    <label for="basic4" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Version</label>
+                    <label for="basic4" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Version<span style="color: red;">*</span></label>
                     <input inputId="basic4" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="text" pInputText
                         placeholder="Entré la version"   [(ngModel)]="this.AddPointVersion.version" />
 
                 </span>
                 <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
-                    <label for="basic4" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Nombre de tickets confirmés  </label>
+                    <label for="basic4" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Nombre de tickets confirmés<span style="color: red;">*</span></label>
                     <input inputId="basic4" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="text" pInputText
                         placeholder="Entré le Nombre de tickets confirmés "   [(ngModel)]="this.AddPointVersion.ticketConfirmer" />
 
@@ -35,26 +35,26 @@
             </div>
             <div class="col-12" style="margin: 2%">
                 <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
-                    <label for="basic4" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">GO / No GO TNR </label>
+                    <label for="basic4" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">GO / No GO TNR<span style="color: red;">*</span> </label>
                     <input inputId="basic4" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="text" pInputText
                         placeholder="Entré le GO / No GO TNR "   [(ngModel)]="this.AddPointVersion.goNoGoTNR" />
 
                 </span>
                 <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
-                    <label for="basic4" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">GO / No GO MEP  </label>
+                    <label for="basic4" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">GO / No GO MEP<span style="color: red;">*</span>  </label>
                     <input inputId="basic4" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="text" pInputText
                         placeholder="Entré le GO / No GO MEP  "   [(ngModel)]="this.AddPointVersion.goNoGoMEP" />
 
                 </span>
                 <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
-                    <label for="basic4" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date Reunion </label>
+                    <label for="basic4" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date Reunion<span style="color: red;">*</span> </label>
                         <p-calendar inputId="basic4" appendTo="body"  [(ngModel)]="date2" [style]="{ width: '100%' }" [(ngModel)]="this.AddPointVersion.dateAjout" [showTime]="true" ></p-calendar>
 
                 </span>
             </div>
 
             <div class="card align-items-center" style="width: 97%; margin-bottom: 3%;background-color: rgb(241, 241, 241);">
-                <h1 style="margin: 3%">Ajouter Livraison CARPM</h1>
+                <h1 style="margin: 3%">Ajouter Livraison CARPM<span style="color: red;">*</span></h1>
                 <div class="col-12" style="margin-bottom: 2%">
                     <span style="margin-left: 2%" class="p-input-icon-left" [style]="{ width: '30%' }">
                         <label for="basic8" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date MEI</label>
@@ -145,7 +145,7 @@
                 </div>
             </div>
             <div class="card align-items-center" style="width: 97%; margin-bottom: 3%;background-color: rgb(241, 241, 241);">
-                <h1 style="margin: 3%">Ticket Ajouté</h1>
+                <h1 style="margin: 3%">Ticket Ajouté<span style="color: red;">*</span></h1>
                 <div class="col-12 " style="margin-bottom: 2%">
                     <span style="margin-left: 2%" class="p-input-icon-left" [style]="{ width: '45%' }">
                         <label for="basic8" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">N° Ticket</label>
@@ -211,7 +211,7 @@
                 </div>
             </div>
             <div class="card align-items-center" style="width: 97%; margin-bottom: 3%;background-color: rgb(241, 241, 241);">
-                <h1 style="margin: 3%">Ticket Retiré</h1>
+                <h1 style="margin: 3%">Ticket Retiré<span style="color: red;">*</span></h1>
                 <div class="col-12 " style="margin-bottom: 2%">
                     <span style="margin-left: 2%" class="p-input-icon-left" [style]="{ width: '45%' }">
                         <label for="basic8" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">N° Ticket</label>
@@ -277,7 +277,7 @@
                 </div>
             </div>
             <div class="card align-items-center" style="width: 97%; margin-bottom: 3%;background-color: rgb(241, 241, 241);">
-                <h1 style="margin: 3%">Planning Point Version</h1>
+                <h1 style="margin: 3%">Planning Point Version<span style="color: red;">*</span></h1>
                 <div class="col-12 " style="margin-bottom: 2%">
                     <span style="margin-left: 2%" class="p-input-icon-left" [style]="{ width: '45%' }">
                         <label for="basic8" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Titre</label>
@@ -345,7 +345,7 @@
 
             <div class="col-12" >
                 <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '46%' }">
-                    <label for="basic9" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Lien Commentaire</label>
+                    <label for="basic9" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Lien Commentaire<span style="color: red;">*</span></label>
                     <textarea inputId="basic9" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text" pInputTextarea
                         placeholder="Entré la Solution de contournement" [(ngModel)]="this.AddPointVersion.lienComment" ></textarea>
                 </span>

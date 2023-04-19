@@ -6,7 +6,7 @@
                     class="p-input-icon-left"
                     [style]="{ width: '30%' }"
                   >
-                  <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Perimeter</label>
+                  <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Périmètre<span style="color: red;">*</span></label>
                   <p-dropdown [style]="{ width: '100%', required: 'required' }" [options]="ListPerimetre" optionLabel="titre"
                   [filter]="true" filterBy="titre" [showClear]="true" placeholder="Selectinné le Perimetre"
                   [(ngModel)]="this.helthchekBwdetail.perimetre">
@@ -18,7 +18,7 @@
                 </p-dropdown>   
                   </span>
                   <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
-                    <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Status Night Treatment</label>
+                    <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Status Night Treatment<span style="color: red;">*</span></label>
                     <p-dropdown
                     [options]="ListStatut"
                     [style]="{ width: '100%', required: 'required' }"
@@ -30,7 +30,7 @@
                   ></p-dropdown>
                   </span>
                   <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
-                    <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Status Data Integrity</label>
+                    <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Status Data Integrity<span style="color: red;">*</span></label>
                     <p-dropdown
                     [options]="ListStatut"
                     [style]="{ width: '100%', required: 'required' }"
@@ -44,24 +44,24 @@
                 </div>
                 <div class="col-12 text-center" style="margin-bottom: 2%;">
                     <span class="p-input-icon-left" [style]="{ width: '46%' }">
-                        <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Incident in Progress</label>
+                        <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Incident in Progress<span style="color: red;">*</span></label>
                         <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="number" pInputText
                             placeholder="Entré le nombre d'inicdent en cours" [(ngModel)]="this.helthchekBwdetail.incidentInProgress"/>
                     </span>
                     <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '46%' }">
-                        <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Incident Completed this month</label>
+                        <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Incident Completed this month<span style="color: red;">*</span></label>
                         <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="number" pInputText
                             placeholder="Entré le nombre d'inicdent completer" [(ngModel)]="this.helthchekBwdetail.incidentCompleted"/>
                     </span>
                 </div>
                 <div class="col-12 text-center" style="margin-bottom: 2%;">
                     <span class="p-input-icon-left" [style]="{ width: '46%' }">
-                        <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Comment</label>
+                        <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Comment<span style="color: red;">*</span></label>
                         <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="text" pInputText
                             placeholder="Entré le commentaire" [(ngModel)]="this.helthchekBwdetail.comment"/>
                     </span>
-                    <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '40%' }">
-                        <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Key User feedBack</label>
+                    <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '41%' }">
+                        <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Key User feedBack<span style="color: red;">*</span></label>
                         <p-dropdown
                         [options]="userKey"
                         [style]="{ width: '100%', required: 'required' }"
@@ -176,7 +176,7 @@
 </div>
             <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
                 <button pButton pRipple  type="button" label="Visualiser la charte" style=" float: left;margin-left: 2%;" (click)="charte()" class="p-button-raised p-button-help"></button>
-                <button pButton pRipple  style=" float: right;margin-right: 2%;" type="button" label="Submit" class="p-button-raised" (click)="SendAndSaveHealth()"></button>
+                <button pButton pRipple  style=" float: right;margin-right: 2%;" type="button" label="Submit" class="p-button-raised" [disabled]="isSubmitDisabled()" (click)="SendAndSaveHealth()"></button>
             </div>
         </div>
     </div>

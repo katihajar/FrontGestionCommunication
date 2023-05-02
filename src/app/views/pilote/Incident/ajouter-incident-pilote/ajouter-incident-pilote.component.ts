@@ -37,7 +37,7 @@ export class AjouterIncidentPiloteComponent implements OnInit {
   @ViewChild(CharteIncidentMoneticComponent,{static:false}) myDivMonetic: any ;
   constructor(private incidentService: IncidentService, private messageService: MessageService,
     private charteService:CharteService,private router: Router,private destService:DestinataireService) {
-      if (performance.navigation.type === 1) {
+      if(this.AddIncident.application.nomApplication == '' && this.AddIncident.statut ==''){
         this.router.navigate(['/pilote/incident/registre']);
       }
      }

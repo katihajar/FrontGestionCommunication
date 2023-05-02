@@ -29,7 +29,11 @@ export class AjouterOperationComponent implements OnInit {
   listDestinataire:Array<DestinataireCommunication>= new Array<DestinataireCommunication>();
   @ViewChild(CharteOperationFrComponent,{static:false}) myDiv: any ;
   constructor(private operationService: OperationService,private charte:CharteService,
-    private messageService: MessageService,private router:Router,private destService: DestinataireService) { }
+    private messageService: MessageService,private router:Router,private destService: DestinataireService) { 
+      if(this.AddOperation.application.nomApplication == '' && this.AddOperation.statut=='' ){
+        this.router.navigate(['/pilote/operation/registre']);
+      }
+    }
   clear(table: Table) {
     table.clear();
   }

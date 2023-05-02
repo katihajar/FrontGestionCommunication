@@ -45,7 +45,9 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
   constructor(private incidentService: IncidentService, private charteService: CharteService,
     private router: Router, private renderer: Renderer2, private el: ElementRef, private destService: DestinataireService,
     private messageService: MessageService, private cdRef: ChangeDetectorRef) {
-
+      if(this.AddIncident.application.nomApplication == '' && this.AddIncident.statut ==''){
+        this.router.navigate(['/pilote/incident/registre']);
+      }
 
   }
 

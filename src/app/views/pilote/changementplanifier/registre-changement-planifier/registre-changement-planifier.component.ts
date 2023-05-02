@@ -233,8 +233,9 @@ set charteChangeAngFr(value: boolean) {
     }
     this.AddChangementAng.contenuChangementList=this.ListContenuAng;
   }
+
   RouteFormAddChange() {
-    if(this.AddChangement.application.nomApplication != '' && this.AddChangement.statut!='' && this.langage !=''){
+    if(this.AddChangement.application.nomApplication != '' && this.AddChangement.statut!='' && this.langage !='' && this.AddChangement.type != ''){
     if(this.langage == "Français"){
     this.showPopUpChange = false;
     this.router.navigate(['/pilote/changement/save/Français']);

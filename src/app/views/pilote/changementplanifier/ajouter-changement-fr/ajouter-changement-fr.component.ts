@@ -31,7 +31,11 @@ export class AjouterChangementFrComponent implements OnInit {
   dialogElement:any;
   @ViewChild(CharteChangementFrComponent,{static:false}) myDiv: any ;
   constructor(private messageService: MessageService,private changeService: ChangementService,
-    private charteService:CharteService,private router: Router,private destService:DestinataireService) { }
+    private charteService:CharteService,private router: Router,private destService:DestinataireService) {
+      if(this.AddChangement.application.nomApplication == '' && this.AddChangement.statut=='' && this.AddChangement.type == ''){
+        this.router.navigate(['/pilote/changement/registre']);
+      }
+     }
 
   ngOnInit(): void {
     this.listDestinataire = new Array<DestinataireCommunication>();

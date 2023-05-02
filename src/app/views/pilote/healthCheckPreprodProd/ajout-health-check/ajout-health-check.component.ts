@@ -46,7 +46,11 @@ export class AjoutHealthCheckComponent implements OnInit {
   dialogElement:any;
   @ViewChild(CharteHealthCheckComponent,{static:false}) myDiv: any ;
   constructor(private healthService: HealthCheckService,private charteService:CharteService,private router: Router,
-    private confirmationService: ConfirmationService,private messageService:MessageService,private destService: DestinataireService) { }
+    private confirmationService: ConfirmationService,private messageService:MessageService,private destService: DestinataireService) {
+      if(this.AddHealthCheck.type == ''  ){
+        this.router.navigate(['/pilote/healthcheck/PreprodProd/registre']);
+      }
+     }
     clear(table: Table) {
       table.clear();
     }

@@ -108,12 +108,15 @@
   <p-dialog header="Liste des Pilotes" [modal]="true" [draggable]="false"
   [(visible)]="displayPilote" [style]="{width: '70vw', height: '70vw','margin-left':'10%'}">
 
-    <div>
-      <div>
-        <button pButton pRipple type="button" label="Ajouter Un Pilote" (click)="AddPilote()"
-          style="width: fit-content;margin: 4px;float: right;" 
-          class="p-button-raised p-button-success" ></button>
-      </div>
+    <div class="card" style="border: none;">
+      
+      <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+        </ng-template>
+        <ng-template pTemplate="right">
+            <button pButton pRipple label="Ajouter un Destinataire" icon="pi pi-plus" class="p-button-success mr-2" (click)="AddPilote()" ></button>
+        </ng-template>
+    </p-toolbar>
     <p-table class="table" #dt2 [value]=" this.ListPiloteApplication" dataKey="id" [rows]="5" [showCurrentPageReport]="true"
     [loading]="loading" [paginator]="true"
    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -185,7 +188,7 @@
 </p-dialog>
 
 <p-dialog header="Ajouter Un Pilote" [modal]="true" (onHide)="submittedPilote=false"
-  [(visible)]="AjouterPilote" [style]="{width: '25vw', height: '20vw'}" [resizable]="true">
+  [(visible)]="AjouterPilote" [style]="{width: '25vw', height: '15vw'}" [resizable]="true">
 
     <div class="col-12 text-center" style="margin-top: 1%;" >
       <span
@@ -201,6 +204,7 @@
         [filter]="true"
         filterBy="username"
         [showClear]="true"
+        appendTo="body"
         placeholder="Selectinné le pilote"
       >
         <ng-template let-pilote pTemplate="item">
@@ -216,8 +220,8 @@
   </ng-template>
 </p-dialog>
 
-<p-dialog header="Modifier Application" [modal]="true" (onHide)="submittedModif=false"
-  [(visible)]="ModifApp" [style]="{width: '35vw', height: '23vw'}" [resizable]="true">
+<p-dialog header="Modifier l'Application" [modal]="true" (onHide)="submittedModif=false"
+  [(visible)]="ModifApp" [style]="{width: '35vw', height: '15vw'}" [resizable]="true">
 
     <div class="col-12 text-center" style="margin-top: 1%;" >
       <span
@@ -226,6 +230,7 @@
     >
       <p-dropdown
         [options]="disponibilite"
+        appendTo="body"
         [style]="{ width: '100%', required: 'required' }"
         placeholder="Selectinné la disponibilité"
         optionValue="name"
@@ -241,6 +246,7 @@
     <p-dropdown id="err"
     [style]="{ width: '100%', required: 'required' }"
     [options]="responsableList"
+    appendTo="body"
     optionLabel="username"
     [filter]="true"
     filterBy="username"

@@ -36,7 +36,11 @@ export class AjouterIncidentPiloteComponent implements OnInit {
   @ViewChild(CharteIncident3bfrComponent,{static:false}) myDiv: any ;
   @ViewChild(CharteIncidentMoneticComponent,{static:false}) myDivMonetic: any ;
   constructor(private incidentService: IncidentService, private messageService: MessageService,
-    private charteService:CharteService,private router: Router,private destService:DestinataireService) { }
+    private charteService:CharteService,private router: Router,private destService:DestinataireService) {
+      if (performance.navigation.type === 1) {
+        this.router.navigate(['/pilote/incident/registre']);
+      }
+     }
   clear(table: Table) {
     table.clear();
   }
@@ -51,6 +55,7 @@ export class AjouterIncidentPiloteComponent implements OnInit {
   }
 
   ngOnInit(): void {
+   
     this.listDestinataire = new Array<DestinataireCommunication>();
     this.Action = new PlanAction();
     this.num=1;

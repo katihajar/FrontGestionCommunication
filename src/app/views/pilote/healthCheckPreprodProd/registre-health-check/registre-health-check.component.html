@@ -85,7 +85,7 @@
  
   <div class="col-12 text-center" style="margin-top: 1%;">
     <span class="p-input-icon-left" style="margin-left: 2%;" [style]="{'width':'80%'}">
-      <p-dropdown [options]="this.ListType" [(ngModel)]="this.AddHealthCheck.type"
+      <p-dropdown [options]="this.ListType" [(ngModel)]="this.AddHealthCheck.type" appendTo="body"
         [style]="{'width':'100%','required':'required'}" placeholder="Selectinné le type" optionValue="name"
         optionLabel="name" [showClear]="true"></p-dropdown>
     </span>

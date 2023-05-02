@@ -71,8 +71,13 @@ export class AjoutHealthCheckBwPerimetreComponent implements OnInit {
   }
   AddDetails(){
     if(this.helthchekBwdetail.perimetre.titre != '' && this.helthchekBwdetail.statusNightTreatment!='' && this.helthchekBwdetail.statusNightTreatment!=''&& this.helthchekBwdetail.statusDataIntegrity!='' ){
+      const match = this.listHelthchekBwdetail.find(etat => etat.perimetre.titre  === this.helthchekBwdetail.perimetre.titre);
+    if (match) {
+      this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Vous avez déja ajouter ce périmètre' });
+    } else {
     this.listHelthchekBwdetail.push(this.helthchekBwdetail);
     this.helthchekBwdetail = new HealthCheckBwPerimetreDetail();
+    }
   }else{
     this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
   }

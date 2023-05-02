@@ -122,12 +122,12 @@
       <span class="p-input-icon-left" [style]="{'width':'45%'}">
         <p-dropdown [options]="lots" [(ngModel)]="this.AddUser.user.lots"
           [style]="{'width':'100%','required':'required'}" placeholder="Selectinné le lot" optionValue="name"
-          optionLabel="name" [showClear]="true"></p-dropdown>
+          optionLabel="name" [showClear]="true"  appendTo="body"></p-dropdown>
         <small style="color: red;margin-left: 2%;" *ngIf="submittedUtilisateur && !this.AddUser.user.lots"
           class="p-invalid">lot est obligatoire</small>
       </span>
       <span class="p-input-icon-left" style="margin-left: 2%;" [style]="{'width':'45%'}">
-        <p-dropdown [options]="RoleList" [(ngModel)]="this.AddUser.idRole"
+        <p-dropdown [options]="RoleList" [(ngModel)]="this.AddUser.idRole"  appendTo="body"
           [style]="{'width':'100%','required':'required'}" placeholder="Selectinné le role" optionValue="id"
           optionLabel="name" [showClear]="true"></p-dropdown>
         <small style="color: red;margin-left: 2%;" *ngIf="submittedUtilisateur && !this.AddUser.idRole"
@@ -164,7 +164,7 @@
     </div>
     <div class="col-12" style="margin-top: 2%;">
       <span class="p-input-icon-left" [style]="{'width':'45%'}">
-        <p-dropdown [options]="lots" [(ngModel)]="this.EditeUser.user.lots"
+        <p-dropdown [options]="lots" [(ngModel)]="this.EditeUser.user.lots"  appendTo="body"
           [style]="{'width':'100%', 'required':'required'}" placeholder="Selectinné le lot" optionValue="name"
           optionLabel="name" [showClear]="true"></p-dropdown>
         <small style="color: red;margin-left: 2%;" *ngIf="submittedUtilisateur && !this.EditeUser.user.lots"
@@ -173,7 +173,7 @@
       <span class="p-input-icon-left" style="margin-left: 2%;" [style]="{'width':'45%'}">
         <p-dropdown [options]="RoleList" [(ngModel)]="this.EditeUser.idRole"
           [style]="{'width':'100%','required':'required'}" placeholder="Selectinné le role" optionValue="id"
-          optionLabel="name" [showClear]="true"></p-dropdown>
+          optionLabel="name" [showClear]="true"  appendTo="body"></p-dropdown>
         <small style="color: red;margin-left: 2%;" *ngIf="submittedUtilisateur && !this.EditeUser.idRole"
           class="p-invalid">Role est obligatoire</small>
       </span>

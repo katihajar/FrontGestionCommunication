@@ -122,11 +122,11 @@
     </div>
   </div>
   <p-dialog header="Ajouter Un Changement" [modal]="true" [(visible)]="showPopUpChange" (onHide)="onDialogHideLang()"
-    [style]="{width: '40vw', height: '25vw'}" [resizable]="true">
+    [style]="{width: '40vw', height: '18vw'}" [resizable]="true">
   
     <div class="col-12 text-center" style="margin-top: 1%;">
       <span class="p-input-icon-left" [style]="{ width: '40%' }">
-        <p-dropdown [style]="{ width: '100%', required: 'required' }" [options]="ListApp" optionLabel="nomApplication"
+        <p-dropdown [style]="{ width: '100%', required: 'required' }" [options]="ListApp" optionLabel="nomApplication" appendTo="body"
           [filter]="true" filterBy="nomApplication" [showClear]="true" placeholder="Selectinné l'Application"
           [(ngModel)]="this.AddChangement.application">
           <ng-template let-application pTemplate="item">
@@ -137,19 +137,19 @@
         </p-dropdown>
       </span>
       <span class="p-input-icon-left" style="margin-left: 2%;" [style]="{'width':'40%'}">
-        <p-dropdown [options]="statutChange" [(ngModel)]="this.AddChangement.statut"
+        <p-dropdown [options]="statutChange" [(ngModel)]="this.AddChangement.statut" appendTo="body"
           [style]="{'width':'100%','required':'required'}" placeholder="Selectinné le statut" optionValue="name"
           optionLabel="name" [showClear]="true"></p-dropdown>
       </span>
     </div>
     <div class="col-12 text-center" style="margin-top: 2%;">
       <span class="p-input-icon-left" [style]="{'width':'40%'}">
-        <p-dropdown [options]="ListType" [(ngModel)]="this.AddChangement.type"
+        <p-dropdown [options]="ListType" [(ngModel)]="this.AddChangement.type" appendTo="body"
           [style]="{'width':'100%','required':'required'}" placeholder="Selectinné le type" optionValue="name"
           optionLabel="name" [showClear]="true"></p-dropdown>
       </span>
       <span class="p-input-icon-left" style="margin-left: 2%;" [style]="{'width':'40%'}">
-        <p-dropdown [options]="listLangage" [(ngModel)]="this.langage"
+        <p-dropdown [options]="listLangage" [(ngModel)]="this.langage" appendTo="body"
           [style]="{'width':'100%','required':'required'}" placeholder="Selectinné la langue" optionValue="name"
           optionLabel="name" [showClear]="true"></p-dropdown>
       </span>
@@ -163,7 +163,7 @@
    
     <div class="col-12 text-center" style="margin-top: 1%;">
       <span class="p-input-icon-left" style="margin-left: 2%;" [style]="{'width':'80%'}">
-        <p-dropdown [options]="listLangageCharte" [(ngModel)]="this.selectLang"
+        <p-dropdown [options]="listLangageCharte" [(ngModel)]="this.selectLang" appendTo="body"
           [style]="{'width':'100%','required':'required'}" placeholder="Selectinné la langue" optionValue="name"
           optionLabel="name" [showClear]="true"></p-dropdown>
       </span>

@@ -38,6 +38,7 @@ import { DashboardPiloteComponent } from './views/pilote/dashboard-pilote/dashbo
 import { DashboardComponent } from './views/admin/dashboard/dashboard.component';
 import { DashboardRespoComponent } from './views/responsable/dashboard-respo/dashboard-respo.component';
 import { ExpireTokenComponent } from './redirectlogin/expire-token/expire-token.component';
+import { AuthGuard } from './auth.guard';
 
 
 @NgModule({
@@ -45,6 +46,8 @@ import { ExpireTokenComponent } from './redirectlogin/expire-token/expire-token.
     {
       path: 'admin',
       component: AdminComponent,
+      canActivate: [AuthGuard],
+      data: { role: 'ROLE_ADMIN' },
       children: [
         { path: 'dashboard', component: DashboardComponent },
         { path: 'users/register', component: RegistreUserComponent },
@@ -58,6 +61,8 @@ import { ExpireTokenComponent } from './redirectlogin/expire-token/expire-token.
     {
       path: 'responsable',
       component: ResponsableComponent,
+      canActivate: [AuthGuard],
+      data: { role: 'ROLE_RESPONSABLE' },
       children: [
         { path: 'dashboard', component: DashboardRespoComponent },
         { path: 'incident/registre', component: ResgistreIncidentRespoComponent },
@@ -73,6 +78,8 @@ import { ExpireTokenComponent } from './redirectlogin/expire-token/expire-token.
     {
       path: 'pilote',
       component: PiloteComponent,
+      canActivate: [AuthGuard],
+      data: { role: 'ROLE_PILOTE' },
       children: [
         { path: 'Dashboard', component: DashboardPiloteComponent },
         { path: 'application/registre', component: RegistreApplicationOfPiloteComponent },
@@ -100,7 +107,7 @@ import { ExpireTokenComponent } from './redirectlogin/expire-token/expire-token.
     { path: 'error', component: ErrorPageComponent },
     { path: 'forbidden', component: ForbiddenComponent },
     { path: 'expired-token', component: ExpireTokenComponent },
-    { path: '**', redirectTo: 'error', pathMatch: 'full' },
+    { path: '**', redirectTo: 'login', pathMatch: 'full' },
   ])],
   exports: [RouterModule],
 })

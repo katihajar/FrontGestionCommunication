@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
   successMessage: string = String();
   invalidLogin = false;
   loginSuccess = false;
-
   constructor(private authService: AuthService, private router: Router) {
    }
 
@@ -48,7 +47,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('refreshToken',this.UserAuth.refreshToken as string);
       localStorage.setItem('auth',JSON.stringify(this.UserAuth));
       this.invalidLogin = false;
-      this.loginSuccess = true;
+      this.loginSuccess = true;      
       this.successMessage = 'Login Successful';
       if (this.UserAuth.accessToken !== null) {
         if (this.User.roles[0].name == 'ROLE_ADMIN') {

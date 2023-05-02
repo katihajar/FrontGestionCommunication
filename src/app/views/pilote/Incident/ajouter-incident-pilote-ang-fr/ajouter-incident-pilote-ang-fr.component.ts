@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
 import { Table } from 'primeng/table';
 import { Incident } from 'src/app/controller/model/incident';
 import { PlanAction } from 'src/app/controller/model/plan-action';
@@ -14,13 +14,14 @@ import { MyOptions } from 'src/app/controller/model/myoption';
 import { DestinataireCommunication } from 'src/app/controller/model/destinataire-communication';
 import { DestinataireService } from 'src/app/controller/service/destinataire.service';
 import { CharteIncidentMoneticAngFrComponent } from '../charte-incident-monetic-ang-fr/charte-incident-monetic-ang-fr.component';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-ajouter-incident-pilote-ang-fr',
   templateUrl: './ajouter-incident-pilote-ang-fr.component.html',
   styleUrls: ['./ajouter-incident-pilote-ang-fr.component.scss']
 })
 export class AjouterIncidentPiloteAngFrComponent implements OnInit {
-  imageDataUrl: string= String();
+  imageDataUrl: string = String();
   param: any;
   StatutPlan: any[] = [];
   StatutPlanAng: any[] = [];
@@ -32,17 +33,20 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
   screenshotDataUrl: any;
   num: number = Number(0);
   numAng: number = Number(0);
-  listDestinataire:Array<DestinataireCommunication>= new Array<DestinataireCommunication>();
-  EmailObligatoire:any[]=[];
-  EmailEnCC:any[]=[];
-  Subject:string = String();
-  dialogElement:any;
-  @ViewChild(CharteIncident3BfrAngComponent,{static:false}) myDiv: any ;
-  @ViewChild(CharteIncidentMoneticAngFrComponent,{static:false}) myDivMonetic: any ;
+  listDestinataire: Array<DestinataireCommunication> = new Array<DestinataireCommunication>();
+  EmailObligatoire: any[] = [];
+  EmailEnCC: any[] = [];
+  Subject: string = String();
+  dialogElement: any;
+  @ViewChild(CharteIncident3BfrAngComponent, { static: false }) myDiv: any;
+  @ViewChild(CharteIncidentMoneticAngFrComponent, { static: false }) myDivMonetic: any;
+ 
 
   constructor(private incidentService: IncidentService, private charteService: CharteService,
-    private router: Router,private renderer: Renderer2, private el: ElementRef,private destService: DestinataireService,
-    private messageService: MessageService,private cdRef: ChangeDetectorRef) {
+    private router: Router, private renderer: Renderer2, private el: ElementRef, private destService: DestinataireService,
+    private messageService: MessageService, private cdRef: ChangeDetectorRef) {
+
+
   }
 
 
@@ -52,7 +56,6 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
   ngAfterViewInit(): void {
     this.cdRef.detectChanges();
   }
-
   ngOnInit(): void {
     this.Action = new PlanAction();
     this.AddIncidentAng = new Incident();
@@ -71,9 +74,10 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
       { name: 'To start' },
       { name: 'Closed' },
     ];
-    this.ListPlanAction =this.AddIncident.planActionList;
-    if(this.AddIncident.titreIncident != ''){
-    this.translateInput();}
+    this.ListPlanAction = this.AddIncident.planActionList;
+    if (this.AddIncident.titreIncident != '') {
+      this.translateInput();
+    }
     if (this.AddIncident.statut == "Ouvert") {
       this.AddIncidentAng.statut = "Open";
     } else if (this.AddIncident.statut == "Résolu avec Suivi") {
@@ -82,13 +86,13 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
       this.AddIncidentAng.statut = "Closed";
     }
 
-    this.destService.FindDestinataireByApplication(this.AddIncident.application.id).subscribe((data)=>{
+    this.destService.FindDestinataireByApplication(this.AddIncident.application.id).subscribe((data) => {
       // @ts-ignore
       this.listDestinataire = data.body;
-      for(let i = 0;i<this.listDestinataire.length;i++){
-        if(this.listDestinataire[i].typeDest=='Obligatoire' && this.listDestinataire[i].statutRespo == 'Valider'){
+      for (let i = 0; i < this.listDestinataire.length; i++) {
+        if (this.listDestinataire[i].typeDest == 'Obligatoire' && this.listDestinataire[i].statutRespo == 'Valider') {
           this.EmailObligatoire.push(this.listDestinataire[i].email)
-        }else if(this.listDestinataire[i].typeDest=='en CC' && this.listDestinataire[i].statutRespo == 'Valider'){
+        } else if (this.listDestinataire[i].typeDest == 'en CC' && this.listDestinataire[i].statutRespo == 'Valider') {
           this.EmailEnCC.push(this.listDestinataire[i].email)
         }
       }
@@ -187,7 +191,7 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
     this.incidentService.AddIncidentAng = value;
   }
 
-  get ListPlanActionAng(): Array<PlanAction>{
+  get ListPlanActionAng(): Array<PlanAction> {
     return this.incidentService.ListPlanActionAng;
   }
 
@@ -195,7 +199,7 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
     this.incidentService.ListPlanActionAng = value;
   }
 
-  get ListPlanAction(): Array<PlanAction>{
+  get ListPlanAction(): Array<PlanAction> {
 
     return this.incidentService.ListPlanAction;
   }
@@ -211,8 +215,8 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
       this.ListPlanAction.push(this.Action);
       this.Action = new PlanAction();
       this.num = this.num + 1;
-    }else{
-      this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
+    } else {
+      this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Insérer tout les champs' });
     }
   }
   AddActionAng() {
@@ -221,8 +225,8 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
       this.ListPlanActionAng.push(this.ActionAng);
       this.ActionAng = new PlanAction();
       this.numAng = this.numAng + 1;
-    }else{
-      this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
+    } else {
+      this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Insérer tout les champs' });
     }
   }
 
@@ -243,13 +247,13 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
   showCharte() {
     this.AddIncident.planActionList = this.ListPlanAction;
     this.AddIncidentAng.planActionList = this.ListPlanActionAng;
-    if(this.AddIncident.application.charteIncident =='charte Incident'){
+    if (this.AddIncident.application.charteIncident == 'charte Incident') {
       this.charteIncident3BfrAng = true;
-      }else if(this.AddIncident.application.charteIncident =='charte Incident Monetics'){
-        this.charteIncidentMoneticAngFr = true;
-      }else{
-        this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Charte Non trouvé'});
-      }
+    } else if (this.AddIncident.application.charteIncident == 'charte Incident Monetics') {
+      this.charteIncidentMoneticAngFr = true;
+    } else {
+      this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Charte Non trouvé' });
+    }
   }
   isSubmitDisabled() {
     return (
@@ -273,40 +277,40 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
       this.AddIncidentAng.causePrincipale.length < 3
     );
   }
-  SaveIncident(){
+  SaveIncident() {
     this.AddIncident.dateAjout = new Date();
-    if(this.AddIncident.application.charteIncident =='charte Incident'){
-      this.Subject = '[INCIDENT]['+this.AddIncident.application.nomApplication+'][Communication No.'+this.AddIncident.numeroIncident+'] '+this.AddIncidentAng.titreIncident+' / '+this.AddIncident.titreIncident+' - '+this.AddIncidentAng.statut+' / '+this.AddIncident.statut;
-    }else if(this.AddIncident.application.charteIncident =='charte Incident Monetics'){
-      this.Subject = '['+this.AddIncident.type+'] '+this.AddIncident.application.nomApplication+' Incident '+this.AddIncident.numeroIncident+' - '+this.AddIncident.titreIncident;
-     }   
-      this.incidentService.SaveIncident().subscribe((data) => {
-             this.AddIncident=new Incident();
-              this.ListPlanAction = new Array<PlanAction>();
-             this.ListPlanActionAng = new Array<PlanAction>();
-             const mailtoLink = `mailto:${this.EmailObligatoire.join(';')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(';')}`;
-             window.open(mailtoLink, '_blank');
-             this.router.navigate(['/pilote/incident/registre']);
-             this.messageService.add({severity:'success', summary: 'Success', detail: 'Incident Ajouter avec succès'});
-            },error=>{
-              this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de l\'enregistrement verifier le titre d \'incident'});
-      })
+    if (this.AddIncident.application.charteIncident == 'charte Incident') {
+      this.Subject = '[INCIDENT][' + this.AddIncident.application.nomApplication + '][Communication No.' + this.AddIncident.numeroIncident + '] ' + this.AddIncidentAng.titreIncident + ' / ' + this.AddIncident.titreIncident + ' - ' + this.AddIncidentAng.statut + ' / ' + this.AddIncident.statut;
+    } else if (this.AddIncident.application.charteIncident == 'charte Incident Monetics') {
+      this.Subject = '[' + this.AddIncident.type + '] ' + this.AddIncident.application.nomApplication + ' Incident ' + this.AddIncident.numeroIncident + ' - ' + this.AddIncident.titreIncident;
+    }
+    this.incidentService.SaveIncident().subscribe((data) => {
+      this.AddIncident = new Incident();
+      this.ListPlanAction = new Array<PlanAction>();
+      this.ListPlanActionAng = new Array<PlanAction>();
+      const mailtoLink = `mailto:${this.EmailObligatoire.join(';')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(';')}`;
+      window.open(mailtoLink, '_blank');
+      this.router.navigate(['/pilote/incident/registre']);
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Incident Ajouter avec succès' });
+    }, error => {
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Erreur lors de l\'enregistrement verifier le titre d \'incident' });
+    })
 
-    
+
   }
 
 
 
   takeScreenshot() {
-    if(this.AddIncident.application.charteIncident =='charte Incident'){
-    this.charteIncident3BfrAng = true;
-    }else if(this.AddIncident.application.charteIncident =='charte Incident Monetics'){
+    if (this.AddIncident.application.charteIncident == 'charte Incident') {
+      this.charteIncident3BfrAng = true;
+    } else if (this.AddIncident.application.charteIncident == 'charte Incident Monetics') {
       this.charteIncidentMoneticAngFr = true;
     }
     setTimeout(() => {
-      if(this.AddIncident.application.charteIncident =='charte Incident'){
-      this.dialogElement = this.myDiv.filterComponent.nativeElement;
-      } else if(this.AddIncident.application.charteIncident =='charte Incident Monetics'){
+      if (this.AddIncident.application.charteIncident == 'charte Incident') {
+        this.dialogElement = this.myDiv.filterComponent.nativeElement;
+      } else if (this.AddIncident.application.charteIncident == 'charte Incident Monetics') {
         this.dialogElement = this.myDivMonetic.filterComponent.nativeElement;
       }
       const options: MyOptions = {
@@ -319,17 +323,18 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
         this.imageDataUrl = canvas.toDataURL();
         const blob = this.dataURLtoBlob(this.imageDataUrl);
         const imageUrl = URL.createObjectURL(blob); // create URL object from blob
-        const file = new File([blob], this.AddIncident.titreIncident+'-'+this.AddIncident.application.nomApplication+'.png', { type: 'image/png' });
+        const file = new File([blob], this.AddIncident.titreIncident + '-' + this.AddIncident.application.nomApplication + '.png', { type: 'image/png' });
         saveAs(file);
         this.SaveIncident();
       });
-      if(this.AddIncident.application.charteIncident =='charte Incident'){
+      if (this.AddIncident.application.charteIncident == 'charte Incident') {
         this.charteIncident3BfrAng = false;
-        }else if(this.AddIncident.application.charteIncident =='charte Incident Monetics'){
-          this.charteIncidentMoneticAngFr = false;
-        }    }, 1000);
+      } else if (this.AddIncident.application.charteIncident == 'charte Incident Monetics') {
+        this.charteIncidentMoneticAngFr = false;
+      }
+    }, 1000);
   }
-  
+
   dataURLtoBlob(dataURL: string): Blob {
     const arr = dataURL.split(',');
     if (arr.length < 2) {
@@ -354,15 +359,15 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
     return new Blob([u8arr], { type: mime });
   }
   SendAndSaveIncident() {
-       this.AddIncident.planActionList = this.ListPlanAction;
-       this.AddIncident.id=0;
-      this.AddIncidentAng.planActionList = this.ListPlanActionAng;
-      if(this.AddIncident.description != '' && this.AddIncident.causePrincipale != '' &&this.AddIncident.situationActuelle != '' && this.AddIncident.prochaineCommunication !=null){
-        this.takeScreenshot();
-        }else{
-            this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
-          }
+    this.AddIncident.planActionList = this.ListPlanAction;
+    this.AddIncident.id = 0;
+    this.AddIncidentAng.planActionList = this.ListPlanActionAng;
+    if (this.AddIncident.description != '' && this.AddIncident.causePrincipale != '' && this.AddIncident.situationActuelle != '' && this.AddIncident.prochaineCommunication != null) {
+      this.takeScreenshot();
+    } else {
+      this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Insérer tout les champs' });
+    }
   }
 
-  
+
 }

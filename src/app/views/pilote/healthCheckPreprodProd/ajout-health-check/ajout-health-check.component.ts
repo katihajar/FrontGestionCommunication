@@ -103,8 +103,12 @@ export class AjoutHealthCheckComponent implements OnInit {
   }
   AddStatutApp(){
     if(this.statuApp.statut != '' && this.statuApp.application.nomApplication!=''  ){
+      const match = this.ListStatutApp.find(etat => etat.application.nomApplication === this.statuApp.application.nomApplication);
+      if (match) {
+        this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Vous avez déja ajouter l\'état de cette application' });
+      }else{
     this.ListStatutApp.push(this.statuApp);
-    this.statuApp = new StatutApplication();
+    this.statuApp = new StatutApplication();}
   } else{
     this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
   }
@@ -113,14 +117,20 @@ removeStatutApp(us: StatutApplication) {
   let i = this.ListStatutApp.indexOf(us);
   this.ListStatutApp.splice(i, 1);
 }
-  AddEtat(){
-    if(this.etatproc.statut != '' && this.etatproc.processusMetier.titre!=''  ){
-    this.listEtatproc.push(this.etatproc);
-    this.etatproc = new EtatProcessusMetier();
-  } else{
-    this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
+AddEtat() {
+  if (this.etatproc.statut != '' && this.etatproc.processusMetier.titre != '') {
+    const match = this.listEtatproc.find(etat => etat.processusMetier.titre === this.etatproc.processusMetier.titre);
+    if (match) {
+      this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Vous avez déja ajouter ce processus' });
+    } else {
+      this.listEtatproc.push(this.etatproc);
+      this.etatproc = new EtatProcessusMetier();
+    }
+  } else {
+    this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Insert all fields' });
   }
 }
+
 removeEtat(us: EtatProcessusMetier) {
   let i = this.listEtatproc.indexOf(us);
   this.listEtatproc.splice(i, 1);
@@ -129,7 +139,8 @@ AddDeatils(){
   if(this.helthchekdetail.statut != '' && this.helthchekdetail.application.nomApplication!='' && this.helthchekdetail.feu != '' && this.helthchekdetail.impactClient != '' && this.helthchekdetail.information != ''){
   this.listHelthchekdetail.push(this.helthchekdetail);
   this.helthchekdetail = new HealthChekPreprodProdDetail();
-}else{        this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
+}else{      
+   this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
 }
 }
 
@@ -233,9 +244,18 @@ removeDeatils(us: HealthChekPreprodProdDetail) {
     this.AddHealthCheck.id=0;
     this.AddHealthCheck.etatProcessusMetierList = this.listEtatproc;
     this.AddHealthCheck.healthChekPreprodProdDetailList = this.listHelthchekdetail;
+    this.AddHealthCheck.statutApplicationList= this.ListStatutApp;
     if(this.AddHealthCheck.etatProcessusMetierList.length != 0 && this.AddHealthCheck.healthChekPreprodProdDetailList.length != 0  ){
+      if(this.ListApp.length -2 == this.ListStatutApp.length ){
+        if(this.listEtatproc.length == this.ListProcessus.length){
       this.AddHealthCheck.dateAjout = new Date();
       this.takeScreenshot();
+        }else{
+          this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout l\'état de tout les processus métier'});
+        }
+    }else{
+        this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout l\'état de toute les appliaction'});
+      }
   }else{
     this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
   }

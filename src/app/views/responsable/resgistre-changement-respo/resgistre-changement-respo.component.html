@@ -118,7 +118,7 @@
    
     <div class="col-12 text-center" style="margin-top: 1%;">
       <span class="p-input-icon-left" style="margin-left: 2%;" [style]="{'width':'80%'}">
-        <p-dropdown [options]="listLangageCharte" [(ngModel)]="this.selectLang"
+        <p-dropdown [options]="listLangageCharte" [(ngModel)]="this.selectLang" appendTo="body"
           [style]="{'width':'100%','required':'required'}" placeholder="Selectinné la langue" optionValue="name"
           optionLabel="name" [showClear]="true"></p-dropdown>
       </span>

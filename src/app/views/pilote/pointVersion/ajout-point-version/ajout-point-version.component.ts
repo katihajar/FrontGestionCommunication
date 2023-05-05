@@ -261,9 +261,11 @@ export class AjoutPointVersionComponent implements OnInit {
       this.ListTicket.push(this.ListTicketRetirer[i]);
     }
     this.AddPointVersion.ticketList = this.ListTicket;
-    if (this.AddPointVersion.titre != '' && this.AddPointVersion.goNoGoMEP != '' && this.AddPointVersion.goNoGoTNR != '' && this.AddPointVersion.remarque != '' && this.AddPointVersion.lienComment != '') {
+    if ( this.AddPointVersion.goNoGoMEP != '' && this.AddPointVersion.goNoGoTNR != '' && this.AddPointVersion.remarque != '' && this.AddPointVersion.lienComment != '') {
     this.takeScreenshot();
   } else {
+    console.log(JSON.stringify(this.AddPointVersion));
+    
     this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Insérer tout les champs' });
   }
   }

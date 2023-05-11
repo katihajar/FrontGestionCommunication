@@ -89,8 +89,14 @@ export class AjoutPointVersionComponent implements OnInit {
   }
   FindApp() {
     this.pointService.FindApp().subscribe((data) => {
+      let app = new Array<Application>;
       // @ts-ignore
-      this.ListApp = data.body;
+      app = data.body;
+      for(let i= 0; i<app.length; i++){
+        if(app[i].nomApplication != 'Health Check Bw Perimetre' && app[i].nomApplication != 'health check ProdPredprod'){
+          this.ListApp.push(app[i]);
+        }
+      }
     })
   }
   AddLivraison() {

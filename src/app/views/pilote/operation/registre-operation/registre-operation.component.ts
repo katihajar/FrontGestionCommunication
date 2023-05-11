@@ -186,7 +186,13 @@ set charteOperationFr(value: boolean) {
       // @ts-ignore
       this.ListPiloteApp = data.body;
       for (let i = 0; i < this.ListPiloteApp.length; i++) {
-        this.ListApp.push(this.ListPiloteApp[i].application);
+        let app = new Array<Application>;
+        app.push(this.ListPiloteApp[i].application);
+        for(let i= 0; i<app.length; i++){
+          if(app[i].nomApplication != 'Health Check Bw Perimetre' && app[i].nomApplication != 'health check ProdPredprod'){
+            this.ListApp.push(app[i]);
+          }
+        }
       }
     })
   }

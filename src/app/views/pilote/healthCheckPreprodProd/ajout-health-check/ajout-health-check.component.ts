@@ -162,8 +162,14 @@ removeDeatils(us: HealthChekPreprodProdDetail) {
 
   FindApp(){
     this.healthService.FindApp().subscribe((data)=>{
+      let app = new Array<Application>;
       // @ts-ignore
-      this.ListApp= data.body;
+      app= data.body;
+      for(let i= 0; i<app.length; i++){
+        if(app[i].nomApplication != 'Health Check Bw Perimetre' && app[i].nomApplication != 'health check ProdPredprod'){
+          this.ListApp.push(app[i]);
+        }
+      }
     })
   }
   isSubmitDisabled(){
@@ -250,7 +256,7 @@ removeDeatils(us: HealthChekPreprodProdDetail) {
     this.AddHealthCheck.healthChekPreprodProdDetailList = this.listHelthchekdetail;
     this.AddHealthCheck.statutApplicationList= this.ListStatutApp;
     if(this.AddHealthCheck.etatProcessusMetierList.length != 0 && this.AddHealthCheck.healthChekPreprodProdDetailList.length != 0  ){
-      if(this.ListApp.length -2 == this.ListStatutApp.length ){
+      if(this.ListApp.length == this.ListStatutApp.length ){
         if(this.listEtatproc.length == this.ListProcessus.length){
       this.AddHealthCheck.dateAjout = new Date();
       this.takeScreenshot();

@@ -12,4 +12,6 @@ export class Operation {
     public dateAjout: Date = new Date();
     public createurOperation =new User();
     public application =new Application();
+    public impactMetier: string = String();
+
 }

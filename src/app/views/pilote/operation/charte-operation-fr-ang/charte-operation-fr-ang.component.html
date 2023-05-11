@@ -1,5 +1,5 @@
 <p-dialog [modal]="true" [(visible)]="this.charteOperationAngFr" header="Charte Operation Planifier"
-    [style]="{width: '50vw', height: '70vw','margin-left':'3%'}" [resizable]="true">
+    [style]="{width: '60vw', height: '70vw','margin-left':'3%'}" [resizable]="true">
     <div #myDialog id="myDialog" style="width: 100%;border:2px solid rgb(24, 109, 189)">
         <div class="col-12">
             <img src="../../../../../assets/img/operationPlanifier.png" width="100%" style="margin-left: 0%;" alt="psa"
@@ -17,9 +17,19 @@
                                       
                     <p>Hello,</p><br>
 
-                    <p>{{this.AddOperationAng.description}}</p><br>
+                    <p>{{this.AddOperationAng.description}}</p>
+                    <p>Additional Information:</p>
+                    <div style="margin: 1%;">
+                        <p ><b>Application:</b><span > {{this.AddOperation.application.nomApplication}}
+                        </span></p>
+                        <p ><b>Start Date:</b> <span > {{this.AddOperation.dateDebut  | date : 'YYYY-MM-dd'}} 
+                        </span></p>
+                        <p ><b>End Date:</b><span > {{this.AddOperation.dateFin | date : 'YYYY-MM-dd'}} 
+                        </span></p>
+                        <p ><b>Business Impacts:</b><span > {{this.AddOperationAng.impactMetier}}</span></p>
+                      </div><br>
 
-                    <p *ngIf="this.AddOperationAng.statut == 'Planifier'">At your disposal for any further information.</p>
+                    <p *ngIf="this.AddOperation.statut == 'Planifier'">At your disposal for any further information.</p>
 
                     <br>
                     <p style="color: rgb(55, 97, 233);;font-weight: bolder">PLEASE FORWARD THIS EMAIL TO ALL CONCERNED PARTIES.</p>
@@ -39,7 +49,16 @@
                    
                     <p>Bonjour,</p><br>
 
-                    <p>{{this.AddOperation.description}}</p><br>
+                    <p>{{this.AddOperation.description}}</p><p>Information Complémentaire :</p>
+                    <div style="margin: 1%;">
+                        <p ><b>Application :</b><span > {{this.AddOperation.application.nomApplication}}
+                        </span></p>
+                        <p ><b>Date Début :</b> <span > {{this.AddOperation.dateDebut | date : 'YYYY-MM-dd'}} 
+                        </span></p>
+                        <p ><b>Date Fin :</b><span > {{this.AddOperation.dateFin | date : 'YYYY-MM-dd'}} 
+                        </span></p>
+                        <p ><b>Impacts Metier :</b><span > {{this.AddOperation.impactMetier}}</span></p>
+                      </div><br>
 
                     <p *ngIf="this.AddOperation.statut == 'Planifier'">Restons à votre disposition pour toutes informations complémentaires.</p>
 

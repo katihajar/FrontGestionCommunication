@@ -103,6 +103,13 @@ translateInput() {
     .catch((error: any) => {
       console.error(error);
     });
+    translate(this.AddOperation.impactMetier, { from: 'fr', to: 'en' }).then((result: string) => {
+      this.AddOperationAng.impactMetier = result;
+    })
+      .catch((error: any) => {
+        console.error(error);
+      });
+    this.AddOperationAng.application = this.AddOperation.application;
     this.AddOperationAng.numero = this.AddOperation.numero;
     this.AddOperationAng.dateDebut = this.AddOperation.dateDebut;
     this.AddOperationAng.dateFin = this.AddOperation.dateFin;
@@ -170,6 +177,7 @@ set charteOperationFr(value: boolean) {
   }
   RouteFormAddIncident() {
     if(this.AddOperation.application.nomApplication !='' && this.AddOperation.statut!='' && this.langage !=''){
+      this.AddOperationAng.application = this.AddOperation.application;
     if(this.langage == "Français"){
     this.showPopUpOpert = false;
     this.router.navigate(['/pilote/operation/save/Français']);

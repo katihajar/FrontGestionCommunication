@@ -25,6 +25,13 @@ export class CharteOperationAngComponent implements OnInit {
   set AddOperationAng(value: Operation) {
     this.operationService.AddOperationAng = value;
   }
+  get AddOperation(): Operation{
+    return this.operationService.AddOperation;
+  }
+
+  set AddOperation(value: Operation) {
+    this.operationService.AddOperation = value;
+  }
   get charteOperationAng(): boolean {
     return this.charte.charteOperationAng;
   }

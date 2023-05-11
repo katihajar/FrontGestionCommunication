@@ -100,6 +100,12 @@ export class AjouterOperationFrAngComponent implements OnInit {
       .catch((error: any) => {
         console.error(error);
       });
+      translate(this.AddOperation.impactMetier, { from: 'fr', to: 'en' }).then((result: string) => {
+        this.AddOperationAng.impactMetier = result;
+      })
+        .catch((error: any) => {
+          console.error(error);
+        });
       this.AddOperationAng.numero = this.AddOperation.numero;
       this.AddOperationAng.dateDebut = this.AddOperation.dateDebut;
       this.AddOperationAng.dateFin = this.AddOperation.dateFin;
@@ -153,7 +159,7 @@ export class AjouterOperationFrAngComponent implements OnInit {
   }
   SendAndSaveOper() {
       this.AddOperation.id=0;
-      if(this.AddOperation.description != '' && this.AddOperation.titre != '' && this.AddOperation.dateDebut !=null){
+      if(this.AddOperation.impactMetier != '' &&this.AddOperation.description != '' && this.AddOperation.titre != '' && this.AddOperation.dateDebut !=null && this.AddOperationAng.impactMetier != '' && this.AddOperationAng.description != '' && this.AddOperationAng.titre != '' && this.AddOperationAng.dateDebut !=null){
         this.takeScreenshot();
       }else{
         this.messageService.add({severity:'warn', summary: 'Warning', detail: 'Insérer tout les champs'});

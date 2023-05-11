@@ -121,7 +121,7 @@ export class AjouterOperationComponent implements OnInit {
   }
   SendAndSaveOper() {
       this.AddOperation.id=0;
-      if(this.AddOperation.description != '' && this.AddOperation.titre != '' && this.AddOperation.dateDebut !=null){
+      if(this.AddOperation.impactMetier != ''  && this.AddOperation.description != '' && this.AddOperation.titre != '' && this.AddOperation.dateDebut !=null){
       this.takeScreenshot();
     }else{
       this.messageService.add({severity:'warn', summary: 'Warning', detail: 'Insérer tout les champs'});

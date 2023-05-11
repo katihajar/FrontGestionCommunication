@@ -67,7 +67,7 @@ export class DashboardComponent {
      this.updateChart();
     });
   }
- onStartDateChanged(event: Event) {
+  onStartDateChanged(event: Event) {
     const startDateStr = (event.target as HTMLInputElement).value;
     const startDate = moment(startDateStr);
     if (startDate.isValid()) {
@@ -171,16 +171,12 @@ export class DashboardComponent {
     // Get unique application labels for both datasets
     const allLabels = [...new Set([...Object.keys(incidentsClosPerApplication), ...Object.keys(incidentsOpenPerApplication)])];
   
-    // Define colors for open and closed datasets using getRandomColor() function
-    const openColors = allLabels.map(label => this.getRandomColor());
-    const closedColors = allLabels.map(label => this.getRandomColor());
-    
+   
     // Create datasets for both open and closed incidents
     const closedData = allLabels.map(label => incidentsClosPerApplication[label] || 0);
     const openData = allLabels.map(label => incidentsOpenPerApplication[label] || 0);
     
     // Assign colors to datasets
-    const backgroundColors = [...closedColors.slice(0, allLabels.length), ...openColors.slice(0, allLabels.length)];
     
     // Create a chart using Chart.js
     const chart = new Chart('combinedChart', {
@@ -191,15 +187,15 @@ export class DashboardComponent {
           {
             label: 'Nombre d\'Incidents cloturé',
             data: closedData,
-            backgroundColor: closedColors.slice(0, allLabels.length),
-            borderColor: closedColors.map(color => color.replace('0.5', '1')),
+            backgroundColor: '#00e600',
+            borderColor: '#00b300',
             borderWidth: 1
           },
           {
             label: 'Nombre d\'incident ouvert',
             data: openData,
-            backgroundColor: openColors.slice(0, allLabels.length),
-            borderColor: openColors.map(color => color.replace('0.5', '1')),
+            backgroundColor:'#ff4d4d',
+            borderColor: '#ff1a1a',
             borderWidth: 1
           }
         ]
@@ -275,10 +271,6 @@ export class DashboardComponent {
       }
     });
   }
-  
-  
-
-  
   generateIncidentsPerLotChart() {
     const lots = Array.from(new Set(this.listIncident.map(incident => incident.application.lot)));
   
@@ -326,11 +318,7 @@ export class DashboardComponent {
       }
     });
   }
-
-
-
   // chart Operation 
-
   generateOperationPerStatutChartMonth() {
     const monthNames = ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aout', 'Sep', 'Oct', 'Nov', 'Dec'];
     const statut = Array.from(new Set(this.listOperation.map(operation => operation.statut)));
@@ -403,16 +391,9 @@ export class DashboardComponent {
     // Get unique application labels for both datasets
     const allLabels = [...new Set([...Object.keys(OperationPlanifierPerApplication), ...Object.keys(OperationTerminePerApplication)])];
   
-    // Define colors for open and closed datasets using getRandomColor() function
-    const openColors = allLabels.map(label => this.getRandomColor());
-    const closedColors = allLabels.map(label => this.getRandomColor());
     // Create datasets for both open and closed incidents
     const closedData = allLabels.map(label => OperationPlanifierPerApplication[label] || 0);
-    const openData = allLabels.map(label => OperationTerminePerApplication[label] || 0);
-    
-    // Assign colors to datasets
-    const backgroundColors = [...closedColors.slice(0, allLabels.length), ...openColors.slice(0, allLabels.length)];
-    
+    const openData = allLabels.map(label => OperationTerminePerApplication[label] || 0);    
     // Create a chart using Chart.js
     const chart = new Chart('operationPerApplicationChart', {
       type: 'bar',
@@ -422,15 +403,15 @@ export class DashboardComponent {
           {
             label: 'Nombre d\'operation planifier',
             data: closedData,
-            backgroundColor: closedColors.slice(0, allLabels.length),
-            borderColor: closedColors.map(color => color.replace('0.5', '1')),
+            backgroundColor:'#ff4d4d',
+            borderColor: '#ff1a1a',
             borderWidth: 1
           },
           {
             label: 'Nombre d\'operation terminer',
             data: openData,
-            backgroundColor: openColors.slice(0, allLabels.length),
-            borderColor: openColors.map(color => color.replace('0.5', '1')),
+            backgroundColor: '#00e600',
+            borderColor: '#00b300',
             borderWidth: 1
           }
         ]
@@ -455,7 +436,6 @@ export class DashboardComponent {
       }
     });
   }
-
   generateOperationTerminerPerLotChart() {
     const lots = Array.from(new Set(this.listOperation.map(operation => operation.application.lot)));
   
@@ -503,10 +483,6 @@ export class DashboardComponent {
       }
     });
   }
-  
-  
-
-  
   generateOperationPlanifierPerLotChart() {
     const lots = Array.from(new Set(this.listOperation.map(operation => operation.application.lot)));
   
@@ -554,8 +530,6 @@ export class DashboardComponent {
       }
     });
   }
-    
- 
 
 // chart changement 
 generateChangePerStatutChartMonth() {
@@ -632,16 +606,11 @@ generateChangePerApplicationChart() {
   const allLabels = [...new Set([...Object.keys(changementPlanifierPerApplication), ...Object.keys(changementTerminePerApplication)])];
 
   // Define colors for open and closed datasets
-   // Define colors for open and closed datasets using getRandomColor() function
-   const openColors = allLabels.map(label => this.getRandomColor());
-   const closedColors = allLabels.map(label => this.getRandomColor());
+  
   // Create datasets for both open and closed incidents
-  const closedData = allLabels.map(label => changementPlanifierPerApplication[label] || 0);
-  const openData = allLabels.map(label => changementTerminePerApplication[label] || 0);
-  
-  // Assign colors to datasets
-  const backgroundColors = [...closedColors.slice(0, allLabels.length), ...openColors.slice(0, allLabels.length)];
-  
+  const plannedData = allLabels.map(label => changementPlanifierPerApplication[label] || 0);
+  const terminerData = allLabels.map(label => changementTerminePerApplication[label] || 0);
+    
   // Create a chart using Chart.js
   const chart = new Chart('changePerApplicationChart', {
     type: 'bar',
@@ -650,16 +619,16 @@ generateChangePerApplicationChart() {
       datasets: [
         {
           label: 'Nombre de changement planifier',
-          data: closedData,
-          backgroundColor: closedColors.slice(0, allLabels.length),
-          borderColor: closedColors.map(color => color.replace('0.5', '1')),
+          data: plannedData,
+          backgroundColor:'#ff4d4d',
+          borderColor: '#ff1a1a',
           borderWidth: 1
         },
         {
           label: 'Nombre de changement terminer',
-          data: openData,
-          backgroundColor: openColors.slice(0, allLabels.length),
-          borderColor: openColors.map(color => color.replace('0.5', '1')),
+          data: terminerData,
+          backgroundColor: '#00e600',
+            borderColor: '#00b300',
           borderWidth: 1
         }
       ]
@@ -779,7 +748,6 @@ generateChangePlanifierPerLotChart() {
     }
   });
 }
-
 ///////////////////////////////
 getHealthCheckPerWeekOfCurrentMonth(): number[] {
   const today = new Date();
@@ -836,6 +804,7 @@ getHealthCheckPerDayOfCurrentWeek(): number[] {
 
     }
   });
+
   return healthCheckCounts;
 }
 getHealthCheckPerMonthOfCurrentYear(): number[] {
@@ -1014,7 +983,6 @@ private updateChart() {
     }
   });
 }
-
    getRandomColor() {
     const r = Math.floor(Math.random() * 256);
     const g = Math.floor(Math.random() * 256);

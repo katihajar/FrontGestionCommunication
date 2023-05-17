@@ -2,15 +2,15 @@
     [style]="{width: '60vw', height: '70vw','margin-left':'3%'}" [resizable]="true">
     <div #myDialog id="myDialog" style="width: 100%;border:2px solid rgb(24, 109, 189)">
         <div class="col-12">
-            <img src="../../../../../assets/img/operationPlanifier.png" width="100%" style="margin-left: 0%;" alt="psa"
+            <img src="http://localhost:4200/assets/img/operationPlanifier.png" width="100%" style="margin-left: 0%;" alt="psa"
                 title="psa" class="staticImg">
         </div>
-        <div style="width: 100%;" style="font-family: 'Times New Roman', Times, sans-serif;font-size: 25px;">
+        <div style="width: 100%;" style="font-family: 'Times New Roman', Times, sans-serif;font-size: 16px;">
             <div style="float:left;width: 100%;">
-                <div *ngIf="this.AddOperation.statut == 'Planifier'" class="col-12" style="height: 5vh; display: flex; align-items: center; justify-content: center; text-align: center;background-color: rgb(146, 196, 219);">
+                <div *ngIf="this.AddOperation.statut == 'Planifiée'" class="col-12" style="height: 5vh; display: flex; align-items: center; justify-content: center; text-align: center;background-color: rgb(146, 196, 219);">
                     <p style="margin: 1%;"><b style="color: white;font-size: 30px;">Operation Details</b></p>
                 </div>
-                <div *ngIf="this.AddOperation.statut == 'Terminer'" class="col-12" style="height: 5vh; display: flex; align-items: center; justify-content: center; text-align: center;background-color: rgb(100, 241, 136);">
+                <div *ngIf="this.AddOperation.statut == 'Terminée'" class="col-12" style="height: 5vh; display: flex; align-items: center; justify-content: center; text-align: center;background-color: rgb(100, 241, 136);">
                     <p style="margin: 1%;"><b style="color: white;font-size: 30px;">End of Operation</b></p>
                 </div>
             <div style="margin: 2%;">
@@ -30,7 +30,7 @@
                   </div><br>
 
                 
-                <p *ngIf="this.AddOperation.statut == 'Planifier'">At your disposal for any further information.</p>
+                <p *ngIf="this.AddOperation.statut == 'Planifiée'">At your disposal for any further information.</p>
                 
                 <br>
                 <p style="color: rgb(55, 97, 233);font-weight: bolder">PLEASE FORWARD THIS EMAIL TO ALL CONCERNED PARTIES.</p>
@@ -39,7 +39,7 @@
         </div>
         <div class="col-12" style="margin-top: 2%;">
 
-            <img src="../../../../../assets/img/FooteroperationPlanifier.png" width="100%" style="margin-left: 0%;" alt="psa"
+            <img src="http://localhost:4200/assets/img/FooteroperationPlanifier.png" width="100%" style="margin-left: 0%;" alt="psa"
                 title="psa" class="staticImg">
 
 

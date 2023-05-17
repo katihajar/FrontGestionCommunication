@@ -67,6 +67,7 @@ export class DashboardComponent {
      this.updateChart();
     });
   }
+  
   onStartDateChanged(event: Event) {
     const startDateStr = (event.target as HTMLInputElement).value;
     const startDate = moment(startDateStr);
@@ -187,14 +188,14 @@ export class DashboardComponent {
           {
             label: 'Nombre d\'Incidents cloturé',
             data: closedData,
-            backgroundColor: '#00e600',
+            backgroundColor: '#8bd3c7',
             borderColor: '#00b300',
             borderWidth: 1
           },
           {
             label: 'Nombre d\'incident ouvert',
             data: openData,
-            backgroundColor:'#ff4d4d',
+            backgroundColor:'#fd7f6f',
             borderColor: '#ff1a1a',
             borderWidth: 1
           }
@@ -367,7 +368,7 @@ export class DashboardComponent {
   }
   generateOperationPerApplicationChart() {
     const OperationPlanifierPerApplication = this.listOperation.reduce((acc:any, operation) => {
-      if (operation.statut === 'Planifier') { 
+      if (operation.statut === 'Planifiée') { 
         const applicationTitle = operation.application.nomApplication;
         if (!acc[applicationTitle]) {
           acc[applicationTitle] = 0;
@@ -378,7 +379,7 @@ export class DashboardComponent {
     }, {});
     
     const OperationTerminePerApplication = this.listOperation.reduce((acc:any, operation) => {
-      if (operation.statut === 'Terminer') { 
+      if (operation.statut === 'Terminée') { 
         const applicationTitle = operation.application.nomApplication;
         if (!acc[applicationTitle]) {
           acc[applicationTitle] = 0;
@@ -401,16 +402,16 @@ export class DashboardComponent {
         labels: allLabels,
         datasets: [
           {
-            label: 'Nombre d\'operation planifier',
+            label: 'Nombre d\'operation planifiée',
             data: closedData,
-            backgroundColor:'#ff4d4d',
+            backgroundColor:'#fd7f6f',
             borderColor: '#ff1a1a',
             borderWidth: 1
           },
           {
-            label: 'Nombre d\'operation terminer',
+            label: 'Nombre d\'operation terminée',
             data: openData,
-            backgroundColor: '#00e600',
+            backgroundColor: '#8bd3c7',
             borderColor: '#00b300',
             borderWidth: 1
           }
@@ -426,7 +427,7 @@ export class DashboardComponent {
         plugins: {
           title: {
             display: true,
-            text: 'Nombre d\'operation planifier et terminer par Application',
+            text: 'Nombre d\'operation planifiée et terminée par Application',
             padding: {
               top: 20,
               bottom: 20
@@ -442,7 +443,7 @@ export class DashboardComponent {
     const operationPerLots = this.listOperation.reduce((acc: any, op) => {
       const lot = op.application.lot;
       const statut = op.statut;
-      if (statut === "Terminer") {
+      if (statut === "Terminée") {
         if (!acc[lot]) {
           acc[lot] = 0;
         }
@@ -460,7 +461,7 @@ export class DashboardComponent {
     const chart = new Chart('operationTerminerPerLotsChart', {
       type: 'bar',
       data: {
-        labels: ['Nombre d\'operation terminer par lots'],
+        labels: ['Nombre d\'operation terminée par lots'],
         datasets
       },
       options: {
@@ -473,7 +474,7 @@ export class DashboardComponent {
         plugins: {
           title: {
             display: true,
-            text: 'Nombre d\'operation terminer par lots',
+            text: 'Nombre d\'operation terminée par lots',
             padding: {
               top: 20,
               bottom: 20
@@ -489,7 +490,7 @@ export class DashboardComponent {
     const operationPerLots = this.listOperation.reduce((acc: any, op) => {
       const lot = op.application.lot;
       const statut = op.statut;
-      if (statut === "Planifier") {
+      if (statut === "Planifiée") {
         if (!acc[lot]) {
           acc[lot] = 0;
         }
@@ -507,7 +508,7 @@ export class DashboardComponent {
     const chart = new Chart('operationPlannedPerLotsChart', {
       type: 'bar',
       data: {
-        labels: ['Nombre d\'operation planifier par lots'],
+        labels: ['Nombre d\'operation planifiée par lots'],
         datasets
       },
       options: {
@@ -520,7 +521,7 @@ export class DashboardComponent {
         plugins: {
           title: {
             display: true,
-            text: 'Nombre d\'operation planifier par lots',
+            text: 'Nombre d\'operation planifiée par lots',
             padding: {
               top: 20,
               bottom: 20
@@ -618,16 +619,16 @@ generateChangePerApplicationChart() {
       labels: allLabels,
       datasets: [
         {
-          label: 'Nombre de changement planifier',
+          label: 'Nombre de changement planifiée',
           data: plannedData,
-          backgroundColor:'#ff4d4d',
+          backgroundColor:'#fd7f6f',
           borderColor: '#ff1a1a',
           borderWidth: 1
         },
         {
-          label: 'Nombre de changement terminer',
+          label: 'Nombre de changement terminée',
           data: terminerData,
-          backgroundColor: '#00e600',
+          backgroundColor: '#8bd3c7',
             borderColor: '#00b300',
           borderWidth: 1
         }
@@ -643,7 +644,7 @@ generateChangePerApplicationChart() {
       plugins: {
         title: {
           display: true,
-          text: 'Nombre de changement planifier et terminer par Application',
+          text: 'Nombre de changement planifiée et terminée par Application',
           padding: {
             top: 20,
             bottom: 20
@@ -677,7 +678,7 @@ generateChangeTerminePerLotChart() {
   const chart = new Chart('changeTerminerPerLotsChart', {
     type: 'bar',
     data: {
-      labels: ['Nombre de changement terminer par lots'],
+      labels: ['Nombre de changement terminée par lots'],
       datasets
     },
     options: {
@@ -690,7 +691,7 @@ generateChangeTerminePerLotChart() {
       plugins: {
         title: {
           display: true,
-          text: 'Nombre de changement terminer par lots',
+          text: 'Nombre de changement terminée par lots',
           padding: {
             top: 20,
             bottom: 20
@@ -725,7 +726,7 @@ generateChangePlanifierPerLotChart() {
   const chart = new Chart('changePlannedPerLotsChart', {
     type: 'bar',
     data: {
-      labels: ['Nombre de changement planifier par lots'],
+      labels: ['Nombre de changement planifiée par lots'],
       datasets
     },
     options: {
@@ -738,7 +739,7 @@ generateChangePlanifierPerLotChart() {
       plugins: {
         title: {
           display: true,
-          text: 'Nombre de changement planifier par lots',
+          text: 'Nombre de changement planifiée par lots',
           padding: {
             top: 20,
             bottom: 20

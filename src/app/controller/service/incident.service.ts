@@ -1,11 +1,11 @@
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Incident } from '../model/incident';
 import { PlanAction } from '../model/plan-action';
 import { AuthService } from './auth.service';
 import {Observable} from "rxjs";
-
+import { MsalService } from '@azure/msal-angular';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,9 @@ export class IncidentService {
   private _AddIncidentAng: Incident = new Incident();
   private _ListPlanAction = new Array<PlanAction>();
   private _ListPlanActionAng = new Array<PlanAction>();
-  constructor(private http: HttpClient,private auth: AuthService) { }
+
+
+  constructor(private http: HttpClient,private auth: AuthService,private authService: MsalService) { }
 
   get ListPlanActionAng(): Array<PlanAction>{
     if(this._ListPlanActionAng == null){
@@ -84,7 +86,7 @@ export class IncidentService {
   public FindIncidentByPilote(): Observable<HttpResponse<Array<Incident>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<Incident>>(
-      this.urlPilote + 'incident/user/'+this.auth.User.username,
+      this.urlPilote + 'incident/lot/'+this.auth.User.lots,
       { observe: 'response', headers }
     );    
   }
@@ -112,4 +114,20 @@ export class IncidentService {
       { observe: 'response', headers }
     );    
   }
+
+  
+
+  
+
+
+
+ 
+
+
+
+
+
+
 }
+  
+

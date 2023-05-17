@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Application } from 'src/app/controller/model/application';
 import { PiloteApplication } from 'src/app/controller/model/pilote-application';
@@ -24,15 +25,14 @@ export class RegistreApplicationComponent implements OnInit {
   App: Application = new Application();
   responsableList = new Array<User>();
   disponibilite:any[]=[];
-  constructor(private appService: ApplicationService, private userService: UserService,
-     private router: Router, private charteService: CharteService) { }
+  constructor(private appService: ApplicationService, private userService: UserService,private messageService: MessageService,
+    private cdRef: ChangeDetectorRef,private router: Router, private charteService: CharteService) { }
   clear(table: Table) {
     table.clear();
   }
 
   ngOnInit(): void {
     this.FindAllApp();
-    this.FindAllUsers();
     this.disponibilite= [
       {name: 'Oui'},
       {name: 'Non'},
@@ -73,7 +73,6 @@ export class RegistreApplicationComponent implements OnInit {
       // @ts-ignore
       this.ListPiloteApplication = data.body;
       this.displayPilote = true;
-      this.FindAllUsers();
     });
   }
   RouteFormAddApp() {
@@ -86,29 +85,44 @@ export class RegistreApplicationComponent implements OnInit {
     this.userService.UserList = value;
   }
   AddPilote() {
+    this.FindAllUsers(this.App.lot);
     this.AjouterPilote = true;
+    this.cdRef.detectChanges();
+
   }
-  SavePiloteToApp(){    
+  SavePiloteToApp(){   
+    const match = this.ListPiloteApplication.find(etat => etat.pilote.id === this.AddPiloteApp.pilote.id);
+    if (match) {
+      this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'ce pilote existe déja.' });
+    } else {
     this.appService.SavePiloteToApp().subscribe((data)=>{
       this.FindListPilote(this.App);
       this.AddPiloteApp = new PiloteApplication;
       this.AjouterPilote = false;
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Pilote Ajouté avec succesé' });
+
     })
   }
-  FindAllUsers() {
+  }
+  FindAllUsers(lot: string) {
     this.userService.FindAllUsers().subscribe((data) => {
       // @ts-ignore
       this.UserList = data.body;
-      for(let i = 0; i<this.UserList.length;i++){
-        if(this.UserList[i].roles[0].name== "ROLE_PILOTE"){
-          this.piloteList.push(this.UserList[i]);
-        } else if(this.UserList[i].roles[0].name== "ROLE_RESPONSABLE"){
-          this.responsableList.push(this.UserList[i]);
-        } 
+      this.piloteList = new Array<User>();
+      for (const user of this.UserList) {
+        if (user.roles && user.roles.length > 0) {
+          const roleName = user.roles[0].name;
+          if (roleName == "ROLE_PILOTE" && lot == user.lots) {
+            this.piloteList.push(user);
+          } else if (roleName == "ROLE_RESPONSABLE" && lot == user.lots) {
+            this.responsableList.push(user);
+          }
+        }
       }
-    }
-    );
+      this.cdRef.detectChanges(); // Manually trigger change detection
+    });
   }
+  
   ShowModifDialog(app: Application){
     this.ModifApp = true;
   }

@@ -11,6 +11,8 @@ import { CharteService } from 'src/app/controller/service/charte.service';
 import { IncidentService } from 'src/app/controller/service/incident.service';
 const translate = require('translate');
 import * as FileSaver from 'file-saver';
+import { User } from 'src/app/controller/model/user';
+import { AuthService } from 'src/app/controller/service/auth.service';
 const moment = require('moment');
 
 @Component({
@@ -35,12 +37,18 @@ export class RegistreIncidentPiloteComponent implements OnInit {
   selectLang:any='';
   ListType:any[]=[];
   constructor(private charteService:CharteService,private incidentService: IncidentService,private confirmationService: ConfirmationService,
-     private router: Router, private appService: ApplicationService, private messageService:MessageService) { 
+     private router: Router, private appService: ApplicationService, private messageService:MessageService,private userService: AuthService) { 
      }
   clear(table: Table) {
     table.clear();
   }
+  get User(): User {
+    return this.userService.User;
+  }
 
+  set User(value: User) {
+    this.userService.User = value;
+  }
 
   exportExcel() {
     import("xlsx").then(xlsx => {
@@ -144,6 +152,18 @@ translateInput() {
     .catch((error: any) => {
       console.error(error);
     });
+    translate(this.AddIncident.detailResolution, { from: 'fr', to: 'en' }).then((result: string) => {
+      this.AddIncidentAng.detailResolution = result;
+    })
+      .catch((error: any) => {
+        console.error(error);
+      });
+      translate(this.AddIncident.actionPrise, { from: 'fr', to: 'en' }).then((result: string) => {
+        this.AddIncidentAng.actionPrise = result;
+      })
+        .catch((error: any) => {
+          console.error(error);
+        });
   this.AddIncidentAng.numeroIncident = this.AddIncident.numeroIncident;
   this.AddIncidentAng.dateDebut = this.AddIncident.dateDebut;
   this.AddIncidentAng.dateFin = this.AddIncident.dateFin;

@@ -15,6 +15,7 @@ import { DestinataireCommunication } from 'src/app/controller/model/destinataire
 import { DestinataireService } from 'src/app/controller/service/destinataire.service';
 import { CharteIncidentMoneticAngFrComponent } from '../charte-incident-monetic-ang-fr/charte-incident-monetic-ang-fr.component';
 import { Location } from '@angular/common';
+import { EmaildraftsService } from 'src/app/controller/service/emaildrafts.service';
 @Component({
   selector: 'app-ajouter-incident-pilote-ang-fr',
   templateUrl: './ajouter-incident-pilote-ang-fr.component.html',
@@ -42,7 +43,7 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
   @ViewChild(CharteIncidentMoneticAngFrComponent, { static: false }) myDivMonetic: any;
  
 
-  constructor(private incidentService: IncidentService, private charteService: CharteService,
+  constructor(private incidentService: IncidentService, private charteService: CharteService,private emailService: EmaildraftsService,
     private router: Router, private renderer: Renderer2, private el: ElementRef, private destService: DestinataireService,
     private messageService: MessageService, private cdRef: ChangeDetectorRef) {
       if(this.AddIncident.application.nomApplication == '' && this.AddIncident.statut ==''){
@@ -98,10 +99,15 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
           this.EmailEnCC.push(this.listDestinataire[i].email)
         }
       }
-    })
+    });
+    this.AddIncident.actionPrise = String();
+    this.AddIncident.detailResolution = String();
+    this.AddIncidentAng.actionPrise = String();
+    this.AddIncidentAng.detailResolution = String();
   }
 
   translateInput() {
+    this.ListPlanActionAng = new Array<PlanAction>();
     translate(this.AddIncident.titreIncident, { from: 'fr', to: 'en' }).then((result: string) => {
       this.AddIncidentAng.titreIncident = result;
     })
@@ -138,7 +144,18 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
       .catch((error: any) => {
         console.error(error);
       });
-
+      translate(this.AddIncident.detailResolution, { from: 'fr', to: 'en' }).then((result: string) => {
+        this.AddIncidentAng.detailResolution = result;
+      })
+        .catch((error: any) => {
+          console.error(error);
+        });
+        translate(this.AddIncident.actionPrise, { from: 'fr', to: 'en' }).then((result: string) => {
+          this.AddIncidentAng.actionPrise = result;
+        })
+          .catch((error: any) => {
+            console.error(error);
+          });
     this.AddIncidentAng.numeroIncident = this.AddIncident.numeroIncident;
     this.AddIncidentAng.dateDebut = this.AddIncident.dateDebut;
     this.AddIncidentAng.dateFin = this.AddIncident.dateFin;
@@ -257,7 +274,9 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
       this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Charte Non trouvé' });
     }
   }
+ 
   isSubmitDisabled() {
+    if(this.AddIncident.statut=='Ouvert'){
     return (
       !this.AddIncident.titreIncident ||
       this.AddIncident.titreIncident.length < 3 ||
@@ -277,8 +296,58 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
       this.AddIncidentAng.situationActuelle.length < 3 ||
       !this.AddIncidentAng.causePrincipale ||
       this.AddIncidentAng.causePrincipale.length < 3
-    );
+    );}else if(this.AddIncident.statut=='Résolu avec Suivi'){
+      return (
+        !this.AddIncident.actionPrise ||
+        this.AddIncident.actionPrise.length < 3 ||
+        !this.AddIncident.titreIncident ||
+      this.AddIncident.titreIncident.length < 3 ||
+      !this.AddIncident.dateDebut ||
+      !this.AddIncident.description ||
+      this.AddIncident.description.length < 3 ||
+      !this.AddIncident.situationActuelle ||
+      this.AddIncident.situationActuelle.length < 3 ||
+      !this.AddIncident.causePrincipale ||
+      this.AddIncident.causePrincipale.length < 3 ||
+      !this.AddIncidentAng.actionPrise ||
+      this.AddIncidentAng.actionPrise.length < 3 ||
+      !this.AddIncidentAng.titreIncident ||
+      this.AddIncidentAng.titreIncident.length < 3 ||
+      !this.AddIncidentAng.dateDebut ||
+      !this.AddIncidentAng.description ||
+      this.AddIncidentAng.description.length < 3 ||
+      !this.AddIncidentAng.situationActuelle ||
+      this.AddIncidentAng.situationActuelle.length < 3 ||
+      !this.AddIncidentAng.causePrincipale ||
+      this.AddIncidentAng.causePrincipale.length < 3
+      );}else{
+        return (
+          !this.AddIncident.detailResolution ||
+          this.AddIncident.detailResolution.length < 3 ||
+          !this.AddIncident.titreIncident ||
+          this.AddIncident.titreIncident.length < 3 ||
+          !this.AddIncident.dateDebut ||
+          !this.AddIncident.description ||
+          this.AddIncident.description.length < 3 ||
+          !this.AddIncident.situationActuelle ||
+          this.AddIncident.situationActuelle.length < 3 ||
+          !this.AddIncident.causePrincipale ||
+          this.AddIncident.causePrincipale.length < 3 ||
+          !this.AddIncidentAng.detailResolution ||
+          this.AddIncidentAng.detailResolution.length < 3 ||
+          !this.AddIncidentAng.titreIncident ||
+          this.AddIncidentAng.titreIncident.length < 3 ||
+          !this.AddIncidentAng.dateDebut ||
+          !this.AddIncidentAng.description ||
+          this.AddIncidentAng.description.length < 3 ||
+          !this.AddIncidentAng.situationActuelle ||
+          this.AddIncidentAng.situationActuelle.length < 3 ||
+          !this.AddIncidentAng.causePrincipale ||
+          this.AddIncidentAng.causePrincipale.length < 3
+        );}
   }
+
+
   SaveIncident() {
     this.AddIncident.dateAjout = new Date();
     if (this.AddIncident.application.charteIncident == 'charte Incident') {
@@ -287,6 +356,7 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
       this.Subject = '[' + this.AddIncident.type + '] ' + this.AddIncident.application.nomApplication + ' Incident ' + this.AddIncident.numeroIncident + ' - ' + this.AddIncident.titreIncident;
     }
     this.incidentService.SaveIncident().subscribe((data) => {
+      this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire,this.EmailEnCC,this.Subject,this.dialogElement.innerHTML);
       this.AddIncident = new Incident();
       this.ListPlanAction = new Array<PlanAction>();
       this.ListPlanActionAng = new Array<PlanAction>();

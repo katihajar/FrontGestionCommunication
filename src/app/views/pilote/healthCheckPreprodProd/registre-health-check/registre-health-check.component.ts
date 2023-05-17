@@ -6,6 +6,8 @@ import { Application } from 'src/app/controller/model/application';
 import { EtatProcessusMetier } from 'src/app/controller/model/etat-processus-metier';
 import { HealthChekPreprodProd } from 'src/app/controller/model/health-chek-preprod-prod';
 import { HealthChekPreprodProdDetail } from 'src/app/controller/model/health-chek-preprod-prod-detail';
+import { User } from 'src/app/controller/model/user';
+import { AuthService } from 'src/app/controller/service/auth.service';
 import { CharteService } from 'src/app/controller/service/charte.service';
 import { HealthCheckService } from 'src/app/controller/service/health-check.service';
 const moment = require('moment');
@@ -20,11 +22,17 @@ export class RegistreHealthCheckComponent implements OnInit {
   ListType: any[] = [];
   popUpAjout:boolean = false;
   constructor(private healthService: HealthCheckService,private charteService:CharteService,private router: Router,
-    private confirmationService: ConfirmationService,private messageService:MessageService) { }
+    private confirmationService: ConfirmationService,private messageService:MessageService,private userService: AuthService) { }
     clear(table: Table) {
       table.clear();
     }
+    get User(): User {
+      return this.userService.User;
+    }
   
+    set User(value: User) {
+      this.userService.User = value;
+    }
   ngOnInit(): void {
     this.AddHealthCheck = new HealthChekPreprodProd();
     this.FindHealth();

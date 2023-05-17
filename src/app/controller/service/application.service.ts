@@ -12,6 +12,7 @@ import {Observable} from "rxjs";
 export class ApplicationService {
   private url = environment.baseUrlAdmin;
   private urlPilote = environment.baseUrlPilote;
+  private urlRespo = environment.baseUrlResponsable;
   private _ListApplication: Array<Application> = new Array<Application>();
   private _ListPiloteApplication: Array<PiloteApplication> = new Array<PiloteApplication>();
   private _AddApplication: Application = new Application();
@@ -83,7 +84,20 @@ export class ApplicationService {
       { observe: 'response', headers }
     );    
   }
-
+  public FindApplcationHealthPilotByLots(): Observable<HttpResponse<Array<Application>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<Application>>(
+      this.urlPilote + 'application/lot/'+this.auth.User.lots,
+      { observe: 'response', headers }
+    );    
+  }
+  public FindApplcationHealthRespoByLots(): Observable<HttpResponse<Array<Application>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<Application>>(
+      this.urlRespo + 'application/lot/'+this.auth.User.lots,
+      { observe: 'response', headers }
+    );    
+  }
   public SaveApplication(): Observable<HttpResponse<void>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.post<void>(

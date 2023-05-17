@@ -114,7 +114,7 @@
         <ng-template pTemplate="left">
         </ng-template>
         <ng-template pTemplate="right">
-            <button pButton pRipple label="Ajouter un Destinataire" icon="pi pi-plus" class="p-button-success mr-2" (click)="AddPilote()" ></button>
+            <button pButton pRipple label="Ajouter un pilote" icon="pi pi-plus" class="p-button-success mr-2" (click)="AddPilote()" ></button>
         </ng-template>
     </p-toolbar>
     <p-table class="table" #dt2 [value]=" this.ListPiloteApplication" dataKey="id" [rows]="5" [showCurrentPageReport]="true"
@@ -152,9 +152,7 @@
            <p-columnFilter type="text" field="pilote.username" display="menu"></p-columnFilter>
          </div>
        </th>
-       <th>
-         action
-       </th>
+     
      </tr>
    </ng-template>
    <ng-template pTemplate="body" let-appPilote>
@@ -170,9 +168,7 @@
        <td>
          {{appPilote.pilote.username}}
        </td>
-       <td><button pButton pRipple type="button" style="font-size: larger;" icon="pi pi-times"
-           class="p-button-rounded p-button-danger"></button>
-       </td>
+      
      </tr>
    </ng-template>
    <ng-template pTemplate="emptymessage">

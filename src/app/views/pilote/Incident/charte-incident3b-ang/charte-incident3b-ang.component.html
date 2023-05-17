@@ -3,13 +3,13 @@
   <div #myDialog id="myDialog" style="width: 100%;">
 <div  class="col-12"   >
   <div *ngIf="this.AddIncident.statut == 'Ouvert'" >
-    <img src="../../../../../assets/img/IncidentOuvert.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
+    <img src="http://localhost:4200/assets/img/IncidentOuvert.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
   </div>
   <div *ngIf="this.AddIncident.statut == 'Résolu avec Suivi'" >
-    <img src="../../../../../assets/img/IncidentResoluAvecSuivi.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
+    <img src="http://localhost:4200/assets/img/IncidentResoluAvecSuivi.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
     </div>
     <div *ngIf="this.AddIncident.statut == 'Clos'" >
-      <img src="../../../../../assets/img/IncidentClose.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
+      <img src="http://localhost:4200/assets/img/IncidentClose.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
       </div>
     </div>
 <div style="width: 100%;">
@@ -30,20 +30,25 @@
       <br>
       <p style="color: rgb(91, 91, 219);font-weight: bolder;">INCIDENT DESCRIPTION </p>
       <p style="color: rgb(177, 177, 177);">{{this.AddIncidentAng.description}}</p><br>
-      <br>
       <p style="color: rgb(91, 91, 219);font-weight: bolder;">CURRENT SITUATION </p>
       <p style="color: rgb(177, 177, 177);">{{this.AddIncidentAng.situationActuelle}}</p><br>
-      <br>
       <p style="color: rgb(91, 91, 219);font-weight: bolder;">IDENTIFIED IMPACTS</p>
       <p style="color: rgb(177, 177, 177);">{{this.AddIncidentAng.impact}}</p><br>
-      <br>
       <p style="color: rgb(91, 91, 219);font-weight: bolder;">ACTION PLAN</p>
       <div *ngFor="let action of this.AddIncidentAng.planActionList">
         <p> <b><u>Action {{action.numero}}</u></b> ({{action.statut}}) : {{action.description}} </p><br>
       </div>
+    
       <p style="color: rgb(91, 91, 219);font-weight: bolder;">WORKAROUND</p>
       <p style="color: rgb(177, 177, 177);">{{this.AddIncidentAng.solutionContournement}}</p><br>
-      <br>
+      <div *ngIf="this.AddIncident.statut == 'Clos'">
+        <p style="color: rgb(91, 91, 219);font-weight: bolder;">DETAILS ABOUT THE INCIDENTS RESOLUTION </p>
+      <p style="color: rgb(177, 177, 177);">{{this.AddIncident.detailResolution}}</p><br>
+      </div>
+      <div *ngIf="this.AddIncident.statut == 'Résolu avec Suivi'">
+        <p style="color: rgb(91, 91, 219);font-weight: bolder;">ACTION TAKEN</p>
+      <p style="color: rgb(177, 177, 177);">{{this.AddIncident.actionPrise}}</p><br>
+      </div>
       <p><span style="color: rgb(91, 91, 219);font-weight: bolder;"> NEXT COMMUNICATION AT:</span>{{this.AddIncidentAng.prochaineCommunication | date: 'HH:mm:ss MM/dd/yyyy'}}</p>
     
       <br>
@@ -53,13 +58,13 @@
 </div>
 <div class="col-12" >
   <div *ngIf="this.AddIncident.statut == 'Ouvert'" >
-  <img src="../../../../../assets/img/FooterIncidentOuvert.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
+  <img src="http://localhost:4200/assets/img/FooterIncidentOuvert.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
   </div>
   <div *ngIf="this.AddIncident.statut == 'Résolu avec Suivi'" >
-    <img src="../../../../../assets/img/FooterIncidentResoluAvecSuivi.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
+    <img src="http://localhost:4200/assets/img/FooterIncidentResoluAvecSuivi.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
     </div>
     <div *ngIf="this.AddIncident.statut == 'Clos'" >
-      <img src="../../../../../assets/img/FooterIncidentClos.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
+      <img src="http://localhost:4200/assets/img/FooterIncidentClos.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
       </div>
 </div></div>
 <ng-template pTemplate="footer">

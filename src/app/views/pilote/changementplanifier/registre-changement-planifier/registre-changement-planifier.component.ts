@@ -11,6 +11,8 @@ import { ChangementService } from 'src/app/controller/service/changement.service
 import { CharteService } from 'src/app/controller/service/charte.service';
 const translate = require('translate');
 import * as FileSaver from 'file-saver';
+import { AuthService } from 'src/app/controller/service/auth.service';
+import { User } from 'src/app/controller/model/user';
 const moment = require('moment');
 @Component({
   selector: 'app-registre-changement-planifier',
@@ -31,9 +33,16 @@ export class RegistreChangementPlanifierComponent implements OnInit {
   ListType: any[] = [];
   ListPiloteApp = new Array<PiloteApplication>();
   ContenuAng = new ContenuChangement();
-  constructor(private router: Router,private changeService: ChangementService, private charte: CharteService,
+  constructor(private router: Router,private changeService: ChangementService, private charte: CharteService,private userService: AuthService,
     private confirmationService: ConfirmationService,private messageService:MessageService,private appService: ApplicationService) { }
-
+    
+    get User(): User {
+      return this.userService.User;
+    }
+  
+    set User(value: User) {
+      this.userService.User = value;
+    }
   ngOnInit(): void {
     this.FindChange();
     this.FindApp();

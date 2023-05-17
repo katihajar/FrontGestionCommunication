@@ -107,7 +107,7 @@
                   class="p-button-rounded p-button-info"></button>
               <button pButton pRipple (click)="Edite(change)" type="button" style="font-size: larger;" icon="pi pi-pencil"
                 class="p-button-rounded p-button-success"></button>
-            <button pButton pRipple (click)="DeleteChange(change.id)" type="button" style="font-size: larger;" icon="pi pi-times"
+            <button *ngIf="change.createurChangement.id == this.User.id"  pButton pRipple (click)="DeleteChange(change.id)" type="button" style="font-size: larger;" icon="pi pi-times"
               class="p-button-rounded p-button-danger"></button>
           </td>
             </tr>

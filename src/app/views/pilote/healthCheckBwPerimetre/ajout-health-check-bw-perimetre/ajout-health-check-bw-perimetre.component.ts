@@ -13,6 +13,7 @@ import { saveAs } from 'file-saver';
 import { MyOptions } from 'src/app/controller/model/myoption';
 import { CharteHealthCheckBwPerimetreComponent } from '../charte-health-check-bw-perimetre/charte-health-check-bw-perimetre.component';
 import { DestinataireService } from 'src/app/controller/service/destinataire.service';
+import { EmaildraftsService } from 'src/app/controller/service/emaildrafts.service';
 const moment = require('moment');
 @Component({
   selector: 'app-ajout-health-check-bw-perimetre',
@@ -35,7 +36,7 @@ export class AjoutHealthCheckBwPerimetreComponent implements OnInit {
   Subject: string= String();
   dialogElement:any;
   @ViewChild(CharteHealthCheckBwPerimetreComponent,{static:false}) myDiv: any ;
-  constructor(private healthService: HealthCheckBwPerimetreService,private charteService:CharteService,private router: Router,
+  constructor(private emailService:EmaildraftsService,private healthService: HealthCheckBwPerimetreService,private charteService:CharteService,private router: Router,
     private messageService:MessageService,private destService: DestinataireService) { }
 
   ngOnInit(): void {
@@ -117,6 +118,7 @@ removeDetails(us: HealthCheckBwPerimetreDetail) {
   SaveHealth(){
     this.Subject = this.AddHealthCheckBw.titre;
       this.healthService.SaveHealthCheck().subscribe((data) => {
+        this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire,this.EmailEnCC,this.Subject,this.dialogElement.innerHTML);
              this.AddHealthCheckBw=new HealthCheckBwPerimetre();
              this.listHelthchekBwdetail = new Array<HealthCheckBwPerimetreDetail>();
              this.helthchekBwdetail= new HealthCheckBwPerimetreDetail;
@@ -148,7 +150,7 @@ removeDetails(us: HealthCheckBwPerimetreDetail) {
         const blob = this.dataURLtoBlob(this.imageDataUrl);
         const imageUrl = URL.createObjectURL(blob); // create URL object from blob
         const file = new File([blob], 'healthcheck.png', { type: 'image/png' });
-        saveAs(file);
+        // saveAs(file);
         this.SaveHealth();
       });       
        this.charteHealthCheckBw = false;

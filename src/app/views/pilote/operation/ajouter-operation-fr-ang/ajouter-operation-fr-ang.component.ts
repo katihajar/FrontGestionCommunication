@@ -12,6 +12,7 @@ import { CharteOperationFrAngComponent } from '../charte-operation-fr-ang/charte
 import { DestinataireService } from 'src/app/controller/service/destinataire.service';
 import { DestinataireCommunication } from 'src/app/controller/model/destinataire-communication';
 import { Router } from '@angular/router';
+import { EmaildraftsService } from 'src/app/controller/service/emaildrafts.service';
 @Component({
   selector: 'app-ajouter-operation-fr-ang',
   templateUrl: './ajouter-operation-fr-ang.component.html',
@@ -29,7 +30,7 @@ export class AjouterOperationFrAngComponent implements OnInit {
   listDestinataire:Array<DestinataireCommunication>= new Array<DestinataireCommunication>();
   @ViewChild(CharteOperationFrAngComponent,{static:false}) myDiv: any ;
   constructor(private operationService: OperationService,private messageService: MessageService,private router:Router,
-    private charte: CharteService,private destService: DestinataireService) { 
+    private emailService:EmaildraftsService,private charte: CharteService,private destService: DestinataireService) { 
       if(this.AddOperation.application.nomApplication == '' && this.AddOperation.statut=='' ){
         this.router.navigate(['/pilote/operation/registre']);
       }
@@ -127,7 +128,7 @@ export class AjouterOperationFrAngComponent implements OnInit {
         const blob = this.dataURLtoBlob(this.imageDataUrl);
         const imageUrl = URL.createObjectURL(blob); // create URL object from blob
         const file = new File([blob], this.AddOperation.titre+'-'+this.AddOperation.application.nomApplication+'.png', { type: 'image/png' });
-        saveAs(file);
+        // saveAs(file);
         this.SaveOperation();
       });
         this.charteOperationAngFr = false;
@@ -172,6 +173,7 @@ export class AjouterOperationFrAngComponent implements OnInit {
       this.Subject = '[TOTALENERGIES][COMMUNICATION] -N°.'+this.AddOperation.numero+' - Description Courte de l\'Operation Terminée'; 
    }
       this.operationService.SaveOperation().subscribe((data) => {
+        this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire,this.EmailEnCC,this.Subject,this.dialogElement.innerHTML);
              this.AddOperation=new Operation();
              this.AddOperationAng=new Operation();
              const mailtoLink = `mailto:${this.EmailObligatoire.join(';')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(';')}`;

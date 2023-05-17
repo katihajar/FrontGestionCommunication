@@ -1,10 +1,11 @@
 <p-dialog [modal]="true" [(visible)]="this.charteHealthCheckPreprodProd" header="Charte Health Check "
     [style]="{width: '67vw', height: '70vw','margin-left':'3%'}" [resizable]="true">
     <div #myDialog id="myDialog" style="width: 100%;">
+       
         <div class="col-12">
 
             <div style="border:1px solid black;">
-                <img src="../../../../../assets/img/EtatSantéProd.png" width="100%" alt="psa" title="psa"
+                <img src="http://localhost:4200/assets/img/EtatSantéProd.png" width="100%" alt="psa" title="psa"
                     class="staticImg">
             </div>
         </div>
@@ -12,13 +13,13 @@
             [ngStyle]="{'border':'1px solid black'}">
             <div style="font-family: 'Times New Roman', Times, sans-serif;">
                 <div
-                    style="height: 4vh; display: flex; align-items: center; justify-content: flex-start; text-align: center;background-color: rgb(88, 140, 153) ">
+                    style="height: 6vh; display: flex; align-items: center; justify-content: flex-start; text-align: center;background-color: rgb(88, 140, 153) ">
                     <p style="margin: 1%; font-weight: bolder;">[{{this.AddHealthCheck.type}}] Etat de santé Monétique –
                         <span>{{this.AddHealthCheck.dateAjout | date :'dd/MM/YYYY'}}</span>,
                         <span>{{this.AddHealthCheck.dateAjout | date :'HH:mm'}}</span>
                     </p>
-                    <div style="margin-left: auto;">
-                        <img src="../../../../../assets/img/frFlag.png" class="mr-2 flag " style="width: 30px;" />
+                    <div style="margin-left: auto;justify-content: center;">
+                        <img src="http://localhost:4200/assets/img/frFlag.png" class="mr-2 flag "  />
                     </div>
                 </div>
             </div>
@@ -30,59 +31,92 @@
                         <b>{{this.AddHealthCheck.dateAjout | date : 'HH:mm'}}</b>
                     </p>
                     <div style="float:left; width: 35%; margin-top: 2%;">
-                        <table id="customers">
+                        <table id="customers" style=" font-family: Arial, Helvetica, sans-serif;
+                        border-collapse: collapse;
+                        width: 100%;">
                             <tr>
-                                <th style="background-color: #990033;color: white;width: 60%;text-align: center;">
+                                <th style="background-color: #990033;color: white;width: 60%;text-align: center;  border: 1px solid  #a2a2a2;
+                                padding: 8px;
+                                text-align: center;padding-top: 12px;
+  padding-bottom: 12px;  ">
                                     Application
                                 </th>
-                                <th style="background-color: white;color: #990033;width: 40%;text-align: center;">
+                                <th style="background-color: white;color: #990033;width: 40%;text-align: center;  border: 1px solid  #a2a2a2;
+                                padding: 8px;
+                                text-align: center;padding-top: 12px;
+  padding-bottom: 12px;  ">
                                     Disponibilité
                                 </th>
                             </tr>
-                            <tr *ngFor="let satutApp of this.AddHealthCheck.statutApplicationList">
-                                <td style="width: 75%;">
+                            <tr *ngFor="let satutApp of this.AddHealthCheck.statutApplicationList; let i = index" [style.background-color]="i % 2 === 0 ? '#e0dcdc' : ''">
+                                <td style="width: 75%;  border: 1px solid  #a2a2a2;
+                                padding: 8px;
+                                text-align: center;">
                                     {{ satutApp.application.nomApplication }}
                                 </td>
-                                <td style="width: 25%;text-align: center;">
-                                    <div *ngIf="satutApp.statut =='OK'"> <p-badge severity="success"
-                                            styleClass="mr-2"></p-badge>
+                                <td style="width: 25%;text-align: center;  border: 1px solid  #a2a2a2;
+                                padding: 8px;
+                                text-align: center;">
+                                    <div *ngIf="satutApp.statut =='OK'"> 
+                                        <span style="display: inline-block;width: 25px;height: 25px;border-radius: 50%;background-color: #28a745;"></span>
                                     </div>
-                                    <div *ngIf="satutApp.statut =='En cours d\'éxecuxtion'"><p-badge severity="info"
-                                            styleClass="mr-2"></p-badge></div>
-                                    <div *ngIf="satutApp.statut =='Flux non critique KO'"><p-badge severity="warning"
-                                            styleClass="mr-2"></p-badge></div>
-                                    <div *ngIf="satutApp.statut =='Flux critique KO'"><p-badge severity="danger"
-                                            styleClass="mr-2"></p-badge></div>
+                                    <div *ngIf="satutApp.statut =='En cours d\'éxecuxtion'">
+                                        <span
+                                                style="display: inline-block;width: 25px;height: 25px;border-radius: 50%;background-color: rgb(54, 105, 245);"></span>
+                                    </div>
+                                    <div *ngIf="satutApp.statut =='Flux non critique KO'">
+                                        <span style="display: inline-block;width: 25px;height: 25px;border-radius: 50%;background-color: orange"></span>
+                                           
+                                    </div>
+                                    <div *ngIf="satutApp.statut =='Flux critique KO'">
+                                        <span
+                                        style="display: inline-block;width: 25px;height: 25px;border-radius: 50%;background-color: red"></span>
+                                    
+                                    </div>
+
 
                                 </td>
                             </tr>
                         </table>
-                        <img src="../../../../../assets/img/HealthLegend.png" width="100%" alt="psa" title="psa"
+                        <img src="http://localhost:4200/assets/img/HealthLegend.png" width="100%" alt="psa" title="psa"
                             class="staticImg">
                     </div>
                     <div style="float:right; width: 55%;margin: 2%;">
-                        <table id="customers">
+                        <table id="customers" style=" font-family: Arial, Helvetica, sans-serif;
+                        border-collapse: collapse;
+                        width: 100%;">
                             <tr>
-                                <th style="background-color: #990033;color: white;width: 60%;text-align: center;">
+                                <th style="background-color: #990033;color: white;width: 60%;text-align: center;padding-top: 12px;border: 1px solid  #a2a2a2;
+                                padding-bottom: 12px;  ">
                                     Processus Métier
                                 </th>
-                                <th style="background-color: white;color: #990033;width: 40%;text-align: center;">Statut
+                                <th style="background-color: white;color: #990033;width: 40%;text-align: center;padding-top: 12px;border: 1px solid  #a2a2a2;
+                                padding-bottom: 12px;  ">Statut
                                 </th>
                             </tr>
-                            <tr *ngFor="let etat of this.AddHealthCheck.etatProcessusMetierList">
-                                <td style="width: 75%;text-align: left;">
+                            <tr *ngFor="let etat of this.AddHealthCheck.etatProcessusMetierList; let i = index" [style.background-color]="i % 2 === 0 ? '#e0dcdc' : ''">
+                                <td style="width: 75%;text-align: left;border: 1px solid  #a2a2a2;">
                                     {{ etat.processusMetier.titre }}
                                 </td>
-                                <td style="width: 25%;text-align: center;">
-                                    <div *ngIf="etat.statut =='OK'"> <p-badge severity="success"
-                                            styleClass="mr-2"></p-badge>
-                                    </div>
-                                    <div *ngIf="etat.statut =='En cours d\'éxecuxtion'"><p-badge severity="info"
-                                            styleClass="mr-2"></p-badge></div>
-                                    <div *ngIf="etat.statut =='Flux non critique KO'"><p-badge severity="warning"
-                                            styleClass="mr-2"></p-badge></div>
-                                    <div *ngIf="etat.statut =='Flux critique KO'"><p-badge severity="danger"
-                                            styleClass="mr-2"></p-badge></div>
+                                <td style="width: 25%;text-align: center;border: 1px solid  #a2a2a2;">
+                                    
+                                            <div *ngIf="etat.statut =='OK'"> 
+                                                <span style="display: inline-block;width: 25px;height: 25px;border-radius: 50%;background-color: #28a745;"></span>
+                                            </div>
+                                            <div *ngIf="etat.statut =='En cours d\'éxecuxtion'">
+                                                <span
+                                                        style="display: inline-block;width: 25px;height: 25px;border-radius: 50%;background-color: rgb(54, 105, 245);"></span>
+                                            </div>
+                                            <div *ngIf="etat.statut =='Flux non critique KO'">
+                                                <span style="display: inline-block;width: 25px;height: 25px;border-radius: 50%;background-color: orange"></span>
+                                                   
+                                            </div>
+                                            <div *ngIf="etat.statut =='Flux critique KO'">
+                                                <span
+                                                style="display: inline-block;width: 25px;height: 25px;border-radius: 50%;background-color: red"></span>
+                                            
+                                            </div>
+
                                 </td>
                             </tr>
                         </table>
@@ -90,44 +124,47 @@
                 </div>
                 <div class="col-12 " style="margin-top: 1%; ">
 
-                    <table id="cust">
+                    <table id="cust" style=" font-family: Arial, Helvetica, sans-serif;
+                    border-collapse: collapse;
+                    width: 100%;
+                    border-color: #a2a2a2;">
                         <tr>
-                            <th>Processus
+                            <th style=" border: 1px solid  #a2a2a2; padding: 8px;  padding-top: 12px; padding-bottom: 12px;text-align: left;background-color: #990033;color: white;">Processus
                             </th>
-                            <th>Application
+                            <th style=" border: 1px solid  #a2a2a2; padding: 8px;padding-top: 12px; padding-bottom: 12px;text-align: left;background-color: #990033;color: white;">Application
                             </th>
-                            <th>Date début
+                            <th style=" border: 1px solid  #a2a2a2; padding: 8px;padding-top: 12px; padding-bottom: 12px;text-align: left;background-color: #990033;color: white;">Date début
                             </th>
-                            <th>Date Fin
+                            <th style=" border: 1px solid  #a2a2a2; padding: 8px;padding-top: 12px; padding-bottom: 12px;text-align: left;background-color: #990033;color: white;">Date Fin
                             </th>
-                            <th>Information/Problème
+                            <th style=" border: 1px solid  #a2a2a2; padding: 8px;padding-top: 12px; padding-bottom: 12px;text-align: left;background-color: #990033;color: white;">Information/Problème
                             </th>
-                            <th>Impact Client
+                            <th style=" border: 1px solid  #a2a2a2; padding: 8px;padding-top: 12px; padding-bottom: 12px;text-align: left;background-color: #990033;color: white;">Impact Client
                             </th>
-                            <th>Information Technique
+                            <th style=" border: 1px solid  #a2a2a2; padding: 8px;padding-top: 12px; padding-bottom: 12px;text-align: left;background-color: #990033;color: white;">Information Technique
                             </th>
-                            <th>Feu
+                            <th style=" border: 1px solid  #a2a2a2; padding: 8px;padding-top: 12px; padding-bottom: 12px;text-align: left;background-color: #990033;color: white;">Feu
                             </th>
-                            <th>Statut
+                            <th style=" border: 1px solid  #a2a2a2; padding: 8px;padding-top: 12px; padding-bottom: 12px;text-align: left;background-color: #990033;color: white;">Statut
                             </th>
                         </tr>
                         <tr *ngFor="let Helth of this.AddHealthCheck.healthChekPreprodProdDetailList"
                             style="background-color: white;">
-                            <td style="text-align: center;">
+                            <td style="text-align: center;border: 1px solid  #a2a2a2; padding: 8px;">
                                 {{ Helth.processus }}
                             </td>
-                            <td style="text-align: center;">
+                            <td style="text-align: center;border: 1px solid  #a2a2a2; padding: 8px;">
                                 {{ Helth.application.nomApplication }}
                             </td>
-                            <td style="text-align: center;">
+                            <td style="text-align: center;border: 1px solid  #a2a2a2; padding: 8px;">
                                 {{ Helth.dateDebut | date: 'dd/MM/YY'}}
                             </td>
-                            <td style="text-align: center;">
+                            <td style="text-align: center;border: 1px solid  #a2a2a2; padding: 8px;">
                                 <span *ngIf="Helth.dateFin!=null">{{ Helth.dateFin | date: 'dd/MM/YY'}}</span>
                                 <span *ngIf="Helth.dateFin==null">-</span>
 
                             </td>
-                            <td>
+                            <td style="border: 1px solid  #a2a2a2; padding: 8px;">
                                 {{ Helth.information }}<br>
                                 <b style="color: black">Impact Merier :</b><br>
                                 {{ Helth.impactMetier }}<br>
@@ -136,23 +173,32 @@
                                 <b style="color: black;">Plan Action :</b><br>
                                 {{ Helth.planAction }}
                             </td>
-                            <td style="text-align: center;">
+                            <td style="text-align: center;border: 1px solid  #a2a2a2; padding: 8px;">
                                 {{ Helth.impactClient }}
                             </td>
-                            <td>
+                            <td style="border: 1px solid  #a2a2a2; padding: 8px;">
                                 {{ Helth.problemeTechnique }}
                             </td>
-                            <td style="text-align: center;">
-                                <div *ngIf="Helth.feu =='OK'"> <p-badge severity="success" styleClass="mr-2"></p-badge>
-                                </div>
-                                <div *ngIf="Helth.feu =='En cours d\'éxecuxtion'"><p-badge severity="info"
-                                        styleClass="mr-2"></p-badge></div>
-                                <div *ngIf="Helth.feu =='Flux non critique KO'"><p-badge severity="warning"
-                                        styleClass="mr-2"></p-badge></div>
-                                <div *ngIf="Helth.feu =='Flux critique KO'"><p-badge severity="danger"
-                                        styleClass="mr-2"></p-badge></div>
+                            <td style="text-align: center;border: 1px solid  #a2a2a2; padding: 8px;">
+                                
+                                        <div *ngIf="Helth.feu =='OK'"> 
+                                            <span style="display: inline-block;width: 25px;height: 25px;border-radius: 50%;background-color: #28a745;"></span>
+                                        </div>
+                                        <div *ngIf="Helth.feu =='En cours d\'éxecuxtion'">
+                                            <span
+                                                    style="display: inline-block;width: 25px;height: 25px;border-radius: 50%;background-color: rgb(54, 105, 245);"></span>
+                                        </div>
+                                        <div *ngIf="Helth.feu =='Flux non critique KO'">
+                                            <span style="display: inline-block;width: 25px;height: 25px;border-radius: 50%;background-color: orange"></span>
+                                               
+                                        </div>
+                                        <div *ngIf="Helth.feu =='Flux critique KO'">
+                                            <span
+                                            style="display: inline-block;width: 25px;height: 25px;border-radius: 50%;background-color: red"></span>
+                                        
+                                        </div>
                             </td>
-                            <td style="text-align: center;">
+                            <td style="text-align: center;border: 1px solid  #a2a2a2; padding: 8px;">
                                 {{ Helth.statut }}
                             </td>
                         </tr>
@@ -160,16 +206,25 @@
 
                 </div>
                 <div class="col-12" style="margin-top: 2%; ">
-                    <table id="customers2">
+                    <table id="customers2" style="font-family: Arial, Helvetica, sans-serif;
+                    border-collapse: collapse;
+                    width: 100%;">
                         <tr >
-                            <th style="background-color: #990033;color: white;width: 30%;text-align: center;">Historique</th>
+                            <th style="background-color: #990033;color: white;width: 30%;text-align: center;  border: 1px solid  #a2a2a2;
+                            padding: 8px;
+                            text-align: center;padding-top: 12px;
+  padding-bottom: 12px;  ">Historique</th>
                         </tr>
                         <tr>
-                            <th style="background-color: #990033;color: white;text-align: left;"> Etat des
+                            <th style="background-color: #990033;color: white;text-align: left;  border: 1px solid  #a2a2a2;
+                            padding: 8px;
+                            text-align: center;padding-top: 12px;
+  padding-bottom: 12px;  "> Etat des
                                 Processus Métier
                             </th>
                             <ng-container *ngFor="let healt of listHealt">
-                                <th style="background-color: white;color: #990033;text-align: center;">
+                                <th style="background-color: white;color: #990033;text-align: center;padding-top: 12px; border: 1px solid  #a2a2a2;
+                                padding-bottom: 12px;  ">
                                     {{this.healt.dateAjout| date: 'dd/MM'}}
                                 </th>
                             </ng-container>
@@ -177,22 +232,19 @@
                         </tr>
                         <ng-container *ngFor="let process of listProcess;">
                             <tr>
-                                <td>{{ process.titre }}</td>
+                                <td style="border: 1px solid  #a2a2a2;">{{ process.titre }}</td>
                                 <ng-container *ngFor="let healt of listHealt; let i = index">
-                                    <td style="padding: 0 0;">
-                                        <div *ngFor="let etat of healt.etatProcessusMetierList" style="width: 100%;height: 100%;">
-                                            <div *ngIf="etat.processusMetier.titre==process.titre" style="width: 100%;height: 100%;">
-                                                <span *ngIf="etat.statut == 'OK'"
-                                                    style="background-color: #49be25; display: block; height: 100%;width: 100%;">&nbsp;</span>
-                                                <span *ngIf="etat.statut == 'En cours d\'éxecuxtion'"
-                                                    style="background-color: #2596be; display: block; height: 100%;width: 100%;">&nbsp;</span>
-                                                <span *ngIf="etat.statut == 'Flux non critique KO'"
-                                                    style="background-color: #F3c300; display: block; height: 100%;width: 100%;">&nbsp;</span>
-                                                <span *ngIf="etat.statut == 'Flux critique KO'"
-                                                    style="background-color: red; display: block; height: 100%;width: 100%;">&nbsp;</span>
-                                            </div>
+                                    <td style="padding: 0; border: 1px solid #a2a2a2;">
+                                        <div *ngFor="let etat of healt.etatProcessusMetierList" style="width: 100%; height: 100%;">
+                                          <div *ngIf="etat.processusMetier.titre == process.titre" style="width: 100%; height: 100%;">
+                                            <span *ngIf="etat.statut == 'OK'" style="background-color: #49be25; display: block; height: 100%; width: 100%;">&nbsp;</span>
+                                            <span *ngIf="etat.statut == 'En cours d\'éxecuxtion'" style="background-color: #2596be; display: block; height: 100%; width: 100%;">&nbsp;</span>
+                                            <span *ngIf="etat.statut == 'Flux non critique KO'" style="background-color: #F3c300; display: block; height: 100%; width: 100%;">&nbsp;</span>
+                                            <span *ngIf="etat.statut == 'Flux critique KO'" style="background-color: red; display: block; height: 100%; width: 100%;">&nbsp;</span>
+                                          </div>
                                         </div>
-                                    </td>
+                                      </td>
+                                      
                                 </ng-container>
                             </tr>
                         </ng-container>
@@ -206,7 +258,7 @@
         <div class="col-12">
 
             <div style="margin-top: 1%;border:1px solid black ;">
-                <img src="../../../../../assets/img/FooterEtatSantéProd.png" width="100%" alt="psa" title="psa"
+                <img src="http://localhost:4200/assets/img/FooterEtatSantéProd.png" width="100%" alt="psa" title="psa"
                     class="staticImg">
             </div>
 

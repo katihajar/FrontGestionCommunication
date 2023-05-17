@@ -105,7 +105,7 @@ export class ChangementService {
   public FindChangementByPilote(): Observable<HttpResponse<Array<ChangementPlanifier>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<ChangementPlanifier>>(
-      this.urlPilote + 'changementplanifier/user/'+this.auth.User.id,
+      this.urlPilote + 'changementplanifier/lot/'+this.auth.User.lots,
       { observe: 'response', headers }
     );    
   }
@@ -136,7 +136,7 @@ export class ChangementService {
   public FindChangementByRespo(): Observable<HttpResponse<Array<ChangementPlanifier>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<ChangementPlanifier>>(
-      this.urlRespo + 'changementplanifier/user/'+this.auth.User.id,
+      this.urlRespo + 'changementplanifier/lot/'+this.auth.User.lots,
       { observe: 'response', headers }
     );    
   }

@@ -13,6 +13,7 @@ const moment = require('moment');
 import html2canvas from 'html2canvas';
 import { saveAs } from 'file-saver';
 import { MyOptions } from 'src/app/controller/model/myoption';
+import { EmaildraftsService } from 'src/app/controller/service/emaildrafts.service';
 @Component({
   selector: 'app-ajouter-changement-ang-fr',
   templateUrl: './ajouter-changement-ang-fr.component.html',
@@ -33,7 +34,7 @@ export class AjouterChangementAngFrComponent implements OnInit {
   Subject:string = String();
   dialogElement:any;
   @ViewChild(CharteChangementFrAngComponent,{static:false}) myDiv: any ;
-  constructor(private messageService: MessageService,private changeService: ChangementService,
+  constructor(private emailService:EmaildraftsService,private messageService: MessageService,private changeService: ChangementService,
     private charteService:CharteService,private router: Router,private destService:DestinataireService) {
       if(this.AddChangement.application.nomApplication == '' && this.AddChangement.statut=='' && this.AddChangement.type == ''){
         this.router.navigate(['/pilote/changement/registre']);
@@ -69,6 +70,7 @@ export class AjouterChangementAngFrComponent implements OnInit {
     } 
   }
   translateInput() {
+    this.ListContenuAng = new Array<ContenuChangement>();
     translate(this.AddChangement.titre, { from: 'fr', to: 'en' }).then((result: string) => {
       this.AddChangementAng.titre = result;
     })
@@ -184,6 +186,7 @@ export class AjouterChangementAngFrComponent implements OnInit {
       this.Subject = '['+this.AddChangement.type+'] '+this.AddChangement.application.nomApplication+' '+this.AddChangement.version+' - Completed Change - '+moment(this.AddChangement.dateDebut).format('DD/MM/YYYY');
      }
       this.changeService.SaveChangement().subscribe((data) => {
+        this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire,this.EmailEnCC,this.Subject,this.dialogElement.innerHTML);
              this.AddChangement=new ChangementPlanifier();
              this.ListContenu = new Array<ContenuChangement>();
              this.router.navigate(['/pilote/changement/registre']);
@@ -212,7 +215,7 @@ export class AjouterChangementAngFrComponent implements OnInit {
         const blob = this.dataURLtoBlob(this.imageDataUrl);
         const imageUrl = URL.createObjectURL(blob); // create URL object from blob
         const file = new File([blob], this.AddChangement.titre+'-'+this.AddChangement.application.nomApplication+'.png', { type: 'image/png' });
-        saveAs(file);
+        // saveAs(file);
         this.SaveChange();
       });
       this.charteChangeAngFr = false;

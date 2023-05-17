@@ -53,7 +53,7 @@ export class HealthCheckBwPerimetreService {
   public FindHealthCheckBwByPilote(): Observable<HttpResponse<Array<HealthCheckBwPerimetre>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<HealthCheckBwPerimetre>>(
-      this.urlPilote + 'healthcheck/bwperimetre/user/'+this.auth.User.id,
+      this.urlPilote + 'healthcheck/bwperimetre/lot/'+this.auth.User.lots,
       { observe: 'response', headers }
     );    
   }

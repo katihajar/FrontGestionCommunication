@@ -153,7 +153,38 @@ import { DashboardComponent } from './views/admin/dashboard/dashboard.component'
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ExpiredTokenInterceptor } from './controller/service/expiredTokenInterceptor';
 import { ExpireTokenComponent } from './redirectlogin/expire-token/expire-token.component';
+import { PublicClientApplication, InteractionType } from '@azure/msal-browser';
+import { MsalGuard, MsalInterceptor, MsalBroadcastService, MsalModule, MSAL_GUARD_CONFIG, MSAL_INSTANCE, MSAL_INTERCEPTOR_CONFIG, MsalInterceptorConfiguration, MsalService } from '@azure/msal-angular';
 
+const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
+
+export function MSALInstanceFactory(): PublicClientApplication {
+  return new PublicClientApplication({
+    auth: {
+      clientId: 'a5526c57-ce79-4e7a-8f5c-455d20c2663f',
+      authority: 'https://login.microsoftonline.com/3bd72a86-a8ea-44a6-a899-f3cccbedf027',
+      redirectUri: 'http://localhost:4200',
+      navigateToLoginRequestUrl: true,
+    },
+    cache: {
+      cacheLocation: 'localStorage',
+      storeAuthStateInCookie: isIE, // Set to true if using IE 11
+    },
+    system: {
+      navigateFrameWait: 0,
+    },
+  });
+}
+
+export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
+  const protectedResourceMap = new Map<string, Array<string>>();
+  protectedResourceMap.set('https://graph.microsoft.com/v1.0/*', ['user.read','mail.send']);
+
+  return {
+    interactionType: InteractionType.Popup,
+    protectedResourceMap,
+  };
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -309,12 +340,34 @@ import { ExpireTokenComponent } from './redirectlogin/expire-token/expire-token.
     TreeSelectModule,
     TreeTableModule,
     VirtualScrollerModule,
-    StyleClassModule
+    StyleClassModule,
+    MsalModule
   ],
   providers: [ConfirmationService,MessageService, {
     provide: HTTP_INTERCEPTORS,
     useClass: ExpiredTokenInterceptor,
     multi: true
+  },{
+    provide: MSAL_INSTANCE,
+    useFactory: MSALInstanceFactory,
+  },
+  {
+    provide: MSAL_GUARD_CONFIG,
+    useValue: {
+      interactionType: isIE ? InteractionType.Redirect : InteractionType.Popup,
+    },
+  },
+  {
+    provide: MSAL_INTERCEPTOR_CONFIG,
+    useFactory: MSALInterceptorConfigFactory,
+  },
+  MsalGuard,
+  MsalBroadcastService,
+  MsalService,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: MsalInterceptor,
+    multi: true,
   }],
   bootstrap: [AppComponent]
 })

@@ -41,7 +41,7 @@
               </th>
               <th>
                 <div class="flex justify-content-center align-items-center">
-                    dateAjout
+                    Date
                   <!-- <p-columnFilter type="text" field="dateAjout" display="menu"></p-columnFilter> -->
                 </div>
               </th>
@@ -65,7 +65,7 @@
                   class="p-button-rounded p-button-info"></button>
               <button pButton pRipple  type="button" style="font-size: larger;" icon="pi pi-pencil" (click)="Edite(health)"
                 class="p-button-rounded p-button-success"></button>
-            <button pButton pRipple type="button" style="font-size: larger;" icon="pi pi-times" (click)="DeleteHealthCheck(health.id)"
+            <button *ngIf="health.createurHealthChekPreprodProd.id == this.User.id"  pButton pRipple type="button" style="font-size: larger;" icon="pi pi-times" (click)="DeleteHealthCheck(health.id)"
               class="p-button-rounded p-button-danger"></button>
           </td>
             </tr>

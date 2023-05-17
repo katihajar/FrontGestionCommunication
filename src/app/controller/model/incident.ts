@@ -10,6 +10,8 @@ export class Incident {
     public description: string = String();
     public situationActuelle: string = String();
     public type: string = String();
+    public detailResolution: string = String();
+    public actionPrise: string = String();
     public impact: string = String();
     public causePrincipale: string = String();
     public solutionContournement: string = String();

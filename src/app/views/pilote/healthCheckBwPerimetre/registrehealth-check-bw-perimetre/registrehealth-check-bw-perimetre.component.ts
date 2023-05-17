@@ -8,6 +8,8 @@ import { HealthCheckBwPerimetre } from 'src/app/controller/model/health-check-bw
 import { HealthCheckBwPerimetreDetail } from 'src/app/controller/model/health-check-bw-perimetre-detail';
 import { HealthChekPreprodProd } from 'src/app/controller/model/health-chek-preprod-prod';
 import { HealthChekPreprodProdDetail } from 'src/app/controller/model/health-chek-preprod-prod-detail';
+import { User } from 'src/app/controller/model/user';
+import { AuthService } from 'src/app/controller/service/auth.service';
 import { CharteService } from 'src/app/controller/service/charte.service';
 import { HealthCheckBwPerimetreService } from 'src/app/controller/service/health-check-bw-perimetre.service';
 
@@ -20,9 +22,17 @@ export class RegistrehealthCheckBwPerimetreComponent implements OnInit {
 
   loading: boolean = true;
   constructor(private healthService: HealthCheckBwPerimetreService,private charteService:CharteService,private router: Router,
-    private confirmationService: ConfirmationService,private messageService:MessageService) { }
+    private confirmationService: ConfirmationService,private messageService:MessageService,private userService: AuthService) { }
     clear(table: Table) {
       table.clear();
+    }
+    
+    get User(): User {
+      return this.userService.User;
+    }
+  
+    set User(value: User) {
+      this.userService.User = value;
     }
   
   ngOnInit(): void {

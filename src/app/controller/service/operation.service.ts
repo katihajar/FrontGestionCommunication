@@ -74,14 +74,14 @@ export class OperationService {
   public FindOperationByPilote(): Observable<HttpResponse<Array<Operation>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<Operation>>(
-      this.urlPilote + 'operation/user/'+this.auth.User.id,
+      this.urlPilote + 'operation/lot/'+this.auth.User.lots,
       { observe: 'response', headers }
     );    
   }
   public FindOperationByRespo(): Observable<HttpResponse<Array<Operation>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<Operation>>(
-      this.urlRespo + 'operation/user/'+this.auth.User.id,
+      this.urlRespo + 'operation/lot/'+this.auth.User.lots,
       { observe: 'response', headers }
     );    
   }

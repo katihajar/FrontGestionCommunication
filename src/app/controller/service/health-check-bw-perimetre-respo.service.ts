@@ -15,7 +15,7 @@ export class HealthCheckBwPerimetreRespoService {
   public FindHealthCheckBw(): Observable<HttpResponse<Array<HealthCheckBwPerimetre>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<HealthCheckBwPerimetre>>(
-      this.urlRespo + 'healthcheck/bwperimetre/findAll',
+      this.urlRespo + 'healthcheck/bwperimetre/lot/'+this.auth.User.lots,
       { observe: 'response', headers }
     );    
   }

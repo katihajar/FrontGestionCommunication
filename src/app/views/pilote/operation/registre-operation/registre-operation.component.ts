@@ -10,6 +10,8 @@ import { ApplicationService } from 'src/app/controller/service/application.servi
 import { OperationService } from 'src/app/controller/service/operation.service';
 import * as FileSaver from 'file-saver';
 import { CharteService } from 'src/app/controller/service/charte.service';
+import { AuthService } from 'src/app/controller/service/auth.service';
+import { User } from 'src/app/controller/model/user';
 const translate = require('translate');
 
 @Component({
@@ -29,9 +31,17 @@ export class RegistreOperationComponent implements OnInit {
   popUpLangue:boolean=false;
   listLangageCharte: any[] = [];
   constructor(private operationService: OperationService,private appService: ApplicationService,private charte: CharteService,
-    private confirmationService: ConfirmationService, private router:Router,private messageService:MessageService) { }
+    private confirmationService: ConfirmationService, private router:Router,private messageService:MessageService,private userService: AuthService) { }
   clear(table: Table) {
     table.clear();
+  }
+
+  get User(): User {
+    return this.userService.User;
+  }
+
+  set User(value: User) {
+    this.userService.User = value;
   }
   FindOperation() {
     this.operationService.FindOperationByPilote().subscribe((data) => {
@@ -48,8 +58,8 @@ export class RegistreOperationComponent implements OnInit {
       { name: 'Français-Anglais' },
     ];
     this.statutOperation = [
-      { name: 'Planifier' },
-      { name: 'Terminer' },
+      { name: 'Planifiée' },
+      { name: 'Terminée' },
     ];
     this.listLangageCharte=[
       { name: 'Français' },

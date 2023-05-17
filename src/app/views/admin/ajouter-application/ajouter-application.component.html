@@ -39,7 +39,7 @@
       </div>
       <div class="col-12" style="margin-bottom: 2%; float: left">
         <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '22%' }">
-          <p-dropdown [options]="lots" [(ngModel)]="this.AddApplication.lot"
+          <p-dropdown [options]="lots" [(ngModel)]="this.AddApplication.lot" (onChange)="FindAllUsers()"
             [style]="{ width: '100%', required: 'required' }" placeholder="Selectinné le lot " optionValue="name"
             optionLabel="name" [showClear]="true"></p-dropdown>
           <small style="color: red; margin-left: 2%;font-size : 16px"
@@ -127,8 +127,7 @@
         </div>
       </div> 
       <div class="col-12 " style="margin-bottom: 2%; ">
-        <p-button label="Submit" style=" float: right;margin-right: 2%;" [disabled]="isSubmitDisabled()" (click)="SaveApp()"
-          icon="pi pi-check"></p-button>
+        <p-button label="Submit" [style]="{ 'float': 'right', 'margin-right': '2%' }" [disabled]="isSubmitDisabled()" (click)="SaveApp()" icon="pi pi-check"></p-button>
       </div>
     </div>
   </div>

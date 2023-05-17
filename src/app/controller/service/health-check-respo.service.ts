@@ -20,7 +20,7 @@ export class HealthCheckRespoService {
   public FindHealthCheck(): Observable<HttpResponse<Array<HealthChekPreprodProd>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<HealthChekPreprodProd>>(
-      this.urlRespo + 'healthcheck/findAll',
+      this.urlRespo + 'healthcheck/lot/'+this.auth.User.lots,
       { observe: 'response', headers }
     );    
   }

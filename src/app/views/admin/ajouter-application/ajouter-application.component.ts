@@ -51,9 +51,9 @@ this.charte= [
    // @ts-ignore
    this.UserList = data.body;
    for(let i = 0; i<this.UserList.length;i++){
-     if(this.UserList[i].roles[0].name== "ROLE_PILOTE"){
+     if(this.UserList[i].roles[0].name== "ROLE_PILOTE" && this.AddApplication.lot == this.UserList[i].lots){
        this.piloteList.push(this.UserList[i]);
-     } else  if(this.UserList[i].roles[0].name== "ROLE_RESPONSABLE"){
+     } else  if(this.UserList[i].roles[0].name== "ROLE_RESPONSABLE" && this.AddApplication.lot == this.UserList[i].lots){
        this.responsableList.push(this.UserList[i]);
      } 
    }

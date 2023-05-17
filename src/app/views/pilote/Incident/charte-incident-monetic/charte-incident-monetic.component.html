@@ -1,63 +1,80 @@
-<p-dialog  [modal]="true" header="Charte Incident"
-  [(visible)]="this.charteIncidentMonetic"  [style]="{width: '60vw', height: '70vw','margin-left':'3%'}" [resizable]="true">
+<p-dialog [modal]="true" header="Charte Incident" [(visible)]="this.charteIncidentMonetic"
+  [style]="{width: '60vw', height: '70vw','margin-left':'3%'}" [resizable]="true">
   <div #myDialog id="myDialog" style="width: 100%;">
-  <div class="col-12"  >
-  <div >
-<div *ngIf="this.AddIncident.statut == 'Ouvert'" style="border: 1px solid  rgb(211, 45, 16) ;">
-  <img src="../../../../../assets/img/incidentMoneticEncours.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
-  </div>
-  <div *ngIf="this.AddIncident.statut == 'Clos'" style="border: 1px solid #17d440 ;">
-    <img src="../../../../../assets/img/incidentMoneticRésolu.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
-    </div>
-</div>
-</div>
-  <div style="width: 100%;margin-top: 2%;margin-bottom: 2%;color: black;" [ngStyle]="{'border': this.AddIncident.statut == 'Clos' ? '1px solid #17d440' : (this.AddIncident.statut == 'Ouvert' ? '1px solid rgb(211, 45, 16)' : '1px solid white') }"  >
-    <div style="font-family: 'Times New Roman', Times, sans-serif;">
-      <div style="margin: 1%;">
-      <p style="font-weight: bolder;">Statut Actuelle : <span *ngIf="this.AddIncident.statut == 'Clos'" style="color: rgb(12, 199, 12);"> RESOLU</span> <b *ngIf="this.AddIncident.statut == 'Ouvert'" style="color: rgb(211, 45, 16);"> EN COURS</b></p>
-      <p style="font-weight: bolder;">Application : [<span  > {{this.AddIncident.type}} </span>] <span  >{{this.AddIncident.application.nomApplication}}</span></p>
-      <p style="font-weight: bolder;">Début d'incident :<span  >{{this.AddIncident.dateDebut | date: 'yyyy-MM-dd HH:mm'}} CET</span></p>
-      <p style="font-weight: bolder;" *ngIf="this.AddIncident.statut == 'Clos'"><span>Fin d'incident :</span><span  >{{this.AddIncidentAng.dateDebut | date: 'yyyy-MM-dd HH:mm'}} CET</span></p>
-</div>
-      <div style="height: 4vh; display: flex; align-items: center; justify-content: flex-start; text-align: center;" [ngStyle]="{'background-color': this.AddIncident.statut == 'Clos' ? 'rgb(93, 182, 163)' : (this.AddIncident.statut == 'Ouvert' ? 'rgb(245, 107, 118)' : 'white') }">
-        <p style="margin: 1%; font-weight: bolder;"><span  > [{{this.AddIncident.type}} </span>] <span  >{{this.AddIncidentAng.application.nomApplication}}</span>-Incident <span  >{{this.AddIncidentAng.numeroIncident}}</span> - <span  >{{this.AddIncidentAng.titreIncident}}</span></p>
-        <div style="margin-left: auto;">
-          <img src="../../../../../assets/img/frFlag.png"  class="mr-2 flag " style="width: 30px;"/>
+    <div class="col-12">
+      <div>
+        <div *ngIf="this.AddIncident.statut == 'Ouvert'" style="border: 1px solid  rgb(211, 45, 16) ;">
+          <img src="http://localhost:4200/assets/img/incidentMoneticEncours.png" width="100%" style="margin-left: 0%;"
+            alt="psa" title="psa" class="staticImg">
+        </div>
+        <div *ngIf="this.AddIncident.statut == 'Clos'" style="border: 1px solid #17d440 ;">
+          <img src="http://localhost:4200/assets/img/incidentMoneticRésolu.png" width="100%" style="margin-left: 0%;"
+            alt="psa" title="psa" class="staticImg">
         </div>
       </div>
-      <br>
-      <div style="margin: 1%;">
-      <p style="background-color: rgb(244, 247, 247);"><u>Description</u> </p>
-      <p  >{{this.AddIncident.description}}</p><br>
-      
-
-      <p style="background-color: rgb(244, 247, 247);"><u>Impact Métier</u></p>
-      <p  >{{this.AddIncident.impact}}</p><br>
-      <p style="background-color: rgb(244, 247, 247);"><u>Situation Actuelle</u> </p>
-      <p  >{{this.AddIncident.situationActuelle}}</p><br>
-      <p style="background-color: rgb(244, 247, 247);"><u>Causes identifiées</u> </p>
-      <p  >{{this.AddIncident.causePrincipale}}</p><br>
-      
-      <p style="background-color: rgb(244, 247, 247);"><u>Plan d'action</u></p>
-      <div *ngFor="let action of this.AddIncident.planActionList" style=" font-family: 'Times New Roman', Times, serif;">
-        <li > {{action.description}} </li>
-      </div><br>
-      <p style="font-family: 'Times New Roman', Times, serif;"> <u>Prochaine communication :</u></p>
-      <p style=" font-family: 'Times New Roman', Times, serif;">{{this.AddIncident.prochaineCommunication | date: 'dd-MM-yyyy HH:mm'}}</p>
-         </div>
-</div>
-  </div>
-
-<div class="col-12">
-
-  <div *ngIf="this.AddIncident.statut == 'Ouvert'" style="border:1px solid rgb(211, 45, 16) ;" >
-    <img src="../../../../../assets/img/footerIncidentMoneticEncours.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
     </div>
-    <div *ngIf="this.AddIncident.statut == 'Clos'" style="border:1px solid  #17d440 ;">
-      <img src="../../../../../assets/img/footerIncidentMoneticRésolu.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
+    <div style="width: 100%;margin-top: 2%;margin-bottom: 2%;color: black;"
+      [ngStyle]="{'border': this.AddIncident.statut == 'Clos' ? '1px solid #17d440' : (this.AddIncident.statut == 'Ouvert' ? '1px solid rgb(211, 45, 16)' : '1px solid white') }">
+      <div style="font-family: 'Times New Roman', Times, sans-serif;">
+        <div style="margin: 1%;">
+          <p style="font-weight: bolder;">Statut Actuelle : <span *ngIf="this.AddIncident.statut == 'Clos'"
+              style="color: rgb(12, 199, 12);"> RESOLU</span> <b *ngIf="this.AddIncident.statut == 'Ouvert'"
+              style="color: rgb(211, 45, 16);"> EN COURS</b></p>
+          <p style="font-weight: bolder;">Application : [<span> {{this.AddIncident.type}} </span>]
+            <span>{{this.AddIncident.application.nomApplication}}</span></p>
+          <p style="font-weight: bolder;">Début d'incident :<span>{{this.AddIncident.dateDebut | date: 'yyyy-MM-dd
+              HH:mm'}} CET</span></p>
+          <p style="font-weight: bolder;" *ngIf="this.AddIncident.statut == 'Clos'"><span>Fin d'incident
+              :</span><span>{{this.AddIncidentAng.dateDebut | date: 'yyyy-MM-dd HH:mm'}} CET</span></p>
+        </div>
+        <div style="height: 6vh; display: flex; align-items: center; justify-content: flex-start; text-align: center;"
+          [ngStyle]="{'background-color': this.AddIncident.statut == 'Clos' ? 'rgb(93, 182, 163)' : (this.AddIncident.statut == 'Ouvert' ? 'rgb(245, 107, 118)' : 'white') }">
+          <p style="margin: 1%; font-weight: bolder;"><span> [{{this.AddIncident.type}} </span>]
+            <span>{{this.AddIncidentAng.application.nomApplication}}</span>-Incident
+            <span>{{this.AddIncidentAng.numeroIncident}}</span> - <span>{{this.AddIncidentAng.titreIncident}}</span></p>
+          <div style="margin-left: auto;justify-content: center;">
+            <img src="http://localhost:4200/assets/img/frFlag.png" class="mr-2 flag " />
+          </div>
+        </div>
+        <br>
+        <div style="margin: 1%;">
+          <p style="background-color: rgb(244, 247, 247);"><u>Description</u> </p>
+          <p>{{this.AddIncident.description}}</p><br>
+
+
+          <p style="background-color: rgb(244, 247, 247);"><u>Impact Métier</u></p>
+          <p>{{this.AddIncident.impact}}</p><br>
+          <p style="background-color: rgb(244, 247, 247);"><u>Situation Actuelle</u> </p>
+          <p>{{this.AddIncident.situationActuelle}}</p><br>
+          <p style="background-color: rgb(244, 247, 247);"><u>Causes identifiées</u> </p>
+          <p>{{this.AddIncident.causePrincipale}}</p><br>
+
+          <p style="background-color: rgb(244, 247, 247);"><u>Plan d'action</u></p>
+          <div *ngFor="let action of this.AddIncident.planActionList"
+            style=" font-family: 'Times New Roman', Times, serif;">
+            <li> {{action.description}} </li>
+          </div><br>
+          <p style="font-family: 'Times New Roman', Times, serif;"> <u>Prochaine communication :</u></p>
+          <p style=" font-family: 'Times New Roman', Times, serif;">{{this.AddIncident.prochaineCommunication | date:
+            'dd-MM-yyyy HH:mm'}}</p>
+        </div>
       </div>
-</div></div>
-<ng-template pTemplate="footer">
-  <p-button icon="pi pi-check" (click)="this.charteIncidentMonetic=false" label="Ok" styleClass="p-button-text"></p-button>
-</ng-template>
+    </div>
+
+    <div class="col-12">
+
+      <div *ngIf="this.AddIncident.statut == 'Ouvert'" style="border:1px solid rgb(211, 45, 16) ;">
+        <img src="http://localhost:4200/assets/img/footerIncidentMoneticEncours.png" width="100%"
+          style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
+      </div>
+      <div *ngIf="this.AddIncident.statut == 'Clos'" style="border:1px solid  #17d440 ;">
+        <img src="http://localhost:4200/assets/img/footerIncidentMoneticRésolu.png" width="100%"
+          style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
+      </div>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="this.charteIncidentMonetic=false" label="Ok"
+      styleClass="p-button-text"></p-button>
+  </ng-template>
 </p-dialog>

@@ -108,7 +108,7 @@
                 <button pButton pRipple type="button" 
                   style="font-size: larger;margin-left: 2%;" icon="pi pi-pencil" (click)="Edite(operation)"
                   class="p-button-rounded p-button-success"></button>
-                 <button pButton pRipple type="button" style="font-size: larger;" icon="pi pi-times" (click)="DeleteOperation(operation.id)"
+                 <button *ngIf="operation.createurOperation.id == this.User.id" pButton pRipple type="button" style="font-size: larger;"  icon="pi pi-times" (click)="DeleteOperation(operation.id)"
                   class="p-button-rounded p-button-danger"></button>
               </td>
             </tr>

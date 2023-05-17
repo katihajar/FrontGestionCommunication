@@ -10,6 +10,9 @@ import { IncidentService } from 'src/app/controller/service/incident.service';
 })
 export class CharteIncidentMoneticComponent implements OnInit {
   @ViewChild('myDialog',{static:false}) filterComponent!: ElementRef;
+  @ViewChild('myDialogHeader',{static:false}) header!: ElementRef;
+  @ViewChild('myDialogContent',{static:false}) content!: ElementRef;
+  @ViewChild('myDialogFooter',{static:false}) footer!: ElementRef;
   constructor(private charteService: CharteService,private incidentService: IncidentService) { }
 
   ngOnInit(): void {

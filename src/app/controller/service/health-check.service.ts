@@ -87,7 +87,7 @@ export class HealthCheckService {
   public FindHealthCheckByPilote(): Observable<HttpResponse<Array<HealthChekPreprodProd>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<HealthChekPreprodProd>>(
-      this.urlPilote + 'healthcheck/user/'+this.auth.User.id,
+      this.urlPilote + 'healthcheck/lot/'+this.auth.User.lots,
       { observe: 'response', headers }
     );    
   }
@@ -142,6 +142,13 @@ export class HealthCheckService {
       { observe: 'response', headers }
     );    
   }
+  public FindApplcationHealthPilotByLots(): Observable<HttpResponse<Array<Application>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<Application>>(
+      this.urlPilote + 'application/lot/'+this.auth.User.lots,
+      { observe: 'response', headers }
+    );    
+  }
   public FindAllHealthCheck(): Observable<HttpResponse<Array<HealthChekPreprodProd>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<HealthChekPreprodProd>>(
@@ -152,14 +159,14 @@ export class HealthCheckService {
   public FindLast10HealthCheck(): Observable<HttpResponse<Array<HealthChekPreprodProd>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<HealthChekPreprodProd>>(
-      this.urlPilote + 'healthcheck/last10',
+      this.urlPilote + 'healthcheck/last10/'+this.auth.User.lots,
       { observe: 'response', headers }
     );    
   }
   public FindLast10HealthCheckRespo(): Observable<HttpResponse<Array<HealthChekPreprodProd>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<HealthChekPreprodProd>>(
-      this.urlRespo + 'healthcheck/last10',
+      this.urlRespo + 'healthcheck/last10/'+this.auth.User.lots,
       { observe: 'response', headers }
     );    
   }

@@ -1,18 +1,18 @@
 <p-dialog [modal]="true" [(visible)]="this.charteIncidentMoneticAngFr" header="Charte Incident"
     [style]="{width: '60vw', height: '70vw','margin-left':'3%'}" [resizable]="true">
     <div #myDialog id="myDialog" style="width: 100%;">
-    <div class="col-12">
-        
-            <div *ngIf="this.AddIncident.statut == 'Ouvert'" style="border: 1px solid  rgb(211, 45, 16) ;">
-                <img src="../../../../../assets/img/incidentMoneticEncours.png" width="100%" style="margin-left: 0%;"
-                    alt="psa" title="psa" class="staticImg">
+        <div class="col-12">
+            <div>
+              <div *ngIf="this.AddIncident.statut == 'Ouvert'" style="border: 1px solid  rgb(211, 45, 16) ;">
+                <img src="http://localhost:4200/assets/img/incidentMoneticEncours.png" width="100%" style="margin-left: 0%;"
+                  alt="psa" title="psa" class="staticImg">
+              </div>
+              <div *ngIf="this.AddIncident.statut == 'Clos'" style="border: 1px solid #17d440 ;">
+                <img src="http://localhost:4200/assets/img/incidentMoneticRésolu.png" width="100%" style="margin-left: 0%;"
+                  alt="psa" title="psa" class="staticImg">
+              </div>
             </div>
-            <div *ngIf="this.AddIncident.statut == 'Clos'" style="border: 1px solid #17d440 ;">
-                <img src="../../../../../assets/img/incidentMoneticRésolu.png" width="100%" style="margin-left: 0%;"
-                    alt="psa" title="psa" class="staticImg">
-            </div>
-        
-    </div>
+          </div>
     <div style="width: 100%;margin-top: 2%;margin-bottom: 2%;color: black;"
         [ngStyle]="{'border': this.AddIncident.statut == 'Clos' ? '1px solid #17d440' : (this.AddIncident.statut == 'Ouvert' ? '1px solid rgb(211, 45, 16)' : '1px solid white') }">
         <div style="font-family: 'Times New Roman', Times, sans-serif;">
@@ -32,15 +32,15 @@
                      >{{this.AddIncidentAng.dateDebut | date: 'yyyy-MM-dd HH:mm'}}
                     CET</span></p>
             </div>
-            <div style="height: 4vh; display: flex; align-items: center; justify-content: flex-start; text-align: center;"
+            <div style="height: 6vh; display: flex; align-items: center; justify-content: flex-start; text-align: center;"
                 [ngStyle]="{'background-color': this.AddIncident.statut == 'Clos' ? 'rgb(93, 182, 163)' : (this.AddIncident.statut == 'Ouvert' ? 'rgb(245, 107, 118)' : 'white') }">
                 <p style="margin: 1%; font-weight: bolder;"><span  > [{{this.AddIncident.type}}
                     </span>] <span
                          >{{this.AddIncidentAng.application.nomApplication}}</span>-Incident
                     <span  >{{this.AddIncidentAng.numeroIncident}}</span> - <span
                          >{{this.AddIncidentAng.titreIncident}}</span></p>
-                        <div style="margin-left: auto;">
-                        <img src="../../../../../assets/img/usaFlag.png"  class="mr-2 flag " style="width: 30px;"/>
+                        <div style="margin-left: auto;justify-content: center;">
+                        <img src="http://localhost:4200/assets/img/usaFlag.png"  class="mr-2 flag " />
                 </div>
             </div>
             <br>
@@ -71,15 +71,15 @@
     <div style="width: 100%;margin-top: 2%;margin-bottom: 2%;color: black;"
     [ngStyle]="{'border': this.AddIncident.statut == 'Clos' ? '1px solid #17d440' : (this.AddIncident.statut == 'Ouvert' ? '1px solid rgb(211, 45, 16)' : '1px solid white') }">
     <div style="font-family: 'Times New Roman', Times, sans-serif;">
-        <div style="height: 4vh; display: flex; align-items: center; justify-content: flex-start; text-align: center;"
+        <div style="height: 6vh; display: flex; align-items: center; justify-content: flex-start; text-align: center;"
                 [ngStyle]="{'background-color': this.AddIncident.statut == 'Clos' ? 'rgb(93, 182, 163)' : (this.AddIncident.statut == 'Ouvert' ? 'rgb(245, 107, 118)' : 'white') }">
                 <p style="margin: 1%; font-weight: bolder;"><span  > [{{this.AddIncident.type}}
                     </span>] <span
                          >{{this.AddIncident.application.nomApplication}}</span>-Incident
                     <span  >{{this.AddIncident.numeroIncident}}</span> - <span
                          >{{this.AddIncident.titreIncident}}</span></p>
-                        <div style="margin-left: auto;">
-                        <img src="../../../../../assets/img/frFlag.png"  class="mr-2 flag " style="width: 30px; "/></div>
+                        <div style="margin-left: auto;justify-content: center;">
+                        <img src="http://localhost:4200/assets/img/frFlag.png"  class="mr-2 flag " /></div>
                     </div>
                     <div style="margin: 1%;">
         <p style="background-color: rgb(244, 247, 247);"><u>Description</u> </p>
@@ -105,11 +105,11 @@
     <div class="col-12">
 
         <div *ngIf="this.AddIncident.statut == 'Ouvert'" style="border:1px solid rgb(211, 45, 16) ;">
-            <img src="../../../../../assets/img/footerIncidentMoneticEncours.png" width="100%" style="margin-left: 0%;"
+            <img src="http://localhost:4200/assets/img/footerIncidentMoneticEncours.png" width="100%" style="margin-left: 0%;"
                 alt="psa" title="psa" class="staticImg">
         </div>
         <div *ngIf="this.AddIncident.statut == 'Clos'" style="border:1px solid  #17d440 ;">
-            <img src="../../../../../assets/img/footerIncidentMoneticRésolu.png" width="100%" style="margin-left: 0%;"
+            <img src="http://localhost:4200/assets/img/footerIncidentMoneticRésolu.png" width="100%" style="margin-left: 0%;"
                 alt="psa" title="psa" class="staticImg">
         </div>
     </div>

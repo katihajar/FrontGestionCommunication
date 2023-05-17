@@ -33,7 +33,7 @@ export class IncidentRespoService {
   public FindIncidentByRespo(): Observable<HttpResponse<Array<Incident>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<Incident>>(
-      this.urlRespo + 'incident/user/'+this.auth.User.id,
+      this.urlRespo + 'incident/lot/'+this.auth.User.lots,
       { observe: 'response', headers }
     );    
   }

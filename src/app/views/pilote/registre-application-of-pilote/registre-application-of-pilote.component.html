@@ -150,6 +150,7 @@
           <p-columnFilter type="text" field="statutRespo" display="menu"></p-columnFilter>
         </div>
        </th>
+       <th>Action</th>
      </tr>
    </ng-template>
    <ng-template pTemplate="body" let-dest>
@@ -171,6 +172,14 @@
        <td>
         {{dest.statutRespo}}
        </td>
+       <td>
+        <div *ngIf="dest.statutRespo== 'Valider'">
+          <button pButton pRipple type="button" label="Retirer" (click)="Refuser(dest)" class="p-button-success"></button>
+        </div>
+        <div *ngIf="dest.statutRespo== 'En Attente'">
+          <button pButton pRipple type="button" label="Valider" (click)="Valider(dest)"  class="p-button-warning"></button>
+        </div>
+      </td>
      </tr>
    </ng-template>
    <ng-template pTemplate="emptymessage">

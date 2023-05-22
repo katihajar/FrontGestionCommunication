@@ -5,6 +5,7 @@ import { Application } from '../model/application';
 import { PiloteApplication } from '../model/pilote-application';
 import { AuthService } from './auth.service';
 import {Observable} from "rxjs";
+import { DestinataireCommunication } from '../model/destinataire-communication';
 
 @Injectable({
   providedIn: 'root'
@@ -84,6 +85,20 @@ export class ApplicationService {
       { observe: 'response', headers }
     );    
   }
+  public FindAllApplcationPilote(): Observable<HttpResponse<Array<Application>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<Application>>(
+      this.urlPilote + 'application/AllApp',
+      { observe: 'response', headers }
+    );    
+  }
+  public FindAllApplcationRespo(): Observable<HttpResponse<Array<Application>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<Application>>(
+      this.urlRespo + 'application/AllApp',
+      { observe: 'response', headers }
+    );    
+  }
   public FindApplcationHealthPilotByLots(): Observable<HttpResponse<Array<Application>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<Application>>(
@@ -128,5 +143,19 @@ export class ApplicationService {
       { observe: 'response', headers }
     );    
   }
-  
+  public ValiderDest(des: DestinataireCommunication): Observable<HttpResponse<DestinataireCommunication>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.put<DestinataireCommunication>(
+      this.urlPilote + 'destinataire/validate',des,
+      { observe: 'response', headers }
+    );    
+  }
+
+  public RetirerDest(des: DestinataireCommunication): Observable<HttpResponse<DestinataireCommunication>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.put<DestinataireCommunication>(
+      this.urlPilote + 'destinataire/retirer',des,
+      { observe: 'response', headers }
+    );    
+  }
 }

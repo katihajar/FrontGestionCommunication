@@ -54,7 +54,6 @@ export class RegistreIncidentPiloteComponent implements OnInit {
     import("xlsx").then(xlsx => {
       const worksheet = xlsx.utils.json_to_sheet(this.ListIncidentOfPilote.map(incident => {
         return {
-          id:incident.id,
           application: incident.application.nomApplication, 
           titreIncident: incident.titreIncident,
           numeroIncident: incident.numeroIncident,

@@ -14,6 +14,8 @@ export class HealthCheckBwPerimetreService {
 
  
   private urlPilote = environment.baseUrlPilote;
+  private urlRepo = environment.baseUrlResponsable;
+  private urlAdmin = environment.baseUrlAdmin;
   private _ListHealthCheckBw: Array<HealthCheckBwPerimetre> = new Array<HealthCheckBwPerimetre>();
   private _AddHealthCheckBw: HealthCheckBwPerimetre = new HealthCheckBwPerimetre();
   private _ListHealthBwDetail = new Array<HealthCheckBwPerimetreDetail>();
@@ -48,6 +50,27 @@ export class HealthCheckBwPerimetreService {
 
   set ListHealthBwDetail(value: Array<HealthCheckBwPerimetreDetail>) {
     this._ListHealthBwDetail = value;
+  }
+  public FindAllHealthCheckBwPilote(): Observable<HttpResponse<Array<HealthCheckBwPerimetre>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<HealthCheckBwPerimetre>>(
+      this.urlPilote + 'healthcheck/bwperimetre/findAll',
+      { observe: 'response', headers }
+    );    
+  }
+  public FindAllHealthCheckBwAdmin(): Observable<HttpResponse<Array<HealthCheckBwPerimetre>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<HealthCheckBwPerimetre>>(
+      this.urlAdmin + 'healthcheck/bwperimetre/findAll',
+      { observe: 'response', headers }
+    );    
+  }
+  public FindAllHealthCheckBwRespo(): Observable<HttpResponse<Array<HealthCheckBwPerimetre>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<HealthCheckBwPerimetre>>(
+      this.urlRepo + 'healthcheck/bwperimetre/findAll',
+      { observe: 'response', headers }
+    );    
   }
 
   public FindHealthCheckBwByPilote(): Observable<HttpResponse<Array<HealthCheckBwPerimetre>>> {

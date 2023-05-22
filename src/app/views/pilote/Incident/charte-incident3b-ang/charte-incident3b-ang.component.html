@@ -42,12 +42,12 @@
       <p style="color: rgb(91, 91, 219);font-weight: bolder;">WORKAROUND</p>
       <p style="color: rgb(177, 177, 177);">{{this.AddIncidentAng.solutionContournement}}</p><br>
       <div *ngIf="this.AddIncident.statut == 'Clos'">
-        <p style="color: rgb(91, 91, 219);font-weight: bolder;">DETAILS ABOUT THE INCIDENTS RESOLUTION </p>
-      <p style="color: rgb(177, 177, 177);">{{this.AddIncident.detailResolution}}</p><br>
+        <p style="color: rgb(91, 91, 219);font-weight: bolder;"><b>DETAILS ABOUT THE INCIDENTS RESOLUTION</b> </p>
+      <p style="color: rgb(177, 177, 177);"><b>{{this.AddIncident.detailResolution}}</b></p><br>
       </div>
       <div *ngIf="this.AddIncident.statut == 'Résolu avec Suivi'">
-        <p style="color: rgb(91, 91, 219);font-weight: bolder;">ACTION TAKEN</p>
-      <p style="color: rgb(177, 177, 177);">{{this.AddIncident.actionPrise}}</p><br>
+        <p style="color: rgb(91, 91, 219);font-weight: bolder;"><b>UPDATE</b></p>
+      <p style="color: rgb(177, 177, 177);"><b>{{this.AddIncident.actionPrise}}</b></p><br>
       </div>
       <p><span style="color: rgb(91, 91, 219);font-weight: bolder;"> NEXT COMMUNICATION AT:</span>{{this.AddIncidentAng.prochaineCommunication | date: 'HH:mm:ss MM/dd/yyyy'}}</p>
     

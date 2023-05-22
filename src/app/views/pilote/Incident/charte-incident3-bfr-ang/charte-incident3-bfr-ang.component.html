@@ -41,12 +41,12 @@
       <p style="color: rgb(91, 91, 219);font-weight: bolder;">WORKAROUND</p>
       <p style="color: rgb(177, 177, 177);">{{this.AddIncidentAng.solutionContournement}}</p><br>
         <div *ngIf="this.AddIncident.statut == 'Clos'">
-        <p style="color: rgb(91, 91, 219);font-weight: bolder;">DETAILS ABOUT THE INCIDENTS RESOLUTION </p>
-      <p style="color: rgb(177, 177, 177);">{{this.AddIncident.detailResolution}}</p><br>
+        <p style="color: rgb(91, 91, 219);font-weight: bolder;"><b>DETAILS ABOUT THE INCIDENTS RESOLUTION </b></p>
+      <p style="color: rgb(177, 177, 177);"><b>{{this.AddIncident.detailResolution}}</b></p><br>
       </div>
       <div *ngIf="this.AddIncident.statut == 'Résolu avec Suivi'">
-        <p style="color: rgb(91, 91, 219);font-weight: bolder;">ACTION TAKEN</p>
-      <p style="color: rgb(177, 177, 177);">{{this.AddIncident.actionPrise}}</p><br>
+        <p style="color: rgb(91, 91, 219);font-weight: bolder;"><b>UPDATE</b></p>
+      <p style="color: rgb(177, 177, 177);"><b>{{this.AddIncident.actionPrise}}</b></p><br>
       </div>
       <p><span style="color: rgb(91, 91, 219);font-weight: bolder;"> NEXT COMMUNICATION AT:</span>{{this.AddIncidentAng.prochaineCommunication | date: 'HH:mm:ss MM/dd/yyyy'}}</p>
     
@@ -55,7 +55,7 @@
 
   </div>
  
-  <div style="float:right;width: 50%;" [ngStyle]="{'border-left': this.AddIncident.statut == 'Ouvert' ? '3px solid #e26a61' : (this.AddIncident.statut == 'Résolu avec Suivi' ? '3px solid #ddbd07' : '3px solid #17d440') }" >
+  <div style="float:right;width: 49%;" [ngStyle]="{'border-left': this.AddIncident.statut == 'Ouvert' ? '3px solid #e26a61' : (this.AddIncident.statut == 'Résolu avec Suivi' ? '3px solid #ddbd07' : '3px solid #17d440') }" >
     <div style="margin-top: 2%;margin-left: 2%;">
       <p>Madame, Monsieur</p><br>
       <br>
@@ -83,12 +83,12 @@
       <p style="color: rgb(91, 91, 219);font-weight: bolder;">SOLUTION DE CONTOURNEMENT</p>
       <p style="color: rgb(177, 177, 177);">{{this.AddIncident.solutionContournement}}</p><br>
       <div *ngIf="this.AddIncident.statut == 'Clos'">
-        <p style="color: rgb(91, 91, 219);font-weight: bolder;">DETAIL SUR LA RESOLUTION DE L'INCIDENT</p>
-      <p style="color: rgb(177, 177, 177);">{{this.AddIncident.detailResolution}}</p><br>
+        <p style="color: rgb(91, 91, 219);font-weight: bolder;"><b>DETAIL SUR LA RESOLUTION DE L'INCIDENT</b></p>
+      <p style="color: rgb(177, 177, 177);"><b>{{this.AddIncident.detailResolution}}</b></p><br>
       </div>
       <div *ngIf="this.AddIncident.statut == 'Résolu avec Suivi'">
-        <p style="color: rgb(91, 91, 219);font-weight: bolder;">ACTION PRISE</p>
-      <p style="color: rgb(177, 177, 177);">{{this.AddIncident.actionPrise}}</p><br>
+        <p style="color: rgb(91, 91, 219);font-weight: bolder;"><b>MISE A JOUR</b></p>
+      <p style="color: rgb(177, 177, 177);"><b>{{this.AddIncident.actionPrise}}</b></p><br>
       </div>
       
       <p><span style="color: rgb(91, 91, 219);font-weight: bolder;"> PROCHAINE COMMUNICATION A:</span>{{this.AddIncident.prochaineCommunication | date: 'HH:mm:ss MM/dd/yyyy'}}</p>

@@ -67,6 +67,10 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
     this.ListPlanActionAng = new Array<PlanAction>();
     this.num = 1;
     this.numAng = 1;
+    this.AddIncident.actionPrise = String();
+    this.AddIncident.detailResolution = String();
+    this.AddIncidentAng.actionPrise = String();
+    this.AddIncidentAng.detailResolution = String();
     this.StatutPlan = [
       { name: 'En cours' },
       { name: 'A Démarer' },
@@ -100,10 +104,7 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
         }
       }
     });
-    this.AddIncident.actionPrise = String();
-    this.AddIncident.detailResolution = String();
-    this.AddIncidentAng.actionPrise = String();
-    this.AddIncidentAng.detailResolution = String();
+
   }
 
   translateInput() {

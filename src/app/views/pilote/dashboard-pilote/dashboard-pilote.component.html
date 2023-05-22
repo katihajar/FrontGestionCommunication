@@ -1,109 +1,503 @@
 <div class="container-fluid page" style="background-color: white">
   <div class="d-flex page__box p-3">Dashboard</div>
-  <div class="page__content shadow p-3 position-relative" >   
+  <div class="page__content shadow p-3 position-relative">
+    <div class="col-12 text-center" style="margin-top: 1%;">
+      
+      <span class="p-input-icon-left" *ngIf="selectedCom && selectedCom != 'Health check BW Perimeter' && selectedCom != 'Health check prod/preprod'" style="margin-left: 2%;float: right;" [style]="{ width: '30%' }">
+        <p-dropdown [style]="{ 'width': '100%', 'required': 'required' }" [options]="listApp" optionLabel="nomApplication" appendTo="body" (onChange)="onchange()"
+          [filter]="true" filterBy="nomApplication" optionValue="nomApplication" [showClear]="true" placeholder="Selectinné l'Application"
+          [(ngModel)]="selectedApp">
+          <ng-template let-application pTemplate="item">
+            <div class="country-item">
+              <div>{{ application.nomApplication }}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
+      </span>
+      <span class="p-input-icon-left" style="float: right;" [style]="{'width':'30%'}">
+        <p-dropdown [options]="typeCom" [(ngModel)]="selectedCom" appendTo="body" 
+          [style]="{'width':'100%','required':'required'}" placeholder="Selectinné le type de Communication"
+          optionValue="name" optionLabel="name" [showClear]="true" (ngModelChange)="executeFunction()"></p-dropdown>
+      </span>
+    </div>
     <div class="card" style="border: none;width: 100%;background-color: rgb(247, 246, 246);">
-      <div  class="col-12 row gradient-text" >
-        <h1 style="text-align: center;font-size:larger;font-weight: bolder;">Communication d'Incident</h1>
+      <div *ngIf="selectedCom === 'Incident' && selectedApp">
+        <div class="col-12 row gradient-text">
+          <h1 style="text-align: center;font-size:larger;font-weight: bolder;">Communication d'Incident</h1>
         </div>
-      <div class="row">
-        <div class="col-lg-12">
-          <canvas id="incidentsPerStatutChartMonth"></canvas>
+        <div class="row">
+          <div class="col-lg-12">
+            <canvas id="incidentsPerStatutChartMonth"></canvas>
+          </div>
         </div>
-      </div>
+    
+        <!-- <div class="row">
+          <div class="col-md-6">
+            <canvas id="incidentsPerLotsChart" *ngIf="isChartVisible('incidentsPerLotsChart')"></canvas>
+          </div>
+          <div class="col-md-6">
+            <canvas id="incidentsClosPerLotsChart" *ngIf="isChartVisible('incidentsClosPerLotsChart')"></canvas>
+          </div>
+        </div> -->
+        <div class="row" style="margin-bottom: 2%;">
+          <div class="form-group col-lg-3"></div>
+          <div class="form-group col-lg-3"></div>
+          <div class="form-group col-lg-3">
+            <label for="startDate" style="font-size: 14px;">Start Date</label>
+            <input type="date" class="form-control" id="startDate" (input)="onStartDateChangedIncident($event)">
+          </div>
+    
+          <div class="form-group col-lg-3">
+            <label for="endDate" style="font-size: 14px;">End Date</label>
+            <input type="date" class="form-control" id="endDate" (input)="onEndDateChangedIncident($event)">
+          </div>
+        </div>
+        <div class="row" style="height: 100%;">
+          <div class="col-lg-6" style="height: 100%;">
+            <canvas id="combinedChart" style="height: 100%;"></canvas>
+          </div>
+          <div class="col-lg-6">
+            <div class="card" style="border: none; height: 100%;">
+              
+              <p-table class="table" #dt1 [value]=" this.listIncidentFiltred" dataKey="id" [rows]="4"
+                [showCurrentPageReport]="true" [paginator]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [sortField]="'dateDebut'" [sortOrder]="-1"
+                [globalFilterFields]="['titreIncident','application.nomApplication','statut','dateDebut','dateFin','prochaineCommunication','description','situationActuelle','impact','causePrincipale','solutionContournement']">
+                <ng-template pTemplate="caption">
+                  <div class="flex">
+                    <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                      (click)="clear(dt1)"></button>
+                      <button pButton pRipple label="Export" icon="pi pi-upload" style="margin-left: 1%;" (click)="exportExcelIncident()" class="p-button-help"></button>
 
-      <div class="row">
-        <div class="col-md-6" >
-          <canvas id="incidentsPerLotsChart"></canvas>
+                    <span class="p-input-icon-left ml-auto" style="float: right;">
+                      <i class="pi pi-search"></i>
+                      <input pInputText type="text" (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
+                        placeholder="Search keyword" />
+                    </span>
+                  </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                  <tr>      
+                    <th>
+                      <div class="flex justify-content-center align-items-center">
+                        Application
+                        <p-columnFilter type="text" field="application.nomApplication" display="menu"></p-columnFilter>
+                      </div>
+                    </th>
+                    <th>
+                      <div class="flex justify-content-center align-items-center">
+                        titre Incident
+                        <p-columnFilter type="text" field="titreIncident" display="menu"></p-columnFilter>
+                      </div>
+                    </th>
+                    <th>
+                      <div class="flex justify-content-center align-items-center">
+                        Statut
+                        <p-columnFilter type="text" field="statut" display="menu"></p-columnFilter>
+                      </div>
+                    </th>
+                    <th style="min-width: 300px">
+                      <div class="flex justify-content-center align-items-center">
+                        description
+                        <p-columnFilter type="text" field="application.lot" display="menu"></p-columnFilter>
+                      </div>
+                    </th>
+                    <th style="min-width: 300px">
+                      <div class="flex justify-content-center align-items-center">
+                        Situation Actuelle
+                        <p-columnFilter type="text" field="situationActuelle" display="menu"></p-columnFilter>
+                      </div>
+                    </th>
+                    <th style="min-width: 300px">
+                      <div class="flex justify-content-center align-items-center">
+                        Impact
+                        <p-columnFilter type="text" field="impact" display="menu"></p-columnFilter>
+                      </div>
+                    </th>
+                    <th style="min-width: 300px">
+                      <div class="flex justify-content-center align-items-center">
+                        Cause Principale
+                        <p-columnFilter type="text" field="causePrincipale" display="menu"></p-columnFilter>
+                      </div>
+                    </th>
+                    <th style="min-width: 300px">
+                      <div class="flex justify-content-center align-items-center">
+                        Solution Contournement
+                        <p-columnFilter type="text" field="solutionContournement" display="menu"></p-columnFilter>
+                      </div>
+                    </th>
+                   
+                   
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-incident>
+                  <tr>
+                   
+                    <td>
+                      {{incident.application.nomApplication}}
+                    </td>
+                     <td>
+                      {{incident.titreIncident}}
+                    </td>
+                    <td>
+        
+                      <div *ngIf="incident.statut=='Clos'">    <p-badge severity="success" styleClass="mr-2"></p-badge>
+                      </div> 
+                      <div *ngIf="incident.statut=='Résolu avec Suivi'"><p-badge severity="warning" styleClass="mr-2"></p-badge></div>
+                       <div *ngIf="incident.statut=='Ouvert'" ><p-badge severity="danger" styleClass="mr-2"></p-badge></div> 
+                        {{incident.statut}}
+                    </td>
+                    <td>
+                      {{incident.description}}
+                    </td>
+                    <td style="width: 50px;">
+                      {{incident.situationActuelle}}
+                    </td>
+                    <td>
+                      {{incident.impact}}
+                    </td>
+                    <td>
+                      {{incident.causePrincipale}}
+                    </td>
+                    <td>
+                      {{incident.solutionContournement}}
+                    </td>
+                  
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                  <tr>
+                    <td colspan="11">aucun incident n'a été trouvé.</td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
         </div>
-        <div class="col-md-6">
-          <canvas id="incidentsClosPerLotsChart" ></canvas>
-        </div>
+        
       </div>
-
-      <div class="row" >
-        <div class="col-lg-12">
-          <canvas  id="combinedChart"></canvas>
-        </div>
-      </div>
-      <div  class="col-12 row gradient-text" >
-        <h1 style="text-align: center;font-size:larger;font-weight: bolder;">Communication d'Operation</h1>
+      <div *ngIf="selectedCom === 'Operation' && selectedApp">
+        <div class="col-12 row gradient-text">
+          <h1 style="text-align: center;font-size:larger;font-weight: bolder;">Communication d'Operation</h1>
         </div>
         <div class="row">
           <div class="col-lg-12">
             <canvas id="operationPerStatutChartMonth"></canvas>
           </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-lg-6">
             <canvas id="operationTerminerPerLotsChart"></canvas>
           </div>
           <div class="col-lg-6">
             <canvas id="operationPlannedPerLotsChart"></canvas>
           </div>
+        </div> -->
+        <div class="row" style="margin-bottom: 2%;">
+          <div class="form-group col-lg-3"></div>
+          <div class="form-group col-lg-3"></div>
+          <div class="form-group col-lg-3">
+            <label for="startDate" style="font-size: 14px;">Start Date</label>
+            <input type="date" class="form-control" id="startDate" (input)="onStartDateChangedOpeartion($event)">
+          </div>
+    
+          <div class="form-group col-lg-3">
+            <label for="endDate" style="font-size: 14px;">End Date</label>
+            <input type="date" class="form-control" id="endDate" (input)="onEndDateChangedOpeartion($event)">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <canvas id="operationPerApplicationChart"></canvas>
+          </div>
+          <div class="col-lg-6">
+            <div class="card" style="border: none; height: 100%;">
+              <p-table class="table" #dt1 [value]=" this.listOperationFiltred" dataKey="id" [rows]="4" [showCurrentPageReport]="true"
+              [paginator]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [sortField]="'dateDebut'" [sortOrder]="-1"
+            [globalFilterFields]="['application.nomApplication','titre','numero','statut','description','dateDebut','dateFin']">
+            <ng-template pTemplate="caption">
+              <div class="flex">
+                <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                  (click)="clear(dt1)"></button>
+                  <button pButton pRipple label="Export" icon="pi pi-upload" style="margin-left: 1%;" (click)="exportExcelOperation()" class="p-button-help"></button>
+
+                <span class="p-input-icon-left ml-auto" style="float: right;">
+                  <i class="pi pi-search"></i>
+                  <input pInputText type="text" (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
+                    placeholder="Search keyword" />
+                </span>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr>
+                <th>
+                  <div class="flex justify-content-center align-items-center">
+                    Application
+                    <p-columnFilter type="text" field="application.nomApplication" display="menu"></p-columnFilter>
+                  </div>
+                </th>
+                <th>
+                  <div class="flex justify-content-center align-items-center">
+                    Statut
+                    <p-columnFilter type="text" field="statut" display="menu"></p-columnFilter>
+                  </div>
+                </th>
+                <th>
+                  <div class="flex justify-content-center align-items-center">
+                    Titre
+                    <p-columnFilter type="text" field="titre" display="menu"></p-columnFilter>
+                  </div>
+                </th>
+                <th >
+                  <div class="flex justify-content-center align-items-center">
+                    Numero
+                    <p-columnFilter type="text" field="numero" display="menu"></p-columnFilter>
+                  </div>
+                </th>
+                <th style="min-width: 400px">
+                  <div class="flex justify-content-center align-items-center">
+                      Description
+                    <p-columnFilter type="text" field="description" display="menu"></p-columnFilter>
+                  </div>
+                </th>
+              
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-operation>
+              <tr>
+                <td>
+                  {{operation.application.nomApplication}}
+                </td>
+                <td>
+                  <div *ngIf="operation.statut=='Planifier'"><p-badge severity="warning" styleClass="mr-2"></p-badge></div>
+                  <div *ngIf="operation.statut=='Terminer'" ><p-badge severity="success" styleClass="mr-2"></p-badge></div> 
+                
+                  {{operation.statut}}
+                </td>
+                <td>
+                  {{operation.titre}}
+                </td>
+    
+                <td>
+                  {{operation.numero}}
+                </td>
+    
+                <td>
+                  {{operation.description}}
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td colspan="5">aucune operation n'a été trouvé.</td>
+              </tr>
+            </ng-template>
+          </p-table>
+            </div>
+          </div>
+        </div>
+      </div>
+        <div *ngIf="selectedCom === 'Changement' && selectedApp">
+        <div class="col-12 row gradient-text">
+          <h1 style="text-align: center;font-size:larger;font-weight: bolder;">Communication de Changement Planifier
+          </h1>
         </div>
         <div class="row">
           <div class="col-lg-12">
-            <canvas id="operationPerApplicationChart"></canvas>
+            <canvas id="changePerStatutChartMonth"></canvas>
+          </div>
+        </div>
+        <!-- <div class="row">
+          <div class="col-lg-6">
+            <canvas id="changeTerminerPerLotsChart"></canvas>
+          </div>
+          <div class="col-lg-6">
+            <canvas id="changePlannedPerLotsChart"></canvas>
+          </div>
+        </div> -->
+        <div class="row" style="margin-bottom: 2%;">
+          <div class="col-lg-3"></div>
+          <div class="col-lg-3"></div>
+          <div class="form-group col-lg-3">
+            <label for="startDate" style="font-size: 14px;">Start Date</label>
+            <input type="date" class="form-control" id="startDate" (input)="onStartDateChangedChang($event)">
           </div>
 
+          <div class="form-group col-lg-3">
+            <label for="endDate" style="font-size: 14px;">End Date</label>
+            <input type="date" class="form-control" id="endDate" (input)="onEndDateChangedChang($event)">
+          </div>
         </div>
-        <div  class="col-12 row gradient-text" >
-          <h1 style="text-align: center;font-size:larger;font-weight: bolder;">Communication de Changement Planifier</h1>
+        <div class="row">
+          <div class="col-lg-6">
+            <canvas id="changePerApplicationChart"></canvas>
           </div>
-          <div class="row">
-            <div class="col-lg-12">
-              <canvas id="changePerStatutChartMonth"></canvas>
+          <div class="col-lg-6">
+            <div class="card" style="border: none; height: 100%;">
+              <p-table class="table" #dt1 [value]=" this.listChangeFiltred" dataKey="id" [rows]="10"
+          [showCurrentPageReport]="true"  [paginator]="true"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          [sortField]="'dateDebut'" [sortOrder]="-1"
+          [globalFilterFields]="['titre','application.nomApplication','statut','dateDebut','dateFin','version','impactMetier']">
+          <ng-template pTemplate="caption">
+            <div class="flex">
+              <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                (click)="clear(dt1)"></button>
+                <button pButton pRipple label="Export" icon="pi pi-upload" style="margin-left: 1%;" (click)="exportExcelChange()" class="p-button-help"></button>
+              <span class="p-input-icon-left ml-auto" style="float: right;">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
+                  placeholder="Search keyword" />
+              </span>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6">
-              <canvas id="changeTerminerPerLotsChart"></canvas>
-            </div>
-            <div class="col-lg-6">
-              <canvas id="changePlannedPerLotsChart"></canvas>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-12">
-              <canvas id="changePerApplicationChart"></canvas>
-            </div>
-         </div>
-         <div  class="col-12 row gradient-text" >
-          <h1 style="text-align: center;font-size:larger;font-weight: bolder;">Communication du Health Check Preprod/Prod</h1>
-          </div>
-          <div class="row">
-            <div class="col-lg-12">
-              <canvas id="healthCheckPerMonthChart"></canvas>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6">
-              <canvas id="healthCheckPerWeekChart"></canvas>
-            </div>
-            <div class="col-lg-6">
-              <canvas id="healthCheckPerDayChart"></canvas>
-            </div>
-          </div>
-          <div  class="row" style="margin-bottom: 2%;">
-            <div class="col-lg-3" ></div>
-            <div class="col-lg-3" ></div>
-            <div class="form-group col-lg-3">
-              <label for="startDate" style="font-size: 14px;">Start Date</label>
-              <input type="date" class="form-control" id="startDate" (input)="onStartDateChanged($event)">
-            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>      
+              <th>
+                <div class="flex justify-content-center align-items-center">
+                  Application
+                  <p-columnFilter type="text" field="application.nomApplication" display="menu"></p-columnFilter>
+                </div>
+              </th>
+              <th>
+                <div class="flex justify-content-center align-items-center">
+                  titre Changement
+                  <p-columnFilter type="text" field="titre" display="menu"></p-columnFilter>
+                </div>
+              </th>
+              <th>
+                <div class="flex justify-content-center align-items-center">
+                  Statut
+                  <p-columnFilter type="text" field="statut" display="menu"></p-columnFilter>
+                </div>
+              </th>
+              <th>
+                <div class="flex justify-content-center align-items-center">
+                    version
+                  <p-columnFilter type="text" field="version" display="menu"></p-columnFilter>
+                </div>
+              </th>
+              <th>
+                <div class="flex justify-content-center align-items-center">
+                  Impact Métier
+                  <p-columnFilter type="text" field="impactMetier" display="menu"></p-columnFilter>
+                </div>
+              </th>
+             
+             
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-change>
+            <tr>
+             
+              <td>
+                {{change.application.nomApplication}}
+              </td>
+               <td>
+                {{change.titre}}
+              </td>
+              <td>
+  
+                <div *ngIf="change.statut=='Planifié'"><p-badge severity="warning" styleClass="mr-2"></p-badge></div>
+                 <div *ngIf="change.statut=='Terminé avec succès'" ><p-badge severity="success" styleClass="mr-2"></p-badge></div> 
+                  {{change.statut}}
+              </td>
+              <td>
+                {{change.version}}
+              </td>
+              <td>
+                {{change.impactMetier}}
+              </td>
             
-            <div class="form-group col-lg-3">
-              <label for="endDate" style="font-size: 14px;">End Date</label>
-              <input type="date" class="form-control" id="endDate" (input)="onEndDateChanged($event)">
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="5">aucun changement n'a été trouvé.</td>
+            </tr>
+          </ng-template>
+        </p-table>
             </div>
           </div>
-          <div  class="row">
-            <div class="col-lg-12">
-            <canvas id="health-check-chart"></canvas>
-            </div>
-          </div>
-          <div>
         </div>
-  </div>
-</div>
+      </div>
+      <div *ngIf="selectedCom === 'Health check prod/preprod'">
+        <div class="col-12 row gradient-text">
+          <h1 style="text-align: center;font-size:larger;font-weight: bolder;">Communication du Health Check
+            Preprod/Prod</h1>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <canvas id="healthCheckPerMonthChart"></canvas>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <canvas id="healthCheckPerWeekChart"></canvas>
+          </div>
+          <div class="col-lg-6">
+            <canvas id="healthCheckPerDayChart"></canvas>
+          </div>
+        </div>
+        <div class="row" style="margin-bottom: 2%;">
+          <div class="col-lg-3"></div>
+          <div class="col-lg-3"></div>
+          <div class="form-group col-lg-3">
+            <label for="startDate" style="font-size: 14px;">Start Date</label>
+            <input type="date" class="form-control" id="startDate" (input)="onStartDateChanged($event)">
+          </div>
 
+          <div class="form-group col-lg-3">
+            <label for="endDate" style="font-size: 14px;">End Date</label>
+            <input type="date" class="form-control" id="endDate" (input)="onEndDateChanged($event)">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <canvas id="health-check-chart"></canvas>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="selectedCom === 'Health check BW Perimeter'">
+        <div class="col-12 row gradient-text">
+          <h1 style="text-align: center;font-size:larger;font-weight: bolder;">Communication du Health Check BW Perimeter</h1>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <canvas id="healthCheckBWPerMonthChart"></canvas>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <canvas id="healthCheckBWPerWeekChart"></canvas>
+          </div>
+          <div class="col-lg-6">
+            <canvas id="healthCheckBWPerDayChart"></canvas>
+          </div>
+        </div>
+        <div class="row" style="margin-bottom: 2%;">
+          <div class="col-lg-3"></div>
+          <div class="col-lg-3"></div>
+          <div class="form-group col-lg-3">
+            <label for="startDate" style="font-size: 14px;">Start Date</label>
+            <input type="date" class="form-control" id="startDate" (input)="onStartDateChangedhealthBW($event)">
+          </div>
+
+          <div class="form-group col-lg-3">
+            <label for="endDate" style="font-size: 14px;">End Date</label>
+            <input type="date" class="form-control" id="endDate" (input)="onEndDateChangedhealthBW($event)">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <canvas id="health-check-bw-chart"></canvas>
+          </div>
+        </div>
+      </div>
+      <div>
+      </div>
+    </div>
+  </div>

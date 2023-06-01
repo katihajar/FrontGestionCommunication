@@ -77,14 +77,13 @@ export class DashboardComponent {
   ngOnInit(): void {
     this.typeCom= [
       { name: 'Incident' },
-      { name: 'Operation' },
       { name: 'Changement' },
-      { name: 'Health check prod/preprod' },
-      { name: 'Health check BW Perimeter' },
+      { name: 'Etat de santé monetique' },
+      { name: 'Etat de santé Bi' },
     ];
   const date = new Date();
   const year = date.getFullYear();
-  this.appService.FindAllApplcation().subscribe((data)=>{
+  this.appService.FindApplcation().subscribe((data)=>{
     //@ts-ignore
     this.listApp=data.body;    
   })
@@ -205,14 +204,14 @@ saveAsExcelFile(buffer: any, fileName: string): void {
       //  this.generateChangeTerminePerLotChart();
        this.generateChangePerStatutChartMonth();
       });
-    } else if (this.selectedCom === 'Health check prod/preprod') {
+    } else if (this.selectedCom === 'Etat de santé monetique') {
       this.healthprodService.FindAllHealthCheckAdmin().subscribe(data=>{
         //@ts-ignore
         this.listHealthCheckProd = data.body;
        this.generateChartsHealthProd();
        this.updateChart();
       });
-    } else if (this.selectedCom === 'Health check BW Perimeter') {
+    } else if (this.selectedCom === 'Etat de santé Bi') {
       this.healthBwService.FindAllHealthCheckBwAdmin().subscribe(data=>{
         //@ts-ignore
         this.listHealthCheckBwPerimetre= data.body;

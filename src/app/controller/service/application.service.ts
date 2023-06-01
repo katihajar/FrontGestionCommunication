@@ -77,11 +77,17 @@ export class ApplicationService {
   set ListPiloteApplication(value: Array<PiloteApplication>) {
     this._ListPiloteApplication = value;
   }
-
-  public FindAllApplcation(): Observable<HttpResponse<Array<Application>>> {
+  public FindApplcation(): Observable<HttpResponse<Array<Application>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<Application>>(
       this.url + 'application/AllApp',
+      { observe: 'response', headers }
+    );    
+  }
+  public FindAllApplcation(): Observable<HttpResponse<Array<Application>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<Application>>(
+      this.url + 'application/lot/'+this.auth.User.lots,
       { observe: 'response', headers }
     );    
   }

@@ -1,41 +1,45 @@
+<!DOCTYPE html>
 <html>
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Login Page </title>
-
+  <title>Login Page</title>
+  <style>
+  
+  </style>
 </head>
-
-<body>
-  <!-- <h1> Login Form </h1> -->
-  <form>
+<ng-template [ngIf]="this.spiner ">
+  <div class="spinner-container">
+    <p-progressSpinner styleClass="spinner" strokeWidth="4" [fill]="'#ffffff'"></p-progressSpinner>
+  </div>
+</ng-template>
+<body [ngClass]="{'blur': this.spiner}">
+  <form style="justify-content: center;">
     <div class="container">
       <h1>
-        <img src="../../assets/img/logocgi.png" style="width: 420px;"  alt="psa" title="psa" class="staticImg">
+        <img src="../../assets/img/blueIcon.png" syle="width: 100px;" alt="psa" title="psa" class="staticImg">
       </h1>
-      <div class="signinEntry" style="margin-top: 4%;">
-
+      <div class="signinEntry" style="margin-top: 2%;">
         <div>
           <div class="alert alert-warning " style="color: #cc0000" *ngIf='invalidLogin'>{{errorMessage}}</div>
           <div class="alert alert-success " style="color: green" *ngIf='loginSuccess'>{{successMessage}}</div>
           <span class="label">
-            <label>Utilisateur : </label> </span>
+            <label>Utilisateur:</label>
+          </span>
         </div>
         <div class="box">
-          <input type="text" [(ngModel)]="username" placeholder="Enter Username" name="username" required>
-          <span class="label2">
-            <label>@cgi.com</label> </span>
+          <input type="text" [(ngModel)]="username" placeholder="Login" name="username" required>
         </div>
         <div>
           <span class="label">
-            <label>Mot de passe : </label> </span>
+            <label>Mot de passe:</label>
+          </span>
         </div>
         <div class="box">
-          <input type="password" [(ngModel)]="password" placeholder="Enter Password" name="password" required>
+          <input type="password" [(ngModel)]="password" placeholder="Mot de passe" name="password" required>
         </div>
-
         <div class="boxBtn">
-          <button class="submitbtn" (click)=handleLogin() type="submit">Connexion</button><br>
+          <button class="submitbtn" style="background: linear-gradient(74deg, #e31937 2%, #a82465 44%, #5236ab 84%);" [disabled]="!username && !password" (click)="handleLogin()" type="submit">Connexion</button><br>
         </div>
       </div>
       <footer class="footer">
@@ -43,7 +47,6 @@
       </footer>
     </div>
   </form>
-
 </body>
 
 </html>

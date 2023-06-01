@@ -19,6 +19,7 @@ import { EmaildraftsService } from 'src/app/controller/service/emaildrafts.servi
   styleUrls: ['./ajouter-operation-fr-ang.component.scss']
 })
 export class AjouterOperationFrAngComponent implements OnInit {
+  spinner:boolean=false;
   imageDataUrl:any;
   dialogElement:any;
   date1: Date = new Date();
@@ -161,6 +162,7 @@ export class AjouterOperationFrAngComponent implements OnInit {
   SendAndSaveOper() {
       this.AddOperation.id=0;
       if(this.AddOperation.impactMetier != '' &&this.AddOperation.description != '' && this.AddOperation.titre != '' && this.AddOperation.dateDebut !=null && this.AddOperationAng.impactMetier != '' && this.AddOperationAng.description != '' && this.AddOperationAng.titre != '' && this.AddOperationAng.dateDebut !=null){
+        this.spinner= true;
         this.takeScreenshot();
       }else{
         this.messageService.add({severity:'warn', summary: 'Warning', detail: 'Insérer tout les champs'});
@@ -173,14 +175,18 @@ export class AjouterOperationFrAngComponent implements OnInit {
       this.Subject = '[TOTALENERGIES][COMMUNICATION] -N°.'+this.AddOperation.numero+' - Description Courte de l\'Operation Terminée'; 
    }
       this.operationService.SaveOperation().subscribe((data) => {
-        this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire,this.EmailEnCC,this.Subject,this.dialogElement.innerHTML);
+        const content = `<div style="width: 700px;">${this.dialogElement.innerHTML}</div>`;
+        this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire, this.EmailEnCC, this.Subject, content);      
+        // this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire,this.EmailEnCC,this.Subject,this.dialogElement.innerHTML);
              this.AddOperation=new Operation();
              this.AddOperationAng=new Operation();
              const mailtoLink = `mailto:${this.EmailObligatoire.join(';')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(';')}`;
-             window.open(mailtoLink, '_blank');
+            // window.open(mailtoLink, '_blank');
+            this.spinner= false;
              this.router.navigate(['/pilote/operation/registre']);
              this.messageService.add({severity:'success', summary: 'Success', detail: 'Operation Ajouter avec succès'});
             },error=>{
+              this.spinner= false;
               this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de l\'enregistrement verifier le titre d \'Operation'});
       })
      

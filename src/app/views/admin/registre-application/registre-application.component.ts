@@ -85,7 +85,7 @@ export class RegistreApplicationComponent implements OnInit {
     this.userService.UserList = value;
   }
   AddPilote() {
-    this.FindAllUsers(this.App.lot);
+    this.FindAllUsers();
     this.AjouterPilote = true;
     this.cdRef.detectChanges();
 
@@ -104,18 +104,21 @@ export class RegistreApplicationComponent implements OnInit {
     })
   }
   }
-  FindAllUsers(lot: string) {
+  FindAllUsers() {
     this.userService.FindAllUsers().subscribe((data) => {
       // @ts-ignore
       this.UserList = data.body;
+      console.log(this.UserList);
+      
       this.piloteList = new Array<User>();
       for (const user of this.UserList) {
         if (user.roles && user.roles.length > 0) {
           const roleName = user.roles[0].name;
-          if (roleName == "ROLE_PILOTE" && lot == user.lots) {
+          if (roleName == "ROLE_PILOTE" ) {
             this.piloteList.push(user);
-          } else if (roleName == "ROLE_RESPONSABLE" && lot == user.lots) {
+          } else if (roleName == "ROLE_RESPONSABLE") {            
             this.responsableList.push(user);
+            console.log(this.responsableList);
           }
         }
       }
@@ -124,6 +127,7 @@ export class RegistreApplicationComponent implements OnInit {
   }
   
   ShowModifDialog(app: Application){
+    this.FindAllUsers();
     this.ModifApp = true;
   }
 

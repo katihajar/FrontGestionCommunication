@@ -16,16 +16,6 @@ export class AdminComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // if(this.UserAuth.accessToken == null) {
-    //   this.router.navigate(['/forbidden']).then(() => {
-    //     window.location.reload();
-    //   });
-    // }else  if (this.User.roles[0].name !== 'ROLE_ADMIN') {
-    //   this.router.navigate(['/forbidden']).then(() => {
-    //     window.location.reload();
-    //   });
-    // }
-
   }
 
   get User(): User {

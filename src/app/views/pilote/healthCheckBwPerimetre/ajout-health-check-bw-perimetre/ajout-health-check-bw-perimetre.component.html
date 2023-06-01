@@ -1,4 +1,10 @@
-<div class="container-fluid page" style="background-color: white">
+<ng-template [ngIf]="this.spinner ">
+    <div class="spinner-container">
+      <p-progressSpinner styleClass="spinner" strokeWidth="4" [fill]="'#ffffff'"></p-progressSpinner>
+    </div>
+  </ng-template>
+
+<div [ngClass]="{'blur': this.spinner}" class="container-fluid page" style="background-color: white">
     <div class="d-flex page__box p-3">Ajouter un Etat de santé</div>
     <div class="card align-items-center page__content shadow p-3 position-relative">
                 <div class="col-12 text-center" style="margin-bottom: 2%;margin-top: 2%;">             
@@ -18,7 +24,7 @@
                 </p-dropdown>   
                   </span>
                   <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
-                    <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Status Night Treatment<span style="color: red;">*</span></label>
+                    <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Traitement de nuit<span style="color: red;">*</span></label>
                     <p-dropdown
                     [options]="ListStatut"
                     [style]="{ width: '100%', required: 'required' }"
@@ -30,7 +36,7 @@
                   ></p-dropdown>
                   </span>
                   <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
-                    <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Status Data Integrity<span style="color: red;">*</span></label>
+                    <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Statut d'intégrité des données<span style="color: red;">*</span></label>
                     <p-dropdown
                     [options]="ListStatut"
                     [style]="{ width: '100%', required: 'required' }"
@@ -44,24 +50,24 @@
                 </div>
                 <div class="col-12 text-center" style="margin-bottom: 2%;">
                     <span class="p-input-icon-left" [style]="{ width: '46%' }">
-                        <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Incident in Progress<span style="color: red;">*</span></label>
+                        <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Incident en cours<span style="color: red;">*</span></label>
                         <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="number" pInputText
                             placeholder="Entré le nombre d'inicdent en cours" [(ngModel)]="this.helthchekBwdetail.incidentInProgress"/>
                     </span>
                     <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '46%' }">
-                        <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Incident Completed this month<span style="color: red;">*</span></label>
+                        <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Incident clôturé ce mois-ci<span style="color: red;">*</span></label>
                         <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="number" pInputText
                             placeholder="Entré le nombre d'inicdent completer" [(ngModel)]="this.helthchekBwdetail.incidentCompleted"/>
                     </span>
                 </div>
                 <div class="col-12 text-center" style="margin-bottom: 2%;">
                     <span class="p-input-icon-left" [style]="{ width: '46%' }">
-                        <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Comment<span style="color: red;">*</span></label>
+                        <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Commentaire<span style="color: red;">*</span></label>
                         <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="text" pInputText
                             placeholder="Entré le commentaire" [(ngModel)]="this.helthchekBwdetail.comment"/>
                     </span>
                     <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '41%' }">
-                        <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Key User feedBack<span style="color: red;">*</span></label>
+                        <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Retour d'information des utilisateurs clés<span style="color: red;">*</span></label>
                         <p-dropdown
                         [options]="userKey"
                         [style]="{ width: '100%', required: 'required' }"
@@ -84,37 +90,37 @@
                             <tr>
                                 <th>
                                     <div class="flex justify-content-center align-items-center">
-                                        Perimeter
+                                        Périmètre
                                     </div>
                                 </th>
                                 <th>
                                     <div class="flex justify-content-center align-items-center">
-                                        Status Night Treatment
+                                        Traitement de nuit
                                     </div>
                                 </th>
                                 <th>
                                     <div class="flex justify-content-center align-items-center">
-                                        Status Data Integrity
+                                        Statut d'intégrité des données
                                     </div>
                                 </th>
                                 <th>
                                     <div class="flex justify-content-center align-items-center">
-                                        Incident in Progress
+                                        Incident en cours
                                     </div>
                                 </th>
                                 <th>
                                     <div class="flex justify-content-center align-items-center">
-                                        Incident Completed this month
+                                        Incident clôturé ce mois-ci
                                     </div>
                                 </th>
                                 <th>
                                     <div class="flex justify-content-center align-items-center">
-                                        Comment
+                                        Commentaire
                                     </div>
                                 </th>
                                 <th>
                                     <div class="flex justify-content-center align-items-center">
-                                        Key User FeedBack
+                                        Retour d'information des utilisateurs clés
                                     </div>
                                 </th>
                                 <th>
@@ -167,7 +173,7 @@
                         </ng-template>
                         <ng-template pTemplate="emptymessage">
                             <tr>
-                                <td colspan="8">aucune donnée n'a été ajoué.</td>
+                                <td colspan="8">aucune donnée n'a été trouvée.</td>
                             </tr>
                         </ng-template>
                     </p-table>
@@ -176,8 +182,8 @@
 </div>
             <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
                 <button pButton pRipple  type="button" label="Visualiser la charte" style=" float: left;margin-left: 2%;" (click)="charte()" class="p-button-raised p-button-help"></button>
-                <button pButton pRipple  style=" float: right;margin-right: 2%;" type="button" label="Submit" class="p-button-raised" [disabled]="isSubmitDisabled()" (click)="SendAndSaveHealth()"></button>
+                <button pButton pRipple  style=" float: right;margin-right: 2%;" type="button" label="Soumettre" class="p-button-raised" [disabled]="isSubmitDisabled()" (click)="SendAndSaveHealth()"></button>
             </div>
         </div>
     </div>
-<app-charte-health-check-bw-perimetre *ngIf="charteHealthCheckBw"></app-charte-health-check-bw-perimetre>
+<app-charte-health-check-bw-perimetre *ngIf="charteHealthCheckBw" [ngClass]="{'blur': this.spinner}"></app-charte-health-check-bw-perimetre>

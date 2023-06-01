@@ -1,0 +1,11 @@
+<app-header-super-admin style="margin-left: 0%;"  (toggleSidebarForMe)="sideBarToggler()"></app-header-super-admin>
+<mat-drawer-container>
+  <mat-drawer mode="side" [opened]="sideBarOpen">
+    <app-side-bar-super-admin></app-side-bar-super-admin>
+  </mat-drawer>
+  <mat-drawer-content>
+    <p-toast></p-toast>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
+<app-change-password></app-change-password>

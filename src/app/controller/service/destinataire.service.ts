@@ -63,6 +63,13 @@ export class DestinataireService {
       { observe: 'response', headers }
     );    
   }
+  public FindDestinataireFlamingo(): Observable<HttpResponse<Array<DestinataireCommunication>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<DestinataireCommunication>>(
+      this.urlPilote + 'destinataire/findByNomApplication/Flamingo',
+      { observe: 'response', headers }
+    );    
+  }
   public FindDestinataireHealthCheckBwPerimetre(): Observable<HttpResponse<Array<DestinataireCommunication>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<DestinataireCommunication>>(

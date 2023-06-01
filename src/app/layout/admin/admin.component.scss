@@ -5,8 +5,8 @@
 }
 
 mat-drawer {
-  width: 300px;
-  background: #333333;
+  width: 310px;
+  background: rgb(150, 149, 149);
   z-index: 100000;
 }
 mat-drawer-container {
@@ -30,7 +30,7 @@ p-dialog {
   z-index: 2;
 }
 
-app-header-admin ,app-header-responsable, app-header-pilote{
+app-header-admin ,app-header-responsable, app-header-pilote, app-header-super-admin{
   z-index: 1;
 }
 // app-side-bar-admin,app-side-bar-responsable,app-side-bar-pilote{

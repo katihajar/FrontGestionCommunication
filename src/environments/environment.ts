@@ -5,6 +5,7 @@
 export const environment = {
   baseUrl: 'http://localhost:8039',
   baseUrlAdmin: 'http://localhost:8039/api/admin/',
+  baseUrlSuperAdmin: 'http://localhost:8039/api/superadmin/',
   baseUrlPilote: 'http://localhost:8039/api/pilote/',
   baseUrlResponsable: 'http://localhost:8039/api/responsable/',
   production: false

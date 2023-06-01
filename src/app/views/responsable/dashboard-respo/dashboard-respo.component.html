@@ -3,7 +3,7 @@
   <div class="page__content shadow p-3 position-relative">
     <div class="col-12 text-center" style="margin-top: 1%;">
       
-      <span class="p-input-icon-left" *ngIf="selectedCom && selectedCom != 'Health check BW Perimeter' && selectedCom != 'Health check prod/preprod'" style="margin-left: 2%;float: right;" [style]="{ width: '30%' }">
+      <span class="p-input-icon-left" *ngIf="selectedCom && selectedCom != 'Etat de santé Bi' && selectedCom != 'Etat de santé monétique'" style="margin-left: 2%;float: right;" [style]="{ width: '30%' }">
         <p-dropdown [style]="{ 'width': '100%', 'required': 'required' }" [options]="listApp" optionLabel="nomApplication" appendTo="body" (onChange)="onchange()"
           [filter]="true" filterBy="nomApplication" optionValue="nomApplication" [showClear]="true" placeholder="Selectinné l'Application"
           [(ngModel)]="selectedApp">
@@ -424,10 +424,10 @@
           </div>
         </div>
       </div>
-      <div *ngIf="selectedCom === 'Health check prod/preprod'">
+      <div *ngIf="selectedCom === 'Etat de santé monétique'">
         <div class="col-12 row gradient-text">
-          <h1 style="text-align: center;font-size:larger;font-weight: bolder;">Communication du Health Check
-            Preprod/Prod</h1>
+          <h1 style="text-align: center;font-size:larger;font-weight: bolder;">Communication d'état de santé monétique
+            </h1>
         </div>
         <div class="row">
           <div class="col-lg-12">
@@ -461,9 +461,9 @@
           </div>
         </div>
       </div>
-      <div *ngIf="selectedCom === 'Health check BW Perimeter'">
+      <div *ngIf="selectedCom === 'Etat de santé Bi'">
         <div class="col-12 row gradient-text">
-          <h1 style="text-align: center;font-size:larger;font-weight: bolder;">Communication du Health Check BW Perimeter</h1>
+          <h1 style="text-align: center;font-size:larger;font-weight: bolder;">Communication d'état de santé Bi</h1>
         </div>
         <div class="row">
           <div class="col-lg-12">

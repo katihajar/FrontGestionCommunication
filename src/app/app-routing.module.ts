@@ -39,6 +39,9 @@ import { DashboardComponent } from './views/admin/dashboard/dashboard.component'
 import { DashboardRespoComponent } from './views/responsable/dashboard-respo/dashboard-respo.component';
 import { ExpireTokenComponent } from './redirectlogin/expire-token/expire-token.component';
 import { AuthGuard } from './auth.guard';
+import { AjouterHealthCheckFlamingoComponent } from './views/pilote/healthCheckFlamingo/ajouter-health-check-flamingo/ajouter-health-check-flamingo.component';
+import { RegistreAdministrateurComponent } from './views/superAdmin/registre-administrateur/registre-administrateur.component';
+import { SupAdminComponent } from './layout/sup-admin/sup-admin.component';
 
 
 @NgModule({
@@ -59,6 +62,16 @@ import { AuthGuard } from './auth.guard';
       ],
     },
     {
+      path: 'superAdmin',
+      component: SupAdminComponent,
+      canActivate: [AuthGuard],
+      data: { role: 'ROLE_SUPERADMIN' },
+      children: [
+        { path: 'admin/register', component: RegistreAdministrateurComponent },
+        { path: '', redirectTo: 'admin/register', pathMatch: 'full' },
+      ],
+    },
+    {
       path: 'responsable',
       component: ResponsableComponent,
       canActivate: [AuthGuard],
@@ -67,11 +80,9 @@ import { AuthGuard } from './auth.guard';
         { path: 'dashboard', component: DashboardRespoComponent },
         { path: 'incident/registre', component: ResgistreIncidentRespoComponent },
         { path: 'application/registre', component: ResgistreApplicationRespoComponent },
-        { path: 'operation/registre', component: ResgistreOperationRespoComponent },
+        // { path: 'operation/registre', component: ResgistreOperationRespoComponent },
         { path: 'changement/registre', component: ResgistreChangementRespoComponent },
         { path: 'healthcheck/PreprodProd/registre', component: RegistrHealthCheckProdRespoComponent },
-        { path: 'healthcheck/Bw/registre', component: RegistrHealthBwPerimetreRespoComponent },
-        { path: 'pointversion/registre', component: RegistrePointVersionRespoComponent },
         { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       ],
     },
@@ -86,18 +97,16 @@ import { AuthGuard } from './auth.guard';
         { path: 'incident/registre', component: RegistreIncidentPiloteComponent },
         { path: 'incident/save/Français', component: AjouterIncidentPiloteComponent },
         { path: 'incident/save/FrançaisAnglais', component: AjouterIncidentPiloteAngFrComponent },
-        { path: 'operation/registre', component: RegistreOperationComponent },
-        { path: 'operation/save/Français', component: AjouterOperationComponent },
-        { path: 'operation/save/FrançaisAnglais', component: AjouterOperationFrAngComponent },
+        // { path: 'operation/registre', component: RegistreOperationComponent },
+        // { path: 'operation/save/Français', component: AjouterOperationComponent },
+        // { path: 'operation/save/FrançaisAnglais', component: AjouterOperationFrAngComponent },
         { path: 'changement/registre', component: RegistreChangementPlanifierComponent },
         { path: 'changement/save/Français', component: AjouterChangementFrComponent },
         { path: 'changement/save/FrançaisAnglais', component: AjouterChangementAngFrComponent},
         { path: 'healthcheck/PreprodProd/registre', component: RegistreHealthCheckComponent },
         { path: 'healthcheck/PreprodProd/save', component: AjoutHealthCheckComponent },
-        { path: 'healthcheck/Bw/registre', component: RegistrehealthCheckBwPerimetreComponent },
         { path: 'healthcheck/Bw/save', component: AjoutHealthCheckBwPerimetreComponent },
-        { path: 'pointversion/registre', component: RegistrePointVersionComponent },
-        { path: 'pointversion/save', component: AjoutPointVersionComponent },
+        { path: 'healthcheck/Flamingo/save', component: AjouterHealthCheckFlamingoComponent },
         { path: '', redirectTo: 'Dashboard', pathMatch: 'full' },
       ],
     },

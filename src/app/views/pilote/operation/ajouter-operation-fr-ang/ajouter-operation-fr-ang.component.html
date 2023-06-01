@@ -1,4 +1,9 @@
-<div class="container-fluid page" style="background-color: white">
+<ng-template [ngIf]="this.spinner ">
+    <div class="spinner-container">
+      <p-progressSpinner styleClass="spinner" strokeWidth="4" [fill]="'#ffffff'"></p-progressSpinner>
+    </div>
+  </ng-template>
+<div [ngClass]="{'blur': this.spinner}"  class="container-fluid page" style="background-color: white">
     <div class="d-flex page__box p-3">Ajouter une Operation</div>
     <div class="page__content shadow p-3 position-relative">
         <div class="card align-items-center">
@@ -134,4 +139,4 @@
     </div>
 
 </div>
-<app-charte-operation-fr-ang  *ngIf="charteOperationAngFr"></app-charte-operation-fr-ang>
+<app-charte-operation-fr-ang [ngClass]="{'blur': this.spinner}"  *ngIf="charteOperationAngFr"></app-charte-operation-fr-ang>

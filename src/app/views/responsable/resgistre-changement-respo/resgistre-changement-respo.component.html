@@ -17,7 +17,7 @@
               <span class="p-input-icon-left ml-auto" style="float: right;">
                 <i class="pi pi-search"></i>
                 <input pInputText type="text" (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
-                  placeholder="Search keyword" />
+                  placeholder="Recherche par mot clé" />
               </span>
             </div>
           </ng-template>
@@ -127,7 +127,9 @@
       <p-button label="Submit" (onClick)="SelectLanguage()" icon="pi pi-check"></p-button>
     </ng-template>
   </p-dialog>
-  
+  <app-charte-operation-fr  *ngIf="charteOperationFr"></app-charte-operation-fr>
+  <app-charte-operation-fr-ang  *ngIf="charteOperationAngFr"></app-charte-operation-fr-ang>
+  <app-charte-operation-ang  *ngIf="charteOperationAng"></app-charte-operation-ang>
   <app-charte-changement-ang *ngIf="charteChangeAng"></app-charte-changement-ang>
   <app-charte-changement-fr *ngIf="charteChangeFr"></app-charte-changement-fr>
   <app-charte-changement-fr-ang *ngIf="charteChangeAngFr"></app-charte-changement-fr-ang>

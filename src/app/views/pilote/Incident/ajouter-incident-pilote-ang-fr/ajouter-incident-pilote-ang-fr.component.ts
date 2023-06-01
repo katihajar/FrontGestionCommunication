@@ -22,6 +22,7 @@ import { EmaildraftsService } from 'src/app/controller/service/emaildrafts.servi
   styleUrls: ['./ajouter-incident-pilote-ang-fr.component.scss']
 })
 export class AjouterIncidentPiloteAngFrComponent implements OnInit {
+  spinner:boolean=false;
   imageDataUrl: string = String();
   param: any;
   StatutPlan: any[] = [];
@@ -357,15 +358,17 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
       this.Subject = '[' + this.AddIncident.type + '] ' + this.AddIncident.application.nomApplication + ' Incident ' + this.AddIncident.numeroIncident + ' - ' + this.AddIncident.titreIncident;
     }
     this.incidentService.SaveIncident().subscribe((data) => {
-      this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire,this.EmailEnCC,this.Subject,this.dialogElement.innerHTML);
-      this.AddIncident = new Incident();
+      const content = `<div style="width: 700px;">${this.dialogElement.innerHTML}</div>`;
+      this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire, this.EmailEnCC, this.Subject, content);            this.AddIncident = new Incident();
       this.ListPlanAction = new Array<PlanAction>();
       this.ListPlanActionAng = new Array<PlanAction>();
       const mailtoLink = `mailto:${this.EmailObligatoire.join(';')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(';')}`;
-      window.open(mailtoLink, '_blank');
+      // window.open(mailtoLink, '_blank');
+      this.spinner= false;
       this.router.navigate(['/pilote/incident/registre']);
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Incident Ajouter avec succès' });
     }, error => {
+      this.spinner= false;
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Erreur lors de l\'enregistrement verifier le titre d \'incident' });
     })
 
@@ -393,11 +396,11 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
         imageSmoothingQuality: 'high'
       };
       html2canvas(this.dialogElement, options).then((canvas) => {
-        this.imageDataUrl = canvas.toDataURL();
-        const blob = this.dataURLtoBlob(this.imageDataUrl);
-        const imageUrl = URL.createObjectURL(blob); // create URL object from blob
-        const file = new File([blob], this.AddIncident.titreIncident + '-' + this.AddIncident.application.nomApplication + '.png', { type: 'image/png' });
-        saveAs(file);
+        // this.imageDataUrl = canvas.toDataURL();
+        // const blob = this.dataURLtoBlob(this.imageDataUrl);
+        // const imageUrl = URL.createObjectURL(blob); // create URL object from blob
+        // const file = new File([blob], this.AddIncident.titreIncident + '-' + this.AddIncident.application.nomApplication + '.png', { type: 'image/png' });
+        //saveAs(file);
         this.SaveIncident();
       });
       if (this.AddIncident.application.charteIncident == 'charte Incident') {
@@ -436,6 +439,7 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
     this.AddIncident.id = 0;
     this.AddIncidentAng.planActionList = this.ListPlanActionAng;
     if (this.AddIncident.description != '' && this.AddIncident.causePrincipale != '' && this.AddIncident.situationActuelle != '' && this.AddIncident.prochaineCommunication != null) {
+      this.spinner= true;
       this.takeScreenshot();
     } else {
       this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Insérer tout les champs' });

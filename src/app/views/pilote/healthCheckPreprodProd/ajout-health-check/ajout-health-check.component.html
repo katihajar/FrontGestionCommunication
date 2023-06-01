@@ -1,4 +1,10 @@
-<div class="container-fluid page" style="background-color: white">
+<ng-template [ngIf]="this.spinner ">
+    <div class="spinner-container">
+      <p-progressSpinner styleClass="spinner" strokeWidth="4" [fill]="'#ffffff'"></p-progressSpinner>
+    </div>
+  </ng-template>
+
+<div [ngClass]="{'blur': this.spinner}"  class="container-fluid page" style="background-color: white">
     <div class="d-flex page__box p-3">Ajouter un Etat de santé</div>
     <div class="card page__content shadow p-3 position-relative align-items-center">
 
@@ -385,9 +391,9 @@
 
             <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
                 <button pButton pRipple  type="button" label="Visualiser la charte" style=" float: left;margin-left: 2%;" (click)="charte()" class="p-button-raised p-button-help"></button>
-                <button pButton pRipple  style=" float: right;margin-right: 2%;" type="button" label="Submit" [disabled]="isSubmitDisabled()" class="p-button-raised" (click)="SendAndSaveHealth()"></button>
+                <button pButton pRipple  style=" float: right;margin-right: 2%;" type="button" label="Soumettre" [disabled]="isSubmitDisabled()" class="p-button-raised" (click)="SendAndSaveHealth()"></button>
             </div>
         </div>
     </div>
 
-<app-charte-health-check *ngIf="charteHealthCheckPreprodProd"></app-charte-health-check>
+<app-charte-health-check [ngClass]="{'blur': this.spinner}"  *ngIf="charteHealthCheckPreprodProd"></app-charte-health-check>

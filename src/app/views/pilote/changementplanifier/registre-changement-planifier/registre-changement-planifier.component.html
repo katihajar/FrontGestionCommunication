@@ -22,7 +22,7 @@
               <span class="p-input-icon-left ml-auto" style="float: right;">
                 <i class="pi pi-search"></i>
                 <input pInputText type="text" (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
-                  placeholder="Search keyword" />
+                  placeholder="Recherche par mot clé" />
               </span>
             </div>
           </ng-template>
@@ -70,7 +70,7 @@
                   <!-- <p-columnFilter type="date" field="dateFin" display="menu"></p-columnFilter> -->
                 </div>
               </th>
-              <th>
+              <th [width]="200">
                 Action
               </th>
              
@@ -103,12 +103,17 @@
               <td>
                 {{change.dateFin | date: 'MM/dd/yyyy'}}
               </td>
-              <td><button pButton pRipple (click)="ShowCharte(change)" type="button" style="font-size: larger;" icon="pi pi-search"
+              <td> <!--<button pButton pRipple (click)="ShowCharte(change)" type="button" style="font-size: larger;" icon="pi pi-search"
                   class="p-button-rounded p-button-info"></button>
               <button pButton pRipple (click)="Edite(change)" type="button" style="font-size: larger;" icon="pi pi-pencil"
                 class="p-button-rounded p-button-success"></button>
             <button *ngIf="change.createurChangement.id == this.User.id"  pButton pRipple (click)="DeleteChange(change.id)" type="button" style="font-size: larger;" icon="pi pi-times"
-              class="p-button-rounded p-button-danger"></button>
+              class="p-button-rounded p-button-danger"></button> -->
+              <span class="p-buttonset">
+                <button pButton pRipple class="p-button-info"  icon="pi pi-search" (click)="ShowCharte(change)"></button>
+                <button pButton pRipple class="p-button-success" icon="pi pi-pencil" (click)="Edite(change)"></button>
+                <button *ngIf="change.createurChangement.id == this.User.id"   pButton pRipple class="p-button-danger" (click)="DeleteChange(change.id)" icon="pi pi-trash"></button>
+            </span>
           </td>
             </tr>
           </ng-template>
@@ -172,6 +177,9 @@
       <p-button label="Submit" (onClick)="SelectLanguage()" icon="pi pi-check"></p-button>
     </ng-template>
   </p-dialog>
+  <app-charte-operation-fr  *ngIf="charteOperationFr"></app-charte-operation-fr>
+<app-charte-operation-fr-ang  *ngIf="charteOperationAngFr"></app-charte-operation-fr-ang>
+<app-charte-operation-ang  *ngIf="charteOperationAng"></app-charte-operation-ang>
  <app-charte-changement-ang *ngIf="charteChangeAng"></app-charte-changement-ang>
  <app-charte-changement-fr *ngIf="charteChangeFr"></app-charte-changement-fr>
  <app-charte-changement-fr-ang *ngIf="charteChangeAngFr"></app-charte-changement-fr-ang>

@@ -1,3 +1,4 @@
+
 <div class="container-fluid page " style="background-color: white">
     <div class="page__box p-3">Registre des Applications</div>
     <div class="page__content shadow p-2 position-relative">
@@ -13,7 +14,7 @@
               <span class="p-input-icon-left ml-auto" style="float: right;">
                 <i class="pi pi-search"></i>
                 <input pInputText type="text" (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
-                  placeholder="Search keyword" />
+                  placeholder="Recherche par mot clé" />
               </span>
             </div>
           </ng-template>
@@ -114,7 +115,7 @@
        <span class="p-input-icon-left ml-auto" style="float: right;">
          <i class="pi pi-search"></i>
          <input pInputText type="text" (input)="dt2.filterGlobal($any($event.target).value, 'contains')"
-           placeholder="Search keyword" />
+           placeholder="Recherche par mot clé" />
        </span>
      </div>
    </ng-template>
@@ -177,7 +178,7 @@
           <button pButton pRipple type="button" label="Retirer" (click)="Refuser(dest)" class="p-button-success"></button>
         </div>
         <div *ngIf="dest.statutRespo== 'En Attente'">
-          <button pButton pRipple type="button" label="Valider" (click)="Valider(dest)"  class="p-button-warning"></button>
+          <button pButton pRipple type="button" label="Ajouter" (click)="Valider(dest)"  class="p-button-warning"></button>
         </div>
       </td>
      </tr>
@@ -197,7 +198,7 @@
 
 
 
-<p-dialog header="Ajouter Un Destinataire" appendTo="body" [modal]="true" (onHide)="OnHidAddDest()"
+<p-dialog header="Ajouter Un Destinataire"  appendTo="body" [modal]="true" (onHide)="OnHidAddDest()"
 [(visible)]="dialogAddDest" [style]="{width: '35vw', height: '20vw'}" [resizable]="true">
 
   <div class="col-12 text-center" style="margin-top: 1%;" >
@@ -265,7 +266,7 @@ style="padding-left: 0.8rem; "
 </span>
   </div>
 <ng-template pTemplate="footer">
-  <p-button label="Submit" (onClick)="SaveDestinataire()" icon="pi pi-check"></p-button>
+  <p-button label="Soumettre" (onClick)="SaveDestinataire()" icon="pi pi-check"></p-button>
 </ng-template>
 </p-dialog>
 

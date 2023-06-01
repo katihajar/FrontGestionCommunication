@@ -21,6 +21,7 @@ import { EmaildraftsService } from 'src/app/controller/service/emaildrafts.servi
   styleUrls: ['./ajouter-incident-pilote.component.scss']
 })
 export class AjouterIncidentPiloteComponent implements OnInit {
+  spinner:boolean=false;
   StatutPlan: any[] = [];
   date1: Date = new Date();
   date2: Date = new Date();
@@ -170,17 +171,21 @@ export class AjouterIncidentPiloteComponent implements OnInit {
       this.Subject = '[' + this.AddIncident.type + '] ' + this.AddIncident.application.nomApplication + ' Incident ' + this.AddIncident.numeroIncident + ' - ' + this.AddIncident.titreIncident;
     }
     this.incidentService.SaveIncident().subscribe((data) => {
-      this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire,this.EmailEnCC,this.Subject,this.dialogElement.innerHTML);
+      //this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire,this.EmailEnCC,this.Subject,this.dialogElement.innerHTML);
+      const content = `<div style="width: 700px;">${this.dialogElement.innerHTML}</div>`;
+this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire, this.EmailEnCC, this.Subject, content);
       this.AddIncident = new Incident();
       this.ListPlanAction = new Array<PlanAction>();
+      this.spinner= false;
       this.router.navigate(['/pilote/incident/registre']);
       const htmlContent = this.dialogElement.outerHTML;
       const body = `<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head><body>Your HTML message here</body></html>`;
       const encodedBody = encodeURIComponent(body);
       const mailtoLink = `mailto:${this.EmailObligatoire.join(';')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(';')}&body=${encodedBody}`;
-      window.open(mailtoLink, '_blank');
+      // window.open(mailtoLink, '_blank');
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Incident Ajouter avec succès' });
     }, error => {
+      this.spinner= false;
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Erreur lors de l\'enregistrement' });
     })
 
@@ -232,10 +237,10 @@ export class AjouterIncidentPiloteComponent implements OnInit {
         imageSmoothingQuality: 'high'
       };
       html2canvas(this.dialogElement, options).then((canvas) => {
-        this.imageDataUrl = canvas.toDataURL();
-        const blob = this.dataURLtoBlob(this.imageDataUrl);
-        const imageUrl = URL.createObjectURL(blob); // create URL object from blob
-        const file = new File([blob], this.AddIncident.titreIncident + '-' + this.AddIncident.application.nomApplication + '.png', { type: 'image/png' });
+        // this.imageDataUrl = canvas.toDataURL();
+        // const blob = this.dataURLtoBlob(this.imageDataUrl);
+        // const imageUrl = URL.createObjectURL(blob); // create URL object from blob
+        // const file = new File([blob], this.AddIncident.titreIncident + '-' + this.AddIncident.application.nomApplication + '.png', { type: 'image/png' });
        // saveAs(file);
          this.SaveIncident();
         
@@ -280,6 +285,7 @@ export class AjouterIncidentPiloteComponent implements OnInit {
     this.AddIncident.planActionList = this.ListPlanAction;
     this.AddIncident.id = 0;
     if (this.AddIncident.description != '' && this.AddIncident.causePrincipale != '' && this.AddIncident.situationActuelle != '' && this.AddIncident.prochaineCommunication != null) {
+      this.spinner= true;
       this.takeScreenshot();
     } else {
       this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Insérer tout les champs' });

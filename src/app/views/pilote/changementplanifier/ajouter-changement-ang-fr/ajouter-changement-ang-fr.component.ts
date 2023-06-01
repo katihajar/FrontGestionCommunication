@@ -14,12 +14,15 @@ import html2canvas from 'html2canvas';
 import { saveAs } from 'file-saver';
 import { MyOptions } from 'src/app/controller/model/myoption';
 import { EmaildraftsService } from 'src/app/controller/service/emaildrafts.service';
+import { CharteOperationFrAngComponent } from '../../operation/charte-operation-fr-ang/charte-operation-fr-ang.component';
 @Component({
   selector: 'app-ajouter-changement-ang-fr',
   templateUrl: './ajouter-changement-ang-fr.component.html',
   styleUrls: ['./ajouter-changement-ang-fr.component.scss']
 })
 export class AjouterChangementAngFrComponent implements OnInit {
+  spinner:boolean=false;
+  content:string=String();
   imageDataUrl: string= String();
   date1: Date = new Date();
   date2: Date = new Date();
@@ -34,6 +37,7 @@ export class AjouterChangementAngFrComponent implements OnInit {
   Subject:string = String();
   dialogElement:any;
   @ViewChild(CharteChangementFrAngComponent,{static:false}) myDiv: any ;
+  @ViewChild(CharteOperationFrAngComponent,{static:false}) myDivOperation: any ;
   constructor(private emailService:EmaildraftsService,private messageService: MessageService,private changeService: ChangementService,
     private charteService:CharteService,private router: Router,private destService:DestinataireService) {
       if(this.AddChangement.application.nomApplication == '' && this.AddChangement.statut=='' && this.AddChangement.type == ''){
@@ -148,6 +152,13 @@ export class AjouterChangementAngFrComponent implements OnInit {
   set charteChangeAngFr(value: boolean) {
     this.charteService.charteChangeAngFr = value;
   }
+  get charteOperationAngFr(): boolean {
+    return this.charteService.charteOperationAngFr;
+  }
+
+  set charteOperationAngFr(value: boolean) {
+    this.charteService.charteOperationAngFr = value;
+  }
   removeListContenu(cont: ContenuChangement) {
     let i = this.ListContenu.indexOf(cont);
     this.ListContenu.splice(i, 1);
@@ -176,34 +187,52 @@ export class AjouterChangementAngFrComponent implements OnInit {
     this.AddChangement.contenuChangementList=this.ListContenu;
     this.AddChangementAng.contenuChangementList=this.ListContenuAng;
     this.AddChangementAng.application = this.AddChangement.application;
+    if(this.AddChangement.application.charteChangement == 'charte Changement Monetics' ){
       this.charteChangeAngFr = true;
+    }else{
+      this.charteOperationAngFr = true;
+    }
   }
   SaveChange(){
     this.AddChangement.dateAjout = new Date();
+    if(this.AddChangement.application.charteChangement == 'charte Changement Monetics' ){
     if(this.AddChangement.statut =='Planifié'){
       this.Subject = '['+this.AddChangement.type+'] '+this.AddChangement.application.nomApplication+' '+this.AddChangement.version+' - Planned change - '+moment(this.AddChangement.dateDebut).format('DD/MM/YYYY');
      }else if(this.AddChangement.statut =='Terminé avec succès'){
       this.Subject = '['+this.AddChangement.type+'] '+this.AddChangement.application.nomApplication+' '+this.AddChangement.version+' - Completed Change - '+moment(this.AddChangement.dateDebut).format('DD/MM/YYYY');
      }
+      this.content = `<div style="width: 700px;">${this.dialogElement.innerHTML}</div>`;
+    }else{
+      this.content  = `<div style="width: 800px;">${this.dialogElement.innerHTML}</div>`;
+
+    }
       this.changeService.SaveChangement().subscribe((data) => {
-        this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire,this.EmailEnCC,this.Subject,this.dialogElement.innerHTML);
-             this.AddChangement=new ChangementPlanifier();
+        this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire, this.EmailEnCC, this.Subject, this.content);    
+                     this.AddChangement=new ChangementPlanifier();
              this.ListContenu = new Array<ContenuChangement>();
+             this.spinner= false;
              this.router.navigate(['/pilote/changement/registre']);
              const mailtoLink = `mailto:${this.EmailObligatoire.join(';')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(';')}`;
-             window.open(mailtoLink, '_blank');
+            // window.open(mailtoLink, '_blank');
              this.messageService.add({severity:'success', summary: 'Success', detail: 'Changement Ajouter avec succès'});
             },error=>{
+              this.spinner= false;
               this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de l\'enregistrement'});
       })
      
   }
   takeScreenshot() {
+    if(this.AddChangement.application.charteChangement == 'charte Changement Monetics' ){
       this.charteChangeAngFr = true;
-     
+    }else{
+      this.charteOperationAngFr = true;
+    }
     setTimeout(() => {
-    
+     if(this.AddChangement.application.charteChangement == 'charte Changement Monetics' ){
       this.dialogElement = this.myDiv.filterComponent.nativeElement;
+     }else{
+      this.dialogElement = this.myDivOperation.filterComponent.nativeElement;
+     }
       const options: MyOptions = {
         scale: 2,
         logging: true,
@@ -211,14 +240,18 @@ export class AjouterChangementAngFrComponent implements OnInit {
         imageSmoothingQuality: 'high'
       };
       html2canvas(this.dialogElement, options).then((canvas) => {
-        this.imageDataUrl = canvas.toDataURL();
-        const blob = this.dataURLtoBlob(this.imageDataUrl);
-        const imageUrl = URL.createObjectURL(blob); // create URL object from blob
-        const file = new File([blob], this.AddChangement.titre+'-'+this.AddChangement.application.nomApplication+'.png', { type: 'image/png' });
+        // this.imageDataUrl = canvas.toDataURL();
+        // const blob = this.dataURLtoBlob(this.imageDataUrl);
+        // const imageUrl = URL.createObjectURL(blob); // create URL object from blob
+        // const file = new File([blob], this.AddChangement.titre+'-'+this.AddChangement.application.nomApplication+'.png', { type: 'image/png' });
         // saveAs(file);
         this.SaveChange();
       });
-      this.charteChangeAngFr = false;
+      if(this.AddChangement.application.charteChangement == 'charte Changement Monetics' ){
+        this.charteChangeAngFr = false;
+      }else{
+        this.charteOperationAngFr = false;
+      }
 
     }, 1000);
   }
@@ -247,20 +280,32 @@ export class AjouterChangementAngFrComponent implements OnInit {
     return new Blob([u8arr], { type: mime });
   }
   isSubmitDisabled(){
+    if(this.AddChangement.application.charteChangement == 'charte Changement Monetics' ){
     return !this.AddChangement.titre || this.AddChangement.titre.length < 3|| !this.AddChangement.version || !this.AddChangement.dateDebut
      || !this.AddChangement.dateFin || !this.AddChangement.detail || this.AddChangement.detail.length < 3||
       !this.AddChangement.impactMetier || this.AddChangement.impactMetier.length < 3 || this.ListContenu.length == 0 ||
       !this.AddChangementAng.titre || this.AddChangementAng.titre.length < 3|| !this.AddChangementAng.version || !this.AddChangementAng.dateDebut
      || !this.AddChangementAng.dateFin || !this.AddChangementAng.detail || this.AddChangementAng.detail.length < 3||
       !this.AddChangementAng.impactMetier || this.AddChangementAng.impactMetier.length < 3 || this.ListContenuAng.length == 0;
+  
+    }else{
+      return !this.AddChangement.titre || this.AddChangement.titre.length < 3||  !this.AddChangement.dateDebut
+      || !this.AddChangement.dateFin || !this.AddChangement.detail || this.AddChangement.detail.length < 3||
+       !this.AddChangement.impactMetier || this.AddChangement.impactMetier.length < 3 || 
+       !this.AddChangementAng.titre || this.AddChangementAng.titre.length < 3||  !this.AddChangementAng.dateDebut
+      || !this.AddChangementAng.dateFin || !this.AddChangementAng.detail || this.AddChangementAng.detail.length < 3||
+       !this.AddChangementAng.impactMetier || this.AddChangementAng.impactMetier.length < 3 ;
+   
+    }
   }
   SendAndSaveChange() {
     this.AddChangement.contenuChangementList=this.ListContenu;
     this.AddChangementAng.contenuChangementList=this.ListContenuAng;
     this.AddChangementAng.application = this.AddChangement.application;
     this.AddChangement.id=0;
-    if(this.AddChangement.titre != '' && this.AddChangement.impactMetier != '' &&this.AddChangement.version != '' && this.AddChangement.dateDebut !=null){
-   this.takeScreenshot();
+    if(this.AddChangement.titre != '' && this.AddChangement.impactMetier != '' && this.AddChangement.dateDebut !=null){
+      this.spinner= true;
+      this.takeScreenshot();
   }else{
     this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
   }

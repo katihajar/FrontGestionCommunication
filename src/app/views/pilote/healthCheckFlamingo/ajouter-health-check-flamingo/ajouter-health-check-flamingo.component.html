@@ -1,0 +1,423 @@
+<ng-template [ngIf]="this.spinner ">
+    <div class="spinner-container">
+      <p-progressSpinner styleClass="spinner" strokeWidth="4" [fill]="'#ffffff'"></p-progressSpinner>
+    </div>
+  </ng-template>
+
+<div [ngClass]="{'blur': this.spinner}"  class="container-fluid page" style="background-color: white">
+    <div class="d-flex page__box p-3">Ajouter un Etat de santé</div>
+    <div class="card page__content shadow p-3 position-relative align-items-center">
+        <div class="col-12" style="margin: 2%">
+            <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
+                <label for="basic1" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date Monitoring<span style="color: red;">*</span></label>
+                <p-calendar inputId="basic1" [showTime]="true" [style]="{ width: '100%' }" appendTo="body" [(ngModel)]="this.AddHealthCheckFlamingo.dateFlux" ></p-calendar>
+
+            </span>
+           
+        </div>
+        <div class="card align-items-center" style="width: 97%; margin-bottom: 2%;margin-top: 2%;">
+            <h1 style="margin: 3%">Flux sortants de EAI<span style="color: red;">*</span></h1>
+            <div class="col-12" style="margin: 2%">
+                <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '30%' }">
+                    <label for="basic3" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Process<span style="color: red;">*</span></label>
+                    <input inputId="basic3" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text" pInputText
+                        placeholder="Entré le process"   [(ngModel)]="this.fluxEAI.process" />
+
+                </span>
+                <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
+                    <label for="basic4" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">SubProcess<span style="color: red;">*</span></label>
+                    <input inputId="basic4" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="text" pInputText
+                        placeholder="Entré le Subprocess"   [(ngModel)]="this.fluxEAI.subProcess" />
+
+                </span>
+            <span
+            class="p-input-icon-left"
+            style="margin-left: 2%"
+            [style]="{ width: '30%' }"
+          >
+          <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Etat<span style="color: red;">*</span></label>
+            <p-dropdown
+            [options]="ListEtat"
+              [style]="{ width: '100%', required: 'required' }"
+              placeholder="Selectinné l'etat"
+              optionValue="name"
+              optionLabel="name"
+              [showClear]="true"
+              [(ngModel)]="this.fluxEAI.etat"
+            ></p-dropdown>
+            
+          </span>
+          </div>
+          <div class="col-12" style="margin: 2%">
+            <span class="p-input-icon-left" style="margin-left: 10%" [style]="{ width: '70%' }">
+                <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Commentaire<span style="color: red;">*</span></label>
+                <textarea style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text"
+                    pInputTextarea placeholder="Entré un commentaire" [(ngModel)]="this.fluxEAI.commentaire" ></textarea>
+
+            </span>
+            <button style="margin-left: 1%" pButton pRipple type="button" icon="pi pi-plus" (click)="AddFluxEAI()"
+                class="p-button-rounded p-button-success"></button>
+            </div>
+            <div class="col-12" style="margin: 2%">
+                <p-table class="table" [value]="this.ListFluxEAI" dataKey="id" [rows]="10"
+                    [showCurrentPageReport]="true" [paginator]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    Process
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    SubProcess
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    Etat
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    Commentaire
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    supprimer
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-fluxEAI>
+                        <tr>
+                            <td>
+                                {{ fluxEAI.process }}
+                            </td>
+
+                            <td>
+                                {{ fluxEAI.subProcess }}
+                            </td>  
+                            <td>
+                                {{ fluxEAI.etat }}
+                            </td> 
+                             <td>
+                                {{ fluxEAI.commentaire }}
+                            </td>
+
+                            <td>
+                                <button pButton pRipple type="button" style="font-size: larger" icon="pi pi-times" 
+                                  (click)="removeFluxEAI(fluxEAI)"  class="p-button-rounded p-button-danger"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="5">aucune donnée n'a été ajoué.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div class="card align-items-center" style="width: 97%; margin-bottom: 2%;margin-top: 2%;">
+            <h1 style="margin: 3%">Flux Entrant dans SAP Template Europe<span style="color: red;">*</span></h1>
+            <div class="col-12" style="margin: 2%">
+                <span class="p-input-icon-left" style="margin-left: 5%" [style]="{ width: '43%' }">
+                    <label for="basic3" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Systeme<span style="color: red;">*</span></label>
+                    <input inputId="basic3" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text" pInputText
+                        placeholder="Entré le process"   [(ngModel)]="this.fluxSapEurope.systeme" />
+
+                </span>
+               
+            <span
+            class="p-input-icon-left"
+            style="margin-left: 2%"
+            [style]="{ width: '43%' }"
+          >
+          <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Etat<span style="color: red;">*</span></label>
+            <p-dropdown
+            [options]="ListEtat"
+              [style]="{ width: '100%', required: 'required' }"
+              placeholder="Selectinné l'etat"
+              optionValue="name"
+              optionLabel="name"
+              [showClear]="true"
+              [(ngModel)]="this.fluxSapEurope.etat"
+            ></p-dropdown>
+            
+          </span>
+          </div>
+          <div class="col-12" style="margin: 2%">
+            <span class="p-input-icon-left" style="margin-left: 10%" [style]="{ width: '70%' }">
+                <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Commentaire<span style="color: red;">*</span></label>
+                <textarea style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text"
+                    pInputTextarea placeholder="Entré un commentaire" [(ngModel)]="this.fluxSapEurope.commentaire" ></textarea>
+
+            </span>
+            <button style="margin-left: 1%" pButton pRipple type="button" icon="pi pi-plus" (click)="AddFluxSAPEurope()"
+                class="p-button-rounded p-button-success"></button>
+            </div>
+            <div class="col-12" style="margin: 2%">
+                <p-table class="table" [value]="this.ListfluxSapEurope" dataKey="id" [rows]="10"
+                    [showCurrentPageReport]="true" [paginator]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    Systeme
+                                </div>
+                            </th>
+                      
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    Etat
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    Commentaire
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    supprimer
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-fluxSapEurope>
+                        <tr>
+                        
+
+                            <td>
+                                {{ fluxSapEurope.systeme }}
+                            </td>  
+                            <td>
+                                {{ fluxSapEurope.etat }}
+                            </td> 
+                             <td>
+                                {{ fluxSapEurope.commentaire }}
+                            </td>
+
+                            <td>
+                                <button pButton pRipple type="button" style="font-size: larger" icon="pi pi-times" 
+                                   (click)="removeFluxSAPEurope(fluxSapEurope)" class="p-button-rounded p-button-danger"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="4">aucune donnée n'a été ajoué.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div class="card align-items-center" style="width: 97%; margin-bottom: 2%;margin-top: 2%;">
+            <h1 style="margin: 3%">Flux Entrants dans SAP Template Light Harmonie<span style="color: red;">*</span></h1>
+            <div class="col-12" style="margin: 2%">
+                <span class="p-input-icon-left" style="margin-left: 5%" [style]="{ width: '43%' }">
+                    <label for="basic3" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Systeme<span style="color: red;">*</span></label>
+                    <input inputId="basic3" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text" pInputText
+                        placeholder="Entré le process"   [(ngModel)]="this.fluxSapHarmonies.systeme" />
+
+                </span>
+               
+            <span
+            class="p-input-icon-left"
+            style="margin-left: 2%"
+            [style]="{ width: '43%' }"
+          >
+          <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Etat<span style="color: red;">*</span></label>
+            <p-dropdown
+            [options]="ListEtat"
+              [style]="{ width: '100%', required: 'required' }"
+              placeholder="Selectinné l'etat"
+              optionValue="name"
+              optionLabel="name"
+              [showClear]="true"
+              [(ngModel)]="this.fluxSapHarmonies.etat"
+            ></p-dropdown>
+            
+          </span>
+          </div>
+          <div class="col-12" style="margin: 2%">
+            <span class="p-input-icon-left" style="margin-left: 10%" [style]="{ width: '70%' }">
+                <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Commentaire<span style="color: red;">*</span></label>
+                <textarea style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text"
+                    pInputTextarea placeholder="Entré un commentaire" [(ngModel)]="this.fluxSapHarmonies.commentaire" ></textarea>
+
+            </span>
+            <button style="margin-left: 1%" pButton pRipple type="button" icon="pi pi-plus"  (click)="AddFluxHarmonie()"
+                class="p-button-rounded p-button-success"></button>
+            </div>
+            <div class="col-12" style="margin: 2%">
+                <p-table class="table" [value]="this.ListFluxSapHarmonies" dataKey="id" [rows]="10"
+                    [showCurrentPageReport]="true" [paginator]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    Systeme
+                                </div>
+                            </th>
+                      
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    Etat
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    Commentaire
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    supprimer
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-fluxSapHarmonies>
+                        <tr>
+                        
+
+                            <td>
+                                {{ fluxSapHarmonies.systeme }}
+                            </td>  
+                            <td>
+                                {{ fluxSapHarmonies.etat }}
+                            </td> 
+                             <td>
+                                {{ fluxSapHarmonies.commentaire }}
+                            </td>
+
+                            <td>
+                                <button pButton pRipple type="button" style="font-size: larger" icon="pi pi-times" 
+                                  (click)="removeFluxHarmonie(fluxSapHarmonies)"  class="p-button-rounded p-button-danger"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="4">aucune donnée n'a été ajoué.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div class="card align-items-center" style="width: 97%; margin-bottom: 2%;margin-top: 2%;">
+            <h1 style="margin: 3%">Flux Entrants dans Flamingo - Sales Orders<span style="color: red;">*</span></h1>
+            <div class="col-12" style="margin: 2%">
+                <span class="p-input-icon-left" style="margin-left: 5%" [style]="{ width: '43%' }">
+                    <label for="basic3" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Systeme<span style="color: red;">*</span></label>
+                    <input inputId="basic3" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text" pInputText
+                        placeholder="Entré le process"   [(ngModel)]="this.fluxSalesOrder.systeme" />
+
+                </span>
+               
+            <span
+            class="p-input-icon-left"
+            style="margin-left: 2%"
+            [style]="{ width: '43%' }"
+          >
+          <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Etat<span style="color: red;">*</span></label>
+            <p-dropdown
+            [options]="ListEtat"
+              [style]="{ width: '100%', required: 'required' }"
+              placeholder="Selectinné l'etat"
+              optionValue="name"
+              optionLabel="name"
+              [showClear]="true"
+              [(ngModel)]="this.fluxSalesOrder.etat"
+            ></p-dropdown>
+            
+          </span>
+          </div>
+          <div class="col-12" style="margin: 2%">
+            <span class="p-input-icon-left" style="margin-left: 10%" [style]="{ width: '70%' }">
+                <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Commentaire<span style="color: red;">*</span></label>
+                <textarea style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text"
+                    pInputTextarea placeholder="Entré un commentaire" [(ngModel)]="this.fluxSalesOrder.commentaire" ></textarea>
+
+            </span>
+            <button style="margin-left: 1%" pButton pRipple type="button" icon="pi pi-plus" 
+                class="p-button-rounded p-button-success" (click)="AddFluxSalesOrders()"></button>
+            </div>
+            <div class="col-12" style="margin: 2%">
+                <p-table class="table" [value]="this.ListfluxSalesOrder" dataKey="id" [rows]="10"
+                    [showCurrentPageReport]="true" [paginator]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    Systeme
+                                </div>
+                            </th>
+                      
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    Etat
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    Commentaire
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    supprimer
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-fluxSalesOrder>
+                        <tr>
+                        
+
+                            <td>
+                                {{ fluxSalesOrder.systeme }}
+                            </td>  
+                            <td>
+                                {{ fluxSalesOrder.etat }}
+                            </td> 
+                             <td>
+                                {{ fluxSalesOrder.commentaire }}
+                            </td>
+
+                            <td>
+                                <button pButton pRipple type="button" style="font-size: larger" icon="pi pi-times" 
+                                  (click)="removeFluxSalesOrders(fluxSalesOrder)"  class="p-button-rounded p-button-danger"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="4">aucune donnée n'a été ajoué.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div class="col-12" style="margin: 2%">
+            <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '80%' }">
+                <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Remarque</label>
+                <textarea style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text"
+                    pInputTextarea placeholder="Remarque" [(ngModel)]="this.AddHealthCheckFlamingo.remarque" ></textarea>
+
+            </span>
+        </div>
+        <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
+            <button pButton pRipple  type="button" label="Visualiser la charte" style=" float: left;margin-left: 2%;" (click)="charte()" [disabled]="isSubmitDisabled()" class="p-button-raised p-button-help"></button>
+            <button pButton pRipple  style=" float: right;margin-right: 2%;" type="button" [disabled]="isSubmitDisabled()" (click)="SendAndSaveHealth()" label="Soumettre"  class="p-button-raised" ></button>
+        </div>
+</div>
+</div>
+<app-charte-health-check-flamingo [ngClass]="{'blur': this.spinner}" ></app-charte-health-check-flamingo>

@@ -1,4 +1,10 @@
-<div class="container-fluid page" style="background-color: white">
+<ng-template [ngIf]="this.spinner ">
+    <div class="spinner-container">
+      <p-progressSpinner styleClass="spinner" strokeWidth="4" [fill]="'#ffffff'"></p-progressSpinner>
+    </div>
+  </ng-template>
+
+<div [ngClass]="{'blur': this.spinner}"  class="container-fluid page" style="background-color: white">
     <div class="d-flex page__box p-3">Ajouter un Changement</div>
     <div class="page__content shadow p-3 position-relative card align-items-center">
             <div class="col-12" style="margin: 2%">
@@ -12,7 +18,7 @@
                 </span>
                 <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
                     <label for="basic4" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">N°
-                        Version Application<span style="color: red;">*</span></label>
+                        Version Application<span style="color: red;" *ngIf="this.AddChangement.application.charteChangement == 'charte Changement Monetics'">*</span></label>
                     <input inputId="basic4" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }"
                         type="text" pInputText placeholder="Entré le numero d'incident"
                         [(ngModel)]="this.AddChangement.version" />
@@ -54,7 +60,7 @@
          
             </div>
 
-            <div class="card align-items-center" style="width: 97%; margin-left: 1%;margin-bottom: 2%;background-color: rgb(241, 241, 241);">
+            <div *ngIf="this.AddChangement.application.charteChangement == 'charte Changement Monetics'"  class="card align-items-center" style="width: 97%; margin-left: 1%;margin-bottom: 2%;background-color: rgb(241, 241, 241);">
                 <h1 style="margin: 3%;color: black;">Ajouter le Contenu<span style="color: red;">*</span></h1>
                 <div class="col-12 text-center" style="margin-bottom: 2%">
                     <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '45%' }">
@@ -128,8 +134,9 @@
             </div>
             <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
                 <button pButton pRipple (click)="showCharte()" type="button" label="Visualiser la charte" style=" float: left;margin-left: 2%;" class="p-button-raised p-button-help"></button>
-                <button pButton pRipple (click)="SendAndSaveChange()" [disabled]="isSubmitDisabled()" style=" float: right;margin-right: 2%;" type="button" label="Submit" class="p-button-raised"></button>
+                <button pButton pRipple (click)="SendAndSaveChange()" [disabled]="isSubmitDisabled()" style=" float: right;margin-right: 2%;" type="button" label="Soumettre" class="p-button-raised"></button>
             </div>
         </div>
     </div>
-<app-charte-changement-fr *ngIf="charteChangeFr"></app-charte-changement-fr>
+<app-charte-changement-fr [ngClass]="{'blur': this.spinner}"  *ngIf="charteChangeFr"></app-charte-changement-fr>
+<app-charte-operation-fr [ngClass]="{'blur': this.spinner}"  *ngIf="charteOperationFr"></app-charte-operation-fr>

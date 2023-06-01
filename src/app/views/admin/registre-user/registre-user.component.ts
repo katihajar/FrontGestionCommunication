@@ -20,33 +20,49 @@ export class RegistreUserComponent implements OnInit {
   lots:any[]=[];
   piloteList = new Array<User>();
   responsablleList = new Array<User>();
+  list= new Array<User>();
+  listRole= new Array<Role>();
   constructor(private userService: UserService, private router: Router,private messageService: MessageService) { }
     clear(table: Table) {
         table.clear();
     }
   FindAllUsers(){
+    this.list =new Array<User>();
+    this.UserList =new Array<User>();
        this.userService.FindAllUsers().subscribe((data) => {
       // @ts-ignore
-      this.UserList = data.body;
-      this.loading = false;
-      for(let i = 0; i<this.UserList.length;i++){
-        if(this.UserList[i].roles[0].name== "ROLE_PILOTE"){
-          this.piloteList.push(this.UserList[i]);
-        } else  if(this.UserList[i].roles[0].name== "ROLE_RESPONSABLE"){
-          this.responsablleList.push(this.UserList[i]);
+      this.list = data.body;
+      for(let j=0;j<this.list.length;j++){
+        if(this.list[j].roles[0].name== "ROLE_PILOTE" || this.list[j].roles[0].name== "ROLE_RESPONSABLE"){
+          this.UserList.push(this.list[j]);
+        }
+      }
+      for(let i = 0; i<this.list.length;i++){
+        if(this.list[i].roles[0].name== "ROLE_PILOTE"){
+          this.piloteList.push(this.list[i]);
+        } else  if(this.list[i].roles[0].name== "ROLE_RESPONSABLE"){
+          this.responsablleList.push(this.list[i]);
         } 
       }
+      this.loading = false;
     }
     );
   }
   isSubmitDisabled(){
-    return !this.AddUser.user.prenom || this.AddUser.user.prenom.length <3 || !this.AddUser.user.nom || this.AddUser.user.nom.length <3|| !this.AddUser.user.lots || !this.AddUser.idRole;
+    return !this.AddUser.user.prenom || this.AddUser.user.prenom.length <3 || !this.AddUser.user.nom || this.AddUser.user.nom.length <3||  !this.AddUser.idRole;
   }
   ngOnInit(): void {
+    this.RoleList= new Array<Role>();
+    this.listRole= new Array<Role>();
     this.FindAllUsers();
     this.userService.FindAllRoles().subscribe((data) => {
       // @ts-ignore
-      this.RoleList = data.body;
+      this.listRole = data.body;
+      for(let i =0;i<this.listRole.length;i++){
+        if(this.listRole[i].name=="ROLE_RESPONSABLE" ||this.listRole[i].name=="ROLE_PILOTE"){
+          this.RoleList.push(this.listRole[i]);
+        }
+      }
     }
     );
     this.lots= [
@@ -99,7 +115,6 @@ showDialogEdite(user: User) {
   SaveUser(){
     this.submittedUtilisateur = true;
     this.AddUser.user.username=this.AddUser.user.prenom+'.'+this.AddUser.user.nom;
-    this.AddUser.user.password=this.AddUser.user.username;
     if(this.AddUser.user.prenom != '' && this.AddUser.user.nom != '' && this.AddUser.idRole !=null && this.AddUser.user.lots !=''){
     this.userService.SaveUser().subscribe((data) => {
            this.AddUser=new UserRole;
@@ -118,7 +133,6 @@ showDialogEdite(user: User) {
   UpdateUser(){
     this.submittedUtilisateur = true;
     this.EditeUser.user.username=this.EditeUser.user.prenom+'.'+this.EditeUser.user.nom;
-    this.EditeUser.user.password=this.EditeUser.user.username;
     this.userService.UpdateUser().subscribe((data) => {
            this.submittedUtilisateur = true;
            this.EditeUser =new UserRole;

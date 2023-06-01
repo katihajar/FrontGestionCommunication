@@ -66,7 +66,7 @@ export class UserService {
   public FindAllUsers(): Observable<HttpResponse<Array<User>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<User>>(
-      this.url + 'users/',
+      this.url + 'users/lot/'+this.auth.User.lots,
       { observe: 'response', headers }
     );    
   }
@@ -80,6 +80,7 @@ export class UserService {
   }
 
   public SaveUser(): Observable<HttpResponse<User>> {
+    this.AddUser.user.lots =this.auth.User.lots;
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.post<User>(
       this.url + 'users/saveUser',this.AddUser,

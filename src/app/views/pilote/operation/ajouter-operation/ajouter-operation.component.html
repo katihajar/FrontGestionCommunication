@@ -1,8 +1,14 @@
-<div class="container-fluid page" style="background-color: white">
+<ng-template [ngIf]="this.spinner ">
+    <div class="spinner-container">
+      <p-progressSpinner styleClass="spinner" strokeWidth="4" [fill]="'#ffffff'"></p-progressSpinner>
+    </div>
+  </ng-template>
+<div [ngClass]="{'blur': this.spinner}"  class="container-fluid page" style="background-color: white">
     <div class="d-flex page__box p-3">Ajouter une Operation</div>
     <div class="page__content shadow p-3 position-relative">
         <div class="card align-items-center">
             <div class="col-12" style="margin: 2%">
+                
                 <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '22%' }">
                     <label for="basic3" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Titre<span style="color: red;">*</span></label>
                     <input inputId="basic3" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text" pInputText
@@ -53,4 +59,4 @@
         </div>
     </div>
 </div>
-<app-charte-operation-fr  *ngIf="charteOperationFr"></app-charte-operation-fr>
+<app-charte-operation-fr [ngClass]="{'blur': this.spinner}"  *ngIf="charteOperationFr"></app-charte-operation-fr>

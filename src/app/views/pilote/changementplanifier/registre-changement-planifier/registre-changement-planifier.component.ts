@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
@@ -33,7 +33,7 @@ export class RegistreChangementPlanifierComponent implements OnInit {
   ListType: any[] = [];
   ListPiloteApp = new Array<PiloteApplication>();
   ContenuAng = new ContenuChangement();
-  constructor(private router: Router,private changeService: ChangementService, private charte: CharteService,private userService: AuthService,
+  constructor(private router: Router,private changeService: ChangementService, private charte: CharteService,private userService: AuthService,private cdr: ChangeDetectorRef,
     private confirmationService: ConfirmationService,private messageService:MessageService,private appService: ApplicationService) { }
     
     get User(): User {
@@ -122,6 +122,27 @@ get charteChangeAngFr(): boolean {
 set charteChangeAngFr(value: boolean) {
   this.charte.charteChangeAngFr = value;
 }
+get charteOperationAng(): boolean {
+  return this.charte.charteOperationAng;
+}
+
+set charteOperationAng(value: boolean) {
+  this.charte.charteOperationAng = value;
+}
+get charteOperationAngFr(): boolean {
+  return this.charte.charteOperationAngFr;
+}
+
+set charteOperationAngFr(value: boolean) {
+  this.charte.charteOperationAngFr = value;
+}
+get charteOperationFr(): boolean {
+  return this.charte.charteOperationFr;
+}
+
+set charteOperationFr(value: boolean) {
+  this.charte.charteOperationFr = value;
+}
   get ListChangementOfPilote(): Array<ChangementPlanifier> {
     return this.changeService.ListChangementOfPilote;
   }
@@ -192,6 +213,7 @@ set charteChangeAngFr(value: boolean) {
     this.showPopUpChange = true;
   }
   SelectLanguage(){
+    if(this.AddChangement.application.charteChangement == 'charte Changement Monetics' ){
     if(this.selectLang == "Français"){
       this.popUpLangue = false;
       this.charteChangeFr = true;
@@ -202,6 +224,18 @@ set charteChangeAngFr(value: boolean) {
       this.popUpLangue = false;
       this.charteChangeAng = true;
     }
+  }else{
+    if(this.selectLang == "Français"){
+      this.popUpLangue = false;
+      this.charteOperationFr = true;
+    }else if(this.selectLang == "Français-Anglais"){
+      this.popUpLangue = false;
+      this.charteOperationAngFr = true;
+    }else if(this.selectLang == "Anglais"){
+      this.popUpLangue = false;
+     this.charteOperationAng=true;
+    }
+  }
   }
   translateInput() {
     translate(this.AddChangement.titre, { from: 'fr', to: 'en' }).then((result: string) => {
@@ -265,6 +299,8 @@ set charteChangeAngFr(value: boolean) {
   }
 
   FindApp() {
+    this.ListPiloteApp = new Array<PiloteApplication>;
+    this.ListApp = new Array<Application>;
     this.appService.FindApplicationByPilote().subscribe((data) => {
       // @ts-ignore
       this.ListPiloteApp = data.body;
@@ -277,7 +313,8 @@ set charteChangeAngFr(value: boolean) {
           }
         }
       }
-    })
+    });
+    this.cdr.detectChanges();
   }
   onDialogHideLang(){
     this.FindChange();

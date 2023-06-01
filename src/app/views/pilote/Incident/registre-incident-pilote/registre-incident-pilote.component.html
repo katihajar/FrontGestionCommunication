@@ -24,7 +24,7 @@
             <span class="p-input-icon-left ml-auto" style="float: right;">
               <i class="pi pi-search"></i>
               <input pInputText type="text" (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
-                placeholder="Search keyword" />
+                placeholder="Recherche par mot clé" />
             </span>
           </div>
         </ng-template>
@@ -90,7 +90,7 @@
                 <!-- <p-columnFilter type="date" field="dateFin" display="menu"></p-columnFilter> -->
               </div>
             </th>
-            <th>
+            <th [width]="200">
               Action
             </th>
            
@@ -134,18 +134,24 @@
             <td>
               {{incident.dateFin | date: 'MM/dd/yyyy'}}
             </td>
-            <td><button pButton pRipple (click)="ShowCharte(incident)" type="button" style="font-size: larger;" icon="pi pi-search"
+            <td>
+              <!-- <button pButton pRipple (click)="ShowCharte(incident)" type="button" style="font-size: larger;" icon="pi pi-search"
                 class="p-button-rounded p-button-info"></button>
             <button pButton pRipple (click)="Edite(incident)" type="button" style="font-size: larger;" icon="pi pi-pencil"
               class="p-button-rounded p-button-success"></button>
           <button *ngIf="incident.createurIncident.id == this.User.id" pButton pRipple (click)="DeleteIncident(incident.id)" type="button" style="font-size: larger;" icon="pi pi-times"
-            class="p-button-rounded p-button-danger"></button>
+            class="p-button-rounded p-button-danger"></button> -->
+            <span class="p-buttonset">
+              <button pButton pRipple class="p-button-info"  icon="pi pi-search" (click)="ShowCharte(incident)"></button>
+              <button pButton pRipple class="p-button-success" icon="pi pi-pencil" (click)="Edite(incident)"></button>
+              <button *ngIf="incident.createurIncident.id == this.User.id"   pButton pRipple class="p-button-danger" (click)="DeleteIncident(incident.id)" icon="pi pi-trash"></button>
+          </span>
         </td>
           </tr>
         </ng-template>
         <ng-template pTemplate="emptymessage">
           <tr>
-            <td colspan="11">aucun incident n'a été trouvé.</td>
+            <td colspan="9">aucun incident n'a été trouvé.</td>
           </tr>
         </ng-template>
       </p-table>

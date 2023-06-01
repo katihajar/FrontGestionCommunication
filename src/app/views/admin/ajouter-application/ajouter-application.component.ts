@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Application } from 'src/app/controller/model/application';
@@ -15,13 +15,14 @@ import { UserService } from 'src/app/controller/service/user.service';
 export class AjouterApplicationComponent implements OnInit {
   lots:any[]=[];
   charte:any[]=[];
+  charteChange:any[]=[];
   disponibilite:any[]=[];
   piloteList = new Array<User>();
   responsableList = new Array<User>();
   selectedPiloteApp = new PiloteApplication();
   ListpiloteSelected = new Array<PiloteApplication>();
   submittedApplication: boolean = false;
-  constructor(private userService: UserService, private appService : ApplicationService,private messageService: MessageService,private router: Router) { }
+  constructor(private cdr: ChangeDetectorRef,private userService: UserService, private appService : ApplicationService,private messageService: MessageService,private router: Router) { }
 
   ngOnInit(): void {
     this.FindAllUsers();
@@ -45,23 +46,35 @@ this.charte= [
   {name: 'charte Incident'},
   {name: 'charte Incident Monetics'},
 ];
+this.charteChange= [
+  {name: 'charte Changement'},
+  {name: 'charte Changement Monetics'},
+];
   }
   FindAllUsers(){
+    this.responsableList = new Array<User>();
+    this.piloteList = new Array<User>();
+    this.UserList = new Array<User>();
     this.userService.FindAllUsers().subscribe((data) => {
    // @ts-ignore
    this.UserList = data.body;
    for(let i = 0; i<this.UserList.length;i++){
-     if(this.UserList[i].roles[0].name== "ROLE_PILOTE" && this.AddApplication.lot == this.UserList[i].lots){
+     if(this.UserList[i].roles[0].name== "ROLE_PILOTE" ){
        this.piloteList.push(this.UserList[i]);
-     } else  if(this.UserList[i].roles[0].name== "ROLE_RESPONSABLE" && this.AddApplication.lot == this.UserList[i].lots){
+     } else  if(this.UserList[i].roles[0].name== "ROLE_RESPONSABLE"){
        this.responsableList.push(this.UserList[i]);
      } 
    }
+   console.log(this.UserList);
+   console.log(this.piloteList);
+   console.log(this.responsableList);
+   
  }
  );
+ this.cdr.detectChanges();
 }
 isSubmitDisabled(){
-  return !this.AddApplication.nomApplication || this.AddApplication.nomApplication.length <3 || !this.AddApplication.responsable || !this.AddApplication.disponibilite || !this.AddApplication.lot || !this.AddApplication.charteIncident || this.ListpiloteSelected.length == 0;
+  return !this.AddApplication.nomApplication || this.AddApplication.nomApplication.length <3 || !this.AddApplication.responsable || !this.AddApplication.disponibilite || !this.AddApplication.lot || !this.AddApplication.charteIncident || !this.AddApplication.charteChangement || this.ListpiloteSelected.length == 0;
 }
 AddPilote(){
   let m =this.ListpiloteSelected.indexOf(this.selectedPiloteApp);

@@ -158,8 +158,29 @@ set charteChangeAngFr(value: boolean) {
       } 
     })
   }
-
+  get charteOperationAng(): boolean {
+    return this.charte.charteOperationAng;
+  }
+  
+  set charteOperationAng(value: boolean) {
+    this.charte.charteOperationAng = value;
+  }
+  get charteOperationAngFr(): boolean {
+    return this.charte.charteOperationAngFr;
+  }
+  
+  set charteOperationAngFr(value: boolean) {
+    this.charte.charteOperationAngFr = value;
+  }
+  get charteOperationFr(): boolean {
+    return this.charte.charteOperationFr;
+  }
+  
+  set charteOperationFr(value: boolean) {
+    this.charte.charteOperationFr = value;
+  }
   SelectLanguage(){
+    if(this.AddChangement.application.charteChangement == 'charte Changement Monetics' ){
     if(this.selectLang == "Français"){
       this.popUpLangue = false;
       this.charteChangeFr = true;
@@ -170,6 +191,18 @@ set charteChangeAngFr(value: boolean) {
       this.popUpLangue = false;
       this.charteChangeAng = true;
     }
+  }else{
+    if(this.selectLang == "Français"){
+      this.popUpLangue = false;
+      this.charteOperationFr = true;
+    }else if(this.selectLang == "Français-Anglais"){
+      this.popUpLangue = false;
+      this.charteOperationAngFr = true;
+    }else if(this.selectLang == "Anglais"){
+      this.popUpLangue = false;
+     this.charteOperationAng=true;
+    }
+  }
   }
   translateInput() {
     translate(this.AddChangement.titre, { from: 'fr', to: 'en' }).then((result: string) => {

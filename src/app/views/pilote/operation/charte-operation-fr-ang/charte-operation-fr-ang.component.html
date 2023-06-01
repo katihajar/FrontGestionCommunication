@@ -1,4 +1,4 @@
-<p-dialog [modal]="true" [(visible)]="this.charteOperationAngFr" header="Charte Operation Planifier"
+<p-dialog [modal]="true" [(visible)]="this.charteOperationAngFr" header="Charte Changement"
     [style]="{width: '60vw', height: '70vw','margin-left':'3%'}" [resizable]="true">
     <div #myDialog id="myDialog" style="width: 100%;border:2px solid rgb(24, 109, 189)">
         <div class="col-12">
@@ -7,29 +7,29 @@
         </div>
         <div style="width: 100%;margin-bottom: 2%;" style="font-family: 'Times New Roman', Times, sans-serif;font-size: 16px;">
             <div style="float:left; width: 50%;">
-                <div *ngIf="this.AddOperation.statut == 'Planifiée'" class="col-12" style="height: 5vh; display: flex; align-items: center; justify-content: center; text-align: center;background-color: rgb(146, 196, 219);">
+                <div *ngIf="this.AddChangement.statut == 'Planifié'" class="col-12" style="height: 5vh; display: flex; align-items: center; justify-content: center; text-align: center;background-color: rgb(146, 196, 219);">
                         <p style="margin: 1%;"><b style="color: white;font-size: 30px;">Operation Details</b></p>
                     </div>
-                    <div *ngIf="this.AddOperation.statut == 'Terminée'" class="col-12" style="height: 5vh; display: flex; align-items: center; justify-content: center; text-align: center;background-color: rgb(100, 241, 136);">
+                    <div *ngIf="this.AddChangement.statut == 'Terminé avec succès'" class="col-12" style="height: 5vh; display: flex; align-items: center; justify-content: center; text-align: center;background-color: rgb(100, 241, 136);">
                         <p style="margin: 1%;"><b style="color: white;font-size: 30px;">End of Operation</b></p>
                     </div>
                 <div style="margin: 2%;">
                                       
                     <p>Hello,</p><br>
 
-                    <p>{{this.AddOperationAng.description}}</p>
+                    <p>{{this.AddChangementAng.detail}}</p>
                     <p>Additional Information:</p>
                     <div style="margin: 1%;">
-                        <p ><b>Application:</b><span > {{this.AddOperation.application.nomApplication}}
+                        <p ><b>Application:</b><span > {{this.AddChangement.application.nomApplication}}
                         </span></p>
-                        <p ><b>Start Date:</b> <span > {{this.AddOperation.dateDebut  | date : 'YYYY-MM-dd'}} 
+                        <p ><b>Start Date:</b> <span > {{this.AddChangement.dateDebut  | date : 'YYYY-MM-dd'}} 
                         </span></p>
-                        <p ><b>End Date:</b><span > {{this.AddOperation.dateFin | date : 'YYYY-MM-dd'}} 
+                        <p ><b>End Date:</b><span > {{this.AddChangement.dateFin | date : 'YYYY-MM-dd'}} 
                         </span></p>
-                        <p ><b>Business Impacts:</b><span > {{this.AddOperationAng.impactMetier}}</span></p>
+                        <p ><b>Business Impacts:</b><span > {{this.AddChangementAng.impactMetier}}</span></p>
                       </div><br>
 
-                    <p *ngIf="this.AddOperation.statut == 'Planifiée'">At your disposal for any further information.</p>
+                    <p *ngIf="this.AddChangement.statut == 'Planifié'">At your disposal for any further information.</p>
 
                     <br>
                     <p style="color: rgb(55, 97, 233);;font-weight: bolder">PLEASE FORWARD THIS EMAIL TO ALL CONCERNED PARTIES.</p>
@@ -38,34 +38,35 @@
 
             </div>
 
-            <div style="float:right;width: 49%;border-left: 2px solid rgb(24, 109, 189);">
-                 <div *ngIf="this.AddOperation.statut == 'Planifiée'" class="col-12" style="height: 5vh;display: flex; align-items: center; justify-content: center; text-align: center;background-color: rgb(146, 196, 219);">
+            <div style="float:right;width: 50%;">
+                <div style="border-left: 2px solid rgb(24, 109, 189);height: 100%;">
+                 <div *ngIf="this.AddChangement.statut == 'Planifié'" class="col-12" style="height: 5vh;display: flex; align-items: center; justify-content: center; text-align: center;background-color: rgb(146, 196, 219);">
                         <p style="margin: 1%;"><b style="color: white;font-size: 30px;">Détails de l'opération</b></p>
                     </div>
-                    <div *ngIf="this.AddOperation.statut == 'Terminée'" class="col-12" style="height: 5vh;display: flex;  align-items: center; justify-content: center; text-align: center;background-color: rgb(100, 241, 136);">
+                    <div *ngIf="this.AddChangement.statut == 'Terminé avec succès'" class="col-12" style="height: 5vh;display: flex;  align-items: center; justify-content: center; text-align: center;background-color: rgb(100, 241, 136);">
                         <p style="margin: 1%;"><b style="color: white;font-size: 30px;">Fin de l'opération</b></p>
                     </div>
                 <div style="margin: 2%;">
                    
                     <p>Bonjour,</p><br>
 
-                    <p>{{this.AddOperation.description}}</p><p>Information Complémentaire :</p>
+                    <p>{{this.AddChangement.detail}}</p><p>Information Complémentaire :</p>
                     <div style="margin: 1%;">
-                        <p ><b>Application :</b><span > {{this.AddOperation.application.nomApplication}}
+                        <p ><b>Application :</b><span > {{this.AddChangement.application.nomApplication}}
                         </span></p>
-                        <p ><b>Date Début :</b> <span > {{this.AddOperation.dateDebut | date : 'YYYY-MM-dd'}} 
+                        <p ><b>Date Début :</b> <span > {{this.AddChangement.dateDebut | date : 'YYYY-MM-dd'}} 
                         </span></p>
-                        <p ><b>Date Fin :</b><span > {{this.AddOperation.dateFin | date : 'YYYY-MM-dd'}} 
+                        <p ><b>Date Fin :</b><span > {{this.AddChangement.dateFin | date : 'YYYY-MM-dd'}} 
                         </span></p>
-                        <p ><b>Impacts Metier :</b><span > {{this.AddOperation.impactMetier}}</span></p>
+                        <p ><b>Impacts Metier :</b><span > {{this.AddChangement.impactMetier}}</span></p>
                       </div><br>
 
-                    <p *ngIf="this.AddOperation.statut == 'Planifiée'">Restons à votre disposition pour toutes informations complémentaires.</p>
+                    <p *ngIf="this.AddChangement.statut == 'Planifié'">Restons à votre disposition pour toutes informations complémentaires.</p>
 
                     <br>
                     <p style="color: rgb(55, 97, 233);font-weight: bolder" >PRIERE DE TRANSFERER CET EMAIL A TOUTES LES PARTIES CONCERNEES.</p>
                 </div>
-
+</div>
             </div>
         </div>
         <div class="col-12" style="margin-top: 2%;">

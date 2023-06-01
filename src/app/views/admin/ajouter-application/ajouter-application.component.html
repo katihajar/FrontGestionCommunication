@@ -12,6 +12,14 @@
         </span>
 
         <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
+          <p-dropdown [(ngModel)]="this.AddApplication.disponibilite" [options]="disponibilite"
+            [style]="{ width: '100%', required: 'required' }" placeholder="Selectinné la disponibilité"
+            optionValue="name" optionLabel="name" [showClear]="true"></p-dropdown>
+          <small style="color: red; margin-left: 2%;font-size : 16px"
+            *ngIf="submittedApplication && !this.AddApplication.disponibilite" class="p-invalid">Disponibilité est
+            obligatoire</small>
+        </span>
+        <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
           <p-dropdown id="err" [(ngModel)]="this.AddApplication.responsable"
             [style]="{ width: '100%', required: 'required' }" [options]="responsableList" optionLabel="username"
             [filter]="true" filterBy="username" [showClear]="true" placeholder="Selectinné le Responsable">
@@ -20,37 +28,28 @@
                 <div>{{ respo.nom }} {{ respo.prenom }}</div>
               </div>
             </ng-template>
-
-
           </p-dropdown>
           <small for="err" style="color: red; margin-left: 2%;font-size : 16px"
             *ngIf="submittedApplication && !this.AddApplication.responsable" class="p-invalid">Responsable est
             obligatoire</small>
         </span>
-
-        <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
-          <p-dropdown [(ngModel)]="this.AddApplication.disponibilite" [options]="disponibilite"
-            [style]="{ width: '100%', required: 'required' }" placeholder="Selectinné la disponibilité"
-            optionValue="name" optionLabel="name" [showClear]="true"></p-dropdown>
-          <small style="color: red; margin-left: 2%;font-size : 16px"
-            *ngIf="submittedApplication && !this.AddApplication.disponibilite" class="p-invalid">Disponibilité est
-            obligatoire</small>
-        </span>
       </div>
       <div class="col-12" style="margin-bottom: 2%; float: left">
-        <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '22%' }">
-          <p-dropdown [options]="lots" [(ngModel)]="this.AddApplication.lot" (onChange)="FindAllUsers()"
-            [style]="{ width: '100%', required: 'required' }" placeholder="Selectinné le lot " optionValue="name"
-            optionLabel="name" [showClear]="true"></p-dropdown>
-          <small style="color: red; margin-left: 2%;font-size : 16px"
-            *ngIf="submittedApplication && !this.AddApplication.lot" class="p-invalid">lot est obligatoire</small>
-        </span>
-        <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
+
+        <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '30%' }">
           <p-dropdown [options]="charte" [(ngModel)]="this.AddApplication.charteIncident"
-            [style]="{ width: '100%', required: 'required' }" placeholder="Selectinné la charte " optionValue="name"
+            [style]="{ width: '100%', required: 'required' }" placeholder="Selectinné la charte Incident" optionValue="name"
             optionLabel="name" [showClear]="true"></p-dropdown>
           <small style="color: red; margin-left: 2%;font-size : 16px"
-            *ngIf="submittedApplication && !this.AddApplication.charteIncident" class="p-invalid">Charte est
+            *ngIf="submittedApplication && !this.AddApplication.charteIncident" class="p-invalid">Charte incident est
+            obligatoire</small>
+        </span>
+        <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
+          <p-dropdown [options]="charteChange" [(ngModel)]="this.AddApplication.charteChangement"
+            [style]="{ width: '100%', required: 'required' }" placeholder="Selectinné la charte de changement" optionValue="name"
+            optionLabel="name" [showClear]="true"></p-dropdown>
+          <small style="color: red; margin-left: 2%;font-size : 16px"
+            *ngIf="submittedApplication && !this.AddApplication.charteChangement" class="p-invalid">Charte changement est
             obligatoire</small>
         </span>
       </div>

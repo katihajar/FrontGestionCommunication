@@ -155,6 +155,13 @@ import { ExpiredTokenInterceptor } from './controller/service/expiredTokenInterc
 import { ExpireTokenComponent } from './redirectlogin/expire-token/expire-token.component';
 import { PublicClientApplication, InteractionType } from '@azure/msal-browser';
 import { MsalGuard, MsalInterceptor, MsalBroadcastService, MsalModule, MSAL_GUARD_CONFIG, MSAL_INSTANCE, MSAL_INTERCEPTOR_CONFIG, MsalInterceptorConfiguration, MsalService } from '@azure/msal-angular';
+import { AjouterHealthCheckFlamingoComponent } from './views/pilote/healthCheckFlamingo/ajouter-health-check-flamingo/ajouter-health-check-flamingo.component';
+import { CharteHealthCheckFlamingoComponent } from './views/pilote/healthCheckFlamingo/charte-health-check-flamingo/charte-health-check-flamingo.component';
+import { SupAdminComponent } from './layout/sup-admin/sup-admin.component';
+import { HeaderSuperAdminComponent } from './components/headers/header-super-admin/header-super-admin.component';
+import { SideBarSuperAdminComponent } from './components/sideBar/side-bar-super-admin/side-bar-super-admin.component';
+import { RegistreAdministrateurComponent } from './views/superAdmin/registre-administrateur/registre-administrateur.component';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -185,6 +192,7 @@ export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
     protectedResourceMap,
   };
 }
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -248,9 +256,16 @@ export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
     DashboardRespoComponent,
     DashboardComponent,
     ChangePasswordComponent,
-    ExpireTokenComponent
+    ExpireTokenComponent,
+    AjouterHealthCheckFlamingoComponent,
+    CharteHealthCheckFlamingoComponent,
+    SupAdminComponent,
+    HeaderSuperAdminComponent,
+    SideBarSuperAdminComponent,
+    RegistreAdministrateurComponent
     ],
   imports: [
+    ProgressSpinnerModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

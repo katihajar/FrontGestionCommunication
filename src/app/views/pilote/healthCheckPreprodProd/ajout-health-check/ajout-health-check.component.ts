@@ -25,7 +25,7 @@ const moment = require('moment');
   styleUrls: ['./ajout-health-check.component.scss']
 })
 export class AjoutHealthCheckComponent implements OnInit {
-
+  spinner:boolean=false;
   ListFeu: any[] = [];
   ListImpactClient: any[] = [];
   ListStatut: any[] = [];
@@ -163,6 +163,7 @@ export class AjoutHealthCheckComponent implements OnInit {
   }
 
   FindApp() {
+    this.ListApp= new Array<Application>;
     this.healthService.FindApplcationHealthPilotByLots().subscribe((data) => {
       let app = new Array<Application>;
       // @ts-ignore
@@ -188,15 +189,19 @@ export class AjoutHealthCheckComponent implements OnInit {
     this.AddHealthCheck.titre = 'Etat de santé du ' + moment(this.AddHealthCheck.dateAjout).format('DD/MM/YYYY') + ',' + moment(this.AddHealthCheck.dateAjout).format('HH:mm');
     this.Subject = '[' + this.AddHealthCheck.type + '] Etat de santé Monétique – ' + moment(this.AddHealthCheck.dateAjout).format('DD/MM/YYYY') + ',' + moment(this.AddHealthCheck.dateAjout).format('HH:mm');
     this.healthService.SaveHealthCheck().subscribe((data) => {
-      this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire,this.EmailEnCC,this.Subject,this.dialogElement.innerHTML);
+      const content = `<div style="width: 1000px;">${this.dialogElement.innerHTML}</div>`;
+      this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire, this.EmailEnCC, this.Subject, content);      
+      // this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire,this.EmailEnCC,this.Subject,this.dialogElement.innerHTML);
       this.AddHealthCheck = new HealthChekPreprodProd();
       this.listEtatproc = new Array<EtatProcessusMetier>();
       this.listHelthchekdetail = new Array<HealthChekPreprodProdDetail>();
+      this.spinner =false;
       this.router.navigate(['/pilote/healthcheck/PreprodProd/registre']);
       const mailtoLink = `mailto:${this.EmailObligatoire.join(';')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(';')}`;
-      window.open(mailtoLink, '_blank');
+     // window.open(mailtoLink, '_blank');
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Etat de santé Ajouter avec succès' });
     }, error => {
+      this.spinner =false;
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Erreur lors de l\'enregistrement' });
     })
 
@@ -218,9 +223,9 @@ export class AjoutHealthCheckComponent implements OnInit {
       };
       html2canvas(this.dialogElement, options).then((canvas) => {
         this.imageDataUrl = canvas.toDataURL();
-        const blob = this.dataURLtoBlob(this.imageDataUrl);
-        const imageUrl = URL.createObjectURL(blob); // create URL object from blob
-        const file = new File([blob], 'healthcheck.png', { type: 'image/png' });
+        // const blob = this.dataURLtoBlob(this.imageDataUrl);
+        // const imageUrl = URL.createObjectURL(blob); // create URL object from blob
+        // const file = new File([blob], 'healthcheck.png', { type: 'image/png' });
         // saveAs(file);
         this.SaveHealth();
       });
@@ -263,6 +268,7 @@ export class AjoutHealthCheckComponent implements OnInit {
       if (this.ListApp.length == this.ListStatutApp.length) {
         if (this.listEtatproc.length == this.ListProcessus.length) {
           this.AddHealthCheck.dateAjout = new Date();
+          this.spinner =true;
           this.takeScreenshot();
         } else {
           this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Insérer tout l\'état de tout les processus métier' });

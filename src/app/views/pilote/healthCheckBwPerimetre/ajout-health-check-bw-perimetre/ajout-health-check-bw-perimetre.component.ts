@@ -21,7 +21,7 @@ const moment = require('moment');
   styleUrls: ['./ajout-health-check-bw-perimetre.component.scss']
 })
 export class AjoutHealthCheckBwPerimetreComponent implements OnInit {
-
+  spinner:boolean=false;
   ListStatut:any[]=[];
   userKey:any[]=[];
   ListPerimetre: Array<Perimetre>= new Array<Perimetre>();
@@ -118,15 +118,19 @@ removeDetails(us: HealthCheckBwPerimetreDetail) {
   SaveHealth(){
     this.Subject = this.AddHealthCheckBw.titre;
       this.healthService.SaveHealthCheck().subscribe((data) => {
-        this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire,this.EmailEnCC,this.Subject,this.dialogElement.innerHTML);
+        const content = `<div style="width: 900px;">${this.dialogElement.innerHTML}</div>`;
+        this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire, this.EmailEnCC, this.Subject, content);      
+       // this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire,this.EmailEnCC,this.Subject,this.dialogElement.innerHTML);
              this.AddHealthCheckBw=new HealthCheckBwPerimetre();
              this.listHelthchekBwdetail = new Array<HealthCheckBwPerimetreDetail>();
              this.helthchekBwdetail= new HealthCheckBwPerimetreDetail;
-             this.router.navigate(['/pilote/healthcheck/Bw/registre']);
+             this.spinner= false;
+             this.router.navigate(['/pilote/healthcheck/PreprodProd/registre']);
              const mailtoLink = `mailto:${this.EmailObligatoire.join(';')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(';')}`;
-             window.open(mailtoLink, '_blank');
+             // window.open(mailtoLink, '_blank');
              this.messageService.add({severity:'success', summary: 'Success', detail: 'Etat de santé Ajouter avec succès'});
             },error=>{
+              this.spinner= false;
               this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de l\'enregistrement'});
       })
      
@@ -146,11 +150,11 @@ removeDetails(us: HealthCheckBwPerimetreDetail) {
         imageSmoothingQuality: 'high'
       };
       html2canvas(this.dialogElement, options).then((canvas) => {
-        this.imageDataUrl = canvas.toDataURL();
-        const blob = this.dataURLtoBlob(this.imageDataUrl);
-        const imageUrl = URL.createObjectURL(blob); // create URL object from blob
-        const file = new File([blob], 'healthcheck.png', { type: 'image/png' });
-        // saveAs(file);
+        // this.imageDataUrl = canvas.toDataURL();
+        // const blob = this.dataURLtoBlob(this.imageDataUrl);
+        // const imageUrl = URL.createObjectURL(blob); // create URL object from blob
+        // const file = new File([blob], 'healthcheck.png', { type: 'image/png' });
+        //  saveAs(file);
         this.SaveHealth();
       });       
        this.charteHealthCheckBw = false;
@@ -188,6 +192,7 @@ removeDetails(us: HealthCheckBwPerimetreDetail) {
     this.AddHealthCheckBw.healthCheckBwPerimetreDetailList = this.listHelthchekBwdetail;
     if(this.AddHealthCheckBw.healthCheckBwPerimetreDetailList.length != 0  ){
       this.AddHealthCheckBw.dateAjout = new Date();
+      this.spinner= true;
     this.takeScreenshot();
   }else{
     this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});

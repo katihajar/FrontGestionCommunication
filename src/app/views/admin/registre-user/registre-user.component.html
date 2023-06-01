@@ -99,7 +99,7 @@
 </div>
 
 <p-dialog header="Ajouter Un utilisareur" [modal]="true" (onHide)="submittedUtilisateur=false"
-  [(visible)]="displayBasic2" [style]="{width: '50vw', height: '25vw'}" [resizable]="true">
+  [(visible)]="displayBasic2" [style]="{width: '50vw', height: '20vw'}" [resizable]="true">
   <div class="page__content-data position-relative text-center">
     <div class="col-12">
       <span class="p-input-icon-left" [style]="{'width':'45%'}">
@@ -119,13 +119,7 @@
       </span>
     </div>
     <div class="col-12" style="margin-top: 2%;">
-      <span class="p-input-icon-left" [style]="{'width':'45%'}">
-        <p-dropdown [options]="lots" [(ngModel)]="this.AddUser.user.lots"
-          [style]="{'width':'100%','required':'required'}" placeholder="Selectinné le lot" optionValue="name"
-          optionLabel="name" [showClear]="true"  appendTo="body"></p-dropdown>
-        <small style="color: red;margin-left: 2%;" *ngIf="submittedUtilisateur && !this.AddUser.user.lots"
-          class="p-invalid">lot est obligatoire</small>
-      </span>
+
       <span class="p-input-icon-left" style="margin-left: 2%;" [style]="{'width':'45%'}">
         <p-dropdown [options]="RoleList" [(ngModel)]="this.AddUser.idRole"  appendTo="body"
           [style]="{'width':'100%','required':'required'}" placeholder="Selectinné le role" optionValue="id"
@@ -163,13 +157,6 @@
       </span>
     </div>
     <div class="col-12" style="margin-top: 2%;">
-      <span class="p-input-icon-left" [style]="{'width':'45%'}">
-        <p-dropdown [options]="lots" [(ngModel)]="this.EditeUser.user.lots"  appendTo="body"
-          [style]="{'width':'100%', 'required':'required'}" placeholder="Selectinné le lot" optionValue="name"
-          optionLabel="name" [showClear]="true"></p-dropdown>
-        <small style="color: red;margin-left: 2%;" *ngIf="submittedUtilisateur && !this.EditeUser.user.lots"
-          class="p-invalid">lot est obligatoire</small>
-      </span>
       <span class="p-input-icon-left" style="margin-left: 2%;" [style]="{'width':'45%'}">
         <p-dropdown [options]="RoleList" [(ngModel)]="this.EditeUser.idRole"
           [style]="{'width':'100%','required':'required'}" placeholder="Selectinné le role" optionValue="id"

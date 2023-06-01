@@ -1,8 +1,21 @@
 <div class="container-fluid page" style="background-color: white">
-  <div class="page__box p-3">Registre des états de Santé Preprod/Prod </div>
+  <div class="page__box p-3">Registre des états de Santé </div>
   <div class="page__content shadow p-2 position-relative">
-    <div class="card">
-      <p-table class="table" #dt1 [value]=" this.ListHealthCheck" dataKey="id" [rows]="10"
+    <div>
+      <ul class="nav nav-tabs" id="myTab" role="tablist" style="font-size: 20px;padding-top: 12px;padding-left: 12px;padding-right: 12px;">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="monetics-tab" data-bs-toggle="tab" data-bs-target="#monetics" type="button" role="tab" aria-controls="monetics" aria-selected="true">monetics</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="BI-tab" data-bs-toggle="tab" data-bs-target="#BI" type="button" role="tab" aria-controls="BI" aria-selected="false">BI</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="flamingo-tab" data-bs-toggle="tab" data-bs-target="#flamingo" type="button" role="tab" aria-controls="flamingo" aria-selected="false">flamingo</button>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="monetics" role="tabpanel" aria-labelledby="monetics-tab" style="padding: 20px;">
+      <p-table class="table" #dt1 [value]="this.ListHealthCheck" dataKey="id" [rows]="10"
         [showCurrentPageReport]="true" [loading]="loading" [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [sortField]="'dateAjout'"
         [sortOrder]="-1" [globalFilterFields]="['titre','type','dateAjout']">
@@ -13,7 +26,7 @@
             <span class="p-input-icon-left ml-auto" style="float: right;">
               <i class="pi pi-search"></i>
               <input pInputText type="text" (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
-                placeholder="Search keyword" />
+                placeholder="Recherche par mot clé" />
             </span>
           </div>
         </ng-template>
@@ -64,9 +77,130 @@
           </tr>
         </ng-template>
       </p-table>
+      </div>
+      <div class="tab-pane fade" id="BI" role="tabpanel" aria-labelledby="BI-tab" style="padding: 20px;">
+        <p-table class="table" #dt2 [value]=" this.ListHealthCheckBw" dataKey="id" [rows]="10"
+        [showCurrentPageReport]="true" [loading]="loading" [paginator]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [sortField]="'dateAjout'" [sortOrder]="-1"
+        [globalFilterFields]="['titre','dateAjout']">
+        <ng-template pTemplate="caption">
+          <div class="flex">
+       <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+              (click)="clear(dt2)"></button>
+            <span class="p-input-icon-left ml-auto" style="float: right;">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" (input)="dt2.filterGlobal($any($event.target).value, 'contains')"
+                placeholder="Recherche par mot clé" />
+            </span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>      
+            <th>
+              <div class="flex justify-content-center align-items-center">
+                Titre
+                <p-columnFilter type="text" field="titre" display="menu"></p-columnFilter>
+              </div>
+            </th>
+
+            <th>
+              <div class="flex justify-content-center align-items-center">
+                  dateAjout
+                <!-- <p-columnFilter type="text" field="dateAjout" display="menu"></p-columnFilter> -->
+              </div>
+            </th>
+            <th>
+              Action
+            </th>
+           
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-health>
+          <tr>
+           
+            <td>
+              {{health.titre}}
+            </td>
+            <td>
+              {{health.dateAjout | date: 'dd/MM/yyyy'}}
+            </td>
+            <td><button pButton pRipple  type="button" style="font-size: larger;" icon="pi pi-search" (click)="charteBW(health)"
+                class="p-button-rounded p-button-info"></button>
+        </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="4">aucun état santé n'a été trouvé.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+      </div>
+      <div class="tab-pane fade" id="flamingo" role="tabpanel" aria-labelledby="flamingo-tab" style="padding: 20px;">       
+      <p-table class="table" #dt3 [value]="this.ListHealthCheckFlamingo" dataKey="id" [rows]="10"
+        [showCurrentPageReport]="true" [loading]="loadingFlamingo" [paginator]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [sortField]="'dateAjout'" [sortOrder]="-1"
+        [globalFilterFields]="['titre','dateAjout']">
+        <ng-template pTemplate="caption">
+          <div class="flex">
+       <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+              (click)="clear(dt3)"></button>
+            <span class="p-input-icon-left ml-auto" style="float: right;">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" (input)="dt3.filterGlobal($any($event.target).value, 'contains')"
+                placeholder="Recherche par mot clé" />
+            </span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>      
+            <th>
+              <div class="flex justify-content-center align-items-center">
+                Titre
+                <p-columnFilter type="text" field="titre" display="menu"></p-columnFilter>
+              </div>
+            </th>
+
+            <th>
+              <div class="flex justify-content-center align-items-center">
+                  Date
+              </div>
+            </th>
+            <th>
+              Action
+            </th>
+           
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-healthFlamingo>
+          <tr>
+           
+            <td>
+              {{healthFlamingo.titre}}
+            </td>
+            <td>
+              {{healthFlamingo.dateFlux | date: 'dd/MM/yyyy'}}
+            </td>
+            <td><button pButton pRipple  type="button" style="font-size: larger;" icon="pi pi-search" (click)="charteFlamingo(healthFlamingo)"
+                class="p-button-rounded p-button-info"></button>
+        </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="4">aucun état santé n'a été trouvé.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+      </div>
+      </div>
     </div>
   </div>
 </div>
+<app-charte-health-check-flamingo *ngIf="charteHealthCheckFlamingo"></app-charte-health-check-flamingo>
+<app-charte-health-check-bw-perimetre *ngIf="charteHealthCheckBw"></app-charte-health-check-bw-perimetre>
 <app-charte-health-check *ngIf="charteHealthCheckPreprodProd"></app-charte-health-check>
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"
   rejectButtonStyleClass="p-button-text"></p-confirmDialog>

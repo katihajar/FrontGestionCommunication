@@ -21,6 +21,7 @@ export class RegistreApplicationOfPiloteComponent implements OnInit {
   loading: boolean = true;
   displayDestinataire: boolean=false;
   dialogAddDest: boolean=false;
+  spinner: boolean=false;
   TypeDest:any[]=[];
   listApp: Array<PiloteApplication>=new  Array<PiloteApplication>();
   constructor(private appService: ApplicationService, private userService: UserService,private authService : AuthService,
@@ -91,8 +92,10 @@ showDestinataire(app:Application){
 
 
 SaveDestinataire(){
+  this.spinner = true;
   if(this.AddDestinataire.nom != null && this.AddDestinataire.prenom != null &&this.AddDestinataire.email != null && this.AddDestinataire.typeDest !=null){
     this.destinataireService.SaveDestinataire().subscribe((data) => {
+      this.spinner = false;
       this.dialogAddDest = false;
       this.showDestinataire(this.AddDestinataire.application);
       this.AddDestinataire.nom= '';
@@ -101,9 +104,11 @@ SaveDestinataire(){
       this.AddDestinataire.typeDest= '';
       this.messageService.add({severity:'success', summary: 'Success', detail: 'Destinataire Ajouter avec succès'});
           },error=>{
+            this.spinner = false;
             this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de l\'enregistrement'});
     })
     }else{
+      this.spinner = false;
       this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Insérer tout les champs'});
     }
 }

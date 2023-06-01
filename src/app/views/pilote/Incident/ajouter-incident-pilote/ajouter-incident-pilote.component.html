@@ -1,4 +1,10 @@
-<div class="container-fluid page" style="background-color: white">
+<ng-template [ngIf]="this.spinner ">
+    <div class="spinner-container">
+      <p-progressSpinner styleClass="spinner" strokeWidth="4" [fill]="'#ffffff'"></p-progressSpinner>
+    </div>
+  </ng-template>
+
+<div [ngClass]="{'blur': this.spinner}" class="container-fluid page" style="background-color: white">
     <div class="d-flex page__box p-3">Ajouter un Incident</div>
     <div class="card align-items-center page__content shadow p-3 position-relative">
             <div class="col-12" style="margin: 2%">
@@ -179,9 +185,9 @@
             <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
                 <button pButton pRipple (click)="showCharte()" type="button" label="Visualiser la charte" style=" float: left;margin-left: 2%;" class="p-button-raised p-button-help"></button>
                 
-                <button pButton pRipple (click)="SendAndSaveIncident()" [disabled]="isSubmitDisabled()" style=" float: right;margin-right: 2%;" type="button" label="Submit" class="p-button-raised"></button>
+                <button pButton pRipple (click)="SendAndSaveIncident()" [disabled]="isSubmitDisabled()" style=" float: right;margin-right: 2%;" type="button" label="Soumettre" class="p-button-raised"></button>
             </div>
         </div>
 </div>
-<app-charte-incident3bfr  *ngIf="charteIncident3Bfr"></app-charte-incident3bfr>
-<app-charte-incident-monetic  *ngIf="charteIncidentMonetic"></app-charte-incident-monetic>
+<app-charte-incident3bfr [ngClass]="{'blur': this.spinner}" *ngIf="charteIncident3Bfr"></app-charte-incident3bfr>
+<app-charte-incident-monetic [ngClass]="{'blur': this.spinner}" *ngIf="charteIncidentMonetic"></app-charte-incident-monetic>

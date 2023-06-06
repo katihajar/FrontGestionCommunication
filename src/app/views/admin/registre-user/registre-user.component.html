@@ -129,10 +129,12 @@
       </span>
 
     </div>
-    
+    <div class="col-12" *ngIf="this.spinner " style="margin-top: 2%;">
+    <p-progressSpinner styleClass="spinner" strokeWidth="4" [fill]="'#ffffff'"></p-progressSpinner>
+    </div>
   </div>
   <ng-template pTemplate="footer">
-    <p-button label="Submit" [disabled]="isSubmitDisabled()" (click)="SaveUser()" icon="pi pi-check"></p-button>
+    <p-button label="Submit" [disabled]="isSubmitDisabled() || this.spinner" (click)="SaveUser()" icon="pi pi-check"></p-button>
   </ng-template>
 </p-dialog>
 
@@ -165,8 +167,11 @@
           class="p-invalid">Role est obligatoire</small>
       </span>
     </div>
+    <div class="col-12" *ngIf="this.spinner " style="margin-top: 2%;">
+      <p-progressSpinner styleClass="spinner" strokeWidth="4" [fill]="'#ffffff'"></p-progressSpinner>
+      </div>
   </div>
   <ng-template pTemplate="footer">
-    <p-button label="Submit" type="Submit" (click)="UpdateUser()" icon="pi pi-check"></p-button>
+    <p-button label="Submit" type="Submit" [disabled]=" this.spinner" (click)="UpdateUser()" icon="pi pi-check"></p-button>
   </ng-template>
 </p-dialog>

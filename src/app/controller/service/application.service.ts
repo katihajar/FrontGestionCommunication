@@ -17,6 +17,7 @@ export class ApplicationService {
   private _ListApplication: Array<Application> = new Array<Application>();
   private _ListPiloteApplication: Array<PiloteApplication> = new Array<PiloteApplication>();
   private _AddApplication: Application = new Application();
+  private _EditeApplication: Application = new Application();
   private _AddPiloteApp: PiloteApplication = new PiloteApplication();
   private _ListApplicationOfPilote: Array<PiloteApplication> = new Array<PiloteApplication>();
 
@@ -54,6 +55,16 @@ export class ApplicationService {
 
   set AddApplication(value: Application) {
     this._AddApplication = value;
+  }
+  get EditeApplication(): Application{
+    if(this._EditeApplication == null){
+      this._EditeApplication = new Application();
+    }
+    return this._EditeApplication;
+  }
+
+  set EditeApplication(value: Application) {
+    this._EditeApplication = value;
   }
 
   get ListApplication(): Array<Application>{
@@ -120,13 +131,20 @@ export class ApplicationService {
     );    
   }
   public SaveApplication(): Observable<HttpResponse<void>> {
+    this.AddApplication.lot = this.auth.User.lots;
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.post<void>(
       this.url + 'application/saveApp',this.AddApplication,
       { observe: 'response', headers }
     );    
   }
-  
+  public UpdateApplication(): Observable<HttpResponse<void>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.put<void>(
+      this.url + 'application/updateApp',this.EditeApplication,
+      { observe: 'response', headers }
+    );    
+  }
   public FindAllPiloteApplcation(nom: string): Observable<HttpResponse<Array<PiloteApplication>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<PiloteApplication>>(

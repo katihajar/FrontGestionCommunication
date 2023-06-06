@@ -25,6 +25,8 @@ export class RegistreApplicationComponent implements OnInit {
   App: Application = new Application();
   responsableList = new Array<User>();
   disponibilite:any[]=[];
+  charte:any[]=[];
+  charteChange:any[]=[];
   constructor(private appService: ApplicationService, private userService: UserService,private messageService: MessageService,
     private cdRef: ChangeDetectorRef,private router: Router, private charteService: CharteService) { }
   clear(table: Table) {
@@ -33,6 +35,14 @@ export class RegistreApplicationComponent implements OnInit {
 
   ngOnInit(): void {
     this.FindAllApp();
+    this.charte= [
+      {name: 'charte Incident'},
+      {name: 'charte Incident Monetics'},
+    ];
+    this.charteChange= [
+      {name: 'charte Changement'},
+      {name: 'charte Changement Monetics'},
+    ];
     this.disponibilite= [
       {name: 'Oui'},
       {name: 'Non'},
@@ -101,7 +111,10 @@ export class RegistreApplicationComponent implements OnInit {
       this.AjouterPilote = false;
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Pilote Ajouté avec succesé' });
 
-    })
+    },error=>{
+      this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de l\'enregistrement'});
+    
+})
   }
   }
   FindAllUsers() {
@@ -127,9 +140,30 @@ export class RegistreApplicationComponent implements OnInit {
   }
   
   ShowModifDialog(app: Application){
+    this.EditeApplication=app;
     this.FindAllUsers();
     this.ModifApp = true;
   }
+  get EditeApplication(): Application{
+    return this.appService.EditeApplication;
+  }
 
-
+  set EditeApplication(value: Application) {
+    this.appService.EditeApplication = value;
+  }
+  diasbleUpdate(){
+    return !this.EditeApplication.disponibilite && !this.EditeApplication.responsable && !this.EditeApplication.charteChangement && !this.EditeApplication.charteIncident;
+  }
+  updateApp(){
+    this.appService.UpdateApplication().subscribe((data)=>{
+      this.EditeApplication= new Application();
+      this.FindListPilote(this.App);
+      this.AddPiloteApp = new PiloteApplication;
+      this.ModifApp = false;
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Application modifier avec succesé' });
+    },error=>{
+      this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de la modification'});
+    
+});
+  }
 }

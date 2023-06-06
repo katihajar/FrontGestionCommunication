@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Table } from 'primeng/table';
 import { Role } from 'src/app/controller/model/role';
@@ -13,6 +13,7 @@ import {MessageService} from 'primeng/api';
   styleUrls: ['./registre-user.component.scss']
 })
 export class RegistreUserComponent implements OnInit {
+  spinner: boolean = false;
   loading: boolean = true;
   displayBasic2: boolean = false;
   displayEdite: boolean = false;
@@ -22,29 +23,27 @@ export class RegistreUserComponent implements OnInit {
   responsablleList = new Array<User>();
   list= new Array<User>();
   listRole= new Array<Role>();
-  constructor(private userService: UserService, private router: Router,private messageService: MessageService) { }
+  constructor(private userService: UserService,private cdRef: ChangeDetectorRef, private router: Router,private messageService: MessageService) { }
     clear(table: Table) {
         table.clear();
     }
   FindAllUsers(){
     this.list =new Array<User>();
     this.UserList =new Array<User>();
+    this.piloteList=new Array<User>();
+    this.responsablleList=new Array<User>();
        this.userService.FindAllUsers().subscribe((data) => {
       // @ts-ignore
-      this.list = data.body;
-      for(let j=0;j<this.list.length;j++){
-        if(this.list[j].roles[0].name== "ROLE_PILOTE" || this.list[j].roles[0].name== "ROLE_RESPONSABLE"){
-          this.UserList.push(this.list[j]);
-        }
-      }
-      for(let i = 0; i<this.list.length;i++){
-        if(this.list[i].roles[0].name== "ROLE_PILOTE"){
-          this.piloteList.push(this.list[i]);
-        } else  if(this.list[i].roles[0].name== "ROLE_RESPONSABLE"){
-          this.responsablleList.push(this.list[i]);
+      this.UserList = data.body;
+      for(let i = 0; i<this.UserList.length;i++){
+        if(this.UserList[i].roles[0].name== "ROLE_PILOTE"){
+          this.piloteList.push(this.UserList[i]);
+        } else  if(this.UserList[i].roles[0].name== "ROLE_RESPONSABLE"){
+          this.responsablleList.push(this.UserList[i]);
         } 
       }
-      this.loading = false;
+      this.cdRef.detectChanges();
+      this.loading=false;
     }
     );
   }
@@ -65,6 +64,7 @@ export class RegistreUserComponent implements OnInit {
       }
     }
     );
+    this.cdRef.detectChanges();
     this.lots= [
       {name: '1'},
       {name: '2'},
@@ -113,12 +113,14 @@ showDialogEdite(user: User) {
     this.userService.EditeUser = value;
   }
   SaveUser(){
+    this.spinner =true;
     this.submittedUtilisateur = true;
     this.AddUser.user.username=this.AddUser.user.prenom+'.'+this.AddUser.user.nom;
-    if(this.AddUser.user.prenom != '' && this.AddUser.user.nom != '' && this.AddUser.idRole !=null && this.AddUser.user.lots !=''){
+    if(this.AddUser.user.prenom != '' && this.AddUser.user.nom != '' && this.AddUser.idRole !=null){
     this.userService.SaveUser().subscribe((data) => {
+      this.FindAllUsers();
            this.AddUser=new UserRole;
-           this.FindAllUsers();
+           this.spinner =false;
            this.displayBasic2 = false;
            this.submittedUtilisateur = false;
            this.messageService.add({severity:'success', summary: 'Success', detail: 'Utilisateur Ajouter avec succès'});
@@ -131,12 +133,14 @@ showDialogEdite(user: User) {
   }
   }
   UpdateUser(){
+    this.spinner =true;
     this.submittedUtilisateur = true;
     this.EditeUser.user.username=this.EditeUser.user.prenom+'.'+this.EditeUser.user.nom;
     this.userService.UpdateUser().subscribe((data) => {
-           this.submittedUtilisateur = true;
+      this.FindAllUsers();
+           this.submittedUtilisateur = false;
            this.EditeUser =new UserRole;
-           this.FindAllUsers();
+           this.spinner =false;
            this.displayEdite = false;
            this.messageService.add({severity:'success', summary: 'Success', detail: 'Utilisateur Modifier avec succès'});
 

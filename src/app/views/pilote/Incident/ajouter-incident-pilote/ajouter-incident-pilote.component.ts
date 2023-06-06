@@ -282,6 +282,7 @@ this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire, this
   }
 
   SendAndSaveIncident() {
+    //this.emailService.test();
     this.AddIncident.planActionList = this.ListPlanAction;
     this.AddIncident.id = 0;
     if (this.AddIncident.description != '' && this.AddIncident.causePrincipale != '' && this.AddIncident.situationActuelle != '' && this.AddIncident.prochaineCommunication != null) {

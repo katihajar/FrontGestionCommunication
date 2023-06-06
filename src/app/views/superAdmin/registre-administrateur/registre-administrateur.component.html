@@ -1,10 +1,6 @@
-<ng-template [ngIf]="this.spinner ">
-  <div class="spinner-container">
-    <p-progressSpinner styleClass="spinner" strokeWidth="4" [fill]="'#ffffff'"></p-progressSpinner>
-  </div>
-</ng-template>
 
-<div [ngClass]="{'blur': this.spinner}" class="container-fluid page " style="background-color: white">
+
+<div  class="container-fluid page " style="background-color: white">
   <div class="page__box p-3">Registre des Administrateurs</div>
   <div class="page__content shadow p-2 position-relative">
     <div class="card">
@@ -104,7 +100,7 @@
   </div>
 </div>
 
-<p-dialog header="Ajouter un Admin" [ngClass]="{'blur': this.spinner}"  [modal]="true" (onHide)="submittedUtilisateurSuperAdmin=false"
+<p-dialog header="Ajouter un Admin"  [modal]="true" (onHide)="submittedUtilisateurSuperAdmin=false"
   [(visible)]="displayBasicSuperAdmin2" [style]="{width: '50vw', height: '20vw'}" [resizable]="true">
   <div class="page__content-data position-relative text-center">
     <div class="col-12">
@@ -133,15 +129,17 @@
           class="p-invalid">lot est obligatoire</small>
       </span>
     </div>
-    
+    <div *ngIf="this.spinner" class="col-12" style="margin-top: 2%;">
+      <p-progressSpinner  styleClass="spinner" strokeWidth="4" [fill]="'#ffffff'"></p-progressSpinner>
+    </div>
   </div>
   <ng-template pTemplate="footer">
-    <p-button label="Submit" [disabled]="isSubmitDisabled()" (click)="SaveUser()" icon="pi pi-check"></p-button>
+    <p-button label="Submit" [disabled]="isSubmitDisabled() || this.spinner" (click)="SaveUser()" icon="pi pi-check"></p-button>
   </ng-template>
 </p-dialog>
 
 
-<p-dialog header="Modifier un Admin" [ngClass]="{'blur': this.spinner}"  (onHide)="submittedUtilisateurSuperAdmin=false" [modal]="true"
+<p-dialog header="Modifier un Admin"   (onHide)="submittedUtilisateurSuperAdmin=false" [modal]="true"
   [(visible)]="displayEditeSuperAdmin" [style]="{width: '50vw', height: '20vw'}">
   <div class="page__content-data position-relative text-center">
     <div class="col-12 ">
@@ -169,8 +167,11 @@
         class="p-invalid">lot est obligatoire</small>
     </span>
     </div>
+    <div *ngIf="this.spinner" class="col-12" style="margin-top: 2%;">
+      <p-progressSpinner  styleClass="spinner" strokeWidth="4" [fill]="'#ffffff'"></p-progressSpinner>
+    </div>
   </div>
   <ng-template pTemplate="footer">
-    <p-button label="Submit" type="Submit" [disabled]="isSubmitDisabledEdite()" (click)="UpdateUser()" icon="pi pi-check"></p-button>
+    <p-button label="Submit" type="Submit" [disabled]="isSubmitDisabledEdite() || this.spinner" (click)="UpdateUser()" icon="pi pi-check"></p-button>
   </ng-template>
 </p-dialog>

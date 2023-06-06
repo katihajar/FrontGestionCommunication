@@ -67,7 +67,97 @@ export class EmaildraftsService {
         });
     });
   }
- 
+  test(): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      // Configure the login request
+      const loginRequest = {
+        scopes: ['https://graph.microsoft.com/.default']
+      };
+  
+      // Call the login method to authenticate the user
+      this.authService.loginPopup(loginRequest)
+        .subscribe((response) => {
+          // Get the account from the response
+          const account: AccountInfo | null = response.account;
+  
+          if (account) {
+            // Set the active account
+            this.authService.instance.setActiveAccount(account);
+  
+            // Authentication successful, retrieve the access token
+            const tokenRequest = {
+              scopes: ['https://graph.microsoft.com/.default'],
+              account: account
+            };            
+            // Call the acquireTokenSilent method to get the access token
+            this.authService.acquireTokenSilent(tokenRequest)
+              .subscribe((response) => {
+                const accessToken = response.accessToken;
+                this.azureToken = accessToken;
+                console.log(response.accessToken);
+                resolve(accessToken);
+                this.retrieveInboxEmails(
+                  this.azureToken
+                ).then(() => {
+                  console.log('sent');
+                  this.authService.instance.setActiveAccount(null);
+                }).catch((error) => {
+                  console.log('error');
+                });
+              }, (error) => {
+                reject(`Error acquiring access token: ${error}`);
+              });
+          } else {
+            reject('No account found in the login response.');
+          }
+        }, (error) => {
+          reject(`Error during authentication: ${error}`);
+        });
+    });
+  }
+  retrieveInboxEmails(accessToken: string): Promise<{ subject: string, body: string }[]> {
+    return new Promise<{ subject: string, body: string }[]>((resolve, reject) => {
+      const endpoint = 'https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?$top=100';
+      const emails: { subject: string, body: string }[] = [];
+      function fetchEmails(url: string) {
+        fetch(url, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          }
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Failed to retrieve inbox emails: ${response.status} - ${response.statusText}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          const retrievedEmails = data.value.map((email: any) => {
+            return {
+              subject: email.subject,
+              body: email.body.content
+            };
+          });
+          emails.push(...retrievedEmails);
+          if (data["@odata.nextLink"]) {
+            fetchEmails(data["@odata.nextLink"]);
+            console.log(emails);
+          } else {
+            resolve(emails);
+            console.log(emails);
+          }
+          
+        })
+        .catch(error => {
+          reject(`Error retrieving inbox emails: ${error}`);
+        });
+      }
+  
+      fetchEmails(endpoint);
+    });
+  }
+  
+  
   async createDraftEmail(
     accessToken: string,
     fromEmailAddress: string,

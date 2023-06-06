@@ -74,7 +74,7 @@ this.charteChange= [
  this.cdr.detectChanges();
 }
 isSubmitDisabled(){
-  return !this.AddApplication.nomApplication || this.AddApplication.nomApplication.length <3 || !this.AddApplication.responsable || !this.AddApplication.disponibilite || !this.AddApplication.lot || !this.AddApplication.charteIncident || !this.AddApplication.charteChangement || this.ListpiloteSelected.length == 0;
+  return !this.AddApplication.nomApplication || this.AddApplication.nomApplication.length <3 || !this.AddApplication.responsable || !this.AddApplication.disponibilite || !this.AddApplication.charteIncident || !this.AddApplication.charteChangement || this.ListpiloteSelected.length == 0;
 }
 AddPilote(){
   let m =this.ListpiloteSelected.indexOf(this.selectedPiloteApp);
@@ -111,7 +111,6 @@ SaveApp(){
   this.appService.SaveApplication().subscribe((data) => {
          this.AddApplication=new Application;
          this.piloteList = new Array<User>();
-         this.FindAllUsers();
          this.submittedApplication = false;
          this.ListpiloteSelected = new Array<PiloteApplication>();
          this.messageService.add({severity:'success', summary: 'Success', detail: 'Application Ajouter avec succès'});

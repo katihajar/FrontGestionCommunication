@@ -217,7 +217,7 @@
 </p-dialog>
 
 <p-dialog header="Modifier l'Application" [modal]="true" (onHide)="submittedModif=false"
-  [(visible)]="ModifApp" [style]="{width: '35vw', height: '15vw'}" [resizable]="true">
+  [(visible)]="ModifApp" [style]="{width: '40vw', height: '20vw'}" [resizable]="true">
 
     <div class="col-12 text-center" style="margin-top: 1%;" >
       <span
@@ -225,6 +225,7 @@
       [style]="{ width: '40%' }"
     >
       <p-dropdown
+      [(ngModel)]="this.EditeApplication.disponibilite"
         [options]="disponibilite"
         appendTo="body"
         [style]="{ width: '100%', required: 'required' }"
@@ -246,6 +247,7 @@
     optionLabel="username"
     [filter]="true"
     filterBy="username"
+    [(ngModel)]="this.EditeApplication.responsable"
     [showClear]="true"
     placeholder="Selectinné le Responsable"
   >
@@ -257,7 +259,20 @@
   </p-dropdown>
   </span>
     </div>
+    <div class="col-12 text-center" style="margin-top: 2%">
+
+      <span class="p-input-icon-left"  [style]="{ width: '40%' }">
+        <p-dropdown [options]="charte" [(ngModel)]="this.EditeApplication.charteIncident"
+          [style]="{ width: '100%', required: 'required' }" placeholder="Selectinné la charte Incident" optionValue="name"
+          optionLabel="name" [showClear]="true"></p-dropdown>
+      </span>
+      <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '40%' }">
+        <p-dropdown [options]="charteChange" [(ngModel)]="this.EditeApplication.charteChangement"
+          [style]="{ width: '100%', required: 'required' }" placeholder="Selectinné la charte de changement" optionValue="name"
+          optionLabel="name" [showClear]="true"></p-dropdown>
+      </span>
+    </div>
   <ng-template pTemplate="footer">
-    <p-button label="Submit"  icon="pi pi-check"></p-button>
+    <p-button label="Submit" [disabled]="diasbleUpdate()" (onClick)="updateApp()" icon="pi pi-check"></p-button>
   </ng-template>
 </p-dialog>

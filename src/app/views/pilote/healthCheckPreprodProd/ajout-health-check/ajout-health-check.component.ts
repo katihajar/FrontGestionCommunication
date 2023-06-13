@@ -68,7 +68,8 @@ export class AjoutHealthCheckComponent implements OnInit {
       { name: 'OK' },
       { name: 'En cours d\'éxecuxtion' },
       { name: 'Flux non critique KO' },
-      { name: 'Flux critique KO' }
+      { name: 'Flux critique KO' },
+      { name: 'RAS' }
     ];
     this.ListStatut = [
       { name: 'Ko' },

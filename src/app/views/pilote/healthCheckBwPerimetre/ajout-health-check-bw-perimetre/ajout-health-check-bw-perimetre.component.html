@@ -10,7 +10,7 @@
                 <div class="col-12 text-center" style="margin-bottom: 2%;margin-top: 2%;">             
                     <span
                     class="p-input-icon-left"
-                    [style]="{ width: '30%' }"
+                    [style]="{ width: '45%' }"
                   >
                   <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Périmètre<span style="color: red;">*</span></label>
                   <p-dropdown [style]="{ width: '100%', required: 'required' }" [options]="ListPerimetre" optionLabel="titre"
@@ -23,7 +23,7 @@
                   </ng-template>
                 </p-dropdown>   
                   </span>
-                  <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
+                  <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '45%' }">
                     <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Traitement de nuit<span style="color: red;">*</span></label>
                     <p-dropdown
                     [options]="ListStatut"
@@ -35,7 +35,7 @@
                     [(ngModel)]="this.helthchekBwdetail.statusNightTreatment"
                   ></p-dropdown>
                   </span>
-                  <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
+                  <!-- <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
                     <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Statut d'intégrité des données<span style="color: red;">*</span></label>
                     <p-dropdown
                     [options]="ListStatut"
@@ -46,9 +46,9 @@
                     [showClear]="true"
                     [(ngModel)]="this.helthchekBwdetail.statusDataIntegrity"
                   ></p-dropdown>
-                  </span>
+                  </span> -->
                 </div>
-                <div class="col-12 text-center" style="margin-bottom: 2%;">
+                <!-- <div class="col-12 text-center" style="margin-bottom: 2%;">
                     <span class="p-input-icon-left" [style]="{ width: '46%' }">
                         <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Incident en cours<span style="color: red;">*</span></label>
                         <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="number" pInputText
@@ -59,14 +59,14 @@
                         <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="number" pInputText
                             placeholder="Entré le nombre d'inicdent completer" [(ngModel)]="this.helthchekBwdetail.incidentCompleted"/>
                     </span>
-                </div>
+                </div>-->
                 <div class="col-12 text-center" style="margin-bottom: 2%;">
-                    <span class="p-input-icon-left" [style]="{ width: '46%' }">
+                    <span class="p-input-icon-left" [style]="{ width: '95%' }">
                         <label  for="basic6" style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Commentaire<span style="color: red;">*</span></label>
-                        <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="text" pInputText
-                            placeholder="Entré le commentaire" [(ngModel)]="this.helthchekBwdetail.comment"/>
+                        <textarea id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="text" pInputText
+                            placeholder="Entré le commentaire" [(ngModel)]="this.helthchekBwdetail.comment"></textarea>
                     </span>
-                    <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '41%' }">
+                    <!-- <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '41%' }">
                         <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Retour d'information des utilisateurs clés<span style="color: red;">*</span></label>
                         <p-dropdown
                         [options]="userKey"
@@ -77,10 +77,10 @@
                         [showClear]="true"
                         [(ngModel)]="this.helthchekBwdetail.feedBack"
                       ></p-dropdown>
-                      </span>
+                      </span> -->
                       <button style="margin-left: 2%" pButton pRipple type="button" icon="pi pi-plus" (click)="AddDetails()"
                         class="p-button-rounded p-button-success"></button>
-                </div>
+                </div> 
                 <div class="card align-items-center"  style="margin: 2%;width: 98%;">
                 <div class="col-12" >
                     <p-table class="table" [value]="this.listHelthchekBwdetail" dataKey="id" [rows]="10" 
@@ -95,34 +95,15 @@
                                 </th>
                                 <th>
                                     <div class="flex justify-content-center align-items-center">
-                                        Traitement de nuit
+                                        Alerte
                                     </div>
                                 </th>
                                 <th>
                                     <div class="flex justify-content-center align-items-center">
-                                        Statut d'intégrité des données
+                                        Comments
                                     </div>
                                 </th>
-                                <th>
-                                    <div class="flex justify-content-center align-items-center">
-                                        Incident en cours
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="flex justify-content-center align-items-center">
-                                        Incident clôturé ce mois-ci
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="flex justify-content-center align-items-center">
-                                        Commentaire
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="flex justify-content-center align-items-center">
-                                        Retour d'information des utilisateurs clés
-                                    </div>
-                                </th>
+                            
                                 <th>
                                     <div class="flex justify-content-center align-items-center">
                                         supprimer
@@ -136,35 +117,16 @@
                                     {{ Helth.perimetre.titre }}
                                 </td>
                                 <td>
-                                    <div *ngIf="Helth.statusNightTreatment =='OK'">    <p-badge severity="success" styleClass="mr-2"></p-badge>
+                                    <div *ngIf="Helth.statusNightTreatment =='OK'" style="color: green;">    OK
                                     </div> 
-                                    <div *ngIf="Helth.statusNightTreatment =='In progress'"><p-badge severity="info" styleClass="mr-2"></p-badge></div>
-                                    <div *ngIf="Helth.statusNightTreatment =='Critical data KO'" ><p-badge severity="warning" styleClass="mr-2"></p-badge></div> 
-                                    <div *ngIf="Helth.statusNightTreatment =='Non critical data KO'" ><p-badge severity="danger" styleClass="mr-2"></p-badge></div>   
-                            
+                                    <div *ngIf="Helth.statusNightTreatment =='En cours'" style="color: orange;">En cours</div>
+                                  
                                 </td>
-                                <td>
-                                    <div *ngIf="Helth.statusDataIntegrity =='OK'">    <p-badge severity="success" styleClass="mr-2"></p-badge>
-                                    </div> 
-                                    <div *ngIf="Helth.statusDataIntegrity =='In progress'"><p-badge severity="info" styleClass="mr-2"></p-badge></div>
-                                    <div *ngIf="Helth.statusDataIntegrity =='Critical data KO'" ><p-badge severity="warning" styleClass="mr-2"></p-badge></div> 
-                                    <div *ngIf="Helth.statusDataIntegrity =='Non critical data KO'" ><p-badge severity="danger" styleClass="mr-2"></p-badge></div>   
-                            
-                                </td>
-                                <td>
-                                    {{ Helth.incidentInProgress }}
-                                </td>
-                                <td>
-                                    {{ Helth.incidentCompleted }}
-                                </td>
+                              
                                 <td>
                                     {{ Helth.comment }}
                                         </td>
-                                <td>
-                                    <div *ngIf="Helth.feedBack =='Yes'">
-                                        <i class="pi pi-check" style="font-size: 2rem"></i>
-                                    </div>
-                                </td>
+                              
                                 <td>
                                     <button pButton pRipple type="button" style="font-size: larger" icon="pi pi-times" (click)="removeDetails(Helth)"
                                         class="p-button-rounded p-button-danger"></button>
@@ -173,7 +135,7 @@
                         </ng-template>
                         <ng-template pTemplate="emptymessage">
                             <tr>
-                                <td colspan="8">aucune donnée n'a été trouvée.</td>
+                                <td colspan="4">aucune donnée n'a été trouvée.</td>
                             </tr>
                         </ng-template>
                     </p-table>
@@ -186,4 +148,4 @@
             </div>
         </div>
     </div>
-<app-charte-health-check-bw-perimetre *ngIf="charteHealthCheckBw" [ngClass]="{'blur': this.spinner}"></app-charte-health-check-bw-perimetre>
+<app-nouvel-charte *ngIf="newcharteHealthCheckBw" [ngClass]="{'blur': this.spinner}"></app-nouvel-charte>

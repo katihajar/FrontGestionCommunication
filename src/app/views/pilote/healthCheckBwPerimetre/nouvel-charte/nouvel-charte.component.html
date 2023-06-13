@@ -1,0 +1,68 @@
+<p-dialog [modal]="true" [(visible)]="this.newcharteHealthCheckBw" header="Charte Health Check BW Perimeter"
+  [style]="{width: '65vw', height: '90vw','margin-left':'3%'}" [resizable]="true">
+  <div #myDialog id="myDialog" style="width: 100%;font-size: small;">
+    <div style="margin: 2%;font-size: 18px;">
+      <p style="color: rgb(40, 76, 255);font-family: Georgia, serif;">Hello,</p><br>
+      <p style="margin-bottom: 3%;color: rgb(40, 76, 255);font-family: Georgia, serif;">Here is the status of the P3E application night :  </p>
+      <div class="col-12" style="border: 1px solid black;">
+      <div class="col-12">
+            <img src=" http://localhost:4200/assets/img/BIhealth2.png"  alt="psa" title="psa"
+              class="staticImg">
+        </div>
+
+        <p style="color: cornflowerblue;"></p><br>
+        <div class="col-12">
+          <table id="customers" style="font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;">
+         
+            <tr>
+              <th [width]="220" style="color:black;background-color:  rgb(174, 173, 173);border: 1px solid black;
+                text-align: center;
+                padding: 0;
+    ">Perimeter</th>
+              <th [width]="150" style="color:black; background-color: rgb(174, 173, 173);border: 1px solid black;
+                text-align: center;
+                padding: 0;
+   ">Alerts</th>
+              <th [width]="500" style="color:black;background-color: rgb(174, 173, 173);border: 1px solid black;
+                text-align: center;
+                padding: 0;padding-top: 12px;
+    ">Comments</th>
+              
+            </tr>
+            <tr *ngFor="let Helth of this.AddHealthCheckBw.healthCheckBwPerimetreDetailList" style="padding: 0;">
+              <td style="color:black;border: 1px solid black;
+                text-align: center;
+                padding: 0;"><b>{{ Helth.perimetre.titre }}</b></td>
+              <td style="border: 1px solid black;
+              text-align: center;padding: 0%;height: 100%;
+              ">
+                <div *ngIf="Helth.statusNightTreatment =='OK'" style="background-color:rgb(160, 249, 160) ;color: green;padding: 0%;height: 100%;"> OK
+                </div>
+                <div *ngIf="Helth.statusNightTreatment =='En cours'" style="background-color:rgb(252, 234, 188) ;color: orange;padding: 0%;height: 100%;"> En cours
+                                  </div>
+               
+
+              </td>
+              
+             
+              <td style="border: 1px solid black;
+              text-align: center;
+              padding: 0;">
+                {{ Helth.comment }}
+              </td>
+           
+            </tr>
+
+          </table>
+        </div>
+        </div>
+      </div>
+    </div>
+
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="this.newcharteHealthCheckBw=false" label="Ok"
+      styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>

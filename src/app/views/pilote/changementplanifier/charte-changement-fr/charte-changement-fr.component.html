@@ -28,7 +28,7 @@
         </div>
         <br>
         <div style="margin: 1%;">
-          <p style="background-color: rgb(244, 247, 247);"><u>Description</u> </p>
+          <p style="background-color: rgb(229, 230, 230);padding: 4px;"><u>Description</u> </p>
           <p>Platform :<span> {{this.AddChangement.type}} </span></p>
           <p>Application :<span> {{this.AddChangement.application.nomApplication}}
             </span> version <span> {{this.AddChangement.version}} </span></p>
@@ -58,7 +58,7 @@
             </p>
           </div>
           <p style=>Détail: {{this.AddChangement.detail}} </p><br>
-          <p style="background-color: rgb(244, 247, 247);"><u>Content</u></p>
+          <p style="background-color: rgb(229, 230, 230);padding: 4px;"><u>Content</u></p>
           <table style="width:100%">
 
             <tr *ngFor="let cont of this.AddChangement.contenuChangementList">
@@ -73,7 +73,7 @@
           </table>
           <br>
           <div *ngIf="this.AddChangement.statut=='Planifié'">
-            <p style="background-color: rgb(244, 247, 247);"><u>Impacts métier</u></p>
+            <p style="background-color: rgb(229, 230, 230);padding: 4px;"><u>Impacts métier</u></p>
             <p style="white-space: pre-line;">{{this.AddChangement.impactMetier}}</p>
           </div>
           <br>

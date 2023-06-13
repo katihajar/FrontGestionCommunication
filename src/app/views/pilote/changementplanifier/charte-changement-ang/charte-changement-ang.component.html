@@ -21,7 +21,7 @@
                         >Planned change - </span>
                         <span *ngIf="this.AddChangement.statut=='Terminé avec succès'"
                        >Completed change - </span>
-                       <span style="background-color:yellow ;">- {{this.AddChangement.dateDebut | date : 'dd/MM/YYYY'}}</span>
+                       {{this.AddChangement.dateDebut | date : 'dd/MM/YYYY'}}
                       </p>
                         <div style="margin-left: auto;justify-content: center;">
                         <img src="http://localhost:4200/assets/img/usaFlag.png"  class="mr-2 flag " />
@@ -29,7 +29,7 @@
             </div>
             <br>
             <div style="margin: 1%;">
-            <p style="background-color: rgb(244, 247, 247);"><u>Description</u> </p>
+            <p style="background-color: rgb(229, 230, 230);padding: 4px;"><u>Description</u> </p>
             <p >Platform : {{this.AddChangement.type}} </p>
             <p >Application : {{this.AddChangement.application.nomApplication}}
             version {{this.AddChangement.version}} </p>
@@ -55,7 +55,7 @@
             </p>
           </div>
           <p >Detail: {{this.AddChangementAng.detail}}  </p><br>
-            <p style="background-color: rgb(244, 247, 247);"><u>Content</u></p>
+            <p style="background-color: rgb(229, 230, 230);padding: 4px;"><u>Content</u></p>
             
                 <table style="width:100%"  >
 
@@ -72,7 +72,7 @@
                 </table>
             <br>
             <div *ngIf="this.AddChangement.statut=='Planifié'">
-              <p style="background-color: rgb(244, 247, 247);"><u>Business Impacts</u></p>
+              <p style="background-color: rgb(229, 230, 230);padding: 4px;"><u>Business Impacts</u></p>
               <p style="white-space: pre-line;">{{this.AddChangementAng.impactMetier}} </p>
             </div>
                 </div>

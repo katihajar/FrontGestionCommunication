@@ -38,18 +38,18 @@
         </div>
         <br>
         <div style="margin: 1%;">
-          <p style="background-color: rgb(244, 247, 247);"><u>Description</u> </p>
+          <p style="background-color: rgb(229, 230, 230);padding: 4px;"><u>Description</u> </p>
           <p>{{this.AddIncident.description}}</p><br>
 
 
-          <p style="background-color: rgb(244, 247, 247);"><u>Impact Métier</u></p>
+          <p style="background-color: rgb(229, 230, 230);padding: 4px;"><u>Impact Métier</u></p>
           <p>{{this.AddIncident.impact}}</p><br>
-          <p style="background-color: rgb(244, 247, 247);"><u>Situation Actuelle</u> </p>
+          <p style="background-color: rgb(229, 230, 230);padding: 4px;"><u>Situation Actuelle</u> </p>
           <p>{{this.AddIncident.situationActuelle}}</p><br>
-          <p style="background-color: rgb(244, 247, 247);"><u>Causes identifiées</u> </p>
+          <p style="background-color: rgb(229, 230, 230);padding: 4px;"><u>Causes identifiées</u> </p>
           <p>{{this.AddIncident.causePrincipale}}</p><br>
 
-          <p style="background-color: rgb(244, 247, 247);"><u>Plan d'action</u></p>
+          <p style="background-color: rgb(229, 230, 230);padding: 4px;"><u>Plan d'action</u></p>
           <div *ngFor="let action of this.AddIncident.planActionList"
             style=" font-family: 'Times New Roman', Times, serif;">
             <li> {{action.description}} </li>

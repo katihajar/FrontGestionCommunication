@@ -160,7 +160,7 @@ export class HealthCheckService {
   public FindLast10HealthCheck(): Observable<HttpResponse<Array<HealthChekPreprodProd>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<HealthChekPreprodProd>>(
-      this.urlPilote + 'healthcheck/last10/'+this.auth.User.lots,
+      this.urlPilote + 'healthcheck/historique/'+this.auth.User.lots,
       { observe: 'response', headers }
     );    
   }

@@ -162,6 +162,7 @@ import { HeaderSuperAdminComponent } from './components/headers/header-super-adm
 import { SideBarSuperAdminComponent } from './components/sideBar/side-bar-super-admin/side-bar-super-admin.component';
 import { RegistreAdministrateurComponent } from './views/superAdmin/registre-administrateur/registre-administrateur.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { NouvelCharteComponent } from './views/pilote/healthCheckBwPerimetre/nouvel-charte/nouvel-charte.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -262,7 +263,8 @@ export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
     SupAdminComponent,
     HeaderSuperAdminComponent,
     SideBarSuperAdminComponent,
-    RegistreAdministrateurComponent
+    RegistreAdministrateurComponent,
+    NouvelCharteComponent
     ],
   imports: [
     ProgressSpinnerModule,

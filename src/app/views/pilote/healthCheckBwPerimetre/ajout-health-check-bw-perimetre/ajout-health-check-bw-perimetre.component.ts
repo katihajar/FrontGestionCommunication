@@ -11,9 +11,9 @@ import { HealthCheckBwPerimetreService } from 'src/app/controller/service/health
 import html2canvas from 'html2canvas';
 import { saveAs } from 'file-saver';
 import { MyOptions } from 'src/app/controller/model/myoption';
-import { CharteHealthCheckBwPerimetreComponent } from '../charte-health-check-bw-perimetre/charte-health-check-bw-perimetre.component';
 import { DestinataireService } from 'src/app/controller/service/destinataire.service';
 import { EmaildraftsService } from 'src/app/controller/service/emaildrafts.service';
+import { NouvelCharteComponent } from '../nouvel-charte/nouvel-charte.component';
 const moment = require('moment');
 @Component({
   selector: 'app-ajout-health-check-bw-perimetre',
@@ -35,7 +35,7 @@ export class AjoutHealthCheckBwPerimetreComponent implements OnInit {
   imageDataUrl: string= String();
   Subject: string= String();
   dialogElement:any;
-  @ViewChild(CharteHealthCheckBwPerimetreComponent,{static:false}) myDiv: any ;
+  @ViewChild(NouvelCharteComponent,{static:false}) myDiv: any ;
   constructor(private emailService:EmaildraftsService,private healthService: HealthCheckBwPerimetreService,private charteService:CharteService,private router: Router,
     private messageService:MessageService,private destService: DestinataireService) { }
 
@@ -47,13 +47,7 @@ export class AjoutHealthCheckBwPerimetreComponent implements OnInit {
     this.AddHealthCheckBw.dateAjout = new Date();
     this.ListStatut= [
       { name: 'OK' },
-      { name: 'In progress' },
-      { name: 'Critical data KO' },
-      { name: 'Non critical data KO' }
-    ];
-    this.userKey= [
-      { name: 'Yes' },
-      { name: 'No' },
+      { name: 'En cours' }
     ];
     this.destService.FindDestinataireHealthCheckBwPerimetre().subscribe((data)=>{
       // @ts-ignore
@@ -71,7 +65,7 @@ export class AjoutHealthCheckBwPerimetreComponent implements OnInit {
     return this.listHelthchekBwdetail.length == 0;
   }
   AddDetails(){
-    if(this.helthchekBwdetail.perimetre.titre != '' && this.helthchekBwdetail.statusNightTreatment!='' && this.helthchekBwdetail.statusNightTreatment!=''&& this.helthchekBwdetail.statusDataIntegrity!='' ){
+    if(this.helthchekBwdetail.perimetre.titre != '' && this.helthchekBwdetail.statusNightTreatment!=''){
       const match = this.listHelthchekBwdetail.find(etat => etat.perimetre.titre  === this.helthchekBwdetail.perimetre.titre);
     if (match) {
       this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Vous avez déja ajouter ce périmètre' });
@@ -102,21 +96,21 @@ removeDetails(us: HealthCheckBwPerimetreDetail) {
   }
 
   
-  get charteHealthCheckBw(): boolean {
-    return this.charteService.charteHealthCheckBw;
+  get newcharteHealthCheckBw(): boolean {
+    return this.charteService.newcharteHealthCheckBw;
   }
 
-  set charteHealthCheckBw(value: boolean) {
-    this.charteService.charteHealthCheckBw = value;
+  set newcharteHealthCheckBw(value: boolean) {
+    this.charteService.newcharteHealthCheckBw = value;
   }
 
   charte(){
     this.AddHealthCheckBw.id=0;
     this.AddHealthCheckBw.healthCheckBwPerimetreDetailList = this.listHelthchekBwdetail;
-    this.charteHealthCheckBw = true;
+    this.newcharteHealthCheckBw = true;
   }
   SaveHealth(){
-    this.Subject = this.AddHealthCheckBw.titre;
+    this.Subject = 'P3E Availability regarding data of Application night '+moment(new Date()).format('dd/MM/YYYY');;
       this.healthService.SaveHealthCheck().subscribe((data) => {
         const content = `<div style="width: 900px;">${this.dialogElement.innerHTML}</div>`;
         this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire, this.EmailEnCC, this.Subject, content);      
@@ -137,7 +131,7 @@ removeDetails(us: HealthCheckBwPerimetreDetail) {
   }
   takeScreenshot() {
 
-        this.charteHealthCheckBw = true;
+        this.newcharteHealthCheckBw = true;
       
     setTimeout(() => {
 
@@ -157,7 +151,7 @@ removeDetails(us: HealthCheckBwPerimetreDetail) {
         //  saveAs(file);
         this.SaveHealth();
       });       
-       this.charteHealthCheckBw = false;
+       this.newcharteHealthCheckBw = false;
 
       
     }, 1000);

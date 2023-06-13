@@ -15,10 +15,37 @@ import { ProcessusMetierService } from 'src/app/controller/service/processus-met
 export class CharteHealthCheckComponent implements OnInit {
   listHealt:Array<HealthChekPreprodProd>= new Array<HealthChekPreprodProd>();
   listProcess:Array<ProcessusMetier>= new Array<ProcessusMetier>();
-  uniqueDates = [];
+  uniqueDates = []; 
   @ViewChild('myDialog',{static:false}) filterComponent!: ElementRef;
   constructor(private authService: AuthService,private charteService: CharteService,private healthService: HealthCheckService,private processService: ProcessusMetierService) { }
 
+  getLastTenDays(): Date[] {
+    const today = new Date(); // Current date
+    const lastTenDays: Date[] = [];
+
+    for (let i = 10; i > 0; i--) {
+      const date = new Date(today);
+      date.setDate(today.getDate() - i);
+      lastTenDays.push(date);
+    }
+
+    return lastTenDays;
+  }
+
+  isMatchingDate(healthDate: any, targetDate: Date): boolean {
+    const healthCheckDate = new Date(healthDate);
+    return (
+      healthCheckDate.getFullYear() === targetDate.getFullYear() &&
+      healthCheckDate.getMonth() === targetDate.getMonth() &&
+      healthCheckDate.getDate() === targetDate.getDate()
+    );
+  }
+  
+  hasMatchingProcess(etatProcessusMetierList: any[], processTitre: string): boolean {
+    return etatProcessusMetierList.some(
+      (etat: any) => etat.processusMetier.titre === processTitre
+    );
+  }
   ngOnInit(): void {
     this.listHealt = new Array<HealthChekPreprodProd>();
     this.listProcess= new Array<ProcessusMetier>();

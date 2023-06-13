@@ -264,12 +264,12 @@ export class RegistreHealthCheckComponent implements OnInit {
   set ListHealthCheckBw(value: Array<HealthCheckBwPerimetre>) {
     this.healthBWService.ListHealthCheckBw = value;
   }
-  get charteHealthCheckBw(): boolean {
-    return this.charteService.charteHealthCheckBw;
+  get newcharteHealthCheckBw(): boolean {
+    return this.charteService.newcharteHealthCheckBw;
   }
 
-  set charteHealthCheckBw(value: boolean) {
-    this.charteService.charteHealthCheckBw = value;
+  set newcharteHealthCheckBw(value: boolean) {
+    this.charteService.newcharteHealthCheckBw = value;
   }
   charteBW(helth: HealthCheckBwPerimetre) {
     this.AddHealthCheckBw = helth;
@@ -280,7 +280,7 @@ export class RegistreHealthCheckComponent implements OnInit {
         this.AddHealthCheckBw.healthCheckBwPerimetreDetailList = data.body;
       });
 
-    this.charteHealthCheckBw = true;
+    this.newcharteHealthCheckBw = true;
   }
   DeleteHealthCheckBW(id: number) {
     this.confirmationService.confirm({

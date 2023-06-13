@@ -19,10 +19,18 @@ private _charteChangeFr: boolean = false;
 private _charteChangeAng: boolean = false;
 private _charteHealthCheckPreprodProd: boolean = false;
 private _charteHealthCheckBw: boolean = false;
+private _newcharteHealthCheckBw: boolean = false;
 private _chartePointVersion: boolean = false;
 private _charteHealthCheckFlamingo: boolean = false;
 
   constructor() { }
+  get newcharteHealthCheckBw(): boolean {
+    return this._newcharteHealthCheckBw;
+  }
+
+  set newcharteHealthCheckBw(value: boolean) {
+    this._newcharteHealthCheckBw = value;
+  }
   get charteHealthCheckFlamingo(): boolean {
     return this._charteHealthCheckFlamingo;
   }

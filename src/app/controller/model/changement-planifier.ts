@@ -10,9 +10,9 @@ export class ChangementPlanifier {
     public impactMetier: string = String();
     public detail: string = String();
     public type: string = String();
-    public dateDebut: Date = new Date();
+    public dateDebut: Date | null= null;
     public dateAjout: Date = new Date();
-    public dateFin: Date = new Date();
+    public dateFin: Date | null= null;
     public createurChangement =new User();
     public application =new Application();
     public contenuChangementList = new Array<ContenuChangement>();

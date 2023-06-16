@@ -1,10 +1,11 @@
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import {Observable} from "rxjs";
 import { environment } from 'src/environments/environment';
 import { ChangementPlanifier } from '../model/changement-planifier';
 import { ContenuChangement } from '../model/contenu-changement';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -102,14 +103,75 @@ export class ChangementService {
       { observe: 'response', headers }
     );    
   }
-  public FindChangementByPilote(): Observable<HttpResponse<Array<ChangementPlanifier>>> {
-    const headers: HttpHeaders = this.auth.tokenHeaders();
-    return this.http.get<Array<ChangementPlanifier>>(
-      this.urlPilote + 'changementplanifier/lot/'+this.auth.User.lots,
-      { observe: 'response', headers }
-    );    
-  }
 
+  public FindChangementByPilote(page: number, pageSize: number): Observable<HttpResponse<Array<ChangementPlanifier>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    const url = this.urlPilote + 'changementplanifier/lot/' + this.auth.User.lots;
+    const params = new HttpParams()
+        .set('page', page.toString())
+        .set('pageSize', pageSize.toString());
+    return this.http.get<Array<ChangementPlanifier>>(url, { observe: 'response', headers, params });
+}
+public FindChangementByRespo(page: number, pageSize: number): Observable<HttpResponse<Array<ChangementPlanifier>>> {
+  const headers: HttpHeaders = this.auth.tokenHeaders();
+  const url = this.urlRespo + 'changementplanifier/lot/' + this.auth.User.lots;
+  const params = new HttpParams()
+      .set('page', page.toString())
+      .set('pageSize', pageSize.toString());
+  return this.http.get<Array<ChangementPlanifier>>(url, { observe: 'response', headers, params });
+}
+public SearchChange(dateDebut: Date | null, dateFin: Date | null, change: ChangementPlanifier, page: number, pageSize: number): Observable<HttpResponse<Array<ChangementPlanifier>>> {
+  const headers: HttpHeaders = this.auth.tokenHeaders();
+  const url = this.urlPilote + 'changementplanifier/searchChange';
+
+  let params = new HttpParams()
+    .set('titre', change.titre)
+    .set('statut', change.statut)
+    .set('vers', change.version)
+    .set('lot', this.auth.User.lots)
+    .set('page', page.toString())
+    .set('size', pageSize.toString());
+if(change.application){    
+  params = params.set('applicationId', change.application.id)
+
+}
+if (dateDebut) {
+  const formattedDateDebut = moment(dateDebut).format('YYYY-MM-DD');
+  params = params.set('dateDebut', formattedDateDebut);
+}
+
+if (dateFin) {
+  const formattedDateFin =moment(dateFin).format('YYYY-MM-DD');// Extract date part  
+  params = params.set('dateFin', formattedDateFin);
+}
+  return this.http.get<Array<ChangementPlanifier>>(url, { observe: 'response', headers, params });
+}
+public SearchChangeByRespo(dateDebut: Date | null, dateFin: Date | null, change: ChangementPlanifier, page: number, pageSize: number): Observable<HttpResponse<Array<ChangementPlanifier>>> {
+  const headers: HttpHeaders = this.auth.tokenHeaders();
+  const url = this.urlRespo + 'changementplanifier/searchChange';
+
+  let params = new HttpParams()
+    .set('titre', change.titre)
+    .set('statut', change.statut)
+    .set('vers', change.version)
+    .set('lot', this.auth.User.lots)
+    .set('page', page.toString())
+    .set('size', pageSize.toString());
+if(change.application){    
+  params = params.set('applicationId', change.application.id)
+
+}
+if (dateDebut) {
+  const formattedDateDebut = moment(dateDebut).format('YYYY-MM-DD');
+  params = params.set('dateDebut', formattedDateDebut);
+}
+
+if (dateFin) {
+  const formattedDateFin =moment(dateFin).format('YYYY-MM-DD');// Extract date part  
+  params = params.set('dateFin', formattedDateFin);
+}
+  return this.http.get<Array<ChangementPlanifier>>(url, { observe: 'response', headers, params });
+}
   public SaveChangement(): Observable<HttpResponse<ChangementPlanifier>> {
     this.AddChangement.createurChangement = this.auth.User;
     const headers: HttpHeaders = this.auth.tokenHeaders();
@@ -130,13 +192,6 @@ export class ChangementService {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<ContenuChangement>>(
       this.urlRespo + 'contenuchangement/changement/'+id,
-      { observe: 'response', headers }
-    );    
-  }
-  public FindChangementByRespo(): Observable<HttpResponse<Array<ChangementPlanifier>>> {
-    const headers: HttpHeaders = this.auth.tokenHeaders();
-    return this.http.get<Array<ChangementPlanifier>>(
-      this.urlRespo + 'changementplanifier/lot/'+this.auth.User.lots,
       { observe: 'response', headers }
     );    
   }

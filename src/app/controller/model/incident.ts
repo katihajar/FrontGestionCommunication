@@ -15,9 +15,9 @@ export class Incident {
     public impact: string = String();
     public causePrincipale: string = String();
     public solutionContournement: string = String();
-    public dateDebut: Date = new Date();
+    public dateDebut: Date | null=null;
     public dateAjout: Date = new Date();
-    public dateFin: Date = new Date();
+    public dateFin: Date | null=null;
     public application =new Application();
     public prochaineCommunication: Date = new Date();
     public createurIncident =new User();

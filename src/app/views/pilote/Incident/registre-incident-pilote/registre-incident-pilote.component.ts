@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {ConfirmationService, ConfirmEventType, MessageService} from 'primeng/api';
+import {ConfirmationService, ConfirmEventType, LazyLoadEvent, MessageService} from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Application } from 'src/app/controller/model/application';
 import { Incident } from 'src/app/controller/model/incident';
@@ -25,6 +25,7 @@ export class RegistreIncidentPiloteComponent implements OnInit {
   loading: boolean = true;
   statutIncident: any[] = [];
   ListApp = new Array<Application>();
+  searchApp = new Array<Application>();
   ListPiloteApp = new Array<PiloteApplication>();
   showPopUpIncd: boolean = false;
   application: Application = new Application();
@@ -36,11 +37,21 @@ export class RegistreIncidentPiloteComponent implements OnInit {
   optionType:boolean=false;
   selectLang:any='';
   ListType:any[]=[];
+  pageSize: number = 10;
+  page: number = 0;
+  first: number = 0;
+  totalRecords: number = 0;
+  currentPageReportTemplate: string = '';
+  filterIncident:Incident=new Incident();
+  statutIncidentFiltre: any[] = [];
+  searchActive:boolean=false;
   constructor(private charteService:CharteService,private incidentService: IncidentService,private confirmationService: ConfirmationService,
      private router: Router, private appService: ApplicationService, private messageService:MessageService,private userService: AuthService) { 
      }
-  clear(table: Table) {
-    table.clear();
+  clear() {
+    this.searchActive = false;
+    this.filterIncident= new Incident();
+    this.loadIncidentsLazy({ first: 0, rows: this.pageSize });
   }
   get User(): User {
     return this.userService.User;
@@ -204,7 +215,35 @@ Edite(inc:Incident){
   })
   this.showPopUpIncd = true;
 }
+loadIncidentsLazy(event: LazyLoadEvent): void {
+  this.loading = true;
+  this.incidentService.FindIncidentByPilote(this.page, this.pageSize).subscribe((data) => {
+    //@ts-ignore
+    this.ListIncidentOfPilote = data.body.content;
+    //@ts-ignore
+    this.totalRecords = data.body.totalElements;
+    this.currentPageReportTemplate = `Showing ${this.first + 1} to ${this.first + this.pageSize} of ${this.totalRecords} entries`;
+    this.loading = false;
+  });
+}
+lazyLoadHandler(event: LazyLoadEvent): void {
 
+  if( this.searchActive==true){
+    if (event.first !== this.first || event.rows !== this.pageSize) {
+      this.first = event.first ?? 0;
+      this.pageSize = event.rows ?? 10;
+      this.page = Math.floor(this.first / this.pageSize);
+    this.searchIncident();
+    }
+  }else{
+  if (event.first !== this.first || event.rows !== this.pageSize) {
+    this.first = event.first ?? 0;
+    this.pageSize = event.rows ?? 10;
+    this.page = Math.floor(this.first / this.pageSize);
+    // Only trigger the loadIncidentsLazy function if the page or pageSize has changed
+    this.loadIncidentsLazy(event);
+  }}
+}
 SelectLanguage(){
   if(this.selectLang == "Français"){
     this.popUpLangue = false;
@@ -235,16 +274,17 @@ SelectLanguage(){
     }
   }
 }
-  FindIncident() {
-    this.incidentService.FindIncidentByPilote().subscribe((data) => {
-      // @ts-ignore
-      this.ListIncidentOfPilote = data.body;
-      this.loading = false;
-    })
-  }
+  // FindIncident() {
+  //   this.incidentService.FindIncidentByPilote().subscribe((data) => {
+  //     // @ts-ignore
+  //     this.ListIncidentOfPilote = data.body;
+  //     this.loading = false;
+  //   })
+  // }
   ngOnInit(): void {
-    this.FindIncident();
+    this.loadIncidentsLazy({ first: 0, rows: this.pageSize });
     this.FindApp();
+    this.getAppforSearch();
     this.AddIncident = new Incident();
     this.ListType= [
       { name: 'PREPRODUCTION' },
@@ -260,7 +300,11 @@ SelectLanguage(){
       { name: 'Français-Anglais' },
       { name: 'Anglais' }
     ];
-
+    this.statutIncidentFiltre = [
+      { name: 'Ouvert' },
+      { name: 'Résolu avec Suivi' },
+      { name: 'Clos' },
+    ];
   }
   
   changeStatut(){
@@ -279,6 +323,27 @@ SelectLanguage(){
       ];
     }
   }
+searchIncident(){
+  this.loading = true;
+  console.log(this.filterIncident.dateDebut);
+  if(this.filterIncident.application.id==null){
+    this.filterIncident.application.id =0;
+  }
+  if(!this.filterIncident.description && !this.filterIncident.dateDebut && !this.filterIncident.dateFin && !this.filterIncident.titreIncident && this.filterIncident.application.id==0 && !this.filterIncident.statut  ){
+    this.clear();
+  }else{
+  this.incidentService.SearchInci(this.filterIncident.dateDebut,this.filterIncident.dateFin,this.filterIncident,this.page, this.pageSize).subscribe((data)=>{
+    console.log(data);
+    this.searchActive=true;
+    //@ts-ignore
+    this.ListIncidentOfPilote = data.body.content;
+    //@ts-ignore
+    this.totalRecords = data.body.totalElements;
+    this.currentPageReportTemplate = `Showing ${this.first + 1} to ${this.first + this.pageSize} of ${this.totalRecords} entries`;
+    this.loading = false;
+
+  })}
+}
   PopUp() {
     this.AddIncident= new Incident();
     this.AddIncidentAng= new Incident();
@@ -381,9 +446,21 @@ SelectLanguage(){
       }
     })
   }
-  onDialogHideLang(){
-    this.FindIncident();
+  getAppforSearch(){
+    this.appService.FindApplicationBylotforPilote().subscribe((data) => {
+      let app = new Array<Application>;
+      // @ts-ignore
+       app = data.body;
+      for(let i= 0; i<app.length; i++){
+        if(app[i].nomApplication != 'Health Check Bw Perimetre' && app[i].nomApplication != 'health check ProdPredprod'){
+          this.searchApp.push(app[i]);
+        }
+      }
+  })
   }
+  onDialogHideLang(){
+    this.loadIncidentsLazy({ first: 0, rows: this.pageSize });
+    }
   DeleteIncident(id:number){
     this.confirmationService.confirm({
       message: 'Êtes-vous sûr(e) de vouloir continuer?',
@@ -391,8 +468,7 @@ SelectLanguage(){
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.incidentService.DeleteIncident(id).subscribe((data) => {
-          this.FindIncident();
-          // @ts-ignore
+          this.loadIncidentsLazy({ first: 0, rows: this.pageSize });          // @ts-ignore
           this.messageService.add({severity:'success', summary: 'Success', detail: 'Incident supprimer avec succès'});
         },error=>{
           this.messageService.add({severity:'error', summary: 'Error', detail: 'Erreur lors de la suppression'});

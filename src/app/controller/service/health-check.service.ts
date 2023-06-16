@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -9,6 +9,8 @@ import { HealthChekPreprodProdDetail } from '../model/health-chek-preprod-prod-d
 import { ProcessusMetier } from '../model/processus-metier';
 import { AuthService } from './auth.service';
 import { StatutApplication } from '../model/statut-application';
+import * as moment from 'moment';
+import { Incident } from '../model/incident';
 
 @Injectable({
   providedIn: 'root'
@@ -85,13 +87,15 @@ export class HealthCheckService {
     this._ListHealthCheck = value;
   }
 
-  public FindHealthCheckByPilote(): Observable<HttpResponse<Array<HealthChekPreprodProd>>> {
+  public FindHealthCheckByPilote(page: number, pageSize: number): Observable<HttpResponse<Array<HealthChekPreprodProd>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
-    return this.http.get<Array<HealthChekPreprodProd>>(
-      this.urlPilote + 'healthcheck/lot/'+this.auth.User.lots,
-      { observe: 'response', headers }
-    );    
+    const url = this.urlPilote + 'healthcheck/lot/' + this.auth.User.lots;
+    const params = new HttpParams()
+        .set('page', page.toString())
+        .set('pageSize', pageSize.toString());
+    return this.http.get<Array<HealthChekPreprodProd>>(url, { observe: 'response', headers, params }); 
   }
+
 
   public SaveHealthCheck(): Observable<HttpResponse<HealthChekPreprodProd>> {
     this.AddHealthCheck.createurHealthChekPreprodProd = this.auth.User;
@@ -171,4 +175,24 @@ export class HealthCheckService {
       { observe: 'response', headers }
     );    
   }
+  public SearchHealth(dateAjout: Date | null, health: HealthChekPreprodProd, page: number, pageSize: number): Observable<HttpResponse<Array<HealthChekPreprodProd>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    const url = this.urlPilote + 'healthcheck/searchHealth';
+  
+    let params = new HttpParams()
+      .set('titre', health.titre)
+      .set('type', health.type)
+      .set('lot', this.auth.User.lots)
+      .set('page', page.toString())
+      .set('size', pageSize.toString());
+
+    
+  if (dateAjout) {
+    const formattedDateDebut = moment(dateAjout).format('YYYY-MM-DD');
+    params = params.set('dateAjout', formattedDateDebut);
+  }
+  
+    return this.http.get<Array<HealthChekPreprodProd>>(url, { observe: 'response', headers, params });
+  }
+  
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as FileSaver from 'file-saver';
 import * as moment from 'moment';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Application } from 'src/app/controller/model/application';
 import { ChangementPlanifier } from 'src/app/controller/model/changement-planifier';
@@ -12,6 +12,7 @@ import { ApplicationRespoService } from 'src/app/controller/service/application-
 import { ChangementService } from 'src/app/controller/service/changement.service';
 import { CharteService } from 'src/app/controller/service/charte.service';
 const translate = require('translate');
+
 
 @Component({
   selector: 'app-resgistre-changement-respo',
@@ -33,12 +34,21 @@ export class ResgistreChangementRespoComponent implements OnInit {
   ListPiloteApp = new Array<PiloteApplication>();
   ContenuAng = new ContenuChangement();
   ListChangementOfRespo = new Array<ChangementPlanifier>();
+  filterChange:ChangementPlanifier=new ChangementPlanifier();
+  searchActive:boolean=false;
+  pageSize: number = 10;
+  page: number = 0;
+  first: number = 0;
+  totalRecords: number = 0;
+  currentPageReportTemplate: string = '';
+  searchApp = new Array<Application>();
   constructor(private router: Router,private changeService: ChangementService, private charte: CharteService,
     private confirmationService: ConfirmationService,private messageService:MessageService,private appService: ApplicationRespoService) { }
 
   ngOnInit(): void {
-    this.FindChange();
+    this.loadChangeLazy({ first: 0, rows: this.pageSize });
     this.FindApp();
+    this.getAppforSearch();
     this.AddChangement = new ChangementPlanifier();
     this.statutChange = [
       { name: 'Planifié' },
@@ -54,8 +64,72 @@ export class ResgistreChangementRespoComponent implements OnInit {
       { name: 'Anglais' }
     ]
   }
-  clear(table: Table) {
-    table.clear();
+  clear() {
+    this.searchActive=false;
+    this.filterChange = new ChangementPlanifier();
+    this.loadChangeLazy({ first: 0, rows: this.pageSize });
+  }
+  getAppforSearch(){
+    this.appService.FindApplicationBylotforRespo().subscribe((data) => {
+      let app = new Array<Application>;
+      // @ts-ignore
+       app = data.body;
+      for(let i= 0; i<app.length; i++){
+        if(app[i].nomApplication != 'Health Check Bw Perimetre' && app[i].nomApplication != 'health check ProdPredprod'){
+          this.searchApp.push(app[i]);
+        }
+      }
+  })
+  }
+  loadChangeLazy(event: LazyLoadEvent): void {
+    this.loading = true;
+    this.changeService.FindChangementByRespo(this.page, this.pageSize).subscribe((data) => {      
+      //@ts-ignore
+      this.ListChangementOfRespo = data.body.content;
+      //@ts-ignore
+      this.totalRecords = data.body.totalElements;
+      console.log( this.ListChangementOfRespo.length);
+      
+      this.currentPageReportTemplate = `Showing ${this.first + 1} to ${this.first + this.pageSize} of ${this.totalRecords} entries`;
+      this.loading = false;
+    });
+  }
+  lazyLoadHandler(event: LazyLoadEvent): void {
+    if (event.first !== this.first || event.rows !== this.pageSize) {
+        this.first = event.first ?? 0;
+        this.pageSize = event.rows ?? 10;
+        this.page = Math.floor(this.first / this.pageSize);
+    if( this.searchActive==true){
+          this.searchChange();
+
+    }else{
+      // Only trigger the loadIncidentsLazy function if the page or pageSize has changed
+      this.loadChangeLazy(event);
+    }
+  }
+
+  }
+
+  searchChange(){
+    this.loading = true;
+    console.log(this.filterChange.dateDebut);
+    if(!this.filterChange.dateDebut && !this.filterChange.dateFin && !this.filterChange.titre && !this.filterChange.application  && !this.filterChange.statut && !this.filterChange.version  ){
+      console.log(this.filterChange.dateDebut);
+      
+      this.clear();
+    }else{
+    this.changeService.SearchChangeByRespo(this.filterChange.dateDebut,this.filterChange.dateFin,this.filterChange,this.page, this.pageSize).subscribe((data)=>{
+      this.searchActive=true;
+      //@ts-ignore
+      this.ListChangementOfRespo = data.body.content;
+      //@ts-ignore
+      this.totalRecords = data.body.totalElements;
+      console.log( this.ListChangementOfRespo.length);
+      console.log( data.body);
+      this.currentPageReportTemplate = `Showing ${this.first + 1} to ${this.first + this.pageSize} of ${this.totalRecords} entries`;
+      this.loading = false;
+  
+    })}
   }
   exportExcel() {
     import("xlsx").then(xlsx => {
@@ -244,13 +318,6 @@ set charteChangeAngFr(value: boolean) {
     this.AddChangementAng.contenuChangementList=this.ListContenuAng;
   }
 
-  FindChange() {
-    this.changeService.FindChangementByRespo().subscribe((data) => {
-      // @ts-ignore
-      this.ListChangementOfRespo = data.body;
-      this.loading = false;
-    })
-  }
 
   FindApp() {
     this.appService.FindApplicationByRespo().subscribe((data) => {
@@ -259,6 +326,6 @@ set charteChangeAngFr(value: boolean) {
     })
   }
   onDialogHideLang(){
-    this.FindChange();
+    this.loadChangeLazy({ first: 0, rows: this.pageSize });
   }
 }

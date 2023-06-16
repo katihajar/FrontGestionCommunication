@@ -50,7 +50,13 @@ export class ApplicationRespoService {
       { observe: 'response', headers }
     );    
   }
-  
+  public FindApplicationByPilote(): Observable<HttpResponse<Array<Application>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<Application>>(
+      this.urlRespo + 'application/lot/'+this.auth.User.lots,
+      { observe: 'response', headers }
+    );    
+  }
 
   public FindApplicationByRespo(): Observable<HttpResponse<Array<Application>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
@@ -71,6 +77,13 @@ export class ApplicationRespoService {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.put<DestinataireCommunication>(
       this.urlRespo + 'destinataire/retirer',des,
+      { observe: 'response', headers }
+    );    
+  }
+  public FindApplicationBylotforRespo(): Observable<HttpResponse<Array<Application>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<Application>>(
+      this.urlRespo + 'application/lot/'+this.auth.User.lots,
       { observe: 'response', headers }
     );    
   }

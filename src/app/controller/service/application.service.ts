@@ -167,6 +167,13 @@ export class ApplicationService {
       { observe: 'response', headers }
     );    
   }
+  public FindApplicationBylotforPilote(): Observable<HttpResponse<Array<Application>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<Application>>(
+      this.urlPilote + 'application/lot/'+this.auth.User.lots,
+      { observe: 'response', headers }
+    );    
+  }
   public ValiderDest(des: DestinataireCommunication): Observable<HttpResponse<DestinataireCommunication>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.put<DestinataireCommunication>(

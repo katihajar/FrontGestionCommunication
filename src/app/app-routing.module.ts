@@ -27,10 +27,8 @@ import { ResgistreOperationRespoComponent } from './views/responsable/resgistre-
 import { ResgistreChangementRespoComponent } from './views/responsable/resgistre-changement-respo/resgistre-changement-respo.component';
 import { RegistreHealthCheckComponent } from './views/pilote/healthCheckPreprodProd/registre-health-check/registre-health-check.component';
 import { AjoutHealthCheckComponent } from './views/pilote/healthCheckPreprodProd/ajout-health-check/ajout-health-check.component';
-import { RegistrehealthCheckBwPerimetreComponent } from './views/pilote/healthCheckBwPerimetre/registrehealth-check-bw-perimetre/registrehealth-check-bw-perimetre.component';
 import { AjoutHealthCheckBwPerimetreComponent } from './views/pilote/healthCheckBwPerimetre/ajout-health-check-bw-perimetre/ajout-health-check-bw-perimetre.component';
 import { RegistrHealthCheckProdRespoComponent } from './views/responsable/registr-health-check-prod-respo/registr-health-check-prod-respo.component';
-import { RegistrHealthBwPerimetreRespoComponent } from './views/responsable/registr-health-bw-perimetre-respo/registr-health-bw-perimetre-respo.component';
 import { RegistrePointVersionComponent } from './views/pilote/pointVersion/registre-point-version/registre-point-version.component';
 import { AjoutPointVersionComponent } from './views/pilote/pointVersion/ajout-point-version/ajout-point-version.component';
 import { RegistrePointVersionRespoComponent } from './views/responsable/registre-point-version-respo/registre-point-version-respo.component';

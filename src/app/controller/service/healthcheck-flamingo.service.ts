@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
@@ -8,6 +8,7 @@ import { FluxEAI } from '../model/flux-eai';
 import { FluxSalesOrder } from '../model/flux-sales-order';
 import { FluxSapEurope } from '../model/flux-sap-europe';
 import { FluxSapHarmonie } from '../model/flux-sap-harmonie';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -49,13 +50,14 @@ export class HealthcheckFlamingoService {
       { observe: 'response', headers }
     );    
   }
-  public FindHealthCheckByPilote(): Observable<HttpResponse<Array<HealthCheckFlamingo>>> {
+
+  public FindHealthCheckByPilote(page: number, pageSize: number): Observable<HttpResponse<Array<HealthCheckFlamingo>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
-    console.log(this.auth.User.lots);
-    return this.http.get<Array<HealthCheckFlamingo>>(
-      this.urlPilote + 'healthcheck/flamingo/lot/'+this.auth.User.lots,
-      { observe: 'response', headers }
-    );    
+    const url = this.urlPilote + 'healthcheck/flamingo/lot/' + this.auth.User.lots;
+    const params = new HttpParams()
+        .set('page', page.toString())
+        .set('pageSize', pageSize.toString());
+    return this.http.get<Array<HealthCheckFlamingo>>(url, { observe: 'response', headers, params }); 
   }
   public FindFluxEAIByHealthCheck(id:number): Observable<HttpResponse<Array<FluxEAI>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
@@ -91,5 +93,23 @@ export class HealthcheckFlamingoService {
       this.urlPilote + 'healthcheck/flamingo/delete/'+id,
       { observe: 'response', headers }
     );    
+  }
+  public SearchHealth(dateFlux: Date | null, health: HealthCheckFlamingo, page: number, pageSize: number): Observable<HttpResponse<Array<HealthCheckFlamingo>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    const url = this.urlPilote + 'healthcheck/flamingo/searchHealth';
+  
+    let params = new HttpParams()
+      .set('titre', health.titre)
+      .set('lot', this.auth.User.lots)
+      .set('page', page.toString())
+      .set('size', pageSize.toString());
+
+    
+  if (dateFlux) {
+    const formattedDateDebut = moment(dateFlux).format('YYYY-MM-DD');
+    params = params.set('dateFlux', formattedDateDebut);
+  }
+  
+    return this.http.get<Array<HealthCheckFlamingo>>(url, { observe: 'response', headers, params });
   }
 }

@@ -6,6 +6,8 @@ import { PlanAction } from '../model/plan-action';
 import { AuthService } from './auth.service';
 import {Observable} from "rxjs";
 import { MsalService } from '@azure/msal-angular';
+import { Application } from '../model/application';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -83,14 +85,21 @@ export class IncidentService {
       { observe: 'response', headers }
     );    
   }
-  public FindIncidentByPilote(): Observable<HttpResponse<Array<Incident>>> {
+  // public FindIncidentByPilote(): Observable<HttpResponse<Array<Incident>>> {
+  //   const headers: HttpHeaders = this.auth.tokenHeaders();
+  //   return this.http.get<Array<Incident>>(
+  //     this.urlPilote + 'incident/lot/'+this.auth.User.lots,
+  //     { observe: 'response', headers }
+  //   );    
+  // }
+  public FindIncidentByPilote(page: number, pageSize: number): Observable<HttpResponse<Array<Incident>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
-    return this.http.get<Array<Incident>>(
-      this.urlPilote + 'incident/lot/'+this.auth.User.lots,
-      { observe: 'response', headers }
-    );    
-  }
-
+    const url = this.urlPilote + 'incident/lot/' + this.auth.User.lots;
+    const params = new HttpParams()
+        .set('page', page.toString())
+        .set('pageSize', pageSize.toString());
+    return this.http.get<Array<Incident>>(url, { observe: 'response', headers, params });
+}
   public SaveIncident(): Observable<HttpResponse<Incident>> {
     this.AddIncident.createurIncident = this.auth.User;
     const headers: HttpHeaders = this.auth.tokenHeaders();
@@ -112,16 +121,40 @@ export class IncidentService {
     return this.http.delete<number>(
       this.urlPilote + 'incident/delete/'+id,
       { observe: 'response', headers }
-    );    
+    );  
+
   }
 
+  public SearchInci(dateDebut: Date | null, dateFin: Date | null, inc: Incident, page: number, pageSize: number): Observable<HttpResponse<Array<Incident>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    const url = this.urlPilote + 'incident/searchIncident';
+  
+    let params = new HttpParams()
+      .set('titre', inc.titreIncident)
+      .set('statut', inc.statut)
+      .set('desc', inc.description)
+      .set('lot', this.auth.User.lots)
+      .set('page', page.toString())
+      .set('size', pageSize.toString());
+  if(inc.application){    
+    params = params.set('applicationId', inc.application.id)
+
+  }
+  if (dateDebut) {
+    const formattedDateDebut = moment(dateDebut).format('YYYY-MM-DD');
+    params = params.set('dateDebut', formattedDateDebut);
+  }
+  
+  if (dateFin) {
+    const formattedDateFin =moment(dateFin).format('YYYY-MM-DD');// Extract date part  
+    params = params.set('dateFin', formattedDateFin);
+  }
+    return this.http.get<Array<Incident>>(url, { observe: 'response', headers, params });
+  }
   
 
   
 
-
-
- 
 
 
 

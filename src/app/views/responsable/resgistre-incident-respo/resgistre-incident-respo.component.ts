@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import * as FileSaver from 'file-saver';
 import * as moment from 'moment';
-import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api';
+import { ConfirmationService, MessageService, ConfirmEventType, LazyLoadEvent } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Application } from 'src/app/controller/model/application';
 import { Incident } from 'src/app/controller/model/incident';
@@ -19,7 +19,8 @@ const translate = require('translate');
   styleUrls: ['./resgistre-incident-respo.component.scss']
 })
 export class ResgistreIncidentRespoComponent implements OnInit {
-
+  @ViewChild('dt1', { static: true })
+  dt1!: Table;
   ListIncidentOfRespo = new Array<Incident>();
   ActionAng = new PlanAction();
   loading: boolean = true;
@@ -34,11 +35,21 @@ export class ResgistreIncidentRespoComponent implements OnInit {
   viewCharte:boolean = false;
   popUpLangue:boolean=false;
   selectLang:any='';
+  pageSize: number = 10;
+  first: number = 0;
+  totalRecords: number = 0;
+  currentPageReportTemplate: string = '';
+  sortField: string = String();
+  sortOrder: number = 0;
+  page: number = 0;
+  searchActive:boolean=false;
+  filterIncident:Incident= new Incident();
   constructor(private charteService:CharteService,private incidentServiceReso: IncidentRespoService,private incidentService: IncidentService,private confirmationService: ConfirmationService,
      private router: Router, private appService: ApplicationRespoService, private messageService:MessageService) { }
-  clear(table: Table) {
-    table.clear();
-  }
+     clear() {
+      this.searchActive= false;
+      this.loadIncidentsLazy({ first: 0, rows: this.pageSize });
+    }
 
   exportExcel() {
     import("xlsx").then(xlsx => {
@@ -193,15 +204,56 @@ SelectLanguage(){
     }
   }
 }
-  FindIncident() {
-    this.incidentServiceReso.FindIncidentByRespo().subscribe((data) => {
-      // @ts-ignore
-      this.ListIncidentOfRespo = data.body;
-      this.loading = false;
-    })
-  }
+searchIncident(){  
+  this.loading = true;
+  console.log(this.filterIncident.statut);
+  if(!this.filterIncident.dateDebut && !this.filterIncident.dateFin && !this.filterIncident.titreIncident && !this.filterIncident.application && (!this.filterIncident.statut || this.filterIncident.statut==null) ){
+    console.log('here');
+    this.clear();
+  }else{
+  this.incidentServiceReso.SearchInci(this.filterIncident.dateDebut,this.filterIncident.dateFin,this.filterIncident,this.page, this.pageSize).subscribe((data)=>{
+    console.log(data);
+    this.searchActive=true;
+    //@ts-ignore
+    this.ListIncidentOfRespo = data.body.content;
+    //@ts-ignore
+    this.totalRecords = data.body.totalElements;
+    this.currentPageReportTemplate = `Showing ${this.first + 1} to ${this.first + this.pageSize} of ${this.totalRecords} entries`;
+    this.loading = false;
+
+  })}
+}
+loadIncidentsLazy(event: LazyLoadEvent): void {
+  this.loading = true;
+
+  this.incidentServiceReso.FindIncidentByRespo(this.page, this.pageSize).subscribe((data) => {
+    //@ts-ignore
+    this.ListIncidentOfRespo = data.body.content;
+     //@ts-ignore
+     this.totalRecords = data.body.totalElements;
+    this.currentPageReportTemplate = `Showing ${this.first + 1} to ${this.first + this.pageSize} of ${this.totalRecords} entries`;
+    this.loading = false;
+  });
+}
+lazyLoadHandler(event: LazyLoadEvent): void {
+
+  if( this.searchActive==true){
+    if (event.first !== this.first || event.rows !== this.pageSize) {
+      this.first = event.first ?? 0;
+      this.pageSize = event.rows ?? 10;
+      this.page = Math.floor(this.first / this.pageSize);
+    this.searchIncident();
+    }
+  }else{
+  if (event.first !== this.first || event.rows !== this.pageSize) {
+    this.first = event.first ?? 0;
+    this.pageSize = event.rows ?? 10;
+    this.page = Math.floor(this.first / this.pageSize);
+    this.loadIncidentsLazy(event);
+  }}
+}
   ngOnInit(): void {
-    this.FindIncident();
+    this.loadIncidentsLazy({ first: 0, rows: this.pageSize });
     this.FindApp();
     this.AddIncident = new Incident();
     
@@ -298,12 +350,20 @@ SelectLanguage(){
 
   FindApp() {
     this.appService.FindApplicationByRespo().subscribe((data) => {
+      let app = new Array<Application>;
       // @ts-ignore
-      this.ListApp = data.body;
+      app = data.body;
+      for(let i= 0; i<app.length; i++){
+        if(app[i].nomApplication != 'Health Check Bw Perimetre' && app[i].nomApplication != 'health check ProdPredprod'){
+          this.ListApp.push(app[i]);
+        }
+      }
     })
   }
+  
+ 
   onDialogHideLang(){
-    this.FindIncident();
+    this.loadIncidentsLazy({ first: 0, rows: this.pageSize });
   }
 
 

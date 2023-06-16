@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Application } from 'src/app/controller/model/application';
 import { HealthCheckBwPerimetre } from 'src/app/controller/model/health-check-bw-perimetre';
@@ -25,32 +25,68 @@ export class RegistrHealthCheckProdRespoComponent implements OnInit {
   ListHealthCheck : Array<HealthChekPreprodProd>=new Array<HealthChekPreprodProd>();
   ListHealthCheckFlamingo: Array<HealthCheckFlamingo>= new  Array<HealthCheckFlamingo>();
   loading: boolean = true;
-  loading2: boolean = true;
+  loadingBW: boolean = true;
   loadingFlamingo: boolean = true;
   ListType: any[] = [];
   popUpAjout:boolean = false;
+    //// monetics ///
+    filterHealthMonetics:HealthChekPreprodProd=new HealthChekPreprodProd();
+    searchActiveHealthMonetics:boolean=false;
+    pageSizeHealthMonetics: number = 10;
+    pageHealthMonetics: number = 0;
+    firstHealthMonetics: number = 0;
+    totalRecordsHealthMonetics: number = 0;
+    currentPageReportTemplateHealthMonetics: string = '';
+    public dateHealthMonetics: Date |null = null;
+     //// bi ///
+     filterHealthBI:HealthCheckBwPerimetre=new HealthCheckBwPerimetre();
+     searchActiveHealthBI:boolean=false;
+     pageSizeHealthBI: number = 10;
+     pageHealthBI: number = 0;
+     firstHealthBI: number = 0;
+     totalRecordsHealthBI: number = 0;
+     currentPageReportTemplateHealthBI: string = '';
+     public dateHealthBI: Date |null = null;
+      //// suplyFlamingo ///
+    filterHealthSuplyFlamingo:HealthCheckFlamingo=new HealthCheckFlamingo();
+    searchActiveHealthSuplyFlamingo:boolean=false;
+    pageSizeHealthSuplyFlamingo: number = 10;
+    pageHealthSuplyFlamingo: number = 0;
+    firstHealthSuplyFlamingo: number = 0;
+    totalRecordsHealthSuplyFlamingo: number = 0;
+    currentPageReportTemplateHealthSuplyFlamingo: string = '';
+    public dateHealthSuplyFlamingo: Date |null = null;
   constructor(private healthBW: HealthCheckBwPerimetreService,private healthBWService: HealthCheckBwPerimetreRespoService,private healthService: HealthCheckRespoService,private health2 : HealthCheckService,private charteService:CharteService,private router: Router,
     private healthFlamingoPiloteService: HealthcheckFlamingoService,private healthFlamingoService: HealthcheckFlamingoRespoService,private confirmationService: ConfirmationService,private messageService:MessageService) { }
-    clear(table: Table) {
-      table.clear();
+    clearBI() {
+      this.searchActiveHealthBI=false;
+      this.filterHealthBI = new HealthCheckBwPerimetre();
+      this.dateHealthBI =null;
+      this.loadHealthBILazy({ first: 0, rows: this.pageSizeHealthBI });
+    }
+    clearMonetics() {
+      this.searchActiveHealthMonetics=false;
+      this.filterHealthMonetics = new HealthChekPreprodProd();
+      this.dateHealthMonetics =null;
+      this.loadHealthMoneticsLazy({ first: 0, rows: this.pageSizeHealthMonetics });
+    }
+    clearSuplyFlamingo() {
+      this.searchActiveHealthSuplyFlamingo=false;
+      this.filterHealthSuplyFlamingo = new HealthCheckFlamingo();
+      this.dateHealthSuplyFlamingo =null;
+      this.loadHealthSuplyFlamingoLazy({ first: 0, rows: this.pageSizeHealthSuplyFlamingo });
     }
   
   ngOnInit(): void {
     this.AddHealthCheckBw = new HealthCheckBwPerimetre();
-    this.FindHealthBW();
+    this.loadHealthBILazy({ first: 0, rows: this.pageSizeHealthBI });
     this.AddHealthCheck = new HealthChekPreprodProd();
-    this.FindHealth();
+    this.loadHealthMoneticsLazy({ first: 0, rows: this.pageSizeHealthMonetics });
     this.AddHealthCheckFlamingo = new HealthCheckFlamingo();
-    this.FindHealthFlamingo();
+    this.loadHealthSuplyFlamingoLazy({ first: 0, rows: this.pageSizeHealthSuplyFlamingo });
+    this.ListType = [{ name: 'PREPRODUCTION' }, { name: 'PRODUCTION' }];
   }
 
-  FindHealth(){
-    this.healthService.FindHealthCheck().subscribe((data) => {
-      // @ts-ignore
-      this.ListHealthCheck = data.body;
-      this.loading = false;
-    })
-  }
 
   get AddHealthCheck(): HealthChekPreprodProd{
     return this.health2.AddHealthCheck;
@@ -85,14 +121,53 @@ export class RegistrHealthCheckProdRespoComponent implements OnInit {
     });
     this.charteHealthCheckPreprodProd = true;
   }
-  FindHealthBW(){
-    this.healthBWService.FindHealthCheckBw().subscribe((data) => {
-      // @ts-ignore
-      this.ListHealthCheckBw = data.body;
+  loadHealthMoneticsLazy(event: LazyLoadEvent): void {
+    this.loading = true;
+    this.healthService.FindHealthCheckByRespo(this.pageHealthMonetics, this.pageSizeHealthMonetics).subscribe((data) => {      
+      //@ts-ignore
+      this.ListHealthCheck = data.body.content;
+      //@ts-ignore
+      this.totalRecordsHealthMonetics = data.body.totalElements;
+      console.log( this.ListHealthCheck.length);
+      
+      this.currentPageReportTemplateHealthMonetics = `Showing ${this.firstHealthMonetics + 1} to ${this.firstHealthMonetics + this.pageSizeHealthMonetics} of ${this.totalRecordsHealthMonetics} entries`;
       this.loading = false;
-    })
+    });
+  }
+  lazyLoadHandlerHealthMonetics(event: LazyLoadEvent): void {
+    if (event.first !== this.firstHealthMonetics || event.rows !== this.pageSizeHealthMonetics) {
+        this.firstHealthMonetics = event.first ?? 0;
+        this.pageSizeHealthMonetics = event.rows ?? 10;
+        this.pageHealthMonetics = Math.floor(this.firstHealthMonetics / this.pageSizeHealthMonetics);
+    if( this.searchActiveHealthMonetics==true){
+          this.searchHealthMonetics();
+
+    }else{
+      this.loadHealthMoneticsLazy(event);
+    }
   }
 
+  }
+
+  searchHealthMonetics(){
+    this.loading = true;
+    if(!this.dateHealthMonetics && !this.filterHealthMonetics.titre && !this.filterHealthMonetics.type){      
+      this.clearMonetics();
+    }else{
+    this.healthService.SearchHealth(this.dateHealthMonetics,this.filterHealthMonetics,this.pageHealthMonetics, this.pageSizeHealthMonetics).subscribe((data)=>{
+      this.searchActiveHealthMonetics=true;
+      //@ts-ignore
+      this.ListHealthCheck = data.body.content;
+      //@ts-ignore
+      this.totalRecordsHealthMonetics = data.body.totalElements;
+      console.log( this.ListHealthCheck.length);
+      console.log( data.body);
+      this.currentPageReportTemplateHealthMonetics = `Showing ${this.firstHealthMonetics + 1} to ${this.firstHealthMonetics + this.pageSizeHealthMonetics} of ${this.totalRecordsHealthMonetics} entries`;
+      this.loading = false;
+  
+    })}
+  }
+///////////////BI/////////////
   get AddHealthCheckBw(): HealthCheckBwPerimetre{
     return this.healthBW.AddHealthCheckBw;
   }
@@ -118,6 +193,50 @@ export class RegistrHealthCheckProdRespoComponent implements OnInit {
 
     this.charteHealthCheckBw = true;
   }
+  loadHealthBILazy(event: LazyLoadEvent): void {
+    this.loadingBW = true;
+    this.healthBWService.FindHealthCheckBwByRespo(this.pageHealthBI, this.pageSizeHealthBI).subscribe((data) => {      
+      //@ts-ignore
+      this.ListHealthCheckBw = data.body.content;
+      //@ts-ignore
+      this.totalRecordsHealthBI = data.body.totalElements;
+      console.log( this.ListHealthCheck.length);
+      
+      this.currentPageReportTemplateHealthBI = `Showing ${this.firstHealthBI + 1} to ${this.firstHealthBI + this.pageSizeHealthBI} of ${this.totalRecordsHealthBI} entries`;
+      this.loadingBW = false;
+    });
+  }
+  lazyLoadHandlerHealthBI(event: LazyLoadEvent): void {
+    if (event.first !== this.firstHealthBI || event.rows !== this.pageSizeHealthBI) {
+        this.firstHealthBI = event.first ?? 0;
+        this.pageSizeHealthBI = event.rows ?? 10;
+        this.pageHealthBI = Math.floor(this.firstHealthBI / this.pageSizeHealthBI);
+    if( this.searchActiveHealthBI==true){
+          this.searchHealthBI();
+
+    }else{
+      this.loadHealthBILazy(event);
+    }
+  }
+
+  }
+
+  searchHealthBI(){
+    this.loadingBW = true;
+    if(!this.dateHealthBI && !this.filterHealthBI.titre){      
+      this.clearBI();
+    }else{
+    this.healthBWService.SearchHealth(this.dateHealthBI,this.filterHealthBI,this.pageHealthBI, this.pageSizeHealthBI).subscribe((data)=>{
+      this.searchActiveHealthBI=true;
+      //@ts-ignore
+      this.ListHealthCheckBw = data.body.content;
+      //@ts-ignore
+      this.totalRecordsHealthBI = data.body.totalElements;
+      this.currentPageReportTemplateHealthBI = `Showing ${this.firstHealthBI + 1} to ${this.firstHealthBI + this.pageSizeHealthBI} of ${this.totalRecordsHealthBI} entries`;
+      this.loadingBW = false;
+  
+    })}
+  }
   /////Flamingo
 
   get AddHealthCheckFlamingo(): HealthCheckFlamingo {
@@ -126,15 +245,6 @@ export class RegistrHealthCheckProdRespoComponent implements OnInit {
 
   set AddHealthCheckFlamingo(value: HealthCheckFlamingo) {
     this.healthFlamingoPiloteService.AddHealthCheck = value;
-  }
-  FindHealthFlamingo() {
-    this.healthFlamingoService.FindHealthCheckByRespo().subscribe((data) => {
-      // @ts-ignore
-      this.ListHealthCheckFlamingo = data.body;
-      console.log(data.body);
-
-      this.loadingFlamingo = false;
-    });
   }
 
   charteFlamingo(helth: HealthCheckFlamingo) {
@@ -166,6 +276,50 @@ export class RegistrHealthCheckProdRespoComponent implements OnInit {
 
     this.charteHealthCheckFlamingo = true;
   } 
+  loadHealthSuplyFlamingoLazy(event: LazyLoadEvent): void {
+    this.loadingFlamingo = true;
+    this.healthFlamingoService.FindHealthCheckByRespo(this.pageHealthSuplyFlamingo, this.pageSizeHealthSuplyFlamingo).subscribe((data) => {      
+      //@ts-ignore
+      this.ListHealthCheckFlamingo = data.body.content;
+      //@ts-ignore
+      this.totalRecordsHealthSuplyFlamingo = data.body.totalElements;
+      console.log( this.ListHealthCheck.length);
+      
+      this.currentPageReportTemplateHealthSuplyFlamingo = `Showing ${this.firstHealthSuplyFlamingo + 1} to ${this.firstHealthSuplyFlamingo + this.pageSizeHealthSuplyFlamingo} of ${this.totalRecordsHealthSuplyFlamingo} entries`;
+      this.loadingFlamingo = false;
+    });
+  }
+  lazyLoadHandlerHealthSuplyFlamingo(event: LazyLoadEvent): void {
+    if (event.first !== this.firstHealthSuplyFlamingo || event.rows !== this.pageSizeHealthSuplyFlamingo) {
+        this.firstHealthSuplyFlamingo = event.first ?? 0;
+        this.pageSizeHealthSuplyFlamingo = event.rows ?? 10;
+        this.pageHealthSuplyFlamingo = Math.floor(this.firstHealthSuplyFlamingo / this.pageSizeHealthSuplyFlamingo);
+    if( this.searchActiveHealthSuplyFlamingo==true){
+          this.searchHealthSuplyFlamingo();
+
+    }else{
+      this.loadHealthSuplyFlamingoLazy(event);
+    }
+  }
+
+  }
+
+  searchHealthSuplyFlamingo(){
+    this.loadingFlamingo = true;
+    if(!this.dateHealthSuplyFlamingo && !this.filterHealthSuplyFlamingo.titre){      
+      this.clearSuplyFlamingo();
+    }else{
+    this.healthFlamingoService.SearchHealth(this.dateHealthSuplyFlamingo,this.filterHealthSuplyFlamingo,this.pageHealthSuplyFlamingo, this.pageSizeHealthSuplyFlamingo).subscribe((data)=>{
+      this.searchActiveHealthSuplyFlamingo=true;
+      //@ts-ignore
+      this.ListHealthCheckFlamingo = data.body.content;
+      //@ts-ignore
+      this.totalRecordsHealthSuplyFlamingo = data.body.totalElements;
+      this.currentPageReportTemplateHealthSuplyFlamingo = `Showing ${this.firstHealthSuplyFlamingo + 1} to ${this.firstHealthSuplyFlamingo + this.pageSizeHealthSuplyFlamingo} of ${this.totalRecordsHealthSuplyFlamingo} entries`;
+      this.loadingFlamingo = false;
+  
+    })}
+  }
    get charteHealthCheckFlamingo(): boolean {
     return this.charteService.charteHealthCheckFlamingo;
   }

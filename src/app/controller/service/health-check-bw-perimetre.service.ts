@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -6,6 +6,7 @@ import { HealthCheckBwPerimetre } from '../model/health-check-bw-perimetre';
 import { HealthCheckBwPerimetreDetail } from '../model/health-check-bw-perimetre-detail';
 import { Perimetre } from '../model/perimetre';
 import { AuthService } from './auth.service';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -73,14 +74,15 @@ export class HealthCheckBwPerimetreService {
     );    
   }
 
-  public FindHealthCheckBwByPilote(): Observable<HttpResponse<Array<HealthCheckBwPerimetre>>> {
+  public FindHealthCheckBwByPilote(page: number, pageSize: number): Observable<HttpResponse<Array<HealthCheckBwPerimetre>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
-    return this.http.get<Array<HealthCheckBwPerimetre>>(
-      this.urlPilote + 'healthcheck/bwperimetre/lot/'+this.auth.User.lots,
-      { observe: 'response', headers }
-    );    
+    const url = this.urlPilote + 'healthcheck/bwperimetre/lot/' + this.auth.User.lots;
+    const params = new HttpParams()
+        .set('page', page.toString())
+        .set('pageSize', pageSize.toString());
+    return this.http.get<Array<HealthCheckBwPerimetre>>(url, { observe: 'response', headers, params }); 
   }
-
+  
   public SaveHealthCheck(): Observable<HttpResponse<HealthCheckBwPerimetre>> {
     this.AddHealthCheckBw.createurHealthCheckBwPerimetre = this.auth.User;
     const headers: HttpHeaders = this.auth.tokenHeaders();
@@ -110,5 +112,23 @@ export class HealthCheckBwPerimetreService {
       this.urlPilote + 'perimetre/findAll',
       { observe: 'response', headers }
     );    
+  }
+  public SearchHealth(dateAjout: Date | null, health: HealthCheckBwPerimetre, page: number, pageSize: number): Observable<HttpResponse<Array<HealthCheckBwPerimetre>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    const url = this.urlPilote + 'healthcheck/bwperimetre/searchHealth';
+  
+    let params = new HttpParams()
+      .set('titre', health.titre)
+      .set('lot', this.auth.User.lots)
+      .set('page', page.toString())
+      .set('size', pageSize.toString());
+
+    
+  if (dateAjout) {
+    const formattedDateDebut = moment(dateAjout).format('YYYY-MM-DD');
+    params = params.set('dateAjout', formattedDateDebut);
+  }
+  
+    return this.http.get<Array<HealthCheckBwPerimetre>>(url, { observe: 'response', headers, params });
   }
 }

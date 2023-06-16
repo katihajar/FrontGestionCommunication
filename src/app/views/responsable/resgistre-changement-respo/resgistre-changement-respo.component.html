@@ -2,75 +2,76 @@
     <div class="page__box p-3">Registre des Changements Planifier</div>
     <div class="page__content shadow p-2 position-relative">
       <div class="card">
-        <p-table class="table" #dt1 [value]=" this.ListChangementOfRespo" dataKey="id" [rows]="10"
-          [showCurrentPageReport]="true" [loading]="loading" [paginator]="true"
-          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-          [sortField]="'dateDebut'" [sortOrder]="-1"
-          [globalFilterFields]="['titre','application.nomApplication','statut','dateDebut','dateFin','version','impactMetier']">
-          <ng-template pTemplate="caption">
-            <div class="flex">
-              
-                  
-              <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
-                (click)="clear(dt1)"></button>
-                <button style="margin-left: 1%;" type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>       
-              <span class="p-input-icon-left ml-auto" style="float: right;">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
-                  placeholder="Recherche par mot clé" />
-              </span>
-            </div>
-          </ng-template>
-          <ng-template pTemplate="header">
-            <tr>      
-              <th>
-                <div class="flex justify-content-center align-items-center">
-                  Application
-                  <p-columnFilter type="text" field="application.nomApplication" display="menu"></p-columnFilter>
-                </div>
-              </th>
-              <th>
-                <div class="flex justify-content-center align-items-center">
-                  titre Changement
-                  <p-columnFilter type="text" field="titre" display="menu"></p-columnFilter>
-                </div>
-              </th>
-              <th>
-                <div class="flex justify-content-center align-items-center">
-                  Statut
-                  <p-columnFilter type="text" field="statut" display="menu"></p-columnFilter>
-                </div>
-              </th>
-              <th>
-                <div class="flex justify-content-center align-items-center">
-                    version
-                  <p-columnFilter type="text" field="version" display="menu"></p-columnFilter>
-                </div>
-              </th>
-              <th>
-                <div class="flex justify-content-center align-items-center">
-                  Impact Métier
-                  <p-columnFilter type="text" field="impactMetier" display="menu"></p-columnFilter>
-                </div>
-              </th>
-              <th>
-                <div class="flex justify-content-center align-items-center">
-                  Date Debut
-                  <!-- <p-columnFilter type="date" field="dateDebut" display="menu"></p-columnFilter> -->
-                </div>
-              </th>
-              <th>
-                <div class="flex justify-content-center align-items-center">
-                  Date Fin
-                  <!-- <p-columnFilter type="date" field="dateFin" display="menu"></p-columnFilter> -->
-                </div>
-              </th>
-              <th>
-                Action
-              </th>
-             
-            </tr>
-          </ng-template>
+        <p-table class="table" #dt1 [value]=" this.ListChangementOfRespo" dataKey="id"
+        [rows]="pageSize" [totalRecords]="totalRecords" [paginator]="true" 
+        [loading]="loading" [currentPageReportTemplate]="currentPageReportTemplate"
+        (onLazyLoad)="lazyLoadHandler($event)"
+        [lazy]="true"
+        [rowsPerPageOptions]="[10, 25, 50]"
+        >
+        <ng-template pTemplate="caption">
+          <div class="flex">
+            <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+              (click)="clear()"></button>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>      
+            <th [width]="200" style="text-align: center;">
+              <div class="flex align-items-center">
+                <span style="width: 100%;text-align: center;">Application</span>
+                <p-dropdown [style]="{ width: '100%' }" [options]="searchApp" optionLabel="nomApplication" appendTo="body" 
+                  [filter]="true" filterBy="nomApplication" [showClear]="true" placeholder="Application"
+                  [(ngModel)]="filterChange.application">
+                  <ng-template let-application pTemplate="item">
+                    <div class="country-item">
+                      <div>{{ application.nomApplication }}</div>
+                    </div>
+                  </ng-template>
+                </p-dropdown>
+              </div>
+            </th>
+            <th [width]="200" style="text-align: center;">
+              <div class="flex align-items-center">
+                <span style="width: 100%;">Titre</span>
+                <input pInputText type="text" [(ngModel)]="filterChange.titre" placeholder="recherche par mot-clé" />
+              </div>
+            </th>
+            <th [width]="200" style="text-align: center;">
+              <div class="flex align-items-center">
+                <span style="width: 100%;">Statut</span>
+                <p-dropdown [options]="statutChange" [(ngModel)]="filterChange.statut" appendTo="body"
+                  [style]="{'width':'100%'}" placeholder="Statut" optionValue="name"
+                  optionLabel="name" [showClear]="true"></p-dropdown>
+              </div>
+            </th>
+
+            <th [width]="200" style="text-align: center;">
+              <div class="flex align-items-center">
+                <span style="width: 100%;">version</span>
+                <input pInputText type="text" [(ngModel)]="filterChange.version" placeholder="recherche par mot-clé" />
+              </div>
+            </th> 
+            <th [width]="300" style="text-align: center;">
+              <div class="flex align-items-center">
+                <span style="width: 100%;">Date Debut</span>
+                <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '100%' }">
+                <p-calendar dateFormat="dd/mm/yy" [style]="{ width: '100%' }" inputId="basic2"  appendTo="body" [(ngModel)]="filterChange.dateDebut"></p-calendar>
+              </span></div>
+            </th>
+            <th [width]="300" style="text-align: center;">
+              <div class="flex align-items-center">
+                <span style="width: 100%;">Date Fin</span>
+                <p-calendar dateFormat="dd/mm/yy" [style]="{'width':'100%'}" inputId="basic2"  appendTo="body" [(ngModel)]="filterChange.dateFin"></p-calendar>
+              </div>
+            </th>
+            <th  style="text-align: center;">
+              <span  style="width: 100%;">Action</span>
+              <button pButton pRipple  type="button" style="font-size: larger;" (click)="searchChange()" icon="pi pi-search"
+                class="p-button-rounded p-button-outlined"></button>
+            </th>  
+          </tr>
+        </ng-template>
           <ng-template pTemplate="body" let-change>
             <tr>
              
@@ -89,14 +90,12 @@
               <td>
                 {{change.version}}
               </td>
+        
               <td>
-                {{change.impactMetier}}
+                {{change.dateDebut | date: 'dd/MM/yyyy'}}
               </td>
               <td>
-                {{change.dateDebut | date: 'MM/dd/yyyy'}}
-              </td>
-              <td>
-                {{change.dateFin | date: 'MM/dd/yyyy'}}
+                {{change.dateFin | date: 'dd/MM/yyyy'}}
               </td>
               <td><button pButton pRipple (click)="ShowCharte(change)" type="button" style="font-size: larger;" icon="pi pi-search"
                   class="p-button-rounded p-button-info"></button>
@@ -105,7 +104,7 @@
           </ng-template>
           <ng-template pTemplate="emptymessage">
             <tr>
-              <td colspan="8">aucun changement n'a été trouvé.</td>
+              <td colspan="7">aucun changement n'a été trouvé.</td>
             </tr>
           </ng-template>
         </p-table>

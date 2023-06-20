@@ -253,6 +253,9 @@ SelectLanguage(){
     }else if(this.AddIncident.application.charteIncident == 'charte Incident Monetics'){
       this.charteIncidentMonetic = true;
       this.selectLang='';
+    }else if(this.AddIncident.application.charteIncident == 'charte Incident BI'){
+      this.charteIncidentBIfr = true;
+      this.selectLang='';
     }
   }else if(this.selectLang == "Français-Anglais"){
     this.popUpLangue = false;
@@ -262,6 +265,9 @@ SelectLanguage(){
     }else if(this.AddIncident.application.charteIncident == 'charte Incident Monetics'){
       this.charteIncidentMoneticAngFr = true;
       this.selectLang='';
+    }else if(this.AddIncident.application.charteIncident == 'charte Incident BI'){
+      this.charteIncidentBIfrAng = true;
+      this.selectLang='';
     }
   }else if(this.selectLang == "Anglais"){
     this.popUpLangue = false;
@@ -270,6 +276,9 @@ SelectLanguage(){
       this.selectLang='';
     }else if(this.AddIncident.application.charteIncident == 'charte Incident Monetics'){
       this.charteIncidentMoneticAng = true;
+      this.selectLang='';
+    }else if(this.AddIncident.application.charteIncident == 'charte Incident BI'){
+      this.charteIncidentBIAng = true;
       this.selectLang='';
     }
   }
@@ -315,7 +324,7 @@ SelectLanguage(){
         { name: 'Résolu avec Suivi' },
         { name: 'Clos' },
       ];
-    }else if(this.AddIncident.application.charteIncident == 'charte Incident Monetics'){
+    }else if(this.AddIncident.application.charteIncident == 'charte Incident Monetics' || this.AddIncident.application.charteIncident == 'charte Incident BI'){
       this.optionType=true;
       this.statutIncident = [
         { name: 'Ouvert' },
@@ -370,6 +379,27 @@ searchIncident(){
 
   set AddIncidentAng(value: Incident) {
     this.incidentService.AddIncidentAng = value;
+  }
+  get charteIncidentBIfr(): boolean {
+    return this.charteService.charteIncidentBIfr;
+  }
+
+  set charteIncidentBIfr(value: boolean) {
+    this.charteService.charteIncidentBIfr = value;
+  }
+  get charteIncidentBIfrAng(): boolean {
+    return this.charteService.charteIncidentBIfrAng;
+  }
+
+  set charteIncidentBIfrAng(value: boolean) {
+    this.charteService.charteIncidentBIfrAng = value;
+  }
+  get charteIncidentBIAng(): boolean {
+    return this.charteService.charteIncidentBIAng;
+  }
+
+  set charteIncidentBIAng(value: boolean) {
+    this.charteService.charteIncidentBIAng = value;
   }
   get charteIncident3Bfr(): boolean {
     return this.charteService.charteIncident3Bfr;

@@ -6,7 +6,10 @@ import { Injectable } from '@angular/core';
 export class CharteService {
   private _charteIncident3BfrAng: boolean = false;
   private _charteIncident3Bfr: boolean = false;
-  private _charteIncident3BAng: boolean = false;
+  private _charteIncident3BAng: boolean = false; 
+   private _charteIncidentBIfrAng: boolean = false;
+  private _charteIncidentBIfr: boolean = false;
+  private _charteIncidentBIAng: boolean = false;
 private _charteIncidentMonetic: boolean = false;
 private _charteIncidentMoneticAng: boolean = false;
 private _charteIncidentMoneticAngFr: boolean = false;
@@ -156,5 +159,28 @@ private _charteHealthCheckFlamingo: boolean = false;
 
   set charteIncident3Bfr(value: boolean) {
     this._charteIncident3Bfr = value;
+  }
+
+  get charteIncidentBIfrAng(): boolean {
+    return this._charteIncidentBIfrAng;
+  }
+
+  set charteIncidentBIfrAng(value: boolean) {
+    this._charteIncidentBIfrAng = value;
+  }
+  get charteIncidentBIAng(): boolean {
+    return this._charteIncidentBIAng;
+  }
+
+  set charteIncidentBIAng(value: boolean) {
+    this._charteIncidentBIAng = value;
+  }
+
+  get charteIncidentBIfr(): boolean {
+    return this._charteIncidentBIfr;
+  }
+
+  set charteIncidentBIfr(value: boolean) {
+    this._charteIncidentBIfr = value;
   }
 }

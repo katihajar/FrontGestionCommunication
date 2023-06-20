@@ -16,6 +16,7 @@ import { DestinataireService } from 'src/app/controller/service/destinataire.ser
 import { CharteIncidentMoneticAngFrComponent } from '../charte-incident-monetic-ang-fr/charte-incident-monetic-ang-fr.component';
 import { Location } from '@angular/common';
 import { EmaildraftsService } from 'src/app/controller/service/emaildrafts.service';
+import { CharteIncidentBiFrAnglComponent } from '../charte-incident-bi-fr-angl/charte-incident-bi-fr-angl.component';
 @Component({
   selector: 'app-ajouter-incident-pilote-ang-fr',
   templateUrl: './ajouter-incident-pilote-ang-fr.component.html',
@@ -42,6 +43,7 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
   dialogElement: any;
   @ViewChild(CharteIncident3BfrAngComponent, { static: false }) myDiv: any;
   @ViewChild(CharteIncidentMoneticAngFrComponent, { static: false }) myDivMonetic: any;
+  @ViewChild(CharteIncidentBiFrAnglComponent, { static: false }) myDivBI: any;
  
 
   constructor(private incidentService: IncidentService, private charteService: CharteService,private emailService: EmaildraftsService,
@@ -265,6 +267,13 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
   set charteIncidentMoneticAngFr(value: boolean) {
     this.charteService.charteIncidentMoneticAngFr = value;
   }
+  get charteIncidentBIfrAng(): boolean {
+    return this.charteService.charteIncidentBIfrAng;
+  }
+
+  set charteIncidentBIfrAng(value: boolean) {
+    this.charteService.charteIncidentBIfrAng = value;
+  }
   showCharte() {
     this.AddIncident.planActionList = this.ListPlanAction;
     this.AddIncidentAng.planActionList = this.ListPlanActionAng;
@@ -272,7 +281,9 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
       this.charteIncident3BfrAng = true;
     } else if (this.AddIncident.application.charteIncident == 'charte Incident Monetics') {
       this.charteIncidentMoneticAngFr = true;
-    } else {
+    }else if (this.AddIncident.application.charteIncident == 'charte Incident BI') {
+      this.charteIncidentBIfrAng = true;
+    }  else {
       this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Charte Non trouvé' });
     }
   }
@@ -358,7 +369,8 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
       this.Subject = '[' + this.AddIncident.type + '] ' + this.AddIncident.application.nomApplication + ' Incident ' + this.AddIncident.numeroIncident + ' - ' + this.AddIncident.titreIncident;
     }
     this.incidentService.SaveIncident().subscribe((data) => {
-      const content = `<div style="width: 700px;">${this.dialogElement.innerHTML}</div>`;
+      
+      const content = `<div style="width: 800px;">${this.dialogElement.innerHTML}</div>`;
       this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire, this.EmailEnCC, this.Subject, content);            this.AddIncident = new Incident();
       this.ListPlanAction = new Array<PlanAction>();
       this.ListPlanActionAng = new Array<PlanAction>();
@@ -382,13 +394,17 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
       this.charteIncident3BfrAng = true;
     } else if (this.AddIncident.application.charteIncident == 'charte Incident Monetics') {
       this.charteIncidentMoneticAngFr = true;
-    }
+    }else if (this.AddIncident.application.charteIncident == 'charte Incident BI') {
+      this.charteIncidentBIfrAng = true;
+    } 
     setTimeout(() => {
       if (this.AddIncident.application.charteIncident == 'charte Incident') {
         this.dialogElement = this.myDiv.filterComponent.nativeElement;
       } else if (this.AddIncident.application.charteIncident == 'charte Incident Monetics') {
         this.dialogElement = this.myDivMonetic.filterComponent.nativeElement;
-      }
+      }else if (this.AddIncident.application.charteIncident == 'charte Incident BI') {
+        this.dialogElement = this.myDivBI.filterComponent.nativeElement;
+      } 
       const options: MyOptions = {
         scale: 2,
         logging: true,
@@ -407,7 +423,9 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
         this.charteIncident3BfrAng = false;
       } else if (this.AddIncident.application.charteIncident == 'charte Incident Monetics') {
         this.charteIncidentMoneticAngFr = false;
-      }
+      }else if (this.AddIncident.application.charteIncident == 'charte Incident BI') {
+        this.charteIncidentBIfrAng = false;
+      } 
     }, 1000);
   }
 

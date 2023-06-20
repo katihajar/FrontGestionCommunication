@@ -44,6 +44,7 @@ export class AjouterApplicationComponent implements OnInit {
 ];
 this.charte= [
   {name: 'charte Incident'},
+  {name: 'charte Incident BI'},
   {name: 'charte Incident Monetics'},
 ];
 this.charteChange= [

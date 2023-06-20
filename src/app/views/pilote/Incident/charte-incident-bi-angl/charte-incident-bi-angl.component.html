@@ -1,0 +1,62 @@
+<p-dialog  [modal]="true" header="Charte Incident"
+  [(visible)]="this.charteIncidentBIAng"  [style]="{width: '60vw', height: '70vw','margin-left':'3%'}" [resizable]="true">
+  <div #myDialog id="myDialog" style="width: 100%;">
+    <div class="col-12" >
+        <div *ngIf="this.AddIncident.statut == 'Ouvert'" >
+        <img src="http://localhost:4200/assets/img/IncBiOuvertheader.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
+      </div>
+        <div *ngIf="this.AddIncident.statut == 'Clos'" >
+          <img src="http://localhost:4200/assets/img/IncBiClosheader.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
+          </div>
+      </div>
+      <div class="col-12" >
+          <div *ngIf="this.AddIncident.statut == 'Ouvert'" >
+          <img src="http://localhost:4200/assets/img/statutOuverIncBi.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
+        </div>
+          <div *ngIf="this.AddIncident.statut == 'Clos'" >
+            <img src="http://localhost:4200/assets/img/statutClosBi.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
+            </div>
+        </div>
+<div style="width: 100%;">
+  <div style="float:left; width: 100%;"  >
+    <div style="margin-top: 2%;">
+      <p> Sir or Madam,</p>
+      <p>Please find hereafter the follow up status regarding the incident :</p><br>
+      <p style="background-color: #8FAADC;height: 3vh;display: flex; align-items: center; justify-content: flex-start; text-align: center;color: white;font-weight: bolder;">INCIDENT DESCRIPTION</p>
+      <li style="color: darkblue;margin-left: 37px;">{{this.AddIncidentAng.description}}</li><br>
+      <p style="background-color: #8FAADC;height: 3vh;display: flex; align-items: center; justify-content: flex-start; text-align: center;color: white;font-weight: bolder;">CURRENT SITUATION</p>
+      <li style="margin-left: 37px;" [ngStyle]="{'color': this.AddIncident.statut == 'Clos' ? 'green' : (this.AddIncident.statut == 'Ouvert' ? 'orange' : 'darkblue') }">{{this.AddIncidentAng.situationActuelle}}</li>
+      <li style="color: darkblue;margin-left: 37px;"><b>Root cause : </b>{{this.AddIncidentAng.causePrincipale}}</li><br>
+      <p style="background-color: #8FAADC;height: 3vh;display: flex; align-items: center; justify-content: flex-start; text-align: center;color: white;font-weight: bolder;">IDENTIFIED IMPACTS</p>
+      <li style="color: darkblue;margin-left: 37px;">{{this.AddIncidentAng.impact}}</li><br>
+     
+      <p style="background-color: #8FAADC;height: 3vh;display: flex; align-items: center; justify-content: flex-start; text-align: center;color: white;font-weight: bolder;">CHRONOLOGY (Paris Time)</p>
+      <li style="color: darkblue;margin-left: 37px;" *ngIf="this.AddIncident.dateDebut"><b>Début de l’incident :</b> {{this.AddIncident.dateDebut | date: 'HH:mm:ss MM/dd/yyyy'}}</li>
+      <li style="color: darkblue;margin-left: 37px;" *ngIf="this.AddIncident.dateFin && this.AddIncident.statut == 'Clos'"><b>Fin d’incident :</b> {{this.AddIncident.dateFin | date: 'HH:mm:ss MM/dd/yyyy'}}</li><br>
+      <div *ngIf="this.AddIncident.statut == 'Clos'">
+        <p style="background-color: #8FAADC;height: 3vh;display: flex; align-items: center; justify-content: flex-start; text-align: center;color: white;font-weight: bolder;"><b>DETAIL SUR LA RESOLUTION DE L'INCIDENT</b></p>
+      <li style="color: darkblue;margin-left: 37px;"><b>{{this.AddIncidentAng.detailResolution}}</b></li><br>
+      </div>
+      <p style="background-color: #8FAADC;height: 3vh;display: flex; align-items: center; justify-content: flex-start; text-align: center;color: white;font-weight: bolder;"><span > PROCHAINE COMMUNICATION :</span></p>
+      <div *ngIf="this.AddIncident.statut == 'Ouvert'" style="color: darkblue;margin-left: 17px;">
+        <p>We apologize for the inconvenience.</p>
+        <p>Another communication at {{this.AddIncident.prochaineCommunication | date: 'HH:mm:ss MM/dd/yyyy'}}</p>
+        <p>Do not hesitate to contact us at MS-DATA-TOTEM@totalenergies.com.</p>
+        </div>
+        <div *ngIf="this.AddIncident.statut == 'Clos'" style="color: darkblue;margin-left: 17px;">
+          <p>We apologize for the inconvenience.</p>
+          <p>Last Communication.</p>
+          <p>Do not hesitate to contact us at MS-DATA-TOTEM@totalenergies.com.</p>
+          </div>
+    </div>
+  </div>
+</div>
+<div class="col-12" >
+ 
+  <img src="http://localhost:4200/assets/img/IncBiClosfooter.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
+</div>
+</div>
+<ng-template pTemplate="footer">
+  <p-button icon="pi pi-check" (click)="this.charteIncidentBIAng=false" label="Ok" styleClass="p-button-text"></p-button>
+</ng-template>
+</p-dialog>

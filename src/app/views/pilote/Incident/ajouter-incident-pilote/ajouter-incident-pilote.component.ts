@@ -14,6 +14,7 @@ import { saveAs } from 'file-saver';
 import { MyOptions } from 'src/app/controller/model/myoption';
 import { CharteIncidentMoneticComponent } from '../charte-incident-monetic/charte-incident-monetic.component';
 import { EmaildraftsService } from 'src/app/controller/service/emaildrafts.service';
+import { CharteIncidentBiFrComponent } from '../charte-incident-bi-fr/charte-incident-bi-fr.component';
 
 @Component({
   selector: 'app-ajouter-incident-pilote',
@@ -39,6 +40,7 @@ export class AjouterIncidentPiloteComponent implements OnInit {
   content: any;
   @ViewChild(CharteIncident3bfrComponent, { static: false }) myDiv: any;
   @ViewChild(CharteIncidentMoneticComponent, { static: false }) myDivMonetic: any;
+  @ViewChild(CharteIncidentBiFrComponent, { static: false }) myDivBI: any;
   constructor(private incidentService: IncidentService, private messageService: MessageService,private emailService:EmaildraftsService,
     private charteService: CharteService, private router: Router, private destService: DestinataireService) {
     if (this.AddIncident.application.nomApplication == '' && this.AddIncident.statut == '') {
@@ -158,7 +160,9 @@ export class AjouterIncidentPiloteComponent implements OnInit {
       this.charteIncident3Bfr = true;
     } else if (this.AddIncident.application.charteIncident == 'charte Incident Monetics') {
       this.charteIncidentMonetic = true;
-    } else {
+    }else if (this.AddIncident.application.charteIncident == 'charte Incident BI') {
+      this.charteIncidentBIfr = true;
+    }  else {
       this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Charte non trouvé' });
     }
   }
@@ -195,14 +199,18 @@ this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire, this
       this.charteIncident3Bfr = true;
     } else if (this.AddIncident.application.charteIncident == 'charte Incident Monetics') {
       this.charteIncidentMonetic = true;
-    }
+    }else if (this.AddIncident.application.charteIncident == 'charte Incident BI') {
+      this.charteIncidentBIfr = true;
+    } 
     setTimeout(() => {
       if (this.AddIncident.application.charteIncident == 'charte Incident') {
         this.dialogElement = this.myDiv.filterComponent.nativeElement.cloneNode(true);
       } else if (this.AddIncident.application.charteIncident == 'charte Incident Monetics') {
         this.dialogElement = this.myDivMonetic.filterComponent.nativeElement.cloneNode(true);
       }
-
+      else if (this.AddIncident.application.charteIncident == 'charte Incident BI') {
+        this.dialogElement = this.myDivBI.filterComponent.nativeElement.cloneNode(true);
+      }
       const doc = document.implementation.createHTMLDocument('');
       doc.body.appendChild(this.dialogElement);
       const html = doc.documentElement.outerHTML;
@@ -214,7 +222,9 @@ this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire, this
         this.charteIncident3Bfr = false;
       } else if (this.AddIncident.application.charteIncident == 'charte Incident Monetics') {
         this.charteIncidentMonetic = false;
-      }
+      } else if (this.AddIncident.application.charteIncident == 'charte Incident BI') {
+        this.charteIncidentBIfr = false;
+      } 
     }, 1000);
   }
 
@@ -223,7 +233,9 @@ this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire, this
       this.charteIncident3Bfr = true;
     } else if (this.AddIncident.application.charteIncident == 'charte Incident Monetics') {
       this.charteIncidentMonetic = true;
-    }
+    }else if (this.AddIncident.application.charteIncident == 'charte Incident BI') {
+      this.charteIncidentBIfr = true;
+    } 
     setTimeout(() => {
       if (this.AddIncident.application.charteIncident == 'charte Incident') {
         this.dialogElement = this.myDiv.filterComponent.nativeElement;
@@ -249,7 +261,9 @@ this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire, this
         this.charteIncident3Bfr = false;
       } else if (this.AddIncident.application.charteIncident == 'charte Incident Monetics') {
         this.charteIncidentMonetic = false;
-      }
+      }else if (this.AddIncident.application.charteIncident == 'charte Incident BI') {
+        this.charteIncidentBIfr = false;
+      } 
     }, 1000);
   }
 
@@ -305,5 +319,12 @@ this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire, this
 
   set charteIncidentMonetic(value: boolean) {
     this.charteService.charteIncidentMonetic = value;
+  }
+    get charteIncidentBIfr(): boolean {
+    return this.charteService.charteIncidentBIfr;
+  }
+
+  set charteIncidentBIfr(value: boolean) {
+    this.charteService.charteIncidentBIfr = value;
   }
 }

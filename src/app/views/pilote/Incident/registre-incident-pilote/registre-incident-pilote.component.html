@@ -15,7 +15,7 @@
     [loading]="loading" [currentPageReportTemplate]="currentPageReportTemplate"
     (onLazyLoad)="lazyLoadHandler($event)"
     [lazy]="true"
-    [rowsPerPageOptions]="[10, 25, 50]">
+    [rowsPerPageOptions]="[10, 25, 50, 100 ,150]">
      <ng-template pTemplate="caption">
           <div class="flex">
             
@@ -188,6 +188,10 @@
     <p-button label="Submit" (onClick)="SelectLanguage()" icon="pi pi-check"></p-button>
   </ng-template>
 </p-dialog>
+
+<app-charte-incident-bi-fr  *ngIf="charteIncidentBIfr"></app-charte-incident-bi-fr>
+<app-charte-incident-bi-fr-angl  *ngIf="charteIncidentBIfrAng"></app-charte-incident-bi-fr-angl>
+<app-charte-incident-bi-angl  *ngIf="charteIncidentBIAng"></app-charte-incident-bi-angl>
 
 
 <app-charte-incident3bfr  *ngIf="charteIncident3Bfr"></app-charte-incident3bfr>

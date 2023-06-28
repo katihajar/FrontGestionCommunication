@@ -164,6 +164,9 @@ import { NouvelCharteComponent } from './views/pilote/healthCheckBwPerimetre/nou
 import { CharteIncidentBiFrComponent } from './views/pilote/Incident/charte-incident-bi-fr/charte-incident-bi-fr.component';
 import { CharteIncidentBiAnglComponent } from './views/pilote/Incident/charte-incident-bi-angl/charte-incident-bi-angl.component';
 import { CharteIncidentBiFrAnglComponent } from './views/pilote/Incident/charte-incident-bi-fr-angl/charte-incident-bi-fr-angl.component';
+import { CharteChangeBiFrComponent } from './views/pilote/changementplanifier/charte-change-bi-fr/charte-change-bi-fr.component';
+import { CharteChangeBiFrAngComponent } from './views/pilote/changementplanifier/charte-change-bi-fr-ang/charte-change-bi-fr-ang.component';
+import { CharteChangeBiAngComponent } from './views/pilote/changementplanifier/charte-change-bi-ang/charte-change-bi-ang.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -266,7 +269,10 @@ export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
     NouvelCharteComponent,
     CharteIncidentBiFrAnglComponent,
     CharteIncidentBiFrComponent,
-    CharteIncidentBiAnglComponent
+    CharteIncidentBiAnglComponent,
+    CharteChangeBiFrComponent,
+    CharteChangeBiFrAngComponent,
+    CharteChangeBiAngComponent
     ],
   imports: [
     ProgressSpinnerModule,

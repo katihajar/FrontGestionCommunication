@@ -50,6 +50,7 @@ this.charte= [
 this.charteChange= [
   {name: 'charte Changement'},
   {name: 'charte Changement Monetics'},
+  {name: 'charte Changement BI'}
 ];
   }
   FindAllUsers(){

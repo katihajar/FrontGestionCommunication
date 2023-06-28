@@ -13,6 +13,7 @@ const translate = require('translate');
 import * as FileSaver from 'file-saver';
 import { User } from 'src/app/controller/model/user';
 import { AuthService } from 'src/app/controller/service/auth.service';
+import { cloneDeep } from 'lodash';
 const moment = require('moment');
 
 @Component({
@@ -206,7 +207,7 @@ translateInput() {
   this.AddIncidentAng.planActionList=this.ListPlanActionAng;
 }
 Edite(inc:Incident){
-  this.AddIncident=inc;
+  this.AddIncident=cloneDeep(inc);
   this.incidentService.FindPlanActionByIncident(inc.id).subscribe((data)=>{
     // @ts-ignore
     this.AddIncident.planActionList = data.body;
@@ -283,13 +284,7 @@ SelectLanguage(){
     }
   }
 }
-  // FindIncident() {
-  //   this.incidentService.FindIncidentByPilote().subscribe((data) => {
-  //     // @ts-ignore
-  //     this.ListIncidentOfPilote = data.body;
-  //     this.loading = false;
-  //   })
-  // }
+
   ngOnInit(): void {
     this.loadIncidentsLazy({ first: 0, rows: this.pageSize });
     this.FindApp();

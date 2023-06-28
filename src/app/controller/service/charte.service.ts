@@ -25,8 +25,35 @@ private _charteHealthCheckBw: boolean = false;
 private _newcharteHealthCheckBw: boolean = false;
 private _chartePointVersion: boolean = false;
 private _charteHealthCheckFlamingo: boolean = false;
-
+private _charteChangeBiAng: boolean = false;
+private _charteChangeBiAngFr: boolean = false;
+private _charteChangeBiFr: boolean = false;
   constructor() { }
+  get charteChangeBiAng(): boolean {
+    return this._charteChangeBiAng;
+  }
+
+  set charteChangeBiAng(value: boolean) {
+    this._charteChangeBiAng = value;
+  }
+
+  get charteChangeBiFr(): boolean {
+    return this._charteChangeBiFr;
+  }
+
+  set charteChangeBiFr(value: boolean) {
+    this._charteChangeBiFr = value;
+  }
+
+  get charteChangeBiAngFr(): boolean {
+    return this._charteChangeBiAngFr;
+  }
+
+  set charteChangeBiAngFr(value: boolean) {
+    this._charteChangeBiAngFr = value;
+  }
+
+
   get newcharteHealthCheckBw(): boolean {
     return this._newcharteHealthCheckBw;
   }

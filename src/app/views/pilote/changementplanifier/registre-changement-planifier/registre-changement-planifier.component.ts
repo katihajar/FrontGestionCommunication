@@ -14,6 +14,7 @@ import * as FileSaver from 'file-saver';
 import { AuthService } from 'src/app/controller/service/auth.service';
 import { User } from 'src/app/controller/model/user';
 const moment = require('moment');
+import { cloneDeep } from 'lodash';
 @Component({
   selector: 'app-registre-changement-planifier',
   templateUrl: './registre-changement-planifier.component.html',
@@ -41,6 +42,7 @@ export class RegistreChangementPlanifierComponent implements OnInit {
   totalRecords: number = 0;
   currentPageReportTemplate: string = '';
   searchApp = new Array<Application>();
+  listStatutDebut: any[] = [];
   constructor(private router: Router,private changeService: ChangementService, private charte: CharteService,private userService: AuthService,private cdr: ChangeDetectorRef,
     private confirmationService: ConfirmationService,private messageService:MessageService,private appService: ApplicationService) { }
     
@@ -68,6 +70,10 @@ export class RegistreChangementPlanifierComponent implements OnInit {
     this.FindApp();
     this.getAppforSearch();
     this.AddChangement = new ChangementPlanifier();
+    this.listStatutDebut=[
+      { name: 'Oui' },
+      { name: 'Non' },
+    ];
     this.ListType= [
       { name: 'PREPRODUCTION' },
       { name: 'PRODUCTION' },
@@ -205,7 +211,7 @@ set charteOperationFr(value: boolean) {
     this.changeService.ListContenu= value;
   }
   Edite(chng:ChangementPlanifier){
-    this.AddChangement=chng;
+    this.AddChangement = cloneDeep(chng);
     this.changeService.FindContenuByChangement(chng.id).subscribe((data)=>{
       // @ts-ignore
       this.AddChangement.contenuChangementList = data.body;
@@ -235,6 +241,27 @@ set charteOperationFr(value: boolean) {
     this.AddChangementAng= new ChangementPlanifier();
     this.showPopUpChange = true;
   }
+  get charteChangeBiAngFr(): boolean {
+    return this.charte.charteChangeBiAngFr;
+  }
+  
+  set charteChangeBiAngFr(value: boolean) {
+    this.charte.charteChangeBiAngFr = value;
+  }
+  get charteChangeBiAng(): boolean {
+    return this.charte.charteChangeBiAng;
+  }
+  
+  set charteChangeBiAng(value: boolean) {
+    this.charte.charteChangeBiAng = value;
+  }
+  get charteChangeBiFr(): boolean {
+    return this.charte.charteChangeBiFr;
+  }
+  
+  set charteChangeBiFr(value: boolean) {
+    this.charte.charteChangeBiAngFr = value;
+  }
   SelectLanguage(){
     if(this.AddChangement.application.charteChangement == 'charte Changement Monetics' ){
     if(this.selectLang == "Français"){
@@ -247,7 +274,7 @@ set charteOperationFr(value: boolean) {
       this.popUpLangue = false;
       this.charteChangeAng = true;
     }
-  }else{
+  }else if(this.AddChangement.application.charteChangement == 'charte Changement' ){
     if(this.selectLang == "Français"){
       this.popUpLangue = false;
       this.charteOperationFr = true;
@@ -258,30 +285,53 @@ set charteOperationFr(value: boolean) {
       this.popUpLangue = false;
      this.charteOperationAng=true;
     }
+  }else if(this.AddChangement.application.charteChangement == 'charte Changement BI' ){
+    if(this.selectLang == "Français"){
+      this.popUpLangue = false;
+      this.charteChangeBiFr = true;
+    }else if(this.selectLang == "Français-Anglais"){
+      this.popUpLangue = false;
+      this.charteChangeBiAngFr = true;
+    }else if(this.selectLang == "Anglais"){
+      this.popUpLangue = false;
+      this.charteChangeBiAng = true;
+    }
   }
   }
   translateInput() {
-    translate(this.AddChangement.titre, { from: 'fr', to: 'en' }).then((result: string) => {
-      this.AddChangementAng.titre = result;
-    })
-      .catch((error: any) => {
-        console.error(error);
-      });
-    translate(this.AddChangement.impactMetier, { from: 'fr', to: 'en' }).then((result: string) => {
-      this.AddChangementAng.impactMetier = result;
-    })
-      .catch((error: any) => {
-        console.error(error);
-      });
-      translate(this.AddChangement.detail, { from: 'fr', to: 'en' }).then((result: string) => {
-        this.AddChangementAng.detail = result;
+    if(this.AddChangement.titre){
+      translate(this.AddChangement.titre, { from: 'fr', to: 'en' }).then((result: string) => {
+        this.AddChangementAng.titre = result;
       })
         .catch((error: any) => {
           console.error(error);
-        });
+        });}
+        if(this.AddChangement.impactMetier){
+      translate(this.AddChangement.impactMetier, { from: 'fr', to: 'en' }).then((result: string) => {
+        this.AddChangementAng.impactMetier = result;
+      })
+        .catch((error: any) => {
+          console.error(error);
+        });}
+        if(this.AddChangement.detail){
+        translate(this.AddChangement.detail, { from: 'fr', to: 'en' }).then((result: string) => {
+          this.AddChangementAng.detail = result;
+        })
+          .catch((error: any) => {
+            console.error(error);
+          });}
+          if(this.AddChangement.planRollBack){
+          translate(this.AddChangement.planRollBack, { from: 'fr', to: 'en' }).then((result: string) => {
+            this.AddChangementAng.planRollBack = result;
+          })
+            .catch((error: any) => {
+              console.error(error);
+            });}
     this.AddChangementAng.version = this.AddChangement.version;
     this.AddChangementAng.dateDebut = this.AddChangement.dateDebut;
     this.AddChangementAng.dateFin = this.AddChangement.dateFin;
+    this.AddChangementAng.prochaineCom = this.AddChangement.prochaineCom;
+
     for (let i = 0; i < this.AddChangement.contenuChangementList.length; i++) {
       translate(this.AddChangement.contenuChangementList[i].description, { from: 'fr', to: 'en' }).then((result: string) => {
         this.ContenuAng.description = result; 
@@ -299,7 +349,14 @@ set charteOperationFr(value: boolean) {
     }
     this.AddChangementAng.contenuChangementList=this.ListContenuAng;
   }
+disable(){
+  if(this.AddChangement?.application?.charteChangement == 'charte Changement BI'){
+ return (this.AddChangement.debut == '' || this.AddChangement.application.nomApplication == '' || this.AddChangement.statut=='' || this.langage =='' || this.AddChangement.type == '' ||this.AddChangement.debut == null || this.AddChangement.application.nomApplication == null || this.AddChangement.statut==null || this.langage ==null || this.AddChangement.type == null);
+  }else{
+    return this.AddChangement?.application?.nomApplication == '' || this.AddChangement.statut=='' || this.langage =='' || this.AddChangement.type == '' || this.AddChangement.application.nomApplication == null || this.AddChangement.statut==null || this.langage ==null || this.AddChangement.type == null;
 
+  }
+}
   RouteFormAddChange() {
     if(this.AddChangement.application.nomApplication != '' && this.AddChangement.statut!='' && this.langage !='' && this.AddChangement.type != ''){
     if(this.langage == "Français"){

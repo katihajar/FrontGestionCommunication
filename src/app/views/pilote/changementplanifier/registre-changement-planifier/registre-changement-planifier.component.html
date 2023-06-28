@@ -84,7 +84,7 @@
             <tr>
              
               <td style="text-align: center;">
-                {{change.application.nomApplication}}
+                {{change.application?.nomApplication}}
               </td>
                <td style="text-align: center;">
                 {{change.titre}}
@@ -128,7 +128,7 @@
     </div>
   </div>
   <p-dialog header="Ajouter Un Changement" [modal]="true" [(visible)]="showPopUpChange" (onHide)="onDialogHideLang()"
-    [style]="{width: '40vw', height: '18vw'}" [resizable]="true">
+    [style]="{width: '40vw', height: '20vw'}" [resizable]="true">
   
     <div class="col-12 text-center" style="margin-top: 1%;">
       <span class="p-input-icon-left" [style]="{ width: '40%' }">
@@ -160,8 +160,15 @@
           optionLabel="name" [showClear]="true"></p-dropdown>
       </span>
     </div>
+    <div class="col-12 text-center" style="margin-top: 2%;" *ngIf="this.AddChangement.application?.charteChangement == 'charte Changement BI'">
+      <span class="p-input-icon-left" [style]="{'width':'40%'}">
+        <p-dropdown [options]="listStatutDebut" [(ngModel)]="this.AddChangement.debut" appendTo="body"
+          [style]="{'width':'100%','required':'required'}" placeholder="Operation Débuté" optionValue="name"
+          optionLabel="name" [showClear]="true"></p-dropdown>
+      </span>
+      </div>
     <ng-template pTemplate="footer">
-      <p-button label="Submit" (onClick)="RouteFormAddChange()" icon="pi pi-check"></p-button>
+      <p-button label="Submit" (onClick)="RouteFormAddChange()" [disabled]="disable()" icon="pi pi-check"></p-button>
     </ng-template>
   </p-dialog>
   <p-dialog header="Choix D'affichage" [modal]="true" [(visible)]="popUpLangue" (onHide)="onDialogHideLang()"
@@ -184,5 +191,8 @@
  <app-charte-changement-ang *ngIf="charteChangeAng"></app-charte-changement-ang>
  <app-charte-changement-fr *ngIf="charteChangeFr"></app-charte-changement-fr>
  <app-charte-changement-fr-ang *ngIf="charteChangeAngFr"></app-charte-changement-fr-ang>
+ <app-charte-change-bi-fr-ang *ngIf="charteChangeBiAngFr"></app-charte-change-bi-fr-ang>
+ <app-charte-change-bi-fr *ngIf="charteChangeBiFr"></app-charte-change-bi-fr>
+ <app-charte-change-bi-ang *ngIf="charteChangeBiAng"></app-charte-change-bi-ang>
   <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
   

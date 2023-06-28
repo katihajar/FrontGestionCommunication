@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { cloneDeep } from 'lodash';
 import {
   ConfirmationService,
   ConfirmEventType,
@@ -132,7 +133,7 @@ export class RegistreHealthCheckComponent implements OnInit {
   //   });
   // }
   Edite(helth: HealthChekPreprodProd) {
-    this.AddHealthCheck = helth;
+    this.AddHealthCheck = cloneDeep(helth);
     this.healthService.FindDetailByHealthCheck(helth.id).subscribe((data) => {
       // @ts-ignore
       this.AddHealthCheck.healthChekPreprodProdDetailList = data.body;
@@ -353,7 +354,7 @@ export class RegistreHealthCheckComponent implements OnInit {
     })}
   }
   EditeBW(helth: HealthCheckBwPerimetre) {
-    this.AddHealthCheckBw = helth;
+    this.AddHealthCheckBw = cloneDeep(helth);
     this.healthBWService
       .FindDetailByHealthCheckBw(helth.id)
       .subscribe((data) => {
@@ -550,7 +551,7 @@ export class RegistreHealthCheckComponent implements OnInit {
     this.charteService.charteHealthCheckFlamingo = value;
   }
   EditeFlamingo(helth: HealthCheckFlamingo) {
-    this.AddHealthCheckFlamingo = helth;
+    this.AddHealthCheckFlamingo = cloneDeep(helth);
     this.healthFlamingoService
       .FindFluxEAIByHealthCheck(helth.id)
       .subscribe((data) => {

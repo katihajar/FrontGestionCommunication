@@ -15,6 +15,7 @@ import { saveAs } from 'file-saver';
 import { MyOptions } from 'src/app/controller/model/myoption';
 import { EmaildraftsService } from 'src/app/controller/service/emaildrafts.service';
 import { CharteOperationFrAngComponent } from '../../operation/charte-operation-fr-ang/charte-operation-fr-ang.component';
+import { CharteChangeBiFrAngComponent } from '../charte-change-bi-fr-ang/charte-change-bi-fr-ang.component';
 @Component({
   selector: 'app-ajouter-changement-ang-fr',
   templateUrl: './ajouter-changement-ang-fr.component.html',
@@ -38,6 +39,7 @@ export class AjouterChangementAngFrComponent implements OnInit {
   dialogElement:any;
   @ViewChild(CharteChangementFrAngComponent,{static:false}) myDiv: any ;
   @ViewChild(CharteOperationFrAngComponent,{static:false}) myDivOperation: any ;
+  @ViewChild(CharteChangeBiFrAngComponent,{static:false}) myDivChangeBi: any ;
   constructor(private emailService:EmaildraftsService,private messageService: MessageService,private changeService: ChangementService,
     private charteService:CharteService,private router: Router,private destService:DestinataireService) {
       if(this.AddChangement.application.nomApplication == '' && this.AddChangement.statut=='' && this.AddChangement.type == ''){
@@ -75,27 +77,38 @@ export class AjouterChangementAngFrComponent implements OnInit {
   }
   translateInput() {
     this.ListContenuAng = new Array<ContenuChangement>();
+    if(this.AddChangement.titre){
     translate(this.AddChangement.titre, { from: 'fr', to: 'en' }).then((result: string) => {
       this.AddChangementAng.titre = result;
     })
       .catch((error: any) => {
         console.error(error);
-      });
+      });}
+      if(this.AddChangement.impactMetier){
     translate(this.AddChangement.impactMetier, { from: 'fr', to: 'en' }).then((result: string) => {
       this.AddChangementAng.impactMetier = result;
     })
       .catch((error: any) => {
         console.error(error);
-      });
+      });}
+      if(this.AddChangement.detail){
       translate(this.AddChangement.detail, { from: 'fr', to: 'en' }).then((result: string) => {
         this.AddChangementAng.detail = result;
       })
         .catch((error: any) => {
           console.error(error);
-        });
+        });}
+        if(this.AddChangement.planRollBack){
+        translate(this.AddChangement.planRollBack, { from: 'fr', to: 'en' }).then((result: string) => {
+          this.AddChangementAng.planRollBack = result;
+        })
+          .catch((error: any) => {
+            console.error(error);
+          });}
     this.AddChangementAng.version = this.AddChangement.version;
     this.AddChangementAng.dateDebut = this.AddChangement.dateDebut;
     this.AddChangementAng.dateFin = this.AddChangement.dateFin;
+    this.AddChangementAng.prochaineCom = this.AddChangement.prochaineCom;
 
     for (let i = 0; i < this.AddChangement.contenuChangementList.length; i++) {
       translate(this.AddChangement.contenuChangementList[i].description, { from: 'fr', to: 'en' }).then((result: string) => {
@@ -116,6 +129,15 @@ export class AjouterChangementAngFrComponent implements OnInit {
     }
     this.AddChangementAng.contenuChangementList=this.ListContenuAng;
   }
+  get charteChangeBiAngFr(): boolean {
+    return this.charteService.charteChangeBiAngFr;
+  }
+  
+  set charteChangeBiAngFr(value: boolean) {
+    this.charteService.charteChangeBiAngFr = value;
+  }
+
+
   get ListContenuAng(): Array<ContenuChangement>{
     return this.changeService.ListContenuAng;
   }
@@ -189,6 +211,8 @@ export class AjouterChangementAngFrComponent implements OnInit {
     this.AddChangementAng.application = this.AddChangement.application;
     if(this.AddChangement.application.charteChangement == 'charte Changement Monetics' ){
       this.charteChangeAngFr = true;
+    }else  if(this.AddChangement.application.charteChangement == 'charte Changement BI' ){
+      this.charteChangeBiAngFr = true;
     }else{
       this.charteOperationAngFr = true;
     }
@@ -202,6 +226,18 @@ export class AjouterChangementAngFrComponent implements OnInit {
       this.Subject = '['+this.AddChangement.type+'] '+this.AddChangement.application.nomApplication+' '+this.AddChangement.version+' - Completed Change - '+moment(this.AddChangement.dateDebut).format('DD/MM/YYYY');
      }
       this.content = `<div style="width: 700px;">${this.dialogElement.innerHTML}</div>`;
+    }
+    else if(this.AddChangement.application.charteChangement == 'charte Changement BI' ){
+      if(this.AddChangement.statut =='Planifié'){
+        if(this.AddChangement.debut=='Oui'){
+        this.Subject = '[TOTALENERGIES - APP] [Communication N°2] Operation started/Début d\'opération-'+this.AddChangement.application.nomApplication;
+      }else{
+        this.Subject = '[TOTALENERGIES - APP] [Communication N°1] Scheduled operation/Opération Planifiée-'+this.AddChangement.application.nomApplication;
+      }
+     }else if(this.AddChangement.statut =='Terminé avec succès'){
+        this.Subject = '[TOTALENERGIES - APP] [Communication N°3] - End of operation/Fin de l\'opération-'+this.AddChangement.application.nomApplication;
+       }
+       this.content  = `<div style="width: 800px;">${this.dialogElement.innerHTML}</div>`;
     }else{
       this.content  = `<div style="width: 800px;">${this.dialogElement.innerHTML}</div>`;
 
@@ -224,13 +260,17 @@ export class AjouterChangementAngFrComponent implements OnInit {
   takeScreenshot() {
     if(this.AddChangement.application.charteChangement == 'charte Changement Monetics' ){
       this.charteChangeAngFr = true;
+    }else  if(this.AddChangement.application.charteChangement == 'charte Changement BI' ){
+      this.charteChangeBiAngFr = true;
     }else{
       this.charteOperationAngFr = true;
     }
     setTimeout(() => {
      if(this.AddChangement.application.charteChangement == 'charte Changement Monetics' ){
       this.dialogElement = this.myDiv.filterComponent.nativeElement;
-     }else{
+     }else  if(this.AddChangement.application.charteChangement == 'charte Changement BI' ){
+      this.dialogElement = this.myDivChangeBi.filterComponent.nativeElement;
+    }else{
       this.dialogElement = this.myDivOperation.filterComponent.nativeElement;
      }
       const options: MyOptions = {
@@ -249,6 +289,8 @@ export class AjouterChangementAngFrComponent implements OnInit {
       });
       if(this.AddChangement.application.charteChangement == 'charte Changement Monetics' ){
         this.charteChangeAngFr = false;
+      }else  if(this.AddChangement.application.charteChangement == 'charte Changement BI' ){
+        this.charteChangeBiAngFr = false;
       }else{
         this.charteOperationAngFr = false;
       }

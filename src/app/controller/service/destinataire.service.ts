@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DestinataireCommunication } from '../model/destinataire-communication';
 import {Observable} from "rxjs";
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { environment } from 'src/environments/environment';
 @Injectable({
@@ -40,7 +40,13 @@ export class DestinataireService {
   set ListDestinataireApp(value: Array<DestinataireCommunication>) {
     this._ListDestinataireApp = value;
   }
-
+  public SaveAllDestinataire(data:Array<DestinataireCommunication>): Observable<HttpResponse<Array<DestinataireCommunication>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.post<Array<DestinataireCommunication>>(
+      this.urlPilote + 'destinataire/saveAll',data,
+      { observe: 'response', headers }
+    );    
+  }
 
   public SaveDestinataire(): Observable<HttpResponse<DestinataireCommunication>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
@@ -56,6 +62,22 @@ export class DestinataireService {
       { observe: 'response', headers }
     );    
   }
+  public FindDestinataireByApplicationByResp(page: number, pageSize: number): Observable<HttpResponse<Array<DestinataireCommunication>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    const url = this.urlRespo + 'destinataire/findByApplication/' + this.AddDestinataire.application.id;
+    const params = new HttpParams()
+        .set('page', page.toString())
+        .set('pageSize', pageSize.toString());
+    return this.http.get<Array<DestinataireCommunication>>(url, { observe: 'response', headers, params });
+}
+public FindPagesDestinataireByApplication(page: number, pageSize: number): Observable<HttpResponse<Array<DestinataireCommunication>>> {
+  const headers: HttpHeaders = this.auth.tokenHeaders();
+  const url = this.urlPilote + 'destinataire/findByApplication/' + this.AddDestinataire.application.id;
+  const params = new HttpParams()
+      .set('page', page.toString())
+      .set('pageSize', pageSize.toString());
+  return this.http.get<Array<DestinataireCommunication>>(url, { observe: 'response', headers, params });
+}
   public FindDestinataireHealthCheckProd(): Observable<HttpResponse<Array<DestinataireCommunication>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<DestinataireCommunication>>(
@@ -84,11 +106,30 @@ export class DestinataireService {
       { observe: 'response', headers }
     );    
   }
-  public FindDestinataireByApplicationByResp(id:number): Observable<HttpResponse<Array<DestinataireCommunication>>> {
+  public SearchDestRespo( dest: DestinataireCommunication, page: number, pageSize: number): Observable<HttpResponse<Array<DestinataireCommunication>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
-    return this.http.get<Array<DestinataireCommunication>>(
-      this.urlRespo + 'destinataire/findByApplication/'+id,
-      { observe: 'response', headers }
-    );    
+    const url = this.urlRespo + 'destinataire/search';
+  
+    let params = new HttpParams()
+      .set('email', dest.email)
+      .set('statut', dest.statutRespo)
+      .set('type', dest.typeDest)
+      .set('id', this.AddDestinataire.application.id)
+      .set('page', page.toString())
+      .set('size', pageSize.toString());
+    return this.http.get<Array<DestinataireCommunication>>(url, { observe: 'response', headers, params });
+  }
+  public SearchDest( dest: DestinataireCommunication, page: number, pageSize: number): Observable<HttpResponse<Array<DestinataireCommunication>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    const url = this.urlPilote + 'destinataire/search';
+  
+    let params = new HttpParams()
+      .set('email', dest.email)
+      .set('statut', dest.statutRespo)
+      .set('type', dest.typeDest)
+      .set('id', this.AddDestinataire.application.id)
+      .set('page', page.toString())
+      .set('size', pageSize.toString());
+    return this.http.get<Array<DestinataireCommunication>>(url, { observe: 'response', headers, params });
   }
 }

@@ -1,0 +1,90 @@
+<p-dialog  [modal]="true" header="Charte Changement"
+  [(visible)]="this.charteChangeBiAngFr"  [style]="{width: '60vw', height: '70vw','margin-left':'3%'}" [resizable]="true">
+  <div #myDialog id="myDialog" style="width: 100%;">
+<div  class="col-12"   >
+    <div *ngIf="this.AddChangement.statut == 'Terminé avec succès'" >
+        <img src="http://localhost:4200/assets/img/HeaderChangeBiTerminer.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
+      </div>
+      
+        <div *ngIf="this.AddChangement.statut == 'Planifié'" >
+          <img *ngIf="this.AddChangement.debut == 'Non'" src="http://localhost:4200/assets/img/HeaderChangeBiPlanifier.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
+          <img *ngIf="this.AddChangement.debut == 'Oui'" src="http://localhost:4200/assets/img/HeaderChangeBiStarted.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
+      </div>
+    </div>
+<div style="width: 100%;">
+  <div style="float:left; width: 50%;"  >
+    <div style="margin-top: 2%;margin-left: 2%;">
+        <p>Sir or Madam,</p><br>
+        <br>
+        <p>Please find hereafter the follow up status regarding the operation:</p><br>
+        <br>
+        <p style="color: red;font-weight: bolder;">Application Name :</p>
+        <p>{{this.AddChangement.application.nomApplication}}</p>
+        <p style="color: red;font-weight: bolder;">Start date :</p>
+        <p>{{this.AddChangementAng.dateDebut | date: 'MM/dd/yyyy'}} </p>
+        <p style="color: red;font-weight: bolder;">End date : </p>
+        <p>{{this.AddChangementAng.dateFin | date: 'MM/dd/yyyy'}} </p>
+        <p style="color: red;font-weight: bolder;">Incident Status : </p>
+        <p>        <span *ngIf="this.AddChangement.statut == 'Terminé avec succès'"> Closed</span>
+          <span *ngIf="this.AddChangement.statut == 'Planifié'"> Scheduled operation</span></p>
+        <br>
+        <p style="color: rgb(91, 91, 219);font-weight: bolder;">INCIDENT DESCRIPTION </p>
+        <p style="color: rgb(177, 177, 177);">{{this.AddChangementAng.detail}}</p><br>
+        <p style="color: rgb(91, 91, 219);font-weight: bolder;">IDENTIFIED IMPACTS</p>
+        <p style="color: rgb(177, 177, 177);">{{this.AddChangementAng.impactMetier}}</p><br>
+       
+      
+        <p *ngIf="this.AddChangement.planRollBack" style="color: rgb(91, 91, 219);font-weight: bolder;">ROLLBACK PLAN</p>
+        <p *ngIf="this.AddChangement.planRollBack" style="color: rgb(177, 177, 177);">{{this.AddChangementAng.planRollBack}}</p><br>
+       
+        <p *ngIf="this.AddChangement.prochaineCom"><span style="color: rgb(91, 91, 219);font-weight: bolder;"> NEXT COMMUNICATION AT :</span>{{this.AddChangementAng.prochaineCom | date: 'HH:mm MM/dd/yyyy'}} (Paris Time)</p><br>
+        <p style="color: rgb(55, 97, 233)">PLEASE FORWARD THIS EMAIL TO ALL PARTIES CONCERNED.</p>
+      
+         </div>
+
+  </div>
+ 
+  <div style="float:right;width: 49%;" [ngStyle]="{'border-left': this.AddChangement.statut == 'Terminé avec succès' ? '3px solid #17d440' : (this.AddChangement.debut== 'Oui' ? '3px solid #ddbd07' : '3px solid #e26a61') }" >
+    <div style="margin-top: 2%;margin-left: 2%;">
+        <p>Madame, Monsieur</p><br>
+        <br>
+        <p>Vous trouverez ci-après le point de suivi concernant l’opération :</p><br>
+        <br>
+        <p style="color: red;font-weight: bolder;">Nom de l’application :</p>
+        <p>{{this.AddChangement.application.nomApplication}}</p>
+        <p style="color: red;font-weight: bolder;">Date de début : </p>
+        <p>{{this.AddChangement.dateDebut | date: 'MM/dd/yyyy'}} </p>
+        <p style="color: red;font-weight: bolder;">Date de fin : </p>
+        <p>{{this.AddChangement.dateFin | date: 'MM/dd/yyyy'}} </p>
+        <p style="color: red;font-weight: bolder;">Statut de l’opération : </p>
+        <p>        <span *ngIf="this.AddChangement.statut == 'Terminé avec succès'"> Clos</span>
+          <span *ngIf="this.AddChangement.statut == 'Planifié'"> Opération Planifiée</span></p>
+        <br>
+        <p style="color: rgb(91, 91, 219);font-weight: bolder;">DESCRIPTION DE L’OPERATION </p>
+        <p style="color: rgb(177, 177, 177);">{{this.AddChangement.detail}}</p><br>
+        <p style="color: rgb(91, 91, 219);font-weight: bolder;">IMPACTS IDENTIFIES</p>
+        <p style="color: rgb(177, 177, 177);">{{this.AddChangement.impactMetier}}</p><br>
+       
+        <p *ngIf="this.AddChangement.planRollBack" style="color: rgb(91, 91, 219);font-weight: bolder;">PLAN DE ROLLBACK</p>
+        <p *ngIf="this.AddChangement.planRollBack" style="color: rgb(177, 177, 177);">{{this.AddChangement.planRollBack}}</p><br>
+       
+        <p *ngIf="this.AddChangement.prochaineCom"><span style="color: rgb(91, 91, 219);font-weight: bolder;"> PROCHAINE COMMUNICATION :</span>{{this.AddChangement.prochaineCom | date: 'HH:mm MM/dd/yyyy'}} (Paris Time)</p><br>
+        <p style="color: rgb(55, 97, 233);">VEUILLEZ TRANSMETTRE CET E-MAIL À TOUTES LES PARTIES CONCERNÉES.</p>
+      </div> 
+
+  </div>
+</div>
+<div class="col-12" >
+    <div *ngIf="this.AddChangement.statut == 'Terminé avec succès'" >
+        <img src="http://localhost:4200/assets/img/FooterChangeBiTerminer.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
+        </div>
+        <div *ngIf="this.AddChangement.statut == 'Planifié'" >
+          <img *ngIf="this.AddChangement.debut == 'Non'" src="http://localhost:4200/assets/img/FooterChangeBiPlanifier.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
+          <img *ngIf="this.AddChangement.debut == 'Oui'" src="http://localhost:4200/assets/img/FooterChangeBiStarted.png" width="100%" style="margin-left: 0%;" alt="psa" title="psa" class="staticImg">
+      
+          </div>
+</div></div>
+<ng-template pTemplate="footer">
+  <p-button icon="pi pi-check" (click)="this.charteChangeBiAngFr=false" label="Ok" styleClass="p-button-text"></p-button>
+</ng-template>
+</p-dialog>

@@ -11,7 +11,7 @@ import { ApplicationRespoService } from 'src/app/controller/service/application-
 import { ApplicationService } from 'src/app/controller/service/application.service';
 import { CharteService } from 'src/app/controller/service/charte.service';
 import { OperationService } from 'src/app/controller/service/operation.service';
-const translate = require('translate');
+import translate from 'translate';
 
 @Component({
   selector: 'app-resgistre-operation-respo',

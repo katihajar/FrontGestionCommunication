@@ -11,7 +11,7 @@ import { PiloteApplication } from 'src/app/controller/model/pilote-application';
 import { ApplicationRespoService } from 'src/app/controller/service/application-respo.service';
 import { ChangementService } from 'src/app/controller/service/changement.service';
 import { CharteService } from 'src/app/controller/service/charte.service';
-const translate = require('translate');
+import translate from 'translate';
 
 
 @Component({

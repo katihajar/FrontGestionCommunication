@@ -9,7 +9,7 @@ import { PlanAction } from 'src/app/controller/model/plan-action';
 import { ApplicationService } from 'src/app/controller/service/application.service';
 import { CharteService } from 'src/app/controller/service/charte.service';
 import { IncidentService } from 'src/app/controller/service/incident.service';
-const translate = require('translate');
+import translate from 'translate';
 import * as FileSaver from 'file-saver';
 import { User } from 'src/app/controller/model/user';
 import { AuthService } from 'src/app/controller/service/auth.service';

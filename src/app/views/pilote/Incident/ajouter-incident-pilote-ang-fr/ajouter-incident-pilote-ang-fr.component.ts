@@ -6,7 +6,7 @@ import { PlanAction } from 'src/app/controller/model/plan-action';
 import { CharteService } from 'src/app/controller/service/charte.service';
 import { IncidentService } from 'src/app/controller/service/incident.service';
 import { CharteIncident3BfrAngComponent } from '../charte-incident3-bfr-ang/charte-incident3-bfr-ang.component';
-const translate = require('translate');
+import translate from 'translate';
 import html2canvas from 'html2canvas';
 import { MessageService } from 'primeng/api';
 import { saveAs } from 'file-saver';

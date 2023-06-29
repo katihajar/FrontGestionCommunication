@@ -3,7 +3,7 @@ import { Table } from 'primeng/table';
 import { Operation } from 'src/app/controller/model/operation';
 import { CharteService } from 'src/app/controller/service/charte.service';
 import { OperationService } from 'src/app/controller/service/operation.service';
-const translate = require('translate');
+import translate from 'translate';
 import html2canvas from 'html2canvas';
 import { MessageService } from 'primeng/api';
 import { saveAs } from 'file-saver';

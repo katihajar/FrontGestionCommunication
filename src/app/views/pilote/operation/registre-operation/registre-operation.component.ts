@@ -12,7 +12,7 @@ import * as FileSaver from 'file-saver';
 import { CharteService } from 'src/app/controller/service/charte.service';
 import { AuthService } from 'src/app/controller/service/auth.service';
 import { User } from 'src/app/controller/model/user';
-const translate = require('translate');
+import translate from 'translate';
 
 @Component({
   selector: 'app-registre-operation',

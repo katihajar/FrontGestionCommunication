@@ -9,7 +9,7 @@ import { PiloteApplication } from 'src/app/controller/model/pilote-application';
 import { ApplicationService } from 'src/app/controller/service/application.service';
 import { ChangementService } from 'src/app/controller/service/changement.service';
 import { CharteService } from 'src/app/controller/service/charte.service';
-const translate = require('translate');
+import translate from 'translate';
 import * as FileSaver from 'file-saver';
 import { AuthService } from 'src/app/controller/service/auth.service';
 import { User } from 'src/app/controller/model/user';

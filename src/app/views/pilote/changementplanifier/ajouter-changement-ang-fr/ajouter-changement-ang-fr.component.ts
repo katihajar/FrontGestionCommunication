@@ -8,7 +8,7 @@ import { ChangementService } from 'src/app/controller/service/changement.service
 import { CharteService } from 'src/app/controller/service/charte.service';
 import { DestinataireService } from 'src/app/controller/service/destinataire.service';
 import { CharteChangementFrAngComponent } from '../charte-changement-fr-ang/charte-changement-fr-ang.component';
-const translate = require('translate');
+import translate from 'translate';
 const moment = require('moment');
 import html2canvas from 'html2canvas';
 import { saveAs } from 'file-saver';

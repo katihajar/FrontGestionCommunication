@@ -146,7 +146,7 @@ export class IncidentService {
   }
   
   if (dateFin) {
-    const formattedDateFin =moment(dateFin).format('YYYY-MM-DD');// Extract date part  
+    const formattedDateFin =moment(dateFin).format('YYYY-MM-DD'); 
     params = params.set('dateFin', formattedDateFin);
   }
     return this.http.get<Array<Incident>>(url, { observe: 'response', headers, params });

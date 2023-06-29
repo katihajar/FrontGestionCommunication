@@ -15,6 +15,8 @@ import { User } from 'src/app/controller/model/user';
 import { AuthService } from 'src/app/controller/service/auth.service';
 import { cloneDeep } from 'lodash';
 const moment = require('moment');
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-registre-incident-pilote',
@@ -62,9 +64,9 @@ export class RegistreIncidentPiloteComponent implements OnInit {
     this.userService.User = value;
   }
 
-  exportExcel() {
-    import("xlsx").then(xlsx => {
-      const worksheet = xlsx.utils.json_to_sheet(this.ListIncidentOfPilote.map(incident => {
+  exportExcel(): void {
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(
+      this.ListIncidentOfPilote.map(incident => {
         return {
           application: incident.application.nomApplication, 
           titreIncident: incident.titreIncident,
@@ -78,21 +80,17 @@ export class RegistreIncidentPiloteComponent implements OnInit {
           dateDebut: moment(incident.dateDebut).format('DD-MM-YYYY'),
           dateFin: moment(incident.dateFin).format('DD-MM-YYYY')
         };
-      }));
-      const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-      const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-      this.saveAsExcelFile(excelBuffer, "incident");
-    });
+      })
+    );
+
+    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    const excelData: Blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+
+    saveAs(excelData, 'incident_export_' + new Date().getTime() + '.xlsx');
   }
 
-saveAsExcelFile(buffer: any, fileName: string): void {
-    let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-    let EXCEL_EXTENSION = '.xlsx';
-    const data: Blob = new Blob([buffer], {
-        type: EXCEL_TYPE
-    });
-    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
-}
+
 
 
   RouteFormAddIncident() {

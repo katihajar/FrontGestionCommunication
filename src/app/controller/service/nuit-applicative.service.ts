@@ -48,6 +48,14 @@ export class NuitApplicativeService {
         .set('pageSize', pageSize.toString());
     return this.http.get<Array<NuitApplicative>>(url, { observe: 'response', headers, params }); 
   }
+  public FindNuitApplicativeByRespo(page: number, pageSize: number): Observable<HttpResponse<Array<NuitApplicative>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    const url = this.urlRespo + 'nuitapplicative/lot/' + this.auth.User.lots;
+    const params = new HttpParams()
+        .set('page', page.toString())
+        .set('pageSize', pageSize.toString());
+    return this.http.get<Array<NuitApplicative>>(url, { observe: 'response', headers, params }); 
+  }
   public SaveNuitAppl(): Observable<HttpResponse<NuitApplicative>> {
     this.AddNuitApplicative.createurNuitApplicative = this.auth.User;
     const headers: HttpHeaders = this.auth.tokenHeaders();
@@ -93,6 +101,40 @@ export class NuitApplicativeService {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<SuiviVolumetrie>>(
       this.urlPilote + 'suivivolumetrie/nuitApplicative/'+id,
+      { observe: 'response', headers }
+    );    
+  }
+
+  public SearchNuitRespo(dateAjout: Date | null, nuitapp: NuitApplicative, page: number, pageSize: number): Observable<HttpResponse<Array<NuitApplicative>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    const url = this.urlRespo + 'nuitapplicative/search';
+  
+    let params = new HttpParams()
+      .set('titre', nuitapp.titre)
+      .set('statut', nuitapp.statut)
+      .set('lot', this.auth.User.lots)
+      .set('page', page.toString())
+      .set('size', pageSize.toString());
+
+    
+  if (dateAjout) {
+    const formattedDateDebut = moment(dateAjout).format('YYYY-MM-DD');
+    params = params.set('dateAjout', formattedDateDebut);
+  }
+  
+    return this.http.get<Array<NuitApplicative>>(url, { observe: 'response', headers, params });
+  }
+  public FindNbOccurenceByNuitAppRespo(id:number): Observable<HttpResponse<Array<NbOccurence>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<NbOccurence>>(
+      this.urlRespo + 'nboccurence/nuitApplicative/'+id,
+      { observe: 'response', headers }
+    );    
+  }
+  public FindSuiviVolumetrieByNuitAppRespo(id:number): Observable<HttpResponse<Array<SuiviVolumetrie>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<SuiviVolumetrie>>(
+      this.urlRespo + 'suivivolumetrie/nuitApplicative/'+id,
       { observe: 'response', headers }
     );    
   }

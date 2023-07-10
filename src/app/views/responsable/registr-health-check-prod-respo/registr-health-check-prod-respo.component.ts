@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
+import { cloneDeep } from 'lodash';
+import { ConfirmEventType, ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Application } from 'src/app/controller/model/application';
 import { HealthCheckBwPerimetre } from 'src/app/controller/model/health-check-bw-perimetre';
 import { HealthCheckBwPerimetreDetail } from 'src/app/controller/model/health-check-bw-perimetre-detail';
 import { HealthCheckFlamingo } from 'src/app/controller/model/health-check-flamingo';
 import { HealthChekPreprodProd } from 'src/app/controller/model/health-chek-preprod-prod';
+import { NuitApplicative } from 'src/app/controller/model/nuit-applicative';
 import { CharteService } from 'src/app/controller/service/charte.service';
 import { HealthCheckBwPerimetreRespoService } from 'src/app/controller/service/health-check-bw-perimetre-respo.service';
 import { HealthCheckBwPerimetreService } from 'src/app/controller/service/health-check-bw-perimetre.service';
@@ -14,6 +16,7 @@ import { HealthCheckRespoService } from 'src/app/controller/service/health-check
 import { HealthCheckService } from 'src/app/controller/service/health-check.service';
 import { HealthcheckFlamingoRespoService } from 'src/app/controller/service/healthcheck-flamingo-respo.service';
 import { HealthcheckFlamingoService } from 'src/app/controller/service/healthcheck-flamingo.service';
+import { NuitApplicativeService } from 'src/app/controller/service/nuit-applicative.service';
 
 @Component({
   selector: 'app-registr-health-check-prod-respo',
@@ -21,6 +24,7 @@ import { HealthcheckFlamingoService } from 'src/app/controller/service/healthche
   styleUrls: ['./registr-health-check-prod-respo.component.scss']
 })
 export class RegistrHealthCheckProdRespoComponent implements OnInit {
+  loadingNuit: boolean = true;
   ListHealthCheckBw: Array<HealthCheckBwPerimetreDetail>= new Array<HealthCheckBwPerimetreDetail>();
   ListHealthCheck : Array<HealthChekPreprodProd>=new Array<HealthChekPreprodProd>();
   ListHealthCheckFlamingo: Array<HealthCheckFlamingo>= new  Array<HealthCheckFlamingo>();
@@ -38,6 +42,15 @@ export class RegistrHealthCheckProdRespoComponent implements OnInit {
     totalRecordsHealthMonetics: number = 0;
     currentPageReportTemplateHealthMonetics: string = '';
     public dateHealthMonetics: Date |null = null;
+        //// nuit ///
+        filterNuitApplicative:NuitApplicative=new NuitApplicative();
+        searchActiveNuitApplicative:boolean=false;
+        pageSizeNuitApplicative: number = 10;
+        pageNuitApplicative: number = 0;
+        firstNuitApplicative: number = 0;
+        totalRecordsNuitApplicative: number = 0;
+        currentPageReportTemplateNuitApplicative: string = '';
+        public dateNuitApplicative: Date |null = null;
      //// bi ///
      filterHealthBI:HealthCheckBwPerimetre=new HealthCheckBwPerimetre();
      searchActiveHealthBI:boolean=false;
@@ -57,6 +70,7 @@ export class RegistrHealthCheckProdRespoComponent implements OnInit {
     currentPageReportTemplateHealthSuplyFlamingo: string = '';
     public dateHealthSuplyFlamingo: Date |null = null;
   constructor(private healthBW: HealthCheckBwPerimetreService,private healthBWService: HealthCheckBwPerimetreRespoService,private healthService: HealthCheckRespoService,private health2 : HealthCheckService,private charteService:CharteService,private router: Router,
+    private nuitService: NuitApplicativeService,
     private healthFlamingoPiloteService: HealthcheckFlamingoService,private healthFlamingoService: HealthcheckFlamingoRespoService,private confirmationService: ConfirmationService,private messageService:MessageService) { }
     clearBI() {
       this.searchActiveHealthBI=false;
@@ -76,7 +90,12 @@ export class RegistrHealthCheckProdRespoComponent implements OnInit {
       this.dateHealthSuplyFlamingo =null;
       this.loadHealthSuplyFlamingoLazy({ first: 0, rows: this.pageSizeHealthSuplyFlamingo });
     }
-  
+    clearNuit() {
+      this.searchActiveNuitApplicative=false;
+      this.filterNuitApplicative = new NuitApplicative();
+      this.dateNuitApplicative =null;
+      this.loadNuitApplicatibe({ first: 0, rows: this.pageSizeNuitApplicative });
+    }
   ngOnInit(): void {
     this.AddHealthCheckBw = new HealthCheckBwPerimetre();
     this.loadHealthBILazy({ first: 0, rows: this.pageSizeHealthBI });
@@ -84,6 +103,8 @@ export class RegistrHealthCheckProdRespoComponent implements OnInit {
     this.loadHealthMoneticsLazy({ first: 0, rows: this.pageSizeHealthMonetics });
     this.AddHealthCheckFlamingo = new HealthCheckFlamingo();
     this.loadHealthSuplyFlamingoLazy({ first: 0, rows: this.pageSizeHealthSuplyFlamingo });
+    this.AddNuitApplicative = new NuitApplicative();
+    this.loadNuitApplicatibe({ first: 0, rows: this.pageSizeNuitApplicative });
     this.ListType = [{ name: 'PREPRODUCTION' }, { name: 'PRODUCTION' }];
   }
 
@@ -164,6 +185,91 @@ export class RegistrHealthCheckProdRespoComponent implements OnInit {
       console.log( data.body);
       this.currentPageReportTemplateHealthMonetics = `Showing ${this.firstHealthMonetics + 1} to ${this.firstHealthMonetics + this.pageSizeHealthMonetics} of ${this.totalRecordsHealthMonetics} entries`;
       this.loading = false;
+  
+    })}
+  }
+   ////////////////Nuit//////////// 
+
+
+
+
+  get charteNuitApplicative(): boolean {
+    return this.charteService.charteNuitApplicative;
+  }
+
+  set charteNuitApplicative(value: boolean) {
+    this.charteService.charteNuitApplicative = value;
+  }
+  get AddNuitApplicative(): NuitApplicative {
+    return this.nuitService.AddNuitApplicative;
+  }
+
+  set AddNuitApplicative(value: NuitApplicative) {
+    this.nuitService.AddNuitApplicative = value;
+  }
+  get ListNuitApplicative(): Array<NuitApplicative> {
+    return this.nuitService.ListNuitApplicative;
+  }
+
+  set ListNuitApplicative(value: Array<NuitApplicative>) {
+    this.nuitService.ListNuitApplicative = value;
+  }
+
+  charteNuit(nuit: NuitApplicative) {
+    this.AddNuitApplicative = cloneDeep(nuit);
+    this.nuitService.FindNbOccurenceByNuitAppRespo(nuit.id).subscribe((data) => {
+      // @ts-ignore
+      this.AddNuitApplicative.nbOccurenceList = data.body;
+    });
+    this.nuitService
+      .FindSuiviVolumetrieByNuitAppRespo(nuit.id)
+      .subscribe((data) => {
+        // @ts-ignore
+        this.AddNuitApplicative.suiviVolumetrieList = data.body;
+      });
+
+    this.charteNuitApplicative = true;
+  }
+
+  loadNuitApplicatibe(event: LazyLoadEvent): void {
+    this.loadingNuit = true;
+    this.nuitService.FindNuitApplicativeByRespo(this.pageNuitApplicative, this.pageSizeNuitApplicative).subscribe((data) => {      
+      //@ts-ignore
+      this.ListNuitApplicative = data.body.content;
+      //@ts-ignore
+      this.totalRecordsNuitApplicative= data.body.totalElements;      
+      this.currentPageReportTemplateNuitApplicative = `Showing ${this.firstNuitApplicative + 1} to ${this.firstNuitApplicative + this.pageSizeNuitApplicative} of ${this.totalRecordsNuitApplicative} entries`;
+      this.loadingNuit = false;
+    });
+  }
+  lazyLoadHandlerNuitApplicative(event: LazyLoadEvent): void {
+    if (event.first !== this.firstNuitApplicative || event.rows !== this.pageSizeNuitApplicative) {
+        this.firstNuitApplicative = event.first ?? 0;
+        this.pageSizeNuitApplicative = event.rows ?? 10;
+        this.pageNuitApplicative = Math.floor(this.firstNuitApplicative / this.pageSizeNuitApplicative);
+    if( this.searchActiveNuitApplicative==true){
+          this.searchNuitApplicative();
+
+    }else{
+      this.loadNuitApplicatibe(event);
+    }
+  }
+
+  }
+
+  searchNuitApplicative(){
+    this.loadingNuit = true;
+    if(!this.dateNuitApplicative && !this.filterNuitApplicative.titre && !this.filterNuitApplicative.statut){      
+      this.clearNuit();
+    }else{
+    this.nuitService.SearchNuitRespo(this.dateNuitApplicative,this.filterNuitApplicative,this.pageNuitApplicative, this.pageSizeNuitApplicative).subscribe((data)=>{
+      this.searchActiveNuitApplicative=true;
+      //@ts-ignore
+      this.ListNuitApplicative = data.body.content;
+      //@ts-ignore
+      this.totalRecordsNuitApplicative = data.body.totalElements;
+      this.currentPageReportTemplateNuitApplicative = `Showing ${this.firstNuitApplicative + 1} to ${this.firstNuitApplicative + this.pageSizeNuitApplicative} of ${this.totalRecordsNuitApplicative} entries`;
+      this.loadingNuit = false;
   
     })}
   }

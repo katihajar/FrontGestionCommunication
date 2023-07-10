@@ -58,7 +58,7 @@ export class DestinataireService {
   public FindDestinataireByApplication(id:number): Observable<HttpResponse<Array<DestinataireCommunication>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<DestinataireCommunication>>(
-      this.urlPilote + 'destinataire/findByApplication/'+id,
+      this.urlPilote + 'destinataire/findAllByApplication/'+id,
       { observe: 'response', headers }
     );    
   }

@@ -15,7 +15,9 @@
       </ul>
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="monetics" role="tabpanel" aria-labelledby="monetics-tab" style="padding: 20px;">
-      <p-table class="table" #dt1 [value]="this.ListHealthCheck" dataKey="id" 
+          <p-accordion [activeIndex]="0">
+            <p-accordionTab header="Etat de santé">
+          <p-table class="table" #dt1 [value]="this.ListHealthCheck" dataKey="id" 
       [rows]="pageSizeHealthMonetics" [totalRecords]="totalRecordsHealthMonetics" [paginator]="true" 
       [loading]="loading" [currentPageReportTemplate]="currentPageReportTemplateHealthMonetics"
       (onLazyLoad)="lazyLoadHandlerHealthMonetics($event)"
@@ -81,6 +83,76 @@
           </tr>
         </ng-template>
       </p-table>
+      </p-accordionTab>
+      <p-accordionTab header="Nuit Applicative">
+      <p-table class="table" #dt1 [value]=" this.ListNuitApplicative" dataKey="id" [rows]="10"
+      [rows]="pageSizeNuitApplicative" [totalRecords]="totalRecordsNuitApplicative" [paginator]="true" 
+      [loading]="loading" [currentPageReportTemplate]="currentPageReportTemplateNuitApplicative"
+      (onLazyLoad)="lazyLoadHandlerNuitApplicative($event)"
+      [lazy]="true"
+      [rowsPerPageOptions]="[10, 25, 50]">
+        <ng-template pTemplate="caption">
+          <div class="flex">
+       <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+              (click)="clearNuit()"></button>
+           
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>      
+          
+            <th style="text-align: center;">
+              <div class="flex align-items-center">
+                <span style="width: 100%;">Titre</span>
+                <input [style]="{'width':'100%'}" pInputText type="text" [(ngModel)]="filterNuitApplicative.titre" placeholder="recherche par mot-clé" />
+              </div>
+            </th> 
+            <th style="text-align: center;">
+              <div class="flex align-items-center">
+                <span style="width: 100%;">Type</span>
+                <p-dropdown [options]="ListType" [(ngModel)]="filterNuitApplicative.statut" appendTo="body"
+                  [style]="{'width':'100%'}" placeholder="Recherche par type" optionValue="name"
+                  optionLabel="name" [showClear]="true"></p-dropdown>
+              </div>
+            </th>
+            <th style="text-align: center;">
+              <div class="flex align-items-center">
+                <span style="width: 100%;">Date d'Ajout</span>
+                <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '100%' }">
+                <p-calendar dateFormat="dd/mm/yy" [style]="{ width: '100%' }" inputId="basic2"  appendTo="body" [(ngModel)]="dateNuitApplicative"></p-calendar>
+              </span></div>
+            </th>
+            <th  style="text-align: center;">
+              <span  style="width: 100%;">Action</span><br>
+              <button  pButton pRipple  type="button" style="font-size: larger;" (click)="searchNuitApplicative()" icon="pi pi-search"
+                class="p-button-rounded p-button-outlined"></button>
+            </th>  
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-nuit>
+          <tr>
+            <td style="text-align: center;">
+              {{nuit.titre}}
+            </td>
+             <td  style="text-align: center;">
+              {{nuit.statut}}
+            </td>
+            <td  style="text-align: center;">
+              {{nuit.date | date: 'dd/MM/yyyy'}}
+            </td>
+            <td  style="text-align: center;"><button pButton pRipple  type="button" style="font-size: larger;" icon="pi pi-search" (click)="charteNuit(nuit)"
+                class="p-button-rounded p-button-info"></button>
+        </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="4">aucune nuit applicative n'a été trouvé.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+      </p-accordionTab>
+  </p-accordion>
       </div>
       <div class="tab-pane fade" id="BI" role="tabpanel" aria-labelledby="BI-tab" style="padding: 20px;">
         <p-table class="table" #dt2 [value]=" this.ListHealthCheckBw" dataKey="id" 

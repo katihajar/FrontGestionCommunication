@@ -40,6 +40,7 @@ import { AuthGuard } from './auth.guard';
 import { AjouterHealthCheckFlamingoComponent } from './views/pilote/healthCheckFlamingo/ajouter-health-check-flamingo/ajouter-health-check-flamingo.component';
 import { RegistreAdministrateurComponent } from './views/superAdmin/registre-administrateur/registre-administrateur.component';
 import { SupAdminComponent } from './layout/sup-admin/sup-admin.component';
+import { AjouterNuitApplicativeComponent } from './views/pilote/nuitApplicative/ajouter-nuit-applicative/ajouter-nuit-applicative.component';
 
 
 @NgModule({
@@ -105,6 +106,7 @@ import { SupAdminComponent } from './layout/sup-admin/sup-admin.component';
         { path: 'healthcheck/PreprodProd/save', component: AjoutHealthCheckComponent },
         { path: 'healthcheck/Bw/save', component: AjoutHealthCheckBwPerimetreComponent },
         { path: 'healthcheck/Flamingo/save', component: AjouterHealthCheckFlamingoComponent },
+        { path: 'nuitApplicative/save', component: AjouterNuitApplicativeComponent },
         { path: '', redirectTo: 'Dashboard', pathMatch: 'full' },
       ],
     },

@@ -61,9 +61,14 @@ export class AjoutHealthCheckComponent implements OnInit {
     this.listHelthchekdetail = new Array<HealthChekPreprodProdDetail>();
     this.listEtatproc = new Array<EtatProcessusMetier>();
     this.ListStatutApp = new Array<StatutApplication>();
-    this.listEtatproc = this.AddHealthCheck.etatProcessusMetierList;
+    if(this.AddHealthCheck.etatProcessusMetierList){
+    this.listEtatproc = this.AddHealthCheck.etatProcessusMetierList;}
+    if(this.AddHealthCheck.healthChekPreprodProdDetailList){
     this.listHelthchekdetail = this.AddHealthCheck.healthChekPreprodProdDetailList;
+  }
+  if(this.AddHealthCheck.statutApplicationList){
     this.ListStatutApp = this.AddHealthCheck.statutApplicationList;
+  }
     this.ListFeu = [
       { name: 'OK' },
       { name: 'En cours d\'éxecuxtion' },
@@ -187,8 +192,8 @@ export class AjoutHealthCheckComponent implements OnInit {
     this.charteHealthCheckPreprodProd = true;
   }
   SaveHealth() {
-    this.AddHealthCheck.titre = 'Etat de santé du ' + moment(this.AddHealthCheck.dateAjout).format('dd/MM/YYYY') + ',' + moment(this.AddHealthCheck.dateAjout).format('HH:mm');
-    this.Subject = '[' + this.AddHealthCheck.type + '] Etat de santé Monétique – ' + moment(this.AddHealthCheck.dateAjout).format('dd/MM/YYYY') + ',' + moment(this.AddHealthCheck.dateAjout).format('HH:mm');
+    this.AddHealthCheck.titre = 'Etat de santé du ' + moment(this.AddHealthCheck.dateAjout).format('DD/MM/YYYY') + ',' + moment(this.AddHealthCheck.dateAjout).format('HH:mm');
+    this.Subject = '[' + this.AddHealthCheck.type + '] Etat de santé Monétique – ' + moment(this.AddHealthCheck.dateAjout).format('DD/MM/YYYY') + ',' + moment(this.AddHealthCheck.dateAjout).format('HH:mm');
     this.healthService.SaveHealthCheck().subscribe((data) => {
       const content = `<div style="width: 1000px;">${this.dialogElement.innerHTML}</div>`;
       this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire, this.EmailEnCC, this.Subject, content);      

@@ -7,20 +7,20 @@ import {
   LazyLoadEvent,
   MessageService,
 } from 'primeng/api';
-import { Table } from 'primeng/table';
-import { Application } from 'src/app/controller/model/application';
 import { EtatProcessusMetier } from 'src/app/controller/model/etat-processus-metier';
 import { HealthCheckBwPerimetre } from 'src/app/controller/model/health-check-bw-perimetre';
 import { HealthCheckBwPerimetreDetail } from 'src/app/controller/model/health-check-bw-perimetre-detail';
 import { HealthCheckFlamingo } from 'src/app/controller/model/health-check-flamingo';
 import { HealthChekPreprodProd } from 'src/app/controller/model/health-chek-preprod-prod';
 import { HealthChekPreprodProdDetail } from 'src/app/controller/model/health-chek-preprod-prod-detail';
+import { NuitApplicative } from 'src/app/controller/model/nuit-applicative';
 import { User } from 'src/app/controller/model/user';
 import { AuthService } from 'src/app/controller/service/auth.service';
 import { CharteService } from 'src/app/controller/service/charte.service';
 import { HealthCheckBwPerimetreService } from 'src/app/controller/service/health-check-bw-perimetre.service';
 import { HealthCheckService } from 'src/app/controller/service/health-check.service';
 import { HealthcheckFlamingoService } from 'src/app/controller/service/healthcheck-flamingo.service';
+import { NuitApplicativeService } from 'src/app/controller/service/nuit-applicative.service';
 const moment = require('moment');
 
 @Component({
@@ -30,10 +30,12 @@ const moment = require('moment');
 })
 export class RegistreHealthCheckComponent implements OnInit {
   loading: boolean = true;
+  loadingNuit: boolean = true;
   loadingBW: boolean = true;
   loadingFlamingo: boolean = true;
   ListType: any[] = [];
   popUpAjout: boolean = false;
+  popUpAjoutNuit: boolean = false;
   //// monetics ///
   filterHealthMonetics:HealthChekPreprodProd=new HealthChekPreprodProd();
   searchActiveHealthMonetics:boolean=false;
@@ -43,6 +45,15 @@ export class RegistreHealthCheckComponent implements OnInit {
   totalRecordsHealthMonetics: number = 0;
   currentPageReportTemplateHealthMonetics: string = '';
   public dateHealthMonetics: Date |null = null;
+    //// nuit ///
+    filterNuitApplicative:NuitApplicative=new NuitApplicative();
+    searchActiveNuitApplicative:boolean=false;
+    pageSizeNuitApplicative: number = 10;
+    pageNuitApplicative: number = 0;
+    firstNuitApplicative: number = 0;
+    totalRecordsNuitApplicative: number = 0;
+    currentPageReportTemplateNuitApplicative: string = '';
+    public dateNuitApplicative: Date |null = null;
    //// bi ///
    filterHealthBI:HealthCheckBwPerimetre=new HealthCheckBwPerimetre();
    searchActiveHealthBI:boolean=false;
@@ -65,6 +76,7 @@ export class RegistreHealthCheckComponent implements OnInit {
     private healthFlamingoService: HealthcheckFlamingoService,
     private healthBWService: HealthCheckBwPerimetreService,
     private healthService: HealthCheckService,
+    private nuitService: NuitApplicativeService,
     private charteService: CharteService,
     private router: Router,
     private confirmationService: ConfirmationService,
@@ -89,6 +101,12 @@ export class RegistreHealthCheckComponent implements OnInit {
     this.dateHealthSuplyFlamingo =null;
     this.loadHealthSuplyFlamingoLazy({ first: 0, rows: this.pageSizeHealthSuplyFlamingo });
   }
+  clearNuit() {
+    this.searchActiveNuitApplicative=false;
+    this.filterNuitApplicative = new NuitApplicative();
+    this.dateNuitApplicative =null;
+    this.loadNuitApplicatibe({ first: 0, rows: this.pageSizeNuitApplicative });
+  }
   get User(): User {
     return this.userService.User;
   }
@@ -103,12 +121,16 @@ export class RegistreHealthCheckComponent implements OnInit {
     this.loadHealthBILazy({ first: 0, rows: this.pageSizeHealthBI });
     this.AddHealthCheckFlamingo = new HealthCheckFlamingo();
     this.loadHealthSuplyFlamingoLazy({ first: 0, rows: this.pageSizeHealthSuplyFlamingo });
+    this.AddNuitApplicative = new NuitApplicative();
+    this.loadNuitApplicatibe({ first: 0, rows: this.pageSizeNuitApplicative });
+
     this.ListType = [{ name: 'PREPRODUCTION' }, { name: 'PRODUCTION' }];
   }
   PopAjout() {
     this.AddHealthCheck = new HealthChekPreprodProd();
     this.popUpAjout = true;
   }
+
   RouterAjout() {
     if (this.AddHealthCheck.type != '') {
       this.router.navigate(['/pilote/healthcheck/PreprodProd/save']);
@@ -298,6 +320,164 @@ export class RegistreHealthCheckComponent implements OnInit {
       console.log( data.body);
       this.currentPageReportTemplateHealthMonetics = `Showing ${this.firstHealthMonetics + 1} to ${this.firstHealthMonetics + this.pageSizeHealthMonetics} of ${this.totalRecordsHealthMonetics} entries`;
       this.loading = false;
+  
+    })}
+  }
+  ////////////////Nuit//////////// 
+  RouterAjoutNuit() {
+    if (this.AddNuitApplicative.statut != '') {
+      this.router.navigate(['/pilote/nuitApplicative/save']);
+    } else {
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Warning',
+        detail: 'Selectionner le Type',
+      });
+    }
+  }
+
+  onDialogHideNuit() {
+    this.AddNuitApplicative = new NuitApplicative();
+  }
+   PopAjoutNuit() {
+    this.AddNuitApplicative = new NuitApplicative();
+    this.popUpAjoutNuit = true;
+  }
+  get charteNuitApplicative(): boolean {
+    return this.charteService.charteNuitApplicative;
+  }
+
+  set charteNuitApplicative(value: boolean) {
+    this.charteService.charteNuitApplicative = value;
+  }
+  get AddNuitApplicative(): NuitApplicative {
+    return this.nuitService.AddNuitApplicative;
+  }
+
+  set AddNuitApplicative(value: NuitApplicative) {
+    this.nuitService.AddNuitApplicative = value;
+  }
+  get ListNuitApplicative(): Array<NuitApplicative> {
+    return this.nuitService.ListNuitApplicative;
+  }
+
+  set ListNuitApplicative(value: Array<NuitApplicative>) {
+    this.nuitService.ListNuitApplicative = value;
+  }
+  EditeNuit(nuit: NuitApplicative) {
+    this.AddNuitApplicative = cloneDeep(nuit);
+    this.nuitService.FindNbOccurenceByNuitApp(nuit.id).subscribe((data) => {
+      // @ts-ignore
+      this.AddNuitApplicative.nbOccurenceList = data.body;
+    });
+    this.nuitService
+      .FindSuiviVolumetrieByNuitApp(nuit.id)
+      .subscribe((data) => {
+        // @ts-ignore
+        this.AddNuitApplicative.suiviVolumetrieList = data.body;
+      });
+
+    this.popUpAjoutNuit = true;
+  }
+  charteNuit(nuit: NuitApplicative) {
+    this.AddNuitApplicative = cloneDeep(nuit);
+    this.nuitService.FindNbOccurenceByNuitApp(nuit.id).subscribe((data) => {
+      // @ts-ignore
+      this.AddNuitApplicative.nbOccurenceList = data.body;
+    });
+    this.nuitService
+      .FindSuiviVolumetrieByNuitApp(nuit.id)
+      .subscribe((data) => {
+        // @ts-ignore
+        this.AddNuitApplicative.suiviVolumetrieList = data.body;
+      });
+
+    this.charteNuitApplicative = true;
+  }
+  DeleteNuit(id: number) {
+    this.confirmationService.confirm({
+      message: 'Êtes-vous sûr(e) de vouloir continuer?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.nuitService.DeleteNuitApplicative(id).subscribe(
+          (data) => {
+            this.loadNuitApplicatibe({ first: 0, rows: this.pageSizeHealthMonetics });
+            // @ts-ignore
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: 'Nuit Applicarive supprimer avec succès',
+            });
+          },
+          (error) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: 'Erreur lors de la suppression',
+            });
+          }
+        );
+      },
+      reject: (type: any) => {
+        switch (type) {
+          case ConfirmEventType.REJECT:
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Rejected',
+              detail: 'Suppression Rejeter',
+            });
+            break;
+          case ConfirmEventType.CANCEL:
+            this.messageService.add({
+              severity: 'warn',
+              summary: 'Cancelled',
+              detail: 'Suppression Annuler',
+            });
+            break;
+        }
+      },
+    });
+  }
+  loadNuitApplicatibe(event: LazyLoadEvent): void {
+    this.loadingNuit = true;
+    this.nuitService.FindNuitApplicativeByPilote(this.pageNuitApplicative, this.pageSizeNuitApplicative).subscribe((data) => {      
+      //@ts-ignore
+      this.ListNuitApplicative = data.body.content;
+      //@ts-ignore
+      this.totalRecordsNuitApplicative= data.body.totalElements;      
+      this.currentPageReportTemplateNuitApplicative = `Showing ${this.firstNuitApplicative + 1} to ${this.firstNuitApplicative + this.pageSizeNuitApplicative} of ${this.totalRecordsNuitApplicative} entries`;
+      this.loadingNuit = false;
+    });
+  }
+  lazyLoadHandlerNuitApplicative(event: LazyLoadEvent): void {
+    if (event.first !== this.firstNuitApplicative || event.rows !== this.pageSizeNuitApplicative) {
+        this.firstNuitApplicative = event.first ?? 0;
+        this.pageSizeNuitApplicative = event.rows ?? 10;
+        this.pageNuitApplicative = Math.floor(this.firstNuitApplicative / this.pageSizeNuitApplicative);
+    if( this.searchActiveNuitApplicative==true){
+          this.searchNuitApplicative();
+
+    }else{
+      this.loadNuitApplicatibe(event);
+    }
+  }
+
+  }
+
+  searchNuitApplicative(){
+    this.loadingNuit = true;
+    if(!this.dateNuitApplicative && !this.filterNuitApplicative.titre && !this.filterNuitApplicative.statut){      
+      this.clearNuit();
+    }else{
+    this.nuitService.SearchNuit(this.dateNuitApplicative,this.filterNuitApplicative,this.pageNuitApplicative, this.pageSizeNuitApplicative).subscribe((data)=>{
+      this.searchActiveNuitApplicative=true;
+      //@ts-ignore
+      this.ListNuitApplicative = data.body.content;
+      //@ts-ignore
+      this.totalRecordsNuitApplicative = data.body.totalElements;
+      this.currentPageReportTemplateNuitApplicative = `Showing ${this.firstNuitApplicative + 1} to ${this.firstNuitApplicative + this.pageSizeNuitApplicative} of ${this.totalRecordsNuitApplicative} entries`;
+      this.loadingNuit = false;
   
     })}
   }

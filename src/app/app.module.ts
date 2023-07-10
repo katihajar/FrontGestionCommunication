@@ -167,6 +167,8 @@ import { CharteIncidentBiFrAnglComponent } from './views/pilote/Incident/charte-
 import { CharteChangeBiFrComponent } from './views/pilote/changementplanifier/charte-change-bi-fr/charte-change-bi-fr.component';
 import { CharteChangeBiFrAngComponent } from './views/pilote/changementplanifier/charte-change-bi-fr-ang/charte-change-bi-fr-ang.component';
 import { CharteChangeBiAngComponent } from './views/pilote/changementplanifier/charte-change-bi-ang/charte-change-bi-ang.component';
+import { AjouterNuitApplicativeComponent } from './views/pilote/nuitApplicative/ajouter-nuit-applicative/ajouter-nuit-applicative.component';
+import { CharteNuitApplicativeComponent } from './views/pilote/nuitApplicative/charte-nuit-applicative/charte-nuit-applicative.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -272,7 +274,9 @@ export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
     CharteIncidentBiAnglComponent,
     CharteChangeBiFrComponent,
     CharteChangeBiFrAngComponent,
-    CharteChangeBiAngComponent
+    CharteChangeBiAngComponent,
+    AjouterNuitApplicativeComponent,
+    CharteNuitApplicativeComponent
     ],
   imports: [
     ProgressSpinnerModule,

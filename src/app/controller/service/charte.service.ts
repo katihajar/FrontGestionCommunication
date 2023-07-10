@@ -28,7 +28,15 @@ private _charteHealthCheckFlamingo: boolean = false;
 private _charteChangeBiAng: boolean = false;
 private _charteChangeBiAngFr: boolean = false;
 private _charteChangeBiFr: boolean = false;
+private _charteNuitApplicative: boolean = false;
   constructor() { }
+  get charteNuitApplicative(): boolean {
+    return this._charteNuitApplicative;
+  }
+
+  set charteNuitApplicative(value: boolean) {
+    this._charteNuitApplicative = value;
+  }
   get charteChangeBiAng(): boolean {
     return this._charteChangeBiAng;
   }

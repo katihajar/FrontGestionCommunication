@@ -49,3 +49,8 @@
     filter: blur(4px);
     pointer-events: none;
   }
+  ::ng-deep {
+    .table>:not(caption)>*>* {
+      background-color: #f8f9fa;
+    }
+  }

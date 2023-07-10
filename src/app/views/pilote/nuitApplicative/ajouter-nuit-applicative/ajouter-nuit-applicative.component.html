@@ -1,0 +1,441 @@
+<ng-template [ngIf]="this.spinner ">
+    <div class="spinner-container">
+      <p-progressSpinner styleClass="spinner" strokeWidth="4" [fill]="'#ffffff'"></p-progressSpinner>
+    </div>
+  </ng-template>
+
+<div [ngClass]="{'blur': this.spinner}"  class="container-fluid page" style="background-color: white">
+    <div class="d-flex page__box p-3">Ajouter Nuit Applicative</div>
+
+    <div class="card page__content shadow p-3 position-relative align-items-center">
+
+        <div class="col-12" style="margin-bottom: 2%">
+            <div class="row">
+              <div class="col-3">
+                <div class="p-input-icon-left" style="width: 100%">
+                  <label for="basic3" style="font-size: 15px; font-family: Arial, Helvetica, sans-serif;">
+                    Statut Chaînes Référentiels<span style="color: red;">*</span>
+                  </label>
+                  <p-dropdown
+                  [options]="ListType"
+                  [style]="{ width: '100%', required: 'required' }"
+                  placeholder="Selectinné le statut"
+                  optionValue="name"
+                  optionLabel="name"
+                  [showClear]="true"
+                  [(ngModel)]="this.AddNuitApplicative.typeChainesReferentiels"
+                ></p-dropdown>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="p-input-icon-left" style="width: 100%">
+                  <label for="basic5" style="font-size: 15px; font-family: Arial, Helvetica, sans-serif;">
+                    Détail Chaînes Référentiels
+                  </label>
+                  <textarea
+                    id="basic60"
+                    required
+                    style="padding-left: 0.8rem; width: 100%"
+                    type="text"
+                    pInputTextarea
+                    placeholder="Entré le Détail Chaînes Référentiels"
+                    [(ngModel)]="this.AddNuitApplicative.descChainesReferentiels"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="p-input-icon-left" style="width: 100%">
+                  <label for="basic3" style="font-size: 15px; font-family: Arial, Helvetica, sans-serif;">
+                    Statut Chaînes Transactions<span style="color: red;">*</span>
+                  </label>
+                  <p-dropdown
+                  [options]="ListType"
+                  [style]="{ width: '100%', required: 'required' }"
+                  placeholder="Selectinné le statut"
+                  optionValue="name"
+                  optionLabel="name"
+                  [showClear]="true"
+                  [(ngModel)]="this.AddNuitApplicative.typeChainesTransactions"
+                ></p-dropdown>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="p-input-icon-left" style="width: 100%">
+                  <label for="basic5" style="font-size: 15px; font-family: Arial, Helvetica, sans-serif;">
+                    Détail Chaînes Transactions 
+                  </label>
+                  <textarea
+                    id="basic60"
+                    required
+                    style="padding-left: 0.8rem; width: 100%"
+                    type="text"
+                    pInputTextarea
+                    placeholder="Entré le Détail Chaînes Transactions"
+                    [(ngModel)]="this.AddNuitApplicative.descChainesTransactions"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12" style="margin-bottom: 2%">
+            <div class="row">
+              <div class="col-3">
+                <div class="p-input-icon-left" style="width: 100%">
+                  <label for="basic3" style="font-size: 15px; font-family: Arial, Helvetica, sans-serif;">
+                    Statut Chaînes PCOM<span style="color: red;">*</span>
+                  </label>
+                  <p-dropdown
+                  [options]="ListType"
+                  [style]="{ width: '100%', required: 'required' }"
+                  placeholder="Selectinné le statut"
+                  optionValue="name"
+                  optionLabel="name"
+                  [showClear]="true"
+                  [(ngModel)]="this.AddNuitApplicative.typeChainesPCOM"
+                ></p-dropdown>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="p-input-icon-left" style="width: 100%">
+                  <label for="basic5" style="font-size: 15px; font-family: Arial, Helvetica, sans-serif;">
+                    Détail Chaînes PCOM
+                  </label>
+                  <textarea
+                    id="basic60"
+                    required
+                    style="padding-left: 0.8rem; width: 100%"
+                    type="text"
+                    pInputTextarea
+                    placeholder="Entré le Détail Chaînes PCOM"
+                    [(ngModel)]="this.AddNuitApplicative.descChainesPCOM"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="p-input-icon-left" style="width: 100%">
+                  <label for="basic3" style="font-size: 15px; font-family: Arial, Helvetica, sans-serif;">
+                    Statut Chaînes GR analytics<span style="color: red;">*</span>
+                  </label>
+                  <p-dropdown
+                  [options]="ListType"
+                  [style]="{ width: '100%', required: 'required' }"
+                  placeholder="Selectinné le statut"
+                  optionValue="name"
+                  optionLabel="name"
+                  [showClear]="true"
+                  [(ngModel)]="this.AddNuitApplicative.typeChainesGRanalytics"
+                ></p-dropdown>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="p-input-icon-left" style="width: 100%">
+                  <label for="basic5" style="font-size: 15px; font-family: Arial, Helvetica, sans-serif;">
+                    Détail Chaînes GR analytics
+                  </label>
+                  <textarea
+                    id="basic60"
+                    required
+                    style="padding-left: 0.8rem; width: 100%"
+                    type="text"
+                    pInputTextarea
+                    placeholder="Entré le Détail Chaînes GR analytics"
+                    [(ngModel)]="this.AddNuitApplicative.descChainesGRanalytics"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12" style="margin-bottom: 2%">
+            <div class="row">
+              <div class="col-3">
+                <div class="p-input-icon-left" style="width: 100%">
+                  <label for="basic3" style="font-size: 15px; font-family: Arial, Helvetica, sans-serif;">
+                    Statut Chaînes Facturation<span style="color: red;">*</span>
+                  </label>
+                  <p-dropdown
+                  [options]="ListType"
+                  [style]="{ width: '100%', required: 'required' }"
+                  placeholder="Selectinné le statut"
+                  optionValue="name"
+                  optionLabel="name"
+                  [showClear]="true"
+                  [(ngModel)]="this.AddNuitApplicative.typeChainesFacturation"
+                ></p-dropdown>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="p-input-icon-left" style="width: 100%">
+                  <label for="basic5" style="font-size: 15px; font-family: Arial, Helvetica, sans-serif;">
+                    Détail Chaînes Facturation
+                  </label>
+                  <textarea
+                    id="basic60"
+                    required
+                    style="padding-left: 0.8rem; width: 100%"
+                    type="text"
+                    pInputTextarea
+                    placeholder="Entré le Détail Chaînes Facturation"
+                    [(ngModel)]="this.AddNuitApplicative.descChainesFacturation"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="p-input-icon-left" style="width: 100%">
+                  <label for="basic3" style="font-size: 15px; font-family: Arial, Helvetica, sans-serif;">
+                    Statut Focus sur les emails<span style="color: red;">*</span>
+                  </label>
+                  <p-dropdown
+                  [options]="ListType"
+                  [style]="{ width: '100%', required: 'required' }"
+                  placeholder="Selectinné le statut"
+                  optionValue="name"
+                  optionLabel="name"
+                  [showClear]="true"
+                  [(ngModel)]="this.AddNuitApplicative.typeFocusEmail"
+                ></p-dropdown>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="p-input-icon-left" style="width: 100%">
+                  <label for="basic5" style="font-size: 15px; font-family: Arial, Helvetica, sans-serif;">
+                    Détail Focus sur les emails
+                  </label>
+                  <textarea
+                    id="basic60"
+                    required
+                    style="padding-left: 0.8rem; width: 100%"
+                    type="text"
+                    pInputTextarea
+                    placeholder="Entré le Détail Focus sur les emails"
+                    [(ngModel)]="this.AddNuitApplicative.descFocusEmail"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+            <div class="card align-items-center" style="width: 100%; margin-bottom: 2%;margin-top: 2%;">
+                <h1 style="margin: 3%">Nombre d'occurence<span style="color: red;">*</span></h1>
+                <div class="col-12" style="margin-bottom: 2%">
+                    <span
+                    class="p-input-icon-left"
+                    style="margin-left: 4%"
+                    [style]="{ width: '30%' }"
+                  >
+                  <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Traitement</label> 
+                  <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="text" pInputText
+                  placeholder="Entré le traitement" [(ngModel)]="this.nbOccurence.traitement"/>          
+                  </span>
+                  <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
+                    <label for="basic1" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date Traitement</label>
+                    <p-calendar appendTo="body"  inputId="basic1" [showTime]="true"  [style]="{ width: '100%' }" [(ngModel)]="this.nbOccurence.date" ></p-calendar>
+
+                </span>
+                <span
+                class="p-input-icon-left"
+                style="margin-left: 2%"
+                [style]="{ width: '30%' }"
+              >
+              <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Traitement</label> 
+              <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="number" pInputText
+              placeholder="Entré le nombre d'occurence" [(ngModel)]="this.nbOccurence.nombreOcurrence"/>          
+              </span>
+                </div>
+                <div class="col-12" style="margin-bottom: 2%">
+                 
+                  <span class="p-input-icon-left" style="margin-left: 4%" [style]="{ width: '30%' }">
+                    <label for="basic1" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Statut Traitement</label>
+                    <p-dropdown
+                    [options]="ListStatut"
+                    [style]="{ width: '100%', required: 'required' }"
+                    placeholder="Selectinné le statut"
+                    optionValue="name"
+                    optionLabel="name"
+                    [showClear]="true"
+                    [(ngModel)]="this.nbOccurence.statut"
+                  ></p-dropdown>
+
+                </span>
+                  <button style="margin-left: 2%" pButton pRipple type="button" icon="pi pi-plus" (click)="AddOccurences()"
+                        class="p-button-rounded p-button-success"></button>
+                </div>
+                <div class="col-12" style="margin: 2%">
+                    <p-table class="table" [value]="this.listNbOccurence" dataKey="id" [rows]="10"
+                        [showCurrentPageReport]="true" [paginator]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Traitement
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Date
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Nombre d'occurence
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Statut
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        supprimer
+                                    </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-occurence>
+                            <tr>
+                                <td>
+                                    {{ occurence.traitement }}
+                                </td>
+
+                                <td>
+                                    {{ occurence.date }}
+                                </td>
+                                <td>
+                                    {{ occurence.nombreOcurrence }}
+                                </td>
+                                <td>
+                                    {{ occurence.statut }}
+                                </td>
+
+                                <td>
+                                    <button pButton pRipple type="button" style="font-size: larger" icon="pi pi-times" (click)="removeOccurence(occurence)"
+                                        class="p-button-rounded p-button-danger"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="5">aucune n'occurence n'a été ajoué.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+            <div class="card align-items-center" style="width: 100%; margin-bottom: 2%;margin-top: 2%;">
+                <h1 style="margin: 3%">Suivi de la volumétrie <span style="color: red;">*</span></h1>
+                <div class="col-12" style="margin-bottom: 2%">
+                    <span
+                    class="p-input-icon-left"
+                    style="margin-left: 4%"
+                    [style]="{ width: '30%' }"
+                  >
+                  <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Type d'alerte</label> 
+                  <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="text" pInputText
+                  placeholder="Entré le type d'alerte" [(ngModel)]="this.suiviVolumetri.typeAlerte"/>          
+                  </span>
+                  <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
+                    <label for="basic1" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Nombre Minimum</label>
+                    <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="text" pInputText
+                    placeholder="Entré le nombre minimum" [(ngModel)]="this.suiviVolumetri.nbMinimun"/>   
+                </span>
+                <span
+                class="p-input-icon-left"
+                style="margin-left: 2%"
+                [style]="{ width: '30%' }"
+              >
+              <label for="basic1" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Nombre Actuel</label>
+              <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }" type="number" pInputText
+              placeholder="Entré le nombre actuel" [(ngModel)]="this.suiviVolumetri.nbActuel"/>         
+              </span>
+                </div>
+                <div class="col-12 " style="margin-bottom: 2%">
+                 
+                  <span class="p-input-icon-left" style="margin-left: 4%" [style]="{ width: '30%' }">
+                    <label for="basic1" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Statut Traitement</label>
+                    <p-dropdown
+                    [options]="ListStatut"
+                    [style]="{ width: '100%', required: 'required' }"
+                    placeholder="Selectinné le statut"
+                    optionValue="name"
+                    optionLabel="name"
+                    [showClear]="true"
+                    [(ngModel)]="this.suiviVolumetri.statut"
+                  ></p-dropdown>
+
+                </span>
+                  <button style="margin-left: 2%" pButton pRipple type="button" icon="pi pi-plus" (click)="AddSuiviVolumetri()"
+                        class="p-button-rounded p-button-success"></button>
+                </div>
+                <div class="col-12" style="margin: 2%">
+                    <p-table class="table" [value]="this.listsuiviVolumetri" dataKey="id" [rows]="10"
+                        [showCurrentPageReport]="true" [paginator]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Type Alerte
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Nb Minimum 
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Nb Actuel 
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        Statut
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex justify-content-center align-items-center">
+                                        supprimer
+                                    </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-suivi>
+                            <tr>
+                                <td>
+                                    {{ suivi.typeAlerte }}
+                                </td>
+
+                                <td>
+                                    {{ suivi.nbMinimun }}
+                                </td>
+                                <td>
+                                    {{ suivi.nbActuel }}
+                                </td>
+                                <td>
+                                    {{ suivi.statut }}
+                                </td>
+
+                                <td>
+                                    <button pButton pRipple type="button" style="font-size: larger" icon="pi pi-times" (click)="removeSuiviVolumetri(suivi)"
+                                        class="p-button-rounded p-button-danger"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="5">aucun suivi de la volumétrie n'a été ajoué.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+
+            <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
+                <button pButton pRipple  type="button" label="Visualiser la charte" style=" float: left;margin-left: 2%;" (click)="charte()" class="p-button-raised p-button-help"></button>
+                <button pButton pRipple  style=" float: right;margin-right: 2%;" type="button" label="Soumettre" [disabled]="isSubmitDisabled()" class="p-button-raised" (click)="SendAndSaveNuit()"></button>
+            </div>
+        </div>
+    </div>
+
+<app-charte-nuit-applicative [ngClass]="{'blur': this.spinner}"  *ngIf="charteNuitApplicative" ></app-charte-nuit-applicative>

@@ -24,3 +24,8 @@
   }
 }
 
+::ng-deep {
+  .table>:not(caption)>*>* {
+    background-color: #f8f9fa;
+  }
+}

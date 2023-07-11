@@ -6,7 +6,7 @@ export class Probleme {
     public id: number = Number(0);
     public topic: string = String();
     public statut: string = String();
-    public dateAjout: Date = new Date();
+    public dateAjout: Date | null=null;
     public description: string = String();
     public ananlyse: string = String();
     public application = new Application();

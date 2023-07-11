@@ -18,7 +18,7 @@ export class NuitApplicative {
     public descChainesFacturation: string = String();
     public typeFocusEmail: string = String();
     public descFocusEmail: string = String();
-    public date: Date = new Date();
+    public date: Date | null=null;
     public nbOccurenceList = new Array<NbOccurence>();
     public suiviVolumetrieList = new Array<SuiviVolumetrie>();
     public createurNuitApplicative = new User();

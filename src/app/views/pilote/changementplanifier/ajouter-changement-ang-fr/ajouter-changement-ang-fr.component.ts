@@ -225,7 +225,7 @@ export class AjouterChangementAngFrComponent implements OnInit {
      }else if(this.AddChangement.statut =='Terminé avec succès'){
       this.Subject = '['+this.AddChangement.type+'] '+this.AddChangement.application.nomApplication+' '+this.AddChangement.version+' - Completed Change - '+moment(this.AddChangement.dateDebut).format('DD/MM/YYYY');
      }
-      this.content = `<div style="width: 700px;">${this.dialogElement.innerHTML}</div>`;
+      this.content = `<div style="width: 600px;">${this.dialogElement.innerHTML}</div>`;
     }
     else if(this.AddChangement.application.charteChangement == 'charte Changement BI' ){
       if(this.AddChangement.statut =='Planifié'){
@@ -237,9 +237,9 @@ export class AjouterChangementAngFrComponent implements OnInit {
      }else if(this.AddChangement.statut =='Terminé avec succès'){
         this.Subject = '[TOTALENERGIES - APP] [Communication N°3] - End of operation/Fin de l\'opération-'+this.AddChangement.application.nomApplication;
        }
-       this.content  = `<div style="width: 800px;">${this.dialogElement.innerHTML}</div>`;
+       this.content  = `<div style="width: 700px;">${this.dialogElement.innerHTML}</div>`;
     }else{
-      this.content  = `<div style="width: 800px;">${this.dialogElement.innerHTML}</div>`;
+      this.content  = `<div style="width: 600px;">${this.dialogElement.innerHTML}</div>`;
 
     }
       this.changeService.SaveChangement().subscribe((data) => {

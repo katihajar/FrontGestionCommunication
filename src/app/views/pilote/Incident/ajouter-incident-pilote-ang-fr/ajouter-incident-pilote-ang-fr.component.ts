@@ -371,7 +371,7 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
     }
     this.incidentService.SaveIncident().subscribe((data) => {
       
-      const content = `<div style="width: 800px;">${this.dialogElement.innerHTML}</div>`;
+      const content = `<div style="width: 650px;">${this.dialogElement.innerHTML}</div>`;
       this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire, this.EmailEnCC, this.Subject, content);            this.AddIncident = new Incident();
       this.ListPlanAction = new Array<PlanAction>();
       this.ListPlanActionAng = new Array<PlanAction>();

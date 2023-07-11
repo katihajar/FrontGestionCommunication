@@ -9,11 +9,11 @@
         </div>
         <div style="width: 100%;" style="font-family: 'Times New Roman', Times, sans-serif;font-size: 16px;">
             <div style="float:left;width: 100%;">
-                <div *ngIf="this.AddChangement.statut == 'Planifié'" class="col-12" style="height: 5vh; align-items: center; justify-content: center;display: flex; text-align: center;background-color: rgb(146, 196, 219);">
-                    <p style="margin: 1%;"><b style="color: white;font-size: 30px;">Détails de l'opération</b></p>
-                </div>
-                <div *ngIf="this.AddChangement.statut == 'Terminé avec succès'" class="col-12" style="height: 5vh; align-items: center; justify-content: center;display: flex; text-align: center;background-color: rgb(100, 241, 136);">
-                    <p style="margin: 1%;"><b style="color: white;font-size: 30px;">Fin de l'opération</b></p>
+                <div *ngIf="this.AddChangement.statut == 'Planifié'" class="col-12" style="height: 5vh; display: flex; align-items: center; justify-content: center; text-align: center; background-color: rgb(146, 196, 219);">
+                    <p style="margin: 0; color: white; font-size: 24px;"><b>Détails de l'opération</b></p>
+                  </div>
+                <div *ngIf="this.AddChangement.statut == 'Terminé avec succès'" class="col-12" style="height: 5vh; display: flex; align-items: center; justify-content: center; text-align: center;background-color: rgb(100, 241, 136);">
+                    <p style="margin: 0;color: white;font-size: 24px; "><b >Fin de l'opération</b></p>
                 </div>
                 <div style="margin: 2%;">
                     <p>Bonjour,</p><br>

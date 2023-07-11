@@ -112,7 +112,7 @@ removeDetails(us: HealthCheckBwPerimetreDetail) {
   SaveHealth(){
     this.Subject = 'P3E Availability regarding data of Application night '+moment(new Date()).format('dd/MM/YYYY');;
       this.healthService.SaveHealthCheck().subscribe((data) => {
-        const content = `<div style="width: 900px;">${this.dialogElement.innerHTML}</div>`;
+        const content = `<div style="width: 650px;">${this.dialogElement.innerHTML}</div>`;
         this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire, this.EmailEnCC, this.Subject, content);      
        // this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire,this.EmailEnCC,this.Subject,this.dialogElement.innerHTML);
              this.AddHealthCheckBw=new HealthCheckBwPerimetre();

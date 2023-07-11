@@ -9,19 +9,19 @@
         </div>
         <div style="width: 100%;margin-bottom: 2%;" style="font-family: 'Times New Roman', Times, sans-serif;font-size: 16px;">
             <div style="float:left; width: 50%;">
-                <div *ngIf="this.AddChangement.statut == 'Planifié'" class="col-12" style="height: 5vh; display: flex; align-items: center; justify-content: center; text-align: center;background-color: rgb(146, 196, 219);">
-                        <p style="margin: 1%;"><b style="color: white;font-size: 30px;">Operation Details</b></p>
+                <div *ngIf="this.AddChangement.statut == 'Planifié'" class="col-12" style="height: 5vh; display: flex; align-items: center; justify-content: center; text-align: center; background-color: rgb(146, 196, 219);">
+                    <p style="margin: 0; color: white; font-size: 24px;"><b >Operation Details</b></p>
                     </div>
                     <div *ngIf="this.AddChangement.statut == 'Terminé avec succès'" class="col-12" style="height: 5vh; display: flex; align-items: center; justify-content: center; text-align: center;background-color: rgb(100, 241, 136);">
-                        <p style="margin: 1%;"><b style="color: white;font-size: 30px;">End of Operation</b></p>
+                        <p style="margin: 0;color: white;font-size: 24px; "><b>End of Operation</b></p>
                     </div>
-                <div style="margin: 2%;">
+                <div style="margin-top: 10px;margin-bottom: 10px;margin-left: 10px;margin-right: 10px;">
                                       
                     <p>Hello,</p><br>
 
                     <p>{{this.AddChangementAng.detail}}</p>
                     <p>Additional Information:</p>
-                    <div style="margin: 1%;">
+                    <div style="margin-top: 5px;margin-bottom: 5px;margin-left: 5px;margin-right: 5px;">
                         <p ><b>Application:</b><span > {{this.AddChangement.application.nomApplication}}
                         </span></p>
                         <p ><b>Start Date:</b> <span > {{this.AddChangement.dateDebut  | date : 'YYYY-MM-dd'}} 
@@ -42,18 +42,18 @@
 
             <div style="float:right;width: 50%;">
                 <div style="border-left: 2px solid rgb(24, 109, 189);height: 100%;">
-                 <div *ngIf="this.AddChangement.statut == 'Planifié'" class="col-12" style="height: 5vh;display: flex; align-items: center; justify-content: center; text-align: center;background-color: rgb(146, 196, 219);">
-                        <p style="margin: 1%;"><b style="color: white;font-size: 30px;">Détails de l'opération</b></p>
+                    <div *ngIf="this.AddChangement.statut == 'Planifié'" class="col-12" style="height: 5vh; display: flex; align-items: center; justify-content: center; text-align: center; background-color: rgb(146, 196, 219);">
+                        <p style="margin: 0; color: white; font-size: 24px;"><b>Détails de l'opération</b></p>
+                      </div>
+                    <div *ngIf="this.AddChangement.statut == 'Terminé avec succès'" class="col-12" style="height: 5vh; display: flex; align-items: center; justify-content: center; text-align: center;background-color: rgb(100, 241, 136);">
+                        <p style="margin: 0;color: white;font-size: 24px; "><b >Fin de l'opération</b></p>
                     </div>
-                    <div *ngIf="this.AddChangement.statut == 'Terminé avec succès'" class="col-12" style="height: 5vh;display: flex;  align-items: center; justify-content: center; text-align: center;background-color: rgb(100, 241, 136);">
-                        <p style="margin: 1%;"><b style="color: white;font-size: 30px;">Fin de l'opération</b></p>
-                    </div>
-                <div style="margin: 2%;">
+                <div style="margin-top: 10px;margin-bottom: 10px;margin-left: 10px;margin-right: 10px;">
                    
                     <p>Bonjour,</p><br>
 
                     <p>{{this.AddChangement.detail}}</p><p>Information Complémentaire :</p>
-                    <div style="margin: 1%;">
+                    <div style="margin-top: 5px;margin-bottom: 5px;margin-left: 5px;margin-right: 5px;">
                         <p ><b>Application :</b><span > {{this.AddChangement.application.nomApplication}}
                         </span></p>
                         <p ><b>Date Début :</b> <span > {{this.AddChangement.dateDebut | date : 'YYYY-MM-dd'}} 

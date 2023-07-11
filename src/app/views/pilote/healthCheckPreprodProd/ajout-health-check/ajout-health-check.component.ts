@@ -195,7 +195,7 @@ export class AjoutHealthCheckComponent implements OnInit {
     this.AddHealthCheck.titre = 'Etat de santé du ' + moment(this.AddHealthCheck.dateAjout).format('DD/MM/YYYY') + ',' + moment(this.AddHealthCheck.dateAjout).format('HH:mm');
     this.Subject = '[' + this.AddHealthCheck.type + '] Etat de santé Monétique – ' + moment(this.AddHealthCheck.dateAjout).format('DD/MM/YYYY') + ',' + moment(this.AddHealthCheck.dateAjout).format('HH:mm');
     this.healthService.SaveHealthCheck().subscribe((data) => {
-      const content = `<div style="width: 1000px;">${this.dialogElement.innerHTML}</div>`;
+      const content = `<div style="width: 900px;">${this.dialogElement.innerHTML}</div>`;
       this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire, this.EmailEnCC, this.Subject, content);      
       // this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire,this.EmailEnCC,this.Subject,this.dialogElement.innerHTML);
       this.AddHealthCheck = new HealthChekPreprodProd();

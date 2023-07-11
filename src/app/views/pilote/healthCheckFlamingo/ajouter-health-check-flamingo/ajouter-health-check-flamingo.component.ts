@@ -150,7 +150,7 @@ export class AjouterHealthCheckFlamingoComponent implements OnInit {
     this.AddHealthCheckFlamingo.titre ='Health Check  Flamingo - '+moment(new Date()).format('DD/MM/YYYY');
     this.Subject = 'Monitoring des flux EAI - SAP de l\'application Flamingo - la date ' + moment(new Date()).format('DD/MM/YYYY');
     this.healthFlamingoService.SaveHealthCheck().subscribe((data) => {
-      const content = `<div style="width: 900px;">${this.dialogElement.outerHTML}</div>`;
+      const content = `<div style="width: 650px;">${this.dialogElement.outerHTML}</div>`;
       this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire, this.EmailEnCC, this.Subject, content);      
       this.AddHealthCheckFlamingo = new HealthCheckFlamingo();
       this.ListFluxEAI = new Array<FluxEAI>();

@@ -176,7 +176,7 @@ export class AjouterIncidentPiloteComponent implements OnInit {
     }
     this.incidentService.SaveIncident().subscribe((data) => {
       //this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire,this.EmailEnCC,this.Subject,this.dialogElement.innerHTML);
-      const content = `<div style="width: 700px;">${this.dialogElement.innerHTML}</div>`;
+      const content = `<div style="width: 600px;">${this.dialogElement.innerHTML}</div>`;
 this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire, this.EmailEnCC, this.Subject, content);
       this.AddIncident = new Incident();
       this.ListPlanAction = new Array<PlanAction>();

@@ -137,7 +137,7 @@ export class AjouterNuitApplicativeComponent implements OnInit {
     this.AddNuitApplicative.titre = 'Suivi nuit applicative Monetique du ' + moment(this.AddNuitApplicative.date).format('DD/MM/YYYY') + ',' + moment(this.AddNuitApplicative.date).format('HH:mm');
     this.Subject = '[' + this.AddNuitApplicative.statut + '] Suivi nuit applicative Monetique – ' + moment(this.AddNuitApplicative.date).format('DD/MM/YYYY');
     this.nuitService.SaveNuitAppl().subscribe((data) => {
-      const content = `<div style="width: 800px;">${this.dialogElement.innerHTML}</div>`;
+      const content = `<div style="width: 650px;">${this.dialogElement.innerHTML}</div>`;
       this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire, this.EmailEnCC, this.Subject, content);      
       this.AddNuitApplicative = new NuitApplicative();
       this.listNbOccurence = new Array<NbOccurence>();

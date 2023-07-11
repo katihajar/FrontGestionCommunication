@@ -41,6 +41,10 @@ import { AjouterHealthCheckFlamingoComponent } from './views/pilote/healthCheckF
 import { RegistreAdministrateurComponent } from './views/superAdmin/registre-administrateur/registre-administrateur.component';
 import { SupAdminComponent } from './layout/sup-admin/sup-admin.component';
 import { AjouterNuitApplicativeComponent } from './views/pilote/nuitApplicative/ajouter-nuit-applicative/ajouter-nuit-applicative.component';
+import { RegistreProblemeComponent } from './views/pilote/probleme/registre-probleme/registre-probleme.component';
+import { AjouterProblemeFrComponent } from './views/pilote/probleme/ajouter-probleme-fr/ajouter-probleme-fr.component';
+import { AjouterProblemeFrAngComponent } from './views/pilote/probleme/ajouter-probleme-fr-ang/ajouter-probleme-fr-ang.component';
+import { RegistreProblemeRespoComponent } from './views/responsable/registre-probleme-respo/registre-probleme-respo.component';
 
 
 @NgModule({
@@ -79,7 +83,7 @@ import { AjouterNuitApplicativeComponent } from './views/pilote/nuitApplicative/
         { path: 'dashboard', component: DashboardRespoComponent },
         { path: 'incident/registre', component: ResgistreIncidentRespoComponent },
         { path: 'application/registre', component: ResgistreApplicationRespoComponent },
-        // { path: 'operation/registre', component: ResgistreOperationRespoComponent },
+        { path: 'probleme/registre', component: RegistreProblemeRespoComponent },
         { path: 'changement/registre', component: ResgistreChangementRespoComponent },
         { path: 'healthcheck/PreprodProd/registre', component: RegistrHealthCheckProdRespoComponent },
         { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -94,8 +98,11 @@ import { AjouterNuitApplicativeComponent } from './views/pilote/nuitApplicative/
         { path: 'Dashboard', component: DashboardPiloteComponent },
         { path: 'application/registre', component: RegistreApplicationOfPiloteComponent },
         { path: 'incident/registre', component: RegistreIncidentPiloteComponent },
+        { path: 'probleme/registre', component: RegistreProblemeComponent },
         { path: 'incident/save/Français', component: AjouterIncidentPiloteComponent },
         { path: 'incident/save/FrançaisAnglais', component: AjouterIncidentPiloteAngFrComponent },
+        { path: 'probleme/save/Français', component: AjouterProblemeFrComponent },
+        { path: 'probleme/save/FrançaisAnglais', component: AjouterProblemeFrAngComponent },
         // { path: 'operation/registre', component: RegistreOperationComponent },
         // { path: 'operation/save/Français', component: AjouterOperationComponent },
         // { path: 'operation/save/FrançaisAnglais', component: AjouterOperationFrAngComponent },

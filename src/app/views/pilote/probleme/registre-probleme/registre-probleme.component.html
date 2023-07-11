@@ -1,0 +1,187 @@
+<div class="container-fluid page" style="background-color: white">
+    <div class="page__box p-3">Registre des Problemes</div>
+    <div class="page__content shadow p-2 position-relative ">
+      <div class="card">
+        <p-toolbar styleClass="mb-4 gap-2">
+          <ng-template pTemplate="right">
+              <button pButton pRipple label="Ajouter Probleme" icon="pi pi-plus" class="p-button-success mr-2" (click)="PopUp()" ></button>
+          </ng-template>
+          <ng-template pTemplate="left">
+              <button pButton pRipple label="Export" icon="pi pi-upload" (click)="exportExcel()" class="p-button-help"></button>
+          </ng-template>
+      </p-toolbar>
+      <p-table class="table" #dt1 [value]="ListProblemeOfPilote" dataKey="id"
+      [rows]="pageSize" [totalRecords]="totalRecords" [paginator]="true" 
+      [loading]="loading" [currentPageReportTemplate]="currentPageReportTemplate"
+      (onLazyLoad)="lazyLoadHandler($event)"
+      [lazy]="true"
+      [rowsPerPageOptions]="[10, 25, 50, 100 ,150]">
+       <ng-template pTemplate="caption">
+            <div class="flex">
+              
+                  
+              <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                (click)="clear()"></button>
+              <!-- <span class="p-input-icon-left ml-auto" style="float: right;">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
+                  placeholder="Recherche par mot clé" />
+              </span> -->
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>      
+              <th [width]="200" style="text-align: center;">
+                <div class="flex align-items-center">
+                  <span style="width: 100%;text-align: center;">Application</span>
+                  <p-dropdown [style]="{ width: '100%' }" [options]="searchApp" optionLabel="nomApplication" appendTo="body" 
+                    [filter]="true" filterBy="nomApplication" [showClear]="true" placeholder="Application"
+                    [(ngModel)]="filterProbleme.application">
+                    <ng-template let-application pTemplate="item">
+                      <div class="country-item">
+                        <div>{{ application.nomApplication }}</div>
+                      </div>
+                    </ng-template>
+                  </p-dropdown>
+                </div>
+              </th>
+              <th [width]="200" style="text-align: center;">
+                <div class="flex align-items-center">
+                  <span style="width: 100%;">Sujet</span>
+                  <input pInputText type="text" [(ngModel)]="filterProbleme.topic" placeholder="recherche par mot-clé" />
+                </div>
+              </th>
+              <th [width]="200" style="text-align: center;">
+                <div class="flex align-items-center">
+                  <span style="width: 100%;">Statut</span>
+                  <p-dropdown [options]="statutProblemeFiltre" [(ngModel)]="filterProbleme.statut" appendTo="body"
+                    [style]="{'width':'100%'}" placeholder="Statut" optionValue="name"
+                    optionLabel="name" [showClear]="true"></p-dropdown>
+                </div>
+              </th>
+              <th [width]="200" style="text-align: center;">
+                <div class="flex align-items-center">
+                  <span style="width: 100%;">Description</span>
+                  <input pInputText type="text" [(ngModel)]="filterProbleme.description" placeholder="recherche par mot-clé" />
+                </div>
+              </th>       
+              <th [width]="300" style="text-align: center;">
+                <div class="flex align-items-center">
+                  <span style="width: 100%;">Date</span>
+                  <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '100%' }">
+                  <p-calendar dateFormat="dd/mm/yy" [style]="{ width: '100%' }" inputId="basic2"  appendTo="body" [(ngModel)]="filterProbleme.dateAjout"></p-calendar>
+                </span></div>
+              </th>
+           
+                
+              <th  style="text-align: center;">
+                <span  style="width: 100%;">Action</span><br>
+                <button  pButton pRipple  type="button" style="font-size: larger;" (click)="searchProbleme()" icon="pi pi-search"
+                  class="p-button-rounded p-button-outlined"></button>
+              </th>  
+            </tr>
+          </ng-template>
+          
+          <ng-template pTemplate="body" let-Probleme>
+            <tr >
+             
+              <td style="text-align: center;">
+                {{Probleme.application.nomApplication}}
+              </td>
+               <td style="text-align: center;">
+                {{Probleme.topic}}
+              </td>
+              <td style="text-align: center;">
+  
+                <!-- <div *ngIf="Probleme.statut=='Zn cours'">    <p-badge severity="success" styleClass="mr-2"></p-badge>
+                </div>  -->
+                <div *ngIf="Probleme.statut=='En cours'"><p-badge severity="warning" styleClass="mr-2"></p-badge></div>
+                 <div *ngIf="Probleme.statut=='Clos'" ><p-badge severity="danger" styleClass="mr-2"></p-badge></div> 
+                  {{Probleme.statut}}
+              </td>
+              <td style="text-align: center;">
+                {{Probleme.description}}
+              </td>
+          
+              <td style="text-align: center;">
+                {{Probleme.dateAjout | date: 'dd/MM/yyyy'}}
+              </td>
+            
+              <td style="text-align: center;">
+                <button pButton pRipple (click)="ShowCharte(Probleme)" type="button" style="font-size: larger;" icon="pi pi-search"
+                  class="p-button-rounded p-button-info"></button>
+              <button pButton pRipple (click)="Edite(Probleme)" type="button" style="font-size: larger;" icon="pi pi-pencil"
+                class="p-button-rounded p-button-success"></button>
+            <button *ngIf="Probleme.createurProbleme.id == this.User.id" pButton pRipple (click)="DeleteProbleme(Probleme.id)" type="button" style="font-size: larger;" icon="pi pi-times"
+              class="p-button-rounded p-button-danger"></button>
+              <!-- <span class="p-buttonset">
+                <button pButton pRipple class="p-button-info"  icon="pi pi-search" (click)="ShowCharte(Probleme)"></button>
+                <button pButton pRipple class="p-button-success" icon="pi pi-pencil" (click)="Edite(Probleme)"></button>
+                <button *ngIf="Probleme.createurProbleme.id == this.User.id"   pButton pRipple class="p-button-danger" (click)="DeleteProbleme(Probleme.id)" icon="pi pi-trash"></button>
+            </span> -->
+          </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="7">aucun probleme n'a été trouvé.</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+  <p-dialog header="Ajouter Un Probleme" [modal]="true" [(visible)]="showPopUpprbld" (onHide)="onDialogHideLang()" [responsive]="true" [autoZIndex]="true"
+    [style]="{width: '40vw', height: '18vw'}" [resizable]="true">
+  
+    <div class="col-12 text-center" style="margin-top: 1%;">
+      <span class="p-input-icon-left" [style]="{ width: '40%' }">
+        <p-dropdown [style]="{ width: '100%', required: 'required' }" [options]="ListApp" optionLabel="nomApplication" appendTo="body" 
+          [filter]="true" filterBy="nomApplication" [showClear]="true" placeholder="Selectinné l'Application"
+          [(ngModel)]="this.AddProbleme.application">
+          <ng-template let-application pTemplate="item">
+            <div class="country-item">
+              <div>{{ application.nomApplication }}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
+      </span>
+      <span class="p-input-icon-left" style="margin-left: 2%;" [style]="{'width':'40%'}">
+        <p-dropdown [options]="statutProbleme" [(ngModel)]="this.AddProbleme.statut" appendTo="body"
+          [style]="{'width':'100%','required':'required'}" placeholder="Selectinné le statut" optionValue="name"
+          optionLabel="name" [showClear]="true"></p-dropdown>
+      </span>
+    </div>
+    <div class="col-12 text-center" style="margin-top: 2%;">
+     
+      <span class="p-input-icon-left" style="margin-left: 2%;" [style]="{'width':'40%'}">
+        <p-dropdown [options]="listLangage" [(ngModel)]="this.langage" appendTo="body"
+          [style]="{'width':'100%','required':'required'}" placeholder="Selectinné la langue" optionValue="name"
+          optionLabel="name" [showClear]="true"></p-dropdown>
+      </span>
+    </div>
+    <ng-template pTemplate="footer">
+      <p-button label="Submit" (onClick)="RouteFormAddProbleme()" icon="pi pi-check"></p-button>
+    </ng-template>
+  </p-dialog>
+  <p-dialog header="Choix D'affichage" [modal]="true" [(visible)]="popUpLangue" (onHide)="onDialogHideLang()"
+    [style]="{width: '30vw', height: '15vw'}" [resizable]="true">
+   
+    <div class="col-12 text-center" style="margin-top: 1%;">
+      <span class="p-input-icon-left" style="margin-left: 2%;" [style]="{'width':'80%'}">
+        <p-dropdown [options]="listLangageCharte" [(ngModel)]="this.selectLang" appendTo="body"
+          [style]="{'width':'100%','required':'required'}" placeholder="Selectinné la langue" optionValue="name"
+          optionLabel="name" [showClear]="true"></p-dropdown>
+      </span>
+    </div>
+    <ng-template pTemplate="footer">
+      <p-button label="Submit" (onClick)="SelectLanguage()" icon="pi pi-check"></p-button>
+    </ng-template>
+  </p-dialog>
+  <app-charte-probleme-fr-ang  *ngIf="charteProblemefrAng"></app-charte-probleme-fr-ang>
+  <app-charte-probleme-fr  *ngIf="charteProblemefr"></app-charte-probleme-fr>
+  <app-charte-probleme-ang *ngIf="charteProblemeAng"></app-charte-probleme-ang>
+
+
+  <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+  

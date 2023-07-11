@@ -8,7 +8,10 @@
                 title="psa" class="staticImg">
         </div>
         <div style="width: 100%;margin-bottom: 2%;" style="font-family: 'Times New Roman', Times, sans-serif;font-size: 16px;">
-            <div style="float:left; width: 50%;">
+            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                  <td align="left" valign="top" width="50%">
+              <div style="float: left; width: 100%;"  >
                 <div *ngIf="this.AddChangement.statut == 'Planifié'" class="col-12" style="height: 5vh; display: flex; align-items: center; justify-content: center; text-align: center; background-color: rgb(146, 196, 219);">
                     <p style="margin: 0; color: white; font-size: 24px;"><b >Operation Details</b></p>
                     </div>
@@ -39,8 +42,9 @@
 
 
             </div>
-
-            <div style="float:right;width: 50%;">
+        </td>
+        <td align="left" valign="top" width="50%">
+            <div style="float:right;width: 100%;">
                 <div style="border-left: 2px solid rgb(24, 109, 189);height: 100%;">
                     <div *ngIf="this.AddChangement.statut == 'Planifié'" class="col-12" style="height: 5vh; display: flex; align-items: center; justify-content: center; text-align: center; background-color: rgb(146, 196, 219);">
                         <p style="margin: 0; color: white; font-size: 24px;"><b>Détails de l'opération</b></p>
@@ -69,7 +73,10 @@
                     <p style="color: rgb(55, 97, 233);font-weight: bolder" >PRIERE DE TRANSFERER CET EMAIL A TOUTES LES PARTIES CONCERNEES.</p>
                 </div>
 </div>
-            </div>
+</div>
+</td>
+</tr>
+</table>
         </div>
         <div class="col-12" style="margin-top: 2%;">
 

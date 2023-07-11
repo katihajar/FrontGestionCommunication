@@ -169,6 +169,13 @@ import { CharteChangeBiFrAngComponent } from './views/pilote/changementplanifier
 import { CharteChangeBiAngComponent } from './views/pilote/changementplanifier/charte-change-bi-ang/charte-change-bi-ang.component';
 import { AjouterNuitApplicativeComponent } from './views/pilote/nuitApplicative/ajouter-nuit-applicative/ajouter-nuit-applicative.component';
 import { CharteNuitApplicativeComponent } from './views/pilote/nuitApplicative/charte-nuit-applicative/charte-nuit-applicative.component';
+import { RegistreProblemeComponent } from './views/pilote/probleme/registre-probleme/registre-probleme.component';
+import { CharteProblemeFrComponent } from './views/pilote/probleme/charte-probleme-fr/charte-probleme-fr.component';
+import { CharteProblemeFrAngComponent } from './views/pilote/probleme/charte-probleme-fr-ang/charte-probleme-fr-ang.component';
+import { CharteProblemeAngComponent } from './views/pilote/probleme/charte-probleme-ang/charte-probleme-ang.component';
+import { AjouterProblemeFrComponent } from './views/pilote/probleme/ajouter-probleme-fr/ajouter-probleme-fr.component';
+import { AjouterProblemeFrAngComponent } from './views/pilote/probleme/ajouter-probleme-fr-ang/ajouter-probleme-fr-ang.component';
+import { RegistreProblemeRespoComponent } from './views/responsable/registre-probleme-respo/registre-probleme-respo.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -276,7 +283,14 @@ export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
     CharteChangeBiFrAngComponent,
     CharteChangeBiAngComponent,
     AjouterNuitApplicativeComponent,
-    CharteNuitApplicativeComponent
+    CharteNuitApplicativeComponent,
+    RegistreProblemeComponent,
+    CharteProblemeFrComponent,
+    CharteProblemeFrAngComponent,
+    CharteProblemeAngComponent,
+    AjouterProblemeFrComponent,
+    AjouterProblemeFrAngComponent,
+    RegistreProblemeRespoComponent
     ],
   imports: [
     ProgressSpinnerModule,

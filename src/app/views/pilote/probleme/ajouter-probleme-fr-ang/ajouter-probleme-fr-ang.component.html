@@ -1,0 +1,245 @@
+<ng-template [ngIf]="this.spinner ">
+    <div class="spinner-container">
+      <p-progressSpinner styleClass="spinner" strokeWidth="4" [fill]="'#ffffff'"></p-progressSpinner>
+    </div>
+  </ng-template>
+
+<div [ngClass]="{'blur': this.spinner}" class="container-fluid page" style="background-color: white">
+    <div class="d-flex page__box p-3">Ajouter un Probleme</div>
+    <div class="card align-items-center page__content shadow p-3 position-relative">
+            <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
+              
+                <button pButton pRipple style=" float: right;margin-right: 2%;" type="button" label="translate"
+                    class="p-button-raised" (click)="translateInput()" ></button>
+            </div>
+            <div style="width: 100%;">
+                <div style="float:left; width: 50%;border-right:3px solid #6d6a6a;">
+                    <div class="col-12" style="margin: 2%">
+                        <span class="p-input-icon-left" style="margin-left: 1%" [style]="{ width: '30%' }">
+                            <label for="basic3"
+                                style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;"> Sujet<span style="color: red;">*</span></label>
+                            <input inputId="basic3" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }"
+                                type="text" pInputText placeholder="Entré le Sujet"
+                                [(ngModel)]="this.AddProbleme.topic" />
+
+                        </span>
+                     
+                     
+
+                    </div>
+                   
+                    <div  class="col-12" style="margin-bottom: 2%;">
+                        <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '46%' }">
+                            <label for="basic5"
+                                style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">
+                                Description des problèmes rencontrés<span style="color: red;">*</span></label>
+                            <textarea id="basic5" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }"
+                                type="text" pInputTextarea placeholder="Entré le Detail"
+                                [(ngModel)]="this.AddProbleme.description"></textarea>
+
+                        </span>
+                        <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '46%' }">
+                            <label for="basic5"
+                                style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Méthode d’analyse et outillage<span style="color: red;">*</span></label>
+                            <textarea id="basic5" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }"
+                                type="text" pInputTextarea placeholder="Entré l'Impact Métier"
+                                [(ngModel)]="this.AddProbleme.ananlyse"></textarea>
+
+                        </span>
+                    </div>
+                   
+                    <div  class="card align-items-center" style="width: 95%; margin-left: 3%;margin-bottom: 2%;background-color: rgb(241, 241, 241);">
+                        <h1 style="margin: 3%;color: black;">Avancement du plan d’actions<span style="color: red;">*</span></h1>
+                        <div class="col-12 text-center" style="margin-bottom: 2%">
+                            <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '45%' }">
+                                <label for="basic6"
+                                    style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 4%">Sujet
+                                    </label>
+                                <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }"
+                                    type="text" pInputText placeholder="Entré le sujet"
+                                    [(ngModel)]="this.AvancementAction.topic" />
+                            </span>
+                            </div>
+                            <div class="col-12 text-center" style="margin-bottom: 2%">
+                            <span class="p-input-icon-left" style="margin-left: 10%" [style]="{ width: '70%' }">
+                                <label
+                                    style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Avancement</label>
+                                <textarea style="padding-left: 0.8rem; " required [style]="{ width: '100%' }"
+                                    type="text" pInputTextarea placeholder="Entré l'avancement'"
+                                    [(ngModel)]="AvancementAction.update"></textarea>
+
+                            </span>
+                            <button style="margin-left: 1%" pButton pRipple type="button" icon="pi pi-plus"
+                                (click)="AddAvancementAction()" class="p-button-rounded p-button-success"></button>
+                        </div>
+                    
+                        <div class="col-12" style="margin: 2%">
+                            <p-table class="table" [value]="this.ListAvancementAction" dataKey="id" [rows]="10"
+                                [showCurrentPageReport]="true" [paginator]="true"
+                                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                Sujet
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                Avancement
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                supprimer
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-cont>
+                                    <tr>
+                                        <td>
+                                            {{ cont.topic }}
+                                        </td>
+
+
+                                        <td>
+                                            {{ cont.update }}
+                                        </td>
+                                        <td>
+                                            <button pButton pRipple type="button" style="font-size: larger" (click)="removeAvancementAction(cont)"
+                                                icon="pi pi-times" class="p-button-rounded p-button-danger"></button>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage">
+                                    <tr>
+                                        <td colspan="3">aucun contenu n'a été ajoué.</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+
+                </div>
+                <div style="float:right; width: 50%;">
+                    <div class="col-12" style="margin: 2%;display: flex;">
+                        <span class="p-input-icon-left" style="margin-left: 1%" [style]="{ width: '30%' }">
+                            <label for="basic01"
+                                style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Topic<span style="color: red;">*</span></label>
+                            <input inputId="basic01" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }"
+                                type="text" pInputText placeholder="Enter Title"
+                                [(ngModel)]="this.AddProblemeAng.topic" />
+
+                        </span>
+                      
+
+                    </div>
+                    <div class="col-12" style="margin-bottom: 2%;">
+                        <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '46%' }">
+                            <label for="basic5"
+                                style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Description of the problems encountered<span style="color: red;">*</span></label>
+                            <textarea id="basic5" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }"
+                                type="text" pInputTextarea placeholder="Enter Detail"
+                                [(ngModel)]="this.AddProblemeAng.description"></textarea>
+
+                        </span>
+                        <span class="p-input-icon-left" style="margin-left: 3%" [style]="{ width: '46%' }">
+                            <label for="basic5"
+                                style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Analysis method<span style="color: red;">*</span></label>
+                            <textarea id="basic5" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }"
+                                type="text" pInputTextarea placeholder="Enter Business Impact"
+                                [(ngModel)]="this.AddProblemeAng.ananlyse"></textarea>
+
+                        </span>
+                 
+                    </div>
+                    
+
+                    
+                    <div  class="card align-items-center" style="width: 95%; margin-left: 3%;margin-bottom: 2%;background-color: rgb(241, 241, 241);">
+                        <h1 style="margin: 3%;color: black;" >Action plan status<span style="color: red;">*</span></h1>
+                        <div class="col-12 text-center" style="margin-bottom: 2%">
+                            <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '45%' }">
+                                <label for="basic6"
+                                    style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 4%">Topic
+                                    </label>
+                                <input id="basic6" required style="padding-left: 0.8rem; " [style]="{ width: '100%' }"
+                                    type="text" pInputText placeholder="Enter Ticket"
+                                    [(ngModel)]="this.AvancementActionAng.topic" />
+                            </span>
+                            </div>
+                            <div class="col-12 text-center" style="margin-bottom: 2%">
+                            <span class="p-input-icon-left" style="margin-left: 10%" [style]="{ width: '70%' }">
+                                <label
+                                    style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Update</label>
+                                <textarea style="padding-left: 0.8rem; " required [style]="{ width: '100%' }"
+                                    type="text" pInputTextarea placeholder="Enter description"
+                                    [(ngModel)]="this.AvancementActionAng.update"></textarea>
+
+                            </span>
+                            <button style="margin-left: 1%" pButton pRipple type="button" icon="pi pi-plus"
+                                (click)="AddAvancementActionAng()" class="p-button-rounded p-button-success"></button>
+                        </div>
+                    
+                        <div class="col-12" style="margin: 2%">
+                            <p-table class="table" [value]="this.ListAvancementActionAng" dataKey="id" [rows]="10"
+                                [showCurrentPageReport]="true" [paginator]="true"
+                                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                               Topic
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                Update
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                delete
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-cont>
+                                    <tr>
+                                        <td>
+                                            {{ cont.topic }}
+                                        </td>
+
+
+                                        <td>
+                                            {{ cont.update }}
+                                        </td>
+                                        <td>
+                                            <button pButton pRipple type="button" style="font-size: larger" (click)="removeAvancementActionAng(cont)"
+                                                icon="pi pi-times" class="p-button-rounded p-button-danger"></button>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage">
+                                    <tr>
+                                        <td colspan="3">aucun contenu n'a été ajoué.</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                    
+                </div>
+             
+            </div>
+            <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
+                <button pButton pRipple (click)="showCharte()" type="button" label="Visualiser la charte"
+                    style=" float: left;margin-left: 2%;" class="p-button-raised p-button-help"></button>
+                <button pButton pRipple (click)="SendAndSaveProbleme()" [disabled]="isSubmitDisabled()" style=" float: right;margin-right: 2%;" type="button" label="Soumettre"
+                    class="p-button-raised"></button>
+            </div>
+        </div>
+
+</div>
+<app-charte-probleme-fr-ang [ngClass]="{'blur': this.spinner}" *ngIf="charteProblemefrAng"></app-charte-probleme-fr-ang>

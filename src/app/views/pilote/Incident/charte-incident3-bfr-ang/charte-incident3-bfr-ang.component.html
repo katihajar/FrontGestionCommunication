@@ -16,7 +16,11 @@
         </div>
     </div>
 <div style="width: 100%;">
-  <div style="float:left; width: 50%;"  >
+  <table cellpadding="0" cellspacing="0" border="0" width="100%">
+    <tr>
+      <td align="left" valign="top" width="50%">
+        <div style="float: left; width: 100%;">
+  
     <div style="margin-top: 2%;margin-left: 2%;">
       <p>Sir or Madam,</p><br>
       <br>
@@ -57,8 +61,10 @@
        </div>
 
   </div>
- 
-  <div style="float:right;width: 49%;" [ngStyle]="{'border-left': this.AddIncident.statut == 'Ouvert' ? '3px solid #e26a61' : (this.AddIncident.statut == 'Résolu avec Suivi' ? '3px solid #ddbd07' : '3px solid #17d440') }" >
+</td>
+<td align="left" valign="top" width="50%">
+  <div style="float: right; width: 100%;" [ngStyle]="{'border-left': this.AddIncident.statut == 'Ouvert' ? '3px solid #e26a61' : (this.AddIncident.statut == 'Résolu avec Suivi' ? '3px solid #ddbd07' : '3px solid #17d440') }">
+  
     <div style="margin-top: 2%;margin-left: 2%;">
       <p>Madame, Monsieur</p><br>
       <br>
@@ -100,6 +106,9 @@
     </div>
 
   </div>
+</td>
+</tr>
+</table>
 </div>
 <div class="col-12" >
   <div *ngIf="this.AddIncident.statut == 'Ouvert'" >

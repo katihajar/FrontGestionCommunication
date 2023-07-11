@@ -29,7 +29,36 @@ private _charteChangeBiAng: boolean = false;
 private _charteChangeBiAngFr: boolean = false;
 private _charteChangeBiFr: boolean = false;
 private _charteNuitApplicative: boolean = false;
+private _charteProblemefr: boolean = false;
+private _charteProblemefrAng: boolean = false;
+private _charteProblemeAng: boolean = false;
   constructor() { }
+
+  get charteProblemefr(): boolean {
+    return this._charteProblemefr;
+  }
+
+  set charteProblemefr(value: boolean) {
+    this._charteProblemefr = value;
+  }
+
+
+  get charteProblemefrAng(): boolean {
+    return this._charteProblemefrAng;
+  }
+
+  set charteProblemefrAng(value: boolean) {
+    this._charteProblemefrAng = value;
+  }
+
+  get charteProblemeAng(): boolean {
+    return this._charteProblemeAng;
+  }
+
+  set charteProblemeAng(value: boolean) {
+    this._charteProblemeAng = value;
+  }
+
   get charteNuitApplicative(): boolean {
     return this._charteNuitApplicative;
   }

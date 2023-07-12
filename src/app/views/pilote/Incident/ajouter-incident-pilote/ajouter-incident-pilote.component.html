@@ -22,12 +22,12 @@
                 </span>
                 <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
                     <label for="basic1" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date Début<span style="color: red;">*</span></label>
-                    <p-calendar inputId="basic1" [showTime]="true" [(ngModel)]="date2" [style]="{ width: '100%' }" appendTo="body" [(ngModel)]="this.AddIncident.dateDebut" ></p-calendar>
+                    <p-calendar dateFormat="dd/mm/yy" inputId="basic1" [showTime]="true" [(ngModel)]="date2" [style]="{ width: '100%' }" appendTo="body" [(ngModel)]="this.AddIncident.dateDebut" ></p-calendar>
 
                 </span>
                 <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
                     <label for="basic2" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date Fin</label>
-                    <p-calendar inputId="basic2" [showTime]="true" [(ngModel)]="date3" [style]="{ width: '100%' }" appendTo="body" [(ngModel)]="this.AddIncident.dateFin"></p-calendar>
+                    <p-calendar dateFormat="dd/mm/yy" inputId="basic2" [showTime]="true" [(ngModel)]="date3" [style]="{ width: '100%' }" appendTo="body" [(ngModel)]="this.AddIncident.dateFin"></p-calendar>
 
                 </span>
             
@@ -178,7 +178,7 @@
                 <div class="col-12" >
                     <span style="margin-left: 2%" class="p-input-icon-left" [style]="{ width: '40%' }">
                         <label for="basic8" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Prochaine Communication<span style="color: red;">*</span></label>
-                        <p-calendar inputId="basic8" [(ngModel)]="date1" [style]="{ width: '100%' }" appendTo="body" [(ngModel)]="this.AddIncident.prochaineCommunication" [showTime]="true" ></p-calendar>
+                        <p-calendar dateFormat="dd/mm/yy" inputId="basic8" [(ngModel)]="date1" [style]="{ width: '100%' }" appendTo="body" [(ngModel)]="this.AddIncident.prochaineCommunication" [showTime]="true" ></p-calendar>
     
                     </span>
             </div>

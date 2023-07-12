@@ -45,6 +45,8 @@ import { RegistreProblemeComponent } from './views/pilote/probleme/registre-prob
 import { AjouterProblemeFrComponent } from './views/pilote/probleme/ajouter-probleme-fr/ajouter-probleme-fr.component';
 import { AjouterProblemeFrAngComponent } from './views/pilote/probleme/ajouter-probleme-fr-ang/ajouter-probleme-fr-ang.component';
 import { RegistreProblemeRespoComponent } from './views/responsable/registre-probleme-respo/registre-probleme-respo.component';
+import { AjouterMonitoringMstoolboxComponent } from './views/pilote/monitoringMstoolbox/ajouter-monitoring-mstoolbox/ajouter-monitoring-mstoolbox.component';
+import { AjouterMonitoringOptirentaComponent } from './views/pilote/monitoringOptirenta/ajouter-monitoring-optirenta/ajouter-monitoring-optirenta.component';
 
 
 @NgModule({
@@ -112,7 +114,9 @@ import { RegistreProblemeRespoComponent } from './views/responsable/registre-pro
         { path: 'healthcheck/PreprodProd/registre', component: RegistreHealthCheckComponent },
         { path: 'healthcheck/PreprodProd/save', component: AjoutHealthCheckComponent },
         { path: 'healthcheck/Bw/save', component: AjoutHealthCheckBwPerimetreComponent },
-        { path: 'healthcheck/Flamingo/save', component: AjouterHealthCheckFlamingoComponent },
+        { path: 'healthcheck/Bw/save', component: AjoutHealthCheckBwPerimetreComponent },
+        { path: 'monitoring/mstoolbox/save', component: AjouterMonitoringMstoolboxComponent },
+        { path: 'monitoring/optirenta/save', component: AjouterMonitoringOptirentaComponent },
         { path: 'nuitApplicative/save', component: AjouterNuitApplicativeComponent },
         { path: '', redirectTo: 'Dashboard', pathMatch: 'full' },
       ],

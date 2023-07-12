@@ -34,14 +34,14 @@
                         <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
                             <label for="basic1" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date
                                 Début<span style="color: red;">*</span></label>
-                                <p-calendar inputId="basic2" [(ngModel)]="date2" [style]="{ width: '100%' }" [showTime]="true" appendTo="body"
+                                <p-calendar dateFormat="dd/mm/yy" inputId="basic2" [(ngModel)]="date2" [style]="{ width: '100%' }" [showTime]="true" appendTo="body"
                                 [(ngModel)]="this.AddChangement.dateDebut"></p-calendar>
 
                         </span>
                         <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
                             <label for="basic2" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date
                                 Fin<span style="color: red;">*</span></label>
-                                <p-calendar inputId="basic2" [(ngModel)]="date1" [style]="{ width: '100%' }" [showTime]="true" appendTo="body"
+                                <p-calendar dateFormat="dd/mm/yy" inputId="basic2" [(ngModel)]="date1" [style]="{ width: '100%' }" [showTime]="true" appendTo="body"
                                 [(ngModel)]="this.AddChangement.dateFin"></p-calendar>
 
                         </span>
@@ -79,7 +79,7 @@
                     <div *ngIf="this.AddChangement.application.charteChangement == 'charte Changement BI'" class="col-12" style="margin-bottom: 2%;">
                         <span style="margin-left: 3%" class="p-input-icon-left" [style]="{ width: '40%' }">
                             <label for="basic8" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Prochaine Communication</label>
-                            <p-calendar inputId="basic8" [style]="{ width: '100%' }" appendTo="body" [(ngModel)]="this.AddChangement.prochaineCom" [showTime]="true" ></p-calendar>
+                            <p-calendar dateFormat="dd/mm/yy" inputId="basic8" [style]="{ width: '100%' }" appendTo="body" [(ngModel)]="this.AddChangement.prochaineCom" [showTime]="true" ></p-calendar>
         
                         </span>
                  
@@ -179,13 +179,13 @@
                         <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
                             <label for="basic03" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Start Date<span style="color: red;">*</span>
                                 </label>
-                            <p-calendar inputId="basic03" [(ngModel)]="date3" [showTime]="true" [style]="{ width: '100%' }" appendTo="body"
+                            <p-calendar dateFormat="dd/mm/yy" inputId="basic03" [(ngModel)]="date3" [showTime]="true" [style]="{ width: '100%' }" appendTo="body"
                                 [(ngModel)]="this.AddChangementAng.dateDebut"></p-calendar>
                         </span>
                         <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
                             <label for="basic04" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">End Date<span style="color: red;">*</span>
                                 </label>
-                            <p-calendar inputId="basic04" [(ngModel)]="date4" [showTime]="true" [style]="{ width: '100%' }" appendTo="body"
+                            <p-calendar dateFormat="dd/mm/yy" inputId="basic04" [(ngModel)]="date4" [showTime]="true" [style]="{ width: '100%' }" appendTo="body"
                                 [(ngModel)]="this.AddChangementAng.dateFin"></p-calendar>
 
                         </span>
@@ -223,7 +223,7 @@
                     <div *ngIf="this.AddChangement.application.charteChangement == 'charte Changement BI'"  class="col-12" style="margin-bottom: 3%;">
                         <span style="margin-left: 2%" class="p-input-icon-left" [style]="{ width: '40%' }">
                             <label for="basic8" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Prochaine Communication</label>
-                            <p-calendar inputId="basic8"  [style]="{ width: '100%' }" appendTo="body" [(ngModel)]="this.AddChangementAng.prochaineCom" [showTime]="true" ></p-calendar>
+                            <p-calendar dateFormat="dd/mm/yy" inputId="basic8"  [style]="{ width: '100%' }" appendTo="body" [(ngModel)]="this.AddChangementAng.prochaineCom" [showTime]="true" ></p-calendar>
         
                         </span>
                  

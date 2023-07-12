@@ -10,7 +10,10 @@
             <button class="nav-link" id="BI-tab" data-bs-toggle="tab" data-bs-target="#BI" type="button" role="tab" aria-controls="BI" aria-selected="false">BI</button>
           </li>
           <li class="nav-item" role="presentation">
-            <button class="nav-link" id="flamingo-tab" data-bs-toggle="tab" data-bs-target="#flamingo" type="button" role="tab" aria-controls="flamingo" aria-selected="false">flamingo</button>
+            <button class="nav-link" id="flamingo-tab" data-bs-toggle="tab" data-bs-target="#flamingo" type="button" role="tab" aria-controls="flamingo" aria-selected="false">Suply</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="lot1-tab" data-bs-toggle="tab" data-bs-target="#lot1" type="button" role="tab" aria-controls="lot1" aria-selected="false">lot 1</button>
           </li>
         </ul>
         <div class="tab-content" id="myTabContent">
@@ -320,7 +323,156 @@
           </ng-template>
         </p-table>
         </div>
-      
+        <div class="tab-pane fade" id="lot1" role="tabpanel" aria-labelledby="lot1-tab" style="padding: 20px;">
+          <p-accordion [activeIndex]="0">
+            <p-accordionTab header="Etat de santé MSTOOLBOX">
+              <p-toolbar styleClass="mb-4 gap-2">
+                <ng-template pTemplate="right">
+                    <button pButton pRipple label="Ajouter Etat santé MSTOOLBOX" icon="pi pi-plus" class="p-button-success mr-2" (click)="RouterAjoutMstoolbox()" ></button>
+                </ng-template>
+                <ng-template pTemplate="left">
+                </ng-template>
+            </p-toolbar>
+             
+            <p-table class="table" #dt2 [value]=" this.ListMonitoringMstoolbox" dataKey="id" 
+            [rows]="pageSizeHealthMstoolbox" [totalRecords]="totalRecordsHealthMstoolbox" [paginator]="true" 
+            [loading]="loadingHealthMstoolbox" [currentPageReportTemplate]="currentPageReportTemplateHealthMstoolbox"
+            (onLazyLoad)="lazyLoadHandlerMstoolbox($event)"
+            [lazy]="true"
+            [rowsPerPageOptions]="[10, 25, 50]"
+            >
+              <ng-template pTemplate="caption">
+                <div class="flex">
+             <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                    (click)="clearMstoolbox()"></button>
+                 
+                </div>
+              </ng-template>
+              <ng-template pTemplate="header">
+                <tr>      
+                  
+                  <th  style="text-align: center;">
+                    <div class="flex align-items-center">
+                      <span style="width: 100%;">Titre</span>
+                      <input [style]="{ width: '100%' }" pInputText type="text" [(ngModel)]="filterHealthMstoolbox.titre" placeholder="recherche par mot-clé" />
+                    </div>
+                  </th> 
+                  <th style="text-align: center;">
+                    <div class="flex align-items-center">
+                      <span style="width: 100%;">Date d'Ajout</span>
+                      <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '100%' }">
+                      <p-calendar dateFormat="dd/mm/yy" [style]="{ width: '100%' }" inputId="basic2"  appendTo="body" [(ngModel)]="dateHealthMstoolbox"></p-calendar>
+                    </span></div>
+                  </th>
+                  
+                  <th  style="text-align: center;">
+                    <span  style="width: 100%;">Action</span><br>
+                    <button pButton pRipple  type="button" style="font-size: larger;" (click)="searchHealthMstoolbox()" icon="pi pi-search"
+                      class="p-button-rounded p-button-outlined"></button>
+                  </th> 
+                 
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-health>
+                <tr>
+                 
+                  <td  style="text-align: center;">
+                    {{health.titre}}
+                  </td>
+                  <td  style="text-align: center;">
+                    {{health.dateAjout | date: 'dd/MM/yyyy'}}
+                  </td>
+                  <td  style="text-align: center;"><button pButton pRipple  type="button" style="font-size: larger;" icon="pi pi-search" (click)="charteMstoolbox(health)"
+                      class="p-button-rounded p-button-info"></button>
+                  <button pButton pRipple  type="button" style="font-size: larger;" icon="pi pi-pencil" (click)="EditeMstoolbox(health)"
+                    class="p-button-rounded p-button-success"></button>
+                <button *ngIf="health.createurMonitoring.id == this.User.id"  pButton pRipple type="button" style="font-size: larger;" icon="pi pi-times" (click)="DeleteMstoolbox(health.id)"
+                  class="p-button-rounded p-button-danger"></button>
+              </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="4">aucun état santé n'a été trouvé.</td>
+                </tr>
+              </ng-template>
+            </p-table>
+              </p-accordionTab>
+              <p-accordionTab header="Nuit Applicative OPTIRENTA">
+                <p-toolbar styleClass="mb-4 gap-2">
+                  <ng-template pTemplate="right">
+                      <button pButton pRipple label="Ajouter Nuit Applicative OPTIRENTA" icon="pi pi-plus" class="p-button-success mr-2" (click)="RouterAjoutOptirenta()" ></button>
+                  </ng-template>
+                  <ng-template pTemplate="left">
+                  </ng-template>
+              </p-toolbar>
+               
+              <p-table class="table" #dt2 [value]=" this.ListMonitoringOptirenta" dataKey="id" 
+              [rows]="pageSizeHealthOptirenta" [totalRecords]="totalRecordsHealthOptirenta" [paginator]="true" 
+              [loading]="loadingHealthOptirenta" [currentPageReportTemplate]="currentPageReportTemplateHealthOptirenta"
+              (onLazyLoad)="lazyLoadHandlerOptirenta($event)"
+              [lazy]="true"
+              [rowsPerPageOptions]="[10, 25, 50]"
+              >
+                <ng-template pTemplate="caption">
+                  <div class="flex">
+               <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                      (click)="clearOptirenta()"></button>
+                   
+                  </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                  <tr>      
+                    
+                    <th  style="text-align: center;">
+                      <div class="flex align-items-center">
+                        <span style="width: 100%;">Titre</span>
+                        <input [style]="{ width: '100%' }" pInputText type="text" [(ngModel)]="filterHealthOptirenta.titre" placeholder="recherche par mot-clé" />
+                      </div>
+                    </th> 
+                    <th style="text-align: center;">
+                      <div class="flex align-items-center">
+                        <span style="width: 100%;">Date d'Ajout</span>
+                        <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '100%' }">
+                        <p-calendar dateFormat="dd/mm/yy" [style]="{ width: '100%' }" inputId="basic2"  appendTo="body" [(ngModel)]="dateHealthOptirenta"></p-calendar>
+                      </span></div>
+                    </th>
+                    
+                    <th  style="text-align: center;">
+                      <span  style="width: 100%;">Action</span><br>
+                      <button pButton pRipple  type="button" style="font-size: larger;" (click)="searchHealthOptirenta()" icon="pi pi-search"
+                        class="p-button-rounded p-button-outlined"></button>
+                    </th> 
+                   
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-health>
+                  <tr>
+                   
+                    <td  style="text-align: center;">
+                      {{health.titre}}
+                    </td>
+                    <td  style="text-align: center;">
+                      {{health.dateAjout | date: 'dd/MM/yyyy'}}
+                    </td>
+                    <td  style="text-align: center;"><button pButton pRipple  type="button" style="font-size: larger;" icon="pi pi-search" (click)="charteOptirenta(health)"
+                        class="p-button-rounded p-button-info"></button>
+                    <button pButton pRipple  type="button" style="font-size: larger;" icon="pi pi-pencil" (click)="EditeOptirenta(health)"
+                      class="p-button-rounded p-button-success"></button>
+                  <button *ngIf="health.createurMonitoring.id == this.User.id"  pButton pRipple type="button" style="font-size: larger;" icon="pi pi-times" (click)="DeleteOptirenta(health.id)"
+                    class="p-button-rounded p-button-danger"></button>
+                </td>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                  <tr>
+                    <td colspan="4">aucune nuit applicate n'a été trouvé.</td>
+                  </tr>
+                </ng-template>
+              </p-table>
+              </p-accordionTab>
+              </p-accordion>
+          </div>
         </div>
       </div>
     </div>
@@ -359,3 +511,5 @@
 <app-charte-health-check-flamingo *ngIf="charteHealthCheckFlamingo"></app-charte-health-check-flamingo>
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 <app-nouvel-charte *ngIf="newcharteHealthCheckBw"></app-nouvel-charte>
+<app-charte-monitoring-mstoolbox *ngIf="charteMonitoringMstoolbox"></app-charte-monitoring-mstoolbox>
+<app-charte-monitoring-optirenta  *ngIf="charteMonitoringOptirenta"></app-charte-monitoring-optirenta>

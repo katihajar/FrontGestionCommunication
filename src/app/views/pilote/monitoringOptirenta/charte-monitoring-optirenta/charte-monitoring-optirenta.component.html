@@ -1,0 +1,32 @@
+<p-dialog [modal]="true" [(visible)]="this.charteMonitoringOptirenta" header="Charte Monitoring OPTIRENTA "
+    [style]="{width: '55vw', height: '70vw','margin-left':'3%'}" [resizable]="true">
+    <div #myDialog id="myDialog" style="width: 100%;">
+        <div style="margin: 2%;font-size: 18px;font-weight: 500;">
+            <p>Bonjour,</p><br>
+            <p style="margin-bottom: 3%;">Voici le bilan du suivi des flux OPTIRENTA pour la nuit applicative du 
+                {{this.AddMonitoringOptirenta.dateAjout | date:'dd/MM/YYYY'}}: </p>
+            <div  style="margin-top: 2%">
+                <table style="font-family: arial, sans-serif;
+                border-collapse: collapse;">
+                    <tr>
+                        <th style="border: 1.5px solid black;text-align: left; padding: 8px;color: white;background-color: #595959;text-align: center;" [width]="300">Flux</th>
+                        <th style="border: 1.5px solid black;text-align: left; padding: 8px;color: white;background-color: #595959;text-align: center;" [width]="150">Etat</th>
+                        <th style="border: 1.5px solid black;text-align: left; padding: 8px;color: white;background-color: #595959;text-align: center;" [width]="350">Commentaire</th>
+                    </tr>
+                    <tr *ngFor="let flux of this.AddMonitoringOptirenta.fluxOptirentaList">
+                        <td style="border: 1.5px solid black;color: white;text-align: left; padding: 8px;background-color: #A6A6A6;" >{{flux.nomFlux}}</td>
+                        <td style="border: 1.5px solid black;text-align: left; padding: 8px;" 
+                        [style.color]="(flux.etat === 'OK') ? 'green' : ((flux.etat === 'Point D\'attention') ? 'orange' : 'black')">
+                            {{flux.etat}}</td>
+                        <td style="border: 1.5px solid black;text-align: left; padding: 8px;" 
+                        [style.color]="(flux.etat === 'OK') ? 'green' : ((flux.etat === 'Point D\'attention') ? 'orange' : 'black')">{{flux.commentaire}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="this.charteMonitoringOptirenta=false" label="Ok"
+            styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>

@@ -212,12 +212,12 @@
                   </span>
                   <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
                     <label for="basic1" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date Début</label>
-                    <p-calendar appendTo="body"  inputId="basic1" [showTime]="true" [(ngModel)]="date2" [style]="{ width: '100%' }" [(ngModel)]="this.helthchekdetail.dateDebut" ></p-calendar>
+                    <p-calendar dateFormat="dd/mm/yy" appendTo="body"  inputId="basic1" [showTime]="true" [(ngModel)]="date2" [style]="{ width: '100%' }" [(ngModel)]="this.helthchekdetail.dateDebut" ></p-calendar>
 
                 </span>
                 <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
                     <label for="basic2" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date Fin</label>
-                    <p-calendar appendTo="body"  inputId="basic2" [showTime]="true" [(ngModel)]="date3" [style]="{ width: '100%' }" [(ngModel)]="this.helthchekdetail.dateFin"></p-calendar>
+                    <p-calendar dateFormat="dd/mm/yy" appendTo="body"  inputId="basic2" [showTime]="true" [(ngModel)]="date3" [style]="{ width: '100%' }" [(ngModel)]="this.helthchekdetail.dateFin"></p-calendar>
 
                 </span>
                 </div>
@@ -284,7 +284,7 @@
                         [options]="ListStatut"
                         [style]="{ width: '100%', required: 'required' }"
                         placeholder="Selectinné statut"
-                        optionValue="name"ss
+                        optionValue="name"
                         optionLabel="name"
                         [showClear]="true"
                         [(ngModel)]="this.helthchekdetail.statut"

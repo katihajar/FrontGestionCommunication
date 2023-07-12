@@ -1,0 +1,69 @@
+<p-dialog [modal]="true" [(visible)]="this.charteMonitoringMstoolbox" header="Charte Monitoring MSTOOLBOX "
+    [style]="{width: '67vw', height: '70vw','margin-left':'3%'}" [resizable]="true">
+    <div #myDialog id="myDialog" style="width: 100%;">
+        <div style="margin: 2%;font-size: 18px;font-weight: 500;">
+            <p style="color: darkblue;">Bonjour,</p><br>
+            <p style="margin-bottom: 3%;color: darkblue;">Ci-dessous les détails des transactions HANDIBIP :
+                 </p>
+            <div  style="margin-top: 2%">
+                <table style="font-family: arial, sans-serif;
+                border-collapse: collapse;">
+                    <tr>
+                        <th style="border: 1.5px solid black;padding: 8px;color: black;background-color: #BDD6EE;text-align: center;" [width]="250">Date</th>
+                        <th style="border: 1.5px solid black;padding: 8px;color: black;background-color: #BDD6EE;text-align: center;" [width]="150">Number of requests</th>
+                        <th style="border: 1.5px solid black;padding: 8px;color: black;background-color: #BDD6EE;text-align: center;" [width]="150">Number of Untreated requests</th>
+                        <th style="border: 1.5px solid black;padding: 8px;color: black;background-color: #BDD6EE;text-align: center;" [width]="200">% of request in Success<br><span style="font-size: small;">Transaction Ok from End to End</span></th>
+                        <th style="border: 1.5px solid black;padding: 8px;color: black;background-color: #BDD6EE;text-align: center;" [width]="220">% of request Untreated<br><span style="font-size: small;">User error or request not processed</span></th>
+                    </tr>
+                    <tr *ngFor="let transaction of this.AddMonitoringMstoolbox.transactionHandbidList">
+                        <td style="border: 1.5px solid black;text-align: right; padding: 8px;color: black;" >{{transaction.date | date :'dd/MM/YYYY'}}</td>
+                        <td style="border: 1.5px solid black;text-align: right; padding: 8px;color: black;" >{{transaction.nombreRequet}}</td>
+                        <td style="border: 1.5px solid black;text-align: right; padding: 8px;color: black;" >{{transaction.nombreRequetNontraite}}</td>
+                        <td style="border: 1.5px solid black;text-align: right; padding: 8px;background-color: #CCFFCC;color: black;" >{{transaction.pourcentageDemandeReussie}}%</td>
+                        <td style="border: 1.5px solid black;text-align: right; padding: 8px;background-color: #99CCFF;color: black;" >{{transaction.pourcentageDemandeNontraite}}%</td>
+                    </tr>
+                </table>
+            </div>
+            <br>
+            <div>
+                <canvas id="ChartHandBid"></canvas>
+              </div>
+            <br>
+            <p style="color: black;"><u>Liste des codes implants :</u></p>
+            <p style="color: black;"><b>{{this.AddMonitoringMstoolbox.dateImplants | date :'dd/MM'}}</b></p>
+            <div *ngFor="let implant of this.AddMonitoringMstoolbox.implantsList">
+                <p style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{implant.numeroImplants}}</p>
+            </div>
+            <p style="margin-bottom: 3%;color: darkblue;">Ci-dessous les détails des transactions SMILEE :
+            </p>
+       <div  style="margin-top: 2%">
+           <table style="font-family: arial, sans-serif;
+           border-collapse: collapse;">
+               <tr>
+                   <th style="border: 1.5px solid black; padding: 8px;color: black;background-color: #BDD6EE;text-align: right;" [width]="250">Date</th>
+                   <th style="border: 1.5px solid black;padding: 8px;color: black;background-color: #BDD6EE;text-align: center;" [width]="150">Number of requests</th>
+                   <th style="border: 1.5px solid black;padding: 8px;color: black;background-color: #BDD6EE;text-align: center;" [width]="150">Number of Untreated requests</th>
+                   <th style="border: 1.5px solid black;padding: 8px;color: black;background-color: #BDD6EE;text-align: center;" [width]="200">% of request in Success<br><span style="font-size: small;">Transaction Ok from End to End</span></th>
+                   <th style="border: 1.5px solid black;padding: 8px;color: black;background-color: #BDD6EE;text-align: center;" [width]="220">% of request Untreated<br><span style="font-size: small;">User error or request not processed</span></th>
+               </tr>
+               <tr *ngFor="let transaction of this.AddMonitoringMstoolbox.transactionSmileList">
+                   <td style="border: 1.5px solid black;text-align: right; padding: 8px;color: black;" >{{transaction.date | date :'dd/MM/YYYY'}}</td>
+                   <td style="border: 1.5px solid black;text-align: right; padding: 8px;color: black;" >{{transaction.nombreRequet}}</td>
+                   <td style="border: 1.5px solid black;text-align: right; padding: 8px;color: black;" >{{transaction.nombreRequetNontraite}}</td>
+                   <td style="border: 1.5px solid black;text-align: right; padding: 8px;background-color: #CCFFCC;color: black;" >{{transaction.pourcentageDemandeReussie}}%</td>
+                   <td style="border: 1.5px solid black;text-align: right; padding: 8px;background-color: #99CCFF;color: black;" >{{transaction.pourcentageDemandeNontraite}}%</td>
+               </tr>
+           </table>
+       </div>
+       <br>
+       <div>
+           <canvas id="ChartSmile"></canvas>
+         </div>
+        </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="this.charteMonitoringMstoolbox=false" label="Ok"
+            styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>

@@ -1,0 +1,114 @@
+<ng-template [ngIf]="this.spinner ">
+    <div class="spinner-container">
+      <p-progressSpinner styleClass="spinner" strokeWidth="4" [fill]="'#ffffff'"></p-progressSpinner>
+    </div>
+  </ng-template>
+
+<div [ngClass]="{'blur': this.spinner}"  class="container-fluid page" style="background-color: white">
+    <div class="d-flex page__box p-3">Ajouter Monitoring OPTIRENTA</div>
+    <div class="card page__content shadow p-3 position-relative align-items-center">
+        
+   
+   
+        <div class="card align-items-center" style="width: 97%; margin-bottom: 2%;margin-top: 2%;">
+            <h1 style="margin: 3%">flux OPTIRENTA  <span style="color: red;">*</span></h1>
+            <div class="col-12" style="margin: 2%">
+                <span class="p-input-icon-left" style="margin-left: 5%" [style]="{ width: '25%' }">
+                    <label for="basic3" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Flux<span style="color: red;">*</span></label>
+                    <input style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text"
+                    pInputTextarea placeholder="Entré le flux" [(ngModel)]="this.fluxOptirenta.nomFlux" />
+
+                </span>
+                <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '25%' }">
+                    <label for="basic3" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Etat<span style="color: red;">*</span></label>
+                    <p-dropdown
+                    [options]="ListEtat"
+                    [style]="{ width: '100%', required: 'required' }"
+                    placeholder="Selectinné l'etat"
+                    optionValue="name"
+                    optionLabel="name"
+                    [showClear]="true"
+                    [(ngModel)]="this.fluxOptirenta.etat"
+                  ></p-dropdown>
+
+                </span>
+                <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '25%' }">
+                    <label for="basic3" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Commentaire<span style="color: red;">*</span></label>
+                    <input inputId="basic3" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text"  pInputText
+                        placeholder="Entré un commentaire"   [(ngModel)]="this.fluxOptirenta.commentaire" />
+
+                </span>
+                <button style="margin-left: 1%" pButton pRipple type="button" icon="pi pi-plus" (click)="AddFlux()"
+                class="p-button-rounded p-button-success"></button>
+          </div>
+         
+            <div class="col-12" style="margin: 2%">
+                <p-table class="table" [value]="this.listfluxOptirenta" dataKey="id" [rows]="10"
+                    [showCurrentPageReport]="true" [paginator]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    Flux
+                                </div>
+                            </th>
+                      
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    
+                                    Etat
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    Commentaire
+                                </div>
+                            </th>
+                          
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    supprimer
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-flux>
+                        <tr>
+                        
+
+                            <td>
+                                {{ flux.nomFlux }}
+                            </td>  
+                            <td>
+                                <span [style.color]="(flux.etat === 'OK') ? 'green' : ((flux.etat === 'Point D\'attention') ? 'orange' : 'black')">
+                                {{ flux.etat }}</span>
+                            </td> 
+                             <td>
+                                <span [style.color]="(flux.etat === 'OK') ? 'green' : ((flux.etat === 'Point D\'attention') ? 'orange' : 'black')">
+                                {{ flux.commentaire }}
+                                </span>
+                            </td>
+                          
+                            <td>
+                                <button pButton pRipple type="button" style="font-size: larger" icon="pi pi-times" 
+                                   (click)="removeFlux(flux)" class="p-button-rounded p-button-danger"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="4">aucune donnée n'a été ajoué.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+     
+        <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
+            <button pButton pRipple  type="button" label="Visualiser la charte" style=" float: left;margin-left: 2%;" (click)="charte()" [disabled]="isSubmitDisabled()" class="p-button-raised p-button-help"></button>
+            <button pButton pRipple  style=" float: right;margin-right: 2%;" type="button" [disabled]="isSubmitDisabled()" (click)="SendAndSave()" label="Soumettre"  class="p-button-raised" ></button>
+        </div>
+</div>
+</div>
+<app-charte-monitoring-optirenta [ngClass]="{'blur': this.spinner}"  *ngIf="charteMonitoringOptirenta"></app-charte-monitoring-optirenta>

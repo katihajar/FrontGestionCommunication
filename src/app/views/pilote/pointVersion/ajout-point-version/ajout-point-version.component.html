@@ -48,7 +48,7 @@
                 </span>
                 <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">
                     <label for="basic4" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date Reunion<span style="color: red;">*</span> </label>
-                        <p-calendar inputId="basic4" appendTo="body"  [(ngModel)]="date2" [style]="{ width: '100%' }" [(ngModel)]="this.AddPointVersion.dateAjout" [showTime]="true" ></p-calendar>
+                        <p-calendar dateFormat="dd/mm/yy" inputId="basic4" appendTo="body"  [(ngModel)]="date2" [style]="{ width: '100%' }" [(ngModel)]="this.AddPointVersion.dateAjout" [showTime]="true" ></p-calendar>
 
                 </span>
             </div>
@@ -58,7 +58,7 @@
                 <div class="col-12" style="margin-bottom: 2%">
                     <span style="margin-left: 2%" class="p-input-icon-left" [style]="{ width: '30%' }">
                         <label for="basic8" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date MEI</label>
-                        <p-calendar appendTo="body"  inputId="basic8" [(ngModel)]="date1" [style]="{ width: '100%' }" [(ngModel)]="this.Livraison.dateMEI" [showTime]="true" ></p-calendar>
+                        <p-calendar dateFormat="dd/mm/yy" appendTo="body"  inputId="basic8" [(ngModel)]="date1" [style]="{ width: '100%' }" [(ngModel)]="this.Livraison.dateMEI" [showTime]="true" ></p-calendar>
     
                     </span>
                     <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '30%' }">

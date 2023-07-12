@@ -32,7 +32,24 @@ private _charteNuitApplicative: boolean = false;
 private _charteProblemefr: boolean = false;
 private _charteProblemefrAng: boolean = false;
 private _charteProblemeAng: boolean = false;
+private _charteMonitoringOptirenta: boolean = false;
+private _charteMonitoringMstoolbox: boolean = false;
   constructor() { }
+  get charteMonitoringOptirenta(): boolean {
+    return this._charteMonitoringOptirenta;
+  }
+
+  set charteMonitoringOptirenta(value: boolean) {
+    this._charteMonitoringOptirenta = value;
+  }
+
+  get charteMonitoringMstoolbox(): boolean {
+    return this._charteMonitoringMstoolbox;
+  }
+
+  set charteMonitoringMstoolbox(value: boolean) {
+    this._charteMonitoringMstoolbox = value;
+  }
 
   get charteProblemefr(): boolean {
     return this._charteProblemefr;

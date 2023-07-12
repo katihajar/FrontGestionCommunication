@@ -13,6 +13,8 @@ import { HealthCheckBwPerimetreDetail } from 'src/app/controller/model/health-ch
 import { HealthCheckFlamingo } from 'src/app/controller/model/health-check-flamingo';
 import { HealthChekPreprodProd } from 'src/app/controller/model/health-chek-preprod-prod';
 import { HealthChekPreprodProdDetail } from 'src/app/controller/model/health-chek-preprod-prod-detail';
+import { MonitoringMstoolbox } from 'src/app/controller/model/monitoring-mstoolbox';
+import { MonitoringOptirenta } from 'src/app/controller/model/monitoring-optirenta';
 import { NuitApplicative } from 'src/app/controller/model/nuit-applicative';
 import { User } from 'src/app/controller/model/user';
 import { AuthService } from 'src/app/controller/service/auth.service';
@@ -20,6 +22,8 @@ import { CharteService } from 'src/app/controller/service/charte.service';
 import { HealthCheckBwPerimetreService } from 'src/app/controller/service/health-check-bw-perimetre.service';
 import { HealthCheckService } from 'src/app/controller/service/health-check.service';
 import { HealthcheckFlamingoService } from 'src/app/controller/service/healthcheck-flamingo.service';
+import { MonitoringMstoolboxService } from 'src/app/controller/service/monitoring-mstoolbox.service';
+import { MonitoringOptirentaService } from 'src/app/controller/service/monitoring-optirenta.service';
 import { NuitApplicativeService } from 'src/app/controller/service/nuit-applicative.service';
 const moment = require('moment');
 
@@ -33,6 +37,8 @@ export class RegistreHealthCheckComponent implements OnInit {
   loadingNuit: boolean = true;
   loadingBW: boolean = true;
   loadingFlamingo: boolean = true;
+  loadingHealthOptirenta: boolean = true;
+  loadingHealthMstoolbox: boolean = true;
   ListType: any[] = [];
   popUpAjout: boolean = false;
   popUpAjoutNuit: boolean = false;
@@ -72,11 +78,31 @@ export class RegistreHealthCheckComponent implements OnInit {
   totalRecordsHealthSuplyFlamingo: number = 0;
   currentPageReportTemplateHealthSuplyFlamingo: string = '';
   public dateHealthSuplyFlamingo: Date |null = null;
+   //// HealthOptirenta ///
+   filterHealthOptirenta :MonitoringOptirenta=new MonitoringOptirenta();
+   searchActiveHealthOptirenta:boolean=false;
+   pageSizeHealthOptirenta: number = 10;
+   pageHealthOptirenta: number = 0;
+   firstHealthOptirenta: number = 0;
+   totalRecordsHealthOptirenta: number = 0;
+   currentPageReportTemplateHealthOptirenta: string = '';
+   public dateHealthOptirenta: Date |null = null;
+   //// HealthMstoolbox ///
+   filterHealthMstoolbox :MonitoringMstoolbox=new MonitoringMstoolbox();
+   searchActiveHealthMstoolbox:boolean=false;
+   pageSizeHealthMstoolbox: number = 10;
+   pageHealthMstoolbox: number = 0;
+   firstHealthMstoolbox: number = 0;
+   totalRecordsHealthMstoolbox: number = 0;
+   currentPageReportTemplateHealthMstoolbox: string = '';
+   public dateHealthMstoolbox: Date |null = null;
   constructor(
     private healthFlamingoService: HealthcheckFlamingoService,
     private healthBWService: HealthCheckBwPerimetreService,
     private healthService: HealthCheckService,
     private nuitService: NuitApplicativeService,
+    private mstoolboxService: MonitoringMstoolboxService,
+    private optirentaService: MonitoringOptirentaService,
     private charteService: CharteService,
     private router: Router,
     private confirmationService: ConfirmationService,
@@ -107,6 +133,18 @@ export class RegistreHealthCheckComponent implements OnInit {
     this.dateNuitApplicative =null;
     this.loadNuitApplicatibe({ first: 0, rows: this.pageSizeNuitApplicative });
   }
+  clearOptirenta() {
+    this.searchActiveHealthOptirenta=false;
+    this.filterHealthOptirenta = new MonitoringOptirenta();
+    this.dateHealthOptirenta =null;
+    this.loadOptirenta({ first: 0, rows: this.pageSizeHealthOptirenta });
+  }
+  clearMstoolbox() {
+    this.searchActiveHealthMstoolbox=false;
+    this.filterHealthMstoolbox = new MonitoringMstoolbox();
+    this.dateHealthMstoolbox =null;
+    this.loadMstoolbox({ first: 0, rows: this.pageSizeHealthMstoolbox });
+  }
   get User(): User {
     return this.userService.User;
   }
@@ -123,6 +161,10 @@ export class RegistreHealthCheckComponent implements OnInit {
     this.loadHealthSuplyFlamingoLazy({ first: 0, rows: this.pageSizeHealthSuplyFlamingo });
     this.AddNuitApplicative = new NuitApplicative();
     this.loadNuitApplicatibe({ first: 0, rows: this.pageSizeNuitApplicative });
+    this.AddMonitoringOptirenta = new MonitoringOptirenta();
+    this.loadOptirenta({ first: 0, rows: this.pageSizeHealthOptirenta });
+    this.AddMonitoringMstoolbox = new MonitoringMstoolbox();
+    this.loadMstoolbox({ first: 0, rows: this.pageSizeHealthMstoolbox });
 
     this.ListType = [{ name: 'PREPRODUCTION' }, { name: 'PRODUCTION' }];
   }
@@ -147,13 +189,6 @@ export class RegistreHealthCheckComponent implements OnInit {
     this.AddHealthCheck = new HealthChekPreprodProd();
   }
 
-  // FindHealth() {
-  //   this.healthService.FindHealthCheckByPilote().subscribe((data) => {
-  //     // @ts-ignore
-  //     this.ListHealthCheck = data.body;
-  //     this.loading = false;
-  //   });
-  // }
   Edite(helth: HealthChekPreprodProd) {
     this.AddHealthCheck = cloneDeep(helth);
     this.healthService.FindDetailByHealthCheck(helth.id).subscribe((data) => {
@@ -807,4 +842,283 @@ export class RegistreHealthCheckComponent implements OnInit {
   RouterAjoutFlamingo() {
     this.router.navigate(['/pilote/healthcheck/Flamingo/save']);
   }
+    ////////////////Optirenta//////////// 
+    RouterAjoutOptirenta() {
+        this.router.navigate(['/pilote/monitoring/optirenta/save']);
+    }
+  
+
+    get charteMonitoringOptirenta(): boolean {
+      return this.charteService.charteMonitoringOptirenta;
+    }
+  
+    set charteMonitoringOptirenta(value: boolean) {
+      this.charteService.charteMonitoringOptirenta = value;
+    }
+    get AddMonitoringOptirenta(): MonitoringOptirenta {
+      return this.optirentaService.AddMonitoringOptirenta;
+    }
+  
+    set AddMonitoringOptirenta(value: MonitoringOptirenta) {
+      this.optirentaService.AddMonitoringOptirenta = value;
+    }
+    get ListMonitoringOptirenta(): Array<MonitoringOptirenta> {
+      return this.optirentaService.ListMonitoringOptirenta;
+    }
+  
+    set ListMonitoringOptirenta(value: Array<MonitoringOptirenta>) {
+      this.optirentaService.ListMonitoringOptirenta = value;
+    }
+    EditeOptirenta(moni: MonitoringOptirenta) {
+      this.AddMonitoringOptirenta = cloneDeep(moni);
+      this.optirentaService.FindFluxOptirentaBymonitoring(moni.id).subscribe((data) => {
+        // @ts-ignore
+        this.AddMonitoringOptirenta.fluxOptirentaList = data.body;
+        this.router.navigate(['/pilote/monitoring/optirenta/save']);
+      });
+  
+    }
+    charteOptirenta(moni: MonitoringOptirenta) {
+      this.AddMonitoringOptirenta = cloneDeep(moni);
+      this.optirentaService.FindFluxOptirentaBymonitoring(moni.id).subscribe((data) => {
+        // @ts-ignore
+        this.AddMonitoringOptirenta.fluxOptirentaList = data.body;
+        this.charteMonitoringOptirenta = true;
+      });
+   
+    }
+    DeleteOptirenta(id: number) {
+      this.confirmationService.confirm({
+        message: 'Êtes-vous sûr(e) de vouloir continuer?',
+        header: 'Confirmation',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+          this.optirentaService.DeleteMonitoringOptirenta(id).subscribe(
+            (data) => {
+              this.loadNuitApplicatibe({ first: 0, rows: this.pageSizeHealthMonetics });
+              // @ts-ignore
+              this.messageService.add({
+                severity: 'success',
+                summary: 'Success',
+                detail: 'Monitoring supprimer avec succès',
+              });
+            },
+            (error) => {
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Error',
+                detail: 'Erreur lors de la suppression',
+              });
+            }
+          );
+        },
+        reject: (type: any) => {
+          switch (type) {
+            case ConfirmEventType.REJECT:
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Rejected',
+                detail: 'Suppression Rejeter',
+              });
+              break;
+            case ConfirmEventType.CANCEL:
+              this.messageService.add({
+                severity: 'warn',
+                summary: 'Cancelled',
+                detail: 'Suppression Annuler',
+              });
+              break;
+          }
+        },
+      });
+    }
+    loadOptirenta(event: LazyLoadEvent): void {
+      this.loadingHealthOptirenta = true;
+      this.optirentaService.FindMonitoringOptirentaByPilote(this.pageHealthOptirenta, this.pageSizeHealthOptirenta).subscribe((data) => {      
+        //@ts-ignore
+        this.ListMonitoringOptirenta = data.body.content;
+        //@ts-ignore
+        this.totalRecordsHealthOptirenta= data.body.totalElements;      
+        this.currentPageReportTemplateHealthOptirenta = `Showing ${this.firstHealthOptirenta + 1} to ${this.firstHealthOptirenta + this.pageSizeHealthOptirenta} of ${this.totalRecordsHealthOptirenta} entries`;
+        this.loadingHealthOptirenta = false;
+      });
+    }
+    lazyLoadHandlerOptirenta(event: LazyLoadEvent): void {
+      if (event.first !== this.firstHealthOptirenta || event.rows !== this.pageSizeHealthOptirenta) {
+          this.firstHealthOptirenta = event.first ?? 0;
+          this.pageSizeHealthOptirenta = event.rows ?? 10;
+          this.pageHealthOptirenta = Math.floor(this.firstHealthOptirenta / this.pageSizeHealthOptirenta);
+      if( this.searchActiveHealthOptirenta==true){
+            this.searchHealthOptirenta();
+  
+      }else{
+        this.loadOptirenta(event);
+      }
+    }
+  
+    }
+  
+    searchHealthOptirenta(){
+      this.loadingHealthOptirenta = true;
+      if(!this.dateHealthOptirenta && !this.filterHealthOptirenta.titre ){      
+        this.clearOptirenta();
+      }else{
+      this.optirentaService.SearchMonitoring(this.dateHealthOptirenta,this.filterHealthOptirenta,this.pageHealthOptirenta, this.pageSizeHealthOptirenta).subscribe((data)=>{
+        this.searchActiveHealthOptirenta=true;
+        //@ts-ignore
+        this.ListHealthOptirenta = data.body.content;
+        //@ts-ignore
+        this.totalRecordsHealthOptirenta = data.body.totalElements;
+        this.currentPageReportTemplateHealthOptirenta = `Showing ${this.firstHealthOptirenta + 1} to ${this.firstHealthOptirenta + this.pageSizeHealthOptirenta} of ${this.totalRecordsHealthOptirenta} entries`;
+        this.loadingHealthOptirenta = false;
+    
+      })}
+    }
+        ////////////////Mstoolbox//////////// 
+        RouterAjoutMstoolbox() {
+          this.router.navigate(['/pilote/monitoring/mstoolbox/save']);
+      }
+    
+  
+      get charteMonitoringMstoolbox(): boolean {
+        return this.charteService.charteMonitoringMstoolbox;
+      }
+    
+      set charteMonitoringMstoolbox(value: boolean) {
+        this.charteService.charteMonitoringMstoolbox = value;
+      }
+      get AddMonitoringMstoolbox(): MonitoringMstoolbox {
+        return this.mstoolboxService.AddMonitoringMstoolbox;
+      }
+    
+      set AddMonitoringMstoolbox(value: MonitoringMstoolbox) {
+        this.mstoolboxService.AddMonitoringMstoolbox = value;
+      }
+      get ListMonitoringMstoolbox(): Array<MonitoringMstoolbox> {
+        return this.mstoolboxService.ListMonitoringMstoolbox;
+      }
+    
+      set ListMonitoringMstoolbox(value: Array<MonitoringMstoolbox>) {
+        this.mstoolboxService.ListMonitoringMstoolbox = value;
+      }
+      EditeMstoolbox(moni: MonitoringMstoolbox) {        
+        this.AddMonitoringMstoolbox = cloneDeep(moni);
+        this.mstoolboxService.FindImplantsBymonitoring(moni.id).subscribe((data) => {
+          // @ts-ignore
+          this.AddMonitoringMstoolbox.implantsList = data.body;
+          this.mstoolboxService.FindTransactionHandbidBymonitoring(moni.id).subscribe((data) => {
+            // @ts-ignore
+            this.AddMonitoringMstoolbox.transactionHandbidList = data.body;
+            this.mstoolboxService.FindTransactionSmileBymonitoring(moni.id).subscribe((data) => {
+              // @ts-ignore
+              this.AddMonitoringMstoolbox.transactionSmileList = data.body;
+              this.router.navigate(['/pilote/monitoring/mstoolbox/save']);
+            });
+          });
+        });
+    
+      }
+      charteMstoolbox(moni: MonitoringMstoolbox) {
+        this.AddMonitoringMstoolbox = cloneDeep(moni);
+        this.mstoolboxService.FindImplantsBymonitoring(moni.id).subscribe((data) => {
+          // @ts-ignore
+          this.AddMonitoringMstoolbox.implantsList = data.body;
+          this.mstoolboxService.FindTransactionHandbidBymonitoring(moni.id).subscribe((data) => {
+            // @ts-ignore
+            this.AddMonitoringMstoolbox.transactionHandbidList = data.body;
+            this.mstoolboxService.FindTransactionSmileBymonitoring(moni.id).subscribe((data) => {
+              // @ts-ignore
+              this.AddMonitoringMstoolbox.transactionSmileList = data.body;
+              this.charteMonitoringMstoolbox = true;
+            });
+          });
+        });
+      }
+      DeleteMstoolbox(id: number) {
+        this.confirmationService.confirm({
+          message: 'Êtes-vous sûr(e) de vouloir continuer?',
+          header: 'Confirmation',
+          icon: 'pi pi-exclamation-triangle',
+          accept: () => {
+            this.mstoolboxService.DeleteMonitoringMstoolbox(id).subscribe(
+              (data) => {
+                this.loadNuitApplicatibe({ first: 0, rows: this.pageSizeHealthMonetics });
+                // @ts-ignore
+                this.messageService.add({
+                  severity: 'success',
+                  summary: 'Success',
+                  detail: 'Monitoring supprimer avec succès',
+                });
+              },
+              (error) => {
+                this.messageService.add({
+                  severity: 'error',
+                  summary: 'Error',
+                  detail: 'Erreur lors de la suppression',
+                });
+              }
+            );
+          },
+          reject: (type: any) => {
+            switch (type) {
+              case ConfirmEventType.REJECT:
+                this.messageService.add({
+                  severity: 'error',
+                  summary: 'Rejected',
+                  detail: 'Suppression Rejeter',
+                });
+                break;
+              case ConfirmEventType.CANCEL:
+                this.messageService.add({
+                  severity: 'warn',
+                  summary: 'Cancelled',
+                  detail: 'Suppression Annuler',
+                });
+                break;
+            }
+          },
+        });
+      }
+      loadMstoolbox(event: LazyLoadEvent): void {
+        this.loadingHealthMstoolbox = true;
+        this.mstoolboxService.FindMonitoringMstoolboxByPilote(this.pageHealthMstoolbox, this.pageSizeHealthMstoolbox).subscribe((data) => {      
+          //@ts-ignore
+          this.ListMonitoringMstoolbox = data.body.content;
+          //@ts-ignore
+          this.totalRecordsHealthMstoolbox= data.body.totalElements;      
+          this.currentPageReportTemplateHealthMstoolbox = `Showing ${this.firstHealthMstoolbox + 1} to ${this.firstHealthMstoolbox + this.pageSizeHealthMstoolbox} of ${this.totalRecordsHealthMstoolbox} entries`;
+          this.loadingHealthMstoolbox = false;
+        });
+      }
+      lazyLoadHandlerMstoolbox(event: LazyLoadEvent): void {
+        if (event.first !== this.firstHealthMstoolbox || event.rows !== this.pageSizeHealthMstoolbox) {
+            this.firstHealthMstoolbox = event.first ?? 0;
+            this.pageSizeHealthMstoolbox = event.rows ?? 10;
+            this.pageHealthMstoolbox = Math.floor(this.firstHealthMstoolbox / this.pageSizeHealthMstoolbox);
+        if( this.searchActiveHealthMstoolbox==true){
+              this.searchHealthMstoolbox();
+    
+        }else{
+          this.loadMstoolbox(event);
+        }
+      }
+    
+      }
+    
+      searchHealthMstoolbox(){
+        this.loadingHealthMstoolbox = true;
+        if(!this.dateHealthMstoolbox && !this.filterHealthMstoolbox.titre ){      
+          this.clearMstoolbox();
+        }else{
+        this.mstoolboxService.SearchMonitoring(this.dateHealthMstoolbox,this.filterHealthMstoolbox,this.pageHealthMstoolbox, this.pageSizeHealthMstoolbox).subscribe((data)=>{
+          this.searchActiveHealthMstoolbox=true;
+          //@ts-ignore
+          this.ListHealthMstoolbox = data.body.content;
+          //@ts-ignore
+          this.totalRecordsHealthMstoolbox = data.body.totalElements;
+          this.currentPageReportTemplateHealthMstoolbox = `Showing ${this.firstHealthMstoolbox + 1} to ${this.firstHealthMstoolbox + this.pageSizeHealthMstoolbox} of ${this.totalRecordsHealthMstoolbox} entries`;
+          this.loadingHealthMstoolbox = false;
+      
+        })}
+      }
 }

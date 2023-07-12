@@ -1,0 +1,297 @@
+<ng-template [ngIf]="this.spinner ">
+    <div class="spinner-container">
+      <p-progressSpinner styleClass="spinner" strokeWidth="4" [fill]="'#ffffff'"></p-progressSpinner>
+    </div>
+  </ng-template>
+
+<div [ngClass]="{'blur': this.spinner}"  class="container-fluid page" style="background-color: white">
+    <div class="d-flex page__box p-3">Ajouter Monitoring MSTOOLBOX</div>
+    <div class="card page__content shadow p-3 position-relative align-items-center">
+        <div class="col-12" style="margin: 2%">
+            <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '22%' }">
+                <label for="basic1" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date Implants<span style="color: red;">*</span></label>
+                <p-calendar dateFormat="dd/mm/yy" inputId="basic1" [style]="{ width: '100%' }" appendTo="body" [(ngModel)]="this.AddMonitoringMstoolbox.dateImplants" ></p-calendar>
+
+            </span>
+           
+        </div>
+        <div class="col-12 card " style="width: 97%; margin-bottom: 2%;margin-top: 2%;display: inline;">
+          
+          <div class="col-5 align-items-center"  style="margin: 2%;float: left;">
+            <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '80%' }">
+                <label  style="float: left;font-size: 15px;font-family: Arial, Helvetica, sans-serif;margin-left: 3%">Code Implants<span style="color: red;">*</span></label>
+                <input style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="text"
+                    pInputTextarea placeholder="Entré le code d'implant" [(ngModel)]="this.implants.numeroImplants" />
+
+            </span>
+            <button style="margin-left: 3%" pButton pRipple type="button" icon="pi pi-plus" (click)="AddImplants()"
+                class="p-button-rounded p-button-success"></button>
+            </div>
+            <div class="col-6" style="margin: 2%;float: right;">
+                <p-table class="table" [value]="this.listImplants" dataKey="id" [rows]="10"
+                    [showCurrentPageReport]="true" [paginator]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    Code implant
+                                </div>
+                            </th>
+                            
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    supprimer
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-implant>
+                        <tr>
+                            <td>
+                                {{ implant.numeroImplants }}
+                            </td>
+
+                          
+
+                            <td>
+                                <button pButton pRipple type="button" style="font-size: larger" icon="pi pi-times" 
+                                  (click)="removeImplants(implant)"  class="p-button-rounded p-button-danger"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="2">aucun CODE n'a été ajoué.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div class="card align-items-center" style="width: 97%; margin-bottom: 2%;margin-top: 2%;">
+            <h1 style="margin: 3%">transactions HANDIBIP<span style="color: red;">*</span></h1>
+            <div class="col-12" style="margin: 2%">
+                <span class="p-input-icon-left" style="margin-left: 5%" [style]="{ width: '28%' }">
+                    <label for="basic3" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date Flux<span style="color: red;">*</span></label>
+                        <p-calendar dateFormat="dd/mm/yy" inputId="basic1"  [style]="{ width: '100%' }"
+                        appendTo="body"  [(ngModel)]="this.transactionHandbid.date"></p-calendar>
+                </span>
+                <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '28%' }">
+                    <label for="basic3" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Nombre de demande<span style="color: red;">*</span></label>
+                    <input inputId="basic3" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" min="0" type="number" pInputText
+                        placeholder="Entré le nombre de demande"   [(ngModel)]="this.transactionHandbid.nombreRequet" />
+
+                </span>
+                <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '28%' }">
+                    <label for="basic3" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Nombre de demande non traitée<span style="color: red;">*</span></label>
+                    <input inputId="basic3" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="number" min="0" pInputText
+                        placeholder="Entré le nombre de demande non traitée"   [(ngModel)]="this.transactionHandbid.nombreRequetNontraite" />
+
+                </span>
+          </div>
+          <div class="col-12" style="margin: 2%">
+            <span class="p-input-icon-left" style="margin-left: 5%" [style]="{ width: '28%' }">
+                <label for="basic3" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Pourcentage de demande reussite<span style="color: red;">*</span></label>
+                <input inputId="basic3" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" min="0" max="100"  type="number" pInputText
+                    placeholder="Entré le pourcentage de demande reussite"   [(ngModel)]="this.transactionHandbid.pourcentageDemandeReussie" />
+
+            </span>
+            <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '28%' }">
+                <label for="basic3" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Pourcentage de demande non traitée<span style="color: red;">*</span></label>
+                <input inputId="basic3" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" min="0" max="100" type="number" pInputText
+                    placeholder="Entré le pourcentage de demande non traitée"   [(ngModel)]="this.transactionHandbid.pourcentageDemandeNontraite" />
+
+            </span>
+            <button style="margin-left: 1%" pButton pRipple type="button" icon="pi pi-plus" (click)="AddTransactionHandbid()"
+                class="p-button-rounded p-button-success"></button>
+            </div>
+            <div class="col-12" style="margin: 2%">
+                <p-table class="table" [value]="this.listTransactionHandbid" dataKey="id" [rows]="10"
+                    [showCurrentPageReport]="true" [paginator]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    Date
+                                </div>
+                            </th>
+                      
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    Nombre de demande
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    Nombre de demande non traitée
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    Pourcentage de demande reussite
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    Pourcentage de demande non traitée
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    supprimer
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-trasaction>
+                        <tr>
+                        
+
+                            <td>
+                                {{ trasaction.date | date:'dd/MM/YYYY' }}
+                            </td>  
+                            <td>
+                                {{ trasaction.nombreRequet }}
+                            </td> 
+                             <td>
+                                {{ trasaction.nombreRequetNontraite }}
+                            </td>
+                            <td>
+                                {{ trasaction.pourcentageDemandeReussie }}%
+                            </td>
+                             <td>
+                                {{ trasaction.pourcentageDemandeNontraite }}%
+                            </td>
+                            <td>
+                                <button pButton pRipple type="button" style="font-size: larger" icon="pi pi-times" 
+                                   (click)="removeTransactionHandbid(trasaction)" class="p-button-rounded p-button-danger"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="6">aucune donnée n'a été ajoué.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div class="card align-items-center" style="width: 97%; margin-bottom: 2%;margin-top: 2%;">
+            <h1 style="margin: 3%">transactions SMILEE <span style="color: red;">*</span></h1>
+            <div class="col-12" style="margin: 2%">
+                <span class="p-input-icon-left" style="margin-left: 5%" [style]="{ width: '28%' }">
+                    <label for="basic3" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Date<span style="color: red;">*</span></label>
+                        <p-calendar dateFormat="dd/mm/yy" inputId="basic1"  [style]="{ width: '100%' }"
+                    appendTo="body"  [(ngModel)]="this.transactionSmile.date"></p-calendar>
+
+                </span>
+                <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '28%' }">
+                    <label for="basic3" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Nombre de demande<span style="color: red;">*</span></label>
+                    <input inputId="basic3" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" min="0" type="number" pInputText
+                        placeholder="Entré le nombre de demande"   [(ngModel)]="this.transactionSmile.nombreRequet" />
+
+                </span>
+                <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '28%' }">
+                    <label for="basic3" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Nombre de demande non traitée<span style="color: red;">*</span></label>
+                    <input inputId="basic3" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" type="number" min="0" pInputText
+                        placeholder="Entré le nombre de demande non traitée"   [(ngModel)]="this.transactionSmile.nombreRequetNontraite" />
+
+                </span>
+          </div>
+          <div class="col-12" style="margin: 2%">
+            <span class="p-input-icon-left" style="margin-left: 5%" [style]="{ width: '28%' }">
+                <label for="basic3" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Pourcentage de demande reussite<span style="color: red;">*</span></label>
+                <input inputId="basic3" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" min="0" max="100"  type="number" pInputText
+                    placeholder="Entré le pourcentage de demande reussite"   [(ngModel)]="this.transactionSmile.pourcentageDemandeReussie" />
+
+            </span>
+            <span class="p-input-icon-left" style="margin-left: 2%" [style]="{ width: '28%' }">
+                <label for="basic3" style="font-size: 15px;font-family: Arial, Helvetica, sans-serif;">Pourcentage de demande non traitée<span style="color: red;">*</span></label>
+                <input inputId="basic3" style="padding-left: 0.8rem; " required [style]="{ width: '100%' }" min="0" max="100" type="number" pInputText
+                    placeholder="Entré le pourcentage de demande non traitée"   [(ngModel)]="this.transactionSmile.pourcentageDemandeNontraite" />
+
+            </span>
+            <button style="margin-left: 1%" pButton pRipple type="button" icon="pi pi-plus" (click)="AddTransactionSmile()"
+                class="p-button-rounded p-button-success"></button>
+            </div>
+            <div class="col-12" style="margin: 2%">
+                <p-table class="table" [value]="this.listTransactionSmile" dataKey="id" [rows]="10"
+                    [showCurrentPageReport]="true" [paginator]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    Date
+                                </div>
+                            </th>
+                      
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    Nombre de demande
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    Nombre de demande non traitée
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    Pourcentage de demande reussite
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    Pourcentage de demande non traitée
+                                </div>
+                            </th>
+                            <th>
+                                <div class="flex justify-content-center align-items-center">
+                                    supprimer
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-trasaction>
+                        <tr>
+                        
+
+                            <td>
+                                {{ trasaction.date | date:'dd/MM/YYYY' }}
+                            </td>  
+                            <td>
+                                {{ trasaction.nombreRequet }}
+                            </td> 
+                             <td>
+                                {{ trasaction.nombreRequetNontraite }}
+                            </td>
+                            <td>
+                                {{ trasaction.pourcentageDemandeReussie }}%
+                            </td>
+                             <td>
+                                {{ trasaction.pourcentageDemandeNontraite }}%
+                            </td>
+                            <td>
+                                <button pButton pRipple type="button" style="font-size: larger" icon="pi pi-times" 
+                                   (click)="removeTransactionSmile(trasaction)" class="p-button-rounded p-button-danger"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="6">aucune donnée n'a été ajoué.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+     
+        <div class="col-12" style="margin-bottom: 2%; margin-top: 2%;">
+            <button pButton pRipple  type="button" label="Visualiser la charte" style=" float: left;margin-left: 2%;" (click)="charte()" [disabled]="isSubmitDisabled()" class="p-button-raised p-button-help"></button>
+            <button pButton pRipple  style=" float: right;margin-right: 2%;" type="button" [disabled]="isSubmitDisabled()" (click)="SendAndSave()" label="Soumettre"  class="p-button-raised" ></button>
+        </div>
+</div>
+</div>
+<app-charte-monitoring-mstoolbox [ngClass]="{'blur': this.spinner}"  *ngIf="charteMonitoringMstoolbox"></app-charte-monitoring-mstoolbox>

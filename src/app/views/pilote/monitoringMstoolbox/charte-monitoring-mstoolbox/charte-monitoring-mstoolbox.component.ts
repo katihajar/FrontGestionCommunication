@@ -72,7 +72,7 @@ export class CharteMonitoringMstoolboxComponent {
             borderColor: '#4472C4',
             borderWidth: 1,
             barPercentage: 0.8, // Adjust the bar width
-            categoryPercentage: 0.9 // Adjust the space between bars
+            categoryPercentage: 0.3 // Adjust the space between bars
           },
           {
             label: 'Number of Untreated requests',
@@ -81,12 +81,12 @@ export class CharteMonitoringMstoolboxComponent {
             borderColor: '#ED7D31',
             borderWidth: 1,
             barPercentage: 0.8, // Adjust the bar width
-            categoryPercentage: 0.9, // Adjust the space between bars            
+            categoryPercentage: 0.3, // Adjust the space between bars            
           }
         ]
       },
       options: {
-        aspectRatio: 2.5,
+        aspectRatio: 2,
         scales: {
           x: {
             grid: {
@@ -94,9 +94,7 @@ export class CharteMonitoringMstoolboxComponent {
             },
             ticks: {
               color: 'black',
-              font: {
-                size: 16 // Set the font size of the x-axis labels
-              }
+             
             }
           },
           y: {
@@ -111,9 +109,10 @@ export class CharteMonitoringMstoolboxComponent {
           legend: {
             position: 'bottom',
             labels: {
+              boxWidth: 15,
               font: {
                 weight: 'bold',
-                size: 14
+                size: 11
               },
             }
           },
@@ -122,7 +121,7 @@ export class CharteMonitoringMstoolboxComponent {
             text: 'HANDBIP | Number of Requests(Total /Untreated)',
             font: {
               weight: 'bold',
-              size: 20
+              size: 18
             }
           },
          
@@ -152,7 +151,7 @@ export class CharteMonitoringMstoolboxComponent {
             borderColor: '#4472C4',
             borderWidth: 1,
             barPercentage: 0.8, // Adjust the bar width
-            categoryPercentage: 0.9 // Adjust the space between bars
+            categoryPercentage: 0.3 // Adjust the space between bars
           },
           {
             label: 'Number of Untreated requests',
@@ -161,12 +160,12 @@ export class CharteMonitoringMstoolboxComponent {
             borderColor: '#ED7D31',
             borderWidth: 1,
             barPercentage: 0.8, // Adjust the bar width
-            categoryPercentage: 0.9, // Adjust the space between bars            
+            categoryPercentage: 0.3, // Adjust the space between bars            
           }
         ]
       },
       options: {
-        aspectRatio: 2.5,
+        aspectRatio: 2,
         scales: {
           x: {
             grid: {
@@ -174,9 +173,7 @@ export class CharteMonitoringMstoolboxComponent {
             },
             ticks: {
               color: 'black',
-              font: {
-                size: 16 // Set the font size of the x-axis labels
-              }
+             
             }
           },
           y: {
@@ -191,9 +188,10 @@ export class CharteMonitoringMstoolboxComponent {
           legend: {
             position: 'bottom',
             labels: {
+              boxWidth: 15, 
               font: {
                 weight: 'bold',
-                size: 14
+                size: 11
               },
             }
           },
@@ -202,7 +200,7 @@ export class CharteMonitoringMstoolboxComponent {
             text: 'SMILEE | Number of Requests(Total /Untreated)',
             font: {
               weight: 'bold',
-              size: 20
+              size: 18
             }
           },
          

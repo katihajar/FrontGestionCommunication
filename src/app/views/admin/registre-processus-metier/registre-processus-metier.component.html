@@ -6,7 +6,7 @@
         <ng-template pTemplate="left">
         </ng-template>
         <ng-template pTemplate="right">
-            <button pButton pRipple label="Ajouter Processus Métier" icon="pi pi-plus" class="p-button-success mr-2" (click)="dialogAjoutProc=true" ></button>
+            <button pButton pRipple label="Ajouter Processus Métier" icon="pi pi-plus" class="p-button-success mr-2" (click)="AjoutProcessusMetier()" ></button>
         </ng-template>
     </p-toolbar>
         <p-table class="table" #dt1 [value]=" this.ListAllProcessusMetier" dataKey="id" [rows]="10" [showCurrentPageReport]="true"

@@ -77,7 +77,7 @@ export class AjouterNuitApplicativeComponent implements OnInit {
       { name: 'OK' },
       { name: 'KO' },
     ]
-    this.destService.FindDestinataireNuitApplicative().subscribe((data) => {
+    this.destService.FindDestinataireNuitApplicativeMonetics().subscribe((data) => {
       // @ts-ignore
       this.listDestinataire = data.body;
       for (let i = 0; i < this.listDestinataire.length; i++) {
@@ -171,7 +171,7 @@ export class AjouterNuitApplicativeComponent implements OnInit {
         scale: 2,
         logging: true,
         imageSmoothingEnabled: true,
-        imageSmoothingQuality: 'high'
+        imageSmoothingQuality: 'high',
       };
       html2canvas(this.dialogElement, options).then((canvas) => {
         this.SaveNuit();

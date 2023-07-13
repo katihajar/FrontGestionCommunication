@@ -25,6 +25,7 @@ export class AjouterApplicationComponent implements OnInit {
   constructor(private cdr: ChangeDetectorRef,private userService: UserService, private appService : ApplicationService,private messageService: MessageService,private router: Router) { }
 
   ngOnInit(): void {
+    this.AddApplication= new Application();
     this.FindAllUsers();
     this.lots= [
       {name: '1'},
@@ -50,7 +51,7 @@ this.charte= [
 this.charteChange= [
   {name: 'charte Changement'},
   {name: 'charte Changement Monetics'},
-  {name: 'charte Changement BI'}
+  {name: 'charte Changement lot1'}
 ];
   }
   FindAllUsers(){

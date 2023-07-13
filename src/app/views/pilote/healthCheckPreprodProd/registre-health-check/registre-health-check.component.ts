@@ -895,7 +895,7 @@ export class RegistreHealthCheckComponent implements OnInit {
         accept: () => {
           this.optirentaService.DeleteMonitoringOptirenta(id).subscribe(
             (data) => {
-              this.loadNuitApplicatibe({ first: 0, rows: this.pageSizeHealthMonetics });
+              this.loadOptirenta({ first: 0, rows: this.pageSizeHealthOptirenta });
               // @ts-ignore
               this.messageService.add({
                 severity: 'success',
@@ -1042,7 +1042,7 @@ export class RegistreHealthCheckComponent implements OnInit {
           accept: () => {
             this.mstoolboxService.DeleteMonitoringMstoolbox(id).subscribe(
               (data) => {
-                this.loadNuitApplicatibe({ first: 0, rows: this.pageSizeHealthMonetics });
+                this.loadMstoolbox({ first: 0, rows: this.pageSizeHealthMstoolbox });
                 // @ts-ignore
                 this.messageService.add({
                   severity: 'success',

@@ -32,7 +32,8 @@ export class AjouterMonitoringMstoolboxComponent implements OnInit{
   listDestinataire: Array<DestinataireCommunication> = new Array<DestinataireCommunication>();
   EmailObligatoire: any[] = [];
   EmailEnCC: any[] = [];
-  imageDataUrl: string = String();
+  imageDataUrlCanvas1: string = String();
+  imageDataUrlCanvas2: string = String();
   Subject: string = String();
   dialogElement: any;
   @ViewChild(CharteMonitoringMstoolboxComponent, { static: false }) myDiv: any;
@@ -146,12 +147,28 @@ export class AjouterMonitoringMstoolboxComponent implements OnInit{
     this.AddMonitoringMstoolbox.transactionHandbidList = this.listTransactionHandbid;
     this.AddMonitoringMstoolbox.transactionSmileList = this.listTransactionSmile;
     this.charteMonitoringMstoolbox = true;
+    
   }
   Save() {
     this.AddMonitoringMstoolbox.titre = '[Monitoring MSTOOLBOX] Transactions HANDIBIP/SMILEE ' + moment(this.AddMonitoringMstoolbox.dateAjout).format('DD/MM/YYYY') + ',' + moment(this.AddMonitoringMstoolbox.dateAjout).format('HH:mm');
     this.Subject = '[Monitoring MSTOOLBOX] Transactions HANDIBIP/SMILEE ' + moment(this.AddMonitoringMstoolbox.dateAjout).format('DD/MM/YYYY');
     this.mstoolboxService.SaveMonitoring().subscribe((data) => {
-      const content = `<div style="width: 650px;">${this.dialogElement.innerHTML}</div>`;
+      const chartHandBidImageTag = `<img src="${this.imageDataUrlCanvas1}"  alt="Chart HandBid">`;
+      const chartSmileImageTag = `<img src="${this.imageDataUrlCanvas2}"  alt="Chart Smile">`;
+      const content = `<div style="width: 650px;">
+      <div>
+        ${this.dialogElement.querySelector('#firstElement').innerHTML}
+      </div>
+      <div>
+        ${chartHandBidImageTag}
+      </div>
+      <div>
+      ${this.dialogElement.querySelector('#SecondElement').innerHTML}
+    </div>
+      <div>
+        ${chartSmileImageTag}
+      </div>
+      </div>`;
       this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire, this.EmailEnCC, this.Subject, content);      
       this.AddMonitoringMstoolbox = new MonitoringMstoolbox();
       this.listImplants = new Array<Implants>();
@@ -171,15 +188,23 @@ export class AjouterMonitoringMstoolboxComponent implements OnInit{
     setTimeout(() => {
       this.dialogElement = this.myDiv.filterComponent.nativeElement;
       const options: MyOptions = {
-        scale: 2,
+        scale: 1.5,
         logging: true,
         imageSmoothingEnabled: true,
-        imageSmoothingQuality: 'high'
+        imageSmoothingQuality: 'high',
       };
-      html2canvas(this.dialogElement, options).then((canvas) => {
-        this.imageDataUrl = canvas.toDataURL();
-        this.Save();
-      });
+      html2canvas(this.dialogElement.querySelector('#ChartHandBid'), options).then((canvas) => {
+        this.imageDataUrlCanvas1 = canvas.toDataURL();
+        console.log(this.imageDataUrlCanvas1);
+        
+       
+      }); 
+      html2canvas(this.dialogElement.querySelector('#ChartSmile'), options).then((canvas) => {
+          this.imageDataUrlCanvas2 = canvas.toDataURL();      
+          console.log(this.imageDataUrlCanvas2);
+    
+          this.Save();
+        });
       this.charteMonitoringMstoolbox = false;
     }, 1000);
   }

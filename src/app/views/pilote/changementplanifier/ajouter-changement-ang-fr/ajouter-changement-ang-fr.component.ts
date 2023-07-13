@@ -211,7 +211,7 @@ export class AjouterChangementAngFrComponent implements OnInit {
     this.AddChangementAng.application = this.AddChangement.application;
     if(this.AddChangement.application.charteChangement == 'charte Changement Monetics' ){
       this.charteChangeAngFr = true;
-    }else  if(this.AddChangement.application.charteChangement == 'charte Changement BI' ){
+    }else  if(this.AddChangement.application.charteChangement == 'charte Changement lot1' ){
       this.charteChangeBiAngFr = true;
     }else{
       this.charteOperationAngFr = true;
@@ -227,7 +227,7 @@ export class AjouterChangementAngFrComponent implements OnInit {
      }
       this.content = `<div style="width: 600px;">${this.dialogElement.innerHTML}</div>`;
     }
-    else if(this.AddChangement.application.charteChangement == 'charte Changement BI' ){
+    else if(this.AddChangement.application.charteChangement == 'charte Changement lot1' ){
       if(this.AddChangement.statut =='Planifié'){
         if(this.AddChangement.debut=='Oui'){
         this.Subject = '[TOTALENERGIES - APP] [Communication N°2] Operation started/Début d\'opération-'+this.AddChangement.application.nomApplication;
@@ -260,7 +260,7 @@ export class AjouterChangementAngFrComponent implements OnInit {
   takeScreenshot() {
     if(this.AddChangement.application.charteChangement == 'charte Changement Monetics' ){
       this.charteChangeAngFr = true;
-    }else  if(this.AddChangement.application.charteChangement == 'charte Changement BI' ){
+    }else  if(this.AddChangement.application.charteChangement == 'charte Changement lot1' ){
       this.charteChangeBiAngFr = true;
     }else{
       this.charteOperationAngFr = true;
@@ -268,7 +268,7 @@ export class AjouterChangementAngFrComponent implements OnInit {
     setTimeout(() => {
      if(this.AddChangement.application.charteChangement == 'charte Changement Monetics' ){
       this.dialogElement = this.myDiv.filterComponent.nativeElement;
-     }else  if(this.AddChangement.application.charteChangement == 'charte Changement BI' ){
+     }else  if(this.AddChangement.application.charteChangement == 'charte Changement lot1' ){
       this.dialogElement = this.myDivChangeBi.filterComponent.nativeElement;
     }else{
       this.dialogElement = this.myDivOperation.filterComponent.nativeElement;
@@ -277,7 +277,7 @@ export class AjouterChangementAngFrComponent implements OnInit {
         scale: 2,
         logging: true,
         imageSmoothingEnabled: true,
-        imageSmoothingQuality: 'high'
+        imageSmoothingQuality: 'high',
       };
       html2canvas(this.dialogElement, options).then((canvas) => {
         // this.imageDataUrl = canvas.toDataURL();
@@ -289,7 +289,7 @@ export class AjouterChangementAngFrComponent implements OnInit {
       });
       if(this.AddChangement.application.charteChangement == 'charte Changement Monetics' ){
         this.charteChangeAngFr = false;
-      }else  if(this.AddChangement.application.charteChangement == 'charte Changement BI' ){
+      }else  if(this.AddChangement.application.charteChangement == 'charte Changement lot1' ){
         this.charteChangeBiAngFr = false;
       }else{
         this.charteOperationAngFr = false;

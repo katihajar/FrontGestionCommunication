@@ -55,6 +55,10 @@ export class RegistrePerimetreComponent implements OnInit {
       this.loading = false;
     })
   }
+  AjoutPerimetre(){
+    this.AddPerimetre = new Perimetre();
+    this.dialogAjoutPerimetre = true;
+  }
   SavePerimetre(){
     if(this.AddPerimetre.titre != ''){
     this.perimetreService.SavePerimetre().subscribe((data) => {

@@ -285,7 +285,7 @@ set charteOperationFr(value: boolean) {
       this.popUpLangue = false;
      this.charteOperationAng=true;
     }
-  }else if(this.AddChangement.application.charteChangement == 'charte Changement BI' ){
+  }else if(this.AddChangement.application.charteChangement == 'charte Changement lot1' ){
     if(this.selectLang == "Français"){
       this.popUpLangue = false;
       this.charteChangeBiFr = true;
@@ -350,7 +350,7 @@ set charteOperationFr(value: boolean) {
     this.AddChangementAng.contenuChangementList=this.ListContenuAng;
   }
 disable(){
-  if(this.AddChangement?.application?.charteChangement == 'charte Changement BI'){
+  if(this.AddChangement?.application?.charteChangement == 'charte Changement lot1'){
  return (this.AddChangement.debut == '' || this.AddChangement.application.nomApplication == '' || this.AddChangement.statut=='' || this.langage =='' || this.AddChangement.type == '' ||this.AddChangement.debut == null || this.AddChangement.application.nomApplication == null || this.AddChangement.statut==null || this.langage ==null || this.AddChangement.type == null);
   }else{
     return this.AddChangement?.application?.nomApplication == '' || this.AddChangement.statut=='' || this.langage =='' || this.AddChangement.type == '' || this.AddChangement.application.nomApplication == null || this.AddChangement.statut==null || this.langage ==null || this.AddChangement.type == null;

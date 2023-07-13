@@ -214,7 +214,7 @@ export class AjouterProblemeFrAngComponent implements OnInit{
         scale: 2,
         logging: true,
         imageSmoothingEnabled: true,
-        imageSmoothingQuality: 'high'
+        imageSmoothingQuality: 'high',
       };
       html2canvas(this.dialogElement, options).then((canvas) => {
         this.SaveProbleme();

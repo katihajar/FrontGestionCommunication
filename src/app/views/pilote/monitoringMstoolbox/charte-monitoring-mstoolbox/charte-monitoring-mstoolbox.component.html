@@ -2,6 +2,7 @@
     [style]="{width: '67vw', height: '70vw','margin-left':'3%'}" [resizable]="true">
     <div #myDialog id="myDialog" style="width: 100%;">
         <div style="margin: 2%;font-size: 18px;font-weight: 500;">
+            <div id="firstElement">
             <p style="color: darkblue;">Bonjour,</p><br>
             <p style="margin-bottom: 3%;color: darkblue;">Ci-dessous les détails des transactions HANDIBIP :
                  </p>
@@ -23,12 +24,13 @@
                         <td style="border: 1.5px solid black;text-align: right; padding: 8px;background-color: #99CCFF;color: black;" >{{transaction.pourcentageDemandeNontraite}}%</td>
                     </tr>
                 </table>
-            </div>
+            </div></div>
             <br>
             <div>
                 <canvas id="ChartHandBid"></canvas>
               </div>
             <br>
+            <div id="SecondElement">
             <p style="color: black;"><u>Liste des codes implants :</u></p>
             <p style="color: black;"><b>{{this.AddMonitoringMstoolbox.dateImplants | date :'dd/MM'}}</b></p>
             <div *ngFor="let implant of this.AddMonitoringMstoolbox.implantsList">
@@ -54,11 +56,14 @@
                    <td style="border: 1.5px solid black;text-align: right; padding: 8px;background-color: #99CCFF;color: black;" >{{transaction.pourcentageDemandeNontraite}}%</td>
                </tr>
            </table>
+
        </div>
+    </div>
        <br>
        <div>
            <canvas id="ChartSmile"></canvas>
          </div>
+         
         </div>
     </div>
 

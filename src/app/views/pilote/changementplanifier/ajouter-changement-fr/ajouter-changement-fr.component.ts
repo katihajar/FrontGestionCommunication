@@ -124,7 +124,7 @@ export class AjouterChangementFrComponent implements OnInit {
     this.AddChangement.contenuChangementList=this.ListContenu;
     if(this.AddChangement.application.charteChangement == 'charte Changement Monetics' ){
       this.charteChangeFr = true;
-    }else if(this.AddChangement.application.charteChangement == 'charte Changement BI' ){
+    }else if(this.AddChangement.application.charteChangement == 'charte Changement lot1' ){
       this.charteChangeBiFr = true;
     }else{
       this.charteOperationFr = true;
@@ -139,7 +139,7 @@ export class AjouterChangementFrComponent implements OnInit {
       this.Subject = '['+this.AddChangement.type+'] '+this.AddChangement.application.nomApplication+' '+this.AddChangement.version+' - Completed Change - '+moment(this.AddChangement.dateDebut).format('DD/MM/YYYY');
      }
      this.content = `<div style="max-width: 100%; width: 600px;">${this.dialogElement.innerHTML}</div>`;
-    } else if(this.AddChangement.application.charteChangement == 'charte Changement BI' ){
+    } else if(this.AddChangement.application.charteChangement == 'charte Changement lot1' ){
       if(this.AddChangement.statut =='Planifié'){
         if(this.AddChangement.debut=='Oui'){
         this.Subject = '[TOTALENERGIES - APP] [Communication N°2] Operation started/Début d\'opération-'+this.AddChangement.application.nomApplication;
@@ -172,7 +172,7 @@ export class AjouterChangementFrComponent implements OnInit {
   takeScreenshot() {
     if(this.AddChangement.application.charteChangement == 'charte Changement Monetics' ){
       this.charteChangeFr = true;
-    }else if(this.AddChangement.application.charteChangement == 'charte Changement BI' ){
+    }else if(this.AddChangement.application.charteChangement == 'charte Changement lot1' ){
       this.charteChangeBiFr = true;
     }else{
       this.charteOperationFr = true;
@@ -181,7 +181,7 @@ export class AjouterChangementFrComponent implements OnInit {
     setTimeout(() => {
       if(this.AddChangement.application.charteChangement == 'charte Changement Monetics' ){
         this.dialogElement = this.myDiv.filterComponent.nativeElement;
-      }else  if(this.AddChangement.application.charteChangement == 'charte Changement BI' ){
+      }else  if(this.AddChangement.application.charteChangement == 'charte Changement lot1' ){
         this.dialogElement = this.myDivChangeBi.filterComponent.nativeElement;
       }else{
         this.dialogElement = this.myDivOperation.filterComponent.nativeElement;
@@ -190,7 +190,7 @@ export class AjouterChangementFrComponent implements OnInit {
         scale: 2,
         logging: true,
         imageSmoothingEnabled: true,
-        imageSmoothingQuality: 'high'
+        imageSmoothingQuality: 'high',
       };
       html2canvas(this.dialogElement, options).then((canvas) => {
         // this.imageDataUrl = canvas.toDataURL();
@@ -202,7 +202,7 @@ export class AjouterChangementFrComponent implements OnInit {
       });
       if(this.AddChangement.application.charteChangement == 'charte Changement Monetics' ){
         this.charteChangeFr = false;
-      }else if(this.AddChangement.application.charteChangement == 'charte Changement BI' ){
+      }else if(this.AddChangement.application.charteChangement == 'charte Changement lot1' ){
         this.charteChangeBiFr = false;
       }else{
         this.charteOperationFr = false;

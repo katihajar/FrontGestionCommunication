@@ -85,10 +85,10 @@ public FindPagesDestinataireByApplication(page: number, pageSize: number): Obser
       { observe: 'response', headers }
     );    
   }
-  public FindDestinataireNuitApplicative(): Observable<HttpResponse<Array<DestinataireCommunication>>> {
+  public FindDestinataireNuitApplicativeMonetics(): Observable<HttpResponse<Array<DestinataireCommunication>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<DestinataireCommunication>>(
-      this.urlPilote + 'destinataire/findByNomApplication/Nuit Applicative',
+      this.urlPilote + 'destinataire/findByNomApplication/Nuit Applicative Monetics',
       { observe: 'response', headers }
     );    
   }

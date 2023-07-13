@@ -44,6 +44,10 @@ export class RegistreProcessusMetierComponent implements OnInit {
   set AddProcessusMetier(value: ProcessusMetier) {
     this.processusMetierService.AddProcessusMetier = value;
   }
+  AjoutProcessusMetier(){
+    this.AddProcessusMetier = new ProcessusMetier();
+    this.dialogAjoutProc = true;
+  }
   ShowModifDialog(processusMetier: ProcessusMetier){
     this.ModifierProcessusMetier = processusMetier;
     this.dialogEditeProc = true;

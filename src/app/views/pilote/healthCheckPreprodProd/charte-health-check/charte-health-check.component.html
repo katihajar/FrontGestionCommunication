@@ -1,5 +1,5 @@
 <p-dialog [modal]="true" [(visible)]="this.charteHealthCheckPreprodProd" header="Charte Health Check "
-    [style]="{width: '67vw', height: '70vw','margin-left':'3%'}" [resizable]="true">
+    [style]="{width: '65vw', height: '70vw','margin-left':'3%'}" [resizable]="true">
     <div #myDialog id="myDialog">
        <style>
         ::ng-deep p-table[_ngcontent-som-c129], td[_ngcontent-som-c129], th[_ngcontent-som-c129] {
@@ -71,27 +71,26 @@
                             </tr>
                             <tr *ngFor="let satutApp of this.AddHealthCheck.statutApplicationList; let i = index" [style.background-color]="i % 2 === 0 ? '#e0dcdc' : ''">
                                 <td style="width: 75%;  border: 1px solid  #a2a2a2;
-                                padding: 8px;
                                 text-align: center;">
                                     {{ satutApp.application.nomApplication }}
                                 </td>
-                                <td style="width: 25%;text-align: center;  border: 1px solid  #a2a2a2;
-                                padding: 8px;
+                                <td style="width: 25%;  border: 1px solid  #a2a2a2;
                                 text-align: center;">
-                                    <div *ngIf="satutApp.statut =='OK'"> 
-                                        <div style="display: inline-block;width: 25px;height: 25px;border-radius: 50%;background-color: #28a745;"></div>
+                                    <div *ngIf="satutApp.statut =='OK'"style="font: 50px/30px Arial, sans-serif;color: #28a745; "> &#x25CF;
+                                       
+                                      
                                     </div>
                                     <div *ngIf="satutApp.statut =='En cours d\'éxecuxtion'">
-                                        <div
-                                                style="display: inline-block;width: 25px;height: 25px;border-radius: 50%;background-color: rgb(54, 105, 245);"></div>
+                                        <div style="font: 50px/30px Arial, sans-serif;color:rgb(54, 105, 245);">&#x25CF;</div>
+                                        
                                     </div>
                                     <div *ngIf="satutApp.statut =='Flux non critique KO'">
-                                        <div style="display: inline-block;width: 25px;height: 25px;border-radius: 50%;background-color: orange"></div>
-                                           
+                                         <div style="font: 50px/30px Arial, sans-serif;color:orange;">&#x25CF;</div> 
+                                        
                                     </div>
                                     <div *ngIf="satutApp.statut =='Flux critique KO'">
-                                        <div
-                                        style="display: inline-block;width: 25px;height: 25px;border-radius: 50%;background-color: red"></div>
+                                        
+                                        <div style="font: 50px/30px Arial, sans-serif;color:red;">&#x25CF;</div>
                                     
                                     </div>
 
@@ -99,8 +98,7 @@
                                 </td>
                             </tr>
                         </table>
-                        <!-- <img src="http://localhost:4200/assets/img/HealthLegend.png" width="100%" alt="psa" title="psa"
-                            class="staticImg"> -->
+                       <br>
                             <img src="data:image/png;base64,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" width="100%" alt="psa" title="psa"
                             class="staticImg">
                     </div>
@@ -127,19 +125,18 @@
                                 <td style="width: 25%;text-align: center;border: 1px solid  #a2a2a2;">
                                     
                                             <div *ngIf="etat.statut =='OK'"> 
-                                                <div style="display: inline-block;width: 25px;height: 25px;border-radius: 50%;background-color: #28a745;"></div>
+                                                
+                                                <div style="font: 50px/30px Arial, sans-serif;color:#28a745;">&#x25CF;</div>
                                             </div>
                                             <div *ngIf="etat.statut =='En cours d\'éxecuxtion'">
-                                                <div
-                                                        style="display: inline-block;width: 25px;height: 25px;border-radius: 50%;background-color: rgb(54, 105, 245);"></div>
+                                                <div style="font: 50px/30px Arial, sans-serif;color:rgb(54, 105, 245);">&#x25CF;</div>
                                             </div>
                                             <div *ngIf="etat.statut =='Flux non critique KO'">
-                                                <div style="display: inline-block;width: 25px;height: 25px;border-radius: 50%;background-color: orange"></div>
+                                                <div style="font: 50px/30px Arial, sans-serif;color:orange;">&#x25CF;</div>
                                                    
                                             </div>
                                             <div *ngIf="etat.statut =='Flux critique KO'">
-                                                <div
-                                                style="display: inline-block;width: 25px;height: 25px;border-radius: 50%;background-color: red"></div>
+                                                <div style="font: 50px/30px Arial, sans-serif;color:red;">&#x25CF;</div>
                                             
                                             </div>
 
@@ -210,23 +207,23 @@
                                 {{ Helth.impactClient }}
                             </td>
                             
-                            <td style="text-align: center;border: 1px solid  #a2a2a2; padding: 8px;">
+                            <td style="text-align: center;border: 1px solid  #a2a2a2; ">
                                 
                                         <div *ngIf="Helth.feu =='OK'"> 
-                                            <div style="display: inline-block;width: 25px;height: 25px;border-radius: 50%;background-color: #28a745;"></div>
+                                            
+                                            <div style="font: 50px/30px Arial, sans-serif;color:#28a745;">&#x25CF;</div>
                                         </div>
                                         <div *ngIf="Helth.feu =='En cours d\'éxecuxtion'">
-                                            <div
-                                                    style="display: inline-block;width: 25px;height: 25px;border-radius: 50%;background-color: rgb(54, 105, 245);"></div>
+                                           
+                                                    <div style="font: 50px/30px Arial, sans-serif;color:rgb(54, 105, 245);">&#x25CF;</div>
                                         </div>
                                         <div *ngIf="Helth.feu =='Flux non critique KO'">
-                                            <div style="display: inline-block;width: 25px;height: 25px;border-radius: 50%;background-color: orange"></div>
-                                               
+                                           
+                                            <div style="font: 50px/30px Arial, sans-serif;color:orange;">&#x25CF;</div>   
                                         </div>
                                         <div *ngIf="Helth.feu =='Flux critique KO'">
-                                            <div
-                                            style="display: inline-block;width: 25px;height: 25px;border-radius: 50%;background-color: red"></div>
-                                        
+                                          
+                                            <div style="font: 50px/30px Arial, sans-serif;color:red;">&#x25CF;</div>
                                         </div>
                             </td>
                             <td style="text-align: center;border: 1px solid  #a2a2a2; padding: 8px;">

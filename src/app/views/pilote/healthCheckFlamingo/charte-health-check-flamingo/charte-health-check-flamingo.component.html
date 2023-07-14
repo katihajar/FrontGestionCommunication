@@ -5,9 +5,11 @@
             <p>Bonjour,</p><br>
             <p style="margin-bottom: 3%;">Veuillez trouver ci-dessous le Monitoring des flux Flamingo du
                 {{this.AddHealthCheckFlamingo.dateFlux | date:'dd/MM'}}: </p>
+                <div style="padding-top: 2px;">&nbsp;</div>
             <p style="color: red;">Rapport des <span style="background-color: yellow;"> Flux sortants de EAI :</span>
             </p>
-            <div  style="margin-top: 2%">
+            <div style="padding-top: 2px;">&nbsp;</div>
+            <div  >
                 <table style="font-family: arial, sans-serif;
                 border-collapse: collapse;">
                     <tr>
@@ -26,9 +28,11 @@
                     </tr>
                 </table>
             </div>
-            <p style="color: red;margin-top: 2%;">Rapport des <span style="background-color: yellow;"> Flux Entrant dans
+            <div style="padding-top: 2px;">&nbsp;</div>
+            <p style="color: red;">Rapport des <span style="background-color: yellow;"> Flux Entrant dans
                     SAP Template Europe :</span></p>
-            <div  style="margin-top: 2%">
+                    <div style="padding-top: 2px;">&nbsp;</div>
+            <div  >
                 <table style="font-family: arial, sans-serif;
                 border-collapse: collapse;">
                     <tr>
@@ -45,9 +49,11 @@
                     </tr>
                 </table>
             </div>
-            <p style="color: red;margin-top: 2%;">Rapport des <span style="background-color: yellow;"> Flux Entrants
+            <div style="padding-top: 2px;">&nbsp;</div>
+            <p style="color: red;">Rapport des <span style="background-color: yellow;"> Flux Entrants
                     dans SAP Template Light Harmonie : </span></p>
-            <div  style="margin-top: 2%">
+                    <div style="padding-top: 2px;">&nbsp;</div>
+            <div  >
                 <table style="font-family: arial, sans-serif;
                 border-collapse: collapse;">
                     <tr>
@@ -64,9 +70,11 @@
                     </tr>
                 </table>
             </div>
-            <p style="color: red;margin-top: 2%;">Rapport des <span style="background-color: yellow;"> Flux Entrants
+            <div style="padding-top: 2px;">&nbsp;</div>
+            <p style="color: red;">Rapport des <span style="background-color: yellow;"> Flux Entrants
                     dans Flamingo - Sales Orders : </span></p>
-            <div  style="margin-top: 2%">
+                    <div style="padding-top: 2px;">&nbsp;</div>
+            <div  >
                 <table style="font-family: arial, sans-serif;
                 border-collapse: collapse;">
                     <tr>
@@ -83,7 +91,8 @@
                     </tr>
                 </table>
             </div>
-            <p *ngIf="this.AddHealthCheckFlamingo.remarque!=''" style="margin-top: 2%;"><b>Remarques </b></p>
+            <div style="padding-top: 2px;">&nbsp;</div>
+            <p *ngIf="this.AddHealthCheckFlamingo.remarque!=''" ><b>Remarques </b></p>
             <p>{{this.AddHealthCheckFlamingo.remarque}}</p>
             <p>Merci.</p>
         </div>

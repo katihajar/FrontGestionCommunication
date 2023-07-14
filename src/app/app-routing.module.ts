@@ -113,6 +113,7 @@ import { AjouterMonitoringOptirentaComponent } from './views/pilote/monitoringOp
         { path: 'changement/save/FrançaisAnglais', component: AjouterChangementAngFrComponent},
         { path: 'healthcheck/PreprodProd/registre', component: RegistreHealthCheckComponent },
         { path: 'healthcheck/PreprodProd/save', component: AjoutHealthCheckComponent },
+        { path: 'healthcheck/Flamingo/save', component: AjouterHealthCheckFlamingoComponent },
         { path: 'healthcheck/Bw/save', component: AjoutHealthCheckBwPerimetreComponent },
         { path: 'healthcheck/Bw/save', component: AjoutHealthCheckBwPerimetreComponent },
         { path: 'monitoring/mstoolbox/save', component: AjouterMonitoringMstoolboxComponent },

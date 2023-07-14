@@ -73,22 +73,23 @@
           </div>
           <p>&nbsp;Detail: {{this.AddChangementAng.detail}} </p><br>
           <p style="background-color: rgb(229, 230, 230);padding: 4px;"><u>Content</u></p>
-         
-          <table style="width:95%;margin-top: 20px;margin-bottom: 20px;">
+          <div style="padding-top: 2px;">&nbsp;</div>
+
+          <table style="width:100%;padding-top: 2px;">
 
             <tr *ngFor="let cont of this.AddChangementAng.contenuChangementList">
-              <td [width]="'15%'" style="font-family: 'Times New Roman', Times, serif;border: 1px dotted black;
-              padding: 8px;
+              <td [width]="'20%'" style="font-family: 'Times New Roman', Times, serif;border: 1px dotted black;
+              padding: 4px;
               border-collapse: collapse;">{{cont.titre}}</td>
-              <td [width]="'85%'" style="font-family: 'Times New Roman', Times, serif;border: 1px dotted black;
-              padding: 8px;
+              <td [width]="'80%'" style="font-family: 'Times New Roman', Times, serif;border: 1px dotted black;
+              padding: 4px;
               border-collapse: collapse;">{{cont.description}}</td>
 
             </tr>
 
           </table>
-         
-          <div *ngIf="this.AddChangement.statut=='Planifié'">
+          <div style="padding-top: 2px;">&nbsp;</div>
+          <div  *ngIf="this.AddChangement.statut=='Planifié'">
             <p style="background-color: rgb(229, 230, 230);padding: 4px;">&nbsp;<u>Business Impacts</u></p>
             <p style="white-space: pre-line;">&nbsp;{{this.AddChangementAng.impactMetier}}</p>
           </div>
@@ -100,7 +101,6 @@
     <div style="width: 100%;margin-top: 2%;margin-bottom: 2%;color: black;"
       [ngStyle]="{'border': '1px solid rgb(18, 231, 231)'}">
       <div style="font-family: 'Times New Roman', Times, sans-serif;">
-
         <table cellpadding="0" cellspacing="0" border="0" width="100%">
           <tr>
             <td>
@@ -156,20 +156,21 @@
           </div>
           <p>&nbsp;Détail: {{this.AddChangement.detail}} </p><br>
           <p style="background-color: rgb(229, 230, 230);padding: 4px;"><u>Content</u></p>
-          
-          <table style="width:95%;margin-top: 20px;margin-bottom: 20px;">
+          <div style="padding-top: 2px;">&nbsp;</div>
+          <table style="width:100%;">
 
             <tr *ngFor="let cont of this.AddChangement.contenuChangementList">
-              <td [width]="'15%'" style="font-family: 'Times New Roman', Times, serif;border: 1px dotted black;
-              padding: 8px;
+              <td [width]="'20%'" style="font-family: 'Times New Roman', Times, serif;border: 1px dotted black;
+              padding: 4px;
               border-collapse: collapse;">{{cont.titre}}</td>
               <td [width]="'80%'" style="font-family: 'Times New Roman', Times, serif;border: 1px dotted black;
-              padding: 8px;
+              padding: 4px;
               border-collapse: collapse;">{{cont.description}}</td>
             </tr>
 
           </table>
-         
+          <div style="padding-top: 2px;">&nbsp;</div>
+
           <div *ngIf="this.AddChangement.statut=='Planifié'">
             <p style="background-color: rgb(229, 230, 230);padding: 4px;">&nbsp;<u>Impacts métier</u></p>
             <p style="white-space: pre-line;">&nbsp;{{this.AddChangementAng.impactMetier}} </p>

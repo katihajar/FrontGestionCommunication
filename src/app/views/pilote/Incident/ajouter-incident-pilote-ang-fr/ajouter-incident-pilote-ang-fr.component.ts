@@ -112,60 +112,77 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
 
   translateInput() {
     this.ListPlanActionAng = new Array<PlanAction>();
+    if(this.AddIncident.titreIncident){
     translate(this.AddIncident.titreIncident, { from: 'fr', to: 'en' }).then((result: string) => {
       this.AddIncidentAng.titreIncident = result;
     })
       .catch((error: any) => {
         console.error(error);
       });
+    }
+    if(this.AddIncident.description){
     translate(this.AddIncident.description, { from: 'fr', to: 'en' }).then((result: string) => {
       this.AddIncidentAng.description = result;
     })
       .catch((error: any) => {
         console.error(error);
       });
+    }
+    if(this.AddIncident.situationActuelle){
     translate(this.AddIncident.situationActuelle, { from: 'fr', to: 'en' }).then((result: string) => {
       this.AddIncidentAng.situationActuelle = result;
     })
       .catch((error: any) => {
         console.error(error);
       });
+    }
+    if(this.AddIncident.impact){
     translate(this.AddIncident.impact, { from: 'fr', to: 'en' }).then((result: string) => {
       this.AddIncidentAng.impact = result;
     })
       .catch((error: any) => {
         console.error(error);
       });
+    }
+    if(this.AddIncident.causePrincipale){
     translate(this.AddIncident.causePrincipale, { from: 'fr', to: 'en' }).then((result: string) => {
       this.AddIncidentAng.causePrincipale = result;
     })
       .catch((error: any) => {
         console.error(error);
       });
+    }
+    if(this.AddIncident.solutionContournement){
     translate(this.AddIncident.solutionContournement, { from: 'fr', to: 'en' }).then((result: string) => {
       this.AddIncidentAng.solutionContournement = result;
     })
       .catch((error: any) => {
         console.error(error);
       });
+    }
+    if(this.AddIncident.detailResolution){
       translate(this.AddIncident.detailResolution, { from: 'fr', to: 'en' }).then((result: string) => {
         this.AddIncidentAng.detailResolution = result;
       })
         .catch((error: any) => {
           console.error(error);
         });
+      }
+      if(this.AddIncident.actionPrise){
         translate(this.AddIncident.actionPrise, { from: 'fr', to: 'en' }).then((result: string) => {
           this.AddIncidentAng.actionPrise = result;
         })
           .catch((error: any) => {
             console.error(error);
           });
+        }
     this.AddIncidentAng.numeroIncident = this.AddIncident.numeroIncident;
     this.AddIncidentAng.dateDebut = this.AddIncident.dateDebut;
     this.AddIncidentAng.dateFin = this.AddIncident.dateFin;
     this.AddIncidentAng.prochaineCommunication = this.AddIncident.prochaineCommunication;
     this.AddIncidentAng.application = this.AddIncident.application;
     for (let i = 0; i < this.ListPlanAction.length; i++) {
+      if(this.ListPlanAction[i].description){
       translate(this.ListPlanAction[i].description, { from: 'fr', to: 'en' }).then((result: string) => {
         this.ActionAng.description = result; // Output: "Bonjour le monde"
         if (this.ListPlanAction[i].statut === "En cours") {
@@ -185,6 +202,7 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
         .catch((error: any) => {
           console.error(error);
         });
+      }
     }
   }
   removeListPlanAction(us: PlanAction) {

@@ -105,73 +105,103 @@ ShowCharte(inc:Incident){
   })
 }
 translateInput() {
-  translate(this.AddIncident.titreIncident, { from: 'fr', to: 'en' }).then((result: string) => {
-    this.AddIncidentAng.titreIncident = result;
-  })
-    .catch((error: any) => {
-      console.error(error);
-    });
-  translate(this.AddIncident.description, { from: 'fr', to: 'en' }).then((result: string) => {
-    this.AddIncidentAng.description = result;
-  })
-    .catch((error: any) => {
-      console.error(error);
-    });
-  translate(this.AddIncident.situationActuelle, { from: 'fr', to: 'en' }).then((result: string) => {
-    this.AddIncidentAng.situationActuelle = result;
-  })
-    .catch((error: any) => {
-      console.error(error);
-    });
-  translate(this.AddIncident.impact, { from: 'fr', to: 'en' }).then((result: string) => {
-    this.AddIncidentAng.impact = result;
-  })
-    .catch((error: any) => {
-      console.error(error);
-    });
-  translate(this.AddIncident.causePrincipale, { from: 'fr', to: 'en' }).then((result: string) => {
-    this.AddIncidentAng.causePrincipale = result;
-  })
-    .catch((error: any) => {
-      console.error(error);
-    });
-  translate(this.AddIncident.solutionContournement, { from: 'fr', to: 'en' }).then((result: string) => {
-    this.AddIncidentAng.solutionContournement = result;
-  })
-    .catch((error: any) => {
-      console.error(error);
-    });
-  this.AddIncidentAng.numeroIncident = this.AddIncident.numeroIncident;
-  this.AddIncidentAng.dateDebut = this.AddIncident.dateDebut;
-  this.AddIncidentAng.dateFin = this.AddIncident.dateFin;
-  this.AddIncidentAng.prochaineCommunication = this.AddIncident.prochaineCommunication;
-  this.AddIncidentAng.application = this.AddIncident.application;
-  for (let i = 0; i < this.AddIncident.planActionList.length; i++) {
-    translate(this.AddIncident.planActionList[i].description, { from: 'fr', to: 'en' }).then((result: string) => {
-      this.ActionAng.description = result; // Output: "Bonjour le monde"
-      if (this.AddIncident.planActionList[i].statut === "En cours") {
-        this.ActionAng.statut = "On going";
-        this.ActionAng.numero = this.AddIncident.planActionList[i].numero;
-        this.ListPlanActionAng.push(this.ActionAng);
-        this.ActionAng = new PlanAction();
-      } else if (this.AddIncident.planActionList[i].statut === "A Démarer") {
-        this.ActionAng.statut = "To start";
-        this.ActionAng.numero = this.AddIncident.planActionList[i].numero;
-        this.ListPlanActionAng.push(this.ActionAng);
-        this.ActionAng = new PlanAction();
-      } else if (this.AddIncident.planActionList[i].statut = "Clos") {
-        this.ActionAng.statut = "Closed";
-        this.ActionAng.numero = this.AddIncident.planActionList[i].numero;
-        this.ListPlanActionAng.push(this.ActionAng);
-        this.ActionAng = new PlanAction();
-      };
+
+  if(this.AddIncident.titreIncident){
+    translate(this.AddIncident.titreIncident, { from: 'fr', to: 'en' }).then((result: string) => {
+      this.AddIncidentAng.titreIncident = result;
     })
       .catch((error: any) => {
         console.error(error);
-      }); 
+      });
+    }
+    if(this.AddIncident.description){
+    translate(this.AddIncident.description, { from: 'fr', to: 'en' }).then((result: string) => {
+      this.AddIncidentAng.description = result;
+    })
+      .catch((error: any) => {
+        console.error(error);
+      });
+    }
+    if(this.AddIncident.situationActuelle){
+    translate(this.AddIncident.situationActuelle, { from: 'fr', to: 'en' }).then((result: string) => {
+      this.AddIncidentAng.situationActuelle = result;
+    })
+      .catch((error: any) => {
+        console.error(error);
+      });
+    }
+    if(this.AddIncident.impact){
+    translate(this.AddIncident.impact, { from: 'fr', to: 'en' }).then((result: string) => {
+      this.AddIncidentAng.impact = result;
+    })
+      .catch((error: any) => {
+        console.error(error);
+      });
+    }
+    if(this.AddIncident.causePrincipale){
+    translate(this.AddIncident.causePrincipale, { from: 'fr', to: 'en' }).then((result: string) => {
+      this.AddIncidentAng.causePrincipale = result;
+    })
+      .catch((error: any) => {
+        console.error(error);
+      });
+    }
+    if(this.AddIncident.solutionContournement){
+    translate(this.AddIncident.solutionContournement, { from: 'fr', to: 'en' }).then((result: string) => {
+      this.AddIncidentAng.solutionContournement = result;
+    })
+      .catch((error: any) => {
+        console.error(error);
+      });
+    }
+      if(this.AddIncident.detailResolution){
+      translate(this.AddIncident.detailResolution, { from: 'fr', to: 'en' }).then((result: string) => {
+        this.AddIncidentAng.detailResolution = result;
+      })
+        .catch((error: any) => {
+          console.error(error);
+        });
+      }
+        if(this.AddIncident.actionPrise){
+        translate(this.AddIncident.actionPrise, { from: 'fr', to: 'en' }).then((result: string) => {
+          this.AddIncidentAng.actionPrise = result;
+        })
+          .catch((error: any) => {
+            console.error(error);
+          });
+        }
+    this.AddIncidentAng.numeroIncident = this.AddIncident.numeroIncident;
+    this.AddIncidentAng.dateDebut = this.AddIncident.dateDebut;
+    this.AddIncidentAng.dateFin = this.AddIncident.dateFin;
+    this.AddIncidentAng.prochaineCommunication = this.AddIncident.prochaineCommunication;
+    this.AddIncidentAng.application = this.AddIncident.application;
+    for (let i = 0; i < this.AddIncident.planActionList.length; i++) {
+      if(this.AddIncident.planActionList[i].description){
+      translate(this.AddIncident.planActionList[i].description, { from: 'fr', to: 'en' }).then((result: string) => {
+        this.ActionAng.description = result; // Output: "Bonjour le monde"
+        if (this.AddIncident.planActionList[i].statut === "En cours") {
+          this.ActionAng.statut = "On going";
+          this.ActionAng.numero = this.AddIncident.planActionList[i].numero;
+          this.ListPlanActionAng.push(this.ActionAng);
+          this.ActionAng = new PlanAction();
+        } else if (this.AddIncident.planActionList[i].statut === "A Démarer") {
+          this.ActionAng.statut = "To start";
+          this.ActionAng.numero = this.AddIncident.planActionList[i].numero;
+          this.ListPlanActionAng.push(this.ActionAng);
+          this.ActionAng = new PlanAction();
+        } else if (this.AddIncident.planActionList[i].statut = "Clos") {
+          this.ActionAng.statut = "Closed";
+          this.ActionAng.numero = this.AddIncident.planActionList[i].numero;
+          this.ListPlanActionAng.push(this.ActionAng);
+          this.ActionAng = new PlanAction();
+        };
+      })
+        .catch((error: any) => {
+          console.error(error);
+        }); }
+    }
+    this.AddIncidentAng.planActionList=this.ListPlanActionAng;
   }
-  this.AddIncidentAng.planActionList=this.ListPlanActionAng;
-}
 
 
 SelectLanguage(){

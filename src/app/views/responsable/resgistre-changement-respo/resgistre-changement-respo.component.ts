@@ -272,40 +272,51 @@ set charteChangeAngFr(value: boolean) {
   }
   }
   translateInput() {
+    if(this.AddChangement.titre){
     translate(this.AddChangement.titre, { from: 'fr', to: 'en' }).then((result: string) => {
       this.AddChangementAng.titre = result;
     })
       .catch((error: any) => {
         console.error(error);
       });
+    }
+      if(this.AddChangement.impactMetier){
     translate(this.AddChangement.impactMetier, { from: 'fr', to: 'en' }).then((result: string) => {
       this.AddChangementAng.impactMetier = result;
     })
       .catch((error: any) => {
         console.error(error);
       });
+    }
+    if(this.AddChangement.detail){
       translate(this.AddChangement.detail, { from: 'fr', to: 'en' }).then((result: string) => {
         this.AddChangementAng.detail = result;
       })
         .catch((error: any) => {
           console.error(error);
         });
+      }
     this.AddChangementAng.version = this.AddChangement.version;
     this.AddChangementAng.dateDebut = this.AddChangement.dateDebut;
     this.AddChangementAng.dateFin = this.AddChangement.dateFin;
     for (let i = 0; i < this.AddChangement.contenuChangementList.length; i++) {
+    
+    if(this.AddChangement.contenuChangementList[i].description){
       translate(this.AddChangement.contenuChangementList[i].description, { from: 'fr', to: 'en' }).then((result: string) => {
         this.ContenuAng.description = result; 
       })
         .catch((error: any) => {
           console.error(error);
         }); 
+      }
+      if(this.AddChangement.contenuChangementList[i].titre){
         translate(this.AddChangement.contenuChangementList[i].titre, { from: 'fr', to: 'en' }).then((result: string) => {
           this.ContenuAng.titre = result; 
         })
           .catch((error: any) => {
             console.error(error);
-          }); 
+          });
+        } 
         this.ListContenuAng.push(this.ContenuAng);
     }
     this.AddChangementAng.contenuChangementList=this.ListContenuAng;

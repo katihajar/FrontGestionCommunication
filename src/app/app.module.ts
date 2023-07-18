@@ -180,6 +180,7 @@ import { AjouterMonitoringOptirentaComponent } from './views/pilote/monitoringOp
 import { CharteMonitoringOptirentaComponent } from './views/pilote/monitoringOptirenta/charte-monitoring-optirenta/charte-monitoring-optirenta.component';
 import { AjouterMonitoringMstoolboxComponent } from './views/pilote/monitoringMstoolbox/ajouter-monitoring-mstoolbox/ajouter-monitoring-mstoolbox.component';
 import { CharteMonitoringMstoolboxComponent } from './views/pilote/monitoringMstoolbox/charte-monitoring-mstoolbox/charte-monitoring-mstoolbox.component';
+import { RouterModule, Routes } from '@angular/router';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -301,6 +302,7 @@ export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
     CharteMonitoringMstoolboxComponent
     ],
   imports: [
+    RouterModule,
     ProgressSpinnerModule,
     BrowserModule,
     AppRoutingModule,

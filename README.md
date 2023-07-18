@@ -25,3 +25,10 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## avoir les applications suivante déja crée:
+Health Check Monetics : pour gerer les destinataires du health check lot 6
+Health Check BI : pour gerer les destinataires du health check lot BI
+Nuit Applicative Monetics : pour gerer les destinataires de la nuit applicarive lot 6
+health check MSTOOLBOX : pour gerer les destinataires du health check lot lot 1
+Nuit Applicative OPTIRENTA : pour gerer les destinataires de la nuit applicarive lot 1

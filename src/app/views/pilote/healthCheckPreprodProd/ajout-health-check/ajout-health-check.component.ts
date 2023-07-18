@@ -175,7 +175,7 @@ export class AjoutHealthCheckComponent implements OnInit {
       // @ts-ignore
       app = data.body;
       for (let i = 0; i < app.length; i++) {
-        if (app[i].nomApplication != 'Health Check Bw Perimetre' && app[i].nomApplication != 'health check ProdPredprod') {
+        if (app[i].nomApplication != 'Health Check BI' && app[i].nomApplication != 'Health Check Monetics') {
           this.ListApp.push(app[i]);
         }
       }

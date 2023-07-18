@@ -21,6 +21,129 @@
       </span>
     </div>
     <div class="card" style="border: none;width: 100%;background-color: rgb(247, 246, 246);">
+      <div *ngIf="!selectedCom">
+        <div class="col-12 row gradient-text">
+          <h1 style="text-align: center;font-size:larger;font-weight: bolder;">L’incident d’aujourd’hui</h1>
+        </div>
+        <div class="col-lg-12" style="margin-top: 2%;">
+          <div class="card" style="border: none; height: 100%;">
+            
+            <p-table class="table" #dt2 [value]=" this.listofTodayIncident" dataKey="id" [rows]="4"
+              [showCurrentPageReport]="true" [paginator]="true"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+              [sortField]="'dateDebut'" [sortOrder]="-1"
+              [globalFilterFields]="['titreIncident','application.nomApplication','statut','dateDebut','dateFin','prochaineCommunication','description','situationActuelle','impact','causePrincipale','solutionContournement']">
+              <ng-template pTemplate="caption">
+                <div class="flex">
+                  <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                    (click)="clear(dt2)"></button>
+                    <button pButton pRipple label="Export" icon="pi pi-upload" style="margin-left: 1%;" (click)="exportExcelIncident()" class="p-button-help"></button>
+
+                  <span class="p-input-icon-left ml-auto" style="float: right;">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt2.filterGlobal($any($event.target).value, 'contains')"
+                      placeholder="Search keyword" />
+                  </span>
+                </div>
+              </ng-template>
+              <ng-template pTemplate="header">
+                <tr>      
+                  <th>
+                    <div class="flex justify-content-center align-items-center">
+                      Application
+                      <p-columnFilter type="text" field="application.nomApplication" display="menu"></p-columnFilter>
+                    </div>
+                  </th>
+                  <th>
+                    <div class="flex justify-content-center align-items-center">
+                      titre Incident
+                      <p-columnFilter type="text" field="titreIncident" display="menu"></p-columnFilter>
+                    </div>
+                  </th>
+                  <th>
+                    <div class="flex justify-content-center align-items-center">
+                      Statut
+                      <p-columnFilter type="text" field="statut" display="menu"></p-columnFilter>
+                    </div>
+                  </th>
+                  <th style="min-width: 300px">
+                    <div class="flex justify-content-center align-items-center">
+                      description
+                      <p-columnFilter type="text" field="application.lot" display="menu"></p-columnFilter>
+                    </div>
+                  </th>
+                  <th style="min-width: 300px">
+                    <div class="flex justify-content-center align-items-center">
+                      Situation Actuelle
+                      <p-columnFilter type="text" field="situationActuelle" display="menu"></p-columnFilter>
+                    </div>
+                  </th>
+                  <th style="min-width: 300px">
+                    <div class="flex justify-content-center align-items-center">
+                      Impact
+                      <p-columnFilter type="text" field="impact" display="menu"></p-columnFilter>
+                    </div>
+                  </th>
+                  <th style="min-width: 300px">
+                    <div class="flex justify-content-center align-items-center">
+                      Cause Principale
+                      <p-columnFilter type="text" field="causePrincipale" display="menu"></p-columnFilter>
+                    </div>
+                  </th>
+                  <th style="min-width: 300px">
+                    <div class="flex justify-content-center align-items-center">
+                      Solution Contournement
+                      <p-columnFilter type="text" field="solutionContournement" display="menu"></p-columnFilter>
+                    </div>
+                  </th>
+                 
+                 
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-incident>
+                <tr>
+                 
+                  <td>
+                    {{incident.application.nomApplication}}
+                  </td>
+                   <td>
+                    {{incident.titreIncident}}
+                  </td>
+                  <td>
+      
+                    <div *ngIf="incident.statut=='Clos'">    <p-badge severity="success" styleClass="mr-2"></p-badge>
+                    </div> 
+                    <div *ngIf="incident.statut=='Résolu avec Suivi'"><p-badge severity="warning" styleClass="mr-2"></p-badge></div>
+                     <div *ngIf="incident.statut=='Ouvert'" ><p-badge severity="danger" styleClass="mr-2"></p-badge></div> 
+                      {{incident.statut}}
+                  </td>
+                  <td>
+                    {{incident.description}}
+                  </td>
+                  <td style="width: 50px;">
+                    {{incident.situationActuelle}}
+                  </td>
+                  <td>
+                    {{incident.impact}}
+                  </td>
+                  <td>
+                    {{incident.causePrincipale}}
+                  </td>
+                  <td>
+                    {{incident.solutionContournement}}
+                  </td>
+                
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="11">aucun incident déclarer Aujourd'hui.</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </div>
       <div *ngIf="selectedCom === 'Incident' && selectedApp">
         <div class="col-12 row gradient-text">
           <h1 style="text-align: center;font-size:larger;font-weight: bolder;">Communication d'Incident</h1>

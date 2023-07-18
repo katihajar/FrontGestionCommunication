@@ -85,13 +85,13 @@ export class IncidentService {
       { observe: 'response', headers }
     );    
   }
-  // public FindIncidentByPilote(): Observable<HttpResponse<Array<Incident>>> {
-  //   const headers: HttpHeaders = this.auth.tokenHeaders();
-  //   return this.http.get<Array<Incident>>(
-  //     this.urlPilote + 'incident/lot/'+this.auth.User.lots,
-  //     { observe: 'response', headers }
-  //   );    
-  // }
+  public FindTodayIncident(): Observable<HttpResponse<Array<Incident>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<Incident>>(
+      this.urlPilote + 'incident/todayincident/lot/' + this.auth.User.lots,
+      { observe: 'response', headers }
+    );    
+  }
   public FindIncidentByPilote(page: number, pageSize: number): Observable<HttpResponse<Array<Incident>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     const url = this.urlPilote + 'incident/lot/' + this.auth.User.lots;

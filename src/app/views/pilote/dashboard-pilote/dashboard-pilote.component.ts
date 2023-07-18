@@ -24,6 +24,7 @@ import { HealthCheckBwPerimetreService } from 'src/app/controller/service/health
 export class DashboardPiloteComponent implements OnInit {
 
   listIncident:Array<Incident>=new Array<Incident>();
+  listofTodayIncident:Array<Incident>=new Array<Incident>();
   listApp:Array<Application>= new Array<Application>();
   typeCom:any[]=[];
   selectedCom:string=String();
@@ -84,6 +85,12 @@ export class DashboardPiloteComponent implements OnInit {
   this.appService.FindAllApplcationPilote().subscribe((data)=>{
     //@ts-ignore
     this.listApp=data.body;    
+  });
+  this.service.FindTodayIncident().subscribe((data)=>{
+     //@ts-ignore
+    this.listofTodayIncident=data.body; 
+    console.log( 'test :'+this.listofTodayIncident?.length);
+    
   })
   }
   clear(table: Table) {

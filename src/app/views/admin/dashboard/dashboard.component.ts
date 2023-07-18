@@ -22,7 +22,7 @@ import { OperationService } from 'src/app/controller/service/operation.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-
+  listofTodayIncident:Array<Incident>=new Array<Incident>();
   listIncident:Array<Incident>=new Array<Incident>();
   listApp:Array<Application>= new Array<Application>();
   typeCom:any[]=[];
@@ -86,6 +86,12 @@ export class DashboardComponent {
   this.appService.FindApplcation().subscribe((data)=>{
     //@ts-ignore
     this.listApp=data.body;    
+  });
+  this.service.FindTodayIncidentAdmin().subscribe((data)=>{
+     //@ts-ignore
+    this.listofTodayIncident=data.body; 
+    console.log( 'test :'+this.listofTodayIncident?.length);
+    
   })
 
   }

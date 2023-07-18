@@ -241,7 +241,9 @@ this.emailService.authenticateAndRetrieveAccessToken(this.EmailObligatoire, this
         this.dialogElement = this.myDiv.filterComponent.nativeElement;
       } else if (this.AddIncident.application.charteIncident == 'charte Incident Monetics') {
         this.dialogElement = this.myDivMonetic.filterComponent.nativeElement;
-      }
+      }else if (this.AddIncident.application.charteIncident == 'charte Incident BI') {
+        this.dialogElement = this.myDivBI.filterComponent.nativeElement;
+      } 
       const options: MyOptions = {
         scale: 2,
         logging: true,

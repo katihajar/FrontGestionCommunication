@@ -14,7 +14,20 @@ export class IncidentRespoService {
 
   private urlRespo = environment.baseUrlResponsable;
   private urlAdmin = environment.baseUrlAdmin;
-
+  public FindTodayIncidentAdmin(): Observable<HttpResponse<Array<Incident>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<Incident>>(
+      this.urlAdmin + 'incident/todayincident/lot/' + this.auth.User.lots,
+      { observe: 'response', headers }
+    );    
+  }
+  public FindTodayIncident(): Observable<HttpResponse<Array<Incident>>> {
+    const headers: HttpHeaders = this.auth.tokenHeaders();
+    return this.http.get<Array<Incident>>(
+      this.urlRespo + 'incident/todayincident/lot/' + this.auth.User.lots,
+      { observe: 'response', headers }
+    );    
+  }
   constructor(private http: HttpClient,private auth: AuthService) { }
   public FindAllIncident(): Observable<HttpResponse<Array<Incident>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();

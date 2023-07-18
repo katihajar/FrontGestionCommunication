@@ -29,6 +29,7 @@ export class DashboardRespoComponent {
   typeCom:any[]=[];
   selectedCom:string=String();
   selectedApp:string=String();
+  listofTodayIncident:Array<Incident>=new Array<Incident>();
   listOperation:Array<Operation>=new Array<Operation>();
   listChange:Array<ChangementPlanifier>=new Array<ChangementPlanifier>();
   listChangeFiltred:Array<ChangementPlanifier>=new Array<ChangementPlanifier>();
@@ -85,7 +86,13 @@ export class DashboardRespoComponent {
   this.appService.FindAllApplcationRespo().subscribe((data)=>{
     //@ts-ignore
     this.listApp=data.body;    
-  })
+  });
+  this.service.FindTodayIncident().subscribe((data)=>{
+    //@ts-ignore
+   this.listofTodayIncident=data.body; 
+   console.log( 'test :'+this.listofTodayIncident?.length);
+   
+ })
 
   }
   

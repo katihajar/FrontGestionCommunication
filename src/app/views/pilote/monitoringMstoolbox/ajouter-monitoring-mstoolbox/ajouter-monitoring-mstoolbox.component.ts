@@ -194,15 +194,10 @@ export class AjouterMonitoringMstoolboxComponent implements OnInit{
         imageSmoothingQuality: 'high',
       };
       html2canvas(this.dialogElement.querySelector('#ChartHandBid'), options).then((canvas) => {
-        this.imageDataUrlCanvas1 = canvas.toDataURL();
-        console.log(this.imageDataUrlCanvas1);
-        
-       
+        this.imageDataUrlCanvas1 = canvas.toDataURL();        
       }); 
       html2canvas(this.dialogElement.querySelector('#ChartSmile'), options).then((canvas) => {
           this.imageDataUrlCanvas2 = canvas.toDataURL();      
-          console.log(this.imageDataUrlCanvas2);
-    
           this.Save();
         });
       this.charteMonitoringMstoolbox = false;

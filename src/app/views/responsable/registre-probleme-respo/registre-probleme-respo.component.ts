@@ -278,7 +278,6 @@ export class RegistreProblemeRespoComponent implements OnInit{
       this.clear();
     } else {
       this.problemeService.SearchProblemeRespo(this.filterProbleme.dateAjout, this.filterProbleme, this.page, this.pageSize).subscribe((data) => {
-        console.log(data);
         this.searchActive = true;
         //@ts-ignore
         this.ListProblemeOfRespo = data.body.content;

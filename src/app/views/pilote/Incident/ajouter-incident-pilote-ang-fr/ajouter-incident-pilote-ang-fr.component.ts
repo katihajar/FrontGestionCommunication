@@ -99,7 +99,6 @@ export class AjouterIncidentPiloteAngFrComponent implements OnInit {
     this.destService.FindDestinataireByApplication(this.AddIncident.application.id).subscribe((data) => {
       // @ts-ignore
       this.listDestinataire = data.body;
-      console.log(this.listDestinataire);
       for (let i = 0; i < this.listDestinataire.length; i++) {
         if (this.listDestinataire[i].typeDest == 'Obligatoire' && this.listDestinataire[i].statutRespo == 'Valider') {
           this.EmailObligatoire.push(this.listDestinataire[i].email)

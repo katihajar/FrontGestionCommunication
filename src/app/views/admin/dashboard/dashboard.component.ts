@@ -89,9 +89,7 @@ export class DashboardComponent {
   });
   this.service.FindTodayIncidentAdmin().subscribe((data)=>{
      //@ts-ignore
-    this.listofTodayIncident=data.body; 
-    console.log( 'test :'+this.listofTodayIncident?.length);
-    
+    this.listofTodayIncident=data.body;     
   })
 
   }
@@ -100,7 +98,6 @@ export class DashboardComponent {
     table.clear();
   }
 onchange(){
-  console.log(this.selectedApp);
   this.executeFunction();
 }
 
@@ -197,7 +194,6 @@ saveAsExcelFile(buffer: any, fileName: string): void {
       //  this.generateOperationPlanifierPerLotChart();
        this.generateOperationPerStatutChartMonth();
       });
-      console.log("Operation selected");
     } else if (this.selectedCom === 'Changement' && this.selectedApp) {
       this.changeService.FindAllChangeAdmin().subscribe(data=>{
         //@ts-ignore

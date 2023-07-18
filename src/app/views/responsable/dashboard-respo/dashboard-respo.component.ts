@@ -89,9 +89,7 @@ export class DashboardRespoComponent {
   });
   this.service.FindTodayIncident().subscribe((data)=>{
     //@ts-ignore
-   this.listofTodayIncident=data.body; 
-   console.log( 'test :'+this.listofTodayIncident?.length);
-   
+   this.listofTodayIncident=data.body;    
  })
 
   }
@@ -100,7 +98,6 @@ export class DashboardRespoComponent {
     table.clear();
   }
 onchange(){
-  console.log(this.selectedApp);
   this.executeFunction();
 }
 exportExcelChange() {

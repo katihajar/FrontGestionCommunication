@@ -299,7 +299,6 @@ export class RegistreProblemeComponent implements OnInit{
       this.clear();
     } else {
       this.problemeService.SearchProbleme(this.filterProbleme.dateAjout, this.filterProbleme, this.page, this.pageSize).subscribe((data) => {
-        console.log(data);
         this.searchActive = true;
         //@ts-ignore
         this.ListProblemeOfPilote = data.body.content;

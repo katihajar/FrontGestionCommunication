@@ -206,13 +206,10 @@ SelectLanguage(){
 }
 searchIncident(){  
   this.loading = true;
-  console.log(this.filterIncident.statut);
   if(!this.filterIncident.dateDebut && !this.filterIncident.dateFin && !this.filterIncident.titreIncident && !this.filterIncident.application && (!this.filterIncident.statut || this.filterIncident.statut==null) ){
-    console.log('here');
     this.clear();
   }else{
   this.incidentServiceReso.SearchInci(this.filterIncident.dateDebut,this.filterIncident.dateFin,this.filterIncident,this.page, this.pageSize).subscribe((data)=>{
-    console.log(data);
     this.searchActive=true;
     //@ts-ignore
     this.ListIncidentOfRespo = data.body.content;

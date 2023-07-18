@@ -196,7 +196,6 @@ if(this.emailsCC){
 }
 this.listAllDest = new Array<DestinataireCommunication>();
 this.listAllDest = this.listDestCC.concat(this.listDestObl);
-console.log('cc '+JSON.stringify(this.listAllDest));
 this.destinataireService.SaveAllDestinataire(this.listAllDest).subscribe((data) => {
       this.spinner = false;
       this.popupAjoutList = false;

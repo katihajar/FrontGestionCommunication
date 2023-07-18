@@ -43,7 +43,6 @@ export class HealthcheckFlamingoService {
   }
   public SaveHealthCheck(): Observable<HttpResponse<HealthCheckFlamingo>> {    
     this.AddHealthCheck.createurHealthCheckFlamingo = this.auth.User;
-    console.log('akher save '+this.AddHealthCheck);
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.post<HealthCheckFlamingo>(
       this.urlPilote + 'healthcheck/flamingo/save',this.AddHealthCheck,

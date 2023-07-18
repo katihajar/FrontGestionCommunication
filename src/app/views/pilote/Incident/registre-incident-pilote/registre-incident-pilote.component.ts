@@ -327,7 +327,6 @@ SelectLanguage(){
   }
 searchIncident(){
   this.loading = true;
-  console.log(this.filterIncident.dateDebut);
   if(this.filterIncident.application.id==null){
     this.filterIncident.application.id =0;
   }
@@ -335,7 +334,6 @@ searchIncident(){
     this.clear();
   }else{
   this.incidentService.SearchInci(this.filterIncident.dateDebut,this.filterIncident.dateFin,this.filterIncident,this.page, this.pageSize).subscribe((data)=>{
-    console.log(data);
     this.searchActive=true;
     //@ts-ignore
     this.ListIncidentOfPilote = data.body.content;

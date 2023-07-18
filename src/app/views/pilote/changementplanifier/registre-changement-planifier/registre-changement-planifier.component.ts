@@ -377,8 +377,6 @@ disable(){
       this.ListChangementOfPilote = data.body.content;
       //@ts-ignore
       this.totalRecords = data.body.totalElements;
-      console.log( this.ListChangementOfPilote.length);
-      
       this.currentPageReportTemplate = `Showing ${this.first + 1} to ${this.first + this.pageSize} of ${this.totalRecords} entries`;
       this.loading = false;
     });
@@ -401,10 +399,7 @@ disable(){
 
   searchChange(){
     this.loading = true;
-    console.log(this.filterChange.dateDebut);
-    if(!this.filterChange.dateDebut && !this.filterChange.dateFin && !this.filterChange.titre && !this.filterChange.application  && !this.filterChange.statut && !this.filterChange.version  ){
-      console.log(this.filterChange.dateDebut);
-      
+    if(!this.filterChange.dateDebut && !this.filterChange.dateFin && !this.filterChange.titre && !this.filterChange.application  && !this.filterChange.statut && !this.filterChange.version  ){      
       this.clear();
     }else{
     this.changeService.SearchChange(this.filterChange.dateDebut,this.filterChange.dateFin,this.filterChange,this.page, this.pageSize).subscribe((data)=>{
@@ -413,8 +408,6 @@ disable(){
       this.ListChangementOfPilote = data.body.content;
       //@ts-ignore
       this.totalRecords = data.body.totalElements;
-      console.log( this.ListChangementOfPilote.length);
-      console.log( data.body);
       this.currentPageReportTemplate = `Showing ${this.first + 1} to ${this.first + this.pageSize} of ${this.totalRecords} entries`;
       this.loading = false;
   

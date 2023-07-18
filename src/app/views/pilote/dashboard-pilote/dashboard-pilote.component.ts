@@ -88,16 +88,13 @@ export class DashboardPiloteComponent implements OnInit {
   });
   this.service.FindTodayIncident().subscribe((data)=>{
      //@ts-ignore
-    this.listofTodayIncident=data.body; 
-    console.log( 'test :'+this.listofTodayIncident?.length);
-    
+    this.listofTodayIncident=data.body;     
   })
   }
   clear(table: Table) {
     table.clear();
   }
 onchange(){
-  console.log(this.selectedApp);
   this.executeFunction();
 }
 exportExcelChange() {
@@ -194,7 +191,6 @@ saveAsExcelFile(buffer: any, fileName: string): void {
       //  this.generateOperationPlanifierPerLotChart();
        this.generateOperationPerStatutChartMonth();
       });
-      console.log("Operation selected");
     } else if (this.selectedCom === 'Changement' && this.selectedApp) {
       this.changeService.FindAllChange().subscribe(data=>{
         //@ts-ignore

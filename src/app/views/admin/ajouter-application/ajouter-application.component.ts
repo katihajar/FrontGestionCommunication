@@ -68,10 +68,7 @@ this.charteChange= [
        this.responsableList.push(this.UserList[i]);
      } 
    }
-   console.log(this.UserList);
-   console.log(this.piloteList);
-   console.log(this.responsableList);
-   
+
  }
  );
  this.cdr.detectChanges();

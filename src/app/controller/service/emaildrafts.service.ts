@@ -41,7 +41,6 @@ export class EmaildraftsService {
               .subscribe((response) => {
                 const accessToken = response.accessToken;
                 this.azureToken = accessToken;
-                console.log(response.accessToken);
                 resolve(accessToken);
                 this.createDraftEmail(
                   this.azureToken,
@@ -51,10 +50,8 @@ export class EmaildraftsService {
                   sub,
                   body
                 ).then(() => {
-                  console.log('sent');
                   this.authService.instance.setActiveAccount(null);
                 }).catch((error) => {
-                  console.log('error');
                 });
               }, (error) => {
                 reject(`Error acquiring access token: ${error}`);
@@ -94,15 +91,12 @@ export class EmaildraftsService {
               .subscribe((response) => {
                 const accessToken = response.accessToken;
                 this.azureToken = accessToken;
-                console.log(response.accessToken);
                 resolve(accessToken);
                 this.retrieveInboxEmails(
                   this.azureToken
                 ).then(() => {
-                  console.log('sent');
                   this.authService.instance.setActiveAccount(null);
                 }).catch((error) => {
-                  console.log('error');
                 });
               }, (error) => {
                 reject(`Error acquiring access token: ${error}`);
@@ -141,10 +135,8 @@ export class EmaildraftsService {
           emails.push(...retrievedEmails);
           if (data["@odata.nextLink"]) {
             fetchEmails(data["@odata.nextLink"]);
-            console.log(emails);
           } else {
             resolve(emails);
-            console.log(emails);
           }
           
         })

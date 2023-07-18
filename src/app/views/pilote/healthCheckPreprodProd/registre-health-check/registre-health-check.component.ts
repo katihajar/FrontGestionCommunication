@@ -319,8 +319,6 @@ export class RegistreHealthCheckComponent implements OnInit {
       this.ListHealthCheck = data.body.content;
       //@ts-ignore
       this.totalRecordsHealthMonetics = data.body.totalElements;
-      console.log( this.ListHealthCheck.length);
-      
       this.currentPageReportTemplateHealthMonetics = `Showing ${this.firstHealthMonetics + 1} to ${this.firstHealthMonetics + this.pageSizeHealthMonetics} of ${this.totalRecordsHealthMonetics} entries`;
       this.loading = false;
     });
@@ -351,8 +349,6 @@ export class RegistreHealthCheckComponent implements OnInit {
       this.ListHealthCheck = data.body.content;
       //@ts-ignore
       this.totalRecordsHealthMonetics = data.body.totalElements;
-      console.log( this.ListHealthCheck.length);
-      console.log( data.body);
       this.currentPageReportTemplateHealthMonetics = `Showing ${this.firstHealthMonetics + 1} to ${this.firstHealthMonetics + this.pageSizeHealthMonetics} of ${this.totalRecordsHealthMonetics} entries`;
       this.loading = false;
   
@@ -531,8 +527,6 @@ export class RegistreHealthCheckComponent implements OnInit {
       this.ListHealthCheckBw = data.body.content;
       //@ts-ignore
       this.totalRecordsHealthBI = data.body.totalElements;
-      console.log( this.ListHealthCheck.length);
-      
       this.currentPageReportTemplateHealthBI = `Showing ${this.firstHealthBI + 1} to ${this.firstHealthBI + this.pageSizeHealthBI} of ${this.totalRecordsHealthBI} entries`;
       this.loadingBW = false;
     });
@@ -692,8 +686,6 @@ export class RegistreHealthCheckComponent implements OnInit {
       this.ListHealthCheckFlamingo = data.body.content;
       //@ts-ignore
       this.totalRecordsHealthSuplyFlamingo = data.body.totalElements;
-      console.log( this.ListHealthCheck.length);
-      
       this.currentPageReportTemplateHealthSuplyFlamingo = `Showing ${this.firstHealthSuplyFlamingo + 1} to ${this.firstHealthSuplyFlamingo + this.pageSizeHealthSuplyFlamingo} of ${this.totalRecordsHealthSuplyFlamingo} entries`;
       this.loadingFlamingo = false;
     });

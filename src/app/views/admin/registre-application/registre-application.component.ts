@@ -121,7 +121,6 @@ export class RegistreApplicationComponent implements OnInit {
     this.userService.FindAllUsers().subscribe((data) => {
       // @ts-ignore
       this.UserList = data.body;
-      console.log(this.UserList);
       
       this.piloteList = new Array<User>();
       for (const user of this.UserList) {
@@ -131,7 +130,6 @@ export class RegistreApplicationComponent implements OnInit {
             this.piloteList.push(user);
           } else if (roleName == "ROLE_RESPONSABLE") {            
             this.responsableList.push(user);
-            console.log(this.responsableList);
           }
         }
       }

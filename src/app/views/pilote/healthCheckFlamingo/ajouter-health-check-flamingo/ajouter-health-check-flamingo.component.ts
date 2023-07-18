@@ -138,9 +138,7 @@ export class AjouterHealthCheckFlamingoComponent implements OnInit {
     this.AddHealthCheckFlamingo.fluxSalesOrderList = this.ListfluxSalesOrder;
     this.AddHealthCheckFlamingo.fluxSapEuropeList = this.ListfluxSapEurope;
     this.AddHealthCheckFlamingo.fluxSapHarmonies = this.ListFluxSapHarmonies;
-    this.charteHealthCheckFlamingo = true;
-    console.log(this.AddHealthCheckFlamingo);
-    
+    this.charteHealthCheckFlamingo = true;    
   }
   isSubmitDisabled() {
     return this.ListFluxEAI.length == 0 || this.ListfluxSalesOrder.length == 0 || this.ListFluxSapHarmonies.length == 0 || this.ListfluxSapEurope.length == 0 || this.AddHealthCheckFlamingo.dateFlux == null;

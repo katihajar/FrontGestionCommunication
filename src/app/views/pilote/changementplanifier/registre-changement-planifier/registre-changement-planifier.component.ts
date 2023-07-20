@@ -260,7 +260,7 @@ set charteOperationFr(value: boolean) {
   }
   
   set charteChangeBiFr(value: boolean) {
-    this.charte.charteChangeBiAngFr = value;
+    this.charte.charteChangeBiFr = value;
   }
   SelectLanguage(){
     if(this.AddChangement.application.charteChangement == 'charte Changement Monetics' ){

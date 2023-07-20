@@ -1,7 +1,7 @@
 <p-dialog [modal]="true" header="Charte Incident" [(visible)]="this.charteIncidentMonetic"
   [style]="{width: '60vw', height: '70vw','margin-left':'3%'}" [resizable]="true">
   <div #myDialog id="myDialog" style="width: 100%;">
-    <div class="col-12">
+    <div style="width: 100%;">
       <div>
         <div *ngIf="this.AddIncident.statut == 'Ouvert'" style="border: 1px solid  rgb(211, 45, 16) ;">
           <!-- <img src="http://localhost:4200/assets/img/incidentMoneticEncours.png" width="100%" style="margin-left: 0%;"
@@ -62,24 +62,29 @@
             </tr>
           </table>
         </div>
-        <br>
+        <div style="padding-top: 2px;">&nbsp;</div>
         <div style="margin: 10px;">
           <p style="background-color: rgb(229, 230, 230);padding: 4px;"><u>Description</u> </p>
-          <p>{{this.AddIncident.description}}</p><br>
+          <p>{{this.AddIncident.description}}</p>
+          <div style="padding-top: 2px;">&nbsp;</div>
 
 
           <p style="background-color: rgb(229, 230, 230);padding: 4px;"><u>Impact Métier</u></p>
-          <p>{{this.AddIncident.impact}}</p><br>
+          <p>{{this.AddIncident.impact}}</p>
+          <div style="padding-top: 2px;">&nbsp;</div>
           <p style="background-color: rgb(229, 230, 230);padding: 4px;"><u>Situation Actuelle</u> </p>
-          <p>{{this.AddIncident.situationActuelle}}</p><br>
+          <p>{{this.AddIncident.situationActuelle}}</p>
+          <div style="padding-top: 2px;">&nbsp;</div>
           <p style="background-color: rgb(229, 230, 230);padding: 4px;"><u>Causes identifiées</u> </p>
-          <p>{{this.AddIncident.causePrincipale}}</p><br>
+          <p>{{this.AddIncident.causePrincipale}}</p>
+          <div style="padding-top: 2px;">&nbsp;</div>
 
           <p style="background-color: rgb(229, 230, 230);padding: 4px;"><u>Plan d'action</u></p>
           <div *ngFor="let action of this.AddIncident.planActionList"
             style=" font-family: 'Times New Roman', Times, serif;">
             <li> {{action.description}} </li>
-          </div><br>
+          </div>
+          <div style="padding-top: 2px;">&nbsp;</div>
           <p style="font-family: 'Times New Roman', Times, serif;"> <u>Prochaine communication :</u></p>
           <p style=" font-family: 'Times New Roman', Times, serif;">{{this.AddIncident.prochaineCommunication | date:
             'dd-MM-yyyy HH:mm'}}</p>
@@ -87,7 +92,7 @@
       </div>
     </div>
 
-    <div class="col-12">
+    <div style="width: 100%;">
 
       <div *ngIf="this.AddIncident.statut == 'Ouvert'"
         style="border:1px solid rgb(211, 45, 16) ;display: flex;align-items: center; justify-content: flex-start;">

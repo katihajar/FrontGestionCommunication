@@ -65,7 +65,7 @@ export class AjouterChangementFrComponent implements OnInit {
   }
   
   set charteChangeBiFr(value: boolean) {
-    this.charteService.charteChangeBiAngFr = value;
+    this.charteService.charteChangeBiFr = value;
   }
   get AddChangement(): ChangementPlanifier {
     return this.changeService.AddChangement;

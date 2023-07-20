@@ -175,7 +175,7 @@ export class AjouterMonitoringMstoolboxComponent implements OnInit{
       this.listTransactionHandbid = new Array<TransactionHandbid>();
       this.listTransactionSmile = new Array<TransactionSmile>();
       this.spinner =false;
-      this.router.navigate(['/pilote/healthcheck/PreprodProd/registre']);
+      this.router.navigate(['/pilote/healthcheck/Monetics/registre']);
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Monitoring MSTOOLBOX Ajouter avec succès' });
     }, error => {
       this.spinner =false;

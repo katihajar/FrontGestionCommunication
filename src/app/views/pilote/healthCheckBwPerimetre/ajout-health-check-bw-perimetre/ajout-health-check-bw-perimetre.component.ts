@@ -119,7 +119,7 @@ removeDetails(us: HealthCheckBwPerimetreDetail) {
              this.listHelthchekBwdetail = new Array<HealthCheckBwPerimetreDetail>();
              this.helthchekBwdetail= new HealthCheckBwPerimetreDetail;
              this.spinner= false;
-             this.router.navigate(['/pilote/healthcheck/PreprodProd/registre']);
+             this.router.navigate(['/pilote/healthcheck/Monetics/registre']);
              const mailtoLink = `mailto:${this.EmailObligatoire.join(';')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(';')}`;
              // window.open(mailtoLink, '_blank');
              this.messageService.add({severity:'success', summary: 'Success', detail: 'Etat de santé Ajouter avec succès'});

@@ -104,7 +104,7 @@ export class AjouterMonitoringOptirentaComponent implements OnInit{
       this.AddMonitoringOptirenta = new MonitoringOptirenta();
       this.listfluxOptirenta = new Array<FluxOptirenta>();
       this.spinner =false;
-      this.router.navigate(['/pilote/healthcheck/PreprodProd/registre']);
+      this.router.navigate(['/pilote/healthcheck/Monetics/registre']);
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Etat de santé Ajouter avec succès' });
     }, error => {
       this.spinner =false;

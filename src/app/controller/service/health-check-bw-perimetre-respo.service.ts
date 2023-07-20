@@ -16,7 +16,7 @@ export class HealthCheckBwPerimetreRespoService {
 
   public FindHealthCheckBwByRespo(page: number, pageSize: number): Observable<HttpResponse<Array<HealthCheckBwPerimetre>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
-    const url = this.urlRespo + 'healthcheck/bwperimetre/lot/' + this.auth.User.lots;
+    const url = this.urlRespo + 'healthcheck/BIperimetre/lot/' + this.auth.User.lots;
     const params = new HttpParams()
         .set('page', page.toString())
         .set('pageSize', pageSize.toString());
@@ -31,7 +31,7 @@ export class HealthCheckBwPerimetreRespoService {
   }
   public SearchHealth(dateAjout: Date | null, health: HealthCheckBwPerimetre, page: number, pageSize: number): Observable<HttpResponse<Array<HealthCheckBwPerimetre>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
-    const url = this.urlRespo + 'healthcheck/bwperimetre/searchHealth';
+    const url = this.urlRespo + 'healthcheck/BIperimetre/searchHealth';
   
     let params = new HttpParams()
       .set('titre', health.titre)

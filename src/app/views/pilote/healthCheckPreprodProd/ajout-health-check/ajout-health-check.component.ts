@@ -49,7 +49,7 @@ export class AjoutHealthCheckComponent implements OnInit {
   constructor(private emailService: EmaildraftsService, private healthService: HealthCheckService, private charteService: CharteService, private router: Router,
     private confirmationService: ConfirmationService, private messageService: MessageService, private destService: DestinataireService) {
     if (this.AddHealthCheck.type == '') {
-      this.router.navigate(['/pilote/healthcheck/PreprodProd/registre']);
+      this.router.navigate(['/pilote/healthcheck/Monetics/registre']);
     }
   }
   clear(table: Table) {
@@ -202,7 +202,7 @@ export class AjoutHealthCheckComponent implements OnInit {
       this.listEtatproc = new Array<EtatProcessusMetier>();
       this.listHelthchekdetail = new Array<HealthChekPreprodProdDetail>();
       this.spinner =false;
-      this.router.navigate(['/pilote/healthcheck/PreprodProd/registre']);
+      this.router.navigate(['/pilote/healthcheck/Monetics/registre']);
       const mailtoLink = `mailto:${this.EmailObligatoire.join(';')}&subject=${this.Subject}&cc=${this.EmailEnCC.join(';')}`;
      // window.open(mailtoLink, '_blank');
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Etat de santé Ajouter avec succès' });

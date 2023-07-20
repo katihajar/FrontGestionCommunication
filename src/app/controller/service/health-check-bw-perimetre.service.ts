@@ -55,28 +55,28 @@ export class HealthCheckBwPerimetreService {
   public FindAllHealthCheckBwPilote(): Observable<HttpResponse<Array<HealthCheckBwPerimetre>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<HealthCheckBwPerimetre>>(
-      this.urlPilote + 'healthcheck/bwperimetre/findAll',
+      this.urlPilote + 'healthcheck/BIperimetre/findAll',
       { observe: 'response', headers }
     );    
   }
   public FindAllHealthCheckBwAdmin(): Observable<HttpResponse<Array<HealthCheckBwPerimetre>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<HealthCheckBwPerimetre>>(
-      this.urlAdmin + 'healthcheck/bwperimetre/findAll',
+      this.urlAdmin + 'healthcheck/BIperimetre/findAll',
       { observe: 'response', headers }
     );    
   }
   public FindAllHealthCheckBwRespo(): Observable<HttpResponse<Array<HealthCheckBwPerimetre>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.get<Array<HealthCheckBwPerimetre>>(
-      this.urlRepo + 'healthcheck/bwperimetre/findAll',
+      this.urlRepo + 'healthcheck/BIperimetre/findAll',
       { observe: 'response', headers }
     );    
   }
 
   public FindHealthCheckBwByPilote(page: number, pageSize: number): Observable<HttpResponse<Array<HealthCheckBwPerimetre>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
-    const url = this.urlPilote + 'healthcheck/bwperimetre/lot/' + this.auth.User.lots;
+    const url = this.urlPilote + 'healthcheck/BIperimetre/lot/' + this.auth.User.lots;
     const params = new HttpParams()
         .set('page', page.toString())
         .set('pageSize', pageSize.toString());
@@ -87,7 +87,7 @@ export class HealthCheckBwPerimetreService {
     this.AddHealthCheckBw.createurHealthCheckBwPerimetre = this.auth.User;
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.post<HealthCheckBwPerimetre>(
-      this.urlPilote + 'healthcheck/bwperimetre/save',this.AddHealthCheckBw,
+      this.urlPilote + 'healthcheck/BIperimetre/save',this.AddHealthCheckBw,
       { observe: 'response', headers }
     );    
   }
@@ -102,7 +102,7 @@ export class HealthCheckBwPerimetreService {
   public DeleteHealthCheckBw(id:number): Observable<HttpResponse<number>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
     return this.http.delete<number>(
-      this.urlPilote + 'healthcheck/bwperimetre/delete/'+id,
+      this.urlPilote + 'healthcheck/BIperimetre/delete/'+id,
       { observe: 'response', headers }
     );    
   }
@@ -115,7 +115,7 @@ export class HealthCheckBwPerimetreService {
   }
   public SearchHealth(dateAjout: Date | null, health: HealthCheckBwPerimetre, page: number, pageSize: number): Observable<HttpResponse<Array<HealthCheckBwPerimetre>>> {
     const headers: HttpHeaders = this.auth.tokenHeaders();
-    const url = this.urlPilote + 'healthcheck/bwperimetre/searchHealth';
+    const url = this.urlPilote + 'healthcheck/BIperimetre/searchHealth';
   
     let params = new HttpParams()
       .set('titre', health.titre)

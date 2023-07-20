@@ -39,7 +39,7 @@ export class AjouterNuitApplicativeComponent implements OnInit {
   constructor(private emailService: EmaildraftsService, private nuitService: NuitApplicativeService, private charteService: CharteService, private router: Router,
     private confirmationService: ConfirmationService, private messageService: MessageService, private destService: DestinataireService) {
     if (this.AddNuitApplicative.statut == '') {
-      this.router.navigate(['/pilote/healthcheck/PreprodProd/registre']);
+      this.router.navigate(['/pilote/healthcheck/Monetics/registre']);
     }
   }
   clear(table: Table) {
@@ -143,7 +143,7 @@ export class AjouterNuitApplicativeComponent implements OnInit {
       this.listNbOccurence = new Array<NbOccurence>();
       this.listsuiviVolumetri = new Array<SuiviVolumetrie>();
       this.spinner =false;
-      this.router.navigate(['/pilote/healthcheck/PreprodProd/registre']);
+      this.router.navigate(['/pilote/healthcheck/Monetics/registre']);
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Nuit Applicative Ajouter avec succès' });
     }, error => {
       this.spinner =false;

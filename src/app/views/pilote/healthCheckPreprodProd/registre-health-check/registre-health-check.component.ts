@@ -175,7 +175,7 @@ export class RegistreHealthCheckComponent implements OnInit {
 
   RouterAjout() {
     if (this.AddHealthCheck.type != '') {
-      this.router.navigate(['/pilote/healthcheck/PreprodProd/save']);
+      this.router.navigate(['/pilote/healthcheck/Monetics/save']);
     } else {
       this.messageService.add({
         severity: 'warn',
@@ -518,7 +518,7 @@ export class RegistreHealthCheckComponent implements OnInit {
     this.AddHealthCheckBw.titre =
       'Health Check  BW perimeter - ' +
       moment(this.AddHealthCheckBw.dateAjout).format('DD/MM/YYYY');
-    this.router.navigate(['/pilote/healthcheck/Bw/save']);
+    this.router.navigate(['/pilote/healthcheck/BI/save']);
   }
   loadHealthBILazy(event: LazyLoadEvent): void {
     this.loadingBW = true;
@@ -573,7 +573,7 @@ export class RegistreHealthCheckComponent implements OnInit {
         this.AddHealthCheckBw.titre =
           'Health Check  BW perimeter - ' +
           moment(this.AddHealthCheckBw.dateAjout).format('DD/MM/YYYY');
-        this.router.navigate(['/pilote/healthcheck/Bw/save']);
+        this.router.navigate(['/pilote/healthcheck/BI/save']);
       });
   }
   get AddHealthCheckBw(): HealthCheckBwPerimetre {
